@@ -84,7 +84,7 @@
 
   /* ---------------- concepts ---------------- */
   function conceptSearchText(c) {
-    return (c.cat + " " + c.title + " " + c.meaning + " " + c.how + " " + c.trap).toLowerCase();
+    return (c.cat + " " + c.title + " " + c.meaning + " " + c.how + " " + c.trap + " " + (c.today || "")).toLowerCase();
   }
   function renderConcepts() {
     var grid = $("conceptsGrid");
@@ -94,6 +94,7 @@
         "<p><b>Meaning.</b> " + esc(c.meaning) + "</p>" +
         '<details open><summary>How it works</summary><p class="mini">' + esc(c.how) + "</p></details>" +
         '<details><summary>Typical trap</summary><p class="mini">' + esc(c.trap) + "</p></details>" +
+        (c.today ? '<p class="today-note"><b>Today.</b> ' + esc(c.today) + "</p>" : "") +
         "</article>";
     }).join("");
 
@@ -323,7 +324,8 @@
       fb.innerHTML = "<h3>" + (a.isRight ? "Correct." : "Wrong.") + " Answer: " + a.correct + ". " +
         clean(q.options[a.correct]) + "</h3>" +
         (!a.isRight && selectedExp ? "<p><strong>Why your answer does not work:</strong> " + selectedExp + "</p>" : "") +
-        "<p><strong>Recap:</strong> " + correctExp + "</p>";
+        "<p><strong>Recap:</strong> " + correctExp + "</p>" +
+        (q.today ? '<p class="today-note"><b>Today.</b> ' + clean(q.today) + "</p>" : "");
     }
     $("nextBtn").disabled = false;
     updateHeader();
@@ -494,7 +496,8 @@
         ? wrongItems.map(function (x) {
             return '<div class="review-item"><strong>Question ' + (x.i + 1) + "</strong> · " + esc(x.q.cat) + " · " + esc(x.q.title) +
               "<br>Your answer: " + esc(x.a.selected) + ". Correct: " + esc(x.a.correct) + ". " + clean(x.q.options[x.a.correct]) +
-              '<br><span class="small">' + clean(x.q.recap) + "</span></div>";
+              '<br><span class="small">' + clean(x.q.recap) + "</span>" +
+              (x.q.today ? '<p class="today-note"><b>Today.</b> ' + clean(x.q.today) + "</p>" : "") + "</div>";
           }).join("")
         : "<p>No wrong answers among the questions you answered.</p>") +
       '<div class="quiznav"><button class="ghost" id="restartBtn">Restart</button>' +

@@ -21,7 +21,8 @@ const CONCEPTS = [
   "title": "Accrual Principle",
   "meaning": "Under the accrual principle, the effects of transactions and other events are recognized when they occur, not when cash is received or paid, and they are reported in the financial statements of the periods to which they relate.",
   "how": "It is the underlying logic of both the income statement and the balance sheet. Revenues are recorded in the financial year in which the accrual event occurs; costs are registered in the year of the revenues they relate to.",
-  "trap": "When costs cannot reasonably be related to revenues (for example administrative costs), they are attributed directly to the accounting period in which they are paid."
+  "trap": "When costs cannot reasonably be related to revenues (for example administrative costs), they are attributed directly to the accounting period in which they are paid.",
+  "today": "IAS 1 (paragraphs 27-28) applies accrual accounting to these costs as well: an administrative cost is recognised in the period in which it arises, which is normally the period it covers rather than the period in which the invoice happens to be paid. For most administrative costs the two coincide, which is why the course shortcut works, but the payment date is not the criterion."
  },
  {
   "cat": "Principles",
@@ -49,7 +50,8 @@ const CONCEPTS = [
   "title": "Impairment Test",
   "meaning": "IFRS principles state that companies must review all assets to look for any indication of unrecoverable loss of their value. This assessment is called the impairment test.",
   "how": "The frequency depends on the category of asset. Goodwill, because of its indefinite nature, must be tested every year, and the loss of value is credited in the income statement.",
-  "trap": "Impairment is about an unrecoverable loss of value, not about routine wear. Systematic allocation of cost over useful life is depreciation or amortization, which is a different mechanism."
+  "trap": "Impairment is about an unrecoverable loss of value, not about routine wear. Systematic allocation of cost over useful life is depreciation or amortization, which is a different mechanism.",
+  "today": "IAS 36 states the test as a comparison: an asset is impaired when its carrying amount exceeds its recoverable amount, the higher of fair value less costs of disposal and value in use. “Credited in the income statement” means charged against profit. The loss also need not be permanent: for assets other than goodwill it can be reversed if the estimates that produced it change."
  },
  {
   "cat": "Balance Sheet",
@@ -105,42 +107,48 @@ const CONCEPTS = [
   "title": "Goodwill",
   "meaning": "Goodwill can occur from mergers and acquisitions when the purchasing value is higher than the fair value of the resources acquired. It is the difference between the acquisition cost and the participation of the purchaser in the fair value of assets less liabilities.",
   "how": "It sits under intangible assets and has an indefinite life, so IFRS requires an impairment test every year. The loss of its value is credited in the income statement.",
-  "trap": "Goodwill is not amortized over a useful life like a patent. Its indefinite nature is exactly why it gets the annual impairment test instead."
+  "trap": "Goodwill is not amortized over a useful life like a patent. Its indefinite nature is exactly why it gets the annual impairment test instead.",
+  "today": "Under IAS 36 an impairment loss on goodwill reduces the profit of the year and, unlike losses on other assets, can never be reversed in a later period."
  },
  {
   "cat": "Balance Sheet",
   "title": "Financial Assets: the Four Categories",
   "meaning": "IFRS defines financial instruments as contracts that give rise to a financial asset of one entity and a financial liability or equity instrument of another entity. Financial assets can be found under both noncurrent and current assets.",
   "how": "The four categories are: financial assets at fair value through profit or loss (FVTPL), loans and receivables, held-to-maturity investments, and available-for-sale financial assets.",
-  "trap": "The category is what drives the measurement rule, so classification is the first thing to settle before asking how an instrument is valued."
+  "trap": "The category is what drives the measurement rule, so classification is the first thing to settle before asking how an instrument is valued.",
+  "today": "These four categories come from IAS 39. IFRS 9 has replaced them since 2018 with three: amortised cost, fair value through other comprehensive income (FVOCI) and fair value through profit or loss (FVTPL), assigned from the business model for holding the asset and from the nature of its cash flows."
  },
  {
   "cat": "Balance Sheet",
   "title": "FVTPL — Fair Value Through Profit or Loss",
   "meaning": "FVTPL includes assets held for trading, such as derivatives, and financial assets acquired or held for the purpose of selling in the short term.",
   "how": "Initial measurement at fair value; subsequent measurement at fair value; the balance of the fair value variation goes to the income statement.",
-  "trap": "This is the category where fair value swings hit profit directly. Available-for-sale assets are also measured at fair value, but their variation goes to equity instead."
+  "trap": "This is the category where fair value swings hit profit directly. Available-for-sale assets are also measured at fair value, but their variation goes to equity instead.",
+  "today": "FVTPL is the one category that carries over to IFRS 9 unchanged in name and in treatment: fair value, with the variation in profit or loss."
  },
  {
   "cat": "Balance Sheet",
   "title": "Available-for-Sale Financial Assets",
   "meaning": "Any nonderivative financial assets designated on initial recognition as available for sale.",
   "how": "Initial measurement at fair value plus transaction costs; subsequent measurement at fair value; the balance of the fair value variation goes to the revaluation reserve.",
-  "trap": "Same fair value measurement as FVTPL, opposite destination for the variation: revaluation reserve in equity, not the income statement."
+  "trap": "Same fair value measurement as FVTPL, opposite destination for the variation: revaluation reserve in equity, not the income statement.",
+  "today": "IFRS 9 has dropped this category. Its closest successor is FVOCI, where the variation goes to other comprehensive income; for debt instruments the accumulated amount is recycled to profit or loss on disposal, while for equity instruments it never is."
  },
  {
   "cat": "Balance Sheet",
   "title": "Held-to-Maturity Investments",
   "meaning": "Nonderivative financial assets with fixed or determinable payments that the entity intends to hold to maturity.",
   "how": "Initial measurement at fair value plus transaction costs; subsequent measurement at amortized cost using the effective interest method.",
-  "trap": "Because they are carried at amortized cost, there is no fair value variation to allocate either to profit or to reserves."
+  "trap": "Because they are carried at amortized cost, there is no fair value variation to allocate either to profit or to reserves.",
+  "today": "IFRS 9 no longer uses the intention to hold to maturity as a label. The same instruments now sit in the amortised cost category, reached when the business model is to hold the asset to collect its contractual cash flows and those cash flows are solely payments of principal and interest."
  },
  {
   "cat": "Balance Sheet",
   "title": "Loans and Receivables",
   "meaning": "Nonderivative financial assets with fixed or determinable payments that are not quoted in an active market and are not held for trading. Trade receivables are an important item of this category, usually listed under current assets.",
   "how": "Initial measurement at fair value plus transaction costs; subsequent measurement at amortized cost using the effective interest method.",
-  "trap": "What excludes an instrument from this category is being quoted in an active market or being held for trading, not the length of its horizon."
+  "trap": "What excludes an instrument from this category is being quoted in an active market or being held for trading, not the length of its horizon.",
+  "today": "IFRS 9 has absorbed this category into amortised cost. The measurement is unchanged; what has changed is that expected credit losses are recognised from the start, rather than only once a loss event has occurred."
  },
  {
   "cat": "Balance Sheet",
@@ -387,7 +395,8 @@ const QUESTIONS = [
    "C": "Incorrect. The impairment test does not replace depreciation: an asset that is impaired continues to be depreciated over its remaining useful life.",
    "D": "Incorrect. The revaluation model is a measurement option based on fair value; the specific mechanism for identifying unrecoverable losses is the impairment test."
   },
-  "recap": "Correct. IFRS requires companies to review all assets for any indication of unrecoverable loss of their value, and this assessment is the impairment test. Depreciation is a different mechanism: it is the systematic reduction of value due to use, age or obsolescence over the asset's useful life."
+  "recap": "Correct. IFRS requires companies to review all assets for any indication of unrecoverable loss of their value, and this assessment is the impairment test. Depreciation is a different mechanism: it is the systematic reduction of value due to use, age or obsolescence over the asset's useful life.",
+  "today": "IAS 36 puts it as carrying amount against recoverable amount, the higher of fair value less costs of disposal and value in use, and allows the loss to be reversed later for assets other than goodwill."
  },
  {
   "cat": "Principles",
@@ -425,7 +434,8 @@ const QUESTIONS = [
    "C": "Incorrect. There is no rule spreading unmatched administrative costs across future periods; they belong to the period concerned.",
    "D": "Incorrect. They are ordinary operating costs of the period and appear in the income statement, not only as a note disclosure."
   },
-  "recap": "Correct. Costs are normally registered in the financial year of the revenues they relate to, but when they cannot be reasonably related to revenues, as with administrative costs, they are attributed directly to the accounting period in which they are paid."
+  "recap": "Correct. Costs are normally registered in the financial year of the revenues they relate to, but when they cannot be reasonably related to revenues, as with administrative costs, they are attributed directly to the accounting period in which they are paid.",
+  "today": "IAS 1 (paragraphs 27-28) extends accrual accounting to unmatched costs too: they belong to the period they relate to, which is usually but not necessarily the period of payment."
  },
  {
   "cat": "Balance Sheet",
@@ -520,7 +530,8 @@ const QUESTIONS = [
    "C": "Incorrect. Goodwill is not routinely revalued upwards to fair value through the revaluation reserve; what IFRS mandates is the annual test for loss of value.",
    "D": "Incorrect. Waiting for a disposal would ignore the compulsory annual impairment test that IFRS requires precisely because the asset has an indefinite life."
   },
-  "recap": "Correct. Goodwill is the difference between acquisition cost and the purchaser's participation in the fair value of assets less liabilities. Because of its indefinite nature, IFRS requires an impairment test every year, and the loss of its value is credited in the income statement."
+  "recap": "Correct. Goodwill is the difference between acquisition cost and the purchaser's participation in the fair value of assets less liabilities. Because of its indefinite nature, IFRS requires an impairment test every year, and the loss of its value is credited in the income statement.",
+  "today": "Under IAS 36 the loss is charged against the profit of the year, and goodwill is the one asset whose impairment can never be reversed."
  },
  {
   "cat": "Balance Sheet",
@@ -539,7 +550,8 @@ const QUESTIONS = [
    "C": "Correct. Both categories are measured at fair value after acquisition, but the destination of the variation differs: FVTPL variations go to the income statement, while available-for-sale variations go to the revaluation reserve in equity.",
    "D": "Incorrect. The two destinations are inverted: trading assets at FVTPL affect profit, while available-for-sale assets affect the revaluation reserve."
   },
-  "recap": "Correct. Both categories are measured at fair value after acquisition, but the destination of the variation differs: FVTPL variations go to the income statement, while available-for-sale variations go to the revaluation reserve in equity."
+  "recap": "Correct. Both categories are measured at fair value after acquisition, but the destination of the variation differs: FVTPL variations go to the income statement, while available-for-sale variations go to the revaluation reserve in equity.",
+  "today": "Available-for-sale is an IAS 39 category. Under IFRS 9 the equivalent is FVOCI, whose variation goes to other comprehensive income instead of the revaluation reserve."
  },
  {
   "cat": "Balance Sheet",
@@ -558,7 +570,8 @@ const QUESTIONS = [
    "C": "Incorrect. This mixes the available-for-sale destination for fair value variations with a cost-based initial measurement; held-to-maturity investments are not carried at fair value after acquisition.",
    "D": "Incorrect. Nominal value is not a measurement basis here: the standard requires amortized cost with the effective interest method."
   },
-  "recap": "Correct. Held-to-maturity investments are nonderivative financial assets with fixed or determinable payments to be held to maturity: they are measured initially at fair value plus transaction costs and subsequently at amortized cost using the effective interest method."
+  "recap": "Correct. Held-to-maturity investments are nonderivative financial assets with fixed or determinable payments to be held to maturity: they are measured initially at fair value plus transaction costs and subsequently at amortized cost using the effective interest method.",
+  "today": "IFRS 9 has replaced held-to-maturity with the amortised cost category, based on the business model and the nature of the cash flows rather than on the intention to hold. The measurement is the same."
  },
  {
   "cat": "Balance Sheet",
@@ -634,7 +647,8 @@ const QUESTIONS = [
    "C": "Incorrect. Trade receivables belong to the loans and receivables category, which is measured at amortized cost, not at fair value through profit or loss.",
    "D": "Incorrect. The balance sheet reflects an estimate made at the reporting date; it does not wait for subsequent collections to determine the value."
   },
-  "recap": "Correct. Trade receivables are calculated at the net realizable value, considering the probability that some customers will not pay in the future. Since a precise calculation cannot be performed, enterprises use statistical methods based on historical values to determine the potential loss."
+  "recap": "Correct. Trade receivables are calculated at the net realizable value, considering the probability that some customers will not pay in the future. Since a precise calculation cannot be performed, enterprises use statistical methods based on historical values to determine the potential loss.",
+  "today": "Loans and receivables is an IAS 39 category; under IFRS 9 trade receivables are measured at amortised cost, with expected credit losses recognised from initial recognition."
  },
  {
   "cat": "Balance Sheet",

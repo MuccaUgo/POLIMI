@@ -107,6 +107,9 @@ main:focus { outline: none; }
 .topic details { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
 .topic summary { font-size: 13px; font-weight: 600; cursor: pointer; min-height: 30px; }
 .mini { font-size: 13px; color: var(--text2); }
+.today-note { margin: 14px 0 0; border-top: 1px dashed var(--line); padding-top: 12px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.today-note b { color: var(--accent); font-weight: 650; }
+.feedback .today-note { border-top-color: var(--line); }
 .searchbox, input[type=number], select { width: 100%; min-height: 46px; border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px; font: inherit; font-size: 16px; background: var(--card); color: var(--text); }
 .searchbox { padding-left: 16px; background: var(--bg); }
 .searchbox::placeholder { color: var(--muted); }

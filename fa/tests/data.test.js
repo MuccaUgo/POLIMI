@@ -100,3 +100,43 @@ const balanceCases = [
 for (const [title, expected] of balanceCases) {
   test(`answer-key arithmetic: ${title}`, () => assert.deepEqual(selectedNumbers(title), expected));
 }
+
+test("superseded-standard notes are present and never contradict the annexure answers", () => {
+  const concepts = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.cards = JSON.parse(JSON.stringify(CONCEPTS));", concepts);
+
+  const annotatedCards = [
+    "Accrual Principle",
+    "Impairment Test",
+    "Goodwill",
+    "Financial Assets: the Four Categories",
+    "FVTPL — Fair Value Through Profit or Loss",
+    "Available-for-Sale Financial Assets",
+    "Held-to-Maturity Investments",
+    "Loans and Receivables"
+  ];
+  for (const title of annotatedCards) {
+    const card = concepts.cards.find(c => c.title === title);
+    assert.ok(card, `Missing concept card: ${title}`);
+    assert.equal(typeof card.today, "string", `${title}: missing today note`);
+    assert.ok(card.today.trim().length > 40, `${title}: today note too short`);
+  }
+
+  const annotatedQuestions = {
+    "Costs That Cannot Be Matched to Revenues": "B",
+    "Purpose of the Impairment Test": "A",
+    "Goodwill and the Annual Impairment Test": "B",
+    "Where Fair Value Variations Land": "C",
+    "Held-to-Maturity Measurement": "A",
+    "Valuing Trade Receivables": "B"
+  };
+  for (const [title, correct] of Object.entries(annotatedQuestions)) {
+    const q = question(title);
+    assert.equal(typeof q.today, "string", `${title}: missing today note`);
+    assert.ok(q.today.trim().length > 40, `${title}: today note too short`);
+    // the note is context only: the answer key stays the one taught by the course annexure
+    assert.equal(q.correct, correct, `${title}: answer key changed`);
+    assert.equal(q.recap, q.expl[q.correct], `${title}: recap no longer matches the correct explanation`);
+  }
+});
