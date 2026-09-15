@@ -939,5 +939,955 @@ const QUESTIONS = [
    "D": "Incorrect. Segmental reporting applies across industries wherever reportable segments exist; it is not an automotive-specific rule."
   },
   "recap": "Correct. IFRS requires financial and descriptive information about reportable segments, which are operating segments or aggregations of them referred either to specific businesses (business segments) or to specific geographical areas (geographical segments). Such reporting must include information such as sales, results, assets, liabilities and depreciation, exactly as in the Volkswagen split between Automotive and Financial Services."
+ },
+ {
+  "cat": "Principles",
+  "title": "Unpaid Manufacturing Wages at Year End",
+  "question": "A manufacturer owes 18,000 for work performed by its production employees in December Year 1. All the related goods were completed and sold in December. The wages will be paid in January Year 2, and none of this amount has yet been recorded. Ignore taxes. What adjustment is required at 31 December Year 1?",
+  "options": {
+   "A": "Recognize an expense of 18,000 and a wages payable liability of 18,000; cash is unchanged.",
+   "B": "Recognize an expense of 18,000 and reduce cash by 18,000.",
+   "C": "Make no adjustment until the wages are paid in January.",
+   "D": "Recognize an inventory asset of 18,000 and a wages payable liability of 18,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The employees worked in Year 1, and all related goods were sold in Year 1, so the 18,000 belongs in that year's expenses. The unpaid amount creates a liability. Cash does not change until January.",
+   "B": "Incorrect. The expense belongs in Year 1, but no cash was paid in December. The corresponding credit is wages payable, not cash.",
+   "C": "Incorrect. Waiting until payment would understate both Year 1 expenses and year-end liabilities by 18,000, and overstate Year 1 profit by 18,000.",
+   "D": "Incorrect. All goods related to these wages were sold before year end. None of the 18,000 remains in closing inventory; it is a Year 1 expense."
+  },
+  "recap": "Work performed and consumed in Year 1 creates an expense in Year 1 even if paid later. Record expense 18,000 and wages payable 18,000; the cash payment belongs to Year 2."
+ },
+ {
+  "cat": "Principles",
+  "title": "Insurance Paid Across Two Accounting Years",
+  "question": "On 1 October Year 1, a company pays 9,600 for general office insurance covering exactly 12 months, from 1 October Year 1 through 30 September Year 2. The insurance service is received evenly each month. The company closes its accounts on 31 December. What are the Year 1 insurance expense and the prepaid insurance asset at year end?",
+  "options": {
+   "A": "Expense 9,600; prepaid insurance 0.",
+   "B": "Expense 2,400; prepaid insurance 7,200.",
+   "C": "Expense 7,200; prepaid insurance 2,400.",
+   "D": "Expense 0; prepaid insurance 9,600."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The cash payment covers 12 months, but only three months of cover were consumed in Year 1. Expensing the full payment ignores the nine months of future cover.",
+   "B": "Correct. Monthly cost is 9,600 / 12 = 800. October through December give an expense of 3 × 800 = 2,400. The remaining nine months form a prepaid asset of 9 × 800 = 7,200.",
+   "C": "Incorrect. These amounts reverse the elapsed and unexpired periods. Three months have elapsed at 31 December, and nine months remain.",
+   "D": "Incorrect. The policy has already provided three months of cover. Leaving the entire payment as an asset would omit the 2,400 expense and overstate prepaid insurance by 2,400."
+  },
+  "recap": "Allocate a prepayment to the periods receiving the service. Of the 9,600 paid, 2,400 is Year 1 insurance expense and 7,200 remains an asset for future cover."
+ },
+ {
+  "cat": "Principles",
+  "title": "Customer Cash Received Before Any Service",
+  "question": "A training company receives 30,000 in December Year 1 under a valid contract to deliver a single workshop in January Year 2. No training or other promised service is provided before 31 December Year 1. Ignore taxes and financing effects. What is the effect of this receipt in Year 1?",
+  "options": {
+   "A": "Cash increases by 30,000 and revenue increases by 30,000.",
+   "B": "A receivable increases by 30,000 and revenue increases by 30,000; cash is unchanged.",
+   "C": "Cash increases by 30,000 and a contract liability increases by 30,000; revenue is unchanged.",
+   "D": "Cash increases by 30,000 and a contract liability decreases by 30,000; revenue is unchanged."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The cash receipt does not establish that the promised service has been delivered. No workshop revenue has been earned by year end.",
+   "B": "Incorrect. Cash has actually been received, so it must increase. There is no unpaid receivable for this amount, and the workshop has not yet generated revenue.",
+   "C": "Correct. The 30,000 receipt increases cash and creates an obligation to provide the future workshop. That obligation is a contract liability, sometimes called deferred revenue. Year 1 revenue is zero for this contract.",
+   "D": "Incorrect. Receiving the advance creates an obligation rather than settling one. The contract liability increases by 30,000; reducing it would also fail to balance the cash increase."
+  },
+  "recap": "Customer advances can increase cash without increasing profit. Until the promised workshop is delivered, the 30,000 is a contract liability rather than revenue."
+ },
+ {
+  "cat": "Principles",
+  "title": "Collecting Revenue Already Recognized",
+  "question": "At 31 December Year 1, a company has a trade receivable of 22,000 for a service fully delivered and correctly recognized as revenue in Year 1. On 10 January Year 2 the customer pays exactly 22,000. Assume no impairment, discount, interest or exchange-rate effect. How does the January collection affect Year 2?",
+  "options": {
+   "A": "Cash and revenue both increase by 22,000.",
+   "B": "Cash and total assets both increase by 22,000; revenue is unchanged.",
+   "C": "Cash increases by 22,000 and liabilities decrease by 22,000; revenue is unchanged.",
+   "D": "Cash increases by 22,000, trade receivables decrease by 22,000, and neither total assets nor revenue changes."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. The revenue was already recognized in Year 1. Recognizing it again on collection would count the same service twice.",
+   "B": "Incorrect. Cash increases by 22,000, but the receivable decreases by the same amount. The collection changes the composition of assets, not total assets.",
+   "C": "Incorrect. The customer settles a receivable, which is an asset of the company. Collection does not settle a liability owed by the company.",
+   "D": "Correct. One asset becomes another: cash +22,000 and receivables -22,000. The net change in assets is zero, and no new revenue arises from collecting an amount already earned."
+  },
+  "recap": "Collecting an existing receivable converts it into cash. With no adjustments or fees, total assets and profit are unchanged."
+ },
+ {
+  "cat": "Principles",
+  "title": "Two Cash Transactions and the Accounting Equation",
+  "question": "A company begins the day with assets of 120,000, liabilities of 45,000 and equity of 75,000. It then receives a new bank loan of 20,000 in cash and pays 12,000 in cash to settle an existing supplier payable at its carrying amount. There are no interest charges, fees, taxes or other transactions. What are the closing totals?",
+  "options": {
+   "A": "Assets 128,000; liabilities 53,000; equity 75,000.",
+   "B": "Assets 128,000; liabilities 45,000; equity 83,000.",
+   "C": "Assets 140,000; liabilities 53,000; equity 87,000.",
+   "D": "Assets 128,000; liabilities 65,000; equity 63,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Assets become 120,000 + 20,000 - 12,000 = 128,000. Liabilities become 45,000 + 20,000 - 12,000 = 53,000. Neither transaction creates income or expense, so equity remains 75,000. The equation balances: 128,000 = 53,000 + 75,000.",
+   "B": "Incorrect. The net cash increase of 8,000 is matched by a net increase in liabilities, not by profit. Borrowing creates a bank debt and paying a previously recorded supplier balance removes a payable.",
+   "C": "Incorrect. Assets must reflect the 12,000 cash payment, so they end at 128,000 rather than 140,000. The payment does not create an equity gain.",
+   "D": "Incorrect. The supplier payment reduces the existing liability by 12,000. Treating it as a new expense leaves liabilities too high and reduces equity a second time for a cost already recorded."
+  },
+  "recap": "Borrowing increases assets and liabilities; paying an existing payable reduces both. Here assets rise by 8,000, liabilities rise by 8,000, and equity stays at 75,000."
+ },
+ {
+  "cat": "Principles",
+  "title": "A Signed Order Before Delivery",
+  "question": "In December a retailer signs a contract to supply standard goods in February. The customer receives no goods or services in December, pays no advance, and owes nothing until delivery. The contract has no separate service obligations and is not onerous. The sales manager wants to recognize revenue in December because the order is legally binding. Which response is correct?",
+  "options": {
+   "A": "Recognize all revenue in December because a signed contract always completes the accrual event.",
+   "B": "Recognize no revenue in December because the promised goods have not been transferred to the customer.",
+   "C": "Recognize half the revenue at signing and half at delivery to spread it across both periods.",
+   "D": "Recognize revenue only on the eventual cash collection date, regardless of when delivery occurs."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Signing establishes the agreement, but does not by itself satisfy the obligation to supply the goods. The facts specify that nothing has been transferred in December.",
+   "B": "Correct. The promise remains unfulfilled at year end. For this simple sale, revenue is recognized when the goods are transferred and the customer obtains control, not merely when the contract is signed.",
+   "C": "Incorrect. There is no performance at signing to justify recognizing a portion of revenue. An arbitrary split between contract date and delivery is not an accrual principle.",
+   "D": "Incorrect. Cash collection is not the sole revenue trigger. If delivery satisfies the obligation before payment, revenue can be recognized before the cash arrives."
+  },
+  "recap": "A binding contract and a completed sale are different events. In this case, revenue follows transfer of the promised goods; contract signing alone earns none."
+ },
+ {
+  "cat": "Principles",
+  "title": "A Snapshot versus Activity During a Period",
+  "question": "A company reports for the year from 1 July Year 1 to 30 June Year 2. A lender wants two different facts: the amount customers still owe on 30 June, and the revenue earned during the whole reporting year. Which pairing provides the correct time perspective?",
+  "options": {
+   "A": "Both amounts are flows measured from 1 July to 30 June in the cash flow statement.",
+   "B": "Both amounts are balances measured only at 30 June in the balance sheet.",
+   "C": "Outstanding customer receivables are a balance at 30 June; annual revenue is a flow from 1 July to 30 June.",
+   "D": "Outstanding customer receivables are the year's cash receipts; annual revenue is cash held at 30 June."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Unpaid customer amounts are receivable balances at a date, not cash flows. Revenue measures earned activity and may differ from cash received.",
+   "B": "Incorrect. The balance sheet can show receivables outstanding at 30 June, but annual revenue describes activity throughout the year and belongs in the income statement.",
+   "C": "Correct. Receivables answer how much is still owed at the reporting date. Revenue answers how much was earned during the reporting period. A June year end does not alter this distinction.",
+   "D": "Incorrect. Receivables are unpaid customer balances, not collected cash. Revenue is earned over a period, whereas cash held is an asset balance at a date."
+  },
+  "recap": "The balance sheet shows amounts at a date. The income statement shows revenues and expenses over a period, whether the accounting year ends in June or December."
+ },
+ {
+  "cat": "Principles",
+  "title": "Correcting an Owner Contribution Recorded as Revenue",
+  "question": "An owner contributes cash to a company as permanent equity capital, with no repayment obligation and no goods or services supplied in exchange. The bookkeeper correctly increases cash but incorrectly records the matching amount as revenue. Ignore taxes and assume no other entry is affected. What happens when this error is corrected?",
+  "options": {
+   "A": "Cash and total equity both decrease because the receipt is reversed.",
+   "B": "A liability increases and total equity decreases because every cash receipt must be repaid.",
+   "C": "Revenue and profit remain unchanged because an owner's cash contribution is operating income.",
+   "D": "Revenue and profit decrease, contributed capital increases, and cash and total equity remain unchanged."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. The cash contribution really occurred, so the cash entry stays. The correction changes how the increase in equity is described, not the amount of cash or total equity.",
+   "B": "Incorrect. The contribution is explicitly permanent equity with no repayment obligation. It is not a loan and does not create a liability.",
+   "C": "Incorrect. An owner contribution is a transaction with an owner acting as owner. It increases contributed capital directly and is not revenue from providing goods or services.",
+   "D": "Correct. Remove the amount from revenue, reducing reported profit, and record the same amount as contributed capital. The reduced profit component of equity is offset by increased contributed capital, so total equity and cash do not change."
+  },
+  "recap": "Owner contributions increase equity directly. Correcting a contribution mistakenly booked as revenue reduces profit and increases contributed capital by equal amounts, leaving cash and total equity unchanged."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Residual Value and Carrying Amount",
+  "question": "A delivery vehicle costs €72,000 and is available for use on 1 January Year 1. Its useful life is six years and its estimated residual value is €12,000. The company uses straight-line depreciation and the cost model. Estimates remain unchanged and there is no impairment. What are annual depreciation and the carrying amount at 31 December Year 4?",
+  "options": {
+   "A": "Annual depreciation €12,000; carrying amount €24,000.",
+   "B": "Annual depreciation €10,000; carrying amount €40,000.",
+   "C": "Annual depreciation €14,000; carrying amount €16,000.",
+   "D": "Annual depreciation €10,000; carrying amount €32,000."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. €72,000 / 6 ignores the €12,000 residual value. Only €60,000 is depreciable, so the annual charge is €10,000 and four years leave €32,000.",
+   "B": "Incorrect. The annual charge is right, but €40,000 is accumulated depreciation after four years. Carrying amount is cost less that charge: €72,000 − €40,000 = €32,000.",
+   "C": "Incorrect. This adds residual value to cost: (€72,000 + €12,000) / 6 = €14,000. Residual value must be deducted, giving depreciation of €10,000 and a carrying amount of €32,000.",
+   "D": "Correct. Depreciable amount = €72,000 − €12,000 = €60,000. Annual depreciation = €60,000 / 6 = €10,000. After four full years, carrying amount = €72,000 − 4 × €10,000 = €32,000."
+  },
+  "recap": "Subtract residual value before dividing by useful life. Carrying amount is original cost minus accumulated depreciation: €72,000 − €40,000 = €32,000."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Depreciation Starts When Ready",
+  "question": "An office machine is purchased and paid for on 1 April for €90,000. Installation is completed on 1 July, when it becomes available for its intended use. Staff first operate it on 1 September. Its residual value is €9,000 and useful life is nine years. Using straight-line depreciation, monthly proration and a 31 December year end, with no impairment, what depreciation is charged in this first year?",
+  "options": {
+   "A": "€6,750.",
+   "B": "€4,500.",
+   "C": "€3,000.",
+   "D": "€9,000."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. €9,000 × 9/12 = €6,750 starts depreciation at purchase in April. The machine was not available for its intended use until July, so only six months are charged.",
+   "B": "Correct. Full-year depreciation = (€90,000 − €9,000) / 9 = €9,000. Depreciation starts on 1 July, when installation is complete: €9,000 × 6/12 = €4,500.",
+   "C": "Incorrect. €9,000 × 4/12 = €3,000 starts at first operation in September. Being ready in July is sufficient to start depreciation, even though operation begins later.",
+   "D": "Incorrect. €9,000 is the full-year charge. This first year includes only July through December after the machine becomes available, giving €4,500."
+  },
+  "recap": "Use the available-for-use date. Payment and first actual operation do not determine the start: (€90,000 − €9,000) / 9 × 6/12 = €4,500."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Two Significant Components",
+  "question": "A machine costing €240,000 is available for use for a full year. Its two significant components are a €180,000 main structure with a 12-year useful life and a €60,000 control unit with a four-year useful life. Both have zero residual value and use straight-line depreciation. There is no impairment. What is the total depreciation for the year?",
+  "options": {
+   "A": "€20,000.",
+   "B": "€60,000.",
+   "C": "€30,000.",
+   "D": "€15,000."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. €240,000 / 12 = €20,000 incorrectly gives the control unit the main structure's 12-year life. Its own four-year life requires a separate charge.",
+   "B": "Incorrect. €240,000 / 4 = €60,000 gives the entire machine the control unit's shorter life. The €180,000 structure must be depreciated over 12 years.",
+   "C": "Correct. Depreciate each significant component over its own life: €180,000 / 12 = €15,000 for the structure and €60,000 / 4 = €15,000 for the control unit. Total = €30,000.",
+   "D": "Incorrect. €15,000 is the charge for either individual component here. Both components contribute depreciation, so their charges sum to €30,000."
+  },
+  "recap": "Significant components with different useful lives are depreciated separately. Add €15,000 for the structure and €15,000 for the control unit: €30,000."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Recoverable Amount and Impairment",
+  "question": "A machine under the cost model has a carrying amount of €140,000 after this year's depreciation. At the impairment test date, its value in use is €123,000, fair value is €130,000 and costs of disposal are €12,000. The machine generates independent cash inflows, and there is no revaluation reserve. What impairment loss and closing carrying amount should be recorded?",
+  "options": {
+   "A": "Impairment loss €17,000; closing carrying amount €123,000.",
+   "B": "Impairment loss €22,000; closing carrying amount €118,000.",
+   "C": "Impairment loss €10,000; closing carrying amount €130,000.",
+   "D": "No impairment loss; closing carrying amount €140,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Fair value less disposal costs = €130,000 − €12,000 = €118,000. Recoverable amount is the higher of €118,000 and value in use of €123,000, hence €123,000. The loss is €140,000 − €123,000 = €17,000.",
+   "B": "Incorrect. €118,000 is fair value less disposal costs, but value in use is higher at €123,000. Recoverable amount uses the higher measure, so the impairment loss is €17,000, not €22,000.",
+   "C": "Incorrect. Fair value of €130,000 must first be reduced by disposal costs. The resulting €118,000 is compared with €123,000 value in use, producing a €17,000 impairment loss.",
+   "D": "Incorrect. The €140,000 carrying amount exceeds both possible recovery measures. It must be reduced to the higher of them, €123,000, with a €17,000 impairment loss."
+  },
+  "recap": "Recoverable amount = max(value in use, fair value less disposal costs). Here max(€123,000, €118,000) = €123,000, so impairment is €17,000."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Patent: Economic Life vs Legal Term",
+  "question": "A separately purchased patent costs €150,000 and is available for use on 1 January. Its remaining legal protection is ten years, but technological change is expected to limit economic benefits to six years. Residual value is zero, benefits are consumed evenly, and the company uses the cost model with no impairment. What are first-year amortisation and the patent's closing carrying amount?",
+  "options": {
+   "A": "Amortisation €15,000; carrying amount €135,000.",
+   "B": "Amortisation €0; carrying amount €150,000.",
+   "C": "Amortisation €150,000; carrying amount €0.",
+   "D": "Amortisation €25,000; carrying amount €125,000."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. €150,000 / 10 uses the legal term but ignores the shorter six-year period of economic benefit. The six-year useful life gives an annual charge of €25,000.",
+   "B": "Incorrect. This patent has a finite useful life and is available for use. It must be amortised; it is not treated as an indefinite-life intangible asset.",
+   "C": "Incorrect. The purchased patent provides benefits over six years. Its recognised cost is allocated over that useful life rather than expensed entirely in the first year.",
+   "D": "Correct. Useful life is limited by the shorter economic period of six years. Annual amortisation = €150,000 / 6 = €25,000; closing carrying amount = €150,000 − €25,000 = €125,000."
+  },
+  "recap": "A legal right lasting ten years does not justify a ten-year useful life when benefits last only six. Amortisation is €150,000 / 6 = €25,000 per year."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Inventory Write-down by Product",
+  "question": "A retailer holds 100 units of Product Alpha costing €90 each and 100 units of unrelated Product Beta costing €70 each. Alpha's estimated selling price is €88 per unit with €8 selling costs; Beta's is €85 with €6 selling costs. Both products are finished and can be assessed separately. What are total closing inventory and the write-down expense?",
+  "options": {
+   "A": "Inventory €15,900; write-down €100.",
+   "B": "Inventory €15,000; write-down €1,000.",
+   "C": "Inventory €16,000; write-down €0.",
+   "D": "Inventory €15,800; write-down €200."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. This totals both products' net realisable values: 100 × €80 + 100 × €79 = €15,900. Beta cannot be increased above its €70 unit cost to offset Alpha's loss.",
+   "B": "Correct. Alpha's NRV is €88 − €8 = €80, below its €90 cost, so it is carried at €8,000. Beta's NRV is €85 − €6 = €79, above its €70 cost, so it remains at €7,000. Total inventory = €15,000; original cost €16,000 less €15,000 gives a €1,000 write-down.",
+   "C": "Incorrect. Alpha cannot remain at its €90 cost when its NRV is only €80. A €10 reduction for each of 100 Alpha units creates a €1,000 expense, even though Beta remains profitable.",
+   "D": "Incorrect. This compares Alpha's €90 cost with its €88 selling price but omits €8 selling costs. Alpha's NRV is €80, so the reduction is €1,000, not €200."
+  },
+  "recap": "Compare cost with NRV separately for these unrelated products. Alpha is written down to €8,000; Beta stays at its €7,000 cost. Total inventory is €15,000."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Periodic Weighted-Average Inventory",
+  "question": "A retailer starts the month with 100 identical units costing €12 each, then purchases 200 units at €18 each. It sells 180 units during the month and has no returns or losses. The retailer applies the periodic weighted-average method; net realisable value exceeds cost. What are ending inventory and cost of goods sold?",
+  "options": {
+   "A": "Ending inventory €2,160; cost of goods sold €2,640.",
+   "B": "Ending inventory €1,800; cost of goods sold €2,700.",
+   "C": "Ending inventory €1,920; cost of goods sold €2,880.",
+   "D": "Ending inventory €2,880; cost of goods sold €1,920."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. This is the FIFO outcome: all 120 remaining units are valued at the latest €18 cost. The specified periodic weighted-average cost is €16 per unit.",
+   "B": "Incorrect. (€12 + €18) / 2 = €15 is a simple average that ignores the different quantities purchased. The weighted average is (100 × €12 + 200 × €18) / 300 = €16.",
+   "C": "Correct. Goods available cost €1,200 + €3,600 = €4,800 for 300 units, so the periodic average is €16. Ending quantity = 300 − 180 = 120 units: inventory = 120 × €16 = €1,920; cost of goods sold = 180 × €16 = €2,880.",
+   "D": "Incorrect. The two figures are reversed. The 180 units sold cost €2,880; the 120 units still held cost €1,920. Together they reconcile to €4,800."
+  },
+  "recap": "Weight unit costs by quantities: total cost €4,800 / 300 units = €16. The 120 remaining units are worth €1,920, and the 180 sold cost €2,880."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Recording a New Share Issue",
+  "question": "A company issues 6,000 ordinary shares for cash at €12 each. Each share has a nominal value of €3, all shares are fully paid immediately, and there are no issue costs. What increases arise in cash, share capital and share premium?",
+  "options": {
+   "A": "Cash €72,000; share capital €18,000; share premium €54,000.",
+   "B": "Cash €72,000; share capital €72,000; share premium €0.",
+   "C": "Cash €18,000; share capital €18,000; share premium €0.",
+   "D": "Cash €72,000; share capital €18,000; share premium €72,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Cash = 6,000 × €12 = €72,000. Share capital uses nominal value: 6,000 × €3 = €18,000. The excess is share premium: 6,000 × (€12 − €3) = €54,000. Total equity increases by €72,000.",
+   "B": "Incorrect. Share capital is measured at the stated nominal value, not the entire issue price. Of the €72,000 proceeds, €18,000 is share capital and €54,000 is share premium.",
+   "C": "Incorrect. This records only the nominal value and ignores €54,000 received above nominal value. Cash receipts are the full 6,000 × €12 = €72,000.",
+   "D": "Incorrect. €72,000 is total cash received, not the premium alone. Adding €72,000 premium to €18,000 capital would overstate equity by €18,000. Premium is €54,000."
+  },
+  "recap": "Share capital records nominal value; share premium records proceeds above nominal value. €18,000 + €54,000 = the €72,000 cash received."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Retained Earnings Reconciliation",
+  "question": "Opening retained earnings are €95,000. During the year, the company earns €42,000 profit after tax, declares and pays €18,000 dividends, and transfers €9,000 from retained earnings to a separately presented statutory reserve. It also receives €35,000 from a new share issue. With no other changes, what are closing retained earnings after these entries?",
+  "options": {
+   "A": "€119,000.",
+   "B": "€110,000.",
+   "C": "€145,000.",
+   "D": "€128,000."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. €95,000 + €42,000 − €18,000 = €119,000 omits the €9,000 transferred out to the separately presented statutory reserve. Closing retained earnings are €110,000.",
+   "B": "Correct. Closing retained earnings = €95,000 + €42,000 − €18,000 − €9,000 = €110,000. The €35,000 share issue increases contributed equity, not retained earnings. The reserve transfer changes the composition of equity without reducing total equity.",
+   "C": "Incorrect. This adds €35,000 of share issue proceeds to the correct €110,000 retained earnings. Share subscriptions belong in contributed equity rather than accumulated profits.",
+   "D": "Incorrect. This adds the €9,000 reserve transfer instead of deducting it: €95,000 + €42,000 − €18,000 + €9,000 = €128,000. The stated transfer is out of retained earnings."
+  },
+  "recap": "Retained earnings close at €95,000 + €42,000 − €18,000 − €9,000 = €110,000. New share proceeds are separate, and an internal reserve transfer leaves total equity unchanged."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Receivable Allowance Adjustment",
+  "question": "At year end, gross trade receivables are €120,000: €90,000 in a group with a 2% lifetime expected credit loss rate and €30,000 in a group with a 10% rate. These rates already reflect current conditions and supportable forecasts. Before adjustment, the loss allowance has a €1,500 credit balance. There are no further write-offs. What are net receivables and the additional impairment expense required?",
+  "options": {
+   "A": "Net receivables €118,500; additional expense €0.",
+   "B": "Net receivables €115,200; additional expense €4,800.",
+   "C": "Net receivables €113,700; additional expense €4,800.",
+   "D": "Net receivables €115,200; additional expense €3,300."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. This keeps only the existing €1,500 allowance. The closing estimate is €90,000 × 2% + €30,000 × 10% = €4,800, so another €3,300 is required.",
+   "B": "Incorrect. Net receivables of €115,200 are correct, but €4,800 is the required closing allowance, not the additional expense. Subtract the existing €1,500 balance to obtain €3,300.",
+   "C": "Incorrect. Adding a new €4,800 allowance to the existing €1,500 produces €6,300 and double-counts the existing amount. The total closing allowance should be €4,800, giving net receivables of €115,200.",
+   "D": "Correct. Required closing allowance = €1,800 + €3,000 = €4,800. Net receivables = €120,000 − €4,800 = €115,200. Additional expense = €4,800 − the existing €1,500 allowance = €3,300."
+  },
+  "recap": "Distinguish the closing allowance from its adjustment. The required allowance is €4,800, but only €3,300 more is expensed because €1,500 is already recorded."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Warranty Provision from Expected Claims",
+  "question": "A manufacturer sells 4,000 appliances with an assurance warranty covering defects. For each appliance, mutually exclusive outcomes are estimated as 90% no claim, 8% a minor repair costing €30, and 2% a major repair costing €180. A settlement outflow for the warranty population is probable, estimates are reliable, no claims have yet been settled and discounting is immaterial. What closing warranty provision is required?",
+  "options": {
+   "A": "€0.",
+   "B": "€9,600.",
+   "C": "€24,000.",
+   "D": "€84,000."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. No claim is the most likely outcome for one appliance, but the large warranty population has a probable outflow. Its expected total cost must be recognised rather than using the most likely individual outcome of zero.",
+   "B": "Incorrect. 4,000 × 8% × €30 = €9,600 includes only minor repairs. Major repairs add 4,000 × 2% × €180 = €14,400, bringing the provision to €24,000.",
+   "C": "Correct. Expected repair cost per appliance = 90% × €0 + 8% × €30 + 2% × €180 = €6. For 4,000 appliances, the provision is 4,000 × €6 = €24,000.",
+   "D": "Incorrect. 4,000 × 10% × (€30 + €180) = €84,000 charges both repair types to all expected claims. The outcomes are mutually exclusive and have separate probabilities: €9,600 + €14,400 = €24,000."
+  },
+  "recap": "For a large warranty population, weight each mutually exclusive outcome by its probability. Expected cost is €6 per appliance, so 4,000 appliances require a €24,000 provision."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Inventory in a Long Operating Cycle",
+  "question": "A wine producer has a clearly identifiable normal operating cycle of 24 months. At the reporting date, wine inventory is expected to be sold 18 months later as part of that cycle. A bottling machine will be used for eight years and is not held for sale. In a classified balance sheet, how should these two assets be presented?",
+  "options": {
+   "A": "Wine inventory: current asset; bottling machine: noncurrent asset.",
+   "B": "Wine inventory: noncurrent asset; bottling machine: noncurrent asset.",
+   "C": "Wine inventory: current asset; bottling machine: current asset.",
+   "D": "Wine inventory: noncurrent asset; bottling machine: current asset."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Inventory expected to be realised in the normal operating cycle is current even when that cycle exceeds 12 months. The machine is held for long-term use across many cycles, so it is noncurrent.",
+   "B": "Incorrect. The machine is correctly noncurrent, but the wine belongs to the clearly identified normal operating cycle. The 18-month sale date does not make that inventory noncurrent.",
+   "C": "Incorrect. Wine inventory is current, but the machine is not inventory being sold or consumed in the operating cycle. It is equipment used over eight years and is noncurrent.",
+   "D": "Incorrect. Both classifications are reversed. Wine realised within the normal operating cycle is current; equipment retained for eight years is noncurrent."
+  },
+  "recap": "Current classification includes inventory realised within the normal operating cycle, even beyond 12 months. Long-term production equipment remains noncurrent."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Forecast Losses Are Not a Provision",
+  "question": "A retailer forecasts operating losses next year because of weaker demand. At the reporting date, it has no onerous contracts, no announced restructuring plan and no other present obligation related to those forecast losses. Management wants to recognise a provision now. What is the appropriate treatment?",
+  "options": {
+   "A": "Recognise the forecast losses as a provision because they are likely.",
+   "B": "Do not recognise a provision for future operating losses; consider whether the forecast indicates impairment of existing assets.",
+   "C": "Recognise a provision equal to the forecast cash outflow, with no expense until payment.",
+   "D": "Recognise the forecast losses as a negative equity reserve instead of an expense."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Probability alone is insufficient. A provision requires a present obligation from a past event; the question specifies that none exists for these future operating losses.",
+   "B": "Correct. Forecast losses from future operations do not themselves create a present obligation. They are therefore not provided for, although weaker expected cash flows may indicate that existing assets need an impairment assessment.",
+   "C": "Incorrect. Estimating future cash payments does not create a present obligation. In addition, recognising a provision does not generally mean postponing the related expense until cash is paid.",
+   "D": "Incorrect. Moving the forecast into an equity reserve does not solve the absence of a present obligation or a current recognised loss. Forecast future operating losses are not recorded this way."
+  },
+  "recap": "A probable future loss is not enough for a provision: there must be a present obligation. A loss forecast may instead be an indicator that existing assets are impaired."
+ },
+ {
+  "cat": "Balance Sheet",
+  "title": "Purchased Licence vs Internal Brand",
+  "question": "A company purchases an exclusive software licence that it controls, will use for several years and can measure reliably at cost. It also develops its own brand through advertising and has not acquired that brand from another entity. Which treatment of these two items is appropriate under IAS 38?",
+  "options": {
+   "A": "Recognise both as intangible assets whenever management expects future sales.",
+   "B": "Expense the licence because it lacks physical substance; recognise the internal brand as an asset.",
+   "C": "Recognise the qualifying purchased licence as an intangible asset; do not recognise the internally generated brand as an intangible asset.",
+   "D": "Recognise neither unless an active market exists for each item."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Expecting future sales does not override the specific prohibition on recognising internally generated brands. The qualifying purchased licence can be recognised, but the internal brand cannot.",
+   "B": "Incorrect. Lack of physical substance is a feature of an intangible asset, not a reason to reject the licence. The internally generated brand is the item that cannot be recognised as an intangible asset.",
+   "C": "Correct. The purchased licence is an identifiable, controlled resource that meets the stated recognition conditions. IAS 38 does not allow the internally generated brand to be recognised as an intangible asset; advertising expenditure does not create a recognised brand asset.",
+   "D": "Incorrect. An active market is relevant to using a revaluation model after recognition. It is not a general condition for initially recognising a qualifying purchased licence at cost, and it would not permit recognition of the internally generated brand."
+  },
+  "recap": "A qualifying purchased licence can be an intangible asset. Internally generated brands are not recognised as intangible assets, and an active market is not an initial-recognition requirement."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Sales Returns and Gross Profit",
+  "question": "A retailer has sales of EUR 250,000 before returns. Customers return goods sold for EUR 20,000, originally costing EUR 12,000; the goods are undamaged and returned to inventory. Cost of sales before these returns is EUR 150,000. Ignore other items. What is gross profit after recording both effects of the returns?",
+  "options": {
+   "A": "EUR 92,000",
+   "B": "EUR 80,000",
+   "C": "EUR 112,000",
+   "D": "EUR 100,000"
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Net revenue is 250,000 - 20,000 = 230,000. Net cost of sales is 150,000 - 12,000 = 138,000. Gross profit is 230,000 - 138,000 = 92,000.",
+   "B": "Incorrect. 250,000 - 20,000 - 150,000 = 80,000 reverses revenue but forgets the EUR 12,000 restored to inventory, which reduces cost of sales.",
+   "C": "Incorrect. 250,000 - (150,000 - 12,000) = 112,000 reverses cost of sales but leaves the returned goods in revenue.",
+   "D": "Incorrect. 250,000 - 150,000 = 100,000 is gross profit before the returns. The returns reduce it by 20,000 - 12,000 = 8,000."
+  },
+  "recap": "A sales return reverses the revenue and, for recoverable goods returned to stock, the related cost of sales. Here gross profit falls by EUR 8,000 to EUR 92,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "From Gross Profit to Operating Profit",
+  "question": "In a simplified statement by function, a publisher reports revenue of EUR 600,000, cost of sales of EUR 360,000, distribution costs of EUR 50,000 and administrative costs of EUR 90,000. Other operating income is EUR 10,000. Interest expense is EUR 15,000. Define EBIT here as revenue less operating expenses plus other operating income, before interest and tax. What is EBIT?",
+  "options": {
+   "A": "EUR 95,000",
+   "B": "EUR 110,000",
+   "C": "EUR 100,000",
+   "D": "EUR 240,000"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. 600,000 - 360,000 - 50,000 - 90,000 + 10,000 - 15,000 = 95,000 includes interest. It is profit before tax under these assumptions, not EBIT.",
+   "B": "Correct. Gross profit is 600,000 - 360,000 = 240,000. EBIT is 240,000 - 50,000 - 90,000 + 10,000 = 110,000.",
+   "C": "Incorrect. 240,000 - 50,000 - 90,000 = 100,000 omits the EUR 10,000 of other operating income.",
+   "D": "Incorrect. 600,000 - 360,000 = 240,000 is gross profit; operating expenses and other operating income must still be included."
+  },
+  "recap": "Gross profit covers cost of sales. Continue through distribution, administration and other operating items to obtain EBIT: EUR 110,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Recovering an Unreported Operating Cost",
+  "question": "A simplified statement reports revenue of EUR 500,000 and profit after tax of EUR 72,000. Interest expense is EUR 24,000 and is the only non-operating item. Tax expense equals 25% of positive profit before tax, with no tax adjustments or deferred tax. There are no discontinued operations. What total operating costs are implied?",
+  "options": {
+   "A": "EUR 404,000",
+   "B": "EUR 452,000",
+   "C": "EUR 380,000",
+   "D": "EUR 410,000"
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. 72,000 / 0.75 = 96,000 is profit before tax. Subtracting it directly from revenue gives 404,000 but wrongly includes interest among operating costs.",
+   "B": "Incorrect. 500,000 - 72,000 + 24,000 = 452,000 skips the tax reversal and uses the wrong sign for interest when recovering costs.",
+   "C": "Correct. Profit before tax is 72,000 / 0.75 = 96,000. Profit before interest and tax is 96,000 + 24,000 = 120,000. Operating costs are 500,000 - 120,000 = 380,000.",
+   "D": "Incorrect. 72,000 x 1.25 = 90,000 does not reverse a 25% tax deduction. Dividing by 0.75 gives 96,000, after which interest must also be added back."
+  },
+  "recap": "Work backwards: after-tax profit / (1 - tax rate), then add interest, then subtract the resulting operating profit from revenue. Operating costs are EUR 380,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Gross Margin Is a Percentage of Revenue",
+  "question": "A bicycle parts supplier earns revenue of EUR 400,000 and incurs cost of sales of EUR 280,000. Its sales manager says the gross margin is 42.86% because gross profit is divided by cost of sales. Define gross margin as gross profit / revenue. Which correction is right?",
+  "options": {
+   "A": "Gross margin is 70%; gross profit is EUR 280,000.",
+   "B": "Gross margin is 42.86%; gross profit is EUR 120,000.",
+   "C": "Gross margin is 12%; gross profit is EUR 48,000.",
+   "D": "Gross margin is 30%; 42.86% is the markup on cost."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. 280,000 / 400,000 = 70% is the cost-of-sales ratio, not gross margin. Gross profit is 400,000 - 280,000 = 120,000.",
+   "B": "Incorrect. Gross profit is correctly 120,000, but 120,000 / 280,000 = 42.86% uses cost as the denominator and measures markup.",
+   "C": "Incorrect. Gross profit is 120,000, not 48,000. Dividing 120,000 by revenue of 400,000 gives 30%, not 12%.",
+   "D": "Correct. Gross profit is 400,000 - 280,000 = 120,000. Gross margin is 120,000 / 400,000 = 30%; markup is 120,000 / 280,000, approximately 42.86%."
+  },
+  "recap": "The denominator matters: gross margin uses revenue; markup uses cost. The same EUR 120,000 gross profit gives a 30% margin and a 42.86% markup."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Correcting Omitted Depreciation",
+  "question": "A service company has provisionally calculated profit before tax of EUR 90,000 but omitted EUR 10,000 of this year's office-equipment depreciation. The full depreciation charge is an expense of this period and is tax-deductible. Tax expense is 20% of profit before tax; there is no deferred tax or other adjustment. What is corrected profit after tax?",
+  "options": {
+   "A": "EUR 64,000",
+   "B": "EUR 72,000",
+   "C": "EUR 62,000",
+   "D": "EUR 80,000"
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Corrected profit before tax is 90,000 - 10,000 = 80,000. Tax is 80,000 x 20% = 16,000, leaving 64,000.",
+   "B": "Incorrect. 90,000 x 80% = 72,000 leaves the omitted depreciation uncorrected.",
+   "C": "Incorrect. 72,000 - 10,000 = 62,000 deducts depreciation from provisional after-tax profit without reducing tax by 10,000 x 20% = 2,000.",
+   "D": "Incorrect. 90,000 - 10,000 = 80,000 is corrected profit before tax. Tax of 16,000 still needs to be deducted."
+  },
+  "recap": "A deductible EUR 10,000 depreciation charge reduces after-tax profit by EUR 8,000 when the tax rate is 20%. Corrected profit after tax is EUR 64,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Reconstructing Closing Raw Materials",
+  "question": "A workshop begins the year with raw materials costing EUR 45,000. It purchases EUR 180,000 and returns EUR 8,000 of those purchases to suppliers. Its records show materials consumed of EUR 190,000. There are no write-downs, losses, freight adjustments or other movements. What closing raw-material inventory reconciles these figures?",
+  "options": {
+   "A": "EUR 35,000",
+   "B": "EUR 27,000",
+   "C": "EUR 63,000",
+   "D": "EUR 407,000"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. 45,000 + 180,000 - 190,000 = 35,000 ignores the EUR 8,000 returned to suppliers.",
+   "B": "Correct. Materials available are 45,000 + 180,000 - 8,000 = 217,000. Closing inventory is 217,000 - 190,000 = 27,000.",
+   "C": "Incorrect. The inventory movement is a decrease of 190,000 - (180,000 - 8,000) = 18,000. Adding it to 45,000 gives 63,000 but reverses the direction.",
+   "D": "Incorrect. 45,000 + 180,000 - 8,000 + 190,000 = 407,000 adds consumption to inventory. Consumption removes materials, so it must be subtracted."
+  },
+  "recap": "Opening stock + net purchases - consumption = closing stock. Here EUR 45,000 + EUR 172,000 - EUR 190,000 = EUR 27,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Finished Goods and Cost of Sales",
+  "question": "A furniture maker starts with finished goods of EUR 70,000 and completes production costing EUR 330,000 during the year. Closing finished goods are EUR 100,000. The production figure already includes all manufacturing costs; there are no inventory losses or other movements. Revenue is EUR 480,000. What are cost of sales and gross profit?",
+  "options": {
+   "A": "Cost of sales EUR 330,000; gross profit EUR 150,000.",
+   "B": "Cost of sales EUR 430,000; gross profit EUR 50,000.",
+   "C": "Cost of sales EUR 300,000; gross profit EUR 180,000.",
+   "D": "Cost of sales EUR 360,000; gross profit EUR 120,000."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Using production cost of 330,000 as cost of sales ignores the 100,000 - 70,000 = 30,000 increase in finished goods.",
+   "B": "Incorrect. 330,000 + 100,000 = 430,000 adds closing inventory and omits opening inventory. Closing goods have not been sold and must be deducted.",
+   "C": "Correct. Cost of sales is 70,000 + 330,000 - 100,000 = 300,000. Gross profit is 480,000 - 300,000 = 180,000.",
+   "D": "Incorrect. 330,000 + (100,000 - 70,000) = 360,000 treats an inventory increase as extra cost of sales; it should reduce cost of sales."
+  },
+  "recap": "Goods available for sale less closing finished goods gives cost of sales: EUR 300,000. Subtracting that from revenue gives gross profit of EUR 180,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "A Price Increase and After-Tax Profit",
+  "question": "A supplier sells 10,000 units per year. For next year it raises the selling price from EUR 50 to EUR 54 and expects the same volume. Total cost of sales is unchanged, but an additional advertising campaign costs EUR 12,000. All other operating and financing items are unchanged. Tax expense equals 25% of profit before tax in both profitable years, with no adjustments. How much does profit after tax increase?",
+  "options": {
+   "A": "EUR 40,000",
+   "B": "EUR 28,000",
+   "C": "EUR 30,000",
+   "D": "EUR 21,000"
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. 10,000 x (54 - 50) = 40,000 is the revenue increase before extra advertising and tax.",
+   "B": "Incorrect. 40,000 - 12,000 = 28,000 is the increase before tax. Tax on that increase is 7,000.",
+   "C": "Incorrect. 40,000 x 75% = 30,000 taxes the revenue increase but overlooks the advertising expense.",
+   "D": "Correct. Revenue increases by 10,000 x 4 = 40,000. Additional before-tax profit is 40,000 - 12,000 = 28,000. After tax, the increase is 28,000 x 75% = 21,000."
+  },
+  "recap": "For this simplified change, extra after-tax profit = (extra revenue - extra operating expense) x (1 - tax rate) = EUR 21,000."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Combining Continuing and Discontinued Results",
+  "question": "A company reports profit after tax from continuing operations of EUR 84,000. A division that meets the definition of a discontinued operation has an after-tax operating loss of EUR 9,000 and an after-tax gain on disposal of EUR 15,000. Both division amounts belong to the current year. With no other items, what is total profit for the year?",
+  "options": {
+   "A": "EUR 90,000",
+   "B": "EUR 108,000",
+   "C": "EUR 60,000",
+   "D": "EUR 75,000"
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The discontinued result is -9,000 + 15,000 = 6,000. Total profit is 84,000 + 6,000 = 90,000; all amounts are already after tax.",
+   "B": "Incorrect. 84,000 + 9,000 + 15,000 = 108,000 treats the division's loss as a gain.",
+   "C": "Incorrect. 84,000 - 9,000 - 15,000 = 60,000 treats the disposal gain as a loss.",
+   "D": "Incorrect. 84,000 - 9,000 = 75,000 excludes the EUR 15,000 after-tax disposal gain."
+  },
+  "recap": "Combine the after-tax operating result and disposal result of the discontinued operation, then add the net amount to continuing profit. Do not tax already after-tax figures again."
+ },
+ {
+  "cat": "Income Statement",
+  "title": "Avoiding Double-Counted Depreciation",
+  "question": "A simplified statement by function shows revenue of EUR 900,000, cost of sales of EUR 540,000, distribution expenses of EUR 110,000 and administrative expenses of EUR 100,000. A note says total depreciation of EUR 60,000 is already included within those three expense lines. There are no other operating items. What is operating profit?",
+  "options": {
+   "A": "EUR 90,000",
+   "B": "EUR 150,000",
+   "C": "EUR 210,000",
+   "D": "EUR 360,000"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. 900,000 - 540,000 - 110,000 - 100,000 - 60,000 = 90,000 deducts depreciation twice.",
+   "B": "Correct. Operating profit is 900,000 - 540,000 - 110,000 - 100,000 = 150,000. The note disaggregates expenses already recognized; it does not add a new expense.",
+   "C": "Incorrect. 150,000 + 60,000 = 210,000 adds depreciation back. That does not give operating profit as defined by the listed expenses.",
+   "D": "Incorrect. 900,000 - 540,000 = 360,000 is gross profit before distribution and administrative expenses."
+  },
+  "recap": "A note may explain costs already embedded in the statement. Depreciation disclosed separately must not be subtracted again when it is included in the function-based expense lines."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Cash Collected from Credit Customers",
+  "question": "All sales are on credit. During the year, revenue is EUR 240,000. Trade receivables rise from EUR 36,000 to EUR 54,000. There are no write-offs, customer advances, VAT or other receivable movements. How much cash is collected from customers?",
+  "options": {
+   "A": "EUR 258,000.",
+   "B": "EUR 222,000.",
+   "C": "EUR 186,000.",
+   "D": "EUR 240,000."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Adding the EUR 18,000 increase reverses its effect: an increase means some revenue has not yet been collected.",
+   "B": "Correct. Collections = opening receivables + credit sales - closing receivables = 36,000 + 240,000 - 54,000 = EUR 222,000.",
+   "C": "Incorrect. Subtracting closing receivables alone omits the EUR 36,000 due at the beginning of the year.",
+   "D": "Incorrect. Revenue equals collections only if receivables do not change under the stated assumptions."
+  },
+  "recap": "Receivables bridge revenue and cash: collections = opening receivables + credit sales - closing receivables. Here the EUR 18,000 increase leaves collections EUR 18,000 below revenue."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Cash Paid for Credit Purchases",
+  "question": "A retailer buys EUR 180,000 of inventory, all on credit. Trade payables are EUR 28,000 at the beginning of the year and EUR 43,000 at the end. Ignore VAT and assume no other payable movements. What cash amount is paid to inventory suppliers?",
+  "options": {
+   "A": "EUR 195,000.",
+   "B": "EUR 180,000.",
+   "C": "EUR 251,000.",
+   "D": "EUR 165,000."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Adding the EUR 15,000 increase in payables is backwards: more unpaid purchases mean less cash paid.",
+   "B": "Incorrect. This ignores the EUR 15,000 of additional supplier credit outstanding at year end.",
+   "C": "Incorrect. Adding opening and closing payables to purchases does not reconcile the liability; closing payables must be deducted.",
+   "D": "Correct. Supplier payments = 28,000 + 180,000 - 43,000 = EUR 165,000."
+  },
+  "recap": "Cash paid to suppliers = opening trade payables + credit purchases - closing trade payables. An increase in payables reduces cash paid relative to purchases."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "From Cost of Sales to Supplier Payments",
+  "question": "A retailer has cost of sales of EUR 220,000. Inventory rises from EUR 50,000 to EUR 65,000, while trade payables fall from EUR 30,000 to EUR 20,000. All inventory is bought on credit. Assume no write-downs, VAT or other movements. What are cash payments to suppliers?",
+  "options": {
+   "A": "EUR 245,000.",
+   "B": "EUR 235,000.",
+   "C": "EUR 205,000.",
+   "D": "EUR 225,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Purchases = 220,000 + 65,000 - 50,000 = EUR 235,000. Payments = 235,000 + 30,000 - 20,000 = EUR 245,000.",
+   "B": "Incorrect. EUR 235,000 is purchases, before adding the EUR 10,000 reduction in outstanding supplier debt.",
+   "C": "Incorrect. Subtracting the inventory increase from cost of sales gives neither purchases nor payments.",
+   "D": "Incorrect. This correctly finds purchases but subtracts the payable reduction instead of adding it."
+  },
+  "recap": "Use two bridges: purchases = cost of sales + closing inventory - opening inventory; supplier payments = purchases + opening payables - closing payables. The result is EUR 245,000."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Indirect Cash Flow with Mixed Adjustments",
+  "question": "In a simplified operating cash-flow reconciliation, operating profit is EUR 120,000 after depreciation of EUR 18,000. Trade receivables increase by EUR 15,000, inventory decreases by EUR 8,000 and trade payables decrease by EUR 6,000. There are no taxes, interest, disposal gains or other adjustments. What is operating cash flow?",
+  "options": {
+   "A": "EUR 167,000.",
+   "B": "EUR 109,000.",
+   "C": "EUR 125,000.",
+   "D": "EUR 143,000."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Adding every adjustment misses the signs: increasing receivables and decreasing payables absorb cash.",
+   "B": "Incorrect. This incorrectly subtracts the inventory decrease; releasing inventory adds cash in the reconciliation.",
+   "C": "Correct. Operating cash flow = 120,000 + 18,000 - 15,000 + 8,000 - 6,000 = EUR 125,000.",
+   "D": "Incorrect. This double-counts the EUR 18,000 depreciation add-back."
+  },
+  "recap": "Add noncash depreciation; deduct an increase in receivables; add a decrease in inventory; deduct a decrease in payables. Here: 120,000 + 18,000 - 15,000 + 8,000 - 6,000 = EUR 125,000."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Asset Sale Gain in the Cash Flow Statement",
+  "question": "Operating profit of EUR 90,000 includes a EUR 6,000 gain on selling an old machine. The machine had a carrying amount of EUR 24,000 and was sold for EUR 30,000 cash. Depreciation expense is EUR 12,000. Assume no working-capital changes, taxes, interest or other adjustments. What are operating cash flow and investing cash inflow from this sale?",
+  "options": {
+   "A": "Operating EUR 102,000; investing EUR 6,000.",
+   "B": "Operating EUR 96,000; investing EUR 30,000.",
+   "C": "Operating EUR 96,000; investing EUR 6,000.",
+   "D": "Operating EUR 90,000; investing EUR 30,000."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The disposal gain must be removed from operating profit, and the investing inflow is the full proceeds rather than just the gain.",
+   "B": "Correct. Operating cash flow = 90,000 + 12,000 - 6,000 = EUR 96,000. The full EUR 30,000 proceeds are an investing inflow.",
+   "C": "Incorrect. The operating amount is right, but cash received is EUR 30,000, not the EUR 6,000 accounting gain.",
+   "D": "Incorrect. This leaves operating profit unadjusted for depreciation and the disposal gain."
+  },
+  "recap": "Remove the gain from the operating reconciliation and report the entire asset-sale receipt under investing. A gain measures profit on disposal, not the cash proceeds."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Asset Sale Loss in the Cash Flow Statement",
+  "question": "Operating profit is EUR 40,000 after depreciation of EUR 9,000 and a EUR 6,000 loss on selling equipment. Its carrying amount was EUR 20,000 and cash proceeds were EUR 14,000. Assume no working-capital changes, taxes, interest or other adjustments. What are operating cash flow and the investing inflow?",
+  "options": {
+   "A": "Operating EUR 55,000; investing EUR 14,000.",
+   "B": "Operating EUR 49,000; investing EUR 14,000.",
+   "C": "Operating EUR 55,000; investing EUR 20,000.",
+   "D": "Operating EUR 43,000; investing EUR 14,000."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Add back depreciation and the disposal loss: 40,000 + 9,000 + 6,000 = EUR 55,000. Investing reports EUR 14,000 received.",
+   "B": "Incorrect. This adds back depreciation but leaves the disposal loss in operating cash flow.",
+   "C": "Incorrect. The operating amount is right, but carrying amount is not the cash received from the buyer.",
+   "D": "Incorrect. This subtracts the loss after adding depreciation; a loss already reduced profit and must be added back."
+  },
+  "recap": "A disposal loss is added back when reconciling operating profit to operating cash flow. The cash proceeds, EUR 14,000, belong in investing; the EUR 20,000 carrying amount is not a cash flow."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Working Capital Releases and Uses of Cash",
+  "question": "Cash generated from operations before working-capital changes is EUR 80,000. Trade receivables decrease by EUR 12,000, inventories increase by EUR 20,000 and trade payables increase by EUR 9,000. There are no other adjustments. What is the amount after these changes?",
+  "options": {
+   "A": "EUR 39,000.",
+   "B": "EUR 63,000.",
+   "C": "EUR 97,000.",
+   "D": "EUR 81,000."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Deducting all three movements ignores that collecting receivables and extending supplier credit release cash.",
+   "B": "Incorrect. This wrongly deducts the increase in payables instead of adding it.",
+   "C": "Incorrect. This treats the inventory increase as a cash release and the receivable decrease as a cash use.",
+   "D": "Correct. The calculation is 80,000 + 12,000 - 20,000 + 9,000 = EUR 81,000."
+  },
+  "recap": "A decrease in operating receivables and an increase in operating payables release cash; an increase in inventory uses cash. The net adjustment here is +EUR 1,000."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Building Operating Cash Flow by the Direct Method",
+  "question": "A company receives EUR 340,000 from customers and pays EUR 190,000 to suppliers, EUR 72,000 to employees and EUR 18,000 in operating income taxes. Separately, depreciation expense is EUR 25,000. There are no other operating cash flows. What is operating cash flow under the direct method?",
+  "options": {
+   "A": "EUR 35,000.",
+   "B": "EUR 85,000.",
+   "C": "EUR 60,000.",
+   "D": "EUR 78,000."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. This incorrectly deducts noncash depreciation from the cash receipts and payments.",
+   "B": "Incorrect. This adds depreciation even though the calculation already starts from actual cash flows.",
+   "C": "Correct. Operating cash flow = 340,000 - 190,000 - 72,000 - 18,000 = EUR 60,000. Depreciation is not a payment.",
+   "D": "Incorrect. This omits the EUR 18,000 tax payment specified as operating."
+  },
+  "recap": "With the direct method, add actual operating receipts and subtract actual operating payments. A depreciation adjustment is needed in a profit reconciliation, not in a list of cash receipts and payments."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Financing Cash Flow and Unpaid Dividends",
+  "question": "During the year a company receives EUR 100,000 from a bank loan and EUR 80,000 from issuing shares, and repays EUR 35,000 of loan principal. Dividends of EUR 20,000 are declared, but only EUR 12,000 is paid. The company classifies dividends paid as financing. Ignore interest and all other transactions. What is net financing cash flow?",
+  "options": {
+   "A": "EUR 133,000 inflow.",
+   "B": "EUR 125,000 inflow.",
+   "C": "EUR 145,000 inflow.",
+   "D": "EUR 203,000 inflow."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Net financing cash flow = 100,000 + 80,000 - 35,000 - 12,000 = EUR 133,000. The unpaid EUR 8,000 is not a cash flow.",
+   "B": "Incorrect. This deducts all dividends declared, including the EUR 8,000 not yet paid.",
+   "C": "Incorrect. This omits the EUR 12,000 cash dividend payment.",
+   "D": "Incorrect. This adds the principal repayment even though it is cash paid to the lender."
+  },
+  "recap": "Financing cash flow includes cash received from lenders and shareholders, less principal and dividend payments under the policy given. A declaration without payment does not create a cash outflow."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Reconciling Opening and Closing Cash",
+  "question": "Opening cash and cash equivalents are EUR 42,000. During the year, operating activities generate EUR 95,000, investing activities use EUR 110,000 and financing activities generate EUR 30,000. Exchange-rate changes increase the value of foreign-currency cash by EUR 3,000. What is closing cash and cash equivalents?",
+  "options": {
+   "A": "EUR 57,000.",
+   "B": "EUR 60,000.",
+   "C": "EUR 18,000.",
+   "D": "EUR 54,000."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. This includes the three cash-flow categories but omits the positive EUR 3,000 exchange-rate effect.",
+   "B": "Correct. Closing cash = 42,000 + 95,000 - 110,000 + 30,000 + 3,000 = EUR 60,000.",
+   "C": "Incorrect. EUR 18,000 is the total change including exchange effects, not the closing balance.",
+   "D": "Incorrect. This subtracts the exchange-rate effect, although the question states that it increases the balance."
+  },
+  "recap": "Closing cash equals opening cash plus operating, investing and financing cash flows, plus the separate exchange-rate effect. Exchange movements help reconcile the balance but are not themselves cash receipts or payments."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Noncash Equipment Acquisition",
+  "question": "A manufacturer acquires equipment for EUR 120,000 by issuing EUR 120,000 of its own shares directly to the equipment supplier. Neither party makes a cash payment. How should this transaction appear in the cash flow statement?",
+  "options": {
+   "A": "Investing outflow EUR 120,000 and financing inflow EUR 120,000.",
+   "B": "Operating outflow EUR 120,000 and financing inflow EUR 120,000.",
+   "C": "Investing outflow EUR 120,000 only.",
+   "D": "No cash-flow amounts; disclose the noncash investing and financing transaction separately."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. These amounts would invent cash receipts and payments that never occurred.",
+   "B": "Incorrect. No operating payment occurred, and equipment acquisition is not an ordinary operating expense.",
+   "C": "Incorrect. The company did not pay cash for the equipment, so there is no investing cash outflow.",
+   "D": "Correct. Both the asset acquisition and equity issue are noncash; separate disclosure explains them without adding fictitious cash flows."
+  },
+  "recap": "A transaction can increase both assets and equity without moving cash. An equipment-for-shares exchange is excluded from cash-flow totals and disclosed separately as a noncash investing and financing transaction."
+ },
+ {
+  "cat": "Cash Flow",
+  "title": "Transfers Between Cash and Cash Equivalents",
+  "question": "A business transfers EUR 25,000 from its demand bank account into a two-month deposit acquired to meet short-term cash commitments. The deposit is readily convertible to a known cash amount and has insignificant value risk, so it qualifies as a cash equivalent. What is the effect on total cash and cash equivalents at the transfer date?",
+  "options": {
+   "A": "A EUR 25,000 investing cash outflow reduces the total.",
+   "B": "A EUR 25,000 financing cash inflow increases the total.",
+   "C": "No change in the total and no operating, investing or financing cash flow for the transfer.",
+   "D": "A EUR 25,000 operating expense reduces the total."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The deposit remains inside cash and cash equivalents, so the transfer does not reduce their combined balance.",
+   "B": "Incorrect. Moving existing cash does not raise new funds from lenders or shareholders.",
+   "C": "Correct. The transfer exchanges one component of cash and cash equivalents for another: the combined amount stays unchanged.",
+   "D": "Incorrect. Placing cash in a qualifying deposit is neither an expense nor an operating payment outside cash and cash equivalents."
+  },
+  "recap": "Transfers within cash and cash equivalents are cash-management movements. They change the composition of the balance, not its total, and are not reported as operating, investing or financing cash flows."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "Reading a Measurement Policy",
+  "question": "A manufacturer's note states that its machinery is measured at historical cost less accumulated depreciation and impairment losses. A reader wants to use the balance-sheet amount as the price the machines could fetch today. Which interpretation is best supported by the disclosed policy?",
+  "options": {
+   "A": "The carrying amount is necessarily today's market selling price.",
+   "B": "The carrying amount must equal the original purchase price because the cost model ignores depreciation.",
+   "C": "The carrying amount reflects the stated cost-based policy; it does not by itself establish today's market selling price.",
+   "D": "The disclosed policy means any fall in market price is immediately deducted in full."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A cost-based carrying amount is not a quoted selling price. The policy does not say that machinery is remeasured to market value each year.",
+   "B": "Incorrect. The policy explicitly subtracts accumulated depreciation and impairment, so carrying amount can differ from original cost.",
+   "C": "Correct. The note identifies the basis behind the reported amount. Historical cost after depreciation and impairment does not by itself measure current sale proceeds.",
+   "D": "Incorrect. An impairment assessment has its own measurement requirements. This policy does not require every market-price fall to be deducted euro for euro."
+  },
+  "recap": "Read the measurement policy before interpreting an asset number. A depreciated cost amount and a current market selling price answer different questions."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "Useful-Life Estimates and Profit Comparisons",
+  "question": "At the start of Year 3, office equipment has a carrying amount of EUR 60,000 and no residual value. Its remaining useful life was four years, but reliable new evidence changes that estimate to six years from the start of Year 3. The note explains that this is a change in estimate, not correction of an error. Using straight-line depreciation, with the whole charge expensed and ignoring tax, how does Year 3 profit compare with keeping the old estimate?",
+  "options": {
+   "A": "Profit is EUR 15,000 higher; no depreciation is needed after a revision.",
+   "B": "Profit is EUR 5,000 lower; depreciation increases to EUR 20,000.",
+   "C": "Profit is unchanged because estimate changes only affect future years after Year 3.",
+   "D": "Profit is EUR 5,000 higher; Year 3 depreciation falls from EUR 15,000 to EUR 10,000."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Old depreciation was 60,000 / 4 = 15,000, but revising useful life does not remove depreciation. The new annual charge is 60,000 / 6 = 10,000.",
+   "B": "Incorrect. The longer remaining life reduces the annual charge to 10,000. Neither 20,000 nor a 5,000 profit decrease follows from the data.",
+   "C": "Incorrect. The new estimate applies from the start of Year 3, so Year 3 itself uses 60,000 / 6 = 10,000.",
+   "D": "Correct. Old depreciation was 60,000 / 4 = 15,000; the revised charge is 60,000 / 6 = 10,000. Lower expense raises Year 3 profit by 5,000."
+  },
+  "recap": "The disclosed estimate change raises profit by EUR 5,000 without establishing better operating performance. Apply the revised remaining life from the change date; do not rewrite prior depreciation."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "A Debt Conversion Explained in the Notes",
+  "question": "A note explains that a material bank loan was converted directly into ordinary shares during the year, with no cash transferred. A reader cannot find a cash repayment for the conversion. Which conclusion is appropriate?",
+  "options": {
+   "A": "The absence of a repayment cash flow is consistent with a noncash financing transaction; the note explains the change in capital structure.",
+   "B": "The cash flow statement must invent an equal loan repayment and share-issue receipt to match the note.",
+   "C": "No disclosure is needed because only transactions involving cash matter to financial-statement users.",
+   "D": "The conversion proves that the company generated operating revenue equal to the loan amount."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Debt can become equity without a cash payment. Disclosure elsewhere in the financial statements explains this material financing change without presenting a fictitious cash flow.",
+   "B": "Incorrect. There was no cash transfer, so recording a repayment and a receipt would create cash flows that did not occur.",
+   "C": "Incorrect. Material noncash investing and financing transactions still require relevant disclosure even though they are absent from the cash flow statement.",
+   "D": "Incorrect. Exchanging a financing liability for shares changes financing structure; it is not a sale to a customer and does not establish operating revenue."
+  },
+  "recap": "Notes help explain important noncash changes, including debt converted into equity. A financing change can be real even when there is no related cash receipt or payment."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "Combining Segment Gross Margins",
+  "question": "A segment note reports external revenue of EUR 300,000 and gross profit of EUR 90,000 for Components, and external revenue of EUR 100,000 and gross profit of EUR 50,000 for Services. These are the only segments, with no intersegment transactions or consolidation adjustments, and both use the same gross-profit definition. What is the group gross margin, defined as total gross profit / total revenue?",
+  "options": {
+   "A": "40%",
+   "B": "35%",
+   "C": "80%",
+   "D": "30%"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. (30% + 50%) / 2 = 40% gives equal weight to unequal segment revenues. Components has three times the revenue of Services.",
+   "B": "Correct. Total gross profit is 90,000 + 50,000 = 140,000. Total revenue is 300,000 + 100,000 = 400,000. Group gross margin is 140,000 / 400,000 = 35%.",
+   "C": "Incorrect. 30% + 50% = 80% adds the segment percentages. Percentages must be combined using their revenue weights, not simply added.",
+   "D": "Incorrect. 90,000 / 300,000 = 30% is the Components margin only. Including Services increases the group margin to 35%."
+  },
+  "recap": "Combine the underlying revenue and gross-profit amounts before calculating a group margin. Here the revenue-weighted result is 35%, not the simple average of 40%."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "Reconciling Segment and Group Revenue",
+  "question": "A group has only two segments. Manufacturing reports revenue of EUR 700,000, including EUR 120,000 of sales to Distribution. Distribution reports revenue of EUR 500,000, entirely from external customers. There are no other revenue adjustments. What consolidated revenue should the segment note reconcile to after eliminating internal sales?",
+  "options": {
+   "A": "EUR 1,200,000",
+   "B": "EUR 960,000",
+   "C": "EUR 1,080,000",
+   "D": "EUR 580,000"
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. 700,000 + 500,000 = 1,200,000 includes the EUR 120,000 sale within the same group.",
+   "B": "Incorrect. 1,200,000 - 2 x 120,000 = 960,000 eliminates the internal revenue twice. It appears once in the revenue total.",
+   "C": "Correct. Combined segment revenue is 700,000 + 500,000 = 1,200,000. Deduct the internal sale once: 1,200,000 - 120,000 = 1,080,000.",
+   "D": "Incorrect. 700,000 - 120,000 = 580,000 is Manufacturing external revenue only; Distribution also earns EUR 500,000 externally."
+  },
+  "recap": "Revenue from trading inside the group is eliminated on consolidation. Manufacturing external revenue of EUR 580,000 plus Distribution external revenue of EUR 500,000 gives EUR 1,080,000."
+ },
+ {
+  "cat": "Notes & Reporting",
+  "title": "Reconciling a Segment Profit Measure",
+  "question": "A note defines the reported segment result as profit before depreciation, central-office costs, interest and tax. The two segments report EUR 70,000 and EUR 50,000 on that basis. The reconciliation lists depreciation of EUR 18,000, central-office costs of EUR 12,000 and interest expense of EUR 10,000, all excluded from the segment figures. There are no other differences. What group profit before tax follows?",
+  "options": {
+   "A": "EUR 120,000",
+   "B": "EUR 90,000",
+   "C": "EUR 110,000",
+   "D": "EUR 80,000"
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. 70,000 + 50,000 = 120,000 is the total of the specifically defined segment results before all three adjustments.",
+   "B": "Incorrect. 120,000 - 18,000 - 12,000 = 90,000 still excludes interest expense of 10,000, which must be deducted to reach profit before tax.",
+   "C": "Incorrect. 120,000 - 10,000 = 110,000 deducts only interest and omits depreciation and central-office costs.",
+   "D": "Correct. Total segment result is 70,000 + 50,000 = 120,000. Profit before tax is 120,000 - 18,000 - 12,000 - 10,000 = 80,000."
+  },
+  "recap": "Check the definition of a segment result and follow the reconciliation. Segment totals need not equal group profit before tax; here the excluded expenses reduce EUR 120,000 to EUR 80,000."
  }
 ];

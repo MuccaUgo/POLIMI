@@ -8,62 +8,93 @@
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon.svg" />
-<meta name="theme-color" content="#1f3a5f" />
+<meta name="theme-color" content="#2c3a45" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <script>(function(){try{var t=localStorage.getItem('polimi_theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="portal.css" />
 </head>
 <body>
+<a class="skip-link" href="#mainContent">Skip to content</a>
 <header>
   <div class="header-inner">
-    <div>
-      <h1>POLIMI <span class="tag">Study Hubs</span></h1>
-      <p class="small">Personal revision sites for my Management Engineering courses.</p>
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">po<span>.</span></span>
+        <div>
+          <h1>POLIMI <span class="badge">Study Hubs</span></h1>
+          <div class="small">Management Engineering · Politecnico di Milano</div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
     </div>
-    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
   </div>
 </header>
 
-<main>
-  <section class="intro">
-    <h2>Courses</h2>
-    <p>Each hub holds the concept cards for the theory and a bank of practice questions, with three test modes, a mistakes review and offline support. Progress is kept separately per course.</p>
-  </section>
-
-  <div class="course-grid">
-    <a class="course" href="fa/index.html">
-      <span class="swatch fa" aria-hidden="true"></span>
-      <div class="course-body">
-        <span class="kicker">Financial Accounting</span>
-        <strong>IFRS financial reporting</strong>
-        <p>The accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p>
-        <span class="counts">44 concepts · 33 questions</span>
+<main id="mainContent" tabindex="-1">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Your study space</div>
+      <h2>One place<br>to revise it all.</h2>
+      <p>A hub per course, each with the theory in concept cards and a bank of practice questions. Pick a course and start where you left off.</p>
+      <div class="hero-actions">
+        <a class="primary" href="fa/index.html">Financial Accounting <span aria-hidden="true">↗</span></a>
+        <a class="ghost" href="sm/index.html">Strategy &amp; Marketing <span aria-hidden="true">→</span></a>
       </div>
+      <div class="hero-note">Works offline · Installable on a phone · Progress stays in your browser</div>
+    </div>
+    <aside class="study-path" aria-label="What each hub offers">
+      <div class="eyebrow">What every hub offers</div>
+      <ol>
+        <li><span class="step-number">01</span><div><strong>Concepts</strong><p>Cards by area: the meaning, how it works, and the exam trap.</p></div></li>
+        <li><span class="step-number">02</span><div><strong>Three test modes</strong><p>Full Test, Practice 10 with instant feedback, and an Exam Test.</p></div></li>
+        <li><span class="step-number">03</span><div><strong>Mistakes review</strong><p>Wrong answers come back with their explanations.</p></div></li>
+      </ol>
+      <div class="path-footer"><span aria-hidden="true">↺</span> Each course keeps its own progress.</div>
+    </aside>
+  </div>
+
+  <div class="section-heading"><h3>Courses</h3><span class="small">Two hubs ready · One on the way</span></div>
+  <div class="course-grid">
+    <a class="course fa" href="fa/index.html">
+      <div class="course-top">
+        <span class="course-mark" aria-hidden="true">fa</span>
+        <span class="kicker">Financial Accounting</span>
+      </div>
+      <h4>IFRS financial reporting</h4>
+      <p>The accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p>
+      <div class="counts"><span>44 concepts</span><span>83 questions</span><span>5 areas</span></div>
+      <div class="course-open">Open the hub <span aria-hidden="true">→</span></div>
     </a>
 
-    <a class="course" href="sm/index.html">
-      <span class="swatch sm" aria-hidden="true"></span>
-      <div class="course-body">
+    <a class="course sm" href="sm/index.html">
+      <div class="course-top">
+        <span class="course-mark" aria-hidden="true">sm</span>
         <span class="kicker">Strategy &amp; Marketing</span>
-        <strong>Company, ownership and governance</strong>
-        <p>What a company is and the legal forms it can take, ownership from foundation to IPO with dilution, shareholder and stakeholder value, governance models and ESG.</p>
-        <span class="counts">39 concepts · 31 questions</span>
       </div>
+      <h4>Company, ownership and governance</h4>
+      <p>What a company is and the legal forms it can take, ownership from foundation to IPO with dilution, shareholder and stakeholder value, governance models and ESG.</p>
+      <div class="counts"><span>39 concepts</span><span>31 questions</span><span>5 areas</span></div>
+      <div class="course-open">Open the hub <span aria-hidden="true">→</span></div>
     </a>
 
     <div class="course upcoming">
-      <span class="swatch next" aria-hidden="true"></span>
-      <div class="course-body">
+      <div class="course-top">
+        <span class="course-mark" aria-hidden="true">ca</span>
         <span class="kicker">Cost Accounting</span>
-        <strong>Planned</strong>
-        <p>Cost classification, assigning costs to cost objects, and the allocation methods: process, job order, operation and activity-based costing.</p>
-        <span class="counts">Not built yet</span>
       </div>
+      <h4>Planned</h4>
+      <p>Cost classification, assigning costs to cost objects, and the allocation methods: process, job order, operation and activity-based costing.</p>
+      <div class="counts"><span>Not built yet</span></div>
+      <div class="course-open">Coming next</div>
     </div>
   </div>
 
-  <p class="foot">Static sites, no backend. Open a hub once while online to make it available offline and installable on a phone.</p>
+  <div class="review-prompt">
+    <div><strong>Static sites, nothing to install.</strong><p>Open a hub once while online and it stays available offline, ready to add to your home screen.</p></div>
+    <a class="ghost" href="fa/index.html">Start revising <span aria-hidden="true">→</span></a>
+  </div>
 </main>
+<footer class="site-footer"><span>POLIMI <span aria-hidden="true">/</span> Study Hubs</span><span>Your progress stays in this browser.</span></footer>
 
 <script>
 (function () {
@@ -77,7 +108,7 @@
     document.documentElement.setAttribute("data-theme", next);
     try { localStorage.setItem("polimi_theme", next); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = next === "dark" ? "#0b0f14" : "#1f3a5f";
+    if (meta) meta.content = next === "dark" ? "#12171a" : "#2c3a45";
     sync();
   });
   sync();

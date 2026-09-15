@@ -9,7 +9,7 @@ The root page is a portal listing the courses; each course is a self-contained s
 
 | Folder | Course | Content |
 |---|---|---|
-| [`fa/`](fa/) | Financial Accounting | 44 concept cards, 33 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting |
+| [`fa/`](fa/) | Financial Accounting | 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting |
 | [`sm/`](sm/) | Strategy & Marketing | 39 concept cards, 31 practice questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG |
 
 Planned next: Cost Accounting (cost classification, cost objects, and the process, job order, operation and
@@ -19,9 +19,9 @@ activity-based allocation methods).
 
 - **Concepts** — cards grouped by area, each with the meaning, how it works in practice and the typical exam
   trap. Searchable and filterable.
-- **Full Test** — every question in order, with *Start from question* to resume and *Jump to question*.
-- **Practice 10** — 10 random questions with immediate feedback, optionally filtered to one area.
-- **Exam Test** — 10 random questions, no feedback until the final recap.
+- **Full Test** — every question, with area and order selection, automatic session saving and *Jump to question*.
+- **Practice 10** — up to 10 random questions with immediate feedback, optionally filtered to one area.
+- **Exam Test** — 10 random questions with editable choices and no feedback until the final recap.
 - **Mistakes Review** — wrong answers stored in the browser for later revision.
 
 Each hub keeps its own progress, study streak and accuracy in `localStorage` under its own key prefix, so the
@@ -60,8 +60,25 @@ portal.css      portal styles
 manifest.json   portal manifest
 icon.svg        portal icon
 fa/             Financial Accounting hub (index.html, styles.css, data.js, app.js, sw.js, manifest.json, icon.svg)
+fa/tests/       data, quiz and service-worker tests
 sm/             Strategy & Marketing hub (same structure)
+sm/tests/       same tests for the Strategy & Marketing bank
 ```
 
-Each hub uses the same engine: `data.js` holds the concept cards and the question bank, `app.js` renders the
-concepts browser and runs the quiz. No frameworks, no backend, no external dependencies.
+In each hub, `data.js` holds the concept cards and question bank, while `app.js` renders the concepts browser
+and runs the quiz. No frameworks, no backend, no external dependencies.
+
+The portal and both hubs share one design system: the same CSS custom properties, layout and components, with
+only the accent palette changing per course (green for Financial Accounting, indigo for Strategy & Marketing,
+slate for the portal). The chosen theme is stored once under `polimi_theme` and followed everywhere.
+
+## Tests
+
+```bash
+node --test fa/tests/*.test.js
+node --test sm/tests/*.test.js
+```
+
+The suites load `data.js` in a sandbox and check the bank's structure, that every answer key matches its
+explanation, that the numeric exercises recompute correctly, and that each service worker only ever touches
+caches scoped to its own folder.
