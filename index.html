@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>POLIMI Study Hubs</title>
+<meta name="description" content="Personal revision sites for my Management Engineering courses: concept cards and practice questions, one hub per course." />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<meta name="theme-color" content="#1f3a5f" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>(function(){try{var t=localStorage.getItem('polimi_theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="portal.css" />
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>POLIMI <span class="tag">Study Hubs</span></h1>
+      <p class="small">Personal revision sites for my Management Engineering courses.</p>
+    </div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>Courses</h2>
+    <p>Each hub holds the concept cards for the theory and a bank of practice questions, with three test modes, a mistakes review and offline support. Progress is kept separately per course.</p>
+  </section>
+
+  <div class="course-grid">
+    <a class="course" href="fa/index.html">
+      <span class="swatch fa" aria-hidden="true"></span>
+      <div class="course-body">
+        <span class="kicker">Financial Accounting</span>
+        <strong>IFRS financial reporting</strong>
+        <p>The accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p>
+        <span class="counts">44 concepts · 33 questions</span>
+      </div>
+    </a>
+
+    <a class="course" href="sm/index.html">
+      <span class="swatch sm" aria-hidden="true"></span>
+      <div class="course-body">
+        <span class="kicker">Strategy &amp; Marketing</span>
+        <strong>Company, ownership and governance</strong>
+        <p>What a company is and the legal forms it can take, ownership from foundation to IPO with dilution, shareholder and stakeholder value, governance models and ESG.</p>
+        <span class="counts">39 concepts · 31 questions</span>
+      </div>
+    </a>
+
+    <div class="course upcoming">
+      <span class="swatch next" aria-hidden="true"></span>
+      <div class="course-body">
+        <span class="kicker">Cost Accounting</span>
+        <strong>Planned</strong>
+        <p>Cost classification, assigning costs to cost objects, and the allocation methods: process, job order, operation and activity-based costing.</p>
+        <span class="counts">Not built yet</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">Static sites, no backend. Open a hub once while online to make it available offline and installable on a phone.</p>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById("themeToggle");
+  function sync() {
+    btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+  }
+  btn.addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme") || "light";
+    var next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("polimi_theme", next); } catch (e) {}
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = next === "dark" ? "#0b0f14" : "#1f3a5f";
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
