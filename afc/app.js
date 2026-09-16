@@ -202,7 +202,8 @@
 
   /* ---------------- concepts ---------------- */
   function conceptSearchText(c) {
-    return (c.cat + " " + c.title + " " + c.meaning + " " + c.how + " " + c.trap + " " + (c.today || "")).toLowerCase();
+    return (c.cat + " " + c.title + " " + c.meaning + " " + c.how + " " + c.trap + " " +
+            (c.today || "") + " " + (c.deep ? c.deep.text + " " + c.deep.source : "")).toLowerCase();
   }
   function renderConcepts() {
     var grid = $("conceptsGrid");
@@ -212,6 +213,8 @@
         "<p><b>Meaning.</b> " + esc(c.meaning) + "</p>" +
         '<details open><summary>How it works</summary><p class="mini">' + esc(c.how) + "</p></details>" +
         '<details><summary>Typical trap</summary><p class="mini">' + esc(c.trap) + "</p></details>" +
+        (c.deep ? '<details class="deep"><summary>Going deeper</summary><p class="mini">' + esc(c.deep.text) +
+          '</p><p class="source">From the lecture <em>' + esc(c.deep.source) + "</em></p></details>" : "") +
         (c.today ? '<p class="today-note"><b>Today.</b> ' + esc(c.today) + "</p>" : "") +
         "</article>";
     }).join("");

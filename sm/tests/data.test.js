@@ -20,7 +20,7 @@ function selectedNumbers(title) {
 }
 
 test("bank has complete, unique questions and explanations in every area", () => {
-  assert.ok(bank.length >= 74);
+  assert.ok(bank.length >= 85);
   const titles = new Set(), prompts = new Set();
   for (const q of bank) {
     assert.ok(context.categories.includes(q.cat), q.title);
@@ -46,7 +46,7 @@ test("bank has complete, unique questions and explanations in every area", () =>
 });
 
 test("concept cards are complete and use declared areas", () => {
-  assert.ok(context.cards.length >= 82);
+  assert.ok(context.cards.length >= 88);
   const seen = new Set();
   for (const c of context.cards) {
     assert.ok(context.categories.includes(c.cat), c.title);
@@ -119,4 +119,54 @@ test("the Mintzberg chain and the Starbucks figures are stated as published", ()
   for (const figure of ["7 to 1", "40 drinks", "50 in the second", "70 in the third", "20 percent"]) {
     assert.ok(case_.how.includes(figure) || case_.trap.includes(figure), `${figure} missing`);
   }
+});
+
+test("the lecture deep dives are attached to cards and name their source", () => {
+  const lectures = new Set([
+    "Strategy and its origins",
+    "Strategic decisions and Tactical decisions",
+    "Strategy: an operational definition"
+  ]);
+  const deep = context.cards.filter(c => c.deep);
+  assert.ok(deep.length >= 10, `only ${deep.length} cards carry a deep dive`);
+
+  for (const c of deep) {
+    assert.equal(typeof c.deep.text, "string", `${c.title}: deep.text`);
+    assert.ok(c.deep.text.trim().length > 80, `${c.title}: deep dive too short`);
+    assert.ok(lectures.has(c.deep.source), `${c.title}: unknown source ${c.deep.source}`);
+  }
+  // Every lecture has to be reachable from at least one card, or it is not linked to the slides.
+  for (const lecture of lectures) {
+    assert.ok(deep.some(c => c.deep.source === lecture), `${lecture}: not linked to any card`);
+  }
+});
+
+test("the cards the slides do not carry are present with their lecture detail", () => {
+  const added = [
+    "Sun Tzu's Decisive Factors",
+    "From Battlefield to Competitive Arena",
+    "Tactics",
+    "Between Politics and Tactics",
+    "Why Business Strategy Is Not War",
+    "Strategy Is Made of Strategic Decisions"
+  ];
+  for (const title of added) {
+    const card = context.cards.find(c => c.title === title);
+    assert.ok(card, `missing card: ${title}`);
+    assert.equal(card.cat, "What Strategy Is", `${title}: wrong area`);
+    assert.ok(card.deep, `${title}: should carry its lecture source`);
+  }
+  // Sun Tzu's list is quoted, so guard a few of the ten factors verbatim.
+  const sunTzu = context.cards.find(c => c.title === "Sun Tzu's Decisive Factors");
+  for (const factor of ["Invincibility lies in the defense", "Know the enemy and yourself",
+                        "Be flexible", "Separate the enemy from his allies"]) {
+    assert.ok(sunTzu.how.includes(factor), `missing factor: ${factor}`);
+  }
+});
+
+test("the deep dives are searchable", () => {
+  // conceptSearchText in app.js folds deep.text and deep.source into the search string.
+  const app = fs.readFileSync(path.join(__dirname, "../app.js"), "utf8");
+  assert.match(app, /c\.deep \? c\.deep\.text \+ " " \+ c\.deep\.source/,
+    "concept search must include the deep-dive text");
 });

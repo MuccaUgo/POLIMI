@@ -292,14 +292,22 @@ const CONCEPTS = [
   "title": "Strategos: the Military Origin",
   "meaning": "«Strategy» comes from the Greek word «Strategos», which means generalship.",
   "how": "It is the art of war, especially the planning of movements of troops, ships, aircraft and so on into favourable positions.",
-  "trap": "The military root is about positioning before the battle, not about fighting it. That is the sense carried into business: choosing where to be, not only how hard to push."
+  "trap": "The military root is about positioning before the battle, not about fighting it. That is the sense carried into business: choosing where to be, not only how hard to push.",
+  "deep": {
+  "text": "Strategos means generalship, and more literally to command, to lead. The lecture stresses that strategy did not originate in management: it is far older and comes from the military world. The first seminal work on it is Sun Tzu's The Art of War, around 500 B.C. It also warns that strategy risks looking «fuzzy» precisely because the word is now used everywhere, from corporate settings down to everyday personal plans, which is why an operational definition is needed at all.",
+  "source": "Strategy and its origins"
+ }
  },
  {
   "cat": "What Strategy Is",
   "title": "Five Ways of Saying the Same Thing",
   "meaning": "The classic definitions all circle competitive advantage from different angles.",
   "how": "Ken Ohmae: business strategy is about competitive advantage, a sustainable edge over competitors. Peter Drucker: a firm's theory about how to gain competitive advantages. Michael Porter: competitive strategy is about being different, delivering a unique mix of value. Bruce Henderson: a deliberate search for a plan of action that will develop a business's competitive advantage. Henry Mintzberg: a pattern in a stream of decisions.",
-  "trap": "Mintzberg's is the odd one out: a pattern in a stream of decisions is observed after the fact, while the others describe something deliberately searched for or planned. That tension returns later as intended versus emergent strategy."
+  "trap": "Mintzberg's is the odd one out: a pattern in a stream of decisions is observed after the fact, while the others describe something deliberately searched for or planned. That tension returns later as intended versus emergent strategy.",
+  "deep": {
+  "text": "The lecture gives two of these quotes in full, with their sources. Ken Ohmae, The Mind of the Strategist (1983): “What business strategy is all about is, in a word, competitive advantage... The sole purpose of strategic planning is to enable a company to gain, as efficiently as possible, a sustainable edge over its competitors. Strategy thus implies an attempt to alter a company's strength relative to that of its competitors in the most efficient way.” Bruce Henderson, The Origin of Strategy (1989): “Strategy is a deliberate search for a plan of action that will develop a business's competitive advantage and compound it... The differences between you and your competitors are the basis for your advantage... The objective is to enlarge the scope of your advantage, which can only happen at someone else's expense.”",
+  "source": "Strategy: an operational definition"
+ }
  },
  {
   "cat": "What Strategy Is",
@@ -313,14 +321,22 @@ const CONCEPTS = [
   "title": "Strategy as an Integrated Plan",
   "meaning": "Strategy is an integrated, comprehensive plan.",
   "how": "It identifies the scope and the direction of the organisation, integrates a coherent set of strategic decisions, and is aimed at obtaining long term performance superior to competitors, which is competitive advantage.",
-  "trap": "The word that carries the weight is coherent: a list of individually sensible decisions that do not fit together is not a strategy."
+  "trap": "The word that carries the weight is coherent: a list of individually sensible decisions that do not fit together is not a strategy.",
+  "deep": {
+  "text": "The lecture reaches this definition as the answer to its own leading question, how to define strategy operationally, and words the third element as an integrated and consistent set of strategic decisions. It also makes explicit that the superiority is measured with reference to the goals identified, not in the abstract. The definition matters because it sets the boundaries of the discussion: strategy is far from fuzzy once it is tied to advantage and, more broadly, to performance.",
+  "source": "Strategy: an operational definition"
+ }
  },
  {
   "cat": "What Strategy Is",
   "title": "What Makes a Decision Strategic",
   "meaning": "A strategic decision is one that has long term effects, has non-reversible effects, and requires large amounts of resources.",
   "how": "All three together: a cheap decision that is easily undone is not strategic, however long it lasts.",
-  "trap": "Non-reversible is the criterion people drop. It is what makes the decision worth analysing carefully in advance rather than correcting later."
+  "trap": "Non-reversible is the criterion people drop. It is what makes the decision worth analysing carefully in advance rather than correcting later.",
+  "deep": {
+  "text": "The lecture builds the criteria from an everyday example: enrolling in a two-year MSc against skipping a lecture. Enrolling acts on the long term, requires significant resources of time, money and effort, has multi-dimensional, transversal and deep impacts — knowledge, but also people met and friendships made — and is hardly reversible once the course is under way. The same logic runs at company level: investing in a new plant is strategic, scheduling a day's shift work is not. The full definition it arrives at is wider than the three criteria on the slide: a strategic decision has long term, significant, multi-dimensional and non-reversible effects on the final goal of the organization; it usually requires large amounts of resources; and it usually requires top management involvement.",
+  "source": "Strategic decisions and Tactical decisions"
+ }
  },
  {
   "cat": "What Strategy Is",
@@ -580,6 +596,72 @@ const CONCEPTS = [
   "meaning": "The example of stated core values.",
   "how": "Focus on the user and all else will follow. It's best to do one thing really, really well. Fast is better than slow. Democracy on the web works.",
   "trap": "They are phrased as operating rules for decisions, not as adjectives. That is what makes them usable as values rather than slogans."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Sun Tzu's Decisive Factors",
+  "meaning": "The Art of War, around 500 B.C., is the first seminal work on strategy, and it sets out ten decisive factors for victory that a good strategy should take into account.",
+  "how": "Invincibility lies in the defense, the possibility of victory in the attack. Know the enemy and yourself. Strike only when the situation assures victory. Strike the enemy when he is least prepared. Weigh the situation before moving. Be flexible. Recognize the hazard and the weather. Deceive the enemy. Surprise the enemy. Separate the enemy from his allies.",
+  "trap": "Many of these are still business rules today: analysing the competitive arena, planning and acting, being flexible, creative and innovative, and partnering to create alliances. The point of the list is the continuity, not the antiquity.",
+  "deep": {
+   "text": "The lecture reviews the ten factors in brief and draws the parallel explicitly, noting how many of these military factors represent business rules managers still consider today.",
+   "source": "Strategy and its origins"
+  }
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "From Battlefield to Competitive Arena",
+  "meaning": "How strategy moved from the military world into management, term by term.",
+  "how": "The battlefield became the competitive arena; the enemies to fight became the competitors; the army became the company, with its assets and resources as the weapons the war is fought with; and the general became the entrepreneur or manager leading the company towards success.",
+  "trap": "The parallelism is a mapping, not a metaphor to be pushed: business strategy no longer aims at crushing or annihilating the opponent, which is where the analogy stops.",
+  "deep": {
+   "text": "Out of that parallelism the field came to be called Strategic Management, which couples strategy with the roles of the executives in charge of formulating, planning and driving it. The lecture also notes that strategy still finds strong application in its original military context.",
+   "source": "Strategy and its origins"
+  }
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Tactics",
+  "meaning": "Tactics are the short-term, operational decisions performed on a daily basis to pursue and implement a broader strategy.",
+  "how": "In strategy you set long term objectives and plan how to achieve them; tactics are how you concretize and implement that strategy through daily action. In the military parallel, a commander's strategy aims at winning the war, his tactics at winning the single battle with the resources allotted by the strategy level.",
+  "trap": "Tactics are not small strategy. They operate inside resources the strategy has already allocated, which is why a tactical decision is reversible and a strategic one is not.",
+  "deep": {
+   "text": "The lecture pairs each strategic decision with its tactical twin to make the line visible: attending a two-year MSc against skipping a lecture, buying a car against washing it, buying a house against maintaining it, investing in a new plant against scheduling a day's shift work.",
+   "source": "Strategic decisions and Tactical decisions"
+  }
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Between Politics and Tactics",
+  "meaning": "The military way of looking at strategy places it in the space between politics and tactics.",
+  "how": "Politics is derived from a purpose or cause. Strategy incorporates that purpose and is concerned with how to achieve the policy or goal with the means available. Tactics are the particular movements and actions while engaged in battle.",
+  "trap": "Strategy is the middle term, not the top one. It does not set the purpose — it receives it from the level above and works out how to reach it with the means at hand.",
+  "deep": {
+   "text": "Business strategy keeps the majority of these characteristics and then explores their company and management-related aspects, competition and advantage in particular.",
+   "source": "Strategy: an operational definition"
+  }
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Why Business Strategy Is Not War",
+  "meaning": "Where the military analogy stops.",
+  "how": "Business strategy does not aim at crushing or annihilating opponents. It assumes instead that you have a goal, that you have resources to reach it, and that you operate in a context where other entities have their own goals, which overlap and compete with yours.",
+  "trap": "Advantage in business is relative and can be enlarged, but as Henderson puts it, only at someone else's expense. That is competition, not annihilation.",
+  "deep": {
+   "text": "The lecture closes on this: strategy is far from being fuzzy, because it is and will remain fundamentally related to the notion of advantage and, in a broader sense, to performance.",
+   "source": "Strategy: an operational definition"
+  }
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Strategy Is Made of Strategic Decisions",
+  "meaning": "The move that makes strategy definable: place it in the realm of decisions.",
+  "how": "Strategy is defined and made of a set of strategic decisions, which is why defining a strategic decision comes first and defining strategy follows from it. The plan is then integrated and comprehensive because that set is consistent.",
+  "trap": "This is the reason the criteria for a strategic decision are worth memorising: they are the building block the whole definition of strategy rests on, not a side classification.",
+  "deep": {
+   "text": "The lectures follow exactly this order — first the origins, then what makes a decision strategic as opposed to tactical, and only then the operational definition of strategy as a whole.",
+   "source": "Strategic decisions and Tactical decisions"
+  }
  }
 ];
 
@@ -1989,5 +2071,214 @@ const QUESTIONS = [
    "D": "Incorrect. A code of conduct may state values, but the origin given is founder imprinting."
   },
   "recap": "Correct. Organisational culture comes from founder imprinting, which often persists decades after his or her departure. That persistence is the point: a culture can outlast the person who set it and the conditions that made it appropriate."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The First Work on Strategy",
+  "question": "Which work does the lecture identify as the first seminal text on strategy, and roughly when was it written?",
+  "options": {
+   "A": "Ken Ohmae's The Mind of the Strategist, 1983.",
+   "B": "Sun Tzu's The Art of War, around 500 B.C.",
+   "C": "Bruce Henderson's The Origin of Strategy, 1989.",
+   "D": "Michael Porter's Competitive Strategy, 1980."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Ohmae's book is a modern business text, quoted later for its definition of competitive advantage.",
+   "B": "Correct. The first seminal work that referred to strategy, in this case military strategy, is Sun Tzu's The Art of War, which dates back to around 500 B.C. It sets out ten decisive factors for victory.",
+   "C": "Incorrect. Henderson's essay is from 1989 and belongs to the business literature.",
+   "D": "Incorrect. Porter is quoted in the chapter, but the first seminal work named is far older and military."
+  },
+  "recap": "Correct. The first seminal work that referred to strategy, in this case military strategy, is Sun Tzu's The Art of War, which dates back to around 500 B.C. It sets out ten decisive factors for victory."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Military-to-Business Mapping",
+  "question": "In the parallelism that carried strategy from the military world into management, what does the army correspond to?",
+  "options": {
+   "A": "The competitive arena.",
+   "B": "The competitors.",
+   "C": "The company, with its assets and resources as the weapons.",
+   "D": "The entrepreneur or manager."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The competitive arena is what the battlefield became.",
+   "B": "Incorrect. The competitors are what the enemies to fight became.",
+   "C": "Correct. In the parallelism the battlefield became the competitive arena, the enemies became the competitors, the army became the company with its assets and resources as the weapons war could be fought with, and the general became the entrepreneur or manager leading the company towards success.",
+   "D": "Incorrect. The entrepreneur or manager is what the general became."
+  },
+  "recap": "Correct. In the parallelism the battlefield became the competitive arena, the enemies became the competitors, the army became the company with its assets and resources as the weapons war could be fought with, and the general became the entrepreneur or manager leading the company towards success."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Strategic or Tactical",
+  "question": "Enrolling in a two-year MSc, washing your car, investing in a new plant, scheduling tomorrow's shift work. Which pair is strategic?",
+  "options": {
+   "A": "Enrolling in the MSc and investing in a new plant.",
+   "B": "Washing the car and scheduling the shift work.",
+   "C": "Enrolling in the MSc and scheduling the shift work.",
+   "D": "All four, since each requires a decision."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Both act on the long term, require significant resources and are hardly reversible. Washing a car and scheduling a day's shift work are the tactical twins of buying a car and investing in a plant: short-term, operational, and reversible.",
+   "B": "Incorrect. Those are exactly the tactical examples used to draw the line.",
+   "C": "Incorrect. Scheduling shift work for a day is the standard example of a tactical decision at company level.",
+   "D": "Incorrect. Requiring a decision is not the criterion; the criteria are horizon, resources, impact and reversibility."
+  },
+  "recap": "Correct. Both act on the long term, require significant resources and are hardly reversible. Washing a car and scheduling a day's shift work are the tactical twins of buying a car and investing in a plant: short-term, operational, and reversible."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "How Tactics Relate to Strategy",
+  "question": "What is the relationship between strategy and tactics?",
+  "options": {
+   "A": "Tactics replace strategy once implementation begins.",
+   "B": "Tactics are strategy applied at a lower level of the organisation, with the same characteristics.",
+   "C": "In strategy you set long term objectives and plan to achieve them; tactics are how you concretize and implement that strategy through actions performed on a daily basis, within the resources the strategy has allotted.",
+   "D": "Tactics are the part of the strategy that is never carried out."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Tactics implement the strategy rather than replacing it; both remain in play.",
+   "B": "Incorrect. They differ in kind, not only in level: tactical decisions are short-term, operational and reversible.",
+   "C": "Correct. In strategy you set long term objectives and plan to achieve them; tactics refer to how you concretize and implement that strategy by means of actions performed on a daily basis. In the military parallel, strategy aims at winning the war and tactics at winning the single battle, with the resources allotted by the strategy level.",
+   "D": "Incorrect. That describes unrealized strategy, from a different part of the chapter."
+  },
+  "recap": "Correct. In strategy you set long term objectives and plan to achieve them; tactics refer to how you concretize and implement that strategy by means of actions performed on a daily basis. In the military parallel, strategy aims at winning the war and tactics at winning the single battle, with the resources allotted by the strategy level."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Fuller Definition of a Strategic Decision",
+  "question": "Beyond long term effects, non-reversible effects and large amounts of resources, what else does the lecture's operational definition of a strategic decision include?",
+  "options": {
+   "A": "That the effects are significant and multi-dimensional on the final goal of the organization, and that it usually requires top management involvement.",
+   "B": "That it must be approved by the shareholders' meeting.",
+   "C": "That it must be documented in a written strategic plan.",
+   "D": "That it must concern a market the company is not yet in."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The operational definition is that a strategic decision has long term, significant, multi-dimensional and non-reversible effects on the final goal of the organization; it usually requires large amounts of resources; and it usually requires top management involvement.",
+   "B": "Incorrect. No approval body is part of the definition; the involvement named is that of top management.",
+   "C": "Incorrect. Documentation is not one of the criteria, and under Mintzberg's view strategy need not be written at all.",
+   "D": "Incorrect. Entering a new market is one example of a strategic decision, not a condition for one."
+  },
+  "recap": "Correct. The operational definition is that a strategic decision has long term, significant, multi-dimensional and non-reversible effects on the final goal of the organization; it usually requires large amounts of resources; and it usually requires top management involvement."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Politics, Strategy, Tactics",
+  "question": "In the military view, strategy sits in the space between politics and tactics. What does each level do?",
+  "options": {
+   "A": "Politics sets the movements in battle; strategy allocates resources; tactics derive the purpose.",
+   "B": "Politics is derived from a purpose or cause; strategy incorporates that purpose and concerns how to achieve the goal with the means available; tactics are the particular movements and actions while engaged in battle.",
+   "C": "Politics and strategy are the same level; tactics is the only distinct one.",
+   "D": "Strategy sets the purpose, politics negotiates it, and tactics communicate it."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The three are inverted: movements in battle are tactics, and the purpose comes from politics.",
+   "B": "Correct. Politics is derived from a purpose or cause; strategy incorporates this purpose and is concerned with how to achieve the policy or goal with the means available; tactics are the particular movements and actions while engaged in battle. Strategy is the middle term.",
+   "C": "Incorrect. They are distinguished precisely so that strategy can be located between them.",
+   "D": "Incorrect. Strategy does not set the purpose: it receives it and works out how to reach it."
+  },
+  "recap": "Correct. Politics is derived from a purpose or cause; strategy incorporates this purpose and is concerned with how to achieve the policy or goal with the means available; tactics are the particular movements and actions while engaged in battle. Strategy is the middle term."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Where the War Analogy Stops",
+  "question": "The chapter carries strategy over from the military world, but marks one point where the analogy breaks down. Which?",
+  "options": {
+   "A": "Business strategy has no equivalent of resources.",
+   "B": "Business strategy cannot be planned in advance.",
+   "C": "Business strategy does not aim at crushing or annihilating opponents: it assumes you have a goal and resources, in a context where other entities have goals that overlap and compete with yours.",
+   "D": "Business strategy has no equivalent of a commander."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Resources map directly: in the parallelism the company's assets and resources are the weapons.",
+   "B": "Incorrect. Planning survives the transfer; it is central to the intended strategy.",
+   "C": "Correct. Business strategy does not aim any more at crushing or annihilating opponents as in war. It assumes you have a goal, you have resources to reach it, and you operate in a context where other entities may have their own goals that overlap and compete with yours. Strategy is then how to establish and maintain an advantage over them.",
+   "D": "Incorrect. The general maps onto the entrepreneur or manager leading the company."
+  },
+  "recap": "Correct. Business strategy does not aim any more at crushing or annihilating opponents as in war. It assumes you have a goal, you have resources to reach it, and you operate in a context where other entities may have their own goals that overlap and compete with yours. Strategy is then how to establish and maintain an advantage over them."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Why Strategy Looks Fuzzy",
+  "question": "The lecture opens by warning that strategy risks appearing «fuzzy». What causes that, and what resolves it?",
+  "options": {
+   "A": "Its many competing academic schools; an authoritative textbook resolves it.",
+   "B": "The word is used in many varied contexts, from corporate settings down to everyday personal plans; tying it to advantage and performance through an operational definition resolves it.",
+   "C": "Its military origin, which no longer applies; dropping the military parallel resolves it.",
+   "D": "The absence of any agreed definition; only measurement resolves it."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The cause given is the everyday spread of the word, not academic disagreement.",
+   "B": "Correct. Strategy risks appearing fuzzy because the term is used in many varied contexts, in corporate and business environments but also to describe situations at an individual level, even on a daily basis. The answer offered is an operational definition: strategy is far from fuzzy once it is tied to the notion of advantage and, more broadly, to performance.",
+   "C": "Incorrect. The military origin is presented as the foundation of the concept, not as the source of confusion.",
+   "D": "Incorrect. Definitions are given, several of them; the problem is loose everyday use."
+  },
+  "recap": "Correct. Strategy risks appearing fuzzy because the term is used in many varied contexts, in corporate and business environments but also to describe situations at an individual level, even on a daily basis. The answer offered is an operational definition: strategy is far from fuzzy once it is tied to the notion of advantage and, more broadly, to performance."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Ohmae on What Strategic Planning Is For",
+  "question": "In the quote given in full, Ken Ohmae writes that the sole purpose of strategic planning is to enable a company to do what?",
+  "options": {
+   "A": "To maximize its market share as rapidly as possible.",
+   "B": "To gain, as efficiently as possible, a sustainable edge over its competitors, altering the company's strength relative to theirs.",
+   "C": "To set long term objectives and communicate them across the organisation.",
+   "D": "To identify the industries in which it should compete."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Market share is not what the quote names; competitive advantage is.",
+   "B": "Correct. Ohmae, in The Mind of the Strategist (1983): what business strategy is all about is, in a word, competitive advantage, and the sole purpose of strategic planning is to enable a company to gain, as efficiently as possible, a sustainable edge over its competitors. Strategy thus implies an attempt to alter a company's strength relative to that of its competitors in the most efficient way.",
+   "C": "Incorrect. That is closer to the coordinating role of strategy than to Ohmae's stated purpose.",
+   "D": "Incorrect. Choosing industries is corporate strategy in Grant's scheme, not Ohmae's definition."
+  },
+  "recap": "Correct. Ohmae, in The Mind of the Strategist (1983): what business strategy is all about is, in a word, competitive advantage, and the sole purpose of strategic planning is to enable a company to gain, as efficiently as possible, a sustainable edge over its competitors. Strategy thus implies an attempt to alter a company's strength relative to that of its competitors in the most efficient way."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Henderson on Enlarging the Advantage",
+  "question": "Bruce Henderson writes that the differences between you and your competitors are the basis for your advantage, and that the objective is to enlarge its scope. With what qualification?",
+  "options": {
+   "A": "That it can only happen at someone else's expense.",
+   "B": "That it can only happen in a growing market.",
+   "C": "That it can only happen with top management involvement.",
+   "D": "That it can only happen once the plan is written down."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Henderson, in The Origin of Strategy (1989): strategy is a deliberate search for a plan of action that will develop a business's competitive advantage and compound it; the differences between you and your competitors are the basis for your advantage; and the objective is to enlarge the scope of your advantage, which can only happen at someone else's expense.",
+   "B": "Incorrect. Market growth is not the qualification in the quote; competition is.",
+   "C": "Incorrect. Top management involvement belongs to the definition of a strategic decision, not to this quote.",
+   "D": "Incorrect. Nothing in the quote depends on the plan being documented."
+  },
+  "recap": "Correct. Henderson, in The Origin of Strategy (1989): strategy is a deliberate search for a plan of action that will develop a business's competitive advantage and compound it; the differences between you and your competitors are the basis for your advantage; and the objective is to enlarge the scope of your advantage, which can only happen at someone else's expense."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Where the Definition of Strategy Starts",
+  "question": "The lecture says that to define strategy operationally we should position ourselves in the realm of decisions. Why does that order matter?",
+  "options": {
+   "A": "Because decisions are easier to count than plans.",
+   "B": "Because strategy is defined and made of a set of strategic decisions, so defining the building block has to come before defining the whole.",
+   "C": "Because only decisions taken by top management are observable.",
+   "D": "Because tactics cannot be defined until strategy has been."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Countability is not the reason given.",
+   "B": "Correct. The starting assumption is that strategy is defined and made of a set of strategic decisions. That is why the lectures define a strategic decision first, as against a tactical one, and only then arrive at strategy as an integrated, comprehensive plan integrating a consistent set of those decisions.",
+   "C": "Incorrect. Top management involvement is a feature of strategic decisions, not the reason for starting from decisions.",
+   "D": "Incorrect. The two are defined together, by contrast with each other."
+  },
+  "recap": "Correct. The starting assumption is that strategy is defined and made of a set of strategic decisions. That is why the lectures define a strategic decision first, as against a tactical one, and only then arrive at strategy as an integrated, comprehensive plan integrating a consistent set of those decisions."
  }
 ];

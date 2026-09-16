@@ -108,6 +108,9 @@ main:focus { outline: none; }
 .topic details { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
 .topic summary { font-size: 13px; font-weight: 600; cursor: pointer; min-height: 30px; }
 .mini { font-size: 13px; color: var(--text2); }
+.topic details.deep summary { color: var(--accent); }
+.topic details.deep .source { font-size: 10px; color: var(--muted); margin: 8px 0 0; }
+.topic details.deep .source em { font-style: normal; font-weight: 650; }
 .today-note { margin: 14px 0 0; border-top: 1px dashed var(--line); padding-top: 12px; font-size: 12px; line-height: 1.7; color: var(--muted); }
 .today-note b { color: var(--accent); font-weight: 650; }
 .feedback .today-note { border-top-color: var(--line); }
