@@ -23,6 +23,19 @@
   function lsJSON(k, fallback) {
     try { return JSON.parse(lsGet(k) || JSON.stringify(fallback)); } catch (e) { return fallback; }
   }
+
+  // The hub used to live at /fa/ under the fa_ prefix. Carry that progress over once.
+  function migrateLegacyKeys() {
+    if (lsGet("afc_migrated_from_fa")) return;
+    try {
+      Object.keys(localStorage).forEach(function (k) {
+        if (k.indexOf("fa_") !== 0) return;
+        var target = "afc_" + k.slice(3);
+        if (lsGet(target) === null) lsSet(target, localStorage.getItem(k));
+      });
+    } catch (e) {}
+    lsSet("afc_migrated_from_fa", "1");
+  }
   function shuffle(arr) {
     var a = arr.slice();
     for (var i = a.length - 1; i > 0; i--) {
@@ -123,7 +136,7 @@
   }
 
   /* ---------------- quiz ---------------- */
-  function sessionKey(mode) { return "fa_session_" + mode; }
+  function sessionKey(mode) { return "afc_session_" + mode; }
   function newSessionId() {
     return window.crypto && window.crypto.randomUUID
       ? window.crypto.randomUUID()
@@ -341,7 +354,7 @@
 
   /* ---------------- mistakes ---------------- */
   function saveMistakes(wrongItems) {
-    var saved = lsJSON("fa_mistakes", []);
+    var saved = lsJSON("afc_mistakes", []);
     if (!Array.isArray(saved)) saved = [];
     wrongItems.forEach(function (x) {
       saved.push({
@@ -351,10 +364,10 @@
         selected: x.a.selected, recap: plain(x.q.recap).slice(0, 600)
       });
     });
-    lsSet("fa_mistakes", JSON.stringify(saved.slice(-100)));
+    lsSet("afc_mistakes", JSON.stringify(saved.slice(-100)));
   }
   function renderMistakes() {
-    var saved = lsJSON("fa_mistakes", []);
+    var saved = lsJSON("afc_mistakes", []);
     saved = Array.isArray(saved) ? saved.filter(function (m) { return m && typeof m === "object"; }).reverse() : [];
     $("mistakeList").innerHTML = saved.length
       ? saved.map(function (m) {
@@ -372,7 +385,7 @@
     return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
   }
   function studyStats() {
-    var s = lsJSON("fa_stats", {});
+    var s = lsJSON("afc_stats", {});
     if (!s || typeof s !== "object" || Array.isArray(s)) s = {};
     ["totalAnswered", "totalCorrect", "streak"].forEach(function (key) {
       if (!Number.isFinite(s[key]) || s[key] < 0) s[key] = 0;
@@ -395,7 +408,7 @@
       s.streak = s.lastStudyDate === localDate(yesterday) ? (s.streak || 0) + 1 : 1;
       s.lastStudyDate = today;
     }
-    lsSet("fa_stats", JSON.stringify(s));
+    lsSet("afc_stats", JSON.stringify(s));
     return true;
   }
   function recordCompletion(correct, total, wrongItems, mode, completedId) {
@@ -407,7 +420,7 @@
     }
     // Serialize the read/update across tabs where Web Locks is available.
     if (navigator.locks && navigator.locks.request) {
-      navigator.locks.request("fa_record_completion", record).catch(record);
+      navigator.locks.request("afc_record_completion", record).catch(record);
     } else record();
   }
   function renderHomeStats() {
@@ -506,6 +519,7 @@
 
   /* ---------------- wiring ---------------- */
   function init() {
+    migrateLegacyKeys();
     // category select options
     $("category").innerHTML = ["All"].concat(CATEGORIES).map(function (c) {
       return '<option value="' + esc(c) + '">' + esc(c === "All" ? "All areas" : c) + "</option>";
@@ -556,7 +570,7 @@
       if (e.target.closest("#restartBtn")) { openTest(currentMode); return; }
       if (e.target.closest("#backHomeBtn")) { showSection("home"); return; }
       if (e.target.closest("#clearMistakesBtn")) {
-        try { localStorage.removeItem("fa_mistakes"); } catch (err) {}
+        try { localStorage.removeItem("afc_mistakes"); } catch (err) {}
         renderMistakes();
       }
     });

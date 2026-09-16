@@ -1,5 +1,5 @@
 const APP_SCOPE = new URL(self.registration.scope);
-const CACHE_PREFIX = `financial-accounting-hub:${APP_SCOPE.href}:`;
+const CACHE_PREFIX = `accounting-finance-control-hub:${APP_SCOPE.href}:`;
 const CACHE_NAME = `${CACHE_PREFIX}v3`;
 const APP_ASSETS = [
   "./",

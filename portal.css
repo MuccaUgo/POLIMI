@@ -3,7 +3,7 @@
   --bg: #f6f7f8; --card: #fff; --text: #1b2126; --muted: #657079;
   --line: #dfe3e6; --accent: #2c3a45; --accent2: #465a68; --on-accent: #fff;
   --soft: #eef1f3; --text2: #42505b; --hero: #eaeef0; --hero-line: #d5dce0;
-  --fa: #225e50; --fa2: #357c6a; --fa-soft: #e8f0e9;
+  --afc: #225e50; --afc2: #357c6a; --afc-soft: #e8f0e9;
   --sm: #3b3468; --sm2: #554c9c; --sm-soft: #ecebf7;
   --shadow: 0 2px 3px #1b212604; --shadow-md: 0 8px 24px #1b21260c;
 }
@@ -12,7 +12,7 @@
   --bg: #12171a; --card: #1b2126; --text: #e8eef1; --muted: #a3b0b8;
   --line: #333e45; --accent: #a9c6d6; --accent2: #b6cfdc; --on-accent: #17262e;
   --soft: #222a30; --text2: #c6d0d6; --hero: #20292f; --hero-line: #3a464e;
-  --fa: #a6d4b8; --fa2: #7fc696; --fa-soft: #22352b;
+  --afc: #a6d4b8; --afc2: #7fc696; --afc-soft: #22352b;
   --sm: #b6b0f0; --sm2: #8d86d6; --sm-soft: #24243a;
   --shadow: 0 2px 3px #0001; --shadow-md: 0 8px 24px #0002;
 }
@@ -62,12 +62,13 @@ main:focus { outline: none; }
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 34px 0 12px; }
 .section-heading h3 { margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -.15px; }
 .section-heading .small { font-size: 10px; }
-.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .course { display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 13px; padding: 24px; text-decoration: none; color: inherit; transition: box-shadow .18s ease, border-color .18s ease, transform .18s ease; }
 a.course:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--course, var(--accent)); }
 .course-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .course-mark { width: 34px; height: 34px; display: grid; place-items: center; flex-shrink: 0; border-radius: 10px; background: var(--course-soft); color: var(--course); font: bold 15px Georgia, serif; letter-spacing: -1px; }
-.course.fa { --course: var(--fa); --course-2: var(--fa2); --course-soft: var(--fa-soft); }
+.course-mark.trigram { font-size: 13px; letter-spacing: -.8px; }
+.course.afc { --course: var(--afc); --course-2: var(--afc2); --course-soft: var(--afc-soft); }
 .course.sm { --course: var(--sm); --course-2: var(--sm2); --course-soft: var(--sm-soft); }
 .course.upcoming { --course: var(--muted); --course-2: var(--muted); --course-soft: var(--soft); }
 .kicker { font-size: 10px; color: var(--course-2, var(--accent2)); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
@@ -85,7 +86,6 @@ a.course:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); bord
 @media (max-width: 1000px) {
   .hero { gap: 28px; padding: 30px; }
   .hero h2 { font-size: 42px; }
-  .course-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 760px) {
   .header-inner { padding: 14px 18px; }

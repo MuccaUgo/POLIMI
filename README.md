@@ -9,11 +9,12 @@ The root page is a portal listing the courses; each course is a self-contained s
 
 | Folder | Course | Content |
 |---|---|---|
-| [`fa/`](fa/) | Financial Accounting | 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting |
+| [`afc/`](afc/) | Accounting, Finance & Control | Background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting** planned: cost classification, cost objects, and the process, job order, operation and activity-based allocation methods |
 | [`sm/`](sm/) | Strategy & Marketing | 39 concept cards, 31 practice questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG |
 
-Planned next: Cost Accounting (cost classification, cost objects, and the process, job order, operation and
-activity-based allocation methods).
+The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
+holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
+over from the `fa_` key prefix to `afc_` the first time the new hub loads.
 
 ## What each hub offers
 
@@ -44,7 +45,7 @@ Then open `http://localhost:8000`.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Select branch `main` and folder `/root`, then save.
 
-The portal is served at the repository root and each course at its own path, for example `/fa/` and `/sm/`.
+The portal is served at the repository root and each course at its own path, for example `/afc/` and `/sm/`.
 
 ## Offline use
 
@@ -59,23 +60,24 @@ index.html      portal listing the courses
 portal.css      portal styles
 manifest.json   portal manifest
 icon.svg        portal icon
-fa/             Financial Accounting hub (index.html, styles.css, data.js, app.js, sw.js, manifest.json, icon.svg)
-fa/tests/       data, quiz and service-worker tests
+afc/            Accounting, Finance & Control hub (index.html, styles.css, data.js, app.js, sw.js, manifest.json, icon.svg)
+afc/tests/      data, quiz and service-worker tests
 sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
+fa/index.html   redirect from the hub's former path
 ```
 
 In each hub, `data.js` holds the concept cards and question bank, while `app.js` renders the concepts browser
 and runs the quiz. No frameworks, no backend, no external dependencies.
 
 The portal and both hubs share one design system: the same CSS custom properties, layout and components, with
-only the accent palette changing per course (green for Financial Accounting, indigo for Strategy & Marketing,
-slate for the portal). The chosen theme is stored once under `polimi_theme` and followed everywhere.
+only the accent palette changing per course (green for Accounting, Finance & Control, indigo for Strategy &
+Marketing, slate for the portal). The chosen theme is stored once under `polimi_theme` and followed everywhere.
 
 ## Tests
 
 ```bash
-node --test fa/tests/*.test.js
+node --test afc/tests/*.test.js
 node --test sm/tests/*.test.js
 ```
 

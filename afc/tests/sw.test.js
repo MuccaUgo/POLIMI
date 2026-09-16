@@ -5,7 +5,7 @@ const test = require("node:test");
 const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
-const prefix = `financial-accounting-hub:${scope}:`;
+const prefix = `accounting-finance-control-hub:${scope}:`;
 const currentCache = `${prefix}v3`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
@@ -108,8 +108,8 @@ test("activation deletes only this app's stale caches and waits before claiming 
   const deleted = deferred();
   const claimed = deferred();
   const sw = worker({ delete: () => deleted.promise, claim: () => claimed.promise });
-  const siblingCache = "financial-accounting-hub:https://muccaugo.github.io/OtherApp/:v1";
-  for (const name of [`${prefix}v1`, currentCache, siblingCache, "other-app", "financial-accounting-hub-v1"]) {
+  const siblingCache = "accounting-finance-control-hub:https://muccaugo.github.io/OtherApp/:v1";
+  for (const name of [`${prefix}v1`, currentCache, siblingCache, "other-app", "accounting-finance-control-hub-v1"]) {
     sw.seed(name, `${scope}index.html`, name);
   }
   const event = sw.dispatch("activate");
@@ -123,7 +123,7 @@ test("activation deletes only this app's stale caches and waits before claiming 
   assert.equal(done, false);
   claimed.resolve();
   await event.done;
-  assert.deepEqual([...sw.stores.keys()], [currentCache, siblingCache, "other-app", "financial-accounting-hub-v1"]);
+  assert.deepEqual([...sw.stores.keys()], [currentCache, siblingCache, "other-app", "accounting-finance-control-hub-v1"]);
 });
 
 test("offline requests use this app's cached assets and navigation shell", async () => {

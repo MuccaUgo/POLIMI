@@ -148,7 +148,7 @@ function loadApp(storage = new Map(), random = 0.25, locks = undefined) {
     for (const handler of target.listeners.click || []) handler(event);
     for (const handler of body.listeners.click || []) handler(event);
   }
-  const saved = mode => JSON.parse(storage.get("fa_session_" + mode));
+  const saved = mode => JSON.parse(storage.get("afc_session_" + mode));
   function jump(number) { get("jumpTo").value = String(number); click("jumpBtn"); }
   return { get, click, storage, saved, jump };
 }
@@ -198,28 +198,28 @@ test("exam cannot finish with gaps; a completed session is counted only once", (
   assert.equal(app.get("summary").classList.contains("hidden"), true);
   assert.equal(app.get("jumpTo").value, "1");
   assert.match(app.get("quiz").innerHTML, /9 unanswered questions/);
-  assert.equal(app.storage.has("fa_stats"), false);
+  assert.equal(app.storage.has("afc_stats"), false);
   for (let i = 0; i < 9; i++) { app.click("opt-A"); app.click("nextBtn"); }
   app.click("nextBtn");
-  const stats = JSON.parse(app.storage.get("fa_stats"));
+  const stats = JSON.parse(app.storage.get("afc_stats"));
   assert.equal(stats.totalAnswered, 10);
   assert.equal(stats.totalCorrect, 9);
-  assert.equal(JSON.parse(app.storage.get("fa_mistakes")).length, 1);
-  assert.equal(app.storage.has("fa_session_exam"), false);
+  assert.equal(JSON.parse(app.storage.get("afc_mistakes")).length, 1);
+  assert.equal(app.storage.has("afc_session_exam"), false);
   app.click("nextBtn");
-  assert.equal(JSON.parse(app.storage.get("fa_stats")).totalAnswered, 10);
+  assert.equal(JSON.parse(app.storage.get("afc_stats")).totalAnswered, 10);
 });
 
 test("a partial full test counts only answers and stores readable mistake text", () => {
   const app = loadApp();
   app.click("fullBtn"); app.get("startFrom").value = "12"; app.click("startBtn");
   app.click("opt-B"); app.click("nextBtn");
-  const stats = JSON.parse(app.storage.get("fa_stats"));
+  const stats = JSON.parse(app.storage.get("afc_stats"));
   assert.equal(stats.totalAnswered, 1);
   assert.equal(stats.totalCorrect, 0);
   assert.match(app.get("summary").innerHTML, /11<\/strong>Unanswered/);
   assert.match(app.get("summary").innerHTML, /1<\/strong>Wrong/);
-  const mistake = JSON.parse(app.storage.get("fa_mistakes"))[0];
+  const mistake = JSON.parse(app.storage.get("afc_mistakes"))[0];
   assert.equal(mistake.correctText, "Correct & complete");
   app.click("mistakesBtn");
   assert.match(app.get("mistakeList").innerHTML, /Correct &amp; complete/);
@@ -239,8 +239,8 @@ test("different quiz modes keep independent saved sessions", () => {
 
 test("invalid saved sessions and malformed optional history do not crash startup", () => {
   const storage = new Map([
-    ["fa_session_full", '{"version":1,"questionIds":[999]}'],
-    ["fa_stats", "null"], ["fa_mistakes", "{}"]
+    ["afc_session_full", '{"version":1,"questionIds":[999]}'],
+    ["afc_stats", "null"], ["afc_mistakes", "{}"]
   ]);
   const app = loadApp(storage);
   app.click("fullBtn");
@@ -257,12 +257,12 @@ test("the same saved session completed in two tabs records results once", () => 
   first.click("nextBtn");
   // Navigating the stale tab must not recreate the completed saved session.
   second.jump(12);
-  assert.equal(first.storage.has("fa_session_full"), false);
+  assert.equal(first.storage.has("afc_session_full"), false);
   second.click("nextBtn");
-  const stats = JSON.parse(first.storage.get("fa_stats"));
+  const stats = JSON.parse(first.storage.get("afc_stats"));
   assert.equal(stats.totalAnswered, 1);
   assert.equal(stats.completedSessions.length, 1);
-  assert.equal(JSON.parse(first.storage.get("fa_mistakes")).length, 1);
+  assert.equal(JSON.parse(first.storage.get("afc_mistakes")).length, 1);
 });
 
 test("a stale tab cannot overwrite or delete a newer session for the same mode", () => {
@@ -296,10 +296,10 @@ test("shared browser locks serialize duplicate completions across tabs", async (
   second.click("continueBtn");
   first.click("nextBtn"); second.click("nextBtn");
   await queue;
-  assert.deepEqual(names, ["fa_record_completion", "fa_record_completion"]);
-  assert.equal(JSON.parse(first.storage.get("fa_stats")).totalAnswered, 1);
-  assert.equal(JSON.parse(first.storage.get("fa_mistakes")).length, 1);
-  assert.equal(first.storage.has("fa_session_full"), false);
+  assert.deepEqual(names, ["afc_record_completion", "afc_record_completion"]);
+  assert.equal(JSON.parse(first.storage.get("afc_stats")).totalAnswered, 1);
+  assert.equal(JSON.parse(first.storage.get("afc_mistakes")).length, 1);
+  assert.equal(first.storage.has("afc_session_full"), false);
 });
 
 test("only Full Test shows an order selector", () => {

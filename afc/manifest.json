@@ -1,7 +1,7 @@
 {
-  "name": "Financial Accounting Study Hub",
-  "short_name": "FA Study Hub",
-  "description": "Concepts and practice questions on IFRS financial accounting.",
+  "name": "Accounting, Finance & Control Study Hub",
+  "short_name": "AFC Study Hub",
+  "description": "Background topics for Accounting, Finance & Control: concepts and practice questions, starting with IFRS financial accounting.",
   "lang": "en",
   "start_url": "./index.html",
   "scope": "./",

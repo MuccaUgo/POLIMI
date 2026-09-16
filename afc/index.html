@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Accounting, Finance &amp; Control Study Hub</title>
+<meta name="description" content="Background topics for Accounting, Finance &amp; Control: concepts and practice questions, starting with IFRS financial accounting." />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<meta name="theme-color" content="#225e50" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>(function(){try{var t=localStorage.getItem('polimi_theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Skip to content</a>
+<header>
+  <div class="header-inner">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark trigram" aria-hidden="true">afc<span>.</span></span>
+        <div>
+          <a class="backlink" href="../index.html">← All courses</a>
+          <h1>Accounting, Finance &amp; Control <span class="badge" id="versionBadge">Study Hub</span></h1>
+          <div class="small" id="count"></div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="hamb" id="hambBtn" aria-label="Menu" aria-controls="mainNav" aria-expanded="false">Menu</button>
+      </div>
+    </div>
+    <nav class="nav" id="mainNav" aria-label="Sections">
+      <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
+      <button id="conceptsBtn" data-section="concepts">Concepts</button>
+      <button id="fullBtn" data-mode="full">Full Test</button>
+      <button id="practiceBtn" data-mode="practice10">Practice 10</button>
+      <button id="examBtn" data-mode="exam">Exam Test</button>
+      <button id="mistakesBtn" data-section="mistakes">Mistakes</button>
+    </nav>
+    <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+  </div>
+</header>
+
+<main id="mainContent" tabindex="-1">
+  <section id="home" class="app-section">
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Background topics · Financial Accounting</div>
+        <h2>A little practice.<br>A clearer picture.</h2>
+        <p>The groundwork for the course, one concept at a time. Start from financial accounting, test your understanding and learn from your mistakes before the course concepts build on it.</p>
+        <div class="hero-actions">
+          <button class="primary" data-mode="practice10">Start practicing <span aria-hidden="true">↗</span></button>
+          <button class="ghost" data-section="concepts">Explore concepts</button>
+        </div>
+        <div class="hero-note">10 questions · Instant feedback · Go at your own pace</div>
+      </div>
+      <aside class="study-path" aria-label="Suggested study routine">
+        <div class="eyebrow">A simple study routine</div>
+        <ol>
+          <li><span class="step-number">01</span><div><strong>Get the idea</strong><p>Read a concept and spot the exam trap.</p></div></li>
+          <li><span class="step-number">02</span><div><strong>Put it into practice</strong><p>Try a short quiz on the area you’re studying.</p></div></li>
+          <li><span class="step-number">03</span><div><strong>Close the gaps</strong><p>Revisit mistakes, then check yourself in an exam.</p></div></li>
+        </ol>
+        <div class="path-footer"><span aria-hidden="true">↺</span> Small sessions. Steady progress.</div>
+      </aside>
+    </div>
+    <div class="section-heading"><h3>What this hub covers</h3><span class="small">Background topics to revise before the course concepts</span></div>
+    <div class="topic-grid">
+      <div class="topic"><div class="kicker">Ready</div><strong>Financial Accounting</strong><p>How a company reports to the outside world under IFRS: the accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p><p class="small">44 concepts · 83 questions · everything in this hub today</p></div>
+      <div class="topic"><div class="kicker">Planned</div><strong>Cost Accounting</strong><p>How costs are classified and assigned inside the company: cost objects, and the process, job order, operation and activity-based allocation methods.</p><p class="small">Not built yet</p></div>
+    </div>
+    <div class="section-heading"><h3>Your progress</h3><span class="small">From completed tests · Saved in this browser</span></div>
+    <div class="stats-row" id="homeStats"></div>
+    <div class="section-heading"><h3>How would you like to study?</h3><span class="small">Pick up wherever you are</span></div>
+    <div class="mode-grid">
+      <article class="mode-card">
+        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">Aa</span><span class="small">Theory</span></div>
+        <h4>Concepts</h4>
+        <p>Clear explanations, practical examples and the traps to watch for. Find exactly what you need.</p>
+        <button class="ghost" data-section="concepts">Open concepts <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="mode-card featured">
+        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">↗</span><span class="small">Quick practice</span></div>
+        <h4>Practice 10</h4>
+        <p>A fresh set of questions with feedback after every answer. Focus on one area or mix them all.</p>
+        <button class="primary" data-mode="practice10">Start practice <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="mode-card">
+        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">≡</span><span class="small">Complete review</span></div>
+        <h4>Full Test</h4>
+        <p>Work through the question bank at your pace. Choose your order and resume a saved session.</p>
+        <button class="ghost" id="continueBtn" data-mode="full">Start Full Test</button>
+      </article>
+      <article class="mode-card">
+        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">◎</span><span class="small">Check yourself</span></div>
+        <h4>Exam Test</h4>
+        <p>Ten mixed questions. Make your choices, then see your score and explanations at the end.</p>
+        <button class="ghost" data-mode="exam">Start exam <span aria-hidden="true">→</span></button>
+      </article>
+    </div>
+    <div class="review-prompt"><div><strong>Every mistake is a place to start.</strong><p class="small">Your saved mistakes bring the explanations back into focus.</p></div><button class="ghost" data-section="mistakes">Review mistakes <span aria-hidden="true">→</span></button></div>
+  </section>
+
+  <section id="concepts" class="app-section hidden">
+    <div class="card">
+      <h2>Concepts</h2>
+      <p class="small">Each card gives the meaning, how the rule works in practice, and the typical exam trap. Where the course material follows an older standard, a <b>Today</b> note adds what current IFRS says — the answers to learn for the exam stay the ones in the annexure.</p>
+      <div class="pillrow" id="conceptPills"></div>
+      <input class="searchbox" id="conceptSearch" placeholder="Search concepts..." aria-label="Search concepts" />
+      <p class="small result-count" id="conceptResultCount" role="status" aria-live="polite"></p>
+      <div class="empty-state hidden" id="conceptEmpty"><h3>No matching concepts</h3><p>Try a different search or browse all areas.</p><button class="ghost" data-reset-concepts>Clear filters</button></div>
+      <div class="topic-grid concepts-grid" id="conceptsGrid"></div>
+      <div class="callout warn">
+        <strong>High-frequency traps</strong>
+        <div class="topic-grid">
+          <div class="topic"><div class="kicker">Trap</div><strong>Accrual ≠ cash</strong><p>Revenue belongs to the year the transaction takes effect; the cash inflow can fall in a different year.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>FVTPL ≠ Available-for-sale</strong><p>Both are measured at fair value, but the variation goes to the income statement for FVTPL and to the revaluation reserve for available-for-sale.</p><p class="today-note"><b>Today.</b> Both are IAS 39 categories. Under IFRS 9 the second one is FVOCI, and its variation goes to other comprehensive income.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>Impairment ≠ depreciation</strong><p>Depreciation allocates cost across useful life; impairment captures a durable, unrecoverable loss of value.</p><p class="today-note"><b>Today.</b> IAS 36 states it as carrying amount above recoverable amount, and the loss can be reversed later for assets other than goodwill.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>Land is never depreciated</strong><p>Every other item of PPE is, and depreciation continues even while an asset sits idle.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>LIFO is not allowed</strong><p>IFRS permits FIFO and weighted average only; LIFO logic is considered unrealistic.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>Inventories: lower of the two</strong><p>Cost versus net realizable value, where NRV is the selling price less completion and selling costs.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>Gross profit only by function</strong><p>The by-nature format runs from revenue straight to operating profit with no gross profit subtotal.</p></div>
+          <div class="topic"><div class="kicker">Trap</div><strong>Goodwill is tested, not amortized</strong><p>Indefinite life means an impairment test every year, with the loss credited to the income statement.</p><p class="today-note"><b>Today.</b> The loss is charged against the profit of the year, and goodwill is the one asset whose impairment can never be reversed.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testSection" class="app-section hidden">
+    <section class="card" id="setup">
+      <h2 id="testTitle">Test</h2>
+      <p class="small" id="setupDesc">Choose a test mode.</p>
+      <div class="controls">
+        <div id="categoryWrap">
+          <label class="small" for="category">Area</label>
+          <select id="category"></select>
+        </div>
+        <div id="startWrap">
+          <label class="small" for="startFrom">Start from question</label>
+          <input id="startFrom" type="number" min="1" value="1" />
+        </div>
+        <div id="orderWrap">
+          <label class="small" for="orderMode">Order</label>
+          <select id="orderMode">
+            <option value="ordered">Original order</option>
+            <option value="shuffle">Shuffle</option>
+          </select>
+        </div>
+      </div>
+      <button class="primary" id="startBtn">Start</button>
+    </section>
+    <section class="card hidden" id="quiz"></section>
+    <section class="card hidden" id="summary"></section>
+  </section>
+
+  <section id="mistakes" class="app-section hidden">
+    <div class="card">
+      <h2>Mistakes Review</h2>
+      <p class="small">Wrong answers are saved in this browser.</p>
+      <div id="mistakeList"></div>
+      <button class="ghost" id="clearMistakesBtn">Reset mistakes</button>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><span>Accounting, Finance &amp; Control <span aria-hidden="true">/</span> Study Hub</span><span>Your progress stays in this browser.</span></footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

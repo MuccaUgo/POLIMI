@@ -33,6 +33,7 @@ header { position: sticky; top: 0; z-index: 20; background: var(--card); border-
 .topbar { justify-content: space-between; }
 .brand-mark { width: 42px; height: 42px; display: grid; align-content: center; grid-auto-flow: column; justify-content: center; flex-shrink: 0; background: var(--accent); color: var(--on-accent); font: bold 29px Georgia, serif; border-radius: 12px; letter-spacing: -2px; }
 .brand-mark span { opacity: .55; }
+.brand-mark.trigram { font-size: 21px; letter-spacing: -1.4px; }
 h1 { font-size: 17px; font-weight: 650; letter-spacing: -.45px; margin: 0; }
 h1 .badge { margin-left: 6px; font-size: 10px; vertical-align: 2px; font-weight: 600; letter-spacing: .15px; }
 h2 { font-size: 28px; line-height: 1.25; letter-spacing: -.65px; margin: 0 0 12px; }
@@ -190,6 +191,7 @@ main:focus { outline: none; }
 @media (max-width: 480px) {
   .brand { gap: 9px; }
   .brand-mark { width: 34px; height: 36px; font-size: 24px; border-radius: 9px; }
+  .brand-mark.trigram { font-size: 17px; }
   h1 { font-size: 13px; letter-spacing: -.2px; }
   h1 .badge { display: none; }
   #count { font-size: 10px; }
