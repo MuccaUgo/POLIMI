@@ -176,6 +176,12 @@ main:focus { outline: none; }
 .lecture.today .lecture-date { border-color: var(--accent); color: var(--accent); }
 .lecture.today .today-badge { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 650; }
 #programme .section-heading:first-of-type { margin-top: 26px; }
+.module-revise { margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 12px; }
+.module-revise p { margin: 0 0 10px; }
+.module-revise b { color: var(--accent); }
+.module-revise button { width: 100%; justify-content: space-between; padding: 10px 14px; font-size: 11px; }
+#moduleGrid .topic { display: flex; flex-direction: column; }
+#moduleGrid .module-revise { margin-top: auto; }
 .session-resume, .quiz-notice { padding: 16px; margin: 18px 0; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
 .session-resume button { margin-top: 8px; }
 .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden; }

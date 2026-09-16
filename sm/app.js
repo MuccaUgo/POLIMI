@@ -132,11 +132,17 @@
         var lectures = CALENDAR.filter(function (l) { return l.module === m.title; });
         var passed = lectures.filter(function (l) { return lectureDate(l.date) < now; }).length;
         var count = lectures.length + (lectures.length === 1 ? " lecture" : " lectures");
+        var pool = m.revise ? QUESTIONS.filter(function (q) { return topicOf(q.cat) === m.revise; }) : [];
         return '<div class="topic"><div class="kicker">Module</div>' +
           "<strong>" + esc(m.title) + "</strong>" +
           "<p>" + esc(m.blurb) + "</p>" +
-          (m.revise ? '<p class="small">Revise first: ' + esc(m.revise) + "</p>" : "") +
-          '<p class="small">' + esc(count) + " · " + passed + " done</p></div>";
+          '<p class="small">' + esc(count) + " · " + passed + " done</p>" +
+          (pool.length
+            ? '<div class="module-revise"><p class="small">Revise first: <b>' + esc(m.revise) + "</b> · " +
+              pool.length + ' questions</p><button class="ghost" data-mode="practice10" data-cat="topic:' +
+              esc(m.revise) + '">Practice ' + esc(m.revise) + ' <span aria-hidden="true">&#8594;</span></button></div>'
+            : '<div class="module-revise"><p class="small">No background material in this hub yet.</p></div>') +
+          "</div>";
       }).join("");
     }
 
@@ -314,7 +320,7 @@
   function poolFor(cat) {
     return QUESTIONS.filter(function (q) { return matchesFilter(cat, q.cat); });
   }
-  function openTest(mode) {
+  function openTest(mode, preset) {
     currentMode = mode;
     questions = []; answers = []; index = 0; quizComplete = false;
     showSection("testSection");
@@ -322,6 +328,11 @@
     $("quiz").classList.add("hidden");
     $("summary").classList.add("hidden");
     $("category").value = "All";
+    if (preset) {
+      // Falls back to All when the hub has no such area or topic.
+      $("category").value = preset;
+      if (!$("category").value) $("category").value = "All";
+    }
     $("orderMode").value = "ordered";
     $("startFrom").value = 1;
     $("categoryWrap").classList.toggle("hidden", mode === "exam");
@@ -654,7 +665,7 @@
       if (t) {
         if (t.dataset.section) showSection(t.dataset.section);
         else if (t.id === "continueBtn" && readSession("full")) resumeQuiz("full");
-        else openTest(t.dataset.mode);
+        else openTest(t.dataset.mode, t.dataset.cat);
         return;
       }
       if (e.target.closest("[data-reset-concepts]")) {

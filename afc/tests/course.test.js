@@ -84,3 +84,21 @@ test("the modules the hub already covers point back to a background topic", () =
     ["Planning & Control", "Cost Accounting"]
   ]);
 });
+
+test("every module's background topic exists in the question bank", () => {
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS, cats: QUESTIONS.map(q => q.cat) });", data);
+  const { topics, cats } = JSON.parse(data.json);
+  const names = topics.map(t => t.name);
+
+  for (const m of modules) {
+    if (!m.revise) continue;
+    // The Programme tab renders a button preselecting "topic:<revise>"; a name the bank does
+    // not know would silently fall back to practising everything.
+    assert.ok(names.includes(m.revise), `${m.title}: unknown topic ${m.revise}`);
+    const topic = topics.find(t => t.name === m.revise);
+    const count = cats.filter(c => topic.categories.includes(c)).length;
+    assert.ok(count > 0, `${m.title}: topic ${m.revise} has no questions`);
+  }
+});

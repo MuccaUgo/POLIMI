@@ -19,8 +19,9 @@ over from the `fa_` key prefix to `afc_` the first time the new hub loads.
 ## What each hub offers
 
 - **Programme** *(Accounting, Finance & Control only)* — the AFC26 modules and the lecture calendar, with the
-  next lecture highlighted and past lectures dimmed. Read from `course.js`; the rest of the engine ignores it
-  when that file is absent, which is why the Strategy & Marketing hub has no Programme tab.
+  next lecture highlighted and past lectures dimmed. A module that declares a background topic links straight
+  to a Practice 10 run on it, with that topic preselected. Read from `course.js`; the rest of the engine
+  ignores it when that file is absent, which is why the Strategy & Marketing hub has no Programme tab.
 - **Concepts** — cards grouped by area, each with the meaning, how it works in practice and the typical exam
   trap. Searchable and filterable. Where the data declares more than one topic, as the Accounting, Finance &
   Control hub does, a topic row sits above the areas and the area pills follow the topic selected; the quiz
