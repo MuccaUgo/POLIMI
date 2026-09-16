@@ -20,7 +20,7 @@ function selectedNumbers(title) {
 }
 
 test("bank has complete, unique questions and explanations in every area", () => {
-  assert.ok(bank.length >= 85);
+  assert.ok(bank.length >= 105);
   const titles = new Set(), prompts = new Set();
   for (const q of bank) {
     assert.ok(context.categories.includes(q.cat), q.title);
@@ -46,7 +46,7 @@ test("bank has complete, unique questions and explanations in every area", () =>
 });
 
 test("concept cards are complete and use declared areas", () => {
-  assert.ok(context.cards.length >= 88);
+  assert.ok(context.cards.length >= 105);
   const seen = new Set();
   for (const c of context.cards) {
     assert.ok(context.categories.includes(c.cat), c.title);
@@ -125,10 +125,13 @@ test("the lecture deep dives are attached to cards and name their source", () =>
   const lectures = new Set([
     "Strategy and its origins",
     "Strategic decisions and Tactical decisions",
-    "Strategy: an operational definition"
+    "Strategy: an operational definition",
+    "Business Strategy: vision and mission",
+    "Business Strategy: objectives, boundary & strategy analysis",
+    "Business Strategy: strategic alternatives"
   ]);
   const deep = context.cards.filter(c => c.deep);
-  assert.ok(deep.length >= 10, `only ${deep.length} cards carry a deep dive`);
+  assert.ok(deep.length >= 36, `only ${deep.length} cards carry a deep dive`);
 
   for (const c of deep) {
     assert.equal(typeof c.deep.text, "string", `${c.title}: deep.text`);
@@ -169,4 +172,64 @@ test("the deep dives are searchable", () => {
   const app = fs.readFileSync(path.join(__dirname, "../app.js"), "utf8");
   assert.match(app, /c\.deep \? c\.deep\.text \+ " " \+ c\.deep\.source/,
     "concept search must include the deep-dive text");
+});
+
+test("both readings of vision and mission are present and kept apart", () => {
+  const byTitle = title => context.cards.find(c => c.title === title);
+
+  // The general definitions from the slides.
+  const vision = byTitle("Vision");
+  const mission = byTitle("Mission");
+  assert.match(vision.meaning, /future .dream./, "the slide reading of vision must survive");
+  assert.match(mission.meaning, /present business scope/, "the slide reading of mission must survive");
+
+  // The business-strategy reading from the lecture, on its own cards.
+  const foresight = byTitle("Vision as Industry Foresight");
+  const intent = byTitle("Mission as Strategic Intent");
+  assert.ok(foresight && intent, "the business-strategy reading needs its own cards");
+  assert.match(foresight.how, /industry foresight/);
+  assert.match(intent.how, /strategic intent/);
+  assert.match(foresight.trap, /industry-specific/);
+  assert.match(intent.how, /firm-specific/);
+
+  // And a card that states the clash explicitly, so neither reading is silently dropped.
+  const both = byTitle("Two Readings of Vision and Mission");
+  assert.ok(both, "missing the card reconciling the two readings");
+  for (const term of ["future dream", "present business scope", "industry foresight", "strategic intent"]) {
+    assert.ok(both.how.includes(term), `the reconciling card omits: ${term}`);
+  }
+  // The two cards the slides produced must carry the other reading as a deep dive.
+  for (const c of [vision, mission]) {
+    assert.ok(c.deep, `${c.title}: missing the business-strategy note`);
+    assert.equal(c.deep.source, "Business Strategy: vision and mission");
+  }
+});
+
+test("the business strategy process is stated with all five macro-phases", () => {
+  const card = context.cards.find(c => c.title === "The Business Strategy Formulation Process");
+  assert.ok(card, "missing the process card");
+  for (const phase of ["Orientation", "Analysis or Diagnosis", "Decision-making", "Implementation", "Control"]) {
+    assert.ok(card.how.includes(phase), `missing macro-phase: ${phase}`);
+  }
+  // The three-phase grouping from the slides must say how it maps onto the five.
+  const three = context.cards.find(c => c.title === "The Three Phases");
+  assert.ok(three.deep && three.deep.text.includes("Orientation"),
+    "The Three Phases must reconcile with the five-phase version");
+});
+
+test("SMART is spelled out in full", () => {
+  const card = context.cards.find(c => c.title === "SMART Objectives");
+  assert.ok(card, "missing the SMART card");
+  for (const feature of ["Specific", "Measurable", "Appropriate", "Realistic", "Timely"]) {
+    assert.ok(card.how.includes(feature), `missing SMART feature: ${feature}`);
+  }
+  assert.match(card.trap, /does not mean easy/i, "the R must warn that realistic is not easy");
+});
+
+test("the Abell Cube names its three axes", () => {
+  const card = context.cards.find(c => c.title === "The Abell Cube");
+  assert.ok(card, "missing the Abell card");
+  for (const axis of ["customer groups", "customer functions", "alternative technologies"]) {
+    assert.ok(card.how.toLowerCase().includes(axis), `missing axis: ${axis}`);
+  }
 });

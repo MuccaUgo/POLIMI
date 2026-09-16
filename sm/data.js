@@ -364,7 +364,11 @@ const CONCEPTS = [
   "title": "Business Strategy",
   "meaning": "Business strategy is concerned with how the company competes within a particular industry or market.",
   "how": "It answers the question of comparative advantage: how should we compete?",
-  "trap": "The two levels are often confused because both use the word competition. Corporate strategy picks the game; business strategy plays it."
+  "trap": "The two levels are often confused because both use the word competition. Corporate strategy picks the game; business strategy plays it.",
+  "deep": {
+  "text": "The lecture states the aim precisely: business strategy aims at creating a sustainable competitive advantage, meaning performance superior to competitors, within a given industry or business area. It does that by formulating the objectives and the strategic plan that a Strategic Business Unit will follow and implement within the Business Area it covers. The link with the level above is explicit: each SBU receives general goals and resources, or a budget to reach them, from the corporate strategy, and formulates its business strategy accordingly.",
+  "source": "Business Strategy: vision and mission"
+ }
  },
  {
   "cat": "Levels of Strategy",
@@ -406,35 +410,55 @@ const CONCEPTS = [
   "title": "The Strategic Decisions Process",
   "meaning": "The process that turns analysis into action, running from two sides towards the centre and then downwards.",
   "how": "External analysis produces key success factors; internal analysis produces strategic resources. They meet at competitive advantage and grand strategy, supported by a SWOT analysis. Then comes the generation and selection of strategic alternatives, implementation and control.",
-  "trap": "The two analyses run in parallel and meet; neither comes first. Reading the diagram as a single left-to-right sequence loses that."
+  "trap": "The two analyses run in parallel and meet; neither comes first. Reading the diagram as a single left-to-right sequence loses that.",
+  "deep": {
+  "text": "At business level the lecture names five macro-phases rather than three: Orientation, also called direction setting; Analysis or Diagnosis; Decision-making; Implementation; and Control or Monitoring. Orientation comes before any analysis and is where vision, mission and strategic objectives translate the corporate goals into the specific business area. Decision-making then splits into generating strategic alternatives and assessing and selecting them.",
+  "source": "Business Strategy: strategic alternatives"
+ }
  },
  {
   "cat": "Strategy Process",
   "title": "The Three Phases",
   "meaning": "The process groups into three phases.",
   "how": "Diagnosis covers external and internal analysis and the SWOT. Strategy formulation is the generation and selection of strategic alternatives. Actions implementation covers implementation and control.",
-  "trap": "SWOT belongs to diagnosis, not to formulation. It describes the situation; it does not choose the alternative."
+  "trap": "SWOT belongs to diagnosis, not to formulation. It describes the situation; it does not choose the alternative.",
+  "deep": {
+  "text": "The five macro-phases of the business-level process map onto these three: Orientation is added in front, Analysis or Diagnosis matches diagnosis, Decision-making matches strategy formulation, and Implementation and Control are the two halves of actions implementation. If a question asks how many phases the process has, the answer depends on which of the two presentations is being used.",
+  "source": "Business Strategy: strategic alternatives"
+ }
  },
  {
   "cat": "Strategy Process",
   "title": "External Analysis and Key Success Factors",
   "meaning": "The outward-facing half of the diagnosis.",
   "how": "External analysis identifies the key success factors of the arena and yields the opportunities and threats of the SWOT.",
-  "trap": "Key success factors belong to the industry, not to the firm. What the firm has is a resource; what the industry demands is a key success factor."
+  "trap": "Key success factors belong to the industry, not to the firm. What the firm has is a resource; what the industry demands is a key success factor.",
+  "deep": {
+  "text": "The lecture adds the standpoint, which is the part most often got wrong: in external strategy analysis the point of view is that of the average generic player in the business area, not of your own company. Opportunities and threats are therefore industry-wise, not firm-wise, and should apply to any competitor operating in the industry.",
+  "source": "Business Strategy: objectives, boundary & strategy analysis"
+ }
  },
  {
   "cat": "Strategy Process",
   "title": "Internal Analysis and Strategic Resources",
   "meaning": "The inward-facing half of the diagnosis.",
   "how": "Internal analysis identifies the strategic resources of the firm and yields the strengths and weaknesses of the SWOT.",
-  "trap": "Strengths and weaknesses are internal by definition. A hostile market is a threat, never a weakness."
+  "trap": "Strengths and weaknesses are internal by definition. A hostile market is a threat, never a weakness.",
+  "deep": {
+  "text": "Internal strategy analysis focuses on one specific company in the business area and compares it with its main direct competitors, by means of benchmarking, to disclose the firm-specific characteristics that give it an edge or the negative gaps it has to fill. Strengths and weaknesses are therefore the possible sources of competitive advantage or disadvantage.",
+  "source": "Business Strategy: objectives, boundary & strategy analysis"
+ }
  },
  {
   "cat": "Strategy Process",
   "title": "SWOT as the Meeting Point",
   "meaning": "SWOT analysis is where the external and internal halves of the diagnosis come together.",
   "how": "Opportunities and threats arrive from the external side, strengths and weaknesses from the internal side, and the combination frames competitive advantage.",
-  "trap": "SWOT is a summary of the diagnosis, not an analysis in itself. Its content is only as good as the two analyses feeding it."
+  "trap": "SWOT is a summary of the diagnosis, not an analysis in itself. Its content is only as good as the two analyses feeding it.",
+  "deep": {
+  "text": "The lecture calls the SWOT the core of the business-level formulation process, because the business strategy itself arises from it. Crossing the four elements is what produces the content: which strengths to leverage to exploit an opportunity, which strengths to use to defend against a threat, and which weaknesses stop the firm taking advantage of an opportunity or intensify the effect of a threat.",
+  "source": "Business Strategy: strategic alternatives"
+ }
  },
  {
   "cat": "Strategy Process",
@@ -448,7 +472,11 @@ const CONCEPTS = [
   "title": "Repositioning and Control",
   "meaning": "The process is a loop, not a line.",
   "how": "Control follows implementation, and repositioning feeds back into the diagnosis, so the analysis is revisited rather than performed once.",
-  "trap": "Without the feedback the scheme would describe a one-off exercise. Repositioning is what makes it a process."
+  "trap": "Without the feedback the scheme would describe a one-off exercise. Repositioning is what makes it a process.",
+  "deep": {
+  "text": "The lecture makes the loop concrete. Monitoring is usually run annually and executed as a control step corresponding to budgeting variance analysis, quantifying any delta between expected and achieved performance and identifying its cause. The outcome either confirms the long-term goals set in the orientation phase or triggers a strategic re-planning, which may require new objectives and even a new vision, mission and SWOT.",
+  "source": "Business Strategy: strategic alternatives"
+ }
  },
  {
   "cat": "Strategy Process",
@@ -504,14 +532,22 @@ const CONCEPTS = [
   "title": "Vision",
   "meaning": "The vision is the future “dream”: where we are going.",
   "how": "The vision statement expresses the aspirations of a company, what an organisation wants to accomplish, what it wishes to be like in some years' time.",
-  "trap": "Vision looks forward. A statement describing what the company does today is a mission, however ambitious its wording."
+  "trap": "Vision looks forward. A statement describing what the company does today is a mission, however ambitious its wording.",
+  "deep": {
+  "text": "At business-strategy level the lecture gives vision a different and narrower meaning: the long term view on the best possible evolution of the business area the company operates in, describing how the industry will positively evolve and drawing a path that the company and its competitors may follow. In that sense it is also called industry foresight, and being about the industry it can be shared with competitors. That is not the slide's definition, where vision is the company's own future dream. Keep the two apart and notice which level the question is asking about.",
+  "source": "Business Strategy: vision and mission"
+ }
  },
  {
   "cat": "Vision, Mission & Purpose",
   "title": "Mission",
   "meaning": "The mission is a company's present business scope: who we are and what we do.",
   "how": "The mission statement broadly defines what a company does, and the means by which the vision is accomplished. It covers what business the organization is in, and what it is not, both now and projecting into the future.",
-  "trap": "Mission is the means, vision is the end. The mission is also what the company is not in, which is the part usually left out."
+  "trap": "Mission is the means, vision is the end. The mission is also what the company is not in, which is the part usually left out.",
+  "deep": {
+  "text": "At business-strategy level the lecture defines mission as the strategic role a given company wishes to play within the path set by the vision, also called strategic intent. On that reading the mission is firm-specific while the vision is industry-specific, which is the opposite emphasis from the slide, where mission is the present business scope and vision the company's own aspiration.",
+  "source": "Business Strategy: vision and mission"
+ }
  },
  {
   "cat": "Vision, Mission & Purpose",
@@ -661,6 +697,193 @@ const CONCEPTS = [
   "deep": {
    "text": "The lectures follow exactly this order — first the origins, then what makes a decision strategic as opposed to tactical, and only then the operational definition of strategy as a whole.",
    "source": "Strategic decisions and Tactical decisions"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Business Strategy Formulation Process",
+  "meaning": "The sequence of logical steps and building blocks through which a business strategy is formulated, grouped into five macro-phases.",
+  "how": "Orientation, or direction setting; Analysis or Diagnosis; Decision-making; Implementation; and Control, also called Monitoring. Orientation translates the corporate goals and directions into the specific business area, through vision, mission and strategic objectives.",
+  "trap": "Orientation is a phase in its own right and comes before any analysis. Starting from the SWOT skips the step that sets what the analysis is for.",
+  "deep": {
+   "text": "The lecture presents it as the process an SBU follows after receiving general goals and a budget from the corporate strategy.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "From Corporate Goals to the SBU",
+  "meaning": "How the two levels of strategy connect in practice.",
+  "how": "Each SBU receives general goals and resources, or a budget to reach those goals, from the corporate strategy, and formulates its business strategy accordingly. The first step of orientation is precisely translating those corporate goals and directions into the specific business area.",
+  "trap": "The business strategy is not formulated in a vacuum: its goals and its budget are both handed down. What the SBU decides is how to reach them within the business area it covers.",
+  "deep": {
+   "text": "This is what makes the business level answer 'how should we compete' while the corporate level has already answered 'which industries should we be in'.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Abell Cube",
+  "meaning": "A way of defining the boundaries of the business area an SBU will cover, giving a three-dimensional definition of the business.",
+  "how": "The three axes are customer groups, answering who the competitors in the industry serve; customer functions, meaning what customer needs the offer satisfies; and the alternative technologies available to provide those functions through different products and services. Their intersection creates a space, or cube, that delimits the business area.",
+  "trap": "It defines the arena, not the firm. Two competitors in the same Abell space are in the same business area even if their products look nothing alike, because the cube is built on needs served and technologies used.",
+  "deep": {
+   "text": "The lecture places the Abell Cube at the end of orientation: the business area definition is the input to the analysis or diagnosis macro-phase.",
+   "source": "Business Strategy: objectives, boundary & strategy analysis"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Whose Point of View in External Analysis",
+  "meaning": "External strategy analysis takes the standpoint of the average generic player in the business area, not of your own company.",
+  "how": "It looks for the overall trends and phenomena that may constitute an opportunity or a threat for all competitors operating in the industry.",
+  "trap": "Opportunities and threats are industry-wise, not firm-wise. Writing “our brand is weak against this trend” into the external analysis mixes the two perspectives and empties the distinction.",
+  "deep": {
+   "text": "The lecture is explicit that the considerations drawn should apply to the average player in the industry, not just to a specific company.",
+   "source": "Business Strategy: objectives, boundary & strategy analysis"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Internal Analysis by Benchmarking",
+  "meaning": "Internal strategy analysis focuses on one specific company in the business area and compares it with its main direct competitors.",
+  "how": "The comparison is done by benchmarking, and it discloses the firm-specific characteristics that give the company an edge on competition, or the negative gaps it has to fill.",
+  "trap": "Strengths and weaknesses are the possible sources of competitive advantage or disadvantage. A characteristic shared by every competitor is neither: with no gap against rivals there is no advantage to be had.",
+  "deep": {
+   "text": "The lecture pairs this with the external analysis as the two complementary perspectives whose thoughtful combination feeds the rest of the formulation process.",
+   "source": "Business Strategy: objectives, boundary & strategy analysis"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Crossing the Four SWOT Elements",
+  "meaning": "What the SWOT produces once the two analyses are combined.",
+  "how": "Crossing external opportunities and threats with internal strengths and weaknesses lets the company see which strengths to leverage to exploit an opportunity, which strengths to use to defend against a threat, and which weaknesses stop it taking advantage of an opportunity or intensify the effect of a threat.",
+  "trap": "The value is in the crossings, not in the four lists. A SWOT presented as four columns has stopped before the step that generates the strategy.",
+  "deep": {
+   "text": "The lecture calls the SWOT the core of the business-level formulation process, since the business strategy of the company arises from these combined perspectives.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Generating Strategic Alternatives",
+  "meaning": "The first step of the decision-making macro-phase, where the SWOT is turned into a set of possible strategic alternatives.",
+  "how": "Exploiting an opportunity with a strength is itself a strategic decision: it is long term, it requires large investments and resources, it is cross-functional and it is hardly reversible. The overall set of such decisions is what constitutes the company's business strategy.",
+  "trap": "This is where the criteria for a strategic decision come back. An alternative generated from the SWOT that fails those criteria is a tactical choice, not a business strategy.",
+  "deep": {
+   "text": "The lecture presents this as the bridge from diagnosis to decision-making: the business strategy basically emerges from the SWOT.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Assessing and Selecting Alternatives",
+  "meaning": "Not all strategic alternatives can be implemented, because resources are limited or because some are mutually exclusive.",
+  "how": "They are assessed on their consistency with the vision, mission and goals, on the resources available in terms of budget, and on their possible contribution to the ultimate goal, which is value creation by means of competitive advantage. The assessment can use scenario analysis, economic and financial forecasts and sensitivity analysis.",
+  "trap": "The tools inform the choice but do not make it: this is the heart of the decision-making role, and it is the entrepreneur's or manager's strategic and entrepreneurial acumen that determines which decision reaches the goals.",
+  "deep": {
+   "text": "The lecture labels this step Strategic alternatives assessment and selection; once one or more are selected they are embodied in the company's business strategy and the decision-making phase ends.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Implementation Through Tactics",
+  "meaning": "How a selected strategy gets executed.",
+  "how": "The strategy is executed by means of a number of consistent tactical choices, chained to one another, that should lead to achieving the overall strategic objectives. Execution gets strategy down to the basics and encompasses decisions in each given function or unit.",
+  "trap": "The tactical choices have to be consistent and chained. A set of individually reasonable tactics that do not compose is how an implementation drifts away from the strategy it was meant to carry out.",
+  "deep": {
+   "text": "To support execution managers may resort to different models; the framework widely employed is the business model, which considers the implications of a company's business strategy on a unified set of building blocks and parameters.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Monitoring and Variance Analysis",
+  "meaning": "The last macro-phase, where results obtained are confronted with the goals planned.",
+  "how": "It is usually executed through a control step corresponding to budgeting variance analysis, which quantifies any delta between expected and achieved performance and identifies the cause of the positive or negative variance. It is normally run annually.",
+  "trap": "Its outcome is not only a score. It either confirms the long-term goals set in orientation or triggers a strategic re-planning, which may require new objectives and even a new vision, mission and SWOT.",
+  "deep": {
+   "text": "The monitoring macro-phase closes the business strategy formulation process, and the possible re-planning is what sends it back to the beginning.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Process Is Not a Waterfall",
+  "meaning": "The formulation process is presented as linear, but that is an idealisation.",
+  "how": "A strictly linear, waterfall sequence only happens in ideal conditions, where no feedback or feedforward is needed. In real cases one may have to go back to a step, jump another, and so on.",
+  "trap": "The requirement is coverage, not order: what matters is that all the steps are considered at least once and lead to a strategy that achieves competitive advantage in the company's business.",
+  "deep": {
+   "text": "The lecture closes on this caveat, immediately after presenting the five macro-phases in sequence.",
+   "source": "Business Strategy: strategic alternatives"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Vision as Industry Foresight",
+  "meaning": "At business-strategy level, the vision is the long term view on the best possible evolution of the business area the company operates in, or will operate in.",
+  "how": "It describes how the industry will positively evolve and draws a path that the company, as well as other competitors, may follow. For this reason it is also known as industry foresight.",
+  "trap": "On this reading the vision is industry-specific and can be shared with competitors. That is the opposite of the intuition that a vision is what makes a company unique.",
+  "deep": {
+   "text": "The lecture notes that vision and mission are often unclearly defined by companies: sometimes you find one and not the other, or they overlap and their boundaries blur. Both are essential and play complementary roles in formulation.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Mission as Strategic Intent",
+  "meaning": "At business-strategy level, the mission is the strategic role a given company wishes to play within the path set by the vision.",
+  "how": "It is also known as strategic intent. Where the vision is industry-specific, the mission is firm-specific: it tells the company how to develop its strategy according to the trends foreseen by the vision.",
+  "trap": "Vision first, mission second. The mission only makes sense inside a path the vision has already drawn, which is why a mission stated without a vision has nothing to position itself against.",
+  "deep": {
+   "text": "Together vision and mission have a long-term motivational role, but the lecture stresses they are not enough to set boundaries and targets, which is why strategic objectives are introduced next.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Microsoft: Foresight and Intent",
+  "meaning": "The example used to separate the two.",
+  "how": "Microsoft's vision in the late 1980s is given as «A chicken in every oven, and a computer in every house». Behind it sat two ideas: that wealth would spread, letting more people satisfy basic needs, and that the resulting surplus would go to more refined needs met by consumer electronics, personal computers among them. The mission that followed might have been “to become the leader in the personal computers business area”.",
+  "trap": "The vision was a claim about the industry's evolution, and it differed from competitors who believed computers would stay in the corporate world rather than reach individual homes. Apparently naive, it set the path the strategy followed.",
+  "deep": {
+   "text": "The lecture uses the pair precisely to show that the vision could have been shared by others in the industry, while the role of becoming the leader in personal computers is Microsoft's alone.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Two Readings of Vision and Mission",
+  "meaning": "The chapter carries two different definitions of the same two words, and they are not interchangeable.",
+  "how": "In the general definitions, vision is the company's own future dream, what it wishes to be like in some years' time, and mission is its present business scope, who we are and what we do, the means by which the vision is accomplished. In the business-strategy process, vision is industry foresight, a view on how the business area will evolve, and mission is strategic intent, the role the firm wants to play within that path.",
+  "trap": "The tell is what the statement is about. If it describes the industry's future, it is vision in the business-strategy sense; if it describes the company's own future, it is vision in the general sense. Check which part of the chapter a question is drawing on before answering.",
+  "deep": {
+   "text": "The lecture introduces its pair while building the orientation phase of the business strategy formulation process, not while defining corporate identity, which is where the general definitions sit.",
+   "source": "Business Strategy: vision and mission"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Strategic Objectives",
+  "meaning": "The third concept of the orientation phase, introduced because vision and mission are not enough.",
+  "how": "Vision and mission have a long-term motivational role, but they do not set the boundaries and targets for strategy formulation. Strategic objectives, or goals, steer the whole process — analysis, decision-making, implementation and above all control.",
+  "trap": "Objectives are what make control possible. Without them the monitoring phase has nothing to compare results against, which is why the lecture says they matter above all there.",
+  "deep": {
+   "text": "They are described as the means to get the mission down to earth, translating it into a set of measurable and quantifiable milestones.",
+   "source": "Business Strategy: objectives, boundary & strategy analysis"
+  }
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "SMART Objectives",
+  "meaning": "The five features a strategic objective must have, collected in a mnemonic acronym.",
+  "how": "Specific, so that it is relatable to what it focuses on and conveys a clear message on what is to be achieved. Measurable, quantifiable through one or more clear indicators, since you cannot improve what you cannot measure. Appropriate, or aligned, meaning consistent with the company's overarching vision and mission. Realistic: goal setting theory tells managers to set objectives that are challenging but perceived as neither impossible nor too easy, because both extremes demotivate. Timely, related to a clear deadline.",
+  "trap": "Realistic does not mean easy. The requirement is challenging but attainable, and an objective that is too easy demotivates just as an impossible one does.",
+  "deep": {
+   "text": "The lecture presents SMART objectives as the means to get the mission down to earth, translating it into measurable and quantifiable milestones.",
+   "source": "Business Strategy: objectives, boundary & strategy analysis"
   }
  }
 ];
@@ -2280,5 +2503,385 @@ const QUESTIONS = [
    "D": "Incorrect. The two are defined together, by contrast with each other."
   },
   "recap": "Correct. The starting assumption is that strategy is defined and made of a set of strategic decisions. That is why the lectures define a strategic decision first, as against a tactical one, and only then arrive at strategy as an integrated, comprehensive plan integrating a consistent set of those decisions."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Five Macro-Phases",
+  "question": "Which sequence describes the business strategy formulation process as the lecture presents it?",
+  "options": {
+   "A": "Analysis, Decision-making, Implementation, Control.",
+   "B": "Orientation, Analysis or Diagnosis, Decision-making, Implementation, Control.",
+   "C": "Diagnosis, Strategy formulation, Actions implementation.",
+   "D": "Vision, Mission, Objectives, SWOT, Budget."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Orientation, where vision, mission and objectives are set, comes first and is missing here.",
+   "B": "Correct. The process is made of steps belonging to five macro-phases: Orientation, also called direction setting; Analysis or Diagnosis; Decision-making; Implementation; and Control or Monitoring.",
+   "C": "Incorrect. That is the three-phase grouping used on the slides; the business-level lecture names five.",
+   "D": "Incorrect. Those are elements inside the phases, not the phases themselves."
+  },
+  "recap": "Correct. The process is made of steps belonging to five macro-phases: Orientation, also called direction setting; Analysis or Diagnosis; Decision-making; Implementation; and Control or Monitoring."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What the SBU Receives",
+  "question": "How does a Strategic Business Unit's business strategy connect to the corporate level?",
+  "options": {
+   "A": "The SBU formulates its own goals independently and reports results upwards.",
+   "B": "The SBU receives general goals and resources, or a budget to reach them, from the corporate strategy, and formulates its business strategy accordingly.",
+   "C": "The corporate strategy formulates the business strategy and the SBU only implements it.",
+   "D": "The SBU sets the corporate goals, since it is closest to the market."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The goals come from above; what the SBU decides is how to reach them in its business area.",
+   "B": "Correct. Each SBU receives general goals and resources, or a budget to reach those goals, from the corporate strategy, and formulates its business strategy accordingly. Orientation then translates those corporate goals and directions into the specific business area.",
+   "C": "Incorrect. Formulating the business strategy is precisely the SBU's job, within the goals handed down.",
+   "D": "Incorrect. Deciding which industries to be in is the corporate level's question, not the SBU's."
+  },
+  "recap": "Correct. Each SBU receives general goals and resources, or a budget to reach those goals, from the corporate strategy, and formulates its business strategy accordingly. Orientation then translates those corporate goals and directions into the specific business area."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Three Axes of the Abell Cube",
+  "question": "The Abell Cube defines a business area in three dimensions. Which?",
+  "options": {
+   "A": "Customers, competitors and suppliers.",
+   "B": "Strengths, weaknesses and opportunities.",
+   "C": "Customer groups, customer functions, and the alternative technologies available to provide those functions.",
+   "D": "Price, quality and volume."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Competitors and suppliers belong to the external environment, not to the cube's axes.",
+   "B": "Incorrect. Those are SWOT elements, which come later, in the diagnosis phase.",
+   "C": "Correct. The Abell Cube gives a three-dimensional definition of the business: customer groups, answering who the competitors in the industry serve; customer functions, meaning what customer needs the offer satisfies; and the alternative technologies available to provide those functions through different products and services. Their intersection delimits the business area.",
+   "D": "Incorrect. Those are competitive variables inside a business area, not the dimensions that define it."
+  },
+  "recap": "Correct. The Abell Cube gives a three-dimensional definition of the business: customer groups, answering who the competitors in the industry serve; customer functions, meaning what customer needs the offer satisfies; and the alternative technologies available to provide those functions through different products and services. Their intersection delimits the business area."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Whose Standpoint in External Analysis",
+  "question": "When carrying out external strategy analysis, whose point of view should be taken?",
+  "options": {
+   "A": "Your own company's, since the analysis serves its strategy.",
+   "B": "The largest competitor's, since it sets the standard.",
+   "C": "The customers', since they decide what succeeds.",
+   "D": "The average generic player in the business area, so that opportunities and threats are industry-wise rather than firm-wise."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Taking your own standpoint is exactly the mistake: it turns industry trends into firm-specific judgements and empties the distinction from internal analysis.",
+   "B": "Incorrect. No single competitor's view is the reference; the generic average player is.",
+   "C": "Incorrect. Customers are part of the external environment being analysed, not the vantage point.",
+   "D": "Correct. In external strategy analysis the point of view is that of the average generic player in the business area, not of your own company, so the opportunities and threats drawn should apply to any competitor operating in the industry."
+  },
+  "recap": "Correct. In external strategy analysis the point of view is that of the average generic player in the business area, not of your own company, so the opportunities and threats drawn should apply to any competitor operating in the industry."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "How Internal Analysis Finds Strengths",
+  "question": "By what means does internal strategy analysis identify a company's strengths and weaknesses?",
+  "options": {
+   "A": "By comparing the company with its main direct competitors through benchmarking.",
+   "B": "By listing every resource the company owns.",
+   "C": "By surveying employees about the company's qualities.",
+   "D": "By projecting the industry's trends onto the company."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Internal strategy analysis focuses on one specific company in the business area and compares it with its main direct competitors by means of benchmarking, disclosing the firm-specific characteristics that give it an edge or the negative gaps to be filled. Those are the possible sources of competitive advantage or disadvantage.",
+   "B": "Incorrect. A resource shared by every competitor is neither a strength nor a weakness, because it creates no gap.",
+   "C": "Incorrect. The method named is benchmarking against competitors, not internal opinion.",
+   "D": "Incorrect. Projecting industry trends is external analysis."
+  },
+  "recap": "Correct. Internal strategy analysis focuses on one specific company in the business area and compares it with its main direct competitors by means of benchmarking, disclosing the firm-specific characteristics that give it an edge or the negative gaps to be filled. Those are the possible sources of competitive advantage or disadvantage."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What the SWOT Is For",
+  "question": "Why does the lecture call the SWOT the core of the business-level formulation process?",
+  "options": {
+   "A": "Because it summarises the diagnosis in a form that is easy to communicate.",
+   "B": "Because the business strategy itself arises from crossing its four elements.",
+   "C": "Because it replaces the external and internal analyses.",
+   "D": "Because it quantifies the strategic objectives."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Ease of use is mentioned, but it is not why the SWOT is called the core.",
+   "B": "Correct. By crossing external opportunities and threats with internal strengths and weaknesses, the company sees which strengths to leverage to exploit an opportunity, which strengths defend against a threat, and which weaknesses stop it exploiting an opportunity or intensify a threat. The business strategy arises from those combined perspectives.",
+   "C": "Incorrect. It combines them; it is built from their outputs.",
+   "D": "Incorrect. Quantification is the job of the SMART objectives set in orientation."
+  },
+  "recap": "Correct. By crossing external opportunities and threats with internal strengths and weaknesses, the company sees which strengths to leverage to exploit an opportunity, which strengths defend against a threat, and which weaknesses stop it exploiting an opportunity or intensify a threat. The business strategy arises from those combined perspectives."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Is a SWOT Combination a Strategic Decision",
+  "question": "A company decides to exploit an identified opportunity by leveraging one of its strengths. Is that a strategic decision?",
+  "options": {
+   "A": "No, because it follows mechanically from the SWOT.",
+   "B": "No, because it concerns only one function.",
+   "C": "Yes: it is long term, requires large investments and resources, is cross-functional and is hardly reversible.",
+   "D": "Only if the board formally approves it."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The SWOT suggests the combination, but committing to it is a decision with all the strategic characteristics.",
+   "B": "Incorrect. The lecture describes such a decision as cross-functional, which is the opposite.",
+   "C": "Correct. Exploiting an opportunity with a strength is a strategic decision, since it is long term, it requires lots of investments and resources, it is cross-functional and it is hardly reversible. The overall set of such decisions is what constitutes the business strategy.",
+   "D": "Incorrect. Approval is not among the criteria; the nature of the decision is."
+  },
+  "recap": "Correct. Exploiting an opportunity with a strength is a strategic decision, since it is long term, it requires lots of investments and resources, it is cross-functional and it is hardly reversible. The overall set of such decisions is what constitutes the business strategy."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Choosing Among Alternatives",
+  "question": "Not every strategic alternative can be implemented. On what is the selection based, and who ultimately makes it?",
+  "options": {
+   "A": "On consistency with vision, mission and goals, on the budget available, and on the contribution to value creation through competitive advantage; ultimately it rests on the entrepreneur's or manager's strategic acumen.",
+   "B": "Purely on the results of the sensitivity analysis, which ranks the alternatives.",
+   "C": "On which alternative the SWOT identifies first.",
+   "D": "On the corporate strategy, which selects for the SBU."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Alternatives are assessed on their consistency with the vision, mission and goals, on the resources available in terms of budget, and on their contribution to the ultimate goal of value creation by means of competitive advantage. Scenario analysis, economic and financial forecasts and sensitivity analysis support the assessment, but since this is the heart of the decision-making role it is the entrepreneur's or manager's strategic and entrepreneurial acumen that determines the choice.",
+   "B": "Incorrect. The tools inform the decision; they do not settle it.",
+   "C": "Incorrect. Order of appearance is not a criterion, and alternatives may be mutually exclusive.",
+   "D": "Incorrect. The corporate level hands down goals and budget; the selection happens at business level."
+  },
+  "recap": "Correct. Alternatives are assessed on their consistency with the vision, mission and goals, on the resources available in terms of budget, and on their contribution to the ultimate goal of value creation by means of competitive advantage. Scenario analysis, economic and financial forecasts and sensitivity analysis support the assessment, but since this is the heart of the decision-making role it is the entrepreneur's or manager's strategic and entrepreneurial acumen that determines the choice."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What Implementation Consists Of",
+  "question": "How is a selected business strategy executed?",
+  "options": {
+   "A": "Through a single cross-functional project owned by top management.",
+   "B": "Through a number of consistent tactical choices, chained to one another, reaching into each function or unit.",
+   "C": "Through a new SWOT analysis carried out at functional level.",
+   "D": "Through the annual budgeting variance analysis."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Execution reaches into each given function or unit rather than being concentrated in one project.",
+   "B": "Correct. The strategy is executed by means of a number of consistent tactical choices, chained to one another, that should lead to achieving the overall strategic objectives. Execution gets strategy down to the basics and encompasses decisions in each given function or unit.",
+   "C": "Incorrect. The SWOT belongs to the diagnosis phase, before decision-making.",
+   "D": "Incorrect. Variance analysis is the control step of the monitoring phase, which comes after implementation."
+  },
+  "recap": "Correct. The strategy is executed by means of a number of consistent tactical choices, chained to one another, that should lead to achieving the overall strategic objectives. Execution gets strategy down to the basics and encompasses decisions in each given function or unit."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Which Framework Supports Execution",
+  "question": "Which framework does the lecture name as widely employed to support strategy implementation?",
+  "options": {
+   "A": "The Abell Cube.",
+   "B": "The SWOT matrix.",
+   "C": "The business model, which considers the implications of the business strategy on a unified set of building blocks and parameters.",
+   "D": "Benchmarking against direct competitors."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The Abell Cube defines the boundaries of the business area, in the orientation phase.",
+   "B": "Incorrect. The SWOT belongs to diagnosis and to generating alternatives.",
+   "C": "Correct. To support strategy execution managers may resort to different models, and the framework widely employed is the business model, which considers the implications of a company's business strategy on a unified set of building blocks and parameters.",
+   "D": "Incorrect. Benchmarking is the method of internal strategy analysis."
+  },
+  "recap": "Correct. To support strategy execution managers may resort to different models, and the framework widely employed is the business model, which considers the implications of a company's business strategy on a unified set of building blocks and parameters."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What Monitoring Produces",
+  "question": "The monitoring macro-phase compares results obtained with goals planned. What can follow from it?",
+  "options": {
+   "A": "Only a report to the corporate level, with no effect on the strategy.",
+   "B": "Either confirmation of the long-term goals set in orientation, or a strategic re-planning that may require new objectives and even a new vision, mission and SWOT.",
+   "C": "An automatic revision of the budget for the following year.",
+   "D": "A change of the business area boundaries defined by the Abell Cube."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The phase exists to feed back into the strategy, not only to report.",
+   "B": "Correct. Monitoring is usually run annually and executed through a control step corresponding to budgeting variance analysis, quantifying the delta between expected and achieved performance and its cause. It may confirm the long-term goals set in the orientation phase or trigger a strategic re-planning involving new objectives and possibly a new vision, mission and SWOT.",
+   "C": "Incorrect. Variance analysis is the method of the control step, not an automatic budget revision.",
+   "D": "Incorrect. Redefining the business area may be part of a re-planning, but it is not the stated outcome."
+  },
+  "recap": "Correct. Monitoring is usually run annually and executed through a control step corresponding to budgeting variance analysis, quantifying the delta between expected and achieved performance and its cause. It may confirm the long-term goals set in the orientation phase or trigger a strategic re-planning involving new objectives and possibly a new vision, mission and SWOT."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "How Linear the Process Really Is",
+  "question": "The five macro-phases are presented in sequence. How linear is the process in practice?",
+  "options": {
+   "A": "Strictly linear: each phase must be completed before the next begins.",
+   "B": "Linear only in ideal conditions where no feedback or feedforward is needed; in real cases one may go back to a step or jump another, and what matters is that all steps are considered at least once.",
+   "C": "Entirely unordered: the phases can be run in any sequence with the same result.",
+   "D": "Linear at business level but circular at corporate level."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The lecture explicitly says the process is far from being that straightforward.",
+   "B": "Correct. A waterfall sequence only happens in ideal conditions, where no feedback or feedforward is needed. In real cases one may have to go back to one step, jump another, and so on. The important thing is that all the steps are considered at least once and lead to a strategy achieving competitive advantage in the company's business.",
+   "C": "Incorrect. There is an order; what the caveat allows is departing from it, not ignoring it.",
+   "D": "Incorrect. No such contrast between the levels is drawn."
+  },
+  "recap": "Correct. A waterfall sequence only happens in ideal conditions, where no feedback or feedforward is needed. In real cases one may have to go back to one step, jump another, and so on. The important thing is that all the steps are considered at least once and lead to a strategy achieving competitive advantage in the company's business."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Vision in the Business-Strategy Sense",
+  "question": "In the business strategy formulation process, what is the vision, and what is its other name?",
+  "options": {
+   "A": "The company's own future dream, also known as its aspiration.",
+   "B": "The long term view on the best possible evolution of the business area, also known as industry foresight.",
+   "C": "The strategic role the company wishes to play, also known as strategic intent.",
+   "D": "The set of measurable milestones for the coming years, also known as strategic objectives."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the general definition of vision used elsewhere in the chapter, not the one in the business strategy process.",
+   "B": "Correct. At business-strategy level the vision is the long term view on the best possible evolution of the business area the company operates in or will operate in. It describes how the industry will positively evolve and draws a path the company and its competitors may follow, which is why it is also known as industry foresight.",
+   "C": "Incorrect. That is the mission on this reading, also called strategic intent.",
+   "D": "Incorrect. Those are the strategic objectives, introduced as the third concept of orientation."
+  },
+  "recap": "Correct. At business-strategy level the vision is the long term view on the best possible evolution of the business area the company operates in or will operate in. It describes how the industry will positively evolve and draws a path the company and its competitors may follow, which is why it is also known as industry foresight."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Which One Can Be Shared with Competitors",
+  "question": "In the business-strategy reading, one of vision and mission is industry-specific and the other firm-specific. Which way round, and what follows?",
+  "options": {
+   "A": "The vision is industry-specific and may be shared with competitors; the mission is firm-specific and states the role this company wants to play.",
+   "B": "The mission is industry-specific and may be shared; the vision is firm-specific.",
+   "C": "Both are firm-specific, which is why they must not overlap.",
+   "D": "Both are industry-specific, since they describe the business area."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The vision embraces the business area's evolution and might be shared by other competitors too, while the mission is firm-specific: it tells the company how it should develop its strategy according to the trends foreseen by the vision.",
+   "B": "Incorrect. The two are inverted: it is the view of the industry's evolution that can be common.",
+   "C": "Incorrect. The vision concerns the industry, so it is not firm-specific on this reading.",
+   "D": "Incorrect. The mission names the role of one company within the path, which makes it firm-specific."
+  },
+  "recap": "Correct. The vision embraces the business area's evolution and might be shared by other competitors too, while the mission is firm-specific: it tells the company how it should develop its strategy according to the trends foreseen by the vision."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Reading the Microsoft Example",
+  "question": "«A chicken in every oven, and a computer in every house» is given as Microsoft's vision in the late 1980s. What made it a vision rather than a mission, and why did it matter?",
+  "options": {
+   "A": "It named a market share target, which competitors could not match.",
+   "B": "It described the company's internal values, which shaped its culture.",
+   "C": "It was a claim about how the industry would evolve — computers becoming everyday objects in homes — which differed from competitors who expected computers to stay in the corporate world.",
+   "D": "It was a mission, since it describes what Microsoft did."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. No target is named, and the statement is about the industry's evolution rather than a share of it.",
+   "B": "Incorrect. Values and culture are a separate concept in the chapter.",
+   "C": "Correct. The vision implied that wealth would spread, that the resulting surplus would go to more refined needs met by consumer electronics, and so that personal computers could become objects used daily. That differed from competitors who believed computers would find their way into the corporate world rather than individual homes, and it set the path Microsoft's strategy followed. The matching mission would have been to become the leader in the personal computers business area.",
+   "D": "Incorrect. The statement describes the industry's future, not the role Microsoft would play in it."
+  },
+  "recap": "Correct. The vision implied that wealth would spread, that the resulting surplus would go to more refined needs met by consumer electronics, and so that personal computers could become objects used daily. That differed from competitors who believed computers would find their way into the corporate world rather than individual homes, and it set the path Microsoft's strategy followed. The matching mission would have been to become the leader in the personal computers business area."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Why Objectives Are Needed at All",
+  "question": "Vision and mission both have a long-term motivational role. Why does the orientation phase add strategic objectives?",
+  "options": {
+   "A": "Because vision and mission are not enough to set the boundaries and targets for strategy formulation.",
+   "B": "Because vision and mission are optional in practice.",
+   "C": "Because objectives replace the vision once the strategy is under way.",
+   "D": "Because the corporate level requires them for reporting."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. While both the vision and the mission have a long-term motivational role, they are not enough to set the boundaries and targets for strategy formulation, so strategic objectives are introduced. They steer the whole process — analysis, decision-making, implementation and above all control — and they are the means to get the mission down to earth as measurable, quantifiable milestones.",
+   "B": "Incorrect. Both are described as essential and complementary in formulation.",
+   "C": "Incorrect. They translate the mission rather than replacing the vision.",
+   "D": "Incorrect. The reason given is internal to the formulation process, not a reporting requirement."
+  },
+  "recap": "Correct. While both the vision and the mission have a long-term motivational role, they are not enough to set the boundaries and targets for strategy formulation, so strategic objectives are introduced. They steer the whole process — analysis, decision-making, implementation and above all control — and they are the means to get the mission down to earth as measurable, quantifiable milestones."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What SMART Stands For",
+  "question": "Which set matches the five features a strategic objective must have?",
+  "options": {
+   "A": "Simple, Measurable, Ambitious, Recorded, Transparent.",
+   "B": "Specific, Measurable, Appropriate, Realistic, Timely.",
+   "C": "Strategic, Managerial, Achievable, Relevant, Tactical.",
+   "D": "Specific, Motivating, Aligned, Rewarded, Tracked."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The first feature is specific rather than simple, and the last two are not among the five.",
+   "B": "Correct. Specific, so it conveys a clear message on what is to be achieved; Measurable and quantifiable through clear indicators; Appropriate or aligned, consistent with the overarching vision and mission; Realistic, challenging but neither impossible nor too easy; and Timely, tied to a clear deadline.",
+   "C": "Incorrect. Those words do not match the acronym as the lecture spells it out.",
+   "D": "Incorrect. Only the first is right; the remaining four are not the features listed."
+  },
+  "recap": "Correct. Specific, so it conveys a clear message on what is to be achieved; Measurable and quantifiable through clear indicators; Appropriate or aligned, consistent with the overarching vision and mission; Realistic, challenging but neither impossible nor too easy; and Timely, tied to a clear deadline."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What Realistic Means in SMART",
+  "question": "Goal setting theory is invoked for the R in SMART. What does it prescribe?",
+  "options": {
+   "A": "Objectives that are easy enough to be certain of achievement.",
+   "B": "Objectives set as high as possible, so that even partial achievement is valuable.",
+   "C": "Objectives that are challenging but perceived as neither impossible nor too easy, because both extremes demotivate.",
+   "D": "Objectives revised whenever they turn out to be hard."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. An objective that is too easy demotivates, just as an impossible one does.",
+   "B": "Incorrect. An objective perceived as impossible is explicitly ruled out.",
+   "C": "Correct. Goal setting theory tells managers to set objectives that are challenging but not perceived as either impossible or too easy, because both ways lead to demotivation. Realistic therefore does not mean easy.",
+   "D": "Incorrect. Revision on difficulty is not what the feature prescribes; the objective should be challenging by design."
+  },
+  "recap": "Correct. Goal setting theory tells managers to set objectives that are challenging but not perceived as either impossible or too easy, because both ways lead to demotivation. Realistic therefore does not mean easy."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Two Definitions of Vision in One Chapter",
+  "question": "A question asks what a company's vision is. The chapter supports two different answers. What distinguishes them?",
+  "options": {
+   "A": "Nothing: the two formulations say the same thing in different words.",
+   "B": "One applies to listed companies and the other to private ones.",
+   "C": "One is older and has been superseded by the other.",
+   "D": "In the general definitions the vision is the company's own future dream, what it wishes to be like in some years' time; in the business strategy process it is industry foresight, a view on how the business area will evolve, which competitors could share."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. They differ on what the statement is about: the company itself in one case, the industry in the other.",
+   "B": "Incorrect. No such distinction by company type is made.",
+   "C": "Incorrect. Both are presented in the same chapter, at different levels of the discussion.",
+   "D": "Correct. The general definitions make the vision the company's own aspiration and the mission its present business scope. The business strategy process makes the vision industry foresight and the mission strategic intent, the role the firm wants to play within the path the vision draws. The tell is whether the statement describes the industry's future or the company's own."
+  },
+  "recap": "Correct. The general definitions make the vision the company's own aspiration and the mission its present business scope. The business strategy process makes the vision industry foresight and the mission strategic intent, the role the firm wants to play within the path the vision draws. The tell is whether the statement describes the industry's future or the company's own."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Getting the Mission Down to Earth",
+  "question": "The lecture describes SMART objectives as a means to get the mission down to earth. What does that mean in practice?",
+  "options": {
+   "A": "Translating the mission into a set of measurable and quantifiable milestones.",
+   "B": "Replacing the mission with a shorter statement everyone can remember.",
+   "C": "Delegating the mission to the functional level.",
+   "D": "Restating the mission in the language of the industry's evolution."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. SMART objectives are a means to get the mission down to earth, to translate it into a set of measurable and quantifiable milestones. That is also what makes the control phase possible, since results need something to be compared against.",
+   "B": "Incorrect. The mission is not replaced; it is made operational.",
+   "C": "Incorrect. Delegation to functions happens at implementation, through tactical choices.",
+   "D": "Incorrect. Restating it in industry terms would move it towards the vision, not towards measurable targets."
+  },
+  "recap": "Correct. SMART objectives are a means to get the mission down to earth, to translate it into a set of measurable and quantifiable milestones. That is also what makes the control phase possible, since results need something to be compared against."
  }
 ];
