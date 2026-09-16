@@ -160,6 +160,27 @@
     }).join("");
   }
 
+  /* ---------------- topics ---------------- */
+  // Data with a TOPICS list groups its areas under a topic; without one there is a single
+  // implicit topic and every topic-aware branch below collapses to the plain behaviour.
+  function topicList() {
+    return typeof TOPICS !== "undefined" && Array.isArray(TOPICS) ? TOPICS : [];
+  }
+  function multiTopic() { return topicList().length > 1; }
+  function topicOf(cat) {
+    var list = topicList();
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].categories.indexOf(cat) !== -1) return list[i].name;
+    }
+    return "";
+  }
+  // A filter value is either "All", "topic:<name>" or a category name.
+  function matchesFilter(value, cat) {
+    if (!value || value === "All") return true;
+    if (value.indexOf("topic:") === 0) return topicOf(cat) === value.slice(6);
+    return cat === value;
+  }
+
   /* ---------------- concepts ---------------- */
   function conceptSearchText(c) {
     return (c.cat + " " + c.title + " " + c.meaning + " " + c.how + " " + c.trap + " " + (c.today || "")).toLowerCase();
@@ -176,10 +197,28 @@
         "</article>";
     }).join("");
 
-    var pills = $("conceptPills");
-    pills.innerHTML = ["All"].concat(CATEGORIES).map(function (cat, i) {
-      return '<button class="pill' + (i === 0 ? " primary" : "") + '" data-cat="' + esc(cat) + '">' +
-        esc(cat) + "</button>";
+    renderConceptPills("All");
+  }
+  function renderConceptPills(active) {
+    var values = ["All"];
+    if (multiTopic()) {
+      topicList().forEach(function (t) { values.push("topic:" + t.name); });
+      var open = active && active.indexOf("topic:") === 0 ? active.slice(6) : topicOf(active);
+      var areas = [];
+      topicList().forEach(function (t) {
+        if (!open || t.name === open) areas = areas.concat(t.categories);
+      });
+      if (areas.length) values.push("|");
+      values = values.concat(areas);
+    } else {
+      values = values.concat(CATEGORIES);
+    }
+    $("conceptPills").innerHTML = values.map(function (value) {
+      if (value === "|") return '<span class="pill-sep" aria-hidden="true"></span>';
+      var isTopic = value.indexOf("topic:") === 0;
+      var label = value === "All" ? "All" : isTopic ? value.slice(6) : value;
+      return '<button class="pill' + (value === active ? " primary" : "") + (isTopic ? " pill-topic" : "") +
+        '" data-cat="' + esc(value) + '">' + esc(label) + "</button>";
     }).join("");
   }
   function filterConcepts() {
@@ -189,7 +228,7 @@
     var shown = 0;
     document.querySelectorAll("#conceptsGrid .concept-card").forEach(function (el) {
       var c = CONCEPTS[Number(el.dataset.i)];
-      var okCat = cat === "All" || c.cat === cat;
+      var okCat = matchesFilter(cat, c.cat);
       var okText = !qtext || conceptSearchText(c).indexOf(qtext) !== -1;
       var visible = okCat && okText;
       el.classList.toggle("hidden", !visible);
@@ -273,7 +312,7 @@
     renderQuestion();
   }
   function poolFor(cat) {
-    return QUESTIONS.filter(function (q) { return cat === "All" || q.cat === cat; });
+    return QUESTIONS.filter(function (q) { return matchesFilter(cat, q.cat); });
   }
   function openTest(mode) {
     currentMode = mode;
@@ -585,9 +624,18 @@
   /* ---------------- wiring ---------------- */
   function init() {
     // category select options
-    $("category").innerHTML = ["All"].concat(CATEGORIES).map(function (c) {
-      return '<option value="' + esc(c) + '">' + esc(c === "All" ? "All areas" : c) + "</option>";
-    }).join("");
+    function option(value, label) {
+      return '<option value="' + esc(value) + '">' + esc(label) + "</option>";
+    }
+    function areaOptions(cats) {
+      return cats.map(function (c) { return option(c, c); }).join("");
+    }
+    $("category").innerHTML = option("All", "All areas") + (multiTopic()
+      ? topicList().map(function (t) {
+          return '<optgroup label="' + esc(t.name) + '">' +
+            option("topic:" + t.name, "All of " + t.name) + areaOptions(t.categories) + "</optgroup>";
+        }).join("")
+      : areaOptions(CATEGORIES));
 
     renderConcepts();
     filterConcepts();
@@ -611,17 +659,14 @@
       }
       if (e.target.closest("[data-reset-concepts]")) {
         $("conceptSearch").value = "";
-        $("conceptPills").querySelectorAll(".pill").forEach(function (p) {
-          p.classList.toggle("primary", p.dataset.cat === "All");
-        });
+        renderConceptPills("All");
         filterConcepts();
         $("conceptSearch").focus();
         return;
       }
       var pill = e.target.closest("#conceptPills .pill");
       if (pill) {
-        $("conceptPills").querySelectorAll(".pill").forEach(function (p) { p.classList.remove("primary"); });
-        pill.classList.add("primary");
+        renderConceptPills(pill.dataset.cat);
         filterConcepts();
         return;
       }

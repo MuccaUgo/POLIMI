@@ -116,6 +116,10 @@ main:focus { outline: none; }
 .searchbox::placeholder { color: var(--muted); }
 .pillrow { display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0 16px; }
 .pill { border-radius: 7px; padding: 8px 12px; min-height: 40px; }
+.pill-topic { background: var(--soft); border-color: var(--hero-line); color: var(--accent); font-weight: 700; }
+.pill-topic.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.pill-sep { align-self: stretch; width: 1px; margin: 4px 5px; background: var(--line); }
+.pillrow { align-items: center; }
 .result-count { margin: 14px 0; }
 .empty-state { text-align: center; padding: 36px 16px; border: 1px dashed var(--line); border-radius: 12px; margin: 18px 0; }
 .empty-state p { color: var(--muted); }

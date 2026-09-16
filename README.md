@@ -9,7 +9,7 @@ The root page is a portal listing the courses; each course is a self-contained s
 
 | Folder | Course | Content |
 |---|---|---|
-| [`afc/`](afc/) | Accounting, Finance & Control | The AFC26 programme and lecture calendar, plus background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting** planned: cost classification, cost objects, and the process, job order, operation and activity-based allocation methods |
+| [`afc/`](afc/) | Accounting, Finance & Control | The AFC26 programme and lecture calendar, plus background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting**: 39 concept cards, 42 questions — cost objects and the three classifications, cost configurations, and the process, job order, operation and activity-based allocation methods |
 | [`sm/`](sm/) | Strategy & Marketing | 39 concept cards, 31 practice questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG |
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
@@ -22,7 +22,9 @@ over from the `fa_` key prefix to `afc_` the first time the new hub loads.
   next lecture highlighted and past lectures dimmed. Read from `course.js`; the rest of the engine ignores it
   when that file is absent, which is why the Strategy & Marketing hub has no Programme tab.
 - **Concepts** — cards grouped by area, each with the meaning, how it works in practice and the typical exam
-  trap. Searchable and filterable.
+  trap. Searchable and filterable. Where the data declares more than one topic, as the Accounting, Finance &
+  Control hub does, a topic row sits above the areas and the area pills follow the topic selected; the quiz
+  area selector groups its options the same way, with an *All of …* entry per topic.
 - **Full Test** — every question, with area and order selection, automatic session saving and *Jump to question*.
 - **Practice 10** — up to 10 random questions with immediate feedback, optionally filtered to one area.
 - **Exam Test** — 10 random questions with editable choices and no feedback until the final recap.

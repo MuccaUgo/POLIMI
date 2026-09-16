@@ -64,7 +64,8 @@ const MODULES = [
   },
   {
     title: "Planning & Control",
-    blurb: "Budgeting and corporate costs, then non-financial KPIs and transfer pricing, each with its own exercise session."
+    blurb: "Budgeting and corporate costs, then non-financial KPIs and transfer pricing, each with its own exercise session.",
+    revise: "Cost Accounting"
   },
   {
     title: "Sustainability",

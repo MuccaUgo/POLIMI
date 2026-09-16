@@ -76,9 +76,11 @@ test("every lecture belongs to a declared module, and every module has lectures"
 });
 
 test("the modules the hub already covers point back to a background topic", () => {
-  const withRevise = modules.filter(m => m.revise).map(m => m.title);
-  assert.deepEqual(withRevise, ["Foundations", "Financial Statements", "Financial Analysis"]);
-  for (const m of modules) {
-    if (m.revise) assert.equal(m.revise, "Financial Accounting");
-  }
+  const withRevise = modules.filter(m => m.revise).map(m => [m.title, m.revise]);
+  assert.deepEqual(withRevise, [
+    ["Foundations", "Financial Accounting"],
+    ["Financial Statements", "Financial Accounting"],
+    ["Financial Analysis", "Financial Accounting"],
+    ["Planning & Control", "Cost Accounting"]
+  ]);
 });

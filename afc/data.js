@@ -1,5 +1,10 @@
-// Financial Accounting study data. Generated from the course annexure on IFRS financial reporting.
-const CATEGORIES = ["Principles", "Balance Sheet", "Income Statement", "Cash Flow", "Notes & Reporting"];
+// Study data for the Accounting, Finance & Control background topics, generated from the course
+// annexures on IFRS financial reporting and on cost accounting.
+const TOPICS = [
+ { name: "Financial Accounting", categories: ["Principles", "Balance Sheet", "Income Statement", "Cash Flow", "Notes & Reporting"] },
+ { name: "Cost Accounting", categories: ["Cost Basics", "Cost Classification", "Cost Configurations", "Allocation Methods"] }
+];
+const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
 const CONCEPTS = [
  {
@@ -317,6 +322,279 @@ const CONCEPTS = [
   "meaning": "IFRS requires enterprises to report financial and descriptive information about their reportable segments, which are operating segments or aggregations of operating segments.",
   "how": "Segments refer either to specific businesses (business segments) or to specific geographical areas (geographical segments). Segmental reporting must include important financial information such as sales, results, assets, liabilities, depreciation and noncash expenses other than depreciation.",
   "trap": "A worked example is the Volkswagen Group 2012 annual report, which splits its income statement into the Automotive and Financial Services divisions."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Cost and Cost Object",
+  "meaning": "Cost is the monetary measure of the resources sacrificed or forgone to achieve a specific objective. That objective is called the cost object.",
+  "how": "The cost object can be a product (a T-shirt), a service (a dinner at a restaurant), a project (a cruise ship) or an organizational unit (the production department). Yarn and buttons are costs of the T-shirt; food, wine and waiters are costs of the restaurant service.",
+  "trap": "In accounting the word cost is never used as a stand-alone entity. It always carries an adjective — fixed, direct, product — that says which classification is in play."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "What Cost Accounting Is",
+  "meaning": "The set of rules and systems devoted to computing and distributing enterprise costs.",
+  "how": "It serves three purposes: calculating the costs of products, services and projects for profitability analysis or inventory valuation; assigning costs to organizational units; and supporting short-term decision making, such as make or buy.",
+  "trap": "It is one discipline with three purposes, not three separate systems. Which classification you reach for depends on which purpose you are serving."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Internal Accountability",
+  "meaning": "Cost accounting provides information to managers inside the organization, so it supports internal accountability.",
+  "how": "Financial accounting is the opposite case: it exists for external accountability, providing information to decision makers outside the company.",
+  "trap": "The two are not competing views of the same numbers. They answer to different audiences, which is exactly why one is regulated and the other is not."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Cost Accounting Is Nonregulated",
+  "meaning": "Because it serves internal decision makers, cost accounting is not governed by international accounting standards that enterprises must adopt.",
+  "how": "General rules and techniques can be identified, and this is what the discipline teaches. Each enterprise then customizes the approach on the basis of its own needs.",
+  "trap": "Nonregulated does not mean there are no rules. What is absent is the obligation to follow a common standard, not method itself."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Which Classification for Which Purpose",
+  "meaning": "The three cost classifications are not interchangeable: each serves a different purpose of cost accounting.",
+  "how": "Direct versus indirect and product versus period are used to compute the cost of a product or service and to assign resources to organizational units. Fixed versus variable, along with avoidable versus nonavoidable, supports short-term decision making.",
+  "trap": "Reaching for fixed and variable when the question is how to value a product, or for direct and indirect when the question is whether to accept an extra order, is the classic mismatch."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Direct Costs",
+  "meaning": "Costs that can be specifically and exclusively identified with a particular cost object.",
+  "how": "Direct material covers the physical components used for realizing a single unit; direct labor covers employees physically involved in realizing one unit, whose time per unit can be identified. Building a cruise ship makes metal, labor and furniture all direct.",
+  "trap": "Being direct is not a property of the resource itself. The same resource can be direct or indirect depending on the cost object chosen."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Indirect Costs and Overhead",
+  "meaning": "Costs that cannot be identified specifically and exclusively with a given cost object, because they are caused by two or more cost objects jointly. They are also called overhead (OVH).",
+  "how": "Plant depreciation is indirect for a bottle of water: it cannot be associated exclusively with one unit. On large projects the depreciation of fabrication and assembly shops is shared by more than one ship.",
+  "trap": "Indirect says nothing about size. Overhead can dominate the cost structure and still be impossible to trace to a single unit."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "The Cost Object Decides",
+  "meaning": "Whether a resource is direct or indirect cannot be settled a priori. It depends on the cost object.",
+  "how": "A department making T-shirts has one production machine, four direct workers and one supervisor. If the cost object is the T-shirt, only the direct workers are direct. If the cost object is the production department, machine, workers and supervisor are all direct, because the department absorbs them specifically.",
+  "trap": "The supervisor is indirect for the product and direct for the department. Same resource, different answer — always ask what the cost object is before classifying."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Manufacturing and Nonmanufacturing Overhead",
+  "meaning": "Overhead splits according to whether it belongs to the production process.",
+  "how": "Manufacturing OVH is indirect cost related to production: machine depreciation, energy consumption, machine maintenance. Everything that does not enter the production process is nonmanufacturing OVH, such as marketing, administrative and commercial expenses.",
+  "trap": "This split is not cosmetic: it is what decides whether a piece of overhead is a product cost or a period cost."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Product Costs",
+  "meaning": "The value of resources used for producing a product or delivering a service.",
+  "how": "They comprise direct materials (raw materials and components traceable to a single product), direct labor (costs incurred in bringing the product into its current condition and location) and manufacturing overheads.",
+  "trap": "Manufacturing overhead is a product cost even though it is indirect. Product cost and direct cost are not synonyms."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Period Costs",
+  "meaning": "The value of resources used in activities that cannot be directly associated with the manufacturing activity or service delivery.",
+  "how": "Typical examples are selling and marketing expenses, research and development expenses, and administrative and general expenses.",
+  "trap": "Period costs are exactly the nonmanufacturing overheads. If you can name a cost as nonmanufacturing OVH, you have already classified it as a period cost."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "How the Two Classifications Meet",
+  "meaning": "Direct costs are always product costs. Indirect costs can be either product or period costs.",
+  "how": "What settles it for an indirect cost is its contribution to realizing the product: manufacturing overheads are product costs, nonmanufacturing overheads are period costs.",
+  "trap": "There is no direct period cost in this scheme. If a cost is traceable to the product, it belongs to the product."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Variable Costs",
+  "meaning": "Resources that vary, in total, directly and proportionately with the variation of volume or, more generally, the level of activity.",
+  "how": "Organizing a party in a rented villa, food, drink and entry tickets rise proportionally with the number of guests attending.",
+  "trap": "The definition is about the total. Per unit a variable cost is constant, which is the reverse of how a fixed cost behaves."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Fixed Costs",
+  "meaning": "Resources that, in total, do not vary with the volume or activity level. They are also called nonvariable costs.",
+  "how": "Renting the villa and hiring the boy band cost the same amount whatever the number of guests who turn up.",
+  "trap": "Fixed in total means falling per unit as volume grows. Quoting a fixed cost per unit without saying at what volume is meaningless."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Semivariable Costs",
+  "meaning": "Costs that combine variable- and fixed-cost items in one figure.",
+  "how": "A promoter paid a fixed fee plus a commission for every guest brought to the party. In a manufacturing process, utilities are the standard case: a monthly charge as the fixed component plus a part depending on the activity level.",
+  "trap": "A semivariable cost is not a cost that happens to sit between the two. It has two identifiable components, and the analysis works by separating them."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Simulating Costs at Different Volumes",
+  "meaning": "The reason the fixed and variable split matters: it lets you estimate total cost at any activity level.",
+  "how": "For the party, you compute total cost for different numbers of guests. That tells you whether the party is feasible, and what entry price covers your expenses.",
+  "trap": "This is decision support, not product costing. It answers what happens if the volume changes, which the other classifications cannot."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "The Two Decisions",
+  "meaning": "Assigning costs to cost objects involves two decisions: the selection of the cost configuration and the definition of the allocation methodology.",
+  "how": "The configuration decides which resources to include in the value of the object. The methodology decides how those resources get onto it.",
+  "trap": "They are separate choices made in order. Picking a method before deciding what belongs in the cost is putting the cart before the horse."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Prime Cost",
+  "meaning": "The configuration associated with a product's direct costs only: direct material and direct labor.",
+  "how": "For a T-shirt, prime cost is the value of raw materials and direct labor, and nothing else.",
+  "trap": "Precise but incomplete: every indirect resource is left out of the value of the final product."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Full Manufacturing Cost",
+  "meaning": "The configuration that assigns all product costs to the final product: direct material, direct labor and manufacturing overheads.",
+  "how": "On top of prime cost it brings in machine depreciation, energy and electricity, and the supervisors of the production process.",
+  "trap": "It stops at the factory gate. Commercial and administrative expenses are nonmanufacturing overhead and stay out."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Full Cost",
+  "meaning": "The configuration that associates all costs, both product and period, to products.",
+  "how": "Everything in full manufacturing cost, plus nonmanufacturing overhead such as commercial and administrative expenses.",
+  "trap": "Complete, and for that very reason the least precise: the more shared resources you bring in, the more approximations you introduce."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Completeness Against Precision",
+  "meaning": "The trade-off behind the choice of configuration, which is a managerial choice rather than a rule.",
+  "how": "Prime cost traces costs to the object most precisely but leaves indirect resources out. Full cost considers every resource involved but needs hypotheses to spread shared ones.",
+  "trap": "More complete is not more accurate. Adding overhead adds coverage and subjectivity at the same time, and the value of the T-shirt under the two configurations will be very different."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Tracing Against Allocating",
+  "meaning": "Direct costs are traced to the cost object; indirect costs are allocated to it.",
+  "how": "With a good information system in place there is no subjectivity in tracing: if raw material is €3 per T-shirt and labor €2 per T-shirt, the direct cost of one T-shirt is €5. Allocation instead means making a hypothesis about the consumption of joint resources.",
+  "trap": "Allocation is the word reserved for indirect costs. Saying a direct cost is allocated hides the fact that it could simply be traced."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "The Allocation Process",
+  "meaning": "The sequence that carries indirect costs onto a cost object.",
+  "how": "Calculate the amount of overhead to be allocated; choose an allocation basis, a metric used as a proxy for resource consumption; calculate the value the basis takes in the period; calculate the allocation coefficient by dividing overhead by the total value of the basis; then assign to each product the coefficient multiplied by the value the basis takes for that product.",
+  "trap": "The coefficient is computed once, on the total of the basis across all products. Dividing overhead by a single product's basis is the usual slip."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Choosing the Allocation Basis",
+  "meaning": "A metric used as a proxy for the consumption of the indirect resource being spread.",
+  "how": "For production machinery the common bases are the number of units produced or the production time. In job order costing, labor cost or time and machine time are typical.",
+  "trap": "The basis is a hypothesis about consumption, not a measurement of it. A different defensible basis gives a different product cost with the same underlying data."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Proportional Allocation Worked Through",
+  "meaning": "The allocation that apportions indirect costs on proportional criteria, using one basis for the whole overhead pool.",
+  "how": "Textile makes ties and scarves on a shared machine. Machine depreciation €90,000 plus machinery supervisor €50,000 gives €140,000 of overhead. Ties: 10,000 units at 30 min each is 300,000 min; scarves: 20,000 units at 20 min each is 400,000 min; 700,000 min in total. The coefficient is €140,000 / 700,000 min = €0.20/min, so each tie absorbs €6 and each scarf €4.",
+  "trap": "The per-unit charge follows the basis, not the number of units: scarves are twice as numerous but absorb less overhead each, because each one takes less machine time."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "The Four Methods, Ranked by Precision",
+  "meaning": "Process costing, operation costing, job order costing and activity-based costing all allocate direct and indirect costs, so they can serve full cost and full manufacturing cost configurations. They differ in precision.",
+  "how": "Process costing uses proportional criteria for direct material, direct labor and overhead alike. Operation costing traces direct material on cause-effect criteria. Job order costing traces both direct material and direct labor, and allocates overhead proportionally. ABC also allocates overhead on cause-effect criteria.",
+  "trap": "The ranking follows how much is traced rather than allocated: process, then operation, then job order, then ABC. Only ABC changes how overhead itself is handled."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Process Costing",
+  "meaning": "The simplest and least expensive method in terms of data collection and analysis: every cost, direct material, labor and overhead, is allocated with proportional criteria.",
+  "how": "The unit cost is the ratio between total costs and the units of output produced.",
+  "trap": "Its cheapness is the whole point, and so is its imprecision. Nothing is traced, so two products that consume resources very differently still end up with the same treatment."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Equivalent Units",
+  "meaning": "The number of finished products a company could have realized using the resources employed for work in progress and finished goods.",
+  "how": "Neq = Qc + Qwip x dcWip, where Qc is the completed quantity, Qwip the work in progress quantity and dcWip the degree of completion. Unit cost then divides total costs by Neq rather than by units produced.",
+  "trap": "Equivalent units are not a count of physical items. Work in progress enters the figure scaled down by how far it has travelled."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Degree of Completion",
+  "meaning": "The percentage of total costs a product in process has already absorbed, relative to the total absorbed by a finished product.",
+  "how": "It is what qualifies work in progress when costs are computed over a month or a week rather than for a whole finished batch. It converts partial work into equivalent units and values the closing work in progress.",
+  "trap": "It measures absorbed cost, not elapsed time or physical progress. A unit halfway through the calendar is not automatically 50% complete."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Initial Inventories: Average and FIFO",
+  "meaning": "When opening work in progress exists, process costing changes depending on whether products and work in progress are valued at weighted-average cost or FIFO.",
+  "how": "Under average cost logic the cost of the initial work in progress is added to the costs incurred in the period, and equivalent units sum the completed units and the ending work in progress. Under FIFO, allocation covers only the resources sustained during the period, so the opening work in progress is subtracted from the equivalent units: Neq = Qc + WIPending x dcEnding - WIPinitial x dcInitial.",
+  "trap": "The two methods differ on both sides of the ratio. Changing the equivalent units without asking which costs belong in the numerator is where the confusion starts."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Where Process Costing Fits",
+  "meaning": "It suits homogenous production, where a few similar products or services are processed on a large scale.",
+  "how": "It is typical of enterprises with continuous production processes such as chemicals and oil, and of companies with large batch production where the unit value of the product is usually low.",
+  "trap": "When variations in products and processes increase, the equivalence coefficient becomes hard to calculate, and the method stops being the cheap option it was chosen for."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Job Order Costing",
+  "meaning": "The method that takes the job as the element for cost allocation and tracing. A job is a single unit of a product, such as a machine, or a batch of many units, such as a batch of pencil coils.",
+  "how": "Direct material is traced to the job according to consumption; direct labor is traced on the basis of completed operations; overhead is allocated with proportional criteria using an allocation basis such as labor cost or time, or machine time.",
+  "trap": "Even here overhead is still allocated proportionally. What job order costing improves on is the tracing of the two direct components, not the treatment of overhead."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "The Job Order Sheet",
+  "meaning": "The document associated with each job across the whole production process, on which incurred costs are registered.",
+  "how": "It records direct material, direct labor and overhead, each with date, code, quantity and unit price, building up the total cost of the job as work proceeds.",
+  "trap": "The sheet is what makes the method precise and also what makes it time-consuming; information technology has cut the cost of that data collection considerably."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Where Job Order Costing Fits",
+  "meaning": "It is suggested when direct material and direct labor are significant in their incidence on final product cost.",
+  "how": "Enterprises operating with large orders or with small batches have potential benefits. In discrete processes, companies should weigh the benefit of more precise information against the cost of collecting and analysing the data.",
+  "trap": "It is not appropriate for continuous cycles, where a job simply cannot be identified. On a large scale with low unit values, the data collection can cost more than the product is worth."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Operation Costing",
+  "meaning": "A system sitting between job order costing and process costing.",
+  "how": "Direct material costs are traced to products as in job order costing, while conversion costs — direct labor plus overhead — are allocated proportionally as in process costing. The unit of analysis is the operation, a homogenous phase within the transformation process; the most frequent bases are the quantity produced and the operation duration.",
+  "trap": "Only direct material is traced. Direct labor moves back into the proportionally allocated pool, which is what separates this method from job order costing."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Activity-Based Costing",
+  "meaning": "The method that puts activities at an intermediate level in the allocation, as a response to spreading indirect costs proportionally through a single allocation basis.",
+  "how": "Overhead is first divided among the activities that cause its consumption, then each activity gets its own driver and its own coefficient, and only then is it apportioned to the cost objects.",
+  "trap": "The gain is on overhead alone. Direct material and direct labor are traced under job order costing too — ABC is the only method that refuses a single basis for the indirect pool."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "The Six ABC Steps",
+  "meaning": "The sequence ABC follows from overhead to cost object.",
+  "how": "Identify the indirect costs to allocate, the cost pool; identify the activities that determine their consumption; divide overhead among those activities; define an activity driver for each, an indicator explaining the consumption of that activity; calculate an allocation coefficient per activity by dividing activity cost by its driver; apportion activity costs to each cost object using those coefficients.",
+  "trap": "There are two divisions, not one: overhead is split across activities first, and only then across products. Collapsing them back into a single step is ordinary proportional allocation again."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "ABC Worked Through",
+  "meaning": "The Textile case, allocating the year's machine depreciation of €90,000 with ABC instead of a single basis.",
+  "how": "The machine runs two activities: production, 700,000 min in total, and setup, 50,000 min, one setup before ties and one before scarves. Spread over 750,000 min the coefficient is €0.12/min, giving €84,000 to production and €6,000 to setup. Production is then driven by time (€0.12/min) and setup by the number of setups (€6,000 / 2 = €3,000 per setup). Ties take €36,000 + €3,000 = €39,000, or €3.90 a unit; scarves €48,000 + €3,000 = €51,000, or €2.55 a unit.",
+  "trap": "Setup cost splits equally because each product needed one setup, not because the volumes are equal. That is precisely what a proportional allocation on machine time would have missed."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Where ABC Fits",
+  "meaning": "It is suggested when the incidence of overhead is high and those indirect resources are absorbed by heterogeneous activities.",
+  "how": "In that situation a single allocation basis cannot provide realistic information on how overhead is consumed, because different activities are driven by different things.",
+  "trap": "The choice of activity drivers is arbitrary and usually depends on the data available. ABC narrows the subjectivity of allocation; it does not eliminate it."
  }
 ];
 
@@ -1903,5 +2181,803 @@ const QUESTIONS = [
    "D": "Correct. Total segment result is 70,000 + 50,000 = 120,000. Profit before tax is 120,000 - 18,000 - 12,000 - 10,000 = 80,000."
   },
   "recap": "Check the definition of a segment result and follow the reconciliation. Segment totals need not equal group profit before tax; here the excluded expenses reduce EUR 120,000 to EUR 80,000."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Identifying the Cost Object",
+  "question": "A restaurant wants to know what one dinner service costs, and separately what its kitchen department costs to run. In cost accounting terms, what changes between the two questions?",
+  "options": {
+   "A": "Nothing: the resources consumed are the same, so the costs are the same.",
+   "B": "The cost object changes, and with it the classification of several resources as direct or indirect.",
+   "C": "Only the cost configuration changes; the classification of each resource is fixed in advance.",
+   "D": "The second question belongs to financial accounting rather than cost accounting."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The same resources can be classified differently, and the totals assigned differ, because the objective being costed is not the same.",
+   "B": "Correct. Cost is the monetary measure of resources sacrificed to achieve a specific objective, and that objective is the cost object. Change the cost object and resources that were indirect can become direct, as the waiters do when the department rather than the single dinner is being costed.",
+   "C": "Incorrect. Direct and indirect cannot be defined a priori for all resources: the classification follows the cost object.",
+   "D": "Incorrect. Assigning costs to organizational units is one of the three stated purposes of cost accounting."
+  },
+  "recap": "Correct. Cost is the monetary measure of resources sacrificed to achieve a specific objective, and that objective is the cost object. Change the cost object and resources that were indirect can become direct, as the waiters do when the department rather than the single dinner is being costed."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "The Purposes of Cost Accounting",
+  "question": "Which set correctly lists the purposes that cost accounting serves?",
+  "options": {
+   "A": "Calculating the cost of products, services and projects; assigning costs to organizational units; supporting short-term decision making.",
+   "B": "Preparing the four financial statements, valuing inventory and computing taxable income.",
+   "C": "Publishing cost information for investors, lenders and suppliers.",
+   "D": "Setting selling prices, negotiating with suppliers and auditing the accounts."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Cost accounting computes and distributes enterprise costs for profitability analysis or inventory valuation, assigns costs to organizational units, and supports short-term decisions such as make or buy.",
+   "B": "Incorrect. Preparing the financial statements is financial accounting; inventory valuation is only one use of the first purpose.",
+   "C": "Incorrect. Publishing information to outside decision makers is external accountability, which is financial accounting's job.",
+   "D": "Incorrect. Auditing is not a purpose of cost accounting, and the list omits the assignment of costs to organizational units."
+  },
+  "recap": "Correct. Cost accounting computes and distributes enterprise costs for profitability analysis or inventory valuation, assigns costs to organizational units, and supports short-term decisions such as make or buy."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Who the Information Is For",
+  "question": "What distinguishes cost accounting from financial accounting in terms of the decision makers served?",
+  "options": {
+   "A": "Both serve external decision makers, but cost accounting is more detailed.",
+   "B": "Cost accounting serves managers inside the organization; financial accounting serves decision makers outside it.",
+   "C": "Cost accounting serves external auditors; financial accounting serves the board.",
+   "D": "Both serve internal managers, but financial accounting is prepared more frequently."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Only financial accounting addresses external users; cost accounting supports internal accountability.",
+   "B": "Correct. Cost accounting provides information to managers inside the organization, supporting internal accountability, in contrast with financial accounting, which provides information to external decision makers.",
+   "C": "Incorrect. Auditors are external users, and they work from the regulated financial statements.",
+   "D": "Incorrect. Financial accounting is the one addressed to the outside, and it is the annual and interim reporting that is fixed in frequency."
+  },
+  "recap": "Correct. Cost accounting provides information to managers inside the organization, supporting internal accountability, in contrast with financial accounting, which provides information to external decision makers."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "What Nonregulated Means",
+  "question": "Cost accounting is described as nonregulated. What does that actually imply?",
+  "options": {
+   "A": "Enterprises may compute costs any way they like, since no rules or techniques exist.",
+   "B": "There are no international accounting standards that enterprises must adopt, though general rules and techniques exist and each enterprise customizes them.",
+   "C": "It is regulated nationally but not internationally.",
+   "D": "It became nonregulated when IFRS replaced the previous national standards."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The absence is of mandatory standards, not of method: general rules and techniques can be identified and are what the discipline teaches.",
+   "B": "Correct. Given its aim to support internal decision makers, cost accounting is nonregulated: this does not imply the absence of rules but the absence of international accounting standards to be adopted by enterprises, which then customize the approach to their specific needs.",
+   "C": "Incorrect. The point is not a national-international split; there is no mandatory standard to follow at either level.",
+   "D": "Incorrect. It is nonregulated because it serves internal decision makers, not as a consequence of any change in external standards."
+  },
+  "recap": "Correct. Given its aim to support internal decision makers, cost accounting is nonregulated: this does not imply the absence of rules but the absence of international accounting standards to be adopted by enterprises, which then customize the approach to their specific needs."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Matching the Classification to the Question",
+  "question": "A company must decide whether to accept a one-off extra order using spare capacity. Which cost classification is the relevant one, and why?",
+  "options": {
+   "A": "Direct and indirect, because the order must be traced to a cost object.",
+   "B": "Product and period, because only product costs may be charged to the order.",
+   "C": "Fixed and variable, because the decision turns on how total cost responds to a change in the activity level.",
+   "D": "Prime and full cost, because the configuration determines whether the order is profitable."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Direct and indirect is used to compute the cost of a product or to assign resources to organizational units, not to test a change in volume.",
+   "B": "Incorrect. Product and period serves the same costing purpose as direct and indirect, not short-term decision making.",
+   "C": "Correct. The distinction between fixed and variable costs, and between avoidable and nonavoidable costs, is the one that supports short-term decision making, because it shows how total cost moves with the activity level.",
+   "D": "Incorrect. Prime and full cost are configurations, which say which resources to include in a product's value, not how costs respond to volume."
+  },
+  "recap": "Correct. The distinction between fixed and variable costs, and between avoidable and nonavoidable costs, is the one that supports short-term decision making, because it shows how total cost moves with the activity level."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Cost Never Stands Alone",
+  "question": "Why does cost accounting insist that the word cost always be qualified by an adjective?",
+  "options": {
+   "A": "Because the adjective identifies the classification in play, and the same resource is classified differently under different ones.",
+   "B": "Because unqualified costs are not deductible for tax purposes.",
+   "C": "Because international standards prescribe the terminology to be used.",
+   "D": "Because only qualified costs can be entered in the financial statements."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. In accounting the term cost is never used as a stand-alone entity but is always accompanied by an adjective that specifies the type of cost referred to, such as fixed or direct, and a single resource can be direct under one classification and a product cost under another.",
+   "B": "Incorrect. Tax treatment is not what drives the terminology of cost accounting.",
+   "C": "Incorrect. Cost accounting is nonregulated: no international standard prescribes its terminology.",
+   "D": "Incorrect. Cost accounting produces internal information; entry in the financial statements is a separate matter governed by financial accounting."
+  },
+  "recap": "Correct. In accounting the term cost is never used as a stand-alone entity but is always accompanied by an adjective that specifies the type of cost referred to, such as fixed or direct, and a single resource can be direct under one classification and a product cost under another."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Costing a Project",
+  "question": "In building a cruise ship, the annexure observes that the amount of direct costs is very high. Why is that the case?",
+  "options": {
+   "A": "Because large projects are exempt from allocating overhead.",
+   "B": "Because several resources, such as metal, labor and furniture, can be associated directly with the single unit being built.",
+   "C": "Because process costing charges everything proportionally to the single unit.",
+   "D": "Because on large projects all overhead is reclassified as period cost."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Overhead still exists on large projects: the depreciation of fabrication and assembly shops is shared across several ships.",
+   "B": "Correct. For large projects the amount of direct costs is very high because several resources can be directly associated with one unit: in the construction of cruise ships, metal, labor and furniture are all direct costs.",
+   "C": "Incorrect. Process costing suits homogenous, large-scale production, which is the opposite of a one-off ship.",
+   "D": "Incorrect. Whether overhead is a product or a period cost depends on whether it is manufacturing overhead, not on the size of the project."
+  },
+  "recap": "Correct. For large projects the amount of direct costs is very high because several resources can be directly associated with one unit: in the construction of cruise ships, metal, labor and furniture are all direct costs."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Inventory Valuation as a Purpose",
+  "question": "Cost accounting is said to compute the cost of products for profitability analysis or inventory valuation. What does that tell you about its relationship with financial accounting?",
+  "options": {
+   "A": "That financial accounting has no need for cost information.",
+   "B": "That inventory valuation makes cost accounting a regulated discipline.",
+   "C": "That cost accounting is a branch of financial accounting.",
+   "D": "That although cost accounting serves internal decision makers, the product costs it computes also feed a figure reported externally."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Inventories appear in the balance sheet, and valuing them needs the product cost that cost accounting computes.",
+   "B": "Incorrect. Cost accounting remains nonregulated: no international standards govern how enterprises must compute their costs.",
+   "C": "Incorrect. The two are distinct, one for internal and one for external accountability.",
+   "D": "Correct. Calculating the costs of products, services and projects serves profitability analysis or inventory valuation, so the internal computation feeds a reported figure even though the discipline itself is nonregulated and aimed at managers."
+  },
+  "recap": "Correct. Calculating the costs of products, services and projects serves profitability analysis or inventory valuation, so the internal computation feeds a reported figure even though the discipline itself is nonregulated and aimed at managers."
+ },
+ {
+  "cat": "Cost Basics",
+  "title": "Assigning Costs to Units",
+  "question": "A company wants to know what its logistics department costs. Which purpose of cost accounting is being served, and which classifications support it?",
+  "options": {
+   "A": "Assigning costs to organizational units, supported by the direct/indirect and product/period classifications.",
+   "B": "Short-term decision making, supported by the fixed/variable classification.",
+   "C": "Inventory valuation, supported by the fixed/variable classification.",
+   "D": "External accountability, supported by international accounting standards."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Assigning costs to organizational units is the second stated purpose of cost accounting, and the first two classifications, direct versus indirect and product versus period, are the ones usually adopted to compute a product's cost or to assign resources to organizational units.",
+   "B": "Incorrect. Fixed and variable supports short-term decision making, which is a different purpose from costing a unit.",
+   "C": "Incorrect. Neither part is right: the purpose here is assigning costs to a unit, and fixed/variable is not the classification used for it.",
+   "D": "Incorrect. External accountability is financial accounting's aim; cost accounting is internal and nonregulated."
+  },
+  "recap": "Correct. Assigning costs to organizational units is the second stated purpose of cost accounting, and the first two classifications, direct versus indirect and product versus period, are the ones usually adopted to compute a product's cost or to assign resources to organizational units."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "The Supervisor in the T-Shirt Department",
+  "question": "A production department making T-shirts employs one production machine, four direct workers and one supervisor of the entire production process. How are these resources classified?",
+  "options": {
+   "A": "All three are indirect costs, whatever the cost object.",
+   "B": "All three are direct costs, whatever the cost object.",
+   "C": "If the cost object is the T-shirt, only the direct workers are direct; if the cost object is the production department, all three are direct.",
+   "D": "If the cost object is the T-shirt, the machine and the workers are direct; the supervisor is always indirect."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Direct workers can be unambiguously assigned to one unit of the final product, so they are direct when the T-shirt is the cost object.",
+   "B": "Incorrect. With the T-shirt as the cost object, the machine and the supervisor are shared across units and cannot be assigned exclusively to one.",
+   "C": "Correct. The distinction cannot be defined a priori: it depends on the cost object. For the T-shirt only the direct workers can be unambiguously assigned to one unit; for the production department the machine, the workers and the supervisor are all specifically absorbed by the department itself.",
+   "D": "Incorrect. The machine is shared across units, so it is indirect for the T-shirt, and the supervisor is direct once the department is the cost object."
+  },
+  "recap": "Correct. The distinction cannot be defined a priori: it depends on the cost object. For the T-shirt only the direct workers can be unambiguously assigned to one unit; for the production department the machine, the workers and the supervisor are all specifically absorbed by the department itself."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "What Counts as Direct Material and Direct Labor",
+  "question": "In the manufacture of laptops, which description matches the annexure's definition of the direct components?",
+  "options": {
+   "A": "Direct material is every physical component used for one unit; direct labor is the employees physically involved in realizing one unit, whose time per unit can be identified.",
+   "B": "Direct material is material bought directly from the manufacturer; direct labor is labor employed on a permanent contract.",
+   "C": "Direct material is the most expensive material used; direct labor is the labor of the highest-paid workers.",
+   "D": "Direct material is material held in stock; direct labor is labor paid by the hour."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Direct material refers to all the physical components used for realizing a single unit of the final product or service, so that every unit absorbs the same amount; direct labor refers to employees physically involved in realizing one unit, for whom the time spent per unit and therefore the cost absorbed can be identified.",
+   "B": "Incorrect. Neither the supplier relationship nor the type of employment contract has any bearing on the classification.",
+   "C": "Incorrect. Cost magnitude does not make a resource direct; traceability to one unit does.",
+   "D": "Incorrect. Where the material sits and how labor is paid are irrelevant to whether they can be traced to one unit."
+  },
+  "recap": "Correct. Direct material refers to all the physical components used for realizing a single unit of the final product or service, so that every unit absorbs the same amount; direct labor refers to employees physically involved in realizing one unit, for whom the time spent per unit and therefore the cost absorbed can be identified."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Plant Depreciation for a Bottle of Water",
+  "question": "Why is plant depreciation an indirect cost in the production of bottled water?",
+  "options": {
+   "A": "Because depreciation is never a manufacturing cost.",
+   "B": "Because it is caused jointly by many units and cannot be identified exclusively with one bottle.",
+   "C": "Because it is a period cost by definition.",
+   "D": "Because it is too small to trace economically."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Machine depreciation is a standard example of manufacturing overhead, which is a production cost.",
+   "B": "Correct. Indirect costs are those that cannot be identified specifically and exclusively with a given cost object because they are caused by two or more cost objects jointly, and plant depreciation cannot be associated exclusively with one unit of a water bottle.",
+   "C": "Incorrect. Depreciation of production plant is manufacturing overhead, and manufacturing overhead is a product cost, not a period cost.",
+   "D": "Incorrect. The reason is joint causation, not the size of the amount."
+  },
+  "recap": "Correct. Indirect costs are those that cannot be identified specifically and exclusively with a given cost object because they are caused by two or more cost objects jointly, and plant depreciation cannot be associated exclusively with one unit of a water bottle."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Sorting Overhead",
+  "question": "Machine maintenance, energy consumption for the production line, marketing expenses and administrative expenses are all overhead. How do they split?",
+  "options": {
+   "A": "Machine maintenance and energy are manufacturing overhead; marketing and administrative expenses are nonmanufacturing overhead.",
+   "B": "All four are manufacturing overhead, because all four are indirect.",
+   "C": "Machine maintenance is manufacturing overhead; energy, marketing and administrative expenses are nonmanufacturing.",
+   "D": "All four are nonmanufacturing overhead, because none can be traced to a unit."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Manufacturing overhead is indirect cost related to the production process — machine depreciation, energy consumption and machine maintenance — while all remaining resources that do not enter the production process, such as marketing and administrative and commercial expenses, are nonmanufacturing overhead.",
+   "B": "Incorrect. Being indirect is what makes them overhead; whether they enter the production process is what splits them.",
+   "C": "Incorrect. Energy consumed by the production process is a listed example of manufacturing overhead.",
+   "D": "Incorrect. Untraceability makes a cost indirect, but machine maintenance and production energy still belong to the production process."
+  },
+  "recap": "Correct. Manufacturing overhead is indirect cost related to the production process — machine depreciation, energy consumption and machine maintenance — while all remaining resources that do not enter the production process, such as marketing and administrative and commercial expenses, are nonmanufacturing overhead."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "What Product Costs Contain",
+  "question": "Which combination makes up product costs?",
+  "options": {
+   "A": "Direct materials and direct labor only.",
+   "B": "Direct materials, direct labor and manufacturing overheads.",
+   "C": "Direct materials, direct labor, manufacturing overheads and nonmanufacturing overheads.",
+   "D": "All costs incurred in the accounting period."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is prime cost, a cost configuration; product costs also include manufacturing overheads.",
+   "B": "Correct. Product costs are the value of resources used for producing a product or delivering a service, and they include direct materials, direct labor and manufacturing overheads — the costs associated with manufacturing activities overall but not with a single product.",
+   "C": "Incorrect. Nonmanufacturing overheads are period costs; including them gives the full cost configuration, not product cost.",
+   "D": "Incorrect. Costs of the period that are not associated with manufacturing are period costs, which is precisely the category product costs excludes."
+  },
+  "recap": "Correct. Product costs are the value of resources used for producing a product or delivering a service, and they include direct materials, direct labor and manufacturing overheads — the costs associated with manufacturing activities overall but not with a single product."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Recognising Period Costs",
+  "question": "Which of these is a period cost?",
+  "options": {
+   "A": "The depreciation of the assembly machine.",
+   "B": "The energy consumed by the production line.",
+   "C": "Research and development expenses.",
+   "D": "The components assembled into the finished unit."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Machine depreciation is manufacturing overhead, and manufacturing overhead is a product cost.",
+   "B": "Incorrect. Energy consumption in production is a listed example of manufacturing overhead, so it is a product cost.",
+   "C": "Correct. Period costs refer to the value of resources used in activities that cannot be directly associated with the manufacturing activity or service delivery, and research and development expenses sit alongside selling, marketing, administrative and general expenses in that category.",
+   "D": "Incorrect. Components traceable to a single unit are direct material, which is always a product cost."
+  },
+  "recap": "Correct. Period costs refer to the value of resources used in activities that cannot be directly associated with the manufacturing activity or service delivery, and research and development expenses sit alongside selling, marketing, administrative and general expenses in that category."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Can a Direct Cost Be a Period Cost?",
+  "question": "How do the direct/indirect and product/period classifications interact?",
+  "options": {
+   "A": "Direct costs are always product costs, while indirect costs can be either product or period costs.",
+   "B": "Direct costs can be either product or period costs, while indirect costs are always period costs.",
+   "C": "The two classifications are independent: any combination is possible.",
+   "D": "Product costs are always direct and period costs are always indirect."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Direct costs, meaning direct material and direct labor, are always classified as product costs. Indirect costs can be either, depending on their contribution to realizing the product: manufacturing overheads are product costs, nonmanufacturing overheads are period costs.",
+   "B": "Incorrect. It inverts the rule: it is the direct costs that are pinned to one category, and indirect costs that can fall either way.",
+   "C": "Incorrect. One combination is excluded: a direct cost is never a period cost.",
+   "D": "Incorrect. Manufacturing overhead is indirect and still a product cost, so product costs are not always direct."
+  },
+  "recap": "Correct. Direct costs, meaning direct material and direct labor, are always classified as product costs. Indirect costs can be either, depending on their contribution to realizing the product: manufacturing overheads are product costs, nonmanufacturing overheads are period costs."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "Variable in Total, Constant per Unit",
+  "question": "A company's raw material cost is variable. What happens as output volume rises?",
+  "options": {
+   "A": "Total cost stays the same and the cost per unit falls.",
+   "B": "Total cost rises proportionately and the cost per unit stays the same.",
+   "C": "Both the total and the cost per unit rise proportionately.",
+   "D": "Total cost rises proportionately and the cost per unit rises less than proportionately."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That describes a fixed cost, which does not vary in total while falling per unit as volume grows.",
+   "B": "Correct. Variable costs are resources that vary, in total, directly and proportionately with the variation of the volume or activity level, which leaves the amount absorbed by each unit unchanged.",
+   "C": "Incorrect. If the total rises in proportion to volume, the amount per unit is by definition constant.",
+   "D": "Incorrect. Proportionality in total means a flat per-unit figure, not a rising one."
+  },
+  "recap": "Correct. Variable costs are resources that vary, in total, directly and proportionately with the variation of the volume or activity level, which leaves the amount absorbed by each unit unchanged."
+ },
+ {
+  "cat": "Cost Classification",
+  "title": "The Promoter at the Party",
+  "question": "A promoter is paid a fixed amount for the engagement plus a commission for every guest brought to the party. How is this cost classified, and what is the manufacturing equivalent?",
+  "options": {
+   "A": "Fixed, because the engagement is agreed in advance; the equivalent is factory rent.",
+   "B": "Variable, because the commission dominates; the equivalent is raw material.",
+   "C": "Semivariable, because it combines fixed and variable items; the equivalent is utilities, with a monthly charge plus a part depending on activity.",
+   "D": "Neither, because costs with two components fall outside this classification."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A fixed cost does not vary in total with the activity level, and the commission does vary with the number of guests.",
+   "B": "Incorrect. A variable cost varies directly and proportionately in total, which the fixed fee prevents.",
+   "C": "Correct. Semivariable costs include a combination of variable- and fixed-cost items, and the promoter's fixed amount plus per-guest commission is the textbook case. In a manufacturing process utilities behave the same way: a monthly charge as the fixed component, plus a variable part depending on the level of activity.",
+   "D": "Incorrect. Semivariable is precisely the category provided for costs with both components."
+  },
+  "recap": "Correct. Semivariable costs include a combination of variable- and fixed-cost items, and the promoter's fixed amount plus per-guest commission is the textbook case. In a manufacturing process utilities behave the same way: a monthly charge as the fixed component, plus a variable part depending on the level of activity."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "What Prime Cost Includes",
+  "question": "Under a prime cost configuration, what is assigned to a T-shirt?",
+  "options": {
+   "A": "Raw materials and direct labor only.",
+   "B": "Raw materials, direct labor and machine depreciation.",
+   "C": "Raw materials, direct labor, machine depreciation and administrative expenses.",
+   "D": "Raw materials only, since labor is a conversion cost."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Prime cost is associated with a product's direct costs only, material and labor, so the T-shirt carries the value of raw materials and direct labor and nothing else.",
+   "B": "Incorrect. Adding manufacturing overhead such as machine depreciation gives the full manufacturing cost configuration.",
+   "C": "Incorrect. Adding nonmanufacturing overhead as well gives the full cost configuration.",
+   "D": "Incorrect. Direct labor is one of the two direct components and belongs in prime cost."
+  },
+  "recap": "Correct. Prime cost is associated with a product's direct costs only, material and labor, so the T-shirt carries the value of raw materials and direct labor and nothing else."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Full Manufacturing Cost and the Factory Gate",
+  "question": "Which costs does the full manufacturing cost configuration assign, and which does it leave out?",
+  "options": {
+   "A": "It assigns direct material and direct labor, leaving out all overhead.",
+   "B": "It assigns all product costs — direct material, direct labor and manufacturing overheads — leaving out nonmanufacturing overheads.",
+   "C": "It assigns all costs of the period, leaving out nothing.",
+   "D": "It assigns direct material and manufacturing overhead, leaving out direct labor."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is prime cost; full manufacturing cost adds manufacturing overheads.",
+   "B": "Correct. Full manufacturing cost assigns all product costs to the final product, which means direct material, direct labor and manufacturing overheads, so the nonmanufacturing overheads that make up period costs stay out.",
+   "C": "Incorrect. Assigning all costs, product and period alike, is the full cost configuration.",
+   "D": "Incorrect. Direct labor is a product cost and is included."
+  },
+  "recap": "Correct. Full manufacturing cost assigns all product costs to the final product, which means direct material, direct labor and manufacturing overheads, so the nonmanufacturing overheads that make up period costs stay out."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Choosing Between Configurations",
+  "question": "A manager argues that the full cost configuration should always be preferred because it is complete. What is the counterargument?",
+  "options": {
+   "A": "There is none: completeness makes full cost strictly better.",
+   "B": "Full cost is less precise, because assigning shared resources to the product requires approximations that prime cost avoids.",
+   "C": "Full cost is forbidden by international accounting standards.",
+   "D": "Full cost can only be used with activity-based costing."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The selection of the configuration is a managerial choice precisely because there is a trade-off to weigh.",
+   "B": "Correct. A prime cost configuration is particularly precise in tracing costs to cost objects but is not complete, since indirect resources are excluded. A full cost configuration is complete but less precise, because of the approximations introduced in assigning the value of shared resources, and the value of the product under the two can differ substantially.",
+   "C": "Incorrect. Cost accounting is nonregulated, so no standard forbids a configuration.",
+   "D": "Incorrect. All four allocation methods can serve full cost and full manufacturing cost configurations."
+  },
+  "recap": "Correct. A prime cost configuration is particularly precise in tracing costs to cost objects but is not complete, since indirect resources are excluded. A full cost configuration is complete but less precise, because of the approximations introduced in assigning the value of shared resources, and the value of the product under the two can differ substantially."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Traced or Allocated",
+  "question": "A company knows the raw material and direct labor absorbed by each unit, and also incurs warehouse rent shared across products. How does each reach the cost object?",
+  "options": {
+   "A": "Both are allocated, since every cost needs an allocation basis.",
+   "B": "Both are traced, since the company has a good information system.",
+   "C": "Raw material and direct labor are traced with no subjectivity; the warehouse rent is allocated, which means hypothesising how the joint resource is consumed.",
+   "D": "Raw material is traced; direct labor and warehouse rent are allocated."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Allocation is what indirect costs need; direct costs reach the object by tracing.",
+   "B": "Incorrect. However good the information system, warehouse rent is jointly caused and cannot be traced to one unit.",
+   "C": "Correct. In the presence of direct costs the value of the cost object is defined by tracing, and with a good information system in place there is no subjectivity in apportioning those resources. Indirect costs must instead be allocated, which means making a hypothesis about the consumption of joint resources.",
+   "D": "Incorrect. Direct labor is a direct cost and is traced; only in operation and process costing does it fall back into a proportionally allocated pool."
+  },
+  "recap": "Correct. In the presence of direct costs the value of the cost object is defined by tracing, and with a good information system in place there is no subjectivity in apportioning those resources. Indirect costs must instead be allocated, which means making a hypothesis about the consumption of joint resources."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Computing the Allocation Coefficient",
+  "question": "Textile produces ties and scarves on a shared machine. Machine depreciation is €90,000 and the machinery supervisor costs €50,000. Ties: 10,000 units at 30 minutes each. Scarves: 20,000 units at 20 minutes each. Machine time is the allocation basis. What is the allocation coefficient?",
+  "options": {
+   "A": "€0.20 per minute.",
+   "B": "€0.47 per minute.",
+   "C": "€4.67 per unit.",
+   "D": "€0.13 per minute."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Total overhead is €90,000 + €50,000 = €140,000, and the basis totals 300,000 + 400,000 = 700,000 minutes, so the coefficient is €140,000 / 700,000 min = €0.20 per minute.",
+   "B": "Incorrect. €0.47 divides the overhead by 300,000 minutes, using only the time absorbed by ties instead of the total across both products.",
+   "C": "Incorrect. Dividing €140,000 by the 30,000 units produced ignores the chosen basis, which is machine time rather than units.",
+   "D": "Incorrect. €0.13 divides only the €90,000 depreciation by 700,000 minutes, leaving the supervisor's cost out of the overhead pool."
+  },
+  "recap": "Correct. Total overhead is €90,000 + €50,000 = €140,000, and the basis totals 300,000 + 400,000 = 700,000 minutes, so the coefficient is €140,000 / 700,000 min = €0.20 per minute."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Overhead Absorbed per Unit",
+  "question": "Continuing the Textile case, with an allocation coefficient of €0.20 per minute and unit production times of 30 minutes for a tie and 20 minutes for a scarf, how much overhead does each product absorb per unit?",
+  "options": {
+   "A": "€6.00 per tie and €4.00 per scarf.",
+   "B": "€4.00 per tie and €6.00 per scarf.",
+   "C": "€4.67 per tie and €4.67 per scarf.",
+   "D": "€14.00 per tie and €7.00 per scarf."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Each product absorbs the coefficient multiplied by the value the basis takes for it: 30 min x €0.20/min = €6.00 per tie and 20 min x €0.20/min = €4.00 per scarf.",
+   "B": "Incorrect. The figures are inverted: the tie takes the longer machine time, so it absorbs more.",
+   "C": "Incorrect. An equal charge would follow from spreading overhead by units, ignoring that the two products consume machine time differently.",
+   "D": "Incorrect. These divide the whole overhead pool by the units of each product separately, which double-counts the pool."
+  },
+  "recap": "Correct. Each product absorbs the coefficient multiplied by the value the basis takes for it: 30 min x €0.20/min = €6.00 per tie and 20 min x €0.20/min = €4.00 per scarf."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Picking an Allocation Basis",
+  "question": "What is an allocation basis, and what follows from the choice?",
+  "options": {
+   "A": "A metric used as a proxy for resource consumption; a different defensible basis produces a different product cost from the same data.",
+   "B": "The total amount of overhead to be spread; the choice does not affect the result.",
+   "C": "The list of products sharing the resource; it is fixed by accounting standards.",
+   "D": "The proportion of direct costs in the product; it is computed after allocation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The allocation basis is a metric used as a proxy for the consumption of the resource — for production machinery, typically the number of units produced or the production time. Because it stands in for consumption rather than measuring it, the choice changes the cost attributed to each product.",
+   "B": "Incorrect. The overhead to be spread is the numerator of the coefficient; the basis is the denominator, and it very much affects the result.",
+   "C": "Incorrect. Cost accounting is nonregulated, and the basis is a managerial choice.",
+   "D": "Incorrect. The basis is chosen before the coefficient is computed, and it need not relate to direct costs at all."
+  },
+  "recap": "Correct. The allocation basis is a metric used as a proxy for the consumption of the resource — for production machinery, typically the number of units produced or the production time. Because it stands in for consumption rather than measuring it, the choice changes the cost attributed to each product."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "The Order of the Two Decisions",
+  "question": "Which pair of decisions does assigning costs to cost objects involve, and in which order?",
+  "options": {
+   "A": "First the allocation methodology, then the cost configuration.",
+   "B": "First the cost configuration, then the allocation methodology.",
+   "C": "Only the allocation methodology; the configuration follows automatically.",
+   "D": "Only the cost configuration; the methodology is prescribed by the configuration chosen."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Choosing how to move costs before deciding which costs belong in the object leaves the method without a scope.",
+   "B": "Correct. The process of assigning costs to cost objects includes two decisions: the selection of the cost configuration, which says which resources to include, and then the definition of the allocation methodology, which says how they reach the object.",
+   "C": "Incorrect. Both decisions are made: the configuration is an explicit managerial choice.",
+   "D": "Incorrect. Once the configuration is set, a method still has to be chosen among process, operation, job order and activity-based costing."
+  },
+  "recap": "Correct. The process of assigning costs to cost objects includes two decisions: the selection of the cost configuration, which says which resources to include, and then the definition of the allocation methodology, which says how they reach the object."
+ },
+ {
+  "cat": "Cost Configurations",
+  "title": "Steps of the Allocation Process",
+  "question": "Which sequence describes the allocation of indirect costs?",
+  "options": {
+   "A": "Compute overhead; choose an allocation basis; compute the value of the basis in the period; divide overhead by the total value of the basis; multiply the coefficient by each product's basis value.",
+   "B": "Compute overhead; divide it equally among products; adjust for the units produced.",
+   "C": "Trace overhead to each product; sum the results; check against the total.",
+   "D": "Choose an activity driver per activity; compute a coefficient per activity; apportion to products."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The allocation process calculates the amount of indirect cost to be allocated, chooses an allocation basis as a proxy for resource consumption, calculates the value the basis assumes in the period, calculates the allocation coefficient by dividing overhead by the total value of the basis, and finally assigns to each product the coefficient multiplied by the basis value for that product.",
+   "B": "Incorrect. Splitting equally ignores the allocation basis, which exists precisely to reflect differing consumption.",
+   "C": "Incorrect. Overhead cannot be traced: being untraceable to one cost object is what makes it indirect.",
+   "D": "Incorrect. That is the activity-based costing sequence, which inserts activities between the pool and the products."
+  },
+  "recap": "Correct. The allocation process calculates the amount of indirect cost to be allocated, chooses an allocation basis as a proxy for resource consumption, calculates the value the basis assumes in the period, calculates the allocation coefficient by dividing overhead by the total value of the basis, and finally assigns to each product the coefficient multiplied by the basis value for that product."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Ranking the Four Methods",
+  "question": "How do process costing, operation costing, job order costing and activity-based costing treat direct material, direct labor and overhead?",
+  "options": {
+   "A": "Process: all proportional. Operation: direct material on cause-effect, the rest proportional. Job order: both direct components on cause-effect, overhead proportional. ABC: all three on cause-effect.",
+   "B": "Process: all on cause-effect. Operation: overhead on cause-effect. Job order: direct material only. ABC: all proportional.",
+   "C": "All four trace the direct components and differ only in how they treat overhead.",
+   "D": "Process: direct labor on cause-effect. Operation: all proportional. Job order: all on cause-effect. ABC: overhead proportional."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Process costing adopts proportional criteria for all three. Operation costing improves precision by tracing direct material on cause-effect criteria. Job order costing traces both direct material and direct labor on cause-effect criteria and allocates overhead proportionally. ABC also allocates overhead on cause-effect criteria, which makes it the most precise.",
+   "B": "Incorrect. It reverses the ranking: process costing is the least precise and ABC the most.",
+   "C": "Incorrect. Process costing traces nothing, and operation costing traces only direct material.",
+   "D": "Incorrect. Operation costing traces direct material, and ABC is the one method that puts overhead on cause-effect criteria."
+  },
+  "recap": "Correct. Process costing adopts proportional criteria for all three. Operation costing improves precision by tracing direct material on cause-effect criteria. Job order costing traces both direct material and direct labor on cause-effect criteria and allocates overhead proportionally. ABC also allocates overhead on cause-effect criteria, which makes it the most precise."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Equivalent Units and Unit Cost",
+  "question": "Over a period a company completes 800 units and leaves 400 units of work in progress at 50% of completion. Materials and conversion costs entering the process amount to €25,000. There is no opening inventory. What are the equivalent units and the cost per equivalent unit?",
+  "options": {
+   "A": "1,200 equivalent units; €20.83 per equivalent unit.",
+   "B": "1,000 equivalent units; €25.00 per equivalent unit.",
+   "C": "800 equivalent units; €31.25 per equivalent unit.",
+   "D": "600 equivalent units; €41.67 per equivalent unit."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Counting the work in progress at its full physical quantity ignores the degree of completion, which scales it down.",
+   "B": "Correct. Neq = Qc + Qwip x dcWip = 800 + 400 x 0.5 = 1,000 equivalent units, and the unit cost is total cost divided by equivalent units: €25,000 / 1,000 = €25.00 per equivalent unit.",
+   "C": "Incorrect. Dropping the work in progress altogether charges the whole cost to the completed units, although resources were absorbed by the unfinished ones too.",
+   "D": "Incorrect. 600 corresponds to no step in the calculation; the completed quantity alone is 800."
+  },
+  "recap": "Correct. Neq = Qc + Qwip x dcWip = 800 + 400 x 0.5 = 1,000 equivalent units, and the unit cost is total cost divided by equivalent units: €25,000 / 1,000 = €25.00 per equivalent unit."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Valuing the Closing Work in Progress",
+  "question": "Continuing that case, with a cost of €25.00 per equivalent unit and 400 units of work in progress at 50% of completion, what is each unfinished unit worth and what is the closing work in progress worth in total?",
+  "options": {
+   "A": "€12.50 per unit and €5,000 in total.",
+   "B": "€25.00 per unit and €10,000 in total.",
+   "C": "€12.50 per unit and €10,000 in total.",
+   "D": "€50.00 per unit and €20,000 in total."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. A unit in progress has absorbed the share of resources given by its degree of completion: €25.00 x 0.5 = €12.50 each, so 400 units are worth €5,000 in total.",
+   "B": "Incorrect. Valuing unfinished units at the full equivalent-unit cost would treat them as complete.",
+   "C": "Incorrect. The per-unit figure is right but the total must apply it to the 400 physical units: 400 x €12.50 = €5,000.",
+   "D": "Incorrect. This multiplies rather than scales by the degree of completion; a half-finished unit absorbs less, not more."
+  },
+  "recap": "Correct. A unit in progress has absorbed the share of resources given by its degree of completion: €25.00 x 0.5 = €12.50 each, so 400 units are worth €5,000 in total."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Average Cost Against FIFO",
+  "question": "When opening work in progress exists, what distinguishes the weighted-average approach from FIFO in process costing?",
+  "options": {
+   "A": "Nothing: the equivalent units are computed identically.",
+   "B": "Under average cost the initial work in progress is added to the period's costs; under FIFO allocation covers only resources sustained during the period, so the opening work in progress is subtracted from the equivalent units.",
+   "C": "FIFO values the closing work in progress at zero.",
+   "D": "Average cost applies only where there is no closing work in progress."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The equivalent-unit formulas differ precisely in the treatment of the opening work in progress.",
+   "B": "Correct. In the case of average cost logic the unit cost is determined including the cost of the initial work in progress as resources added to the material and conversion costs used in the period, over equivalent units summing ending work in progress and completed units. Using the FIFO approach, allocation is done only for resources sustained during the period, so the equivalent units become Qc + WIPending x dcEnding - WIPinitial x dcInitial.",
+   "C": "Incorrect. Closing work in progress is valued by its degree of completion under either approach.",
+   "D": "Incorrect. Both approaches exist to handle periods with inventories at both ends."
+  },
+  "recap": "Correct. In the case of average cost logic the unit cost is determined including the cost of the initial work in progress as resources added to the material and conversion costs used in the period, over equivalent units summing ending work in progress and completed units. Using the FIFO approach, allocation is done only for resources sustained during the period, so the equivalent units become Qc + WIPending x dcEnding - WIPinitial x dcInitial."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Where Process Costing Belongs",
+  "question": "In which setting is process costing the appropriate method?",
+  "options": {
+   "A": "In enterprises building one-off units to customer order, such as cruise ships.",
+   "B": "Wherever overhead is a large share of total cost and is absorbed by heterogeneous activities.",
+   "C": "In homogenous production, such as continuous processes in chemicals and oil, or large batch production where the unit value is low.",
+   "D": "Wherever direct material and direct labor are the most significant elements of product cost."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. One-off units are jobs, which is the setting for job order costing.",
+   "B": "Incorrect. High overhead absorbed by heterogeneous activities is the case for activity-based costing.",
+   "C": "Correct. Process costing is appropriate with homogenous productions, where a few similar products or services are processed on a large scale. It is often used in enterprises with continuous production processes such as chemicals and oil, or in companies with large batch production where the unit value of the product is usually low.",
+   "D": "Incorrect. Significant direct material and direct labor is the argument for job order costing, which traces both."
+  },
+  "recap": "Correct. Process costing is appropriate with homogenous productions, where a few similar products or services are processed on a large scale. It is often used in enterprises with continuous production processes such as chemicals and oil, or in companies with large batch production where the unit value of the product is usually low."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "How Job Order Costing Handles the Three Components",
+  "question": "Under job order costing, how do direct material, direct labor and overhead reach the job?",
+  "options": {
+   "A": "All three are traced to the job from the job order sheet.",
+   "B": "Direct material is traced according to consumption; direct labor is traced on the basis of completed operations; overhead is allocated proportionally using a basis such as labor time or machine time.",
+   "C": "Direct material is traced; direct labor and overhead are allocated proportionally as conversion costs.",
+   "D": "All three are allocated proportionally, using the number of jobs as the basis."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Overhead is jointly caused and cannot be traced; the sheet records it as an allocated amount.",
+   "B": "Correct. Across the production process each job carries a sheet on which costs are registered: direct material costs are traced to the job according to consumption, direct labor costs on the basis of completed operations, and overhead is allocated with proportional criteria using an allocation basis, typically labor costs or time and machine time.",
+   "C": "Incorrect. Treating direct labor as part of a proportionally allocated conversion cost is operation costing, not job order costing.",
+   "D": "Incorrect. Allocating everything proportionally is process costing."
+  },
+  "recap": "Correct. Across the production process each job carries a sheet on which costs are registered: direct material costs are traced to the job according to consumption, direct labor costs on the basis of completed operations, and overhead is allocated with proportional criteria using an allocation basis, typically labor costs or time and machine time."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "When Job Order Costing Does Not Work",
+  "question": "Why is job order costing inappropriate for enterprises operating with continuous cycles?",
+  "options": {
+   "A": "Because overhead cannot be allocated in a continuous process.",
+   "B": "Because continuous processes have no direct material.",
+   "C": "Because the job — a single unit or a batch of units — cannot be identified.",
+   "D": "Because international standards reserve it for discrete manufacturing."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Overhead is allocated proportionally in every method, continuous processes included.",
+   "B": "Incorrect. Continuous processes consume direct material; what they lack is an identifiable job to charge it to.",
+   "C": "Correct. Job order costing takes the job as the element for cost allocation and tracing, a job being a single unit of a product or a batch of many units. This method is not appropriate in enterprises that operate with continuous cycles, because of the impossibility of identifying the job.",
+   "D": "Incorrect. Cost accounting is nonregulated: no standard reserves a method for a type of production."
+  },
+  "recap": "Correct. Job order costing takes the job as the element for cost allocation and tracing, a job being a single unit of a product or a batch of many units. This method is not appropriate in enterprises that operate with continuous cycles, because of the impossibility of identifying the job."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "What Operation Costing Traces",
+  "question": "Operation costing is described as sitting between job order costing and process costing. What does it trace and what does it allocate?",
+  "options": {
+   "A": "It traces direct material to products, and allocates conversion costs — direct labor plus overhead — proportionally, with the operation as the unit of analysis.",
+   "B": "It traces direct labor and allocates direct material and overhead.",
+   "C": "It traces direct material and direct labor, and allocates overhead by activity driver.",
+   "D": "It allocates everything proportionally but computes a separate coefficient per product."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. In operation costing direct material costs are traced to products as in job order costing, while conversion costs, meaning direct labor plus overhead, are allocated proportionally as in process costing. The unit of analysis is the operation, a homogenous phase within the transformation process, and the most frequent bases are the quantity produced and the operation duration.",
+   "B": "Incorrect. It is direct material that is traced; direct labor falls into the conversion cost pool.",
+   "C": "Incorrect. Tracing both direct components is job order costing, and driver-based overhead allocation is ABC.",
+   "D": "Incorrect. Allocating everything proportionally describes process costing, and operation costing traces direct material."
+  },
+  "recap": "Correct. In operation costing direct material costs are traced to products as in job order costing, while conversion costs, meaning direct labor plus overhead, are allocated proportionally as in process costing. The unit of analysis is the operation, a homogenous phase within the transformation process, and the most frequent bases are the quantity produced and the operation duration."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Why Activity-Based Costing Appeared",
+  "question": "What problem in traditional methods was ABC introduced to address?",
+  "options": {
+   "A": "The impossibility of tracing direct material to products.",
+   "B": "The allocation of indirect costs through a proportional method using a single allocation basis.",
+   "C": "The absence of any way to value work in progress.",
+   "D": "The cost of maintaining a job order sheet for every unit."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Direct material is already traced under job order and operation costing; ABC changes nothing there.",
+   "B": "Correct. ABC appeared during the 1980s as a solution to the problems in traditional methods, and in particular to the allocation of indirect costs through a proportional method using a unique allocation basis. It puts activities at an intermediate level so that each has its own driver.",
+   "C": "Incorrect. Equivalent units and the degree of completion handle work in progress, within process costing.",
+   "D": "Incorrect. ABC does not replace the job order sheet; it changes how the overhead pool is spread."
+  },
+  "recap": "Correct. ABC appeared during the 1980s as a solution to the problems in traditional methods, and in particular to the allocation of indirect costs through a proportional method using a unique allocation basis. It puts activities at an intermediate level so that each has its own driver."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "The ABC Sequence",
+  "question": "Which sequence describes activity-based costing?",
+  "options": {
+   "A": "Identify the overhead pool; identify the activities that determine its consumption; divide overhead among the activities; define an activity driver for each; compute a coefficient per activity; apportion activity costs to the cost objects.",
+   "B": "Identify the overhead pool; choose one allocation basis; compute a coefficient; apportion to the cost objects.",
+   "C": "Trace direct material and direct labor to activities; allocate overhead to products.",
+   "D": "Compute equivalent units per activity; divide total costs by them; apportion to the cost objects."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. ABC identifies the indirect costs to allocate as a cost pool, identifies the activities that determine the consumption of overhead, divides overhead among those activities, defines activity drivers as indicators explaining the consumption of each activity, calculates an allocation coefficient per activity by dividing activity cost by its driver, and apportions activity costs to each cost object using those coefficients.",
+   "B": "Incorrect. That is the traditional proportional allocation ABC was designed to improve on, with a single basis and no intermediate activities.",
+   "C": "Incorrect. ABC does not route the direct components through activities; it is a treatment of overhead.",
+   "D": "Incorrect. Equivalent units belong to process costing and have no role in ABC."
+  },
+  "recap": "Correct. ABC identifies the indirect costs to allocate as a cost pool, identifies the activities that determine the consumption of overhead, divides overhead among those activities, defines activity drivers as indicators explaining the consumption of each activity, calculates an allocation coefficient per activity by dividing activity cost by its driver, and apportions activity costs to each cost object using those coefficients."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Activity Costs in the Textile Case",
+  "question": "Textile allocates the year's machine depreciation of €90,000 using ABC. The machine performs production, 700,000 minutes in the year, and setup, 50,000 minutes in the year. Time is used to divide overhead across the two activities. How much cost goes to each activity?",
+  "options": {
+   "A": "€84,000 to production and €6,000 to setup.",
+   "B": "€45,000 to each activity.",
+   "C": "€90,000 to production and nothing to setup.",
+   "D": "€36,000 to production and €54,000 to setup."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The two activities together take 700,000 + 50,000 = 750,000 minutes, so the coefficient is €90,000 / 750,000 min = €0.12 per minute. Production then receives €0.12 x 700,000 = €84,000 and setup €0.12 x 50,000 = €6,000.",
+   "B": "Incorrect. Splitting equally between activities ignores the time each one absorbs, which is the basis chosen for this step.",
+   "C": "Incorrect. Setup is one of the two activities the machine performs and absorbs part of its depreciation.",
+   "D": "Incorrect. The amounts are the wrong way round and do not follow from the 700,000 to 50,000 split of machine time."
+  },
+  "recap": "Correct. The two activities together take 700,000 + 50,000 = 750,000 minutes, so the coefficient is €90,000 / 750,000 min = €0.12 per minute. Production then receives €0.12 x 700,000 = €84,000 and setup €0.12 x 50,000 = €6,000."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Unit Cost of Ties under ABC",
+  "question": "Continuing the Textile case: production cost is driven by time at €0.12 per minute, and the €6,000 setup pool is driven by the number of setups, of which there were two, one per product. Ties take 300,000 minutes of production and 10,000 units are made. What is the total and unit cost of ties?",
+  "options": {
+   "A": "€36,000 in total and €3.60 per tie.",
+   "B": "€39,000 in total and €3.90 per tie.",
+   "C": "€42,000 in total and €4.20 per tie.",
+   "D": "€45,000 in total and €4.50 per tie."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. €36,000 is the production component alone; the setup activity has still to be charged.",
+   "B": "Correct. Production gives €0.12/min x 300,000 min = €36,000, and setup gives €6,000 / 2 setups = €3,000 per setup x 1 setup = €3,000. The total is €39,000, and over 10,000 units that is €3.90 per tie.",
+   "C": "Incorrect. €42,000 would charge ties a share of setup based on their production time rather than on the one setup they required.",
+   "D": "Incorrect. €45,000 corresponds to half the depreciation, which is neither the activity split nor the driver-based result."
+  },
+  "recap": "Correct. Production gives €0.12/min x 300,000 min = €36,000, and setup gives €6,000 / 2 setups = €3,000 per setup x 1 setup = €3,000. The total is €39,000, and over 10,000 units that is €3.90 per tie."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "What ABC Changes for Scarves",
+  "question": "In the Textile case, a scarf absorbs €4.00 of overhead under proportional allocation on machine time but €2.55 under ABC. What explains the difference?",
+  "options": {
+   "A": "ABC uses a larger overhead pool, so each product absorbs a different amount.",
+   "B": "ABC excludes setup cost from product cost altogether.",
+   "C": "Proportional allocation charges setup in proportion to machine time, whereas ABC charges it by the number of setups, and scarves needed only one despite their higher volume.",
+   "D": "The two figures cover different periods and are not comparable."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Under ABC the pool being spread here is smaller, the €90,000 depreciation, and in any case the pool size is not what redistributes cost between the products.",
+   "B": "Incorrect. ABC charges setup explicitly: it becomes its own activity with its own driver.",
+   "C": "Correct. A single basis spreads everything on machine time, so the 20,000 scarves carry a share of setup proportional to their 400,000 minutes. ABC gives setup its own driver, the number of setups, and each product required exactly one, so the €3,000 per setup is spread over 20,000 scarves rather than 10,000 ties.",
+   "D": "Incorrect. Both figures cover the same year and the same resources; only the allocation logic differs."
+  },
+  "recap": "Correct. A single basis spreads everything on machine time, so the 20,000 scarves carry a share of setup proportional to their 400,000 minutes. ABC gives setup its own driver, the number of setups, and each product required exactly one, so the €3,000 per setup is spread over 20,000 scarves rather than 10,000 ties."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "When ABC Is Worth It",
+  "question": "Under what conditions is activity-based costing suggested, and what limitation remains?",
+  "options": {
+   "A": "When overhead is high and absorbed by heterogeneous activities; the choice of activity drivers is still arbitrary and depends on available data.",
+   "B": "When direct material dominates the cost structure; no limitation remains, since ABC is exact.",
+   "C": "When production is homogenous and large scale; the limitation is that work in progress cannot be valued.",
+   "D": "When the enterprise operates continuous cycles; the limitation is the cost of the job order sheet."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. ABC is more precise and its use is suggested when the incidence of overhead is high and those indirect resources are absorbed for heterogeneous activities, since a single allocation basis would not give realistic information on overhead consumption. The choice of activity drivers, however, is arbitrary and usually depends on the data available.",
+   "B": "Incorrect. Where direct material dominates, operation costing is the natural fit, and ABC narrows subjectivity rather than removing it.",
+   "C": "Incorrect. Homogenous large-scale production is the case for process costing.",
+   "D": "Incorrect. Continuous cycles are where job order costing fails; the job order sheet is not part of ABC."
+  },
+  "recap": "Correct. ABC is more precise and its use is suggested when the incidence of overhead is high and those indirect resources are absorbed for heterogeneous activities, since a single allocation basis would not give realistic information on overhead consumption. The choice of activity drivers, however, is arbitrary and usually depends on the data available."
+ },
+ {
+  "cat": "Allocation Methods",
+  "title": "Two Divisions, Not One",
+  "question": "What structurally separates ABC from a traditional proportional allocation of overhead?",
+  "options": {
+   "A": "ABC applies the allocation coefficient twice to the same basis.",
+   "B": "ABC divides overhead across activities first and only then across cost objects, using a driver per activity instead of one basis for the whole pool.",
+   "C": "ABC traces overhead directly to cost objects, so no coefficient is needed.",
+   "D": "ABC computes a separate overhead pool for each cost object before allocating."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The two steps use different bases: the split across activities, then each activity's own driver.",
+   "B": "Correct. Traditional methods take the cost pool, apply one allocation basis and one coefficient, and reach the cost objects. ABC inserts activities in between: overhead is divided across activities, each activity gets its own driver and coefficient, and only then are activity costs apportioned to the cost objects.",
+   "C": "Incorrect. Overhead remains indirect and is still allocated; ABC changes the route, not the nature of the cost.",
+   "D": "Incorrect. The pool is the overhead to be allocated, defined before the split across activities, not per cost object."
+  },
+  "recap": "Correct. Traditional methods take the cost pool, apply one allocation basis and one coefficient, and reach the cost objects. ABC inserts activities in between: overhead is divided across activities, each activity gets its own driver and coefficient, and only then are activity costs apportioned to the cost objects."
  }
 ];
