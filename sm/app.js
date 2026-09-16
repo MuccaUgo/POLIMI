@@ -1,4 +1,4 @@
-/* Strategy & Marketing Study Hub — concepts browser and quiz engine. */
+/* Strategy & Marketing Study Hub — concepts browser, programme and quiz engine. */
 (function () {
   "use strict";
 

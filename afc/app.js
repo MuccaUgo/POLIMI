@@ -1,4 +1,4 @@
-/* Financial Accounting Study Hub — concepts browser and quiz engine. */
+/* Accounting, Finance & Control Study Hub — concepts browser, programme and quiz engine. */
 (function () {
   "use strict";
 
