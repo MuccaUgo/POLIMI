@@ -1,5 +1,10 @@
-// Strategy & Marketing study data. Generated from the course Introduction deck (V. Chiesa, MSc Management Engineering).
-const CATEGORIES = ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"];
+// Strategy & Marketing study data, generated from the course decks by V. Chiesa,
+// MSc Management Engineering: the Introduction and chapter 1, The Concept of Strategy.
+const TOPICS = [
+ { name: "Introduction", categories: ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"] },
+ { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] }
+];
+const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
 const CONCEPTS = [
  {
@@ -274,6 +279,307 @@ const CONCEPTS = [
   "meaning": "Environmental, social and corporate governance (ESG) is a framework designed to be integrated into an organization's strategy to create enterprise value by expanding the organizational objectives to include the identification, assessment and management of sustainability-related risks and opportunities in respect to all organizational stakeholders and the environment.",
   "how": "The environmental aspect focuses on preserving the natural world: climate change, greenhouse gas emissions, biodiversity loss, deforestation, pollution, energy efficiency and water management. The social aspect focuses on people and relationships: gender and diversity, equity and inclusion, customer satisfaction and employee engagement. The governance aspect focuses on enhancing corporate governance: board composition, cybersecurity practices, management structure, executive compensation and preventing bribery and corruption.",
   "trap": "ESG is framed as a way of creating enterprise value by managing risks and opportunities, not as a set of obligations separate from strategy."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Goal Behind the Strategy",
+  "meaning": "The goal of a company should be to maximize long term cash flows, which allows it to achieve a combination of value creation for both shareholders and stakeholders.",
+  "how": "This is the reference point everything else in the chapter serves: strategy exists to reach that long-term goal, not to win any single period.",
+  "trap": "Shareholders and stakeholders are joined here, not opposed. The phrase is a combination of value creation for both, which is why the horizon has to be long term."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Strategos: the Military Origin",
+  "meaning": "«Strategy» comes from the Greek word «Strategos», which means generalship.",
+  "how": "It is the art of war, especially the planning of movements of troops, ships, aircraft and so on into favourable positions.",
+  "trap": "The military root is about positioning before the battle, not about fighting it. That is the sense carried into business: choosing where to be, not only how hard to push."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Five Ways of Saying the Same Thing",
+  "meaning": "The classic definitions all circle competitive advantage from different angles.",
+  "how": "Ken Ohmae: business strategy is about competitive advantage, a sustainable edge over competitors. Peter Drucker: a firm's theory about how to gain competitive advantages. Michael Porter: competitive strategy is about being different, delivering a unique mix of value. Bruce Henderson: a deliberate search for a plan of action that will develop a business's competitive advantage. Henry Mintzberg: a pattern in a stream of decisions.",
+  "trap": "Mintzberg's is the odd one out: a pattern in a stream of decisions is observed after the fact, while the others describe something deliberately searched for or planned. That tension returns later as intended versus emergent strategy."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Strategy as Goal-Directed Action",
+  "meaning": "Strategy is a set of goal-directed actions a firm takes to gain and sustain superior performance relative to competitors.",
+  "how": "Three parts hold it together: the actions are goal-directed, performance is measured relative to competitors, and the aim is both to gain and to sustain it.",
+  "trap": "Superior performance is relative. A firm improving in absolute terms while its rivals improve faster has no competitive advantage."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Strategy as an Integrated Plan",
+  "meaning": "Strategy is an integrated, comprehensive plan.",
+  "how": "It identifies the scope and the direction of the organisation, integrates a coherent set of strategic decisions, and is aimed at obtaining long term performance superior to competitors, which is competitive advantage.",
+  "trap": "The word that carries the weight is coherent: a list of individually sensible decisions that do not fit together is not a strategy."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "What Makes a Decision Strategic",
+  "meaning": "A strategic decision is one that has long term effects, has non-reversible effects, and requires large amounts of resources.",
+  "how": "All three together: a cheap decision that is easily undone is not strategic, however long it lasts.",
+  "trap": "Non-reversible is the criterion people drop. It is what makes the decision worth analysing carefully in advance rather than correcting later."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Why Strategy Is Important",
+  "meaning": "Strategy earns its place for two organisational reasons, beyond the content of any particular plan.",
+  "how": "As decision support it constrains decision alternatives and integrates the knowledge of different individuals. As a coordinating device it coordinates the actions of different parts of the organisation and defines messages that are easy to communicate.",
+  "trap": "Constraining alternatives is a benefit, not a cost. A strategy that leaves every option open coordinates nothing."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Common Elements in Successful Strategy",
+  "meaning": "Grant's account of what successful strategies have in common.",
+  "how": "Successful strategy rests on effective implementation, which in turn rests on three foundations: simple, consistent, long-term goals; profound understanding of the competitive environment; and objective appraisal of resources.",
+  "trap": "Effective implementation sits between the three foundations and success: the foundations do not deliver on their own. Note also that the goals are required to be simple, not sophisticated."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Corporate Strategy",
+  "meaning": "Corporate strategy defines in which industries and markets the company is going to compete.",
+  "how": "In Grant's scheme it answers the question of industry attractiveness: which industries should we be in?",
+  "trap": "It is about the choice of arena, not about how to win inside it. Deciding to enter a market is corporate; deciding how to beat rivals there is not."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Business Strategy",
+  "meaning": "Business strategy is concerned with how the company competes within a particular industry or market.",
+  "how": "It answers the question of comparative advantage: how should we compete?",
+  "trap": "The two levels are often confused because both use the word competition. Corporate strategy picks the game; business strategy plays it."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "The Question Both Levels Answer",
+  "meaning": "Both levels serve one underlying question: how do we make money, in the sense of earning a rate of return above the cost of capital.",
+  "how": "That question splits in two. Industry attractiveness, which industries should we be in, is corporate strategy. Comparative advantage, how should we compete, is business strategy.",
+  "trap": "The benchmark is the cost of capital, not zero. A positive profit that does not cover the cost of capital is not the return the scheme is asking for."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Functional Strategies",
+  "meaning": "Functional strategies are the elaboration and implementation of business strategies through individual functions.",
+  "how": "Under each business unit strategy sit R&D, production, HR, finance and sales & marketing strategies.",
+  "trap": "They implement rather than choose. A functional strategy that is not the elaboration of a business strategy above it is drifting on its own."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "The Hierarchy of Levels",
+  "meaning": "The three levels nest: corporate strategy at the top, a strategy for each SBU below it, and the functional strategies within each SBU.",
+  "how": "A company with three business units has one corporate strategy, three business strategies, and a full set of functional strategies under each of them.",
+  "trap": "The functional strategies repeat per business unit. R&D in SBU A answers to SBU A's business strategy, not directly to the corporate one."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Strategic Business Unit",
+  "meaning": "An SBU carries out a defined group of products, which are aimed at a specific group of customers.",
+  "how": "It has its own competitors; it can be managed separately from the rest of the company; it can stand alone; and it has distinct objectives, is a profit centre, and has a manager responsible for its strategy and performance.",
+  "trap": "A product line is not automatically an SBU. The test is whether it could stand alone, with its own competitors and its own responsible manager."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "The SBU as a Profit Centre",
+  "meaning": "Being a profit centre with a manager responsible for its strategy and performance is part of the definition, not an administrative detail.",
+  "how": "It is what makes business strategy accountable: someone owns the result of how that unit competes.",
+  "trap": "A unit measured only on cost or volume is not a profit centre, so it cannot carry a business strategy in this sense."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Strategic Decisions Process",
+  "meaning": "The process that turns analysis into action, running from two sides towards the centre and then downwards.",
+  "how": "External analysis produces key success factors; internal analysis produces strategic resources. They meet at competitive advantage and grand strategy, supported by a SWOT analysis. Then comes the generation and selection of strategic alternatives, implementation and control.",
+  "trap": "The two analyses run in parallel and meet; neither comes first. Reading the diagram as a single left-to-right sequence loses that."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Three Phases",
+  "meaning": "The process groups into three phases.",
+  "how": "Diagnosis covers external and internal analysis and the SWOT. Strategy formulation is the generation and selection of strategic alternatives. Actions implementation covers implementation and control.",
+  "trap": "SWOT belongs to diagnosis, not to formulation. It describes the situation; it does not choose the alternative."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "External Analysis and Key Success Factors",
+  "meaning": "The outward-facing half of the diagnosis.",
+  "how": "External analysis identifies the key success factors of the arena and yields the opportunities and threats of the SWOT.",
+  "trap": "Key success factors belong to the industry, not to the firm. What the firm has is a resource; what the industry demands is a key success factor."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Internal Analysis and Strategic Resources",
+  "meaning": "The inward-facing half of the diagnosis.",
+  "how": "Internal analysis identifies the strategic resources of the firm and yields the strengths and weaknesses of the SWOT.",
+  "trap": "Strengths and weaknesses are internal by definition. A hostile market is a threat, never a weakness."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "SWOT as the Meeting Point",
+  "meaning": "SWOT analysis is where the external and internal halves of the diagnosis come together.",
+  "how": "Opportunities and threats arrive from the external side, strengths and weaknesses from the internal side, and the combination frames competitive advantage.",
+  "trap": "SWOT is a summary of the diagnosis, not an analysis in itself. Its content is only as good as the two analyses feeding it."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "The Grand Strategy",
+  "meaning": "At the centre of the process sits competitive advantage and the grand strategy, described as the business model.",
+  "how": "It is what the diagnosis converges on and what the strategic alternatives are generated from.",
+  "trap": "The grand strategy is the output of the diagnosis and the input to formulation. It is not the implementation plan, which comes further down."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Repositioning and Control",
+  "meaning": "The process is a loop, not a line.",
+  "how": "Control follows implementation, and repositioning feeds back into the diagnosis, so the analysis is revisited rather than performed once.",
+  "trap": "Without the feedback the scheme would describe a one-off exercise. Repositioning is what makes it a process."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Strategy as a Link Between Two Environments",
+  "meaning": "Strategy is what connects the internal environment of the firm to the external environment it operates in.",
+  "how": "The internal side is goals & values, resources & capabilities, and structure & systems. The external side is the economic and social context, business areas, competitors, customers and suppliers.",
+  "trap": "Goals and values sit on the internal side. They are something the firm brings, not something the environment imposes."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "The Top-Down Approach",
+  "meaning": "The top down strategic approach produces the intended strategy.",
+  "how": "Strategy is formulated at the top as a strategic plan and passed down the organisation for implementation.",
+  "trap": "Intended is not the same as realized. What is planned at the top is only the starting point of what actually happens."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "The Bottom-Up Approach",
+  "meaning": "The bottom up strategic approach produces the emergent strategy.",
+  "how": "Strategy arises from decisions and initiatives taken lower in the organisation, which accumulate into a pattern.",
+  "trap": "Emergent does not mean accidental or unmanaged. It is a pattern in a stream of decisions, which is precisely Mintzberg's definition of strategy."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Intended, Deliberate, Unrealized, Realized",
+  "meaning": "Mintzberg's four terms describe what happens to a plan on its way to reality.",
+  "how": "The intended strategy splits: part of it is never carried out and becomes unrealized strategy, while the part that is carried out is the deliberate strategy. The deliberate strategy joins the emergent strategy coming from below, and together they form the realized strategy.",
+  "trap": "Deliberate is the surviving part of the intended, not a synonym for it. And realized strategy has two sources, so it matches neither the plan nor the emergent pattern alone."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Strategy as a Combination",
+  "meaning": "In reality strategy is a combination of planned, top down strategy and emergent strategy.",
+  "how": "The top down strategic plan and the bottom up emergent strategy both flow into what the company actually does.",
+  "trap": "The two approaches are not a choice between alternatives. Treating the plan as the whole strategy ignores half of where the realized strategy comes from."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "A Pattern in a Stream of Decisions",
+  "meaning": "Mintzberg's definition of strategy.",
+  "how": "It describes strategy as something identifiable in what an organisation has actually done, rather than only in what it declared it would do.",
+  "trap": "This definition makes strategy observable after the fact. Under it, a company with no plan can still have a strategy, and a company with a plan it never followed may not."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "The Frappuccino Case",
+  "meaning": "The Starbucks example of an emergent strategy, from Rothaermel.",
+  "how": "Diana, a store manager in southern California, received repeated requests for an iced beverage sold by a local competitor. Headquarters said no: the executive committee voted the idea down 7 to 1, and CEO Howard Schultz commented “We do coffee, we don't do iced drinks”. Diana developed the drink and sold it in her store anyway, keeping careful sales records: 40 drinks a day in the first week, 50 in the second, 70 in the third. Those numbers persuaded the executive team to approve the drink for all stores. It is the Frappuccino, at one point more than 20 percent of Starbucks' total revenues.",
+  "trap": "The initiative was rejected by the formal process and succeeded anyway, which is the point: the realized strategy came from the bottom. What changed the committee's mind was the evidence Diana had collected, not the idea itself, which they had already tasted and refused."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Vision",
+  "meaning": "The vision is the future “dream”: where we are going.",
+  "how": "The vision statement expresses the aspirations of a company, what an organisation wants to accomplish, what it wishes to be like in some years' time.",
+  "trap": "Vision looks forward. A statement describing what the company does today is a mission, however ambitious its wording."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Mission",
+  "meaning": "The mission is a company's present business scope: who we are and what we do.",
+  "how": "The mission statement broadly defines what a company does, and the means by which the vision is accomplished. It covers what business the organization is in, and what it is not, both now and projecting into the future.",
+  "trap": "Mission is the means, vision is the end. The mission is also what the company is not in, which is the part usually left out."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Airbus: Vision and Mission",
+  "meaning": "The traditional pairing, shown on one company.",
+  "how": "Vision: to be the world's leading aerospace company. Mission: manufacturing the world's largest aircraft with passengers at heart and airlines in mind.",
+  "trap": "The vision names a position to reach; the mission names the activity and for whom. Neither says why the company exists, which is what purpose adds."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Purpose",
+  "meaning": "A more recent concept: the long-term and normative aspiration that identifies why an organization exists and pushes it to take actions that are meaningful and impactful for its stakeholders.",
+  "how": "It requires an organization to adopt an outward-looking perspective and to look at things from the eyes of its stakeholders. To become an organizational purpose, a statement has to be authentic and shared.",
+  "trap": "Purpose is not a more inspiring mission. Mission says what the company does, vision what it wants to become, purpose why it exists at all."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What Purpose Demands",
+  "meaning": "Purpose sets a higher bar than a well-written statement.",
+  "how": "It means the company does not just sell products but solves problems, addresses societal needs and makes a positive impact. The statement has to be authentic and shared to count as an organizational purpose.",
+  "trap": "Authentic and shared are conditions, not decoration. A purpose announced by management and not recognised inside the company does not qualify."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Mission, Vision and Purpose Side by Side",
+  "meaning": "The three answer three different questions.",
+  "how": "Mission: what business the organization is in, and what it is not, both now and projecting into the future. Vision: what the organization wishes to be like in some years' time. Purpose: why the company exists, with a broader and outward-oriented perspective.",
+  "trap": "Purpose is the only one that is not about what the company does, will do or wants to be."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Disney: All Three",
+  "meaning": "One company stated at all three levels.",
+  "how": "Mission: using its portfolio of brands to differentiate its content, services and consumer products, seeking to develop the most creative, innovative and profitable entertainment experiences and related products in the world. Vision: to be one of the leading producers and providers of entertainment and information. Purpose: promote and spread happiness.",
+  "trap": "The purpose is the shortest and mentions no product at all. That is what outward-oriented looks like in practice."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Purpose Statements in Practice",
+  "meaning": "Examples of how companies word a purpose.",
+  "how": "Tata: improve the quality of life of the communities we serve. Nike: bring inspiration and innovation in every athlete in the world. Unilever: making sustainable living commonplace. Tencent: enhance people's quality of life through internet services. ING: empowering people to stay a step ahead in life and in business. Ford: to help build a better world, where every person is free to move and pursue their dreams. LEGO: inspire and develop children to think creatively, reason systematically and release their potential. Walmart: saving people money so they can live better. Tesla: accelerate the world transition to sustainable energy. Kellogg: nourishing families so they can flourish and thrive.",
+  "trap": "Almost none of them names the product. Tesla says energy rather than cars, Walmart says saving money rather than retail."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Organisational Culture",
+  "meaning": "Organisational culture describes the collectively shared values and norms of the firm.",
+  "how": "Employees learn about an organisation's culture through socialisation.",
+  "trap": "Culture is collectively shared. An individual manager's preferences are not the culture, however senior."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Organisational Values",
+  "meaning": "Organisational values define what is important.",
+  "how": "They include the ethical standards, beliefs and norms that define the appropriate employee attitude and govern the behaviour of individuals within a firm.",
+  "trap": "Values are meant to govern behaviour, not to describe aspirations. That is the test for whether a stated value is real."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Culture Expressed in Artifacts",
+  "meaning": "Corporate culture finds its expression in artifacts.",
+  "how": "These are the design and layout of physical space, symbols such as the type of clothing, vocabulary and language, the stories told, and the events celebrated. An open playful office and a floor of identical cubicles are two different cultures made visible.",
+  "trap": "Artifacts are where culture becomes observable, but they are the expression, not the culture itself. Redecorating does not change shared values."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Founder Imprinting and Groupthink",
+  "meaning": "Organisational culture comes from founder imprinting, which often persists decades after his or her departure.",
+  "how": "The risk that follows is groupthink, where the shared way of seeing things suppresses dissent.",
+  "trap": "The persistence is the point: a culture can outlast the person who set it and the conditions that made it appropriate."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Culture as Asset and as Liability",
+  "meaning": "Culture is one of the strongest assets a company has, but it can also become its strongest liability.",
+  "how": "In that second form it is called core rigidity, and it leads to the need for cultural change, which often means new leaders and a change of management.",
+  "trap": "It is the same culture in both roles. The strength that made it an asset is what makes it hard to change when conditions move."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Google Core Values",
+  "meaning": "The example of stated core values.",
+  "how": "Focus on the user and all else will follow. It's best to do one thing really, really well. Fast is better than slow. Democracy on the web works.",
+  "trap": "They are phrased as operating rules for decisions, not as adjectives. That is what makes them usable as values rather than slogans."
  }
 ];
 
@@ -866,5 +1172,822 @@ const QUESTIONS = [
    "D": "Incorrect. ESG explicitly separates three aspects, and only the first concerns the natural environment."
   },
   "recap": "Correct. The environmental aspect focuses on preserving the natural world, including greenhouse gas emissions and water management; the social aspect focuses on people and relationships, including diversity, equity and inclusion and employee engagement; the governance aspect focuses on enhancing corporate governance, including board composition and executive compensation."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Company's Underlying Goal",
+  "question": "According to the chapter, what should a company's goal be, and what does reaching it allow?",
+  "options": {
+   "A": "Maximizing short term profit, which allows dividends to be paid every year.",
+   "B": "Maximizing long term cash flows, which allows a combination of value creation for both shareholders and stakeholders.",
+   "C": "Maximizing market share, which allows competitors to be driven out.",
+   "D": "Maximizing shareholder value alone, since stakeholder interests are handled by regulation."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The horizon stated is long term, and the measure is cash flows rather than the profit of a single year.",
+   "B": "Correct. The goal of a company should be to maximize long term cash flows, which allows it to achieve a combination of value creation for both shareholders and stakeholders.",
+   "C": "Incorrect. Market share is not the stated goal; it can be a means, but the goal is expressed in long term cash flows.",
+   "D": "Incorrect. The two are joined, not separated: the goal allows value creation for shareholders and stakeholders together."
+  },
+  "recap": "Correct. The goal of a company should be to maximize long term cash flows, which allows it to achieve a combination of value creation for both shareholders and stakeholders."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Where the Word Comes From",
+  "question": "What is the origin of the word «strategy», and what did it originally describe?",
+  "options": {
+   "A": "The Latin «stratum», meaning a layer, describing levels of command.",
+   "B": "The Greek «Strategos», meaning generalship: the art of war, especially planning the movements of troops, ships and aircraft into favourable positions.",
+   "C": "The Greek «stratos», meaning a crowd, describing the management of large organisations.",
+   "D": "A nineteenth-century business coinage with no earlier meaning."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The root is Greek and military, not Latin.",
+   "B": "Correct. «Strategy» comes from the Greek word «Strategos», which means generalship. It is the art of war, especially the planning of movements of troops, ships, aircraft and so on into favourable positions.",
+   "C": "Incorrect. The meaning given is generalship, the command of an army, not a crowd.",
+   "D": "Incorrect. The military meaning long predates the business use, which borrows from it."
+  },
+  "recap": "Correct. «Strategy» comes from the Greek word «Strategos», which means generalship. It is the art of war, especially the planning of movements of troops, ships, aircraft and so on into favourable positions."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Whose Definition Is the Odd One Out",
+  "question": "Four of these definitions describe strategy as something deliberately sought or planned. Which one instead describes it as something identifiable in what a company has actually done?",
+  "options": {
+   "A": "Ohmae: a sustainable edge over competitors.",
+   "B": "Henderson: a deliberate search for a plan of action that will develop a competitive advantage.",
+   "C": "Mintzberg: a pattern in a stream of decisions.",
+   "D": "Porter: being different, delivering a unique mix of value."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. An edge over competitors is the outcome the other definitions aim at, described as something to be achieved.",
+   "B": "Incorrect. Henderson's wording is explicitly a deliberate search for a plan.",
+   "C": "Correct. Mintzberg defines strategy as a pattern in a stream of decisions, which is observed in the decisions actually taken rather than planned in advance. This is the tension that returns later as intended versus emergent strategy.",
+   "D": "Incorrect. Porter describes a chosen position, delivering a unique mix of value."
+  },
+  "recap": "Correct. Mintzberg defines strategy as a pattern in a stream of decisions, which is observed in the decisions actually taken rather than planned in advance. This is the tension that returns later as intended versus emergent strategy."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Superior Relative to Whom",
+  "question": "Strategy is defined as a set of goal-directed actions a firm takes to gain and sustain superior performance. Superior in what sense?",
+  "options": {
+   "A": "Relative to competitors.",
+   "B": "Relative to the firm's own past performance.",
+   "C": "Relative to the expectations set in the budget.",
+   "D": "Relative to the cost of capital alone."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The definition is a set of goal-directed actions a firm takes to gain and sustain superior performance relative to competitors, so the benchmark is external. A firm improving in absolute terms while rivals improve faster has no competitive advantage.",
+   "B": "Incorrect. Improving on one's own past says nothing about competitive advantage.",
+   "C": "Incorrect. Budget expectations are an internal control measure, not the benchmark in this definition.",
+   "D": "Incorrect. The cost of capital appears in the levels-of-strategy scheme as the return threshold, not as the comparison in this definition."
+  },
+  "recap": "Correct. The definition is a set of goal-directed actions a firm takes to gain and sustain superior performance relative to competitors, so the benchmark is external. A firm improving in absolute terms while rivals improve faster has no competitive advantage."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "What an Integrated Plan Does",
+  "question": "Which three things does the chapter say an integrated, comprehensive strategy does?",
+  "options": {
+   "A": "Sets annual targets, allocates budgets and measures results.",
+   "B": "Identifies the scope and direction of the organisation, integrates a coherent set of strategic decisions, and aims at long term performance superior to competitors.",
+   "C": "Describes the vision, the mission and the purpose of the company.",
+   "D": "Analyses the industry, the competitors and the customers."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Those are elements of planning and control, not the definition of the strategic plan given here.",
+   "B": "Correct. Strategy as an integrated, comprehensive plan identifies the scope and the direction of the organisation, integrates a coherent set of strategic decisions, and is aimed at obtaining long term performance superior to competitors, which is competitive advantage.",
+   "C": "Incorrect. Vision, mission and purpose are separate concepts covered later in the chapter.",
+   "D": "Incorrect. That is external analysis, one input to the strategy process rather than what the plan itself does."
+  },
+  "recap": "Correct. Strategy as an integrated, comprehensive plan identifies the scope and the direction of the organisation, integrates a coherent set of strategic decisions, and is aimed at obtaining long term performance superior to competitors, which is competitive advantage."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Testing Whether a Decision Is Strategic",
+  "question": "A company signs a one-year, low-cost advertising contract that it can cancel at any time. By the chapter's criteria, is this a strategic decision?",
+  "options": {
+   "A": "Yes, because any decision about the market is strategic.",
+   "B": "Yes, because advertising affects the company's position.",
+   "C": "No, because it fails all three criteria: it is short term, it is reversible and it does not require large amounts of resources.",
+   "D": "No, because only decisions taken by the board can be strategic."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The subject matter does not settle it; the three criteria do.",
+   "B": "Incorrect. Affecting the company's position is not one of the three criteria given.",
+   "C": "Correct. A strategic decision is one that has long term effects, has non-reversible effects, and requires large amounts of resources. This contract is short, cancellable and cheap, so it satisfies none of them.",
+   "D": "Incorrect. The definition is framed by the nature of the decision, not by who takes it."
+  },
+  "recap": "Correct. A strategic decision is one that has long term effects, has non-reversible effects, and requires large amounts of resources. This contract is short, cancellable and cheap, so it satisfies none of them."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Two Organisational Roles of Strategy",
+  "question": "Beyond the content of any plan, why does the chapter say strategy is important?",
+  "options": {
+   "A": "As decision support, constraining decision alternatives and integrating the knowledge of different individuals; and as a coordinating device, coordinating the actions of different parts of the organisation and defining messages easy to communicate.",
+   "B": "As a legal requirement for listed companies and as a document for investors.",
+   "C": "As a forecasting tool and as a basis for the annual budget.",
+   "D": "As a way of motivating employees and as a recruitment argument."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Strategy works as decision support, by constraining decision alternatives and integrating knowledge of different individuals, and as a coordinating device, by coordinating the actions of different parts of the organisation and defining messages that are easy to communicate.",
+   "B": "Incorrect. No legal requirement is invoked; the reasons given are organisational.",
+   "C": "Incorrect. Forecasting and budgeting are not the two roles stated.",
+   "D": "Incorrect. Motivation and recruitment are not among the reasons given."
+  },
+  "recap": "Correct. Strategy works as decision support, by constraining decision alternatives and integrating knowledge of different individuals, and as a coordinating device, by coordinating the actions of different parts of the organisation and defining messages that are easy to communicate."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "The Structure of Successful Strategy",
+  "question": "In Grant's scheme of common elements in successful strategy, how do the pieces fit together?",
+  "options": {
+   "A": "Successful strategy rests directly on the three foundations, with implementation a separate concern.",
+   "B": "Successful strategy rests on effective implementation, which rests on simple, consistent, long-term goals; profound understanding of the competitive environment; and objective appraisal of resources.",
+   "C": "Successful strategy rests on effective implementation alone, the foundations being optional.",
+   "D": "Successful strategy rests on profound understanding of the competitive environment, from which the other elements follow."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Effective implementation sits between the foundations and success; it is not set aside.",
+   "B": "Correct. In the scheme, successful strategy rests on effective implementation, and effective implementation rests on three foundations: simple, consistent, long-term goals; profound understanding of the competitive environment; and objective appraisal of resources.",
+   "C": "Incorrect. Implementation is effective because of the three foundations beneath it, so they are not optional.",
+   "D": "Incorrect. Understanding the competitive environment is one of three parallel foundations, not the source of the others."
+  },
+  "recap": "Correct. In the scheme, successful strategy rests on effective implementation, and effective implementation rests on three foundations: simple, consistent, long-term goals; profound understanding of the competitive environment; and objective appraisal of resources."
+ },
+ {
+  "cat": "What Strategy Is",
+  "title": "Simple, Consistent, Long-Term",
+  "question": "The first foundation in Grant's scheme calls for goals that are simple, consistent and long-term. What does the requirement of simplicity imply?",
+  "options": {
+   "A": "That goals should be sophisticated enough to capture every contingency.",
+   "B": "That goals should be revised frequently as conditions change.",
+   "C": "That goals should be delegated to each function separately.",
+   "D": "That goals have to be simple as well as consistent and long-term, because they underpin an implementation that many people have to carry out."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. The requirement stated is simplicity, which is the opposite of capturing every contingency.",
+   "B": "Incorrect. Frequent revision conflicts with both consistency and the long-term horizon required.",
+   "C": "Incorrect. Delegation by function is what functional strategies do; it is not what the foundation asks of the goals.",
+   "D": "Correct. The foundation is simple, consistent, long-term goals, and it supports effective implementation, which is what makes simplicity a requirement rather than a compromise: the goals have to survive being communicated and acted on across the organisation."
+  },
+  "recap": "Correct. The foundation is simple, consistent, long-term goals, and it supports effective implementation, which is what makes simplicity a requirement rather than a compromise: the goals have to survive being communicated and acted on across the organisation."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Which Level Answers Which Question",
+  "question": "A company decides to enter the pharmaceutical industry, and separately decides to compete there on speed of development. Which levels are these?",
+  "options": {
+   "A": "Both are corporate strategy decisions.",
+   "B": "Entering the industry is corporate strategy; competing on speed is business strategy.",
+   "C": "Entering the industry is business strategy; competing on speed is corporate strategy.",
+   "D": "Both are business strategy decisions, since both concern competition."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Only the first is corporate; how to compete once inside is a different level.",
+   "B": "Correct. Corporate strategy defines in which industries and markets the company is going to compete, answering industry attractiveness. Business strategy is concerned with how the company competes within a particular industry or market, answering comparative advantage.",
+   "C": "Incorrect. The two are inverted: choosing the arena is corporate, competing inside it is business.",
+   "D": "Incorrect. Both mention competition, which is exactly the confusion the two levels are meant to separate."
+  },
+  "recap": "Correct. Corporate strategy defines in which industries and markets the company is going to compete, answering industry attractiveness. Business strategy is concerned with how the company competes within a particular industry or market, answering comparative advantage."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "The Return Threshold",
+  "question": "In Grant's scheme the levels of strategy serve the question of how the company makes money. Against what benchmark is that return measured?",
+  "options": {
+   "A": "Above zero, so that the company is profitable.",
+   "B": "Above the industry average profit.",
+   "C": "Above the cost of capital.",
+   "D": "Above the previous year's return."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A positive profit that does not cover the cost of capital is not the return the scheme asks for.",
+   "B": "Incorrect. The industry average is not the threshold named; the cost of capital is.",
+   "C": "Correct. The scheme puts a rate of return above the cost of capital at the top, and splits the question of how the company makes money into industry attractiveness, answered by corporate strategy, and comparative advantage, answered by business strategy.",
+   "D": "Incorrect. Improvement on last year is not the benchmark in this scheme."
+  },
+  "recap": "Correct. The scheme puts a rate of return above the cost of capital at the top, and splits the question of how the company makes money into industry attractiveness, answered by corporate strategy, and comparative advantage, answered by business strategy."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "What Functional Strategies Are",
+  "question": "What role do functional strategies play?",
+  "options": {
+   "A": "They choose which industries the company competes in, function by function.",
+   "B": "They are the elaboration and implementation of business strategies through individual functions such as R&D, production, HR, finance and sales & marketing.",
+   "C": "They replace the business strategy where a function is large enough to stand alone.",
+   "D": "They are the strategies of the company's suppliers and distributors."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Choosing industries is corporate strategy and is not done function by function.",
+   "B": "Correct. Functional strategies are the elaboration and implementation of business strategies through individual functions, and in the hierarchy they sit beneath each business unit strategy.",
+   "C": "Incorrect. They implement the business strategy rather than replacing it, however large the function.",
+   "D": "Incorrect. They are internal to the company, not the strategies of external parties."
+  },
+  "recap": "Correct. Functional strategies are the elaboration and implementation of business strategies through individual functions, and in the hierarchy they sit beneath each business unit strategy."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Reading the Hierarchy",
+  "question": "A company has three strategic business units. According to the hierarchy shown, what does the structure of its strategies look like?",
+  "options": {
+   "A": "One corporate strategy, three business unit strategies, and a set of functional strategies under each business unit.",
+   "B": "Three corporate strategies, one for each business unit, each with its own functional strategies.",
+   "C": "One corporate strategy and one set of functional strategies shared by all three business units.",
+   "D": "One corporate strategy and three functional strategies, with no business unit level."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The hierarchy has corporate strategy at the top, a strategy for each SBU below it, and within each SBU the functional strategies — R&D, production, HR, finance and sales & marketing.",
+   "B": "Incorrect. Corporate strategy is single by definition: it decides which industries the company as a whole is in.",
+   "C": "Incorrect. The functional strategies are repeated under each business unit, since each elaborates its own unit's strategy.",
+   "D": "Incorrect. The business unit level is precisely where business strategy lives and cannot be skipped."
+  },
+  "recap": "Correct. The hierarchy has corporate strategy at the top, a strategy for each SBU below it, and within each SBU the functional strategies — R&D, production, HR, finance and sales & marketing."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Is It an SBU?",
+  "question": "A product line shares its customers, its competitors and its management with the rest of the company, and is measured only on production cost. Is it a strategic business unit?",
+  "options": {
+   "A": "Yes, because any defined group of products is an SBU.",
+   "B": "Yes, provided the company chooses to call it one.",
+   "C": "No, because it fails the defining tests: it has no specific customer group of its own, no competitors of its own, cannot be managed separately or stand alone, and is not a profit centre.",
+   "D": "No, but only because it is measured on cost; the other conditions are optional."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A defined group of products is one element of the definition, and on its own it is not enough.",
+   "B": "Incorrect. The definition sets substantive conditions rather than a naming choice.",
+   "C": "Correct. An SBU carries out a defined group of products aimed at a specific group of customers, has its own competitors, can be managed separately from the rest of the company, can stand alone, and has distinct objectives, being a profit centre with a manager responsible for its strategy and performance. This product line satisfies none of those.",
+   "D": "Incorrect. The other conditions are part of the definition too, and this line fails them as well."
+  },
+  "recap": "Correct. An SBU carries out a defined group of products aimed at a specific group of customers, has its own competitors, can be managed separately from the rest of the company, can stand alone, and has distinct objectives, being a profit centre with a manager responsible for its strategy and performance. This product line satisfies none of those."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Why the SBU Is a Profit Centre",
+  "question": "Why does the definition of an SBU insist that it is a profit centre with a manager responsible for its strategy and performance?",
+  "options": {
+   "A": "Because tax rules require separate accounts for each business.",
+   "B": "Because it makes business strategy accountable: someone owns the result of how that unit competes.",
+   "C": "Because profit centres are exempt from corporate strategy.",
+   "D": "Because it determines how the unit's costs are allocated."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. No tax requirement is given; the reasoning is about management and accountability.",
+   "B": "Correct. Being a profit centre with a manager responsible for its strategy and performance is part of the definition, and it is what allows the unit to carry a business strategy whose results someone owns.",
+   "C": "Incorrect. SBUs sit under the corporate strategy, which decides which industries the company is in.",
+   "D": "Incorrect. Cost allocation is a cost accounting matter and is not what the definition is about."
+  },
+  "recap": "Correct. Being a profit centre with a manager responsible for its strategy and performance is part of the definition, and it is what allows the unit to carry a business strategy whose results someone owns."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Standing Alone",
+  "question": "Among the conditions defining an SBU, which captures the idea that the unit could exist as a company in its own right?",
+  "options": {
+   "A": "That it carries out a defined group of products.",
+   "B": "That it has distinct objectives.",
+   "C": "That it can be managed separately from the rest of the company and can stand alone.",
+   "D": "That it is aimed at a specific group of customers."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A defined group of products can sit inside a larger unit without being separable.",
+   "B": "Incorrect. Distinct objectives can be set for a department that could not survive on its own.",
+   "C": "Correct. The definition includes both that the unit can be managed separately from the rest of the company and that it can stand alone, which together express independence rather than mere distinctness.",
+   "D": "Incorrect. Serving a specific customer group is about focus, not about the ability to exist independently."
+  },
+  "recap": "Correct. The definition includes both that the unit can be managed separately from the rest of the company and that it can stand alone, which together express independence rather than mere distinctness."
+ },
+ {
+  "cat": "Levels of Strategy",
+  "title": "Corporate Strategy in One Question",
+  "question": "Which question does corporate strategy answer?",
+  "options": {
+   "A": "Which industries should we be in?",
+   "B": "How should we compete?",
+   "C": "How should each function support the business?",
+   "D": "What is our vision and mission?"
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Corporate strategy defines in which industries and markets the company is going to compete, which the scheme states as the question of industry attractiveness: which industries should we be in?",
+   "B": "Incorrect. How should we compete is the question of comparative advantage, answered by business strategy.",
+   "C": "Incorrect. That is the domain of the functional strategies, which elaborate the business strategy.",
+   "D": "Incorrect. Vision and mission are separate concepts and are not what distinguishes the levels of strategy."
+  },
+  "recap": "Correct. Corporate strategy defines in which industries and markets the company is going to compete, which the scheme states as the question of industry attractiveness: which industries should we be in?"
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Where the Two Analyses Meet",
+  "question": "In the strategic decisions process, what do external and internal analysis produce, and where do they converge?",
+  "options": {
+   "A": "External analysis produces strategic resources and internal analysis key success factors; they converge on the SWOT.",
+   "B": "External analysis produces key success factors and internal analysis strategic resources; they converge on competitive advantage and the grand strategy.",
+   "C": "External analysis produces the grand strategy and internal analysis the implementation plan.",
+   "D": "They do not converge: each produces its own set of strategic alternatives."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The two outputs are inverted: key success factors come from the external side and strategic resources from the internal one.",
+   "B": "Correct. External analysis yields the key success factors and the opportunities and threats; internal analysis yields the strategic resources and the strengths and weaknesses. The two sides meet at competitive advantage and the grand strategy, supported by the SWOT analysis.",
+   "C": "Incorrect. The grand strategy is where the two sides meet, not the output of one of them.",
+   "D": "Incorrect. The alternatives are generated once, after the diagnosis has converged."
+  },
+  "recap": "Correct. External analysis yields the key success factors and the opportunities and threats; internal analysis yields the strategic resources and the strengths and weaknesses. The two sides meet at competitive advantage and the grand strategy, supported by the SWOT analysis."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Which Phase Does SWOT Belong To",
+  "question": "The process groups into diagnosis, strategy formulation and actions implementation. Where does the SWOT analysis sit?",
+  "options": {
+   "A": "In strategy formulation, because it selects among alternatives.",
+   "B": "In actions implementation, because it is used to monitor progress.",
+   "C": "In diagnosis, together with external and internal analysis.",
+   "D": "Outside the three phases, as a preliminary exercise."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Formulation is the generation and selection of strategic alternatives, which follows the SWOT.",
+   "B": "Incorrect. Implementation and control make up the actions phase; the SWOT precedes them.",
+   "C": "Correct. Diagnosis covers external analysis, internal analysis and the SWOT that combines them. SWOT describes the situation; it does not choose the alternative.",
+   "D": "Incorrect. It sits inside the diagnosis phase, which is the first of the three."
+  },
+  "recap": "Correct. Diagnosis covers external analysis, internal analysis and the SWOT that combines them. SWOT describes the situation; it does not choose the alternative."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Key Success Factor or Strength",
+  "question": "A firm notes that rapid delivery is what wins orders in its industry, and separately that its own logistics network is unusually dense. How does the process classify these two observations?",
+  "options": {
+   "A": "Both are strengths, since both favour the firm.",
+   "B": "Rapid delivery is a key success factor from external analysis; the dense network is a strength from internal analysis.",
+   "C": "Rapid delivery is a strength; the dense network is an opportunity.",
+   "D": "Both are opportunities, since both concern the market."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. What the industry demands is not a property of the firm, so it cannot be a strength.",
+   "B": "Correct. External analysis identifies the key success factors of the arena and produces the opportunities and threats; internal analysis identifies the firm's strategic resources and produces the strengths and weaknesses. Key success factors belong to the industry, resources to the firm.",
+   "C": "Incorrect. The classification is inverted: the industry requirement is the key success factor and the firm's asset is the strength.",
+   "D": "Incorrect. The dense logistics network is something the firm owns, which makes it internal."
+  },
+  "recap": "Correct. External analysis identifies the key success factors of the arena and produces the opportunities and threats; internal analysis identifies the firm's strategic resources and produces the strengths and weaknesses. Key success factors belong to the industry, resources to the firm."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Threat or Weakness",
+  "question": "A new low-cost entrant appears in the firm's market. In the SWOT, how is this classified?",
+  "options": {
+   "A": "A weakness, because it damages the firm's position.",
+   "B": "A threat, because it comes from the external environment.",
+   "C": "Either, depending on how severe it is.",
+   "D": "Neither: competitor moves are handled outside the SWOT."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Strengths and weaknesses are internal by definition, describing the firm rather than its surroundings.",
+   "B": "Correct. Opportunities and threats arrive from the external analysis, strengths and weaknesses from the internal one. A new entrant is part of the external environment, so it is a threat however damaging it turns out to be.",
+   "C": "Incorrect. Severity does not move an item from the external side to the internal one.",
+   "D": "Incorrect. Competitors are part of the external environment the analysis covers."
+  },
+  "recap": "Correct. Opportunities and threats arrive from the external analysis, strengths and weaknesses from the internal one. A new entrant is part of the external environment, so it is a threat however damaging it turns out to be."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What the Grand Strategy Is",
+  "question": "In the process diagram, what sits at the centre, and how is it described?",
+  "options": {
+   "A": "The implementation plan, described as the set of actions to be carried out.",
+   "B": "The SWOT analysis, described as the summary of the diagnosis.",
+   "C": "Competitive advantage and the grand strategy, described as the business model.",
+   "D": "The control system, described as the feedback mechanism."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Implementation comes further down, after the alternatives have been generated and selected.",
+   "B": "Incorrect. The SWOT supports the centre but is not what the centre is called.",
+   "C": "Correct. At the centre of the process sits competitive advantage and the grand strategy, which the diagram labels the business model. It is what the diagnosis converges on and what the strategic alternatives are generated from.",
+   "D": "Incorrect. Control is the last step of the actions implementation phase."
+  },
+  "recap": "Correct. At the centre of the process sits competitive advantage and the grand strategy, which the diagram labels the business model. It is what the diagnosis converges on and what the strategic alternatives are generated from."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Why the Process Is a Loop",
+  "question": "What makes the strategic decisions process a process rather than a one-off exercise?",
+  "options": {
+   "A": "That it is repeated at fixed calendar intervals.",
+   "B": "That control follows implementation and repositioning feeds back into the diagnosis.",
+   "C": "That every level of strategy runs it separately.",
+   "D": "That the SWOT is updated whenever a competitor moves."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. No fixed interval is specified; what makes it a process is the feedback in the diagram.",
+   "B": "Correct. Control follows implementation, and repositioning feeds back into the diagnosis, so the analysis is revisited rather than performed once. Without those loops the scheme would describe a single exercise.",
+   "C": "Incorrect. Running it at several levels would multiply the exercise, not make any one of them a loop.",
+   "D": "Incorrect. Updating one input is not the feedback structure the diagram shows."
+  },
+  "recap": "Correct. Control follows implementation, and repositioning feeds back into the diagnosis, so the analysis is revisited rather than performed once. Without those loops the scheme would describe a single exercise."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "Which Side Are Goals and Values On",
+  "question": "Strategy links the internal and external environments. On which side do goals and values sit, and what else is there?",
+  "options": {
+   "A": "Internal, together with resources & capabilities and structure & systems.",
+   "B": "External, together with the economic and social context and the competitors.",
+   "C": "Internal, together with customers and suppliers.",
+   "D": "External, since values are imposed by society."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The internal environment is goals & values, resources & capabilities, and structure & systems. The external side holds the economic and social context, business areas, competitors, customers and suppliers.",
+   "B": "Incorrect. The economic and social context and the competitors are external, but goals and values are not.",
+   "C": "Incorrect. Customers and suppliers belong to the external environment.",
+   "D": "Incorrect. Goals and values are listed as something the firm brings, on the internal side."
+  },
+  "recap": "Correct. The internal environment is goals & values, resources & capabilities, and structure & systems. The external side holds the economic and social context, business areas, competitors, customers and suppliers."
+ },
+ {
+  "cat": "Strategy Process",
+  "title": "What Sits on the External Side",
+  "question": "Which list matches the external environment as the chapter presents it?",
+  "options": {
+   "A": "Resources & capabilities, structure & systems, goals & values.",
+   "B": "Economic and social context, business areas, competitors, customers, suppliers.",
+   "C": "Key success factors, strategic resources, competitive advantage.",
+   "D": "Corporate strategy, business strategy, functional strategies."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the internal environment, the other side of the link.",
+   "B": "Correct. The external environment comprises the economic and social context, business areas, competitors, customers and suppliers, with strategy acting as the link to the internal environment.",
+   "C": "Incorrect. Those are outputs of the strategic decisions process, not the contents of the external environment.",
+   "D": "Incorrect. Those are the levels of strategy, a different scheme."
+  },
+  "recap": "Correct. The external environment comprises the economic and social context, business areas, competitors, customers and suppliers, with strategy acting as the link to the internal environment."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Intended Against Realized",
+  "question": "In the top down and bottom up scheme, what happens to the intended strategy?",
+  "options": {
+   "A": "It becomes the realized strategy in full, once implementation is complete.",
+   "B": "Part of it is never carried out and becomes unrealized strategy; the part carried out is the deliberate strategy, which joins the emergent strategy to form the realized strategy.",
+   "C": "It is replaced entirely by the emergent strategy coming from below.",
+   "D": "It becomes the emergent strategy once the organisation adopts it."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Part of the intended strategy is never carried out; that part is the unrealized strategy.",
+   "B": "Correct. The intended strategy splits: the unrealized part is dropped and the deliberate part goes ahead. The deliberate strategy then joins the emergent strategy arising from below, and together they form the realized strategy.",
+   "C": "Incorrect. The deliberate part survives, so the realized strategy has two sources rather than one.",
+   "D": "Incorrect. Emergent strategy comes from the bottom up, not from the intended plan."
+  },
+  "recap": "Correct. The intended strategy splits: the unrealized part is dropped and the deliberate part goes ahead. The deliberate strategy then joins the emergent strategy arising from below, and together they form the realized strategy."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Deliberate Is Not Intended",
+  "question": "What distinguishes deliberate strategy from intended strategy?",
+  "options": {
+   "A": "Nothing: they are two names for the strategic plan.",
+   "B": "Deliberate strategy is the plan before approval; intended strategy is the plan after it.",
+   "C": "Deliberate strategy is the part of the intended strategy that is actually carried out.",
+   "D": "Deliberate strategy is the part that comes from the bottom of the organisation."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The scheme separates them precisely because the plan and what is carried out differ.",
+   "B": "Incorrect. The distinction is about what survives into action, not about approval.",
+   "C": "Correct. The intended strategy splits into the unrealized part, never carried out, and the deliberate part, which goes ahead and feeds into the realized strategy.",
+   "D": "Incorrect. What comes from the bottom of the organisation is the emergent strategy."
+  },
+  "recap": "Correct. The intended strategy splits into the unrealized part, never carried out, and the deliberate part, which goes ahead and feeds into the realized strategy."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Where Emergent Strategy Comes From",
+  "question": "What is emergent strategy, and what does the label imply?",
+  "options": {
+   "A": "Strategy arising from decisions and initiatives lower in the organisation, which accumulate into a pattern; it is not the same as unmanaged or accidental.",
+   "B": "Strategy that emerges from the external environment and is imposed on the firm.",
+   "C": "Strategy that the board approves without a formal plan.",
+   "D": "The part of the plan that is postponed to a later period."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The bottom up strategic approach produces the emergent strategy, arising from decisions and initiatives taken lower in the organisation. It is a pattern in a stream of decisions, which is Mintzberg's own definition of strategy, so emergent does not mean accidental.",
+   "B": "Incorrect. It comes from inside the organisation, from below, not from the environment.",
+   "C": "Incorrect. Board approval concerns the top down route.",
+   "D": "Incorrect. A postponed part of the plan is still intended; emergent strategy was never in the plan."
+  },
+  "recap": "Correct. The bottom up strategic approach produces the emergent strategy, arising from decisions and initiatives taken lower in the organisation. It is a pattern in a stream of decisions, which is Mintzberg's own definition of strategy, so emergent does not mean accidental."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Plan or Pattern",
+  "question": "Under Mintzberg's definition, can a company with no strategic plan have a strategy?",
+  "options": {
+   "A": "No: without a plan there is nothing to implement.",
+   "B": "Yes, if a pattern can be identified in the stream of decisions it has actually taken.",
+   "C": "Only if the company later writes the plan down.",
+   "D": "Only at the functional level, not at the corporate one."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That reading treats strategy as identical to the plan, which is what Mintzberg's definition sets aside.",
+   "B": "Correct. Mintzberg defines strategy as a pattern in a stream of decisions, which makes it observable in what the organisation has actually done. Under that definition a company with no plan can still have a strategy, and a company with a plan it never followed may not.",
+   "C": "Incorrect. Writing it down afterwards does not change the decisions already taken, which is where the pattern lies.",
+   "D": "Incorrect. The definition is not restricted by level."
+  },
+  "recap": "Correct. Mintzberg defines strategy as a pattern in a stream of decisions, which makes it observable in what the organisation has actually done. Under that definition a company with no plan can still have a strategy, and a company with a plan it never followed may not."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Combining the Two Approaches",
+  "question": "How does the chapter describe the relationship between top down and bottom up strategy in reality?",
+  "options": {
+   "A": "Companies must choose one approach and apply it consistently.",
+   "B": "The top down approach applies to corporate strategy and the bottom up approach to functional strategy.",
+   "C": "Strategy is a combination of planned, top down strategy and emergent strategy, both flowing into what the company actually does.",
+   "D": "The bottom up approach replaces the top down one in large organisations."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. They are presented as combining, not as alternatives to choose between.",
+   "B": "Incorrect. No such split by level is made; both routes feed the realized strategy.",
+   "C": "Correct. Strategy in reality is a combination of planned or top down strategy and emergent strategy: the top down strategic plan and the bottom up emergent strategy both flow into the realized strategy.",
+   "D": "Incorrect. Neither replaces the other; the realized strategy draws on both."
+  },
+  "recap": "Correct. Strategy in reality is a combination of planned or top down strategy and emergent strategy: the top down strategic plan and the bottom up emergent strategy both flow into the realized strategy."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "What Changed the Committee's Mind",
+  "question": "In the Starbucks case, the executive committee first voted the iced drink down 7 to 1, and CEO Howard Schultz said “We do coffee, we don't do iced drinks”. What eventually persuaded the executive team to approve it?",
+  "options": {
+   "A": "The taste of the drink when it was served to them in Seattle.",
+   "B": "The sales records Diana had kept: 40 drinks a day in the first week, 50 in the second and 70 in the third.",
+   "C": "A formal request from the store managers of southern California.",
+   "D": "A change of CEO at Starbucks."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. They tasted it in Seattle and liked it, and still said no; the taste alone did not move them.",
+   "B": "Correct. Howard Behar produced the sales numbers Diana had carefully kept — 40 drinks a day in the first week, 50 in the second, 70 in the third — and those results persuaded the executive team to give reluctant approval to introduce the drink in all stores.",
+   "C": "Incorrect. The initiative came from one store manager, and the case turns on the evidence rather than on collective pressure.",
+   "D": "Incorrect. Schultz remained CEO; the committee was persuaded rather than replaced."
+  },
+  "recap": "Correct. Howard Behar produced the sales numbers Diana had carefully kept — 40 drinks a day in the first week, 50 in the second, 70 in the third — and those results persuaded the executive team to give reluctant approval to introduce the drink in all stores."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Why the Frappuccino Case Is Told Here",
+  "question": "What does the Starbucks Frappuccino case illustrate?",
+  "options": {
+   "A": "That top down strategic planning works when the CEO is decisive.",
+   "B": "That emergent strategy from the bottom of the organisation can enter the realized strategy even after the formal process has rejected it.",
+   "C": "That functional strategies should be set independently of the business strategy.",
+   "D": "That a strong culture always prevents innovation."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The top down process rejected the idea twice, so the case is not an argument for it.",
+   "B": "Correct. A store manager's initiative was voted down by the executive committee and pursued anyway, and it ended as a product that at one point brought in more than 20 percent of Starbucks' total revenues. The realized strategy came from the bottom up.",
+   "C": "Incorrect. The case is about where strategy originates, not about the independence of functional strategies.",
+   "D": "Incorrect. Culture can become a liability, but the case is told to illustrate emergent strategy."
+  },
+  "recap": "Correct. A store manager's initiative was voted down by the executive committee and pursued anyway, and it ended as a product that at one point brought in more than 20 percent of Starbucks' total revenues. The realized strategy came from the bottom up."
+ },
+ {
+  "cat": "Intended & Emergent",
+  "title": "Naming the Two Approaches",
+  "question": "Which pairing of approach and resulting strategy is correct?",
+  "options": {
+   "A": "Top down produces emergent strategy; bottom up produces intended strategy.",
+   "B": "Top down produces intended strategy; bottom up produces emergent strategy.",
+   "C": "Top down produces realized strategy; bottom up produces deliberate strategy.",
+   "D": "Top down produces deliberate strategy; bottom up produces unrealized strategy."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The two are inverted: planning from the top is what produces the intended strategy.",
+   "B": "Correct. The top down strategic approach produces the intended strategy, and the bottom up strategic approach produces the emergent strategy.",
+   "C": "Incorrect. Realized strategy is the outcome of both routes together, not the product of the top down one.",
+   "D": "Incorrect. Unrealized strategy is the part of the intended strategy that is dropped, not the product of the bottom up approach."
+  },
+  "recap": "Correct. The top down strategic approach produces the intended strategy, and the bottom up strategic approach produces the emergent strategy."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Vision or Mission",
+  "question": "“To be the world's leading aerospace company” and “manufacturing the world's largest aircraft with passengers at heart and airlines in mind”. Which is which, for Airbus?",
+  "options": {
+   "A": "The first is the mission and the second the vision.",
+   "B": "The first is the vision and the second the mission.",
+   "C": "Both are vision statements at different horizons.",
+   "D": "The first is the purpose and the second the vision."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The statement of what the company manufactures and for whom describes present business scope, which is the mission.",
+   "B": "Correct. The vision is the future dream, where we are going, so being the world's leading aerospace company is the vision. The mission is the present business scope, who we are and what we do, and the means by which the vision is accomplished.",
+   "C": "Incorrect. Only one of them expresses an aspiration; the other describes the current activity.",
+   "D": "Incorrect. Purpose says why the company exists, which neither statement does."
+  },
+  "recap": "Correct. The vision is the future dream, where we are going, so being the world's leading aerospace company is the vision. The mission is the present business scope, who we are and what we do, and the means by which the vision is accomplished."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What a Mission Statement Covers",
+  "question": "According to the chapter, what does a mission statement define?",
+  "options": {
+   "A": "What the organization wishes to be like in some years' time.",
+   "B": "Why the organization exists, from the perspective of its stakeholders.",
+   "C": "The collectively shared values and norms of the firm.",
+   "D": "What business the organization is in and what it is not, both now and projecting into the future, and the means by which the vision is accomplished."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. That is the vision, which looks at what the organization wishes to become.",
+   "B": "Incorrect. That is purpose, the broader and outward-oriented concept.",
+   "C": "Incorrect. That is organisational culture, covered separately.",
+   "D": "Correct. The mission broadly defines what a company does, covering what business the organization is in and what it is not, both now and projecting into the future, and it is the means by which the vision is accomplished."
+  },
+  "recap": "Correct. The mission broadly defines what a company does, covering what business the organization is in and what it is not, both now and projecting into the future, and it is the means by which the vision is accomplished."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "The Definition of Purpose",
+  "question": "How does the chapter define purpose?",
+  "options": {
+   "A": "The long-term and normative aspiration that identifies why an organization exists and pushes it to take actions that are meaningful and impactful for its stakeholders.",
+   "B": "The set of financial objectives the organization commits to over the long term.",
+   "C": "The statement of what business the organization is in and what it is not.",
+   "D": "The collectively shared values and norms that govern employee behaviour."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Purpose is the long-term and normative aspiration that identifies why an organization exists and pushes it to take actions that are meaningful and impactful for its stakeholders. It requires an outward-looking perspective, seeing things from the eyes of stakeholders.",
+   "B": "Incorrect. Purpose is normative and outward-looking rather than a set of financial targets.",
+   "C": "Incorrect. That is the mission.",
+   "D": "Incorrect. That is organisational culture and values."
+  },
+  "recap": "Correct. Purpose is the long-term and normative aspiration that identifies why an organization exists and pushes it to take actions that are meaningful and impactful for its stakeholders. It requires an outward-looking perspective, seeing things from the eyes of stakeholders."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What Makes a Statement an Organizational Purpose",
+  "question": "A company publishes a purpose statement written by its communications team, which employees do not recognise. Does it qualify as an organizational purpose?",
+  "options": {
+   "A": "Yes, since publishing it makes it official.",
+   "B": "Yes, provided it refers to societal needs.",
+   "C": "No: to become an organizational purpose, a statement has to be authentic and shared.",
+   "D": "No, because only the board may issue a purpose statement."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Publication is not one of the conditions given.",
+   "B": "Incorrect. Referring to societal needs is part of what purpose means, but it does not substitute for the two conditions.",
+   "C": "Correct. To become an organizational purpose, a statement has to be authentic and shared. A statement announced by management and not recognised inside the company does not qualify.",
+   "D": "Incorrect. The conditions concern authenticity and sharing, not who issues the statement."
+  },
+  "recap": "Correct. To become an organizational purpose, a statement has to be authentic and shared. A statement announced by management and not recognised inside the company does not qualify."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Telling the Three Apart",
+  "question": "Disney states: “to be one of the leading producers and providers of entertainment and information”, “promote and spread happiness”, and a statement about using its portfolio of brands to develop creative, innovative and profitable entertainment experiences. Which is the purpose?",
+  "options": {
+   "A": "To be one of the leading producers and providers of entertainment and information.",
+   "B": "Promote and spread happiness.",
+   "C": "Using its portfolio of brands to develop entertainment experiences and related products.",
+   "D": "None of them: Disney states only a vision and a mission."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the vision: what the organization wishes to be like in some years' time.",
+   "B": "Correct. Purpose expresses why a company exists, with a broader and outward-oriented perspective, and it does not represent what the company does, will do or wants to be. Disney's purpose is to promote and spread happiness, and notably it names no product at all.",
+   "C": "Incorrect. That is the mission, describing the present business scope and the means.",
+   "D": "Incorrect. All three are stated for Disney in the chapter."
+  },
+  "recap": "Correct. Purpose expresses why a company exists, with a broader and outward-oriented perspective, and it does not represent what the company does, will do or wants to be. Disney's purpose is to promote and spread happiness, and notably it names no product at all."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "What Purpose Statements Have in Common",
+  "question": "Looking at purpose statements such as Tesla's “accelerate the world transition to sustainable energy” and Walmart's “saving people money so they can live better”, what do they share?",
+  "options": {
+   "A": "They quantify a target and a deadline.",
+   "B": "They name the company's main product explicitly.",
+   "C": "They describe the competitive advantage the company holds.",
+   "D": "They express why the company exists in outward-looking terms, generally without naming the product at all."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. None of the examples given sets a figure or a date.",
+   "B": "Incorrect. Almost none names the product: Tesla says energy rather than cars, Walmart says saving money rather than retail.",
+   "C": "Incorrect. Competitive advantage belongs to business strategy, not to a purpose statement.",
+   "D": "Correct. Purpose has a broader and outward-oriented perspective, representing why a company exists rather than what it does, which is why these statements are framed around the effect on people rather than around products."
+  },
+  "recap": "Correct. Purpose has a broader and outward-oriented perspective, representing why a company exists rather than what it does, which is why these statements are framed around the effect on people rather than around products."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Culture and Values Defined",
+  "question": "How do organisational culture and organisational values differ in the chapter's definitions?",
+  "options": {
+   "A": "Culture is the collectively shared values and norms of the firm; values define what is important and include the ethical standards, beliefs and norms governing individual behaviour.",
+   "B": "Culture is what management declares; values are what employees actually do.",
+   "C": "Culture applies to the whole company; values apply only to senior management.",
+   "D": "Culture is formal and written down; values are informal and unwritten."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Organisational culture describes the collectively shared values and norms of the firm, while organisational values define what is important and include the ethical standards, beliefs and norms that define the appropriate employee attitude and govern the behaviour of individuals within a firm.",
+   "B": "Incorrect. Culture is defined as collectively shared, not as a management declaration.",
+   "C": "Incorrect. Values govern the behaviour of individuals within the firm generally.",
+   "D": "Incorrect. Neither is defined by whether it is written down; culture is expressed in artifacts."
+  },
+  "recap": "Correct. Organisational culture describes the collectively shared values and norms of the firm, while organisational values define what is important and include the ethical standards, beliefs and norms that define the appropriate employee attitude and govern the behaviour of individuals within a firm."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Recognising an Artifact",
+  "question": "Which of these is an artifact of corporate culture as the chapter uses the term?",
+  "options": {
+   "A": "The company's return on invested capital.",
+   "B": "The design and layout of the physical space, such as an open playful office rather than rows of identical cubicles.",
+   "C": "The number of business units the company runs.",
+   "D": "The industry the company has chosen to compete in."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A financial measure is not among the artifacts listed.",
+   "B": "Correct. Corporate culture finds its expression in artifacts: the design and layout of physical space, symbols such as the type of clothing, vocabulary and language, the stories told and the events celebrated. Artifacts are where culture becomes observable, though they are the expression rather than the culture itself.",
+   "C": "Incorrect. The number of SBUs is a matter of organisational structure and corporate strategy.",
+   "D": "Incorrect. The choice of industry is corporate strategy."
+  },
+  "recap": "Correct. Corporate culture finds its expression in artifacts: the design and layout of physical space, symbols such as the type of clothing, vocabulary and language, the stories told and the events celebrated. Artifacts are where culture becomes observable, though they are the expression rather than the culture itself."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "How Culture Becomes a Liability",
+  "question": "The chapter says culture is one of the strongest assets a company has but can also become its strongest liability. What is that second condition called, and what does it lead to?",
+  "options": {
+   "A": "Groupthink, which leads to a change of purpose.",
+   "B": "Founder imprinting, which leads to socialisation.",
+   "C": "Core rigidity, which leads to the need for cultural change, often meaning new leaders and a change of management.",
+   "D": "Core competence, which leads to repositioning."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Groupthink is the risk that follows from founder imprinting; the liability form of culture is named differently.",
+   "B": "Incorrect. Founder imprinting is where culture comes from, and socialisation is how employees learn it.",
+   "C": "Correct. Culture is one of the strongest assets but can also become a company's strongest liability, called core rigidity. This leads to the need for cultural change, which often means new leaders and change of management.",
+   "D": "Incorrect. Core competence is not the term used here, and repositioning belongs to the strategy process."
+  },
+  "recap": "Correct. Culture is one of the strongest assets but can also become a company's strongest liability, called core rigidity. This leads to the need for cultural change, which often means new leaders and change of management."
+ },
+ {
+  "cat": "Vision, Mission & Purpose",
+  "title": "Where Culture Comes From",
+  "question": "According to the chapter, what is the origin of organisational culture, and how long does its influence last?",
+  "options": {
+   "A": "It comes from founder imprinting, which often persists decades after his or her departure.",
+   "B": "It comes from the industry the company competes in and changes with it.",
+   "C": "It comes from the current CEO and changes with each appointment.",
+   "D": "It comes from the written code of conduct and lasts as long as that document."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Organisational culture comes from founder imprinting, which often persists decades after his or her departure. That persistence is the point: a culture can outlast the person who set it and the conditions that made it appropriate.",
+   "B": "Incorrect. The origin given is internal and specific to the firm's founder.",
+   "C": "Incorrect. If it changed with each CEO it could not persist for decades, and cultural change is described as difficult.",
+   "D": "Incorrect. A code of conduct may state values, but the origin given is founder imprinting."
+  },
+  "recap": "Correct. Organisational culture comes from founder imprinting, which often persists decades after his or her departure. That persistence is the point: a culture can outlast the person who set it and the conditions that made it appropriate."
  }
 ];

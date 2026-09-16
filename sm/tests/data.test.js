@@ -19,8 +19,8 @@ function selectedNumbers(title) {
   return (q.options[q.correct].match(/\d[\d,]*(?:\.\d+)?/g) || []).map(n => Number(n.replaceAll(",", "")));
 }
 
-test("bank has complete, unique questions and explanations in all five areas", () => {
-  assert.ok(bank.length >= 31);
+test("bank has complete, unique questions and explanations in every area", () => {
+  assert.ok(bank.length >= 74);
   const titles = new Set(), prompts = new Set();
   for (const q of bank) {
     assert.ok(context.categories.includes(q.cat), q.title);
@@ -46,7 +46,7 @@ test("bank has complete, unique questions and explanations in all five areas", (
 });
 
 test("concept cards are complete and use declared areas", () => {
-  assert.ok(context.cards.length >= 39);
+  assert.ok(context.cards.length >= 82);
   const seen = new Set();
   for (const c of context.cards) {
     assert.ok(context.categories.includes(c.cat), c.title);
@@ -77,3 +77,46 @@ const numericCases = [
 for (const [title, expected] of numericCases) {
   test(`answer-key arithmetic: ${title}`, () => assert.deepEqual(selectedNumbers(title), expected));
 }
+
+test("the two decks are declared as topics that partition the areas", () => {
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS, categories: CATEGORIES });", data);
+  const { topics, categories } = JSON.parse(data.json);
+
+  assert.deepEqual(topics.map(t => t.name), ["Introduction", "The Concept of Strategy"]);
+  const flat = topics.flatMap(t => t.categories);
+  assert.deepEqual(flat, categories, "CATEGORIES must be the topics' areas, in order");
+  assert.equal(new Set(flat).size, flat.length, "an area may not appear under two topics");
+
+  // Each deck has to stand on its own as a study unit.
+  for (const topic of topics) {
+    const qs = bank.filter(q => topic.categories.includes(q.cat));
+    const cs = context.cards.filter(c => topic.categories.includes(c.cat));
+    assert.ok(qs.length >= 31, `${topic.name}: only ${qs.length} questions`);
+    assert.ok(cs.length >= 39, `${topic.name}: only ${cs.length} concept cards`);
+  }
+});
+
+test("chapter 1 covers each of its five areas", () => {
+  const areas = ["What Strategy Is", "Levels of Strategy", "Strategy Process",
+                 "Intended & Emergent", "Vision, Mission & Purpose"];
+  for (const area of areas) {
+    assert.ok(bank.filter(q => q.cat === area).length >= 8, `${area}: too few questions`);
+    assert.ok(context.cards.filter(c => c.cat === area).length >= 6, `${area}: too few cards`);
+  }
+});
+
+test("the Mintzberg chain and the Starbucks figures are stated as published", () => {
+  const chain = context.cards.find(c => c.title === "Intended, Deliberate, Unrealized, Realized");
+  assert.ok(chain, "missing the Mintzberg card");
+  for (const term of ["unrealized", "deliberate", "emergent", "realized"]) {
+    assert.match(chain.how.toLowerCase(), new RegExp(term), `${term} missing from the chain`);
+  }
+  const case_ = context.cards.find(c => c.title === "The Frappuccino Case");
+  assert.ok(case_, "missing the Starbucks card");
+  // 7 to 1 vote, then 40 / 50 / 70 drinks a day over three weeks, then >20% of revenues.
+  for (const figure of ["7 to 1", "40 drinks", "50 in the second", "70 in the third", "20 percent"]) {
+    assert.ok(case_.how.includes(figure) || case_.trap.includes(figure), `${figure} missing`);
+  }
+});
