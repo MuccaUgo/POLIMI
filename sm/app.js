@@ -222,6 +222,13 @@
     } else {
       values = values.concat(CATEGORIES);
     }
+    var note = $("conceptTopicNote");
+    if (note) {
+      var openName = active && active.indexOf("topic:") === 0 ? active.slice(6) : "";
+      var openTopic = openName ? topicList().filter(function (t) { return t.name === openName; })[0] : null;
+      note.textContent = openTopic && openTopic.note ? openTopic.note : "";
+      note.classList.toggle("hidden", !(openTopic && openTopic.note));
+    }
     $("conceptPills").innerHTML = values.map(function (value) {
       if (value === "|") return '<span class="pill-sep" aria-hidden="true"></span>';
       var isTopic = value.indexOf("topic:") === 0;

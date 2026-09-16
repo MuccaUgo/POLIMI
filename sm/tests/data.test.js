@@ -20,7 +20,7 @@ function selectedNumbers(title) {
 }
 
 test("bank has complete, unique questions and explanations in every area", () => {
-  assert.ok(bank.length >= 105);
+  assert.ok(bank.length >= 147);
   const titles = new Set(), prompts = new Set();
   for (const q of bank) {
     assert.ok(context.categories.includes(q.cat), q.title);
@@ -46,7 +46,7 @@ test("bank has complete, unique questions and explanations in every area", () =>
 });
 
 test("concept cards are complete and use declared areas", () => {
-  assert.ok(context.cards.length >= 105);
+  assert.ok(context.cards.length >= 150);
   const seen = new Set();
   for (const c of context.cards) {
     assert.ok(context.categories.includes(c.cat), c.title);
@@ -84,7 +84,7 @@ test("the two decks are declared as topics that partition the areas", () => {
     ";this.json = JSON.stringify({ topics: TOPICS, categories: CATEGORIES });", data);
   const { topics, categories } = JSON.parse(data.json);
 
-  assert.deepEqual(topics.map(t => t.name), ["Introduction", "The Concept of Strategy"]);
+  assert.deepEqual(topics.map(t => t.name), ["Introduction", "The Concept of Strategy", "External Analysis"]);
   const flat = topics.flatMap(t => t.categories);
   assert.deepEqual(flat, categories, "CATEGORIES must be the topics' areas, in order");
   assert.equal(new Set(flat).size, flat.length, "an area may not appear under two topics");
@@ -232,4 +232,72 @@ test("the Abell Cube names its three axes", () => {
   for (const axis of ["customer groups", "customer functions", "alternative technologies"]) {
     assert.ok(card.how.toLowerCase().includes(axis), `missing axis: ${axis}`);
   }
+});
+
+test("chapter 2 covers each of its five areas and is flagged as not yet taught", () => {
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS });", data);
+  const topic = JSON.parse(data.json).topics.find(t => t.name === "External Analysis");
+  assert.ok(topic, "missing the External Analysis topic");
+  assert.deepEqual(topic.categories, [
+    "External Analysis", "STEEP", "Five Forces",
+    "Substitutes, Buyers & Suppliers", "Complements & Competitors"
+  ]);
+  // The user has not attended these lectures yet; the hub must say so rather than imply coverage.
+  assert.equal(typeof topic.note, "string");
+  assert.match(topic.note, /not covered/i);
+
+  for (const area of topic.categories) {
+    assert.ok(bank.filter(q => q.cat === area).length >= 8, `${area}: too few questions`);
+    assert.ok(context.cards.filter(c => c.cat === area).length >= 8, `${area}: too few cards`);
+  }
+});
+
+test("the five forces and their determinants are stated", () => {
+  const byTitle = t => context.cards.find(c => c.title === t);
+  const model = byTitle("Porter's Five Competitive Forces");
+  for (const force of ["existing competitors", "new entrants", "substitutes",
+                       "bargaining power of buyers", "bargaining power of suppliers"]) {
+    assert.ok(model.how.toLowerCase().includes(force), `missing force: ${force}`);
+  }
+  // Entry and exit barriers push profitability in opposite directions; both must say so.
+  assert.match(byTitle("Entry Barriers").trap, /more profitable/);
+  assert.match(byTitle("Exit Barriers").trap, /less profitable/);
+
+  const rivalry = byTitle("Intensity of Internal Rivalry");
+  for (const d of ["concentration", "industry growth", "product differentiation",
+                   "fixed costs", "excess capacity", "switching costs", "exit barriers"]) {
+    assert.ok(rivalry.how.toLowerCase().includes(d), `missing determinant: ${d}`);
+  }
+});
+
+test("the STEEP categories and the rating scale are stated as published", () => {
+  const byTitle = t => context.cards.find(c => c.title === t);
+  const steep = byTitle("The STEEP Framework");
+  for (const c of ["Social", "Technological", "Economic", "Ecological", "Political"]) {
+    assert.ok(steep.how.includes(c), `missing STEEP category: ${c}`);
+  }
+  const method = byTitle("How a STEEP Analysis Is Carried Out");
+  assert.match(method.how, /three to five years/);
+  assert.match(method.how, /-5 is terrible/);
+  assert.match(method.how, /\+5 is fantastic/);
+});
+
+test("the Ryanair figures are the published ones", () => {
+  const card = context.cards.find(c => c.title === "The Ryanair Price War");
+  assert.ok(card);
+  for (const figure of ["April 1986", "14-seat", "\u20ac300", "\u20ac140", "\u20ac130", "\u20ac100", "1989"]) {
+    assert.ok(card.how.includes(figure), `missing figure: ${figure}`);
+  }
+  assert.match(card.trap, /discourage other potential entrants/);
+});
+
+test("a topic note renders only for the topic that declares one", () => {
+  // renderConceptPills writes topic.note into #conceptTopicNote and hides it otherwise.
+  const app = fs.readFileSync(path.join(__dirname, "../app.js"), "utf8");
+  assert.match(app, /conceptTopicNote/, "app.js must render the topic note");
+  assert.match(app, /openTopic && openTopic\.note/, "the note must be optional per topic");
+  const page = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
+  assert.match(page, /id="conceptTopicNote"/, "index.html must host the note element");
 });

@@ -124,6 +124,7 @@ main:focus { outline: none; }
 .pill-sep { align-self: stretch; width: 1px; margin: 4px 5px; background: var(--line); }
 .pillrow { align-items: center; }
 .result-count { margin: 14px 0; }
+.topic-note { margin: -6px 0 14px; padding: 9px 13px; border-left: 3px solid var(--accent2); background: var(--soft); border-radius: 0 8px 8px 0; font-size: 11px; color: var(--text2); }
 .empty-state { text-align: center; padding: 36px 16px; border: 1px dashed var(--line); border-radius: 12px; margin: 18px 0; }
 .empty-state p { color: var(--muted); }
 .empty-state button { margin-top: 12px; }

@@ -1,7 +1,7 @@
 # Verifica dei contenuti didattici — Strategy & Marketing
 
-Revisione del 16 settembre 2026, sul capitolo 1 (*The concept of Strategy*, slide di V. Chiesa) e sulle
-lezioni registrate *Fundamentals of Strategy* 1.1.01–03 e 1.3.01–03.
+Revisione del 16 settembre 2026, sul capitolo 1 (*The concept of Strategy*, slide di V. Chiesa), sulle
+lezioni registrate *Fundamentals of Strategy* 1.1.01–03 e 1.3.01–03, e sul capitolo 2 (*External Analysis*).
 
 Il materiale è coerente quasi ovunque, e le lezioni approfondiscono le slide senza contraddirle. Restano
 però tre punti in cui le due fonti dicono cose diverse. Nessuno è un errore: sono due livelli di discorso
@@ -58,8 +58,27 @@ dell'organizzazione** e che la decisione **richiede di norma il coinvolgimento d
 Anche qui è un'estensione, non una contraddizione. La scheda *What Makes a Decision Strategic* riporta
 entrambe e dice quale viene da dove.
 
+## 4. Capitolo 2 — materiale non ancora spiegato a lezione
+
+Il capitolo 2 (*External Analysis*) è stato costruito **solo dalle slide**: non c'è una lezione registrata che
+lo accompagni, e il corso non lo ha ancora affrontato. Nell'hub il topic porta una nota che lo dice, così non
+viene scambiato per materiale già consolidato.
+
+Due conseguenze pratiche:
+
+- **Nessun approfondimento «Going deeper»** su queste schede: non c'è una seconda fonte con cui confrontarle.
+  Se a lezione emergono definizioni diverse — come è successo per vision e mission — vanno riviste.
+- **Le slide contengono dati datati**, in particolare la sezione STEEP: popolazione oltre gli 8 miliardi «nel
+  2024», tassi di crescita BRICS per 2024 e 2025, il riferimento agli «8 uomini più ricchi». Sono riportati
+  come stanno nelle slide, perché è quello che l'esame userà, ma non sono cifre attuali.
+
+Una nota sul modello di Abell: compare due volte nel corso con usi diversi. Nel capitolo 1 (lezione 1.3.02)
+delimita i **confini della business area** con assi *customer groups / customer functions / alternative
+technologies*. Nel capitolo 2 serve a identificare i **sostituti** con assi *customers / customers' needs /
+products*. È lo stesso modello applicato a due scopi; le due schede sono separate e lo dicono.
+
 ## Limite della verifica
 
-Verifica mirata sui punti in cui slide e lezioni divergono, non una validazione completa delle 105 schede e
-delle 105 domande. Una slide del capitolo 1, *Ingredients of success of a military strategy*, è vuota nel PDF
+Verifica mirata sui punti in cui slide e lezioni divergono, non una validazione completa delle 150 schede e
+delle 147 domande. Una slide del capitolo 1, *Ingredients of success of a military strategy*, è vuota nel PDF
 (solo il titolo): con ogni probabilità è stata commentata a voce e non è stata ricostruita.

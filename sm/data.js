@@ -2,7 +2,9 @@
 // MSc Management Engineering: the Introduction and chapter 1, The Concept of Strategy.
 const TOPICS = [
  { name: "Introduction", categories: ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"] },
- { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] }
+ { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] },
+ { name: "External Analysis", categories: ["External Analysis", "STEEP", "Five Forces", "Substitutes, Buyers & Suppliers", "Complements & Competitors"],
+   note: "Chapter 2 \u2014 material the course has not covered yet. Built from the slides alone; no recorded lecture for it so far." }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
@@ -885,6 +887,321 @@ const CONCEPTS = [
    "text": "The lecture presents SMART objectives as the means to get the mission down to earth, translating it into measurable and quantifiable milestones.",
    "source": "Business Strategy: objectives, boundary & strategy analysis"
   }
+ },
+ {
+  "cat": "External Analysis",
+  "title": "The Five Lenses of External Analysis",
+  "meaning": "The deck organises the analysis of the external environment into five questions, each with its own tool.",
+  "how": "Understanding the big picture: STEEP analysis. Understanding the industry: Porter's five forces model. Understanding the competitors: competitor analysis. Understanding the supply chain: profit pool mapping. Understanding the customers: market demand analysis, customer segmentation and buyer analysis.",
+  "trap": "They are five different levels of zoom, not alternatives. STEEP looks outside the industry entirely, five forces looks at the industry, and the last three look inside it at specific actors."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Where External Analysis Sits",
+  "meaning": "External analysis is one half of the diagnosis in the strategic decisions process.",
+  "how": "It feeds the key success factors, and through them the opportunities and threats of the SWOT, which meet the strategic resources and the strengths and weaknesses coming from internal analysis.",
+  "trap": "Its standpoint is the industry, not your firm. Everything it produces should hold for any competitor in the business area."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Attractiveness of the Business Area",
+  "meaning": "What the industry-level analysis is ultimately measuring.",
+  "how": "The attractiveness of a business area is the average profitability and growth of the companies operating in it, both current and future.",
+  "trap": "Average and future, not yours and today. A firm can do well in an unattractive industry and badly in an attractive one; attractiveness is a property of the arena."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "The Outcome of External Analysis",
+  "meaning": "External analysis leads to three outputs.",
+  "how": "Key success factors, opportunities and threats. The first is about what it takes to succeed in the arena, the other two are the external half of the SWOT.",
+  "trap": "Key success factors are not opportunities. They are the prerequisites for success in the industry, which every competitor faces."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Key Success Factors: the Two Questions",
+  "meaning": "Key success factors are the prerequisites for success in a business area, and they come from crossing two analyses.",
+  "how": "The analysis of demand asks what customers want: who are our customers, and what do they want. The analysis of competition asks how the firm survives competition: what drives competition, what are the main dimensions of competition, and how intense it is. Their intersection gives the key success factors.",
+  "trap": "Demand alone is not enough. What customers want tells you what to offer; how competition works tells you what it takes to still be there next year."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Key Success Factors in Three Industries",
+  "meaning": "The worked comparison used to show how the two questions combine.",
+  "how": "Airlines: customers want low price, and comfort in the business segment; competition is a commodity product with excess capacity, price competition, exit barriers, bargaining power of suppliers and customers, service differentiation and loyalty. The KSFs split by segment — economy needs lean and efficient processes and low operational costs, business needs on-board services. Steel: customers want low price, product consistency and reliability in special steel; competition is a commodity with excess capacity, price competition, high fixed costs and exit barriers; KSFs are access to raw materials at low cost, low cost location, large scale production, and customization for specific applications. Fashion clothing: customers want diversity of style, garment, type and colour, and demand is price sensitive; competition has low barriers to entry, low concentration and buying power of retail chains; KSFs are speed of response to changing fashion and style, and a fast delivery process.",
+  "trap": "The same industry can have different KSFs by segment, as the airline economy and business cases show. A single list per industry hides that."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Opportunities and Threats in an Industry",
+  "meaning": "The worked example on the airline industry.",
+  "how": "Opportunities: market growth, especially in the tourism sector; expansion of the Western countries market; space for increasing the frequency of the most profitable routes. Threats: regulatory issues concerning security; inclusion of aviation in the emission trading scheme for CO2; oil price fluctuation.",
+  "trap": "Every item is industry-wide. None of them names a particular airline, which is the test of whether something belongs in the external half of the SWOT."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Market Segmentation in Practice",
+  "meaning": "The airline example of dividing customers into segments with different behaviour.",
+  "how": "Regular travellers fly for personal reasons, holidays and visiting family, include older consumers with time and money, are price sensitive and may be loyal to one airline to accumulate frequent-flier points. Business travellers have the choice of airline made organisation-wide rather than by the individual, fly business class and tend to be loyal to few airlines. Budget conscious travellers are infrequent, perceive little difference between airlines and are highly price sensitive.",
+  "trap": "The business segment is the one where the buyer and the user are different people, which is why loyalty schemes work differently there."
+ },
+ {
+  "cat": "STEEP",
+  "title": "The STEEP Framework",
+  "meaning": "A model for an educated approach to covering the important context factors — the «big picture» outside the industry.",
+  "how": "Variables are grouped into five categories: Social, Technological, Economic, Ecological and Political.",
+  "trap": "STEEP sits outside the industry. A factor specific to your competitors belongs to the five forces, not here."
+ },
+ {
+  "cat": "STEEP",
+  "title": "What Goes in Each STEEP Category",
+  "meaning": "The variables the deck lists under each heading.",
+  "how": "Political and legal: monopolies legislation, taxation policies, foreign trade regulations, tariffs, political stability. Economic: growth rates, interest rates, exchange rates, price stability or inflation, employment level. Socio-cultural: demographic trends, income distribution, social mobility, lifestyle changes, levels of education, consumer activism, urbanisation. Ecological: environmental protection laws, compliance with environmental protocols, decommissioning costs, energy provision. Technological: breakthroughs and connectedness.",
+  "trap": "Ecological and Economic both start with E, and the split matters: environmental protection laws are ecological, exchange rates are economic."
+ },
+ {
+  "cat": "STEEP",
+  "title": "How a STEEP Analysis Is Carried Out",
+  "meaning": "The practical method behind the framework.",
+  "how": "Identify each possible factor; give each one a probability of occurrence in per cent and a rating for its impact in the coming three to five years, on a scale where -5 is terrible and +5 is fantastic. Factors are then recorded with their impact and the planned response.",
+  "trap": "The horizon is three to five years and the rating is signed. A factor with a large negative rating and a high probability is what the plot is designed to make impossible to ignore."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Plotting Threats and Opportunities",
+  "meaning": "How the rated factors are read together.",
+  "how": "Factors are plotted with probability of change on the vertical axis, from 0 to 100 per cent, against impact on the horizontal axis from -5 to +5. Negative impacts fall on the threats side, positive ones on the opportunities side.",
+  "trap": "Position combines two things. A catastrophic impact with a 5 per cent probability and a mild impact that is nearly certain sit in very different places, and the chart exists to keep both visible."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Socio-cultural Change",
+  "meaning": "The lifestyle trends the deck singles out.",
+  "how": "Sedentary lifestyle and physical inactivity; women at work; ethical living; healthy living; eating outside; attitudes to work and leisure, covering quality of life, home working and distance working; levels of education; and consumer activism through class actions and media campaigns.",
+  "trap": "Consumer activism is listed as a socio-cultural variable, not a political one: it is behaviour, not regulation."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Urbanisation",
+  "meaning": "One of the socio-cultural trends, developed with its numbers.",
+  "how": "1.5 million people migrate to cities every week. Cities generate 85 per cent of the world's GDP. They elevate living standards: 500 million Chinese people were lifted out of poverty in less than 30 years, becoming the country's booming middle class, thanks to developing cities. Cities stay at the heart of economic development because they harness economies of scale and add value by attracting talent and ideas, sharing knowledge and supporting business development.",
+  "trap": "The mechanism given is economies of scale plus the concentration of talent and knowledge, not simply population density."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Demographics",
+  "meaning": "The population trends and what follows from them.",
+  "how": "World population is projected to rise by 60-70 million people a year, passing 8 billion in 2024. Emerging or developing countries produce 97 per cent of that growth. In developed economies people live longer and have fewer children, and people over 65 are the fastest growing segment. Inequality is rising rapidly: the world's 8 richest people own as much wealth as the poorest half of the population. The shift will disrupt the traditional life cycle of education, work and employment, and the ageing population directly influences healthcare spending.",
+  "trap": "Growth and ageing are happening in different places. The 97 per cent figure sits in emerging countries while the ageing segment grows in developed ones."
+ },
+ {
+  "cat": "STEEP",
+  "title": "The Global Economic Power Shift",
+  "meaning": "The economic trend and the figures given for it.",
+  "how": "The world's economic centre of gravity is shifting back to Asia, with 2.2 billion new middle class consumers expected by 2030, especially in Asia, Latin America and Africa. Many emerging markets declined when commodity prices dropped. BRICS potential looks volatile: Brazil grew 4.0 per cent in 2024 and 2.4 per cent in 2025, South Africa 0.6 and 1.1 per cent, China is slowing to 4.6 and 4.8 per cent, India still shows 6.8 and 6.6 per cent, and Russian GDP fell 2.1 per cent in 2022 and was 0.6 per cent in 2025.",
+  "trap": "Volatile is the word the deck uses, and the figures show why: within the same group, India grows above 6 per cent while South Africa stays near 1."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Climate Change and Resource Scarcity",
+  "meaning": "The ecological trend, stated as a constraint on the current model.",
+  "how": "The planet is no longer able to support current models of production and consumption. Rising temperatures are predicted to lead to significant and potentially irreversible environmental changes, and pressure on natural resources is expected to increase dramatically. A growing global population means a 35 per cent increase in food demand by 2030, a 40 per cent increase for water and 50 per cent for energy. In Africa, climate change is expected to reduce agricultural productivity by a third over the next 60 years.",
+  "trap": "The deck links the two explicitly: climate change and resource scarcity are presented as one connected reality, not two separate trends."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Technological Disruption",
+  "meaning": "The technologies the deck lists as disruptive.",
+  "how": "Artificial intelligence, the Internet of Things, cloud technology, advanced robotics, autonomous and near-autonomous vehicles, next generation genomics, energy storage, 3D printing, advanced materials, advanced oil and gas exploration and recovery, and renewable energy.",
+  "trap": "The list mixes digital and physical technologies. Energy storage and advanced materials sit alongside AI, because the criterion is disruptive potential, not whether something is software."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Porter's Five Competitive Forces",
+  "meaning": "A model of industry structure, referred to a specific business area.",
+  "how": "The five forces are existing competitors, the threat of new entrants, the threat of substitutes, the bargaining power of buyers and the bargaining power of suppliers.",
+  "trap": "The model applies to a business area, not to a company and not to a whole sector. Changing the boundaries of the business area changes the answer."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "The Model's Three Assumptions",
+  "meaning": "What the five forces model takes as given.",
+  "how": "Competition is driven by industry structure. The attractiveness of a business area is inversely proportional to the level of competition in the competitive environment. And competition goes well beyond established players, which is the concept of extended rivalry.",
+  "trap": "Attractiveness moves inversely with competition, so a force being strong is bad news for profitability. Extended rivalry is why four of the five forces are not your direct competitors."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Intensity of Internal Rivalry",
+  "meaning": "The force of direct competition among existing competitors.",
+  "how": "Its structural determinants are concentration, industry growth, product differentiation, the impact of fixed costs, excess capacity, switching costs and exit barriers.",
+  "trap": "Growth and rivalry move in opposite directions: a growing industry lets everyone expand without taking share from anyone, which is what keeps rivalry down."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Exit Barriers",
+  "meaning": "What keeps a company in a business area it would otherwise leave.",
+  "how": "Common exit barriers are specialized assets; fixed costs of exit such as labour agreements; strategic interrelationships, meaning relationships of mutual dependence between one business and other parts of a company's operations, such as shared facilities and access to financial markets; emotional barriers such as career concerns and loyalty to employees; and government and social restrictions.",
+  "trap": "The higher the exit barriers, the less profitable the arena, other things being equal, because competitors might stay in even when they are making no profit."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Threat of New Entrants",
+  "meaning": "The force of potential rather than actual competition.",
+  "how": "It depends on two things: the entry barriers protecting the arena, and the incumbents' expected reactions, meaning a credible threat of retaliation.",
+  "trap": "Potential competition counts even when nobody enters. The threat alone disciplines the prices incumbents can charge."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Entry Barriers",
+  "meaning": "What makes entering a business area a costly decision.",
+  "how": "Economies of scale, capital requirements, brand identity, switching costs, access to distribution channels, legislation or government actions, and cost advantages independent of size — which include proprietary product technology, favourable access to raw materials, favourable location, the learning curve and government subsidies.",
+  "trap": "The higher the entry barriers, the more profitable the arena for those already inside, because the threat of external competitors is limited. Entry is not easy even in the digital era."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Absolute Cost Advantages",
+  "meaning": "The cost advantages that do not come from being big.",
+  "how": "They are listed as cost advantages independent of size: proprietary product technology, favourable access to raw materials, favourable location, the learning curve and government subsidies. De Beers in diamonds and Gazprom in gas are the examples given for favourable access to raw materials.",
+  "trap": "These are separate from economies of scale. A new entrant could match an incumbent's volume and still not match its access to the raw material."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "The Ryanair Price War",
+  "meaning": "The case used to show what a credible threat of retaliation looks like.",
+  "how": "In April 1986 Ryanair, a small Irish airline founded by Cathal and Declan Ryan, announced it would run the Dublin-London route, having in its first year flown only Waterford to Gatwick with a 14-seat plane. Aer Lingus and British Airways sold tickets at €300; Ryanair proposed €140. In May 1986, before Ryanair even started, the incumbents cut to €130. Each time Ryanair matched, they cut again; by 1989 tickets could be found at €100. Ryanair's flights and passengers grew steadily but it made significant losses.",
+  "trap": "The incumbents' stated objective was not only to block Ryanair but to discourage other potential entrants from following. The retaliation is aimed at the ones who have not entered yet."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Substitutes",
+  "meaning": "Products provided by other industries that perform the same function as the product of the industry.",
+  "how": "The examples given are short haul airline routes against high speed trains, airlines against web conferencing, tablets against laptops, and aluminium against steel.",
+  "trap": "A substitute comes from another industry and satisfies the same need. A cheaper version of the same product is a direct competitor, not a substitute."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Abell's Model and the Space of Competition",
+  "meaning": "The tool used to identify substitutes by representing the space of competition.",
+  "how": "Its three dimensions are customers, customers' needs and products. It identifies two forms of competition: direct competition, meaning same customers, same needs and same products, which are the existing competitors of Porter's model; and indirect competition, meaning same customers, same needs but different products, which are the substitutes.",
+  "trap": "The difference between the two forms is one dimension only — the product. Same customers and same needs are common to both."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Why Substitutes Cap Profits",
+  "meaning": "The mechanism through which substitutes affect an industry.",
+  "how": "They limit the potential return of an industry by placing a ceiling on the prices companies in the industry can profitably charge. The competition from substitutes is a function of switching costs, the substitute's price against the industry's price, and the substitute's quality and performance against the industry's.",
+  "trap": "The ceiling exists whether or not customers actually switch. The possibility is enough to constrain pricing."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "The Substitutes Matrix",
+  "meaning": "How to read a substitute's threat from its price and its performance.",
+  "how": "With performance of the substitute on one axis, worse or better, and its price on the other, favourable or unfavourable: a substitute with a favourable price and better performance is a big threat. A favourable price with worse performance calls for monitoring the improvement of performance. An unfavourable price with better performance calls for monitoring the reduction of the price. An unfavourable price with worse performance calls for monitoring both the reduction of price and the improvement of performance.",
+  "trap": "Only one cell is an immediate threat. The other three are watch instructions, and what to watch is precisely the dimension the substitute is currently losing on."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Bargaining Power of Buyers",
+  "meaning": "The force exercised downstream, by the industry's customers.",
+  "how": "It depends on relative concentration, the product's features and the buyer's characteristics. The analysis has to include both the buyers and the ultimate customers.",
+  "trap": "Buyers and ultimate customers can be different parties with different power, which is why the deck insists both are analysed."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Buyer Power in B2B",
+  "meaning": "How the three determinants work when the buyer is another business.",
+  "how": "Relative concentration: buyers' power is higher if their business area is more concentrated than that of the suppliers. Product's features: power increases if product differentiation is low and switching costs are low. Buyer's characteristics: power increases if buyers are able to integrate themselves backward and if they have clear information about the product.",
+  "trap": "Concentration is relative, not absolute. What matters is the comparison between the two business areas, not how concentrated the buyers are on their own."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Buyer Power in B2C",
+  "meaning": "How buyer power works when the buyer is a consumer.",
+  "how": "It increases if product differentiation is low, if information about the product is easily available, and if switching costs are low.",
+  "trap": "Backward integration drops out, because an individual consumer cannot credibly threaten to make the product themselves."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Bargaining Power of Suppliers",
+  "meaning": "The force exercised upstream, described as upstream competition.",
+  "how": "Its structural determinants are dual to those influencing the bargaining power of buyers. Suppliers' power is higher if their business area is more concentrated than that of the buyers; it increases if product or service differentiation is high and switching costs are high; and it increases if their customers are not able to integrate backward and do not have clear information about the products.",
+  "trap": "Because the determinants are dual, the same variable pushes the two forces in opposite directions: high differentiation raises supplier power and lowers buyer power."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "The Sixth Force: Complements",
+  "meaning": "An addition to Porter's five forces.",
+  "how": "A complement is a product or service that adds value to the industry's product offering. Complements increase the demand for the primary product, enhancing the profit potential for the industry. Complementors are the companies offering them.",
+  "trap": "A complement raises demand for your product; a substitute replaces it. Same neighbouring industry, opposite effect."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Complementors in Practice",
+  "meaning": "The examples the deck gives.",
+  "how": "In the video game industry the producers of software, meaning games, are complementors to the producers of hardware, the consoles. In the smartphone industry, app developers are complementors. In the electric vehicle industry, the developers of charging stations are complementors.",
+  "trap": "The relationship runs both ways: consoles are equally complementors to games. Which side you call the primary product depends on whose industry is being analysed."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Installed Base and Network Effects",
+  "meaning": "Why complements can become self-reinforcing.",
+  "how": "The number of users of a particular technology is referred to as the installed base. Network effects also arise when complementary goods are important: many products are desirable or functional only if a set of complementary goods is available, and there is a self-reinforcing cycle of installed base and availability of complementary goods.",
+  "trap": "The cycle runs both ways and can therefore run backwards. A shrinking installed base makes complements less worth producing, which shrinks it further."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Porter's Attractiveness Profile",
+  "meaning": "A way of summarising the five forces on one chart, present and future.",
+  "how": "Each force — intensity of rivalry among industry competitors, risk of entry by potential competitors, bargaining power of buyers, bargaining power of suppliers, and availability and similarity of substitute value propositions — is rated from highly unattractive to highly attractive, with a solid line for the present and a dashed line for the future.",
+  "trap": "The two lines are the point of the chart. A profile that is attractive today and shifting towards unattractive tomorrow is a different investment case from a stable one."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Dynamics of Industry Profitability",
+  "meaning": "Industry profitability changes over time, generating threats and opportunities.",
+  "how": "As the industry reaches maturity its growth rate declines, resulting in intensified rivalry and declining profits. An acquisition can introduce a very different player to the industry. Technological innovation creates space for new entrants or substitutes. A reduction in the number of suppliers reduces bargaining power towards them.",
+  "trap": "Each of these acts on one of the forces. The five forces are a snapshot; this is what moves it."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Competitor Analysis",
+  "meaning": "The lens aimed at specific rivals rather than at the industry as a whole.",
+  "how": "Its three purposes are to forecast competitors' future strategies and decisions, to predict competitors' reaction to a firm's strategic initiatives, and to determine how competitors' behaviour can be influenced. Its three sections are understanding how rivals compete at present, forecasting how a competitor might change its strategy, and understanding the perception competitors have of the industry.",
+  "trap": "The third purpose is the most easily forgotten: the analysis is not only about anticipating rivals but about influencing what they do."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Competitive Intelligence",
+  "meaning": "The systematic collection and analysis of public information about rivals, for informing decision making.",
+  "how": "Its main sources are annual reports and company profiles, product brochures, fairs and exhibitions, press releases and articles published in the media, suppliers, customers and the business community.",
+  "trap": "The definition says public information. Suppliers and customers are listed as sources because they talk to rivals too, not because anything confidential is involved."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Strategic Groups",
+  "meaning": "A way of segmenting an industry by the strategies of its member firms.",
+  "how": "Where segmentation analysis concentrates on the characteristics of markets as the basis for disaggregating industries, strategic group analysis segments an industry on the basis of the strategies of the member firms. A strategic group is the group of firms in an industry following the same or a similar strategy along the strategic dimensions. Selecting the most important strategic dimensions and locating each firm along them identifies groups with similar approaches to competing.",
+  "trap": "Segmentation divides the market, strategic groups divide the competitors. The two answer different questions and use different axes."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Reading a Strategic Group Map",
+  "meaning": "What a map of strategic groups adds beyond the picture.",
+  "how": "Competitive rivalry is strongest between firms within the same strategic group. The external environment affects strategic groups differently, and so do the five competitive forces. Some strategic groups are more profitable than others.",
+  "trap": "In the U.S. airline map, prices charged against routes serviced separates a low-cost point-to-point group from a differentiated hub-and-spoke group, divided by a mobility barrier — the obstacle to moving from one group to the other."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Profit Pool Mapping",
+  "meaning": "The lens aimed at the supply chain: the vertical structure of profitability.",
+  "how": "Return on capital varies throughout the value chain, and the map plots operating margin against each stage's share of industry revenue. In the automotive example, auto manufacturing and new car dealers run at low single-digit margins on a large share of revenue, while leasing reaches above 20 per cent and service and repair, warranty and auto rental sit far higher than manufacturing on much smaller revenue shares.",
+  "trap": "A big share of revenue is not a big share of profit. The widest bars in the chart are often the flattest."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "The Questions Profit Pool Mapping Answers",
+  "meaning": "What the map is used to decide.",
+  "how": "How do profits distribute along the supply chain? Are there business areas of the supply chain where profitability is growing? Are there opportunities for expanding the firm's business into other areas of the supply chain?",
+  "trap": "The third question is the strategic one: the map is a search for where else to compete, not only a description of where the money currently is."
  }
 ];
 
@@ -2883,5 +3200,803 @@ const QUESTIONS = [
    "D": "Incorrect. Restating it in industry terms would move it towards the vision, not towards measurable targets."
   },
   "recap": "Correct. SMART objectives are a means to get the mission down to earth, to translate it into a set of measurable and quantifiable milestones. That is also what makes the control phase possible, since results need something to be compared against."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Matching the Lens to the Question",
+  "question": "You want to understand how profits are distributed along your industry's supply chain. Which of the five lenses applies?",
+  "options": {
+   "A": "STEEP analysis.",
+   "B": "Porter's five forces model.",
+   "C": "Profit pool mapping.",
+   "D": "Customer segmentation."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. STEEP covers the big picture outside the industry: social, technological, economic, ecological and political factors.",
+   "B": "Incorrect. The five forces model explains the attractiveness of the business area, not how profit is spread along its chain.",
+   "C": "Correct. Understanding the supply chain is the job of profit pool mapping, which plots the vertical structure of profitability stage by stage.",
+   "D": "Incorrect. Segmentation belongs to understanding the customers."
+  },
+  "recap": "Correct. Understanding the supply chain is the job of profit pool mapping, which plots the vertical structure of profitability stage by stage."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "What Attractiveness Measures",
+  "question": "How is the attractiveness of a business area defined?",
+  "options": {
+   "A": "The profitability of the leading company in the area.",
+   "B": "The average profitability and growth of the companies operating in the business area, both current and future.",
+   "C": "The growth rate of the total market this year.",
+   "D": "The number of competitors relative to the number of customers."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Attractiveness is a property of the arena, measured on the average rather than on the best performer.",
+   "B": "Correct. The attractiveness of a business area is the average profitability and growth of the companies operating in it, both current and future.",
+   "C": "Incorrect. Growth is part of it but so is profitability, and both are considered current and future.",
+   "D": "Incorrect. Concentration is a determinant of rivalry, not the definition of attractiveness."
+  },
+  "recap": "Correct. The attractiveness of a business area is the average profitability and growth of the companies operating in it, both current and future."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "The Three Outputs",
+  "question": "What does external analysis lead to?",
+  "options": {
+   "A": "Strengths, weaknesses and strategic resources.",
+   "B": "Key success factors, opportunities and threats.",
+   "C": "Vision, mission and strategic objectives.",
+   "D": "Strategic groups, segments and profit pools."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Strengths, weaknesses and strategic resources come from internal analysis.",
+   "B": "Correct. The external analysis leads to identifying key success factors, opportunities and threats.",
+   "C": "Incorrect. Those belong to the orientation phase, before any analysis.",
+   "D": "Incorrect. Those are tools and intermediate outputs within the analysis, not its three stated outcomes."
+  },
+  "recap": "Correct. The external analysis leads to identifying key success factors, opportunities and threats."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Where Key Success Factors Come From",
+  "question": "Key success factors are derived by crossing two analyses. Which, and what does each ask?",
+  "options": {
+   "A": "Analysis of demand, asking what customers want; and analysis of competition, asking how firms survive competition.",
+   "B": "Internal analysis, asking what we have; and external analysis, asking what the market offers.",
+   "C": "STEEP analysis and five forces analysis.",
+   "D": "Segmentation and strategic group analysis."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The analysis of demand asks who our customers are and what they want. The analysis of competition asks what drives competition, what the main dimensions of competition are and how intense it is. Crossing the two prerequisites gives the key success factors.",
+   "B": "Incorrect. Key success factors are derived entirely within external analysis; internal analysis produces strengths and weaknesses.",
+   "C": "Incorrect. Those are two tools of external analysis, not the two questions the KSF scheme crosses.",
+   "D": "Incorrect. Segmentation and strategic groups divide markets and competitors; they do not define what it takes to succeed."
+  },
+  "recap": "Correct. The analysis of demand asks who our customers are and what they want. The analysis of competition asks what drives competition, what the main dimensions of competition are and how intense it is. Crossing the two prerequisites gives the key success factors."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Key Success Factors by Segment",
+  "question": "In the airline example, why are two different sets of key success factors given?",
+  "options": {
+   "A": "Because the industry spans several countries with different regulations.",
+   "B": "Because the economy and business segments want different things, so lean and efficient processes and low operational costs serve one while on-board services serve the other.",
+   "C": "Because key success factors change every year.",
+   "D": "Because one set applies to incumbents and the other to new entrants."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The split given is by customer segment, not by geography.",
+   "B": "Correct. Customers want low price, and comfort in the business segment. The economy segment therefore needs lean and efficient processes and low operational costs, while the business segment needs on-board services, which is service differentiation supported by loyalty.",
+   "C": "Incorrect. Nothing in the example turns on the passage of time.",
+   "D": "Incorrect. Key success factors are prerequisites for success in the arena and apply to any competitor in it."
+  },
+  "recap": "Correct. Customers want low price, and comfort in the business segment. The economy segment therefore needs lean and efficient processes and low operational costs, while the business segment needs on-board services, which is service differentiation supported by loyalty."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Is It an Opportunity or a Strength",
+  "question": "An airline notes that the tourism market is growing, and separately that its own fleet is the youngest in the industry. Where does each belong?",
+  "options": {
+   "A": "Both are opportunities from the external analysis.",
+   "B": "Both are strengths from the internal analysis.",
+   "C": "Market growth is an opportunity from external analysis; the young fleet is a strength from internal analysis.",
+   "D": "Market growth is a key success factor; the young fleet is an opportunity."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The fleet belongs to one specific airline, which makes it internal.",
+   "B": "Incorrect. Market growth applies to every competitor in the industry, which makes it external.",
+   "C": "Correct. Market growth, especially in the tourism sector, is listed as an opportunity for the airline industry: it holds for any competitor. A fleet that is the youngest in the industry is a firm-specific characteristic disclosed by internal analysis against direct competitors.",
+   "D": "Incorrect. A key success factor is a prerequisite for success in the arena, not a favourable trend, and the fleet is not external."
+  },
+  "recap": "Correct. Market growth, especially in the tourism sector, is listed as an opportunity for the airline industry: it holds for any competitor. A fleet that is the youngest in the industry is a firm-specific characteristic disclosed by internal analysis against direct competitors."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "Reading a Segment's Behaviour",
+  "question": "In the airline segmentation, what distinguishes business travellers from the other two segments?",
+  "options": {
+   "A": "They are the most price sensitive of the three.",
+   "B": "The choice of airline is made organisation-wide rather than by the individual traveller, and they tend to be loyal to few airlines.",
+   "C": "They travel least frequently.",
+   "D": "They perceive little difference between airlines."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Price sensitivity characterises regular travellers and, most of all, the budget conscious.",
+   "B": "Correct. Business customers make an organization-wide decision as to the choice of airline, rather than the individual traveller being involved in the purchase decision; they fly business class and tend to be loyal to few airlines.",
+   "C": "Incorrect. Infrequent travel describes the budget conscious segment.",
+   "D": "Incorrect. Perceiving little difference between airlines is what the deck says of the budget conscious."
+  },
+  "recap": "Correct. Business customers make an organization-wide decision as to the choice of airline, rather than the individual traveller being involved in the purchase decision; they fly business class and tend to be loyal to few airlines."
+ },
+ {
+  "cat": "External Analysis",
+  "title": "The Standpoint of the Whole Exercise",
+  "question": "Across all five lenses, whose situation is external analysis describing?",
+  "options": {
+   "A": "The industry and its environment, so that the findings hold for any competitor in the business area.",
+   "B": "Your own company, since the analysis exists to serve its strategy.",
+   "C": "The market leader, which sets the terms for everyone else.",
+   "D": "The customers, whose preferences determine everything else."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. External analysis takes the industry and its environment as its subject, which is why its outputs are key success factors, opportunities and threats: things that apply to any competitor operating in the business area rather than to one firm.",
+   "B": "Incorrect. Describing your own firm is internal analysis, which compares it to direct competitors by benchmarking.",
+   "C": "Incorrect. No single firm's standpoint is taken, the leader's included.",
+   "D": "Incorrect. Customers are one of the five lenses, not the vantage point of the whole analysis."
+  },
+  "recap": "Correct. External analysis takes the industry and its environment as its subject, which is why its outputs are key success factors, opportunities and threats: things that apply to any competitor operating in the business area rather than to one firm."
+ },
+ {
+  "cat": "STEEP",
+  "title": "What STEEP Stands For",
+  "question": "Which five groups of variables does STEEP cover?",
+  "options": {
+   "A": "Social, Technological, Economic, Ecological, Political.",
+   "B": "Strategic, Tactical, Economic, Environmental, Political.",
+   "C": "Social, Technical, Ethical, Environmental, Political.",
+   "D": "Supply, Technology, Entry, Exit, Price."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. STEEP groups the context variables into Social, Technological, Economic, Ecological and Political.",
+   "B": "Incorrect. Strategic and tactical are levels of decision, not categories of context variables.",
+   "C": "Incorrect. The categories are ecological and technological, and there is no ethical heading.",
+   "D": "Incorrect. Those are elements of the five forces model, not of STEEP."
+  },
+  "recap": "Correct. STEEP groups the context variables into Social, Technological, Economic, Ecological and Political."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Sorting a Variable into STEEP",
+  "question": "Exchange rates, environmental protection laws, consumer activism and tariffs. Which categories do they belong to?",
+  "options": {
+   "A": "All four are political and legal.",
+   "B": "Economic, ecological, socio-cultural and political respectively.",
+   "C": "Economic, political, political and economic respectively.",
+   "D": "Ecological, ecological, socio-cultural and economic respectively."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Only tariffs sit under political and legal; the other three are spread across three different headings.",
+   "B": "Correct. Exchange rates are economic, alongside growth rates, interest rates, inflation and employment level. Environmental protection laws are ecological. Consumer activism is socio-cultural, listed with class actions and media campaigns. Tariffs are political and legal.",
+   "C": "Incorrect. Environmental protection laws are classified as ecological despite being legislation, and consumer activism is behaviour rather than regulation.",
+   "D": "Incorrect. Exchange rates are economic, not ecological, and tariffs are political."
+  },
+  "recap": "Correct. Exchange rates are economic, alongside growth rates, interest rates, inflation and employment level. Environmental protection laws are ecological. Consumer activism is socio-cultural, listed with class actions and media campaigns. Tariffs are political and legal."
+ },
+ {
+  "cat": "STEEP",
+  "title": "How Factors Are Rated",
+  "question": "In the practical method, how is each STEEP factor assessed?",
+  "options": {
+   "A": "By a yes or no judgement on whether it will occur.",
+   "B": "By a probability of occurrence in per cent and a rating of its impact in the coming three to five years, from -5 for terrible to +5 for fantastic.",
+   "C": "By its financial value in euros over the next year.",
+   "D": "By ranking the factors from most to least important."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A binary judgement would lose the probability, which is one of the two axes the analysis plots.",
+   "B": "Correct. The practical way of carrying out the analysis is to identify each possible factor and give it a probability of occurrence in per cent together with a rating for its impact in the coming 3-5 years, where -5 is terrible and +5 is fantastic.",
+   "C": "Incorrect. The impact scale is a signed rating, not a monetary amount, and the horizon is three to five years.",
+   "D": "Incorrect. Ranking would lose both the probability and the sign of the impact."
+  },
+  "recap": "Correct. The practical way of carrying out the analysis is to identify each possible factor and give it a probability of occurrence in per cent together with a rating for its impact in the coming 3-5 years, where -5 is terrible and +5 is fantastic."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Reading the Threats and Opportunities Chart",
+  "question": "On the chart used to plot rated STEEP factors, what are the two axes and what separates threats from opportunities?",
+  "options": {
+   "A": "Probability of change against impact; the sign of the impact separates threats, on the negative side, from opportunities, on the positive side.",
+   "B": "Time against cost; anything above the break-even line is an opportunity.",
+   "C": "Impact against industry attractiveness; the more attractive the industry the fewer the threats.",
+   "D": "Probability against cost of response; expensive responses mark threats."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Probability of change runs on the vertical axis from 0 to 100 per cent and impact on the horizontal axis from -5 to +5. Negative impacts fall on the threats side and positive ones on the opportunities side, so position combines how likely a factor is with how good or bad it would be.",
+   "B": "Incorrect. Neither time nor cost is an axis of this chart.",
+   "C": "Incorrect. Attractiveness comes from the five forces model, not from the STEEP plot.",
+   "D": "Incorrect. The response is recorded in the table of factors, but it is not an axis."
+  },
+  "recap": "Correct. Probability of change runs on the vertical axis from 0 to 100 per cent and impact on the horizontal axis from -5 to +5. Negative impacts fall on the threats side and positive ones on the opportunities side, so position combines how likely a factor is with how good or bad it would be."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Where Urbanisation Belongs and Why It Matters",
+  "question": "Urbanisation is listed as a socio-cultural variable. Which mechanism does the deck give for why cities matter economically?",
+  "options": {
+   "A": "They concentrate government spending.",
+   "B": "They reduce transport costs for manufacturers.",
+   "C": "They harness economies of scale and add value by attracting talent and ideas, sharing knowledge and supporting business development.",
+   "D": "They lower the cost of housing as supply grows."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Public spending is not the mechanism named.",
+   "B": "Incorrect. Transport costs are not the explanation given.",
+   "C": "Correct. Cities stay at the heart of any economic development because they harness the power of economies of scale and add value for people and companies thanks to their ability to attract talent and ideas, share knowledge and support business development. The deck adds that cities generate 85 per cent of the world's GDP and that 1.5 million people migrate to cities every week.",
+   "D": "Incorrect. Housing cost is not among the reasons listed."
+  },
+  "recap": "Correct. Cities stay at the heart of any economic development because they harness the power of economies of scale and add value for people and companies thanks to their ability to attract talent and ideas, share knowledge and support business development. The deck adds that cities generate 85 per cent of the world's GDP and that 1.5 million people migrate to cities every week."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Where Population Growth Happens",
+  "question": "According to the demographic trends given, where does population growth come from, and what happens in developed economies?",
+  "options": {
+   "A": "Emerging or developing countries produce 97 per cent of the growth, while in developed economies people live longer and have fewer children, making the over-65s the fastest growing segment.",
+   "B": "Growth is spread evenly, and every region is ageing at the same rate.",
+   "C": "Developed economies produce most of the growth thanks to immigration.",
+   "D": "Population is falling globally, which is why the over-65s are growing as a share."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. World population is projected to rise by 60-70 million people a year, passing 8 billion in 2024, and emerging or developing countries produce 97 per cent of that growth. In developed economies people are living longer and having fewer children, and people over 65 are the fastest growing segment of the population.",
+   "B": "Incorrect. The 97 per cent figure shows growth is heavily concentrated.",
+   "C": "Incorrect. Developed economies are described as having fewer children, not as the source of growth.",
+   "D": "Incorrect. The total is projected to rise, not fall."
+  },
+  "recap": "Correct. World population is projected to rise by 60-70 million people a year, passing 8 billion in 2024, and emerging or developing countries produce 97 per cent of that growth. In developed economies people are living longer and having fewer children, and people over 65 are the fastest growing segment of the population."
+ },
+ {
+  "cat": "STEEP",
+  "title": "Why BRICS Potential Is Called Volatile",
+  "question": "The deck calls the economic potential of BRICS volatile. Which figures support that?",
+  "options": {
+   "A": "Every BRICS country grew above 6 per cent in both years.",
+   "B": "India shows 6.8 and 6.6 per cent while South Africa shows 0.6 and 1.1 per cent, China slows to 4.6 and 4.8, and Russian GDP fell 2.1 per cent in 2022 and was 0.6 per cent in 2025.",
+   "C": "All BRICS economies contracted after commodity prices dropped.",
+   "D": "The group's growth is identical to that of developed economies."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Only India is near that level; South Africa is around 1 per cent.",
+   "B": "Correct. Within the same group India still shows significant growth at 6.8 per cent in 2024 and 6.6 in 2025, while South Africa is at 0.6 and 1.1, the champion of economic growth China is slowing to 4.6 and 4.8, Brazil moves from 4.0 to 2.4, and Russia's GDP fell 2.1 per cent in 2022 and was 0.6 per cent in 2025.",
+   "C": "Incorrect. Many emerging markets declined when commodity prices dropped, but the BRICS figures given are not uniformly negative.",
+   "D": "Incorrect. No such comparison is drawn, and the spread within the group is the point."
+  },
+  "recap": "Correct. Within the same group India still shows significant growth at 6.8 per cent in 2024 and 6.6 in 2025, while South Africa is at 0.6 and 1.1, the champion of economic growth China is slowing to 4.6 and 4.8, Brazil moves from 4.0 to 2.4, and Russia's GDP fell 2.1 per cent in 2022 and was 0.6 per cent in 2025."
+ },
+ {
+  "cat": "STEEP",
+  "title": "The Resource Numbers",
+  "question": "By 2030, what increases in demand does the deck attribute to a growing global population?",
+  "options": {
+   "A": "35 per cent for food, 40 per cent for water and 50 per cent for energy.",
+   "B": "50 per cent for food, 40 per cent for water and 35 per cent for energy.",
+   "C": "20 per cent across food, water and energy alike.",
+   "D": "35 per cent for energy only, with food and water stable."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. A growing global population will mean a 35 per cent increase in food demand by 2030, with demand for water increasing by 40 per cent and for energy by 50 per cent. The deck adds that in Africa climate change is expected to reduce agricultural productivity by a third over the next 60 years.",
+   "B": "Incorrect. The figures are in the other order: energy rises most, food least.",
+   "C": "Incorrect. The three figures differ from one another.",
+   "D": "Incorrect. All three are projected to rise."
+  },
+  "recap": "Correct. A growing global population will mean a 35 per cent increase in food demand by 2030, with demand for water increasing by 40 per cent and for energy by 50 per cent. The deck adds that in Africa climate change is expected to reduce agricultural productivity by a third over the next 60 years."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "The Direction of the Relationship",
+  "question": "One of the model's basic assumptions links competition to attractiveness. Which way does it run?",
+  "options": {
+   "A": "Attractiveness is directly proportional to the level of competition.",
+   "B": "Attractiveness is inversely proportional to the level of competition in the competitive environment.",
+   "C": "Attractiveness is independent of competition and depends only on market size.",
+   "D": "Attractiveness rises with competition up to a point and then falls."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. More competition means lower average profitability, which is less attractiveness.",
+   "B": "Correct. Among the model's basic assumptions: competition is driven by industry structure, and the business area's attractiveness is inversely proportional to the level of competition of the competitive environment. So a strong force is bad news for profitability.",
+   "C": "Incorrect. The whole model exists to derive attractiveness from the structure of competition.",
+   "D": "Incorrect. No such turning point is part of the model."
+  },
+  "recap": "Correct. Among the model's basic assumptions: competition is driven by industry structure, and the business area's attractiveness is inversely proportional to the level of competition of the competitive environment. So a strong force is bad news for profitability."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Extended Rivalry",
+  "question": "What does the concept of extended rivalry mean in the five forces model?",
+  "options": {
+   "A": "That rivalry between existing competitors extends across national borders.",
+   "B": "That rivalry extends over long time horizons.",
+   "C": "That competition in an industry goes well beyond established players, which is why buyers, suppliers, entrants and substitutes are forces too.",
+   "D": "That every industry eventually converges on the same level of rivalry."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Geography is not what the term refers to.",
+   "B": "Incorrect. The extension is across actors, not across time.",
+   "C": "Correct. Competition in an industry goes well beyond established players: this is the concept of extended rivalry, and it is why four of the five forces are not your direct competitors.",
+   "D": "Incorrect. No convergence claim is made; rivalry depends on industry structure."
+  },
+  "recap": "Correct. Competition in an industry goes well beyond established players: this is the concept of extended rivalry, and it is why four of the five forces are not your direct competitors."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Industry Growth and Rivalry",
+  "question": "Industry growth is one of the structural determinants of rivalry. How does it act?",
+  "options": {
+   "A": "Faster growth intensifies rivalry, because more is at stake.",
+   "B": "Faster growth eases rivalry, because competitors can expand without taking share from one another.",
+   "C": "Growth has no effect on rivalry, only on entry.",
+   "D": "Growth raises rivalry only where exit barriers are low."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. It is stagnation that forces competitors to grow at each other's expense.",
+   "B": "Correct. Industry growth is listed among the structural determinants of the intensity of internal rivalry, alongside concentration, product differentiation, the impact of fixed costs, excess capacity, switching costs and exit barriers. A growing industry lets everyone expand without taking share from anyone.",
+   "C": "Incorrect. It is explicitly a determinant of rivalry.",
+   "D": "Incorrect. The two determinants act separately; no such condition is stated."
+  },
+  "recap": "Correct. Industry growth is listed among the structural determinants of the intensity of internal rivalry, alongside concentration, product differentiation, the impact of fixed costs, excess capacity, switching costs and exit barriers. A growing industry lets everyone expand without taking share from anyone."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "What Exit Barriers Do to Profitability",
+  "question": "A business area has very high exit barriers. Other things being equal, what does that imply?",
+  "options": {
+   "A": "It is more profitable, because fewer companies can leave and flood the market.",
+   "B": "It is less profitable, because competitors might stay in even if they are not making any profit.",
+   "C": "It is more profitable, because exit barriers also keep new entrants out.",
+   "D": "Profitability is unaffected; exit barriers matter only at the moment of leaving."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Companies staying in is precisely what keeps capacity and competition high.",
+   "B": "Correct. The higher the barriers to exit, the less profitable the business arena, other things being equal, as competitors might stay in even if they are not making any profit.",
+   "C": "Incorrect. Exit barriers and entry barriers are different things and work in opposite directions on profitability.",
+   "D": "Incorrect. Their effect is continuous, because they keep unprofitable capacity in the arena."
+  },
+  "recap": "Correct. The higher the barriers to exit, the less profitable the business arena, other things being equal, as competitors might stay in even if they are not making any profit."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Telling Exit Barriers Apart",
+  "question": "Which of these is listed as an exit barrier?",
+  "options": {
+   "A": "Economies of scale.",
+   "B": "Brand identity.",
+   "C": "Emotional barriers such as career concerns and loyalty to employees.",
+   "D": "Access to distribution channels."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Economies of scale is an entry barrier.",
+   "B": "Incorrect. Brand identity is an entry barrier.",
+   "C": "Correct. Common exit barriers include specialized assets, fixed costs of exit such as labour agreements, strategic interrelationships like shared facilities and access to financial markets, emotional barriers such as career concerns and loyalty to employees, and government and social restrictions.",
+   "D": "Incorrect. Access to distribution channels is an entry barrier."
+  },
+  "recap": "Correct. Common exit barriers include specialized assets, fixed costs of exit such as labour agreements, strategic interrelationships like shared facilities and access to financial markets, emotional barriers such as career concerns and loyalty to employees, and government and social restrictions."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "What the Threat of New Entrants Depends On",
+  "question": "The threat of new entrants has two determinants. Which?",
+  "options": {
+   "A": "Entry barriers, and the incumbents' expected reactions, meaning a credible threat of retaliation.",
+   "B": "Exit barriers, and the bargaining power of suppliers.",
+   "C": "Industry growth, and the availability of substitutes.",
+   "D": "The number of existing competitors, and their concentration."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The threat of new entrants is potential competition, and its structural determinants are the entry barriers protecting the arena and the incumbents' expected reactions, that is a credible threat of retaliation.",
+   "B": "Incorrect. Exit barriers act on rivalry, and supplier power is a separate force.",
+   "C": "Incorrect. Growth is a determinant of rivalry, and substitutes are a separate force.",
+   "D": "Incorrect. Concentration is a determinant of rivalry among existing competitors."
+  },
+  "recap": "Correct. The threat of new entrants is potential competition, and its structural determinants are the entry barriers protecting the arena and the incumbents' expected reactions, that is a credible threat of retaliation."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "Scale or Absolute Advantage",
+  "question": "Proprietary product technology, favourable access to raw materials, favourable location, the learning curve and government subsidies are grouped together. Under what heading, and why does the grouping matter?",
+  "options": {
+   "A": "Economies of scale, because all of them grow with volume.",
+   "B": "Cost advantages independent of size, because a new entrant could match the incumbent's volume and still not match them.",
+   "C": "Switching costs, because all of them make changing supplier expensive.",
+   "D": "Exit barriers, because all of them make leaving costly."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Economies of scale is a separate entry barrier, listed alongside this group.",
+   "B": "Correct. They are listed as cost advantages independent of size, an entry barrier distinct from economies of scale. De Beers in diamonds and Gazprom in gas are the examples given for favourable access to raw materials.",
+   "C": "Incorrect. Switching costs are a separate entry barrier and concern the buyer's cost of changing.",
+   "D": "Incorrect. These make entering hard, not leaving."
+  },
+  "recap": "Correct. They are listed as cost advantages independent of size, an entry barrier distinct from economies of scale. De Beers in diamonds and Gazprom in gas are the examples given for favourable access to raw materials."
+ },
+ {
+  "cat": "Five Forces",
+  "title": "What the Ryanair Case Demonstrates",
+  "question": "In 1986 Aer Lingus and British Airways cut the Dublin-London fare from €300 to €130 before Ryanair had even started flying the route, and kept cutting until tickets reached €100 by 1989. Which element of the model does this illustrate?",
+  "options": {
+   "A": "The bargaining power of buyers, since passengers obtained lower prices.",
+   "B": "The threat of substitutes, since other transport modes became relatively cheaper.",
+   "C": "The incumbents' expected reactions, a credible threat of retaliation, aimed also at discouraging other potential entrants.",
+   "D": "Exit barriers, since Ryanair could not leave the route."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Passengers benefited, but the mechanism described is the incumbents' response to entry rather than buyer power.",
+   "B": "Incorrect. No substitute industry appears in the case; the fight is between airlines on the same route.",
+   "C": "Correct. The threat of new entrants depends on entry barriers and on the incumbents' expected reactions, that is a credible threat of retaliation. Aer Lingus and British Airways had the clear objective of strangling Ryanair to avoid not only its entry but also to discourage other potential entrants from following its footsteps.",
+   "D": "Incorrect. The case is about entering, and Ryanair's problem was losses rather than an inability to leave."
+  },
+  "recap": "Correct. The threat of new entrants depends on entry barriers and on the incumbents' expected reactions, that is a credible threat of retaliation. Aer Lingus and British Airways had the clear objective of strangling Ryanair to avoid not only its entry but also to discourage other potential entrants from following its footsteps."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Substitute or Competitor",
+  "question": "High speed trains on a route also served by short haul flights; and a second airline undercutting the first on the same route. How does the model classify each?",
+  "options": {
+   "A": "Both are substitutes, since both take passengers away.",
+   "B": "Both are existing competitors, since both serve the same passengers.",
+   "C": "The train is a substitute, provided by another industry performing the same function; the second airline is an existing competitor.",
+   "D": "The train is a complement and the second airline a substitute."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A rival airline is inside the same industry, which makes it a direct competitor.",
+   "B": "Incorrect. The train is provided by another industry, which is what makes it a substitute.",
+   "C": "Correct. Substitutes are products provided by other industries that perform the same function as the product of the industry: short haul airline routes against high speed trains is one of the examples given, alongside airlines against web conferencing, tablets against laptops and aluminium against steel.",
+   "D": "Incorrect. A complement adds value to the industry's offering and increases demand for it, which the train does not."
+  },
+  "recap": "Correct. Substitutes are products provided by other industries that perform the same function as the product of the industry: short haul airline routes against high speed trains is one of the examples given, alongside airlines against web conferencing, tablets against laptops and aluminium against steel."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Direct and Indirect Competition in Abell's Model",
+  "question": "In Abell's three dimensions — customers, customers' needs and products — what distinguishes direct from indirect competition?",
+  "options": {
+   "A": "Direct competition shares customers and needs and products; indirect competition shares customers and needs but uses different products.",
+   "B": "Direct competition shares only the customers; indirect competition shares only the needs.",
+   "C": "Direct competition shares products; indirect competition shares nothing.",
+   "D": "Direct competition is within a strategic group; indirect competition is across strategic groups."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Direct competition means same customers, same needs and same products, and corresponds to the existing competitors of Porter's model. Indirect competition means same customers, same needs but different products, and corresponds to the substitutes. The two differ on one dimension only.",
+   "B": "Incorrect. Both forms share customers and needs; only the product differs.",
+   "C": "Incorrect. Indirect competition shares both customers and needs.",
+   "D": "Incorrect. Strategic groups are a different tool, used to segment an industry by the strategies of its firms."
+  },
+  "recap": "Correct. Direct competition means same customers, same needs and same products, and corresponds to the existing competitors of Porter's model. Indirect competition means same customers, same needs but different products, and corresponds to the substitutes. The two differ on one dimension only."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "How Substitutes Affect Returns",
+  "question": "Through what mechanism do substitutes reduce the potential return of an industry?",
+  "options": {
+   "A": "By increasing the fixed costs of the industry's firms.",
+   "B": "By placing a ceiling on the prices companies in the industry can profitably charge.",
+   "C": "By raising the bargaining power of suppliers.",
+   "D": "By lowering the entry barriers into the industry."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Substitutes act on the price the industry can charge, not on its cost structure.",
+   "B": "Correct. Substitutes limit the potential return of an industry by placing a ceiling on the prices companies in the industry can profitably charge. The strength of the competition from substitutes is a function of switching costs, the substitute's price against the industry's, and the substitute's quality and performance against the industry's.",
+   "C": "Incorrect. Supplier power is a separate force, acting upstream.",
+   "D": "Incorrect. Entry barriers concern potential entrants inside the same industry."
+  },
+  "recap": "Correct. Substitutes limit the potential return of an industry by placing a ceiling on the prices companies in the industry can profitably charge. The strength of the competition from substitutes is a function of switching costs, the substitute's price against the industry's, and the substitute's quality and performance against the industry's."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Reading the Substitutes Matrix",
+  "question": "A substitute has a favourable price and better performance than the industry's product. What does the matrix say, and what do the other cells call for?",
+  "options": {
+   "A": "It is a big threat; the other three cells call for monitoring the dimension the substitute is currently losing on.",
+   "B": "It is harmless, because a cheap product cannot be better.",
+   "C": "It calls for monitoring the reduction of the price only.",
+   "D": "It calls for immediate exit from the industry."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Favourable price with better performance is the one cell labelled a big threat. A favourable price with worse performance calls for monitoring the improvement of performance; an unfavourable price with better performance calls for monitoring the reduction of the price; and an unfavourable price with worse performance calls for monitoring both.",
+   "B": "Incorrect. That combination is exactly the dangerous one in the matrix.",
+   "C": "Incorrect. Monitoring the price reduction applies where the substitute is already better but still expensive.",
+   "D": "Incorrect. The matrix prescribes monitoring and threat assessment, not exit."
+  },
+  "recap": "Correct. Favourable price with better performance is the one cell labelled a big threat. A favourable price with worse performance calls for monitoring the improvement of performance; an unfavourable price with better performance calls for monitoring the reduction of the price; and an unfavourable price with worse performance calls for monitoring both."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "When Buyers Are Powerful",
+  "question": "In a business-to-business setting, which combination increases the bargaining power of buyers?",
+  "options": {
+   "A": "High product differentiation and high switching costs.",
+   "B": "Low product differentiation, low switching costs, buyers able to integrate backward and buyers with clear information about the product.",
+   "C": "Buyers less concentrated than their suppliers.",
+   "D": "Buyers with no information about the product."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. High differentiation and high switching costs raise supplier power and lower buyer power.",
+   "B": "Correct. In B2B, buyer power increases if product differentiation is low and switching costs are low, and if buyers are able to integrate themselves backward and have clear information about the product. Power is also higher when the buyers' business area is more concentrated than that of the suppliers.",
+   "C": "Incorrect. Relative concentration works the other way: buyers are stronger when their area is the more concentrated of the two.",
+   "D": "Incorrect. Clear information strengthens buyers; its absence weakens them."
+  },
+  "recap": "Correct. In B2B, buyer power increases if product differentiation is low and switching costs are low, and if buyers are able to integrate themselves backward and have clear information about the product. Power is also higher when the buyers' business area is more concentrated than that of the suppliers."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "What Changes Between B2B and B2C",
+  "question": "Which determinant of buyer power drops out when the buyer is a consumer rather than a business?",
+  "options": {
+   "A": "Low product differentiation.",
+   "B": "Low switching costs.",
+   "C": "The ability to integrate backward.",
+   "D": "Easy availability of information about the product."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Low differentiation raises consumer power just as it does business buyer power.",
+   "B": "Incorrect. Low switching costs appear in both lists.",
+   "C": "Correct. In B2C the power of buyers increases if product differentiation is low, if information about the product is easily available and if switching costs are low. Backward integration is not among them, because an individual consumer cannot credibly threaten to make the product themselves.",
+   "D": "Incorrect. Easily available information is explicitly listed for B2C."
+  },
+  "recap": "Correct. In B2C the power of buyers increases if product differentiation is low, if information about the product is easily available and if switching costs are low. Backward integration is not among them, because an individual consumer cannot credibly threaten to make the product themselves."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "The Duality of the Two Forces",
+  "question": "The determinants of supplier power are described as dual to those of buyer power. What follows for product differentiation?",
+  "options": {
+   "A": "High differentiation raises both forces at once.",
+   "B": "High differentiation lowers both forces at once.",
+   "C": "Differentiation affects neither force.",
+   "D": "High differentiation raises supplier power and lowers buyer power."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Duality means the same variable pushes the two forces in opposite directions.",
+   "B": "Incorrect. For the same reason, they cannot both fall.",
+   "C": "Incorrect. Product features are a listed determinant of both forces.",
+   "D": "Correct. The structural determinants of supplier power are dual to those influencing buyer power. Supplier power increases if product or service differentiation is high and switching costs are high, while buyer power increases if differentiation is low and switching costs are low."
+  },
+  "recap": "Correct. The structural determinants of supplier power are dual to those influencing buyer power. Supplier power increases if product or service differentiation is high and switching costs are high, while buyer power increases if differentiation is low and switching costs are low."
+ },
+ {
+  "cat": "Substitutes, Buyers & Suppliers",
+  "title": "Who Must Be Included in the Buyer Analysis",
+  "question": "The deck adds one requirement to the analysis of buyer power. Which?",
+  "options": {
+   "A": "That it includes the buyers and the ultimate customers.",
+   "B": "That it is repeated for every strategic group.",
+   "C": "That it is carried out only for the largest buyer.",
+   "D": "That it covers only buyers with backward integration capability."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The bargaining power of buyers depends on relative concentration, the product's features and the buyer's characteristics, and the analysis has to include the buyers and the ultimate customers, which can be different parties with different power.",
+   "B": "Incorrect. Strategic groups are a separate tool, used to segment competitors.",
+   "C": "Incorrect. No such restriction is given.",
+   "D": "Incorrect. Backward integration is one determinant among several, not a filter on who is analysed."
+  },
+  "recap": "Correct. The bargaining power of buyers depends on relative concentration, the product's features and the buyer's characteristics, and the analysis has to include the buyers and the ultimate customers, which can be different parties with different power."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Complement or Substitute",
+  "question": "Charging stations for electric vehicles, and petrol cars as an alternative to electric ones. How does the model classify each in relation to the electric vehicle industry?",
+  "options": {
+   "A": "Both are complements, since both concern mobility.",
+   "B": "Charging stations are a complement, adding value and increasing demand for the industry's product; petrol cars are a substitute.",
+   "C": "Both are substitutes, since both come from outside the industry.",
+   "D": "Charging stations are a substitute and petrol cars a complement."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A petrol car replaces the industry's product rather than adding value to it.",
+   "B": "Correct. A complement is a product or service that adds value to the industry's product offering and increases demand for the primary product, enhancing the industry's profit potential. The deck names the developers of charging stations as complementors in the electric vehicle industry, alongside game producers for consoles and app developers for smartphones.",
+   "C": "Incorrect. Both do come from outside, but their effect on demand is opposite.",
+   "D": "Incorrect. The two are inverted."
+  },
+  "recap": "Correct. A complement is a product or service that adds value to the industry's product offering and increases demand for the primary product, enhancing the industry's profit potential. The deck names the developers of charging stations as complementors in the electric vehicle industry, alongside game producers for consoles and app developers for smartphones."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Installed Base and the Self-Reinforcing Cycle",
+  "question": "What is the installed base, and what cycle does it enter?",
+  "options": {
+   "A": "The total production capacity of the industry; it cycles with excess capacity.",
+   "B": "The number of users of a particular technology; there is a self-reinforcing cycle between it and the availability of complementary goods.",
+   "C": "The set of fixed assets a company has installed; it cycles with depreciation.",
+   "D": "The share of the market held by the leader; it cycles with entry."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Installed base counts users, not capacity.",
+   "B": "Correct. The number of users of a particular technology is referred to as the installed base. Network effects also arise when complementary goods are important: many products are desirable or functional only if a set of complementary goods is available, and there is a self-reinforcing cycle of installed base and availability of complementary goods. The cycle can therefore also run backwards.",
+   "C": "Incorrect. The term refers to users of a technology, not to a firm's assets.",
+   "D": "Incorrect. It is not a measure of market share."
+  },
+  "recap": "Correct. The number of users of a particular technology is referred to as the installed base. Network effects also arise when complementary goods are important: many products are desirable or functional only if a set of complementary goods is available, and there is a self-reinforcing cycle of installed base and availability of complementary goods. The cycle can therefore also run backwards."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "What the Attractiveness Profile Shows",
+  "question": "Porter's attractiveness profile plots each of the five forces from highly unattractive to highly attractive, with two lines. What are they, and why does it matter?",
+  "options": {
+   "A": "One line for the industry and one for the firm, to show the firm's relative position.",
+   "B": "One line for revenue and one for profit, to show the margin.",
+   "C": "One line for the present and one, dashed, for the future, so that a profile shifting towards unattractive can be told from a stable one.",
+   "D": "One line for opportunities and one for threats, matching the SWOT."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Both lines describe the business area; the firm's own position comes from internal analysis.",
+   "B": "Incorrect. No financial series is plotted; the axis is the attractiveness rating of each force.",
+   "C": "Correct. The profile rates intensity of rivalry, the risk of entry by potential competitors, the bargaining power of buyers, the bargaining power of suppliers and the availability and similarity of substitute value propositions, with a solid line for the present and a dashed line for the future. The comparison between the two is the point of the chart.",
+   "D": "Incorrect. Opportunities and threats are an outcome of the external analysis, not the two lines of this chart."
+  },
+  "recap": "Correct. The profile rates intensity of rivalry, the risk of entry by potential competitors, the bargaining power of buyers, the bargaining power of suppliers and the availability and similarity of substitute value propositions, with a solid line for the present and a dashed line for the future. The comparison between the two is the point of the chart."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "How Maturity Changes Profitability",
+  "question": "Among the events that change industry profitability over time, what does the deck say happens as an industry reaches maturity?",
+  "options": {
+   "A": "Its growth rate declines, resulting in intensified rivalry and declining profits.",
+   "B": "Entry barriers fall, attracting new entrants.",
+   "C": "Supplier power rises as suppliers consolidate.",
+   "D": "Substitutes disappear as the industry standard settles."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. As the industry reaches maturity its growth rate declines, resulting in intensified rivalry and declining profits. The other events listed are an acquisition introducing a very different player, technological innovation creating space for new entrants or substitutes, and a reduction in the number of suppliers reducing bargaining power towards them.",
+   "B": "Incorrect. Falling entry barriers are not what the deck attributes to maturity.",
+   "C": "Incorrect. Supplier consolidation is listed separately, as a reduction in the number of suppliers.",
+   "D": "Incorrect. Technological innovation is said to create space for substitutes, not to remove them."
+  },
+  "recap": "Correct. As the industry reaches maturity its growth rate declines, resulting in intensified rivalry and declining profits. The other events listed are an acquisition introducing a very different player, technological innovation creating space for new entrants or substitutes, and a reduction in the number of suppliers reducing bargaining power towards them."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "The Three Purposes of Competitor Analysis",
+  "question": "What are the three purposes of competitor analysis?",
+  "options": {
+   "A": "To forecast competitors' future strategies and decisions; to predict their reaction to a firm's strategic initiatives; and to determine how their behaviour can be influenced.",
+   "B": "To measure competitors' market share, profitability and growth.",
+   "C": "To segment the industry, map strategic groups and identify mobility barriers.",
+   "D": "To collect public information, analyse it and publish the findings."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Competitor analysis has three main purposes: to forecast competitors' future strategies and decisions, to predict competitors' reaction to a firm's strategic initiatives, and to determine how competitors' behaviour can be influenced. Its three sections are understanding how rivals compete at present, forecasting how a competitor might change its strategy, and understanding the perception competitors have of the industry.",
+   "B": "Incorrect. Those are measures that might feed the analysis, not its stated purposes.",
+   "C": "Incorrect. Strategic group analysis is a separate tool.",
+   "D": "Incorrect. That describes competitive intelligence as a process, and publishing is no part of it."
+  },
+  "recap": "Correct. Competitor analysis has three main purposes: to forecast competitors' future strategies and decisions, to predict competitors' reaction to a firm's strategic initiatives, and to determine how competitors' behaviour can be influenced. Its three sections are understanding how rivals compete at present, forecasting how a competitor might change its strategy, and understanding the perception competitors have of the industry."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "What Competitive Intelligence Works From",
+  "question": "Competitive intelligence is defined by the kind of information it uses. Which?",
+  "options": {
+   "A": "Confidential information obtained from competitors' employees.",
+   "B": "Public information about rivals, collected and analysed systematically to inform decision making.",
+   "C": "Internal performance data compared against budget.",
+   "D": "Customer satisfaction surveys commissioned by the firm."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The definition specifies public information.",
+   "B": "Correct. Competitive intelligence involves the systematic collection and analysis of public information about rivals for informing decision making. Its main sources are annual reports and company profiles, product brochures, fairs and exhibitions, press releases and articles in the media, suppliers, customers and the business community.",
+   "C": "Incorrect. Comparing results against budget is the variance analysis of the control phase.",
+   "D": "Incorrect. Surveys are a demand analysis tool and are not what defines competitive intelligence."
+  },
+  "recap": "Correct. Competitive intelligence involves the systematic collection and analysis of public information about rivals for informing decision making. Its main sources are annual reports and company profiles, product brochures, fairs and exhibitions, press releases and articles in the media, suppliers, customers and the business community."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Segmentation or Strategic Groups",
+  "question": "What distinguishes strategic group analysis from segmentation analysis?",
+  "options": {
+   "A": "Segmentation concentrates on the characteristics of markets as the basis for disaggregating industries; strategic group analysis segments an industry on the basis of the strategies of the member firms.",
+   "B": "Segmentation applies to B2C markets and strategic groups to B2B ones.",
+   "C": "Segmentation is internal analysis and strategic groups are external analysis.",
+   "D": "They are the same tool under two names."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Whereas segmentation analysis concentrates on the characteristics of markets as the basis for disaggregating industries, strategic group analysis segments an industry on the basis of the strategies of the member firms. A strategic group is the group of firms in an industry following the same or a similar strategy along the strategic dimensions.",
+   "B": "Incorrect. Neither tool is restricted by the type of market.",
+   "C": "Incorrect. Both belong to external analysis.",
+   "D": "Incorrect. One divides the market, the other divides the competitors."
+  },
+  "recap": "Correct. Whereas segmentation analysis concentrates on the characteristics of markets as the basis for disaggregating industries, strategic group analysis segments an industry on the basis of the strategies of the member firms. A strategic group is the group of firms in an industry following the same or a similar strategy along the strategic dimensions."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "Reading a Strategic Group Map",
+  "question": "On a map of the U.S. domestic airline industry, prices charged are plotted against routes serviced, separating a low-cost point-to-point group from a differentiated hub-and-spoke group with a line between them. What is that line, and where is rivalry strongest?",
+  "options": {
+   "A": "An entry barrier; rivalry is strongest across the line.",
+   "B": "A mobility barrier; rivalry is strongest between firms within the same strategic group.",
+   "C": "An exit barrier; rivalry is strongest in the larger group.",
+   "D": "A price ceiling set by substitutes; rivalry is uniform across the industry."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Entry barriers protect the industry from outsiders; this line separates groups inside it.",
+   "B": "Correct. The line is a mobility barrier, the obstacle to moving from one strategic group to another. Competitive rivalry is strongest between firms within the same strategic group, and the map also shows that the external environment and the five forces affect groups differently and that some groups are more profitable than others.",
+   "C": "Incorrect. Exit barriers keep firms in the industry rather than in a group, and rivalry is not a matter of group size.",
+   "D": "Incorrect. A substitute ceiling concerns prices across the industry, not the boundary between groups."
+  },
+  "recap": "Correct. The line is a mobility barrier, the obstacle to moving from one strategic group to another. Competitive rivalry is strongest between firms within the same strategic group, and the map also shows that the external environment and the five forces affect groups differently and that some groups are more profitable than others."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "What a Profit Pool Map Reveals",
+  "question": "In the automotive profit pool, auto manufacturing occupies a large share of industry revenue at a low single-digit operating margin while leasing reaches above 20 per cent on a much smaller share. What is the general lesson?",
+  "options": {
+   "A": "That the largest stage of the chain is always the most profitable.",
+   "B": "That operating margin and share of industry revenue move together.",
+   "C": "That return on capital varies throughout the value chain, so a big share of revenue need not mean a big share of profit.",
+   "D": "That manufacturing should be outsourced in every industry."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The map shows the opposite: manufacturing is large and thin.",
+   "B": "Incorrect. The chart is built precisely to show that they do not.",
+   "C": "Correct. Profit pool mapping plots the vertical structure of profitability, showing that return on capital varies throughout the value chain. In the automotive example manufacturing and new car dealers run at low margins on a large revenue share, while leasing, warranty, service and repair and auto rental sit far higher on smaller shares.",
+   "D": "Incorrect. The map informs where else to compete; it prescribes no universal answer."
+  },
+  "recap": "Correct. Profit pool mapping plots the vertical structure of profitability, showing that return on capital varies throughout the value chain. In the automotive example manufacturing and new car dealers run at low margins on a large revenue share, while leasing, warranty, service and repair and auto rental sit far higher on smaller shares."
+ },
+ {
+  "cat": "Complements & Competitors",
+  "title": "The Questions a Profit Pool Map Answers",
+  "question": "Which set of questions does profit pool mapping address?",
+  "options": {
+   "A": "Who are our customers, what do they want, and how intense is competition?",
+   "B": "How do profits distribute along the supply chain, are there areas where profitability is growing, and are there opportunities for expanding the firm's business into other areas of the chain?",
+   "C": "Which industries should we be in, and how should we compete?",
+   "D": "What are our strengths, weaknesses, opportunities and threats?"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Those belong to the analysis of demand and of competition, which derive key success factors.",
+   "B": "Correct. Profit pool mapping asks how profits distribute along the supply chain, whether there are business areas of the supply chain where profitability is growing, and whether there are opportunities for expanding the firm's business into other areas of the supply chain.",
+   "C": "Incorrect. Those are the questions separating corporate from business strategy.",
+   "D": "Incorrect. That is the SWOT, which combines the external and internal analyses."
+  },
+  "recap": "Correct. Profit pool mapping asks how profits distribute along the supply chain, whether there are business areas of the supply chain where profitability is growing, and whether there are opportunities for expanding the firm's business into other areas of the supply chain."
  }
 ];
