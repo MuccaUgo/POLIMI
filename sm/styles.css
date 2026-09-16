@@ -152,6 +152,26 @@ main:focus { outline: none; }
 .stat { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 16px 10px; text-align: center; font-size: 12px; }
 .stat strong { display: block; font-size: 28px; font-weight: 500; }
 .review-item { border-top: 1px solid var(--line); padding: 20px 0; overflow-wrap: anywhere; font-size: 14px; }
+.next-lecture { margin: 0; padding: 22px 26px; border-left: 3px solid var(--accent); }
+.next-lecture strong { display: block; font-size: 18px; font-weight: 650; letter-spacing: -.2px; margin: 8px 0 2px; }
+.next-lecture p { margin: 0; }
+.calendar { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.lecture { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--card); }
+.lecture:last-child { border-bottom: 0; }
+.lecture-date { display: grid; place-items: center; width: 46px; flex-shrink: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--soft); padding: 6px 0; line-height: 1.15; }
+.lecture-date .day { font-size: 17px; font-weight: 600; letter-spacing: -.5px; }
+.lecture-date .mon, .lecture-date .dow { font-size: 9px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); }
+.lecture-body { flex: 1; min-width: 0; }
+.lecture-body strong { display: block; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.lecture-body p { margin: 2px 0 0; }
+.lecture .badge { flex-shrink: 0; }
+.lecture.past { opacity: .5; }
+.lecture.off .lecture-body strong { font-weight: 500; color: var(--muted); }
+.lecture.off .lecture-date { background: transparent; border-style: dashed; }
+.lecture.today { background: var(--soft); }
+.lecture.today .lecture-date { border-color: var(--accent); color: var(--accent); }
+.lecture.today .today-badge { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 650; }
+#programme .section-heading:first-of-type { margin-top: 26px; }
 .session-resume, .quiz-notice { padding: 16px; margin: 18px 0; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
 .session-resume button { margin-top: 8px; }
 .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden; }
@@ -187,6 +207,11 @@ main:focus { outline: none; }
   .review-prompt { align-items: flex-start; flex-direction: column; gap: 10px; }
   .review-prompt p { font-size: 12px; }
   .question { font-size: 18px; }
+  .lecture { flex-wrap: wrap; gap: 12px; padding: 14px; }
+  .lecture-body { flex-basis: calc(100% - 58px); }
+  .lecture .badge { margin-left: 58px; }
+  .next-lecture { padding: 20px; }
+  .next-lecture strong { font-size: 16px; }
 }
 @media (max-width: 480px) {
   .brand { gap: 9px; }

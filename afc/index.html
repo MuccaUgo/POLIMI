@@ -34,6 +34,7 @@
     <nav class="nav" id="mainNav" aria-label="Sections">
       <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
       <button id="conceptsBtn" data-section="concepts">Concepts</button>
+      <button id="programmeBtn" data-section="programme">Programme</button>
       <button id="fullBtn" data-mode="full">Full Test</button>
       <button id="practiceBtn" data-mode="practice10">Practice 10</button>
       <button id="examBtn" data-mode="exam">Exam Test</button>
@@ -66,7 +67,9 @@
         <div class="path-footer"><span aria-hidden="true">↺</span> Small sessions. Steady progress.</div>
       </aside>
     </div>
-    <div class="section-heading"><h3>What this hub covers</h3><span class="small">Background topics to revise before the course concepts</span></div>
+    <div class="section-heading"><h3>Next lecture</h3><span class="small" id="courseProgress"></span></div>
+    <div class="next-lecture card" id="nextLecture"></div>
+    <div class="section-heading"><h3>What this hub covers</h3><span class="small">Background topics · The course programme is under <b>Programme</b></span></div>
     <div class="topic-grid">
       <div class="topic"><div class="kicker">Ready</div><strong>Financial Accounting</strong><p>How a company reports to the outside world under IFRS: the accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p><p class="small">44 concepts · 83 questions · everything in this hub today</p></div>
       <div class="topic"><div class="kicker">Planned</div><strong>Cost Accounting</strong><p>How costs are classified and assigned inside the company: cost objects, and the process, job order, operation and activity-based allocation methods.</p><p class="small">Not built yet</p></div>
@@ -128,6 +131,17 @@
     </div>
   </section>
 
+  <section id="programme" class="app-section hidden">
+    <div class="card">
+      <h2>Programme</h2>
+      <p class="small">The lecture calendar for AFC26, as published by Professor Arnaboldi. The background topics in this hub are the groundwork for the first three modules.</p>
+      <div class="section-heading"><h3>Modules</h3><span class="small">In the order they are taught</span></div>
+      <div class="topic-grid" id="moduleGrid"></div>
+      <div class="section-heading"><h3>Calendar</h3><span class="small">Mondays and Wednesdays · autumn 2026</span></div>
+      <div class="calendar" id="calendarList"></div>
+    </div>
+  </section>
+
   <section id="testSection" class="app-section hidden">
     <section class="card" id="setup">
       <h2 id="testTitle">Test</h2>
@@ -167,6 +181,7 @@
 <footer class="site-footer"><span>Accounting, Finance &amp; Control <span aria-hidden="true">/</span> Study Hub</span><span>Your progress stays in this browser.</span></footer>
 
 <script src="data.js"></script>
+<script src="course.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

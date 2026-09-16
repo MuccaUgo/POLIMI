@@ -61,7 +61,7 @@
       b.classList.remove("active"); b.removeAttribute("aria-current");
     });
     var map = {
-      home: "homeBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn",
+      home: "homeBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
       testSection: currentMode === "full" ? "fullBtn" : currentMode === "practice10" ? "practiceBtn" : "examBtn"
     };
     var btn = $(map[sectionId]);
@@ -74,12 +74,90 @@
     setActive(id);
     if (id === "mistakes") renderMistakes();
     if (id === "home") renderHomeStats();
+    if (id === "programme") renderProgramme();
     if (id !== "testSection") {
       questions = []; index = 0; answers = [];
       $("progress").style.width = "0%";
       updateHeader();
     }
     window.scrollTo(0, 0);
+  }
+
+  /* ---------------- programme (only where course.js is loaded) ---------------- */
+  var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function lectureDate(iso) {
+    var p = String(iso).split("-");
+    return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  }
+  function today0() {
+    var d = new Date();
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+  function hasProgramme() {
+    return typeof CALENDAR !== "undefined" && Array.isArray(CALENDAR) && !!$("calendarList");
+  }
+  function renderProgramme() {
+    if (!hasProgramme()) return;
+    var now = today0();
+    var next = null;
+    for (var i = 0; i < CALENDAR.length; i++) {
+      if (!CALENDAR[i].off && lectureDate(CALENDAR[i].date) >= now) { next = CALENDAR[i]; break; }
+    }
+    var done = CALENDAR.filter(function (l) { return !l.off && lectureDate(l.date) < now; }).length;
+    var total = CALENDAR.filter(function (l) { return !l.off; }).length;
+
+    var nextEl = $("nextLecture");
+    if (nextEl) {
+      if (next) {
+        var d = lectureDate(next.date);
+        var isToday = d.getTime() === now.getTime();
+        var days = Math.round((d - now) / 86400000);
+        var when = isToday ? "Today" : days === 1 ? "Tomorrow" : "In " + days + " days";
+        nextEl.innerHTML = '<div class="eyebrow">' + esc(when) + "</div>" +
+          "<strong>" + esc(next.topic) + "</strong>" +
+          '<p class="small">' + esc(DAYS[d.getDay()] + " " + d.getDate() + " " + MONTHS[d.getMonth()] + " · " + next.mode + " · " + next.who) + "</p>";
+      } else {
+        nextEl.innerHTML = '<div class="eyebrow">Course finished</div><strong>No lectures left in the calendar.</strong>';
+      }
+    }
+    var progressEl = $("courseProgress");
+    if (progressEl) {
+      progressEl.textContent = done + " of " + total + " lectures done";
+    }
+
+    var modulesEl = $("moduleGrid");
+    if (modulesEl && typeof MODULES !== "undefined") {
+      modulesEl.innerHTML = MODULES.map(function (m) {
+        var lectures = CALENDAR.filter(function (l) { return l.module === m.title; });
+        var passed = lectures.filter(function (l) { return lectureDate(l.date) < now; }).length;
+        var count = lectures.length + (lectures.length === 1 ? " lecture" : " lectures");
+        return '<div class="topic"><div class="kicker">Module</div>' +
+          "<strong>" + esc(m.title) + "</strong>" +
+          "<p>" + esc(m.blurb) + "</p>" +
+          (m.revise ? '<p class="small">Revise first: ' + esc(m.revise) + "</p>" : "") +
+          '<p class="small">' + esc(count) + " · " + passed + " done</p></div>";
+      }).join("");
+    }
+
+    $("calendarList").innerHTML = CALENDAR.map(function (l) {
+      var d = lectureDate(l.date);
+      var isToday = d.getTime() === now.getTime();
+      var past = d < now;
+      var cls = "lecture" + (l.off ? " off" : "") + (past ? " past" : "") + (isToday ? " today" : "");
+      return '<div class="' + cls + '">' +
+        '<div class="lecture-date"><span class="day">' + d.getDate() + '</span>' +
+        '<span class="mon">' + esc(MONTHS[d.getMonth()]) + "</span>" +
+        '<span class="dow">' + esc(DAYS[d.getDay()].slice(0, 3)) + "</span></div>" +
+        '<div class="lecture-body"><strong>' + esc(l.topic) + "</strong>" +
+        (l.off
+          ? '<p class="small">' + esc(l.note || "") + "</p>"
+          : '<p class="small">' + esc(l.who) + "</p>") +
+        "</div>" +
+        (l.off ? "" : '<span class="badge mode">' + esc(l.mode) + "</span>") +
+        (isToday ? '<span class="badge today-badge">Today</span>' : "") +
+        "</div>";
+    }).join("");
   }
 
   /* ---------------- concepts ---------------- */
@@ -513,6 +591,7 @@
 
     renderConcepts();
     filterConcepts();
+    renderProgramme();
 
     $("themeToggle").addEventListener("click", toggleTheme);
     $("hambBtn").setAttribute("aria-controls", "mainNav");

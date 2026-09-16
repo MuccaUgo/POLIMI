@@ -9,7 +9,7 @@ The root page is a portal listing the courses; each course is a self-contained s
 
 | Folder | Course | Content |
 |---|---|---|
-| [`afc/`](afc/) | Accounting, Finance & Control | Background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting** planned: cost classification, cost objects, and the process, job order, operation and activity-based allocation methods |
+| [`afc/`](afc/) | Accounting, Finance & Control | The AFC26 programme and lecture calendar, plus background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 practice questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting** planned: cost classification, cost objects, and the process, job order, operation and activity-based allocation methods |
 | [`sm/`](sm/) | Strategy & Marketing | 39 concept cards, 31 practice questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG |
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
@@ -18,6 +18,9 @@ over from the `fa_` key prefix to `afc_` the first time the new hub loads.
 
 ## What each hub offers
 
+- **Programme** *(Accounting, Finance & Control only)* — the AFC26 modules and the lecture calendar, with the
+  next lecture highlighted and past lectures dimmed. Read from `course.js`; the rest of the engine ignores it
+  when that file is absent, which is why the Strategy & Marketing hub has no Programme tab.
 - **Concepts** — cards grouped by area, each with the meaning, how it works in practice and the typical exam
   trap. Searchable and filterable.
 - **Full Test** — every question, with area and order selection, automatic session saving and *Jump to question*.
@@ -60,7 +63,7 @@ index.html      portal listing the courses
 portal.css      portal styles
 manifest.json   portal manifest
 icon.svg        portal icon
-afc/            Accounting, Finance & Control hub (index.html, styles.css, data.js, app.js, sw.js, manifest.json, icon.svg)
+afc/            Accounting, Finance & Control hub (index.html, styles.css, data.js, course.js, app.js, sw.js, manifest.json, icon.svg)
 afc/tests/      data, quiz and service-worker tests
 sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
@@ -83,4 +86,6 @@ node --test sm/tests/*.test.js
 
 The suites load `data.js` in a sandbox and check the bank's structure, that every answer key matches its
 explanation, that the numeric exercises recompute correctly, and that each service worker only ever touches
-caches scoped to its own folder.
+caches scoped to its own folder. `afc/tests/course.test.js` also checks the calendar against the published
+schedule: 29 slots with 5 of them off, dates in order on the course's Monday/Wednesday pattern, and every
+lecture belonging to a declared module.
