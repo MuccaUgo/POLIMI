@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
 const prefix = `strategy-marketing-hub:${scope}:`;
-const currentCache = `${prefix}v5`;
+const currentCache = `${prefix}v6`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
 const deferred = () => {

@@ -266,6 +266,10 @@ test("the Things to Remember study map has 10 + 10 + 8 linked blocks", () => {
     for (const block of topic.blocks) {
       assert.ok(block.title && block.summary, `${topic.name}: incomplete study-map block`);
       assert.ok(block.summary.length >= 120, `${block.title}: explanation is too short`);
+      assert.ok(Array.isArray(block.keyPoints) && block.keyPoints.length >= 4, `${block.title}: too few learning points`);
+      assert.ok(block.keyPoints.every(point => typeof point === "string" && point.length >= 45), `${block.title}: learning point is too short`);
+      assert.equal(typeof block.exam, "string", `${block.title}: missing exam focus`);
+      assert.ok(block.exam.length >= 90, `${block.title}: exam focus is too short`);
       assert.ok(context.categories.includes(block.filter), `${block.title}: unknown concept filter`);
       assert.ok(validStatuses.has(block.status), `${block.title}: unknown class status`);
     }

@@ -204,7 +204,9 @@
             '<summary class="map-block-heading"><span class="map-number">' + String(i + 1).padStart(2, "0") + '</span>' +
             '<span class="map-copy"><strong>' + esc(block.title) + '</strong><small>Related area: ' + esc(block.filter) + '</small></span>' +
             '<span class="map-status">' + (isCovered ? "Covered" : "Next") + '</span><span class="map-toggle" aria-hidden="true">⌄</span></summary>' +
-            '<div class="map-detail"><p>' + esc(block.summary) + '</p>' +
+            '<div class="map-detail"><p>' + esc(block.summary) + '</p><h4>What you should master</h4><ul>' +
+            block.keyPoints.map(function (point) { return '<li>' + esc(point) + '</li>'; }).join("") + '</ul>' +
+            '<p class="map-exam"><b>Exam focus.</b> ' + esc(block.exam) + '</p>' +
             '<button class="ghost map-action" data-map-filter="' + esc(block.filter) + '">Open related concepts <span aria-hidden="true">→</span></button></div></details>';
         }).join("") + '</div></section>';
     }).join("");
