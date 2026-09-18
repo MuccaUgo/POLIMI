@@ -33,6 +33,7 @@
     </div>
     <nav class="nav" id="mainNav" aria-label="Sections">
       <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
+      <button id="studyMapBtn" data-section="studyMap">Prerequisites</button>
       <button id="conceptsBtn" data-section="concepts">Concepts</button>
       <button id="programmeBtn" data-section="programme">Programme</button>
       <button id="fullBtn" data-mode="full">Full Test</button>
@@ -52,10 +53,10 @@
         <h2>A little practice.<br>A clearer picture.</h2>
         <p>The groundwork for the course, one concept at a time. Start from financial accounting, test your understanding and learn from your mistakes before the course concepts build on it.</p>
         <div class="hero-actions">
-          <button class="primary" data-mode="practice10">Start practicing <span aria-hidden="true">↗</span></button>
-          <button class="ghost" data-section="concepts">Explore concepts</button>
+          <button class="primary" data-section="studyMap">Open prerequisites <span aria-hidden="true">↗</span></button>
+          <button class="ghost" data-mode="practice10">Start practicing</button>
         </div>
-        <div class="hero-note">10 questions · Instant feedback · Go at your own pace</div>
+        <div class="hero-note">10-part study map · Detailed explanations · Direct links to practice</div>
       </div>
       <aside class="study-path" aria-label="Suggested study routine">
         <div class="eyebrow">A simple study routine</div>
@@ -104,6 +105,23 @@
       </article>
     </div>
     <div class="review-prompt"><div><strong>Every mistake is a place to start.</strong><p class="small">Your saved mistakes bring the explanations back into focus.</p></div><button class="ghost" data-section="mistakes">Review mistakes <span aria-hidden="true">→</span></button></div>
+  </section>
+
+  <section id="studyMap" class="app-section hidden">
+    <div class="card">
+      <div class="study-map-intro">
+        <div>
+          <div class="eyebrow">Prerequisites</div>
+          <h2>Your ten-part foundation</h2>
+          <p class="small">Parts 01–09 organise the two prerequisite annexures into a single route from financial reporting to cost allocation. Part 10 connects those foundations to the first new AFC topic: group accounting and financial statement consolidation.</p>
+        </div>
+        <div class="map-legend" aria-label="Study status">
+          <span><i class="map-dot ready" aria-hidden="true"></i> Ready</span>
+          <span><i class="map-dot next" aria-hidden="true"></i> Next lecture</span>
+        </div>
+      </div>
+      <div id="studyMapGrid" class="study-map"></div>
+    </div>
   </section>
 
   <section id="concepts" class="app-section hidden">

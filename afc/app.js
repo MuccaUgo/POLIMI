@@ -74,7 +74,7 @@
       b.classList.remove("active"); b.removeAttribute("aria-current");
     });
     var map = {
-      home: "homeBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
+      home: "homeBtn", studyMap: "studyMapBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
       testSection: currentMode === "full" ? "fullBtn" : currentMode === "practice10" ? "practiceBtn" : "examBtn"
     };
     var btn = $(map[sectionId]);
@@ -198,6 +198,31 @@
     if (!value || value === "All") return true;
     if (value.indexOf("topic:") === 0) return topicOf(cat) === value.slice(6);
     return cat === value;
+  }
+
+  /* ---------------- prerequisite study map ---------------- */
+  function renderStudyMap() {
+    var grid = $("studyMapGrid");
+    if (!grid || typeof STUDY_MAP === "undefined") return;
+    grid.innerHTML = STUDY_MAP.map(function (topic) {
+      var ready = topic.blocks.filter(function (block) { return block.status === "ready"; }).length;
+      return '<section class="map-topic">' +
+        '<div class="map-heading"><div><div class="kicker">' + esc(topic.subtitle) + '</div><h3>' + esc(topic.name) + '</h3></div>' +
+        '<span class="badge">' + ready + '/' + topic.blocks.length + ' ready</span></div>' +
+        '<div class="map-list">' + topic.blocks.map(function (block) {
+          var isReady = block.status === "ready";
+          var action = block.filter
+            ? '<button class="ghost map-action" data-map-filter="' + esc(block.filter) + '">Open ' + esc(block.filter) + ' concepts <span aria-hidden="true">→</span></button>'
+            : '<button class="ghost map-action" data-section="' + esc(block.section || "programme") + '">Open course programme <span aria-hidden="true">→</span></button>';
+          return '<article class="map-block ' + (isReady ? "ready" : "next") + '">' +
+            '<div class="map-block-heading"><span class="map-number">' + esc(block.number) + '</span>' +
+            '<div class="map-copy"><strong>' + esc(block.title) + '</strong><small>' + esc(block.summary) + '</small></div>' +
+            '<span class="map-status">' + (isReady ? "Ready" : "Next lecture") + '</span></div>' +
+            '<div class="map-detail"><p>' + esc(block.overview) + '</p>' +
+            '<h4>What you should master</h4><ul>' + block.keyPoints.map(function (point) { return '<li>' + esc(point) + '</li>'; }).join("") + '</ul>' +
+            '<p class="map-connection"><b>Why it matters.</b> ' + esc(block.connection) + '</p>' + action + '</div></article>';
+        }).join("") + '</div></section>';
+    }).join("");
   }
 
   /* ---------------- concepts ---------------- */
@@ -674,6 +699,7 @@
 
     renderConcepts();
     filterConcepts();
+    renderStudyMap();
     renderProgramme();
 
     $("themeToggle").addEventListener("click", toggleTheme);
@@ -697,6 +723,14 @@
         renderConceptPills("All");
         filterConcepts();
         $("conceptSearch").focus();
+        return;
+      }
+      var mapFilter = e.target.closest("[data-map-filter]");
+      if (mapFilter) {
+        $("conceptSearch").value = "";
+        renderConceptPills(mapFilter.dataset.mapFilter);
+        filterConcepts();
+        showSection("concepts");
         return;
       }
       var pill = e.target.closest("#conceptPills .pill");

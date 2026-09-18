@@ -6,6 +6,158 @@ const TOPICS = [
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
+// The prerequisite map turns the two annexures and the first recovery lectures into a
+// ten-part route. Parts 01-09 are the foundations; part 10 is the bridge to the first
+// new course topic, financial statement consolidation.
+const STUDY_MAP = [
+ {
+  "name": "Prerequisites",
+  "subtitle": "10 parts · foundations for the AFC course",
+  "blocks": [
+   {
+    "number": "01",
+    "title": "Financial Reporting & Accounting Principles",
+    "summary": "Understand why financial accounting exists, who uses it and when transactions enter the financial statements.",
+    "overview": "Financial accounting communicates an organisation's financial position, performance and cash flows to external users such as shareholders, lenders and regulators. IFRS determines which events are recognised, where they appear and how they are measured. The central timing rule is the accrual principle: income and expenses belong to the period in which the underlying economic event occurs, even when the related cash is collected or paid later. Cash information remains essential, but it answers a different question. Historical cost, fair value and impairment then determine how recognised assets and liabilities are measured over time.",
+    "keyPoints": [
+     "Distinguish annual reports from interim reports and identify the four primary financial statements plus the notes.",
+     "Separate the accrual event from the cash event and explain how one transaction can affect different periods.",
+     "Compare historical cost, fair value and recoverable amount without treating them as interchangeable measures."
+    ],
+    "connection": "This part provides the language used by every later accounting, finance and control topic.",
+    "filter": "Principles",
+    "status": "ready"
+   },
+   {
+    "number": "02",
+    "title": "Balance Sheet: Assets & Valuation",
+    "summary": "Read the resources controlled by the company and understand how their carrying amounts change.",
+    "overview": "The balance sheet is a snapshot at the reporting date. Its asset side shows resources controlled by the company and separates current items, expected to turn into cash or be consumed in the operating cycle, from non-current items used over a longer horizon. The chapter follows property, plant and equipment from initial cost through depreciation, revaluation and impairment; then covers intangible assets, goodwill, financial assets, receivables and inventories. The crucial skill is to connect each valuation rule with its effect on both the balance sheet and the income statement.",
+    "keyPoints": [
+     "Classify assets as current or non-current by considering the operating cycle, purpose and expected realisation date.",
+     "Compute carrying amount after depreciation, amortisation, revaluation or impairment and explain the related profit effect.",
+     "Apply the lower of cost and net realisable value to inventories and distinguish FIFO from weighted-average costing."
+    ],
+    "connection": "Asset values become inputs for financial analysis, consolidation and investment decisions.",
+    "filter": "Balance Sheet",
+    "status": "ready"
+   },
+   {
+    "number": "03",
+    "title": "Balance Sheet: Equity & Liabilities",
+    "summary": "Identify who has claims over the company's resources and how those claims are reported.",
+    "overview": "The right-hand side of the balance sheet explains how assets are financed. Liabilities are present obligations to third parties, classified as current or non-current according to when settlement is expected. They include trade payables, borrowings, provisions and employee-benefit obligations. Equity is the residual interest after liabilities are deducted from assets and includes share capital, share premium, reserves and retained earnings. Profit increases equity when it is retained; dividends reduce it when value is distributed to owners.",
+    "keyPoints": [
+     "Use the accounting equation Assets = Equity + Liabilities and explain why both sides must always balance.",
+     "Distinguish an ordinary payable from a provision, whose timing or amount remains uncertain.",
+     "Reconcile opening and closing equity through capital contributions, profit, dividends and reserve movements."
+    ],
+    "connection": "The financing structure shown here is the starting point for leverage, solvency and return-on-equity analysis.",
+    "filter": "Balance Sheet",
+    "status": "ready"
+   },
+   {
+    "number": "04",
+    "title": "Income Statement: Revenues, Costs & Profit",
+    "summary": "Follow the formation of profit from revenue through operating, financial and tax components.",
+    "overview": "The income statement reports economic performance over a period using accrual accounting. Revenue is recognised when the company satisfies the economic conditions for earning it, while expenses are matched with the revenue they help generate or recognised in the period in which they arise. IFRS permits presentation by nature, such as materials, labour and depreciation, or by function, such as cost of sales, distribution and administration. Both formats lead to operating profit, after which financial items, taxes and discontinued operations explain the path to net profit.",
+    "keyPoints": [
+     "Move correctly from revenue to EBITDA, EBIT, profit before tax and net profit without double-counting depreciation.",
+     "Explain why the by-nature and by-function formats classify the same expenses differently.",
+     "Connect changes in inventory, depreciation, finance costs, taxes and discontinued operations to the correct subtotal."
+    ],
+    "connection": "Profit is a performance measure, an input to equity and the starting point of the indirect cash-flow method.",
+    "filter": "Income Statement",
+    "status": "ready"
+   },
+   {
+    "number": "05",
+    "title": "Cash Flow Statement, Notes & Segment Reporting",
+    "summary": "Explain where cash came from, where it went and which disclosures make the numbers understandable.",
+    "overview": "The cash flow statement records actual movements in cash and cash equivalents during the period. Operating activities capture cash generated by the core business, investing activities cover purchases and disposals of long-term resources, and financing activities show changes in debt and owners' capital. The direct method lists major receipts and payments; the indirect method reconciles accrual profit to operating cash flow by removing non-cash items and working-capital effects. Notes disclose accounting policies, estimates and detail that cannot fit in the primary statements, while segment reporting reveals how different business or geographical components perform.",
+    "keyPoints": [
+     "Classify cash movements as operating, investing or financing and reconcile opening cash to closing cash.",
+     "Convert profit into operating cash flow by adjusting non-cash charges, gains or losses and working-capital changes.",
+     "Use notes and segment data to interpret definitions, accounting choices and the sources of group performance."
+    ],
+    "connection": "This part prevents the common mistake of treating profit, cash generation and reported segment performance as the same measure.",
+    "filter": "Cash Flow",
+    "status": "ready"
+   },
+   {
+    "number": "06",
+    "title": "Cost Accounting & Cost Classifications",
+    "summary": "Define the cost object first, then classify costs according to the decision being supported.",
+    "overview": "Cost accounting supplies managers with information for planning, control and decisions inside the organisation. A cost is meaningful only in relation to a cost object, such as a product, service, customer, project or department. The same resource can therefore be direct for one object and indirect for another. Costs can also be classified as product or period costs according to whether they enter inventory, and as fixed, variable or semi-variable according to how their total amount responds to changes in activity.",
+    "keyPoints": [
+     "Name the cost object before deciding whether a resource is direct or indirect.",
+     "Keep the direct/indirect, product/period and fixed/variable classifications separate because they answer different questions.",
+     "Distinguish a cost consumed in the period from an investment that creates benefits across future periods."
+    ],
+    "connection": "Correct classification determines which costs enter product values, budgets and managerial decisions.",
+    "filter": "Cost Classification",
+    "status": "ready"
+   },
+   {
+    "number": "07",
+    "title": "Cost Configurations & Overhead Allocation",
+    "summary": "Build progressively broader product costs and assign shared resources with a defensible allocation base.",
+    "overview": "A cost configuration defines which resources are included in the cost assigned to an object. Prime cost contains direct materials and direct labour; full manufacturing cost adds manufacturing overhead; full cost also includes non-manufacturing support resources. Direct costs can be traced, while indirect costs must be collected in a pool and allocated through a base that represents consumption. The allocation coefficient converts the pool into a rate, and the rate applied to each object's use of the base determines the overhead assigned.",
+    "keyPoints": [
+     "Construct prime cost, full manufacturing cost and full cost without omitting or counting a resource twice.",
+     "Calculate an allocation rate as total indirect cost divided by the total quantity of the chosen allocation base.",
+     "Judge an allocation base by its causal relationship with resource consumption, not merely by convenience."
+    ],
+    "connection": "This is the common logic behind process, job-order, operation and activity-based costing.",
+    "filter": "Cost Configurations",
+    "status": "ready"
+   },
+   {
+    "number": "08",
+    "title": "Process, Job Order & Operation Costing",
+    "summary": "Choose a costing system that matches how homogeneous or customised the production process is.",
+    "overview": "Process costing averages costs across a large flow of similar units and uses equivalent units to value incomplete production. Job-order costing accumulates materials, labour and allocated overhead separately for each customised job. Operation costing sits between them: products share standard operations but may consume different materials or combinations of activities. The methods do not change the total cost incurred; they change how precisely that cost is traced or averaged across outputs and therefore how useful the information is for pricing and control.",
+    "keyPoints": [
+     "Compute equivalent units for work in progress and distinguish weighted-average logic from FIFO logic.",
+     "Use a job cost sheet to trace direct resources and allocate overhead to an individual order.",
+     "Select process, job-order or operation costing from the structure of production rather than from the company's industry label alone."
+    ],
+    "connection": "The choice balances information accuracy against the effort and cost needed to collect detailed data.",
+    "filter": "Allocation Methods",
+    "status": "ready"
+   },
+   {
+    "number": "09",
+    "title": "Activity-Based Costing (ABC)",
+    "summary": "Allocate overhead through the activities that consume resources and the drivers that products consume.",
+    "overview": "Activity-Based Costing recognises that a single volume measure often distorts product cost when overhead is high and products consume support work differently. ABC first identifies activities, collects their costs in activity cost pools and chooses a driver for each pool. It then calculates a driver rate and assigns activity cost to products according to the amount of each driver they consume. A low-volume complex product can consequently receive more setup, inspection or order-processing cost than a high-volume standard product.",
+    "keyPoints": [
+     "Distinguish resources, activities, cost pools, cost drivers and cost objects in the ABC chain.",
+     "Compute each activity rate and apply several drivers to the same product without merging unrelated overhead pools.",
+     "Explain when the extra precision of ABC justifies the additional data and maintenance effort."
+    ],
+    "connection": "ABC exposes cross-subsidisation that can remain hidden when one broad base allocates all overhead.",
+    "filter": "Allocation Methods",
+    "status": "ready"
+   },
+   {
+    "number": "10",
+    "title": "Group Accounting & Financial Statement Consolidation",
+    "summary": "Move from the accounts of separate legal entities to the economic picture of one corporate group.",
+    "overview": "A group contains a parent and one or more legally separate entities linked by control, significant influence or joint control. The relationship determines the accounting method: controlled subsidiaries are fully consolidated, while associates normally use the equity method. Consolidation aligns reporting dates, policies and currencies; combines corresponding items; offsets the parent's investment against the subsidiary's equity; and eliminates intragroup balances, transactions and unrealised results. Acquisition-date fair-value adjustments can create deferred taxes and goodwill, while ownership below 100 per cent requires recognition of non-controlling interests.",
+    "keyPoints": [
+     "Distinguish control, significant influence and joint control and associate each relationship with its accounting method.",
+     "Apply the sequence align, combine, offset and eliminate without counting the subsidiary's net assets twice.",
+     "Explain how fair-value adjustments, deferred tax, goodwill and non-controlling interests enter the consolidated statements."
+    ],
+    "connection": "This is the first bridge from prerequisite financial statements to the AFC course's group-reporting analysis.",
+    "section": "programme",
+    "status": "next"
+   }
+  ]
+ }
+];
+
 const CONCEPTS = [
  {
   "cat": "Principles",
