@@ -46,4 +46,7 @@ test("the AFC shell exposes and renders the Prerequisites section", () => {
   assert.match(html, /id="studyMapGrid"/);
   assert.match(app, /function renderStudyMap\(\)/);
   assert.match(app, /data-map-filter/);
+  assert.match(app, /<details class=\"map-block/);
+  assert.match(app, /blockIndex === 0 \? \" open\"/);
+  assert.match(app, /other\.open = false/);
 });
