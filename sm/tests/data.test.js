@@ -262,8 +262,10 @@ test("the Things to Remember study map has 10 + 10 + 8 linked blocks", () => {
 
   const validStatuses = new Set(["covered", "next"]);
   for (const topic of context.studyMap) {
+    assert.match(topic.chapter, /^0[1-3]$/, `${topic.name}: missing chapter number`);
     for (const block of topic.blocks) {
       assert.ok(block.title && block.summary, `${topic.name}: incomplete study-map block`);
+      assert.ok(block.summary.length >= 120, `${block.title}: explanation is too short`);
       assert.ok(context.categories.includes(block.filter), `${block.title}: unknown concept filter`);
       assert.ok(validStatuses.has(block.status), `${block.title}: unknown class status`);
     }

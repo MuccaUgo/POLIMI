@@ -12,49 +12,52 @@ const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categor
 // Each block opens the most relevant area in the concept browser.
 const STUDY_MAP = [
  {
+  "chapter": "01",
   "name": "Introduction",
   "subtitle": "10 blocks · covered in class",
   "blocks": [
-   { "title": "What is a company?", "summary": "The profit-oriented organisation as the course's unit of analysis.", "filter": "The Company", "status": "covered" },
-   { "title": "How do we measure a company?", "summary": "Market capitalisation, revenues and employees tell different stories about size.", "filter": "The Company", "status": "covered" },
-   { "title": "Company boundaries and general trends", "summary": "Product scope, vertical integration, outsourcing and internationalisation.", "filter": "The Company", "status": "covered" },
-   { "title": "Legal form and ownership", "summary": "Limited or unlimited liability; private or public ownership.", "filter": "Legal Forms", "status": "covered" },
-   { "title": "Foundation, financing rounds and dilution", "summary": "Pre-money, post-money and how new shares change ownership percentages.", "filter": "Ownership & Evolution", "status": "covered" },
-   { "title": "IPO and takeovers", "summary": "Primary, secondary and mixed IPOs; friendly and hostile takeovers.", "filter": "Ownership & Evolution", "status": "covered" },
-   { "title": "Shareholder value", "summary": "Discounted cash flows, enterprise value, equity value and net debt.", "filter": "Value & Objectives", "status": "covered" },
-   { "title": "Stakeholder value and CSR", "summary": "Stakeholders, long-term value creation and the CSR pyramid.", "filter": "Value & Objectives", "status": "covered" },
-   { "title": "Corporate governance", "summary": "Governance bodies and the traditional, one-tier and two-tier systems.", "filter": "Governance & ESG", "status": "covered" },
-   { "title": "ESG", "summary": "Environmental, social and governance dimensions of performance.", "filter": "Governance & ESG", "status": "covered" }
+   { "title": "What is a company?", "summary": "A company can be small or large, private or public, profit-oriented or not-for-profit. In this course the unit of analysis is the profit-oriented organisation that is responsible for its own economic and financial results.", "filter": "The Company", "status": "covered" },
+   { "title": "How do we measure a company?", "summary": "There is no single measure of company size. Market capitalisation measures the market value of equity, revenues measure sales activity and employees indicate organisational scale, so each measure can produce a different ranking.", "filter": "The Company", "status": "covered" },
+   { "title": "Company boundaries and general trends", "summary": "A firm chooses how many products to offer, which activities to keep inside, what to outsource and how many countries to serve. Diversification, vertical integration and internationalisation describe different dimensions of these boundaries.", "filter": "The Company", "status": "covered" },
+   { "title": "Legal form and ownership", "summary": "The company is a legal entity separate from the people behind it. Its legal form determines whether members have limited or unlimited liability and whether shares remain private or can be offered to the public.", "filter": "Legal Forms", "status": "covered" },
+   { "title": "Foundation, financing rounds and dilution", "summary": "Founders start with the initial ownership split; later investors inject capital in exchange for newly issued shares. Post-money value equals pre-money value plus the investment, and existing owners retain the pre-money divided by post-money proportion of their former stake.", "filter": "Ownership & Evolution", "status": "covered" },
+   { "title": "IPO and takeovers", "summary": "A primary IPO issues new shares and sends cash to the company; a secondary IPO sells existing shares and sends cash to the sellers. A takeover is friendly when the target board agrees and hostile when the offer proceeds against the board's wishes.", "filter": "Ownership & Evolution", "status": "covered" },
+   { "title": "Shareholder value", "summary": "Shareholder value is the present value of the net cash flows received by shareholders. It also equals enterprise value minus net debt: SV = EV − debt + cash, so it must not be confused with the value of the operating business.", "filter": "Value & Objectives", "status": "covered" },
+   { "title": "Stakeholder value and CSR", "summary": "Companies depend on employees, customers, suppliers, lenders, governments and communities as well as shareholders. The stakeholder view connects long-term shareholder value with these relationships, while the CSR pyramid adds economic, legal, ethical and philanthropic responsibilities.", "filter": "Value & Objectives", "status": "covered" },
+   { "title": "Corporate governance", "summary": "Corporate governance is the system of bodies, principles and processes used to direct and control a company. Learn the roles of shareholders, directors, managers and supervisors, then distinguish the traditional, one-tier and two-tier governance systems.", "filter": "Governance & ESG", "status": "covered" },
+   { "title": "ESG", "summary": "ESG evaluates performance through environmental, social and governance dimensions. It broadens the information used to judge a company, but the three dimensions must be analysed separately because strong performance in one does not cancel weakness in another.", "filter": "Governance & ESG", "status": "covered" }
   ]
  },
  {
+  "chapter": "02",
   "name": "The Concept of Strategy",
   "subtitle": "10 blocks · covered in class",
   "blocks": [
-   { "title": "What is strategy and why is it important?", "summary": "Goal-directed action, competitive advantage, decision support and coordination.", "filter": "What Strategy Is", "status": "covered" },
-   { "title": "Strategic decisions", "summary": "Long-term, difficult to reverse and demanding large resources.", "filter": "What Strategy Is", "status": "covered" },
-   { "title": "Levels of strategy and SBU", "summary": "Corporate, business and functional levels, plus the strategic business unit.", "filter": "Levels of Strategy", "status": "covered" },
-   { "title": "Strategic decision process", "summary": "Orientation, analysis, choice, implementation and control.", "filter": "Strategy Process", "status": "covered" },
-   { "title": "Strategy links two environments", "summary": "Match internal resources and capabilities with the external environment.", "filter": "Strategy Process", "status": "covered" },
-   { "title": "Elements of a successful strategy", "summary": "Clear goals, understanding the environment, resources and effective implementation.", "filter": "What Strategy Is", "status": "covered" },
-   { "title": "Approaches to strategy", "summary": "Intended top-down strategy, emergent bottom-up strategy and their combination.", "filter": "Intended & Emergent", "status": "covered" },
-   { "title": "Vision and mission", "summary": "Where the organisation is going and what it does now, including the business-strategy reading.", "filter": "Vision, Mission & Purpose", "status": "covered" },
-   { "title": "Purpose", "summary": "Why the company exists beyond the products it sells.", "filter": "Vision, Mission & Purpose", "status": "covered" },
-   { "title": "Culture and values", "summary": "Norms, artefacts, founder imprinting, groupthink and core rigidity.", "filter": "Vision, Mission & Purpose", "status": "covered" }
+   { "title": "What is strategy and why is it important?", "summary": "Strategy is a coherent set of goal-directed choices about where and how an organisation will compete. It gives direction, coordinates decisions and resources, and aims to create a sustainable advantage rather than a single short-term win.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Strategic decisions", "summary": "A decision is strategic when it has significant, multidimensional and long-term effects, is difficult to reverse and commits substantial resources. These decisions normally involve top management because they shape the organisation as a whole.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Levels of strategy and SBU", "summary": "Corporate strategy chooses the industries and businesses in which the company operates; business strategy decides how to compete inside one arena; functional strategy translates those choices into actions. An SBU is the unit for which a distinct business strategy can be formulated.", "filter": "Levels of Strategy", "status": "covered" },
+   { "title": "Strategic decision process", "summary": "The full process moves through orientation, analysis or diagnosis, decision-making, implementation and control. The slides also compress it into diagnosis, strategy formulation and action implementation, so remember how the two versions correspond.", "filter": "Strategy Process", "status": "covered" },
+   { "title": "Strategy links two environments", "summary": "Strategy connects the internal environment—resources, capabilities, strengths and weaknesses—with the external environment of customers, competitors, opportunities and threats. SWOT summarises this fit but does not replace the analysis behind it.", "filter": "Strategy Process", "status": "covered" },
+   { "title": "Elements of a successful strategy", "summary": "Successful strategy needs clear and consistent long-term goals, a deep understanding of the competitive environment, an objective assessment of resources and effective implementation. Weakness in any one of these elements can undermine the whole strategy.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Approaches to strategy", "summary": "Intended strategy is planned top-down; deliberate strategy is the part of that plan actually realised. Emergent strategy forms bottom-up through learning and unexpected events, so realised strategy normally combines deliberate and emergent components.", "filter": "Intended & Emergent", "status": "covered" },
+   { "title": "Vision and mission", "summary": "In the general definition, vision describes the future the company wants and mission describes its present business. In the business-strategy process, vision becomes industry foresight and mission becomes the firm's strategic intent inside that expected future.", "filter": "Vision, Mission & Purpose", "status": "covered" },
+   { "title": "Purpose", "summary": "Purpose explains why the company exists and the contribution it wants to make beyond a list of products or financial targets. It should guide choices over time while remaining broad enough to survive changes in the current business model.", "filter": "Vision, Mission & Purpose", "status": "covered" },
+   { "title": "Culture and values", "summary": "Values state the principles the organisation claims to follow; culture is the deeper system of norms, assumptions and artefacts that shapes actual behaviour. Founder imprinting can make culture distinctive, while groupthink and core rigidity show how a strong culture can become a constraint.", "filter": "Vision, Mission & Purpose", "status": "covered" }
   ]
  },
  {
+  "chapter": "03",
   "name": "External Analysis",
   "subtitle": "8 blocks · covered through STEEP",
   "blocks": [
-   { "title": "Purpose and structure of external analysis", "summary": "Study the business area from the standpoint of the average competitor.", "filter": "External Analysis", "status": "covered" },
-   { "title": "STEEP analysis", "summary": "Scan social, technological, economic, ecological and political forces.", "filter": "STEEP", "status": "covered" },
-   { "title": "Porter's Five Forces", "summary": "Assess industry attractiveness through rivalry, entrants, substitutes, buyers and suppliers.", "filter": "Five Forces", "status": "next" },
-   { "title": "Competitor analysis", "summary": "Competitive intelligence, direct rivals and strategic groups.", "filter": "Complements & Competitors", "status": "next" },
-   { "title": "Profit pool mapping", "summary": "Locate where revenues and profits accumulate along the value chain.", "filter": "Complements & Competitors", "status": "next" },
-   { "title": "Customers and market demand", "summary": "Analyse demand, segmentation, customer needs and buyer behaviour.", "filter": "Substitutes, Buyers & Suppliers", "status": "next" },
-   { "title": "Key success factors", "summary": "Identify the conditions firms must meet to compete successfully in the industry.", "filter": "External Analysis", "status": "next" },
-   { "title": "Opportunities and threats", "summary": "Conclude the external side of SWOT with industry-wide opportunities and threats.", "filter": "External Analysis", "status": "next" }
+   { "title": "Purpose and structure of external analysis", "summary": "External analysis evaluates the business area from the standpoint of the average generic competitor, not from one firm's strengths and weaknesses. It moves from the macroenvironment to industry structure, competitors, customers, key success factors and finally opportunities and threats.", "filter": "External Analysis", "status": "covered" },
+   { "title": "STEEP analysis", "summary": "STEEP scans social, technological, economic, ecological and political forces that can reshape the business area. The task is to select relevant factors, understand their direction and assess whether their impact is positive, negative or uncertain.", "filter": "STEEP", "status": "covered" },
+   { "title": "Porter's Five Forces", "summary": "The model explains average industry profitability through rivalry, threat of entry, substitutes, buyer power and supplier power. Stronger competitive forces reduce attractiveness; entry barriers protect incumbents, while high exit barriers can keep unprofitable capacity in the market.", "filter": "Five Forces", "status": "next" },
+   { "title": "Competitor analysis", "summary": "Competitor analysis identifies direct rivals, gathers competitive intelligence and anticipates their objectives, assumptions and likely moves. Strategic groups help separate firms that compete with similar positions from those following different models in the same industry.", "filter": "Complements & Competitors", "status": "next" },
+   { "title": "Profit pool mapping", "summary": "A profit pool maps revenue and profit across the activities of an industry's value chain. The largest revenue segment is not necessarily the most profitable, so the analysis reveals where value is actually captured rather than merely where sales occur.", "filter": "Complements & Competitors", "status": "next" },
+   { "title": "Customers and market demand", "summary": "Customer analysis studies total demand, its evolution, buying criteria and the segments with different needs or behaviours. Segmentation matters because an apparently attractive market can contain groups with very different willingness to pay and bargaining power.", "filter": "Substitutes, Buyers & Suppliers", "status": "next" },
+   { "title": "Key success factors", "summary": "Key success factors are the conditions any firm must meet to compete successfully in a specific business area. They come from demand and competition, so they are external requirements—not the same thing as the resources or strengths a particular firm already owns.", "filter": "External Analysis", "status": "next" },
+   { "title": "Opportunities and threats", "summary": "The final step translates the external evidence into opportunities and threats for firms in the business area. Opportunities and threats are external by definition; a firm's inability to respond is an internal weakness and belongs on the other side of SWOT.", "filter": "External Analysis", "status": "next" }
   ]
  }
 ];

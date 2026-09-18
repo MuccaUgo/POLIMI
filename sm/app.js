@@ -191,20 +191,33 @@
   function renderStudyMap() {
     var grid = $("studyMapGrid");
     if (!grid || typeof STUDY_MAP === "undefined") return;
-    grid.innerHTML = STUDY_MAP.map(function (topic) {
+    grid.innerHTML = STUDY_MAP.map(function (topic, topicIndex) {
       var covered = topic.blocks.filter(function (block) { return block.status === "covered"; }).length;
       return '<section class="map-topic">' +
-        '<div class="map-heading"><div><div class="kicker">' + esc(topic.subtitle) + '</div><h3>' + esc(topic.name) + '</h3></div>' +
+        '<div class="map-heading"><div class="map-chapter">Chapter ' + esc(topic.chapter) + '</div>' +
+        '<div class="map-title"><div class="kicker">' + esc(topic.subtitle) + '</div><h3>' + esc(topic.name) + '</h3></div>' +
         '<span class="badge">' + covered + '/' + topic.blocks.length + ' covered</span></div>' +
         '<div class="map-list">' + topic.blocks.map(function (block, i) {
           var isCovered = block.status === "covered";
-          return '<button class="map-block ' + (isCovered ? "covered" : "next") + '" data-map-filter="' + esc(block.filter) + '">' +
-            '<span class="map-number">' + String(i + 1).padStart(2, "0") + '</span>' +
-            '<span class="map-copy"><strong>' + esc(block.title) + '</strong><small>' + esc(block.summary) + '</small></span>' +
-            '<span class="map-status">' + (isCovered ? "Covered" : "Next") + '</span>' +
-            '<span class="map-arrow" aria-hidden="true">→</span></button>';
+          return '<details class="map-block ' + (isCovered ? "covered" : "next") + '" name="strategy-map-parts"' +
+            (topicIndex === 0 && i === 0 ? " open" : "") + '>' +
+            '<summary class="map-block-heading"><span class="map-number">' + String(i + 1).padStart(2, "0") + '</span>' +
+            '<span class="map-copy"><strong>' + esc(block.title) + '</strong><small>Related area: ' + esc(block.filter) + '</small></span>' +
+            '<span class="map-status">' + (isCovered ? "Covered" : "Next") + '</span><span class="map-toggle" aria-hidden="true">⌄</span></summary>' +
+            '<div class="map-detail"><p>' + esc(block.summary) + '</p>' +
+            '<button class="ghost map-action" data-map-filter="' + esc(block.filter) + '">Open related concepts <span aria-hidden="true">→</span></button></div></details>';
         }).join("") + '</div></section>';
     }).join("");
+
+    var parts = Array.prototype.slice.call(grid.querySelectorAll(".map-block"));
+    parts.forEach(function (part) {
+      part.addEventListener("toggle", function () {
+        if (!part.open) return;
+        parts.forEach(function (other) {
+          if (other !== part) other.open = false;
+        });
+      });
+    });
   }
 
   /* ---------------- concepts ---------------- */
