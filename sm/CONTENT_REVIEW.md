@@ -58,15 +58,16 @@ dell'organizzazione** e che la decisione **richiede di norma il coinvolgimento d
 Anche qui è un'estensione, non una contraddizione. La scheda *What Makes a Decision Strategic* riporta
 entrambe e dice quale viene da dove.
 
-## 4. Capitolo 2 — materiale non ancora spiegato a lezione
+## 4. Capitolo 2 — spiegato fino alla STEEP analysis
 
-Il capitolo 2 (*External Analysis*) è stato costruito **solo dalle slide**: non c'è una lezione registrata che
-lo accompagni, e il corso non lo ha ancora affrontato. Nell'hub il topic porta una nota che lo dice, così non
-viene scambiato per materiale già consolidato.
+Il corso ha affrontato la struttura dell'*External Analysis* e la **STEEP analysis**. Le parti successive —
+Five Forces, competitor analysis, profit pool mapping, customer analysis, key success factors e
+opportunities/threats — sono presenti nelle slide e nel sito, ma non sono ancora state spiegate a lezione.
+La Study Map mostra questo confine con le etichette *Covered* e *Next*.
 
 Due conseguenze pratiche:
 
-- **Nessun approfondimento «Going deeper»** su queste schede: non c'è una seconda fonte con cui confrontarle.
+- **Nessun approfondimento «Going deeper»** su queste schede: non c'è una lezione registrata con cui confrontarle.
   Se a lezione emergono definizioni diverse — come è successo per vision e mission — vanno riviste.
 - **Le slide contengono dati datati**, in particolare la sezione STEEP: popolazione oltre gli 8 miliardi «nel
   2024», tassi di crescita BRICS per 2024 e 2025, il riferimento agli «8 uomini più ricchi». Sono riportati

@@ -4,9 +4,60 @@ const TOPICS = [
  { name: "Introduction", categories: ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"] },
  { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] },
  { name: "External Analysis", categories: ["External Analysis", "STEEP", "Five Forces", "Substitutes, Buyers & Suppliers", "Complements & Competitors"],
-   note: "Chapter 2 \u2014 material the course has not covered yet. Built from the slides alone; no recorded lecture for it so far." }
+   note: "Chapter 2 \u2014 the course has covered the external-analysis overview and STEEP. Five Forces, competitor analysis, profit pool mapping, customer analysis, key success factors, and opportunities and threats are next." }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
+
+// The 28-part memory map mirrors the student's "Things to Remember" notes.
+// Each block opens the most relevant area in the concept browser.
+const STUDY_MAP = [
+ {
+  "name": "Introduction",
+  "subtitle": "10 blocks · covered in class",
+  "blocks": [
+   { "title": "What is a company?", "summary": "The profit-oriented organisation as the course's unit of analysis.", "filter": "The Company", "status": "covered" },
+   { "title": "How do we measure a company?", "summary": "Market capitalisation, revenues and employees tell different stories about size.", "filter": "The Company", "status": "covered" },
+   { "title": "Company boundaries and general trends", "summary": "Product scope, vertical integration, outsourcing and internationalisation.", "filter": "The Company", "status": "covered" },
+   { "title": "Legal form and ownership", "summary": "Limited or unlimited liability; private or public ownership.", "filter": "Legal Forms", "status": "covered" },
+   { "title": "Foundation, financing rounds and dilution", "summary": "Pre-money, post-money and how new shares change ownership percentages.", "filter": "Ownership & Evolution", "status": "covered" },
+   { "title": "IPO and takeovers", "summary": "Primary, secondary and mixed IPOs; friendly and hostile takeovers.", "filter": "Ownership & Evolution", "status": "covered" },
+   { "title": "Shareholder value", "summary": "Discounted cash flows, enterprise value, equity value and net debt.", "filter": "Value & Objectives", "status": "covered" },
+   { "title": "Stakeholder value and CSR", "summary": "Stakeholders, long-term value creation and the CSR pyramid.", "filter": "Value & Objectives", "status": "covered" },
+   { "title": "Corporate governance", "summary": "Governance bodies and the traditional, one-tier and two-tier systems.", "filter": "Governance & ESG", "status": "covered" },
+   { "title": "ESG", "summary": "Environmental, social and governance dimensions of performance.", "filter": "Governance & ESG", "status": "covered" }
+  ]
+ },
+ {
+  "name": "The Concept of Strategy",
+  "subtitle": "10 blocks · covered in class",
+  "blocks": [
+   { "title": "What is strategy and why is it important?", "summary": "Goal-directed action, competitive advantage, decision support and coordination.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Strategic decisions", "summary": "Long-term, difficult to reverse and demanding large resources.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Levels of strategy and SBU", "summary": "Corporate, business and functional levels, plus the strategic business unit.", "filter": "Levels of Strategy", "status": "covered" },
+   { "title": "Strategic decision process", "summary": "Orientation, analysis, choice, implementation and control.", "filter": "Strategy Process", "status": "covered" },
+   { "title": "Strategy links two environments", "summary": "Match internal resources and capabilities with the external environment.", "filter": "Strategy Process", "status": "covered" },
+   { "title": "Elements of a successful strategy", "summary": "Clear goals, understanding the environment, resources and effective implementation.", "filter": "What Strategy Is", "status": "covered" },
+   { "title": "Approaches to strategy", "summary": "Intended top-down strategy, emergent bottom-up strategy and their combination.", "filter": "Intended & Emergent", "status": "covered" },
+   { "title": "Vision and mission", "summary": "Where the organisation is going and what it does now, including the business-strategy reading.", "filter": "Vision, Mission & Purpose", "status": "covered" },
+   { "title": "Purpose", "summary": "Why the company exists beyond the products it sells.", "filter": "Vision, Mission & Purpose", "status": "covered" },
+   { "title": "Culture and values", "summary": "Norms, artefacts, founder imprinting, groupthink and core rigidity.", "filter": "Vision, Mission & Purpose", "status": "covered" }
+  ]
+ },
+ {
+  "name": "External Analysis",
+  "subtitle": "8 blocks · covered through STEEP",
+  "blocks": [
+   { "title": "Purpose and structure of external analysis", "summary": "Study the business area from the standpoint of the average competitor.", "filter": "External Analysis", "status": "covered" },
+   { "title": "STEEP analysis", "summary": "Scan social, technological, economic, ecological and political forces.", "filter": "STEEP", "status": "covered" },
+   { "title": "Porter's Five Forces", "summary": "Assess industry attractiveness through rivalry, entrants, substitutes, buyers and suppliers.", "filter": "Five Forces", "status": "next" },
+   { "title": "Competitor analysis", "summary": "Competitive intelligence, direct rivals and strategic groups.", "filter": "Complements & Competitors", "status": "next" },
+   { "title": "Profit pool mapping", "summary": "Locate where revenues and profits accumulate along the value chain.", "filter": "Complements & Competitors", "status": "next" },
+   { "title": "Customers and market demand", "summary": "Analyse demand, segmentation, customer needs and buyer behaviour.", "filter": "Substitutes, Buyers & Suppliers", "status": "next" },
+   { "title": "Key success factors", "summary": "Identify the conditions firms must meet to compete successfully in the industry.", "filter": "External Analysis", "status": "next" },
+   { "title": "Opportunities and threats", "summary": "Conclude the external side of SWOT with industry-wide opportunities and threats.", "filter": "External Analysis", "status": "next" }
+  ]
+ }
+];
 
 const CONCEPTS = [
  {

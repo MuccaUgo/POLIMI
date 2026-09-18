@@ -61,7 +61,7 @@
       b.classList.remove("active"); b.removeAttribute("aria-current");
     });
     var map = {
-      home: "homeBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
+      home: "homeBtn", studyMap: "studyMapBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
       testSection: currentMode === "full" ? "fullBtn" : currentMode === "practice10" ? "practiceBtn" : "examBtn"
     };
     var btn = $(map[sectionId]);
@@ -185,6 +185,26 @@
     if (!value || value === "All") return true;
     if (value.indexOf("topic:") === 0) return topicOf(cat) === value.slice(6);
     return cat === value;
+  }
+
+  /* ---------------- study map ---------------- */
+  function renderStudyMap() {
+    var grid = $("studyMapGrid");
+    if (!grid || typeof STUDY_MAP === "undefined") return;
+    grid.innerHTML = STUDY_MAP.map(function (topic) {
+      var covered = topic.blocks.filter(function (block) { return block.status === "covered"; }).length;
+      return '<section class="map-topic">' +
+        '<div class="map-heading"><div><div class="kicker">' + esc(topic.subtitle) + '</div><h3>' + esc(topic.name) + '</h3></div>' +
+        '<span class="badge">' + covered + '/' + topic.blocks.length + ' covered</span></div>' +
+        '<div class="map-list">' + topic.blocks.map(function (block, i) {
+          var isCovered = block.status === "covered";
+          return '<button class="map-block ' + (isCovered ? "covered" : "next") + '" data-map-filter="' + esc(block.filter) + '">' +
+            '<span class="map-number">' + String(i + 1).padStart(2, "0") + '</span>' +
+            '<span class="map-copy"><strong>' + esc(block.title) + '</strong><small>' + esc(block.summary) + '</small></span>' +
+            '<span class="map-status">' + (isCovered ? "Covered" : "Next") + '</span>' +
+            '<span class="map-arrow" aria-hidden="true">→</span></button>';
+        }).join("") + '</div></section>';
+    }).join("");
   }
 
   /* ---------------- concepts ---------------- */
@@ -658,6 +678,7 @@
         }).join("")
       : areaOptions(CATEGORIES));
 
+    renderStudyMap();
     renderConcepts();
     filterConcepts();
     renderProgramme();
@@ -671,6 +692,14 @@
     });
 
     document.body.addEventListener("click", function (e) {
+      var mapBlock = e.target.closest("[data-map-filter]");
+      if (mapBlock) {
+        showSection("concepts");
+        $("conceptSearch").value = "";
+        renderConceptPills(mapBlock.dataset.mapFilter);
+        filterConcepts();
+        return;
+      }
       var t = e.target.closest("[data-section],[data-mode]");
       if (t) {
         if (t.dataset.section) showSection(t.dataset.section);

@@ -10,7 +10,7 @@ The root page is a portal listing the courses; each course is a self-contained s
 | Folder | Course | Content |
 |---|---|---|
 | [`afc/`](afc/) | Accounting, Finance & Control | The AFC26 programme and lecture calendar, plus background topics to revise before the course concepts build on them. **Financial Accounting**: 44 concept cards, 83 questions — IFRS reporting: accrual principle and fair value, balance sheet, income statement, cash flow statement, notes and segmental reporting. **Cost Accounting**: 39 concept cards, 42 questions — cost objects and the three classifications, cost configurations, and the process, job order, operation and activity-based allocation methods |
-| [`sm/`](sm/) | Strategy & Marketing | **Introduction**: 39 concept cards, 31 questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG. **The Concept of Strategy** (chapter 1): 66 concept cards, 74 questions — what strategy is, its levels and the SBU, the business strategy formulation process from orientation to control, intended against emergent strategy, and vision, mission, purpose and culture. Cards the six *Fundamentals of Strategy* lectures expand on carry a **Going deeper** section naming the lecture. **External Analysis** (chapter 2): 45 concept cards, 42 questions — STEEP, Porter's five forces with entry and exit barriers, substitutes, buyer and supplier power, complements and network effects, competitor analysis, strategic groups, profit pool mapping and segmentation; flagged in the hub as not yet taught. `sm/CONTENT_REVIEW.md` records where the sources differ |
+| [`sm/`](sm/) | Strategy & Marketing | **Introduction**: 39 concept cards, 31 questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG. **The Concept of Strategy** (chapter 1): 66 concept cards, 74 questions — what strategy is, its levels and the SBU, the business strategy formulation process from orientation to control, intended against emergent strategy, and vision, mission, purpose and culture. Cards the six *Fundamentals of Strategy* lectures expand on carry a **Going deeper** section naming the lecture. **External Analysis** (chapter 2): 45 concept cards, 42 questions — STEEP, Porter's five forces with entry and exit barriers, substitutes, buyer and supplier power, complements and network effects, competitor analysis, strategic groups, profit pool mapping and segmentation. The hub records that class has reached STEEP. A **Study Map** organises the material into the 10 + 10 + 8 blocks from *Things to Remember*. `sm/CONTENT_REVIEW.md` records where the sources differ |
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
 holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
@@ -22,10 +22,12 @@ over from the `fa_` key prefix to `afc_` the first time the new hub loads.
   next lecture highlighted and past lectures dimmed. A module that declares a background topic links straight
   to a Practice 10 run on it, with that topic preselected. Read from `course.js`; the rest of the engine
   ignores it when that file is absent, which is why the Strategy & Marketing hub has no Programme tab.
+- **Study Map** *(Strategy & Marketing only)* — 28 memory blocks split 10 + 10 + 8 across the three topics,
+  with the current lesson boundary and a direct link from each block to its concept cards.
 - **Concepts** — cards grouped by area, each with the meaning, how it works in practice and the typical exam
   trap, plus an optional **Going deeper** section when a recorded lecture expands on the slide, credited to
   that lecture. A topic may also carry a note, shown when it is selected — the Strategy & Marketing hub uses
-  it to flag a chapter the course has not reached yet. Searchable and filterable. Where the data declares more than one topic, as both hubs now do, a topic
+  it to show how far the class has reached in a chapter. Searchable and filterable. Where the data declares more than one topic, as both hubs now do, a topic
   row sits above the areas and the area pills follow the topic selected; the quiz area selector groups its
   options the same way, with an *All of …* entry per topic.
 - **Full Test** — every question, with area and order selection, automatic session saving and *Jump to question*.

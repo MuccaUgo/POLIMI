@@ -6,7 +6,7 @@ const path = require("node:path");
 const vm = require("node:vm");
 const context = {};
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
-  ";this.bank = JSON.parse(JSON.stringify(QUESTIONS)); this.cards = JSON.parse(JSON.stringify(CONCEPTS)); this.categories = CATEGORIES;", context);
+  ";this.bank = JSON.parse(JSON.stringify(QUESTIONS)); this.cards = JSON.parse(JSON.stringify(CONCEPTS)); this.categories = CATEGORIES; this.studyMap = JSON.parse(JSON.stringify(STUDY_MAP));", context);
 const bank = JSON.parse(JSON.stringify(context.bank));
 
 function question(title) {
@@ -234,7 +234,7 @@ test("the Abell Cube names its three axes", () => {
   }
 });
 
-test("chapter 2 covers each of its five areas and is flagged as not yet taught", () => {
+test("chapter 2 covers each of its five areas and reports the current lecture boundary", () => {
   const data = {};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
     ";this.json = JSON.stringify({ topics: TOPICS });", data);
@@ -244,14 +244,36 @@ test("chapter 2 covers each of its five areas and is flagged as not yet taught",
     "External Analysis", "STEEP", "Five Forces",
     "Substitutes, Buyers & Suppliers", "Complements & Competitors"
   ]);
-  // The user has not attended these lectures yet; the hub must say so rather than imply coverage.
   assert.equal(typeof topic.note, "string");
-  assert.match(topic.note, /not covered/i);
+  assert.match(topic.note, /covered.*STEEP/i);
+  assert.match(topic.note, /Five Forces.*next/i);
 
   for (const area of topic.categories) {
     assert.ok(bank.filter(q => q.cat === area).length >= 8, `${area}: too few questions`);
     assert.ok(context.cards.filter(c => c.cat === area).length >= 8, `${area}: too few cards`);
   }
+});
+
+test("the Things to Remember study map has 10 + 10 + 8 linked blocks", () => {
+  assert.deepEqual(Array.from(context.studyMap, t => t.name), [
+    "Introduction", "The Concept of Strategy", "External Analysis"
+  ]);
+  assert.deepEqual(Array.from(context.studyMap, t => t.blocks.length), [10, 10, 8]);
+
+  const validStatuses = new Set(["covered", "next"]);
+  for (const topic of context.studyMap) {
+    for (const block of topic.blocks) {
+      assert.ok(block.title && block.summary, `${topic.name}: incomplete study-map block`);
+      assert.ok(context.categories.includes(block.filter), `${block.title}: unknown concept filter`);
+      assert.ok(validStatuses.has(block.status), `${block.title}: unknown class status`);
+    }
+  }
+
+  assert.ok(context.studyMap[0].blocks.every(b => b.status === "covered"));
+  assert.ok(context.studyMap[1].blocks.every(b => b.status === "covered"));
+  assert.deepEqual(Array.from(context.studyMap[2].blocks, b => b.status), [
+    "covered", "covered", "next", "next", "next", "next", "next", "next"
+  ]);
 });
 
 test("the five forces and their determinants are stated", () => {
