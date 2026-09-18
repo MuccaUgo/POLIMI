@@ -13,28 +13,28 @@ vm.runInNewContext(
   context
 );
 
-test("Prerequisites is one ten-part route with stable numbering", () => {
-  assert.equal(context.map.length, 1);
-  assert.equal(context.map[0].name, "Prerequisites");
-  assert.equal(context.map[0].blocks.length, 10);
-  assert.deepEqual(
-    Array.from(context.map[0].blocks, block => block.number),
-    ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
-  );
+test("each prerequisite annexure is a ten-part chapter with stable numbering", () => {
+  assert.deepEqual(Array.from(context.map, topic => topic.name), ["Financial Accounting", "Cost Accounting"]);
+  for (const topic of context.map) {
+    assert.equal(topic.blocks.length, 10, `${topic.name}: expected ten parts`);
+    assert.deepEqual(
+      Array.from(topic.blocks, block => block.number),
+      ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+    );
+  }
 });
 
 test("every prerequisite part contains a detailed explanation and learning objectives", () => {
-  for (const block of context.map[0].blocks) {
+  for (const topic of context.map) for (const block of topic.blocks) {
     for (const field of ["title", "summary", "overview", "connection", "status"]) {
-      assert.equal(typeof block[field], "string", `${block.number}: ${field}`);
-      assert.ok(block[field].trim().length > 0, `${block.number}: empty ${field}`);
+      assert.equal(typeof block[field], "string", `${topic.name} ${block.number}: ${field}`);
+      assert.ok(block[field].trim().length > 0, `${topic.name} ${block.number}: empty ${field}`);
     }
-    assert.ok(block.overview.length >= 350, `${block.number}: overview is too brief`);
-    assert.equal(block.keyPoints.length, 3, `${block.number}: expected three learning objectives`);
-    block.keyPoints.forEach(point => assert.ok(point.length >= 60, `${block.number}: objective is too brief`));
-    assert.ok(["ready", "next"].includes(block.status), `${block.number}: unknown status`);
-    if (block.filter) assert.ok(context.categories.includes(block.filter), `${block.number}: invalid concept filter`);
-    else assert.equal(block.section, "programme", `${block.number}: missing destination`);
+    assert.ok(block.overview.length >= 350, `${topic.name} ${block.number}: overview is too brief`);
+    assert.equal(block.keyPoints.length, 3, `${topic.name} ${block.number}: expected three learning objectives`);
+    block.keyPoints.forEach(point => assert.ok(point.length >= 60, `${topic.name} ${block.number}: objective is too brief`));
+    assert.ok(["ready", "next"].includes(block.status), `${topic.name} ${block.number}: unknown status`);
+    assert.ok(context.categories.includes(block.filter), `${topic.name} ${block.number}: invalid concept filter`);
   }
 });
 

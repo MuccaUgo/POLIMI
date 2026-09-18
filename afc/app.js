@@ -217,7 +217,7 @@
           return '<details class="map-block ' + (isReady ? "ready" : "next") + '" name="prerequisite-parts"' + (blockIndex === 0 ? " open" : "") + '>' +
             '<summary class="map-block-heading"><span class="map-number">' + esc(block.number) + '</span>' +
             '<div class="map-copy"><strong>' + esc(block.title) + '</strong><small>' + esc(block.summary) + '</small></div>' +
-            '<span class="map-status">' + (isReady ? "Ready" : "Next lecture") + '</span><span class="map-toggle" aria-hidden="true">⌄</span></summary>' +
+            '<span class="map-status">' + (isReady ? "Ready" : "Next") + '</span><span class="map-toggle" aria-hidden="true">⌄</span></summary>' +
             '<div class="map-detail"><p>' + esc(block.overview) + '</p>' +
             '<h4>What you should master</h4><ul>' + block.keyPoints.map(function (point) { return '<li>' + esc(point) + '</li>'; }).join("") + '</ul>' +
             '<p class="map-connection"><b>Why it matters.</b> ' + esc(block.connection) + '</p>' + action + '</div></details>';
