@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Accounting, Finance &amp; Control Study Hub</title>
-<meta name="description" content="Background topics for Accounting, Finance &amp; Control: concepts and practice questions, starting with IFRS financial accounting." />
+<meta name="description" content="Accounting, Finance &amp; Control study map: financial accounting, cost accounting and financial statement consolidation." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon.svg" />
@@ -33,7 +33,7 @@
     </div>
     <nav class="nav" id="mainNav" aria-label="Sections">
       <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
-      <button id="studyMapBtn" data-section="studyMap">Prerequisites</button>
+      <button id="studyMapBtn" data-section="studyMap">Study Map</button>
       <button id="conceptsBtn" data-section="concepts">Concepts</button>
       <button id="programmeBtn" data-section="programme">Programme</button>
       <button id="fullBtn" data-mode="full">Full Test</button>
@@ -49,14 +49,14 @@
   <section id="home" class="app-section">
     <div class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Background topics · Financial Accounting</div>
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Financial accounting · Cost accounting · Consolidation</div>
         <h2>A little practice.<br>A clearer picture.</h2>
-        <p>The groundwork for the course, one concept at a time. Start from financial accounting, test your understanding and learn from your mistakes before the course concepts build on it.</p>
+        <p>Build the accounting foundations, then learn how a group becomes one consolidated financial statement. Review the study map and use the existing questions to practise the foundations.</p>
         <div class="hero-actions">
-          <button class="primary" data-section="studyMap">Open prerequisites <span aria-hidden="true">↗</span></button>
+          <button class="primary" data-section="studyMap">Open Study Map <span aria-hidden="true">↗</span></button>
           <button class="ghost" data-mode="practice10">Start practicing</button>
         </div>
-        <div class="hero-note">2 chapters · 10 parts each · Detailed explanations · Direct links to practice</div>
+        <div class="hero-note">3 chapters · 30 study parts · Practice questions for the foundations</div>
       </div>
       <aside class="study-path" aria-label="Suggested study routine">
         <div class="eyebrow">A simple study routine</div>
@@ -70,10 +70,11 @@
     </div>
     <div class="section-heading"><h3>Next lecture</h3><span class="small" id="courseProgress"></span></div>
     <div class="next-lecture card" id="nextLecture"></div>
-    <div class="section-heading"><h3>What this hub covers</h3><span class="small">Background topics · The course programme is under <b>Programme</b></span></div>
+    <div class="section-heading"><h3>What this hub covers</h3><span class="small">Foundations and Lecture 03 · The calendar is under <b>Programme</b></span></div>
     <div class="topic-grid">
       <div class="topic"><div class="kicker">Ready</div><strong>Financial Accounting</strong><p>How a company reports to the outside world under IFRS: the accrual principle and fair value, the balance sheet, the income statement, the cash flow statement, and the notes with segmental reporting.</p><p class="small">46 concepts · 83 questions · groundwork for Foundations, Financial Statements and Financial Analysis</p></div>
       <div class="topic"><div class="kicker">Ready</div><strong>Cost Accounting</strong><p>How costs are classified and assigned inside the company: cost objects and the three classifications, the cost configurations, and the process, job order, operation and activity-based allocation methods.</p><p class="small">39 concepts · 42 questions · groundwork for Planning &amp; Control</p></div>
+      <div class="topic"><div class="kicker">Lecture notes</div><strong>Financial Statement Consolidation</strong><p>Ten parts from the two Lecture 03 videos: control, preparation, combine, offset, intragroup elimination, fair value, goodwill and non-controlling interests.</p><p class="small">10 study-map parts · Slide references and worked examples</p></div>
     </div>
     <div class="section-heading"><h3>Your progress</h3><span class="small">From completed tests · Saved in this browser</span></div>
     <div class="stats-row" id="homeStats"></div>
@@ -111,15 +112,20 @@
     <div class="card">
       <div class="study-map-intro">
         <div>
-          <div class="eyebrow">Prerequisites</div>
-          <h2>Your prerequisite study map</h2>
-          <p class="small">The material is organised like the Strategy &amp; Marketing study map: 10 parts for Financial Accounting and 10 parts for Cost Accounting. Expand a part for its explanation, learning objectives and related concept cards.</p>
+          <div class="eyebrow">Study Map</div>
+          <h2>Three chapters, ten parts each</h2>
+          <p class="small">Financial Accounting and Cost Accounting cover the prerequisite annexures. Financial Statement Consolidation follows the two Lecture 03 videos. Expand a part for its explanation, three points to master and source-slide references where available.</p>
         </div>
         <div class="map-legend" aria-label="Study status">
           <span><i class="map-dot ready" aria-hidden="true"></i> Ready</span>
           <span><i class="map-dot next" aria-hidden="true"></i> Next</span>
         </div>
       </div>
+      <nav class="map-jump" aria-label="Jump to a study chapter">
+        <a href="#map-financial-accounting">Financial Accounting</a>
+        <a href="#map-cost-accounting">Cost Accounting</a>
+        <a href="#map-financial-statement-consolidation">Financial Statement Consolidation</a>
+      </nav>
       <div id="studyMapGrid" class="study-map"></div>
     </div>
   </section>
@@ -127,7 +133,7 @@
   <section id="concepts" class="app-section hidden">
     <div class="card">
       <h2>Concepts</h2>
-      <p class="small">Each card gives the meaning, how the rule works in practice, and the typical exam trap. The <b>Going deeper</b> sections add important points from the Financial Statements Recovery lecture, with slide references. Pick a topic to narrow the areas below it. Where the course material follows an older standard, a <b>Today</b> note adds what current IFRS says — the answers to learn for the exam stay the ones in the annexure.</p>
+      <p class="small">Each card gives the meaning, how the rule works in practice, and the typical exam trap. The <b>Going deeper</b> sections add important points from the Financial Statements Recovery lecture, with slide references. The new consolidation chapter is in Study Map. Pick a topic to narrow the areas below it. Where the course material follows an older standard, a <b>Today</b> note adds what current IFRS says — the answers to learn for the exam stay the ones in the annexure.</p>
       <div class="pillrow" id="conceptPills"></div>
       <input class="searchbox" id="conceptSearch" placeholder="Search concepts..." aria-label="Search concepts" />
       <p class="small result-count" id="conceptResultCount" role="status" aria-live="polite"></p>

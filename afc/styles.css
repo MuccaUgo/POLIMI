@@ -107,6 +107,9 @@ main:focus { outline: none; }
 .map-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .map-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok-border); }
 .map-dot.next { background: var(--warn); }
+.map-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.map-jump a { border: 1px solid var(--line); border-radius: 99px; padding: 9px 13px; background: var(--soft); color: var(--accent); font-size: 12px; font-weight: 700; text-decoration: none; }
+.map-jump a:hover, .map-jump a:focus-visible { border-color: var(--accent); background: var(--card); }
 .study-map { display: grid; gap: 18px; }
 .map-topic { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--bg); }
 .map-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--line); background: var(--soft); }
@@ -132,6 +135,8 @@ main:focus { outline: none; }
 .map-detail ul { margin: 0 0 16px; padding-left: 19px; color: var(--text2); font-size: 12px; line-height: 1.65; }
 .map-detail li + li { margin-top: 6px; }
 .map-detail .map-connection { border-left: 2px solid var(--accent2); padding-left: 11px; font-size: 12px; }
+.map-detail .map-note { margin-top: 16px; padding: 12px 14px; border: 1px solid var(--warn); border-radius: 9px; background: var(--soft); color: var(--text); font-size: 13px; }
+.map-detail .map-source { margin-top: 16px; color: var(--muted); font-size: 12px; }
 .map-detail .map-action { width: 100%; justify-content: space-between; margin-top: 18px; padding: 10px 12px; font-size: 11px; }
 .grid, .topic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .topic { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; overflow-wrap: break-word; }

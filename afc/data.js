@@ -1,13 +1,11 @@
-// Study data for the Accounting, Finance & Control background topics, generated from the course
-// annexures on IFRS financial reporting and on cost accounting.
+// Study data for the Accounting, Finance & Control annexures and lecture notes.
 const TOPICS = [
  { name: "Financial Accounting", categories: ["Principles", "Balance Sheet", "Income Statement", "Cash Flow", "Notes & Reporting"] },
  { name: "Cost Accounting", categories: ["Cost Basics", "Cost Classification", "Cost Configurations", "Allocation Methods"] }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
-// The prerequisite map mirrors the Strategy & Marketing study map: each annexure is
-// a chapter with its own ten-part route. Every part opens the related concept area.
+// Three ten-part chapters cover the two prerequisite annexures and Lecture 03 consolidation.
 const STUDY_MAP = [
  {
   "name": "Financial Accounting",
@@ -298,6 +296,154 @@ const STUDY_MAP = [
     "connection": "ABC completes the annexure by replacing one broad allocation assumption with several activity-specific relationships.",
     "filter": "Allocation Methods",
     "status": "ready"
+   }
+  ]
+ },
+
+ {
+  "name": "Financial Statement Consolidation",
+  "subtitle": "10 parts · Lecture 03, videos 1–2",
+  "blocks": [
+   {
+    "number": "01",
+    "title": "The Group and the Consolidated View",
+    "summary": "See separate legal companies as one economic reporting entity.",
+    "overview": "A group consists of a parent and one or more subsidiaries: each company remains a separate legal entity, while the parent controls the subsidiaries. Separate financial statements show each legal entity; consolidated statements present the parent and subsidiaries as one economic entity. This reveals the group's underlying assets, liabilities, income and cash flows instead of showing only the parent's investment line. The Barilla example in the lecture makes the distinction between a company and its wider group concrete.",
+    "keyPoints": [
+     "Define a parent, a subsidiary and a group without confusing legal separation with the consolidated economic view.",
+     "Explain why the parent's investment balance alone cannot reveal the subsidiary's plant, inventory, cash and debt.",
+     "Distinguish the separate financial statements of group members from the consolidated statements for the group."
+    ],
+    "connection": "Once the reporting entity is clear, classify the parent's relationship with each investee before choosing an accounting method.",
+    "slides": "3–5, 15–19",
+    "status": "ready"
+   },
+   {
+    "number": "02",
+    "title": "Investments and the Equity Method",
+    "summary": "Choose the accounting method from the relationship with the investee.",
+    "overview": "Control of a subsidiary leads to full consolidation under IFRS 10. Significant influence over an associate leads to the equity method under IAS 28: record the investment initially at cost, then adjust its carrying amount for the investor's share of post-acquisition profit or loss; distributions received reduce that carrying amount. Joint control falls under IFRS 11: a joint venture uses the equity method, while a joint operation reflects rights to assets and obligations for liabilities. A holding percentage is evidence to assess, not the method by itself.",
+    "keyPoints": [
+     "Match subsidiary, associate and joint arrangement to control, significant influence and joint control respectively.",
+     "Reconcile an equity-method investment from cost through the share of profit or loss and any dividends received.",
+     "Explain why a joint arrangement must be classified by its rights and obligations before selecting its treatment."
+    ],
+    "connection": "The contrast with the equity method shows why deciding whether control exists is the gateway to line-by-line consolidation.",
+    "slides": "6–14, 64",
+    "status": "ready"
+   },
+   {
+    "number": "03",
+    "title": "The Three Elements of Control",
+    "summary": "Test power, variable returns and the link between them together.",
+    "overview": "IFRS 10 requires all three elements: current power over the investee's relevant activities, exposure or rights to variable returns, and the ability to use that power to affect those returns. Relevant activities are decisions that significantly change performance, such as sales, investment or financing. Rights must be substantive and exercisable in practice. More than half the voting rights is a useful indicator, but the lecture's 40% examples show why the dispersion of other shareholders and the actual decision rights matter.",
+    "keyPoints": [
+     "State the three required elements of control and explain the causal link between power and variable returns.",
+     "Identify relevant activities and distinguish substantive decision rights from a passive or merely protective interest.",
+     "Use the 40% examples to show why ownership percentages alone cannot settle control or significant influence."
+    ],
+    "connection": "Once the consolidation perimeter is established, the members' reports must be made comparable before they are combined.",
+    "slides": "20–21",
+    "status": "ready"
+   },
+   {
+    "number": "04",
+    "title": "Pre-Consolidation Alignment",
+    "summary": "Align reporting dates, accounting policies and currency before adding numbers.",
+    "overview": "The lecture's preparation checklist has three parts. Align subsidiaries' closing dates with the parent's date, normally through interim statements; if that is impracticable, the slides allow a gap of no more than three months with consistent periods and adjustments for significant intervening events. Align accounting policies for similar transactions. Translate foreign-currency reports into the group's presentation currency; the lecture contrasts transaction-date or suitable average rates for income with closing rates for balance-sheet items and places translation differences in an equity reserve.",
+    "keyPoints": [
+     "List the three adjustments needed before combining: reporting date, accounting policies and presentation currency.",
+     "Explain the slide's three-month closing-date exception and the need to adjust significant intervening events.",
+     "Recognise that different translation rates can create a translation reserve rather than ordinary operating profit."
+    ],
+    "connection": "These alignments make like-for-like aggregation possible; they precede the three mechanical consolidation steps.",
+    "slides": "24–35",
+    "status": "ready"
+   },
+   {
+    "number": "05",
+    "title": "Combine Like Items",
+    "summary": "Add the parent's and subsidiaries' corresponding lines as a first pass.",
+    "overview": "After alignment, aggregate assets, liabilities, equity, income, expenses and cash flows line by line. The simple A-and-B example adds a subsidiary's plant to the parent's resources and also brings in the subsidiary's equity. This aggregated column is an intermediate working total, not the final consolidated statement: it still contains the parent's investment in B and B's own equity. A controlled subsidiary's identifiable assets and liabilities enter the process in full even when the parent owns less than 100%; the other owners are shown later as non-controlling interests.",
+    "keyPoints": [
+     "Build a line-by-line aggregate of like items from a parent and a controlled subsidiary.",
+     "Explain why full consolidation begins with 100% of a controlled subsidiary rather than the parent's ownership percentage.",
+     "Identify the parent-investment and subsidiary-equity balances still present in the provisional aggregated column."
+    ],
+    "connection": "The next step removes the duplicate representation of the subsidiary created by the first combination.",
+    "slides": "37",
+    "status": "ready"
+   },
+   {
+    "number": "06",
+    "title": "Offset Investment and Subsidiary Equity",
+    "summary": "Remove the parent's investment against the subsidiary equity it represents.",
+    "overview": "When A buys all of B for 100 and B's equity is also 100, the simple worksheet adds B's assets and equity and then removes A's investment asset of 100 against B's equity of 100. The final group statement keeps B's underlying assets and liabilities and the parent's equity, without counting ownership of B twice. Equality of purchase price and book equity is a teaching case; in an actual acquisition, fair-value adjustments, goodwill and possibly non-controlling interests explain the difference.",
+    "keyPoints": [
+     "Perform the simple 100-against-100 offset and identify which asset and equity lines disappear.",
+     "Explain the double-counting that would remain if the parent's investment and the subsidiary's equity were retained.",
+     "Distinguish this simple teaching case from a purchase requiring fair-value, goodwill or ownership-share adjustments."
+    ],
+    "connection": "After ownership balances are offset, internal trading and financing balances must also disappear from the group view.",
+    "slides": "39–41",
+    "status": "ready"
+   },
+   {
+    "number": "07",
+    "title": "Eliminate Intragroup Transactions",
+    "summary": "Keep only transactions with parties outside the group.",
+    "overview": "An internal sale or loan is comparable to moving goods or cash between divisions of one entity. Remove reciprocal internal revenue and expense, receivables and payables, intragroup dividends and unrealised profits embedded in inventory or fixed assets. In the lecture example, A owns 80% of B and sells B services for 500: eliminate revenue of 500 against B's cost of 500, and eliminate the unpaid intercompany receivable of 300 against B's payable of 300. Both eliminations are made in full despite the 80% ownership.",
+    "keyPoints": [
+     "Name the internal flows, balances, dividends and unrealised gains that must not survive consolidation.",
+     "Reproduce both adjustments in the 500-service and 300-unpaid-balance example.",
+     "Explain why the internal amounts are fully eliminated even when the parent owns only 80% of the subsidiary."
+    ],
+    "connection": "With the three basic steps clear, acquisition-date measurement explains why a real worksheet is more complex.",
+    "slides": "43–45",
+    "status": "ready"
+   },
+   {
+    "number": "08",
+    "title": "Acquisition-Date Fair Value and Deferred Tax",
+    "summary": "Remeasure identifiable net assets and account for their tax effects.",
+    "overview": "At the date control is acquired, identify the subsidiary's assets and liabilities at their acquisition-date fair values rather than carrying over every book amount unchanged. In Mickey–Mouse, plant is worth 1,000 more than book value and provisions are 200 higher. At the 50% tax rate used in the slides, the plant uplift creates a 500 deferred tax liability and the provision uplift a 100 deferred tax asset. The net uplift in identifiable assets after these effects is 1,000 − 200 − 500 + 100 = 400.",
+    "keyPoints": [
+     "Separate the 1,000 plant uplift from the 200 increase in provisions in the Mickey–Mouse worksheet.",
+     "Calculate the illustrated 500 deferred tax liability and 100 deferred tax asset using the stated 50% rate.",
+     "Derive the 400 net fair-value uplift that will change the acquisition-date identifiable net assets."
+    ],
+    "connection": "The adjusted net assets become the denominator of the acquisition calculation: any remaining excess price is goodwill.",
+    "slides": "47–50",
+    "status": "ready"
+   },
+   {
+    "number": "09",
+    "title": "Goodwill and Bargain Purchase",
+    "summary": "Measure the residual after recognising identifiable net assets.",
+    "overview": "Goodwill is the excess of acquisition consideration plus any measured non-controlling interest over the acquisition-date value of identifiable net assets. It is not simply purchase price minus the subsidiary's book equity. In the 100%-owned Mickey–Mouse case, book equity is 2,000 and the net fair-value uplift after tax is 400, so identifiable net assets are 2,400 and the 2,700 price leaves goodwill of 300. If the calculation is negative, reassess identification and measurement first; a remaining bargain-purchase difference is recognised as a gain.",
+    "keyPoints": [
+     "Use consideration plus any non-controlling interest minus identifiable net assets as the goodwill structure.",
+     "Reproduce the Mickey–Mouse result of 2,700 − (2,000 + 400) = 300 rather than using book equity alone.",
+     "Explain the review required before recognising a negative residual as a bargain-purchase gain."
+    ],
+    "connection": "The treatment of the portion held by outside shareholders determines which goodwill amount is reported.",
+    "slides": "51–56",
+    "status": "ready"
+   },
+   {
+    "number": "10",
+    "title": "Non-Controlling Interests and Two Goodwill Methods",
+    "summary": "Show outside owners separately after consolidating the subsidiary in full.",
+    "overview": "When a parent owns less than all of a controlled subsidiary, the group still includes 100% of its identifiable assets, liabilities and results; the share attributable to other owners is reported as non-controlling interests. At acquisition, IFRS 3 permits their measurement at fair value, producing full goodwill, or at their proportionate share of identifiable net assets, producing partial goodwill. In STAR–LIGHT, fair-value NCI of 200 gives goodwill of 130. The proportionate method gives parent goodwill of 78 and, using the slide's net identifiable assets of 370, NCI of 40% × 370 = 148.",
+    "keyPoints": [
+     "Explain why a 60% acquisition brings in the controlled subsidiary's assets and liabilities in full.",
+     "Distinguish NCI measured at fair value from NCI measured as a share of identifiable net assets.",
+     "Recalculate STAR–LIGHT: full goodwill 130; partial goodwill 78; proportionate NCI 148, not the slide's 76."
+    ],
+    "connection": "This completes the group statement by separating the parent's interest, outside owners' interest and any acquisition goodwill.",
+    "slides": "57–63",
+    "status": "ready",
+    "note": "Slide 63 reports NCI of 76 by taking 40% of book equity of 190. That omits the 180 net fair-value uplift used in the same example. The proportionate-share amount is 40% × (190 + 180) = 148; the slide's partial-goodwill result of 78 remains consistent."
    }
   ]
  }

@@ -200,27 +200,32 @@
     return cat === value;
   }
 
-  /* ---------------- prerequisite study map ---------------- */
+  /* ---------------- study map ---------------- */
   function renderStudyMap() {
     var grid = $("studyMapGrid");
     if (!grid || typeof STUDY_MAP === "undefined") return;
     grid.innerHTML = STUDY_MAP.map(function (topic) {
       var ready = topic.blocks.filter(function (block) { return block.status === "ready"; }).length;
-      return '<section class="map-topic">' +
+      var topicId = "map-" + topic.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+      return '<section class="map-topic" id="' + topicId + '">' +
         '<div class="map-heading"><div><div class="kicker">' + esc(topic.subtitle) + '</div><h3>' + esc(topic.name) + '</h3></div>' +
         '<span class="badge">' + ready + '/' + topic.blocks.length + ' ready</span></div>' +
         '<div class="map-list">' + topic.blocks.map(function (block, blockIndex) {
           var isReady = block.status === "ready";
           var action = block.filter
             ? '<button class="ghost map-action" data-map-filter="' + esc(block.filter) + '">Open ' + esc(block.filter) + ' concepts <span aria-hidden="true">→</span></button>'
-            : '<button class="ghost map-action" data-section="' + esc(block.section || "programme") + '">Open course programme <span aria-hidden="true">→</span></button>';
-          return '<details class="map-block ' + (isReady ? "ready" : "next") + '" name="prerequisite-parts"' + (blockIndex === 0 ? " open" : "") + '>' +
+            : block.section
+              ? '<button class="ghost map-action" data-section="' + esc(block.section) + '">Open course programme <span aria-hidden="true">→</span></button>'
+              : "";
+          var note = block.note ? '<p class="map-note"><b>Check the slide.</b> ' + esc(block.note) + '</p>' : "";
+          var source = block.slides ? '<p class="map-source">Financial Statement Consolidation · slides ' + esc(block.slides) + '</p>' : "";
+          return '<details class="map-block ' + (isReady ? "ready" : "next") + '" name="study-parts"' + (blockIndex === 0 ? " open" : "") + '>' +
             '<summary class="map-block-heading"><span class="map-number">' + esc(block.number) + '</span>' +
             '<div class="map-copy"><strong>' + esc(block.title) + '</strong><small>' + esc(block.summary) + '</small></div>' +
             '<span class="map-status">' + (isReady ? "Ready" : "Next") + '</span><span class="map-toggle" aria-hidden="true">⌄</span></summary>' +
             '<div class="map-detail"><p>' + esc(block.overview) + '</p>' +
             '<h4>What you should master</h4><ul>' + block.keyPoints.map(function (point) { return '<li>' + esc(point) + '</li>'; }).join("") + '</ul>' +
-            '<p class="map-connection"><b>Why it matters.</b> ' + esc(block.connection) + '</p>' + action + '</div></details>';
+            '<p class="map-connection"><b>Why it matters.</b> ' + esc(block.connection) + '</p>' + note + source + action + '</div></details>';
         }).join("") + '</div></section>';
     }).join("");
 
