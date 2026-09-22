@@ -309,14 +309,16 @@ const CONCEPTS = [
   "title": "Financial Accounting",
   "meaning": "The branch of accounting intended for users outside the organization (external accountability). It refers to mandatory financial reports that companies must prepare and publish according to international and national rules.",
   "how": "Annual reports are the main yearly documents: the accounting year lasts 12 months but may start in different months around the world (January, March, June). Interim reports include quarterly and half-year reports.",
-  "trap": "Companies also publish environmental, corporate and social responsibility reports, but those are voluntary. Financial reporting is the part that is mandatory."
+  "trap": "Companies also publish environmental, corporate and social responsibility reports, but those are voluntary. Financial reporting is the part that is mandatory.",
+  "deep": {"text": "The AFC lens is that of a financial analyst: read, interpret and compare annual reports of profit-making industrial and service companies. Before consolidating subsidiaries or benchmarking a competitor, check each company's reporting period. A twelve-month year can end in different months, so equal year labels need not cover equal dates.", "source": "Financial Statements Recovery, slides 5–6 and 11–12"}
  },
  {
   "cat": "Principles",
   "title": "The Four IFRS Financial Statements",
   "meaning": "Under IFRS an annual report must contain four compulsory financial statements: the balance sheet, the income statement, the cash flow statement, and the statement of changes in equity.",
   "how": "Balance sheet = condition of resources and rights at year end. Income statement = revenues and costs of the year. Cash flow statement = cash flows of the year. Statement of changes in equity = variations in equity during the year.",
-  "trap": "The notes to the financial statements are compulsory too. They are not an optional appendix: they explain the rules followed and the choices made in preparing the statements."
+  "trap": "The notes to the financial statements are compulsory too. They are not an optional appendix: they explain the rules followed and the choices made in preparing the statements.",
+  "deep": {"text": "For listed companies, the lecture also points to an external auditor's report, a supervisory board report and management commentary. These help interpret the figures but serve different purposes from the four statements and the compulsory notes. Read the auditor's opinion and the notes before treating a number as directly comparable.", "source": "Financial Statements Recovery, slides 9–10"}
  },
  {
   "cat": "Principles",
@@ -331,7 +333,8 @@ const CONCEPTS = [
   "title": "Accrual Event vs Cash Event",
   "meaning": "The accrual event is the moment the transaction takes effect, when the company signs the contract transferring the goods and all the risk included. The cash event is the moment cash or its equivalent is actually received or paid.",
   "how": "Car sales of 1 million reached in December 2013 with cash collected in January 2014: revenue of 1 million is counted in 2013 (accrual), cash in 2013 is 0 and there is a cash inflow of 1 million in 2014.",
-  "trap": "The same single transaction generates both an accrual event and a cash event, in different years. Do not treat them as alternative readings of the same figure."
+  "trap": "The same single transaction generates both an accrual event and a cash event, in different years. Do not treat them as alternative readings of the same figure.",
+  "deep": {"text": "Follow the same credit sale across three places: revenue increases profit in the income statement; a receivable appears in the balance sheet; when the customer pays, the receivable becomes cash and the cash flow statement records the inflow. Collection does not create a second sale.", "source": "Financial Statements Recovery, slides 13 and 15"}
  },
  {
   "cat": "Principles",
@@ -345,7 +348,8 @@ const CONCEPTS = [
   "title": "Benchmark vs Allowed Treatment",
   "meaning": "When IFRS gives the option to choose between accounting criteria, the preferred one is called the benchmark treatment and the possible alternative is called the allowed treatment.",
   "how": "Benchmark treatment indicates the preferred accounting criteria for a specific category; allowed treatment is the legitimate alternative for that category.",
-  "trap": "The allowed treatment is a fully legitimate option, not an irregularity. The notes are what tell the reader which of the two the company actually applied."
+  "trap": "The allowed treatment is a fully legitimate option, not an irregularity. The notes are what tell the reader which of the two the company actually applied.",
+  "deep": {"text": "Two companies can report different carrying amounts and profits even when they hold similar assets, because an allowed measurement choice or estimate differs. For comparison, identify the policy in the notes and ask which statement absorbs later changes: profit or loss, or a reserve within equity.", "source": "Financial Statements Recovery, slides 8 and 20–25"}
  },
  {
   "cat": "Principles",
@@ -353,7 +357,8 @@ const CONCEPTS = [
   "meaning": "IFRS principles state that companies must review all assets to look for any indication of unrecoverable loss of their value. This assessment is called the impairment test.",
   "how": "The frequency depends on the category of asset. Goodwill, because of its indefinite nature, must be tested every year, and the loss of value is credited in the income statement.",
   "trap": "Impairment is about an unrecoverable loss of value, not about routine wear. Systematic allocation of cost over useful life is depreciation or amortization, which is a different mechanism.",
-  "today": "IAS 36 states the test as a comparison: an asset is impaired when its carrying amount exceeds its recoverable amount, the higher of fair value less costs of disposal and value in use. “Credited in the income statement” means charged against profit. The loss also need not be permanent: for assets other than goodwill it can be reversed if the estimates that produced it change."
+  "today": "IAS 36 states the test as a comparison: an asset is impaired when its carrying amount exceeds its recoverable amount, the higher of fair value less costs of disposal and value in use. “Credited in the income statement” means charged against profit. The loss also need not be permanent: for assets other than goodwill it can be reversed if the estimates that produced it change.",
+  "deep": {"text": "The practical comparison is carrying amount against recoverable amount. If the carrying amount is 120 and recoverable amount is 95, the asset is written down by 25 and an impairment expense reduces profit. Value in use estimates discounted future cash flows. The slide simplifies the other input to fair value; the Today note gives the complete IAS 36 wording.", "source": "Financial Statements Recovery, slides 21 and 27–28"}
  },
  {
   "cat": "Balance Sheet",
@@ -381,7 +386,19 @@ const CONCEPTS = [
   "title": "Property, Plant and Equipment (PPE)",
   "meaning": "PPE includes tangible assets retained by the enterprise for long-term use, employed in the production of goods and services or in supporting activities: production machinery, buildings, land, office equipment.",
   "how": "Initial measurement is at cost. Measurement after initial recognition follows either the cost model, where the asset is carried at cost, or the revaluation model, where it is carried at a revalued (fair value) amount.",
-  "trap": "With the sole exception of land, PPE must be depreciated, whichever of the two measurement models is applied."
+  "trap": "With the sole exception of land, PPE must be depreciated, whichever of the two measurement models is applied.",
+  "deep": {"text": "For an owner-used building or machine, the lecture contrasts cost less depreciation and impairment with revaluation. An upward revaluation normally creates a revaluation surplus in equity; a later decrease can use that surplus for the same asset before affecting profit. The chosen model therefore changes both the asset value and where gains or losses appear.", "source": "Financial Statements Recovery, slide 30"}
+ },
+ {
+   "cat": "Balance Sheet",
+   "title": "Investment Property",
+   "meaning": "Land or a building held to earn rental income, benefit from capital appreciation, or both, rather than to support the company's own production or administration.",
+   "how": "The lecture measures it initially at cost. Under the fair value model, later changes in fair value go to profit or loss and the property is not depreciated. Under the cost model, depreciable buildings are depreciated, impairment is considered, and fair value is disclosed in the notes.",
+   "trap": "The same building can be PPE when used by the company and investment property when held for rent. PPE revaluation gains normally enter an equity surplus; investment-property fair value changes enter profit or loss.",
+   "deep": {
+     "text": "For financial analysis, ask why the property is held before comparing its carrying amount with another company's. A fair value gain can raise profit without bringing in cash, while cost-model depreciation lowers profit without a current cash payment. The accounting policy can therefore affect both profit and asset-based ratios.",
+     "source": "Financial Statements Recovery, slides 30–31"
+   }
  },
  {
   "cat": "Balance Sheet",
@@ -402,7 +419,8 @@ const CONCEPTS = [
   "title": "Intangible Assets",
   "meaning": "IFRS defines intangible assets as identifiable nonmonetary assets without physical substance. Their three critical attributes are identifiability, control (the power to obtain benefits from the asset) and the existence of future economic benefits, such as revenues or reduced future costs.",
   "how": "They split into intangibles with a finite life, such as patents, and intangibles with an indefinite life, among which goodwill is of particular interest. Initial measurement is at cost; the benchmark treatment afterwards is cost less any amortization and impairment losses.",
-  "trap": "The revaluation model is allowed only if fair value can be determined by reference to an active market (for example milk quotas), and revaluation increases are credited directly to the revaluation reserve under equity."
+  "trap": "The revaluation model is allowed only if fair value can be determined by reference to an active market (for example milk quotas), and revaluation increases are credited directly to the revaluation reserve under equity.",
+  "deep": {"text": "Identification, control and future benefits are separate recognition checks. Training, advertising and start-up spending in the lecture do not become intangible assets simply because managers expect future benefits; they appear as expenses. If an intangible has a finite life, amortise it; if its useful life is indefinite, review that assessment and test for impairment.", "source": "Financial Statements Recovery, slides 33–35"}
  },
  {
   "cat": "Balance Sheet",
@@ -410,7 +428,8 @@ const CONCEPTS = [
   "meaning": "Goodwill can occur from mergers and acquisitions when the purchasing value is higher than the fair value of the resources acquired. It is the difference between the acquisition cost and the participation of the purchaser in the fair value of assets less liabilities.",
   "how": "It sits under intangible assets and has an indefinite life, so IFRS requires an impairment test every year. The loss of its value is credited in the income statement.",
   "trap": "Goodwill is not amortized over a useful life like a patent. Its indefinite nature is exactly why it gets the annual impairment test instead.",
-  "today": "Under IAS 36 an impairment loss on goodwill reduces the profit of the year and, unlike losses on other assets, can never be reversed in a later period."
+  "today": "Under IAS 36 an impairment loss on goodwill reduces the profit of the year and, unlike losses on other assets, can never be reversed in a later period.",
+  "deep": {"text": "The lecture ties goodwill to an acquisition of a business: compare the consideration paid with the fair value of identifiable net assets acquired. Do not create a goodwill balance for internally built reputation or for ordinary training and advertising spend. Once recognised, goodwill is tested for impairment rather than amortised.", "source": "Financial Statements Recovery, slide 36"}
  },
  {
   "cat": "Balance Sheet",
@@ -478,14 +497,16 @@ const CONCEPTS = [
   "title": "Equity",
   "meaning": "IFRS defines equity as the residual interest in the assets of the enterprise after deducting all its liabilities. It reports all shareholders' rights.",
   "how": "It is organized in four categories: capital, reserves, profit or loss brought forward, and profit or loss for the year.",
-  "trap": "Equity is a residual, not an independent valuation of the company: it follows from assets minus liabilities, and has no direct relation to market capitalization."
+  "trap": "Equity is a residual, not an independent valuation of the company: it follows from assets minus liabilities, and has no direct relation to market capitalization.",
+  "deep": {"text": "Trace how equity moves: owners contribute capital; the income statement adds the year's profit or loss; owners may receive dividends; retained amounts remain in reserves or profit brought forward. Dividends are a distribution of equity, not an operating expense that reduces EBIT.", "source": "Financial Statements Recovery, slides 42–43"}
  },
  {
   "cat": "Balance Sheet",
   "title": "Capital and Par Value",
   "meaning": "Capital accounts for the portion of equity obtained directly by shareholders' provisions, made at the corporation's foundation or in subsequent periods.",
   "how": "Capital is reported at par (nominal) value, the value stated in the enterprise's charter and at which shares are offered initially. Under IFRS, capital is decreased by receivables from shareholders, shares issued but not fully paid, and treasury shares.",
-  "trap": "Par value is unrelated to market value and to the issuing value at which shares may be put on the market in the future."
+  "trap": "Par value is unrelated to market value and to the issuing value at which shares may be put on the market in the future.",
+  "deep": {"text": "Keep three per-share values separate. Nominal value is the amount assigned to a share in stated capital; book value per share is equity divided by shares outstanding; market value is the share price investors pay. Equal nominal values do not imply equal book or market values.", "source": "Financial Statements Recovery, slides 44–45"}
  },
  {
   "cat": "Balance Sheet",
@@ -569,7 +590,8 @@ const CONCEPTS = [
   "title": "Operating Profit (EBIT)",
   "meaning": "The result of operating activities, addressed alternatively as operating profit, operating income or net operating income, and most commonly called earnings before interest and taxes (EBIT).",
   "how": "It is obtained as revenues minus operating costs, and it closes the section of the income statement devoted to operating activities, before any financial item.",
-  "trap": "EBIT stops before interest and taxes by construction: finance costs and tax expense belong to the sections below it."
+  "trap": "EBIT stops before interest and taxes by construction: finance costs and tax expense belong to the sections below it.",
+  "deep": {"text": "The lecture builds an analyst's bridge: EBITDA is operating profit before depreciation and amortisation; subtract those expenses to reach EBIT. Then include finance items and tax to reach profit from continuing operations, and add the result of discontinued operations to obtain net profit. EBITDA still includes accruals and is not cash flow.", "source": "Financial Statements Recovery, slide 50"}
  },
  {
   "cat": "Income Statement",
@@ -577,6 +599,17 @@ const CONCEPTS = [
   "meaning": "Below the operating section, the income statement lists income and charges related to financial activities.",
   "how": "These include profit from shares of profit of associates, investment revenues, write-off of financial assets from the impairment test, fair value variation of financial activities classified as FVTPL, and finance costs such as financial interests related to bank debt and bonds.",
   "trap": "Adding financial income and subtracting financial expenses to EBIT gives profit before taxes from continuing operations; subtracting taxes gives profit after taxes from continuing operations, and only then discontinued operations lead to net profit."
+ },
+ {
+   "cat": "Income Statement",
+   "title": "Basic and Diluted Earnings per Share",
+   "meaning": "Earnings per share (EPS) expresses profit attributable to ordinary shareholders for each ordinary share; the lecture presents it for entities with publicly traded securities or a public issue in progress.",
+   "how": "Basic EPS divides profit attributable to ordinary equity holders by the weighted average number of ordinary shares outstanding. Diluted EPS also reflects dilutive potential ordinary shares, such as convertible instruments, with appropriate adjustments to the calculation.",
+   "trap": "Do not divide total net profit by the number of shares at year end: use profit attributable to ordinary shareholders and the weighted average shares for the period. Potential shares belong in diluted EPS, not basic EPS.",
+   "deep": {
+     "text": "EPS supports comparison across periods and companies, but inspect both profit attributable to ordinary holders and changes in share count. A company may increase total profit while EPS falls if the weighted average number of shares grows faster.",
+     "source": "Financial Statements Recovery, slides 51–52"
+   }
  },
  {
   "cat": "Income Statement",
@@ -597,7 +630,8 @@ const CONCEPTS = [
   "title": "Direct vs Indirect Method",
   "meaning": "IFRS allows two methods for presenting the cash flow statement: the direct method, encouraged by IAS/IFRS, and the indirect method.",
   "how": "The direct method shows each major class of gross cash receipts and gross cash payments. The indirect method starts from accrual results, usually operating profit or net profit, and adjusts them for the effects of noncash transactions.",
-  "trap": "The indirect method is often adopted in practice precisely because it highlights the relation between accrual results and financial flows."
+  "trap": "The indirect method is often adopted in practice precisely because it highlights the relation between accrual results and financial flows.",
+  "deep": {"text": "The direct method shows major cash receipts and payments. The indirect method starts from accrual profit and adjusts for non-cash items such as depreciation and for changes in working capital. Both methods must explain the same operating cash flow; investing and financing sections are then shown separately.", "source": "Financial Statements Recovery, slides 54–56"}
  },
  {
   "cat": "Cash Flow",

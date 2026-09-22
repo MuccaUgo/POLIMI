@@ -50,7 +50,7 @@ test("every entry is well formed and the dates run in order", () => {
 
 test("lectures fall on the Monday/Wednesday slots the course uses", () => {
   for (const l of calendar) {
-    const day = new Date(l.date + "T00:00:00").getUTCDay();
+    const day = new Date(l.date + "T00:00:00Z").getUTCDay();
     assert.ok(day === 1 || day === 3, `${l.date} (${l.topic}) is not a Monday or Wednesday`);
   }
 });
