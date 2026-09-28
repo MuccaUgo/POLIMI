@@ -16,7 +16,11 @@
     const i = D.RANKS.findIndex(r => r.id === career.rank);
     return D.RANKS[i + 1] || null;
   }
-  const tierOf = career => career.rank === "intern" ? 1 : 2;
+  // Difficulty tier: 1 intern, 2 junior, 3 financial analyst.
+  const TIER = { intern: 1, junior: 2, analyst: 3 };
+  const tierOf = career => TIER[career.rank] || 3;
+  const XP_MULT = { 1: 1, 2: 1.5, 3: 2 };
+  const bonusFor = tier => ({ 1: 5, 2: 8, 3: 11 })[tier] || 5;
 
   // ---------- Jobs ----------
   let seq = 0;
@@ -26,6 +30,8 @@
     return step * r.int(Math.ceil(lo / step), Math.floor(hi / step));
   };
   const itemsFor = (tier, clients) => D.ITEMS.filter(i => i[1] <= tier && clients.includes(i[0]));
+  // Clients with enough documents for a spot-the-error or build job (the listed group has analysis work instead).
+  const bookClients = (tier, clients, n) => clients.filter(c => itemsFor(tier, [c]).length >= n);
 
   function sortJob(tier, clients, r) {
     const pool = itemsFor(tier, clients);
@@ -41,16 +47,17 @@
 
   function quickJob(tier, clients, r) {
     const pool = D.CALLS.filter(c => c[0] <= tier && clients.includes(c[1]));
-    const [, client, question, answer, wrongs, why] = r.pick(pool);
+    const fresh = pool.filter(c => c[0] === tier);
+    const [level, client, question, answer, wrongs, why] = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
     return {
-      type: "quick", client, pickup: "phone", work: "phone", seconds: tier === 1 ? 15 : 12, why,
+      type: "quick", client, pickup: "phone", work: "phone", seconds: level >= 3 ? 22 : tier === 1 ? 15 : 12, why,
       question, options: r.shuffle([answer].concat(wrongs.slice(0, 3))).map(label => ({ label, correct: label === answer })),
       brief: "The phone is ringing! Answer before the client hangs up."
     };
   }
 
   function spotJob(tier, clients, r) {
-    const client = r.pick(clients);
+    const client = r.pick(bookClients(tier, clients, 5));
     const pool = r.shuffle(itemsFor(tier, [client]));
     const picked = [];
     for (const it of pool) { if (!picked.some(p => p[3] === it[3])) picked.push(it); if (picked.length === 5) break; }
@@ -68,7 +75,7 @@
   const article = w => /^[AEIOU]/i.test(w) ? "an" : "a";
 
   function buildJob(tier, clients, r) {
-    const client = r.pick(clients);
+    const client = r.pick(bookClients(tier, clients, 6));
     const pool = r.shuffle(itemsFor(tier, [client]));
     const picked = [];
     for (const it of pool) {
@@ -126,7 +133,7 @@
 
   function fillJob(tier, clients, r) {
     const kinds = D.FILL_TIER[tier].filter(k => k !== "timesheet" || clients.includes("verdi")).filter(k => k !== "hotelNights" || clients.includes("hotel"));
-    const kind = r.pick(tier === 2 && r.chance(0.25) ? D.FILL_TIER[1] : kinds);
+    const kind = r.pick(tier >= 2 && r.chance(0.25) ? D.FILL_TIER[1] : kinds);
     const f = FILLS[kind](r);
     return Object.assign({ type: "fill", pickup: "inbox", work: "desk" }, f);
   }
@@ -230,7 +237,11 @@
   };
 
   const MAKERS = { sort: sortJob, quick: quickJob, spot: spotJob, build: buildJob, order: orderJob, fill: fillJob };
-  const MIX = { 1: ["sort", "sort", "quick", "fill", "spot", "order", "build"], 2: ["sort", "quick", "fill", "fill", "spot", "order", "build"] };
+  const MIX = {
+    1: ["sort", "sort", "quick", "fill", "spot", "order", "build"],
+    2: ["sort", "quick", "fill", "fill", "spot", "order", "build"],
+    3: ["sort", "quick", "fill", "spot", "build"] // office-analysis.js adds the analyst's jobs
+  };
 
   function clientJob(career, r, forceType) {
     const rank = rankFor(career), tier = tierOf(career);
@@ -257,11 +268,16 @@
       return { ok: right.every(Boolean), right };
     }
     if (job.type === "fill") {
-      const right = job.fields.map(f => Math.abs((answer.values[f.key] == null ? NaN : answer.values[f.key]) - f.answer) < 0.5);
+      const right = job.fields.map(f => Math.abs((answer.values[f.key] == null ? NaN : answer.values[f.key]) - f.answer) <= (f.tol || 0.5));
       const choiceOk = !job.choice || answer.choice === job.choice.answer;
       return { ok: right.every(Boolean) && choiceOk, right, choiceOk };
     }
     if (job.type === "posting") return gradePosting(job, answer.lines);
+    if (job.type === "reclass") {
+      const right = job.items.map((it, i) => answer.placed[i] === it.cat);
+      const fieldsRight = (job.fields || []).map(f => Math.abs((answer.values[f.key] == null ? NaN : answer.values[f.key]) - f.answer) <= (f.tol || 0.5));
+      return { ok: right.every(Boolean) && fieldsRight.every(Boolean), right, fieldsRight };
+    }
     return { ok: false };
   }
 
@@ -282,14 +298,14 @@
   }
 
   // ---------- Rewards ----------
-  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, report: 25 };
+  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, reclass: 5, report: 25 };
   function reward(career, job, ok) {
-    const base = Math.round(XP[job.type] * (job.tier === 2 ? 1.5 : 1));
+    const base = Math.round(XP[job.type] * (XP_MULT[job.tier] || 1));
     if (ok) {
       career.streak = (career.streak || 0) + 1;
       const bonus = career.streak >= 3 ? Math.min(3, Math.floor((career.streak - 1) / 2)) : 0;
       career.xp += base + bonus;
-      career.bonus = (career.bonus || 0) + (job.tier === 2 ? 8 : 5) + (bonus ? 2 : 0);
+      career.bonus = (career.bonus || 0) + bonusFor(job.tier) + (bonus ? 2 : 0);
       if (job.client) {
         career.sat[job.client] = Math.min(100, (career.sat[job.client] || 60) + 4);
         const q = quarterKey(career);
@@ -486,13 +502,18 @@
     return { state: "ready", rank: nr };
   }
   // A hard interview: jobs of the next rank's difficulty, one of each kind, answered in a row.
+  // What each interview asks, by the rank you're applying for.
+  const INTERVIEW_PLAN = {
+    junior: ["spot", "fill", "order", "build", "quick", "fill"],
+    analyst: ["reclassBS", "reclassIS", "quick", "ratio", "segment", "sources"]
+  };
   function planInterview(career, r) {
     const nr = nextRank(career);
     const asIf = Object.assign({}, career, { rank: nr.id });
-    return ["spot", "fill", "order", "build", "quick", "fill"].slice(0, INTERVIEW.questions).map(t => {
+    return (INTERVIEW_PLAN[nr.id] || INTERVIEW_PLAN.junior).slice(0, INTERVIEW.questions).map(t => {
       const j = clientJob(asIf, r, t);
       j.interview = true;
-      if (j.type === "quick") j.seconds = 10;
+      if (j.type === "quick") j.seconds = Math.max(10, j.seconds - 6);
       return j;
     });
   }
@@ -532,7 +553,7 @@
     return {
       v: 1, mode: "career", map: "office", x: 4, y: 6, dir: "up", sound: true, reportTries: 0,
       rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
-      sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
+      sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60, lario: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
       queue: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
       stats: { jobs: 0, right: 0, days: 0, steps: 0, reports: [] }
     };
@@ -545,12 +566,13 @@
     out.stats = Object.assign(newCareer().stats, s.stats);
     ["clientRev", "jobsOk"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
     ["ledger", "queue"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    if (out.rank === "accountant") out.rank = "analyst";
     if (!D.RANKS.some(r => r.id === out.rank)) out.rank = "intern";
     return out;
   }
 
   const api = {
-    eur, acct, rankFor, nextRank, tierOf, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
+    eur, acct, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
     weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };

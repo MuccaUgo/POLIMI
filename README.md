@@ -67,8 +67,12 @@ quarter's invoices, and a dashboard shows revenue, expenses, profit, cash and ea
 end you write the annual report (income statement, balance sheet, weighted-average shares and EPS) from the
 trial balance; the closing entry and the shareholders' meeting follow (5% to the legal reserve, art. 2430
 c.c., and a dividend). You earn a daily salary plus a bonus for good work. Promotions are never automatic:
-once you have the XP you choose when to take a hard six-question interview with Giulia. Intern and Junior
-Accountant are playable; higher ranks open as new content arrives. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
+once you have the XP you choose when to take a hard six-question interview with Giulia. Intern, Junior
+Accountant and Financial Analyst are playable; higher ranks open as new content arrives. The Financial
+Analyst (`office-analysis.js`, from AFC Lecture 05) works on a listed client, Lario Energia: sorting the four
+kinds of public source, the Form 20-F, reclassifying the balance sheet (fixed assets, NOWC, NFP, provisions,
+equity; invested capital = coverage) and the income statement (value added, EBITDA, EBIT, pretax and net
+income), segmental analysis, ROE and the payout ratio. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
 your personnel file; in the adventure, **SAVE BACKUP** is in the menu. Either exports the save as a file or
 a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).

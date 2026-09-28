@@ -31,10 +31,13 @@
   // ---------- Ranks ----------
   // Every step up is a job interview you choose to take; later ranks open as their content arrives.
   const RANKS = [
-    { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno"] },
-    { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "verdi", "hotel"] },
-    { id: "accountant", name: "Accountant", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "pixel"], soon: true },
-    { id: "senior", name: "Senior Accountant", xp: 900, salary: 180, clients: ["forno", "verdi", "hotel", "pixel", "lario"], soon: true },
+    { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno"],
+      blurb: "The five elements, simple documents, and assets = liabilities + equity." },
+    { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "verdi", "hotel"],
+      blurb: "New clients bring new documents: accruals, prepayments, deposits, cut-off. Harder work, better pay." },
+    { id: "analyst", name: "Financial Analyst", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "lario"],
+      blurb: "You read a listed group's annual report like an analyst: sources, the reclassified balance sheet and income statement, segments, ROE and payout." },
+    { id: "senior", name: "Senior Accountant", xp: 900, salary: 180, clients: ["forno", "verdi", "hotel", "lario", "pixel"], soon: true },
     { id: "supervisor", name: "Supervisor", xp: 1500, salary: 240, soon: true },
     { id: "manager", name: "Manager", xp: 2300, salary: 320, soon: true },
     { id: "partner", name: "Partner", xp: 3300, salary: 450, soon: true }
@@ -50,7 +53,8 @@
     forno: { name: "Forno Rossi", kind: "Bakery", icon: "🥐", outfit: "baker", base: 45000 },
     verdi: { name: "Verdi Consulting", kind: "Consultancy", icon: "📈", outfit: "consultant", base: 80000 },
     hotel: { name: "Hotel Lago", kind: "Hotel", icon: "🏨", outfit: "hotelier", base: 120000 },
-    pixel: { name: "Pixel Loop", kind: "Software", icon: "💻", outfit: "coder", base: 60000 }
+    pixel: { name: "Pixel Loop", kind: "Software", icon: "💻", outfit: "coder", base: 60000 },
+    lario: { name: "Lario Energia", kind: "Listed energy group", icon: "⚡", outfit: "consultant", base: 900000, listed: true }
   };
 
   // ---------- Items: what arrives on the desk ----------
@@ -163,6 +167,7 @@
   // ---------- Fill-in forms ----------
   // Each template builds a form from a random generator. Kept here as descriptions; the maths lives in logic.js.
   const FILL_TIER = { 1: ["stock", "till", "payslips", "supplier"], 2: ["prepaid", "accrued", "deposit", "timesheet", "hotelNights"] };
+  FILL_TIER[3] = FILL_TIER[2];
 
   // ---------- Order (by period) ----------
   const ORDER_TIER = { 1: ["simple"], 2: ["simple", "accrual"] };

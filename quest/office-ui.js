@@ -57,7 +57,7 @@
   );
 
   // ---------- Small helpers ----------
-  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS" };
+  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS", reclass: "ANALYSIS" };
   const WHERE = { cabinet: "the right CABINET", desk: "YOUR DESK", books: "the company BOOKS", marco: "Marco", phone: "your phone" };
   const ELEMENT_SHORT = { Asset: "Asset", Liability: "Liab.", Equity: "Equity", Revenue: "Rev.", Expense: "Exp." };
   const article = w => /^[AEIOU]/i.test(w) ? "an" : "a";
@@ -66,6 +66,7 @@
     if (job.type === "posting") return `Memo: ${job.title}`;
     if (job.type === "build") return `Year-end file · ${D.CLIENTS[job.client].name}`;
     if (job.type === "order") return `Cut-off pile · ${D.CLIENTS[job.client].name}`;
+    if (job.type === "reclass") return `${job.docKind.split(" · ")[0]} · ${D.CLIENTS[job.client].name}`;
     if (job.doc) return `${job.doc.kind} · ${D.CLIENTS[job.client].name}`;
     return TYPE_LABEL[job.type];
   }
@@ -334,6 +335,7 @@
     if (job.type === "order") return orderScreen(job, ctx);
     if (job.type === "quick") return quickScreen(job, ctx);
     if (job.type === "posting") return postingScreen(job, ctx);
+    if (job.type === "reclass") return reclassScreen(job, ctx);
     return Promise.resolve(null);
   }
   async function finish(job, answer) {
@@ -454,6 +456,7 @@
     if (job.doc) body = docHtml(job.doc);
     else if (job.type === "build") body = `<div class="doc"><div class="doc-kind">Year-end file</div><div class="doc-title">${job.items.length} items to place</div></div>`;
     else if (job.type === "order") body = `<div class="doc"><div class="doc-kind">Cut-off pile</div><div class="doc-title">${job.items.length} documents from around New Year</div></div>`;
+    else if (job.type === "reclass") body = `<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div><div class="doc-title">${job.items.length} items to classify</div></div>`;
     return screen(`${head(job)}${body}<p class="brief">${esc(job.brief || "")}</p>
       <p class="where">Take it to <b>${esc(WHERE[job.work])}</b>.</p>${go("GOT IT ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.sfx("blip"); E.hideOverlay(); done(); } };
@@ -468,7 +471,7 @@
 
   function fillScreen(job, ctx) {
     return screen(`${head(job, ctx)}${docHtml(job.doc)}<p class="brief">${esc(job.brief)}</p>
-      ${job.fields.map(f => numInput(f.key, f.label)).join("")}
+      ${job.fields.map(f => numInput(f.key, f.label, f.neg)).join("")}
       ${job.choice ? `<div class="lbl">${esc(job.choice.label)}</div>${chips("choice", job.choice.options)}` : ""}${go()}`, (root, done) => {
       const st = {};
       root.onclick = ev => {
@@ -476,7 +479,7 @@
         if (!ev.target.closest("[data-go]")) return;
         const values = {};
         for (const f of job.fields) {
-          const v = num(root.querySelector(`input[data-k="${f.key}"]`).value);
+          const v = num(root.querySelector(`input[data-k="${f.key}"]`).value, f.dec);
           if (v == null) return nag(root, "Fill in every amount first.");
           values[f.key] = v;
         }
@@ -560,6 +563,29 @@
     });
   }
 
+  function reclassScreen(job, ctx) {
+    return screen(`${head(job, ctx)}<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div></div><p class="brief">${esc(job.brief)}</p>
+      <p class="small">${job.cats.map((c, i) => job.short[i] === c ? "" : `<b>${esc(job.short[i])}</b> = ${esc(c)}`).filter(Boolean).join(" · ")}${job.cats.includes("NOWC") ? " · <b>NOWC</b> = net operating working capital · <b>NFP</b> = net financial position" : ""}</p>
+      ${job.items.map((it, i) => `<div class="item"><div>${esc(it.label)}${it.amount != null ? ` <b>${Math.round(it.amount).toLocaleString("en-US")}</b>` : ""}</div>${chips("c" + i, job.cats, job.short)}</div>`).join("")}
+      ${job.fields.map(f => numInput(f.key, f.label, f.neg)).join("")}${go()}`, (root, done) => {
+      const st = {};
+      root.onclick = ev => {
+        if (chipHandler(root, st, ev)) return;
+        if (!ev.target.closest("[data-go]")) return;
+        const placed = job.items.map((_, i) => st["c" + i]);
+        if (placed.some(p => !p)) return nag(root, "Classify every item first.");
+        const values = {};
+        for (const f of job.fields) {
+          const v = num(root.querySelector(`input[data-k="${f.key}"]`).value, f.dec);
+          if (v == null) return nag(root, "Fill in every figure too.");
+          values[f.key] = v;
+        }
+        E.hideOverlay();
+        done({ placed, values });
+      };
+    });
+  }
+
   const ACCOUNT_OPTIONS = `<option value="">Account…</option>` + ["A", "L", "E", "R", "X"].map(t =>
     `<optgroup label="${D.TYPE_NAMES[t]}">${D.ACCOUNTS.filter(a => a.type === t).map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join("")}</optgroup>`).join("");
   function postingScreen(job, ctx) {
@@ -599,6 +625,7 @@
     });
   }
 
+  const fieldVal = (f, v) => v == null || isNaN(v) ? "—" : f.dec ? (Math.round(v * 100) / 100).toString() : f.label.includes("€m") ? Math.round(v).toLocaleString("en-US") : eur(v);
   const lineText = ([id, v]) => `${esc(O.acct(id).name)} <b>${v > 0 ? "▲" : "▼"} ${eur(Math.abs(v))}</b>`;
   function resultScreen(job, g, answer, rw, ctx) {
     let body = "";
@@ -618,13 +645,16 @@
     } else if (job.type === "order") {
       body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.text)} → <b>${it.year}</b><br><small>${esc(it.why)}</small></li>`).join("")}</ul>`;
     } else if (job.type === "fill") {
-      body = `<ul class="res">${job.fields.map((f, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${eur(f.answer)}</b>${g.right[i] ? "" : ` (you wrote ${eur(answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}
+      body = `<ul class="res">${job.fields.map((f, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.right[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}
         ${job.choice ? `<li class="${g.choiceOk ? "y" : "n"}">${g.choiceOk ? "✔" : "✘"} ${esc(job.choice.label)} <b>${esc(job.choice.answer)}</b><br><small>${esc(job.choice.why)}</small></li>` : ""}</ul>`;
+    } else if (job.type === "reclass") {
+      body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}
+        ${job.fields.map((f, i) => `<li class="${g.fieldsRight[i] ? "y" : "n"}">${g.fieldsRight[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.fieldsRight[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}</ul>`;
     } else if (job.type === "posting") {
       body = `<div class="lbl">The right entry</div><ul class="res">${job.lines.map(l => `<li>${lineText(l)}</li>`).join("")}</ul><p>${esc(job.why)}</p>
         ${ok ? "" : `<p class="cons">${g.balanced ? "It balanced, but the accounts or amounts weren't right." : "Your entry didn't even balance!"} Marco fixed the books for you. He sighed loudly.</p>`}`;
     }
-    const reward = ctx && ctx.interview ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${(job.tier === 2 ? 8 : 5) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}</div>`;
+    const reward = ctx && ctx.interview ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${O.bonusFor(job.tier) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}</div>`;
     return screen(`${head(job, ctx)}<div class="verdict ${ok ? "ok" : "ko"}">${ok ? "✔ WELL DONE!" : "✘ NOT QUITE"}</div>${reward}${body}${go("CONTINUE ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.sfx("blip"); E.hideOverlay(); done(); } };
     });
@@ -777,10 +807,12 @@
       <div class="row"><span>Interview</span><span>${score}/${jobs.length}</span></div>
       <div class="row"><span>Daily salary</span><span>${eur(r.salary)}</span></div>
       <div class="row"><span>Your clients</span><span>${r.clients.map(id => D.CLIENTS[id].icon).join(" ")}</span></div>
-      <p>New clients bring new documents: accruals, prepayments, deposits, cut-off. Harder work, better pay.</p></div>${go("BACK TO WORK ▶")}`, (root, done) => {
+      <p>${esc(r.blurb || "Harder work, better pay.")}</p></div>${go("BACK TO WORK ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); } };
     });
-    return E.say(`Congratulations, ${r.name}! Verdi Consulting and Hotel Lago are yours from tomorrow.`, who);
+    const prev = D.RANKS[D.RANKS.findIndex(x => x.id === r.id) - 1];
+    const fresh = r.clients.filter(c => !prev || !prev.clients.includes(c)).map(c => D.CLIENTS[c].name);
+    return E.say(`Congratulations, ${r.name}!${fresh.length ? ` ${fresh.join(" and ")} ${fresh.length === 1 ? "is" : "are"} yours from tomorrow.` : ""}`, who);
   }
 
   // ---------- The career menu ----------
@@ -829,7 +861,13 @@
         <dt>SHARE CAPITAL AND PREMIUM</dt><dd>Shares issued above their nominal value: capital takes the nominal value, the rest goes to the share premium reserve.</dd>
         <dt>LEGAL RESERVE</dt><dd>Italian S.p.A.s set aside 5% of each year's profit until the reserve reaches 20% of share capital (art. 2430 c.c.).</dd>
         <dt>DIVIDENDS</dt><dd>Approved by the shareholders' meeting, they leave retained earnings and are a liability until paid. Never an expense.</dd>
-        <dt>EPS</dt><dd>Earnings per share = profit ÷ weighted-average number of shares in the year.</dd></dl>
+        <dt>EPS</dt><dd>Earnings per share = profit ÷ weighted-average number of shares in the year.</dd>
+        <dt>RECLASSIFIED BALANCE SHEET</dt><dd>Invested capital (fixed assets + NOWC) = coverage (equity + NFP + provisions). Reclassification isn't compulsory: it makes statements readable and comparable.</dd>
+        <dt>NOWC</dt><dd>Net operating working capital = trade receivables + inventories − trade and tax payables. Cash is not in it.</dd>
+        <dt>NFP</dt><dd>Net financial position = bonds + bank debts + other financial liabilities − cash. High isn't necessarily bad, if the debt funds investments that earn more than it costs.</dd>
+        <dt>RECLASSIFIED INCOME STATEMENT</dt><dd>Revenues − raw materials − G&A = value added; − personnel = EBITDA; − D&A = EBIT; − net financial expenses ± extraordinary items = pretax income; − tax = net income.</dd>
+        <dt>ROE AND PAYOUT</dt><dd>ROE = net profit ÷ equity. Payout = dividends paid ÷ previous year's net profit.</dd>
+        <dt>SOURCES</dt><dd>Financial disclosures, industry and economic data, non-financial disclosures, market data. In a Form 20-F: Item 3.D risks, Item 5 management's review, Part III the statements.</dd></dl>
         <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
     };
   }
