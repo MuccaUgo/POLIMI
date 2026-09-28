@@ -282,14 +282,14 @@
   }
 
   // ---------- Rewards ----------
-  const XP = { sort: 8, quick: 8, spot: 12, build: 14, order: 12, fill: 12, posting: 15, report: 60 };
+  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, report: 25 };
   function reward(career, job, ok) {
     const base = Math.round(XP[job.type] * (job.tier === 2 ? 1.5 : 1));
     if (ok) {
       career.streak = (career.streak || 0) + 1;
-      const bonus = career.streak >= 3 ? 2 * Math.min(5, career.streak - 2) : 0;
+      const bonus = career.streak >= 3 ? Math.min(3, Math.floor((career.streak - 1) / 2)) : 0;
       career.xp += base + bonus;
-      career.money += 5 + (job.tier === 2 ? 5 : 0);
+      career.bonus = (career.bonus || 0) + (job.tier === 2 ? 8 : 5) + (bonus ? 2 : 0);
       if (job.client) {
         career.sat[job.client] = Math.min(100, (career.sat[job.client] || 60) + 4);
         const q = quarterKey(career);
@@ -473,27 +473,48 @@
     };
   }
 
-  // ---------- The day ----------
-  function examDue(career) {
+  // ---------- Promotion interviews ----------
+  // Never automatic: once you have the experience you may ask Giulia for an interview, whenever you like.
+  const INTERVIEW = { questions: 6, pass: 5, waitDays: 3 };
+  function interviewStatus(career) {
     const nr = nextRank(career);
-    return nr && !nr.soon && career.xp >= nr.xp;
+    if (!nr) return { state: "top" };
+    if (nr.soon) return { state: "soon", rank: nr };
+    if (career.xp < nr.xp) return { state: "needXp", rank: nr, missing: nr.xp - career.xp };
+    const daysPlayed = (career.year - 1) * 12 + career.day;
+    if (career.interviewRetry && daysPlayed < career.interviewRetry) return { state: "wait", rank: nr, days: career.interviewRetry - daysPlayed };
+    return { state: "ready", rank: nr };
   }
-  // Builds the list of jobs for a new day.
+  // A hard interview: jobs of the next rank's difficulty, one of each kind, answered in a row.
+  function planInterview(career, r) {
+    const nr = nextRank(career);
+    const asIf = Object.assign({}, career, { rank: nr.id });
+    return ["spot", "fill", "order", "build", "quick", "fill"].slice(0, INTERVIEW.questions).map(t => {
+      const j = clientJob(asIf, r, t);
+      j.interview = true;
+      if (j.type === "quick") j.seconds = 10;
+      return j;
+    });
+  }
+  function finishInterview(career, score) {
+    const daysPlayed = (career.year - 1) * 12 + career.day;
+    career.stats.interviews = (career.stats.interviews || 0) + 1;
+    if (score >= INTERVIEW.pass) {
+      career.rank = nextRank(career).id;
+      career.interviewRetry = 0;
+      return true;
+    }
+    career.interviewRetry = daysPlayed + INTERVIEW.waitDays;
+    return false;
+  }
+
+  // ---------- The day ----------
   function planDay(career, r) {
     const jobs = [];
-    const exam = examDue(career);
     const ev = firmEvent(career);
     if (ev) jobs.push(ev);
-    if (exam) {
-      ["sort", "fill", "spot", "order", "build"].forEach(t => {
-        const j = clientJob(Object.assign({}, career, { rank: nextRank(career).id }), r, t);
-        j.exam = true;
-        jobs.push(j);
-      });
-    } else {
-      for (let i = 0; i < D.JOBS_PER_DAY; i++) jobs.push(clientJob(career, r));
-    }
-    return { jobs, exam };
+    for (let i = 0; i < D.JOBS_PER_DAY; i++) jobs.push(clientJob(career, r));
+    return { jobs };
   }
 
   // Clients' businesses: quarterly revenue that grows with how well we serve them.
@@ -510,7 +531,7 @@
   function newCareer() {
     return {
       v: 1, mode: "career", map: "office", x: 6, y: 8, dir: "up", sound: true,
-      rank: "intern", xp: 0, money: 0, streak: 0, day: 1, year: 1,
+      rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
       sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
       queue: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
       stats: { jobs: 0, right: 0, days: 0, reports: [] }
@@ -531,7 +552,7 @@
   const api = {
     eur, acct, rankFor, nextRank, tierOf, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
-    weightedShares, annualReport, gradeReport, closeYear, agm, examDue, planDay, clientQuarter, newCareer, normalizeCareer
+    weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };
   root.OfficeLogic = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;

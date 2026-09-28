@@ -31,8 +31,8 @@
   // ---------- Ranks ----------
   const RANKS = [
     { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno"] },
-    { id: "junior", name: "Junior Accountant", xp: 100, salary: 90, clients: ["forno", "verdi", "hotel"] },
-    { id: "accountant", name: "Accountant", xp: 300, salary: 130, clients: ["forno", "verdi", "hotel", "pixel"], soon: true }
+    { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "verdi", "hotel"] },
+    { id: "accountant", name: "Accountant", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "pixel"], soon: true }
   ];
 
   const FEE_PER_JOB = 1200; // what PolimiAFC bills a client for each job done right
