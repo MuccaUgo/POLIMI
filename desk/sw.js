@@ -1,11 +1,12 @@
 const APP_SCOPE = new URL(self.registration.scope);
 const CACHE_PREFIX = `afc-closing-desk:${APP_SCOPE.href}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v1`;
+const CACHE_NAME = `${CACHE_PREFIX}v2`;
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./core.js",
+  "./onboarding.js",
   "./cases/ch1.js",
   "./cases/ch2.js",
   "./cases/ch3.js",
