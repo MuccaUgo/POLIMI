@@ -33,10 +33,48 @@
   // Clients with enough documents for a spot-the-error or build job (the listed group has analysis work instead).
   const bookClients = (tier, clients, n) => clients.filter(c => itemsFor(tier, [c]).length >= n);
 
+  // ---------- Variety: remember what the player has seen ----------
+  // career.recent is a list of content keys, oldest first. While a day is being planned the makers
+  // draw unseen content first, then the content seen longest ago, so nothing repeats until the
+  // whole pool has come round.
+  const RECENT_MAX = 150;
+  let memory = null;
+  function withMemory(career, fn) {
+    const before = memory;
+    if (!Array.isArray(career.recent)) career.recent = [];
+    memory = career.recent;
+    try { return fn(); } finally { memory = before; }
+  }
+  function remember(key) {
+    if (!memory) return;
+    const i = memory.indexOf(key);
+    if (i >= 0) memory.splice(i, 1);
+    memory.push(key);
+    if (memory.length > RECENT_MAX) memory.splice(0, memory.length - RECENT_MAX);
+  }
+  const ageOf = key => { const i = memory ? memory.indexOf(key) : -1; return i < 0 ? -1 : i; };
+  // The pool in a random order, never-seen first, then from the one seen longest ago.
+  function freshOrder(r, pool, keyOf) {
+    return r.shuffle(pool.slice()).map((x, n) => ({ x, n, age: ageOf(keyOf(x)) }))
+      .sort((a, b) => a.age - b.age || a.n - b.n).map(o => o.x);
+  }
+  // One item: prefers the current tier's content (60%), then the freshest.
+  function pickFresh(r, pool, keyOf, isNew) {
+    let cands = pool;
+    if (isNew) { const hard = pool.filter(isNew); if (hard.length && r.chance(0.6)) cands = hard; }
+    const ordered = freshOrder(r, cands, keyOf);
+    const bestAge = ageOf(keyOf(ordered[0]));
+    // Among the unseen pick at random; otherwise the oldest.
+    const top = bestAge < 0 ? ordered.filter(x => ageOf(keyOf(x)) < 0) : [ordered[0]];
+    const x = r.pick(top);
+    remember(keyOf(x));
+    return x;
+  }
+  const itemKey = it => "item:" + it[3];
+
   function sortJob(tier, clients, r) {
     const pool = itemsFor(tier, clients);
-    const fresh = pool.filter(i => i[1] === tier);
-    const [client, , kind, item, element, range, why] = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
+    const [client, , kind, item, element, range, why] = pickFresh(r, pool, itemKey, i => i[1] === tier);
     const amount = amountIn(r, range);
     return {
       type: "sort", client, pickup: "inbox", work: "cabinet", answer: element, why,
@@ -47,8 +85,7 @@
 
   function quickJob(tier, clients, r) {
     const pool = D.CALLS.filter(c => c[0] <= tier && clients.includes(c[1]));
-    const fresh = pool.filter(c => c[0] === tier);
-    const [level, client, question, answer, wrongs, why] = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
+    const [level, client, question, answer, wrongs, why] = pickFresh(r, pool, c => "call:" + c[2], c => c[0] === tier);
     return {
       type: "quick", client, pickup: "phone", work: "phone", seconds: level >= 3 ? 22 : tier === 1 ? 15 : 12, why,
       question, options: r.shuffle([answer].concat(wrongs.slice(0, 3))).map(label => ({ label, correct: label === answer })),
@@ -58,9 +95,11 @@
 
   function spotJob(tier, clients, r) {
     const client = r.pick(bookClients(tier, clients, 5));
-    const pool = r.shuffle(itemsFor(tier, [client]));
+    const pool = freshOrder(r, itemsFor(tier, [client]), itemKey);
     const picked = [];
     for (const it of pool) { if (!picked.some(p => p[3] === it[3])) picked.push(it); if (picked.length === 5) break; }
+    picked.forEach(it => remember(itemKey(it)));
+    r.shuffle(picked);
     const wrongAt = r.int(0, picked.length - 1);
     const truth = picked[wrongAt][4];
     const marcoSaid = r.pick(D.ELEMENTS.filter(e => e !== truth));
@@ -76,13 +115,15 @@
 
   function buildJob(tier, clients, r) {
     const client = r.pick(bookClients(tier, clients, 6));
-    const pool = r.shuffle(itemsFor(tier, [client]));
+    const pool = freshOrder(r, itemsFor(tier, [client]), itemKey);
     const picked = [];
     for (const it of pool) {
       if (picked.some(p => p[3] === it[3])) continue;
       picked.push(it);
       if (picked.length === 6) break;
     }
+    picked.forEach(it => remember(itemKey(it)));
+    r.shuffle(picked);
     // Make sure there is at least one revenue and one expense line for the profit question.
     const items = picked.map(it => ({ item: it[3], element: it[4], amount: amountIn(r, it[5]), why: it[6] }));
     const revenue = items.filter(i => i.element === "Revenue").reduce((s, i) => s + i.amount, 0);
@@ -112,15 +153,38 @@
     [2, "verdi", "Staff bonus earned in December, paid in January", 0, "Earned in December: this year's expense (an accrued liability at year-end)."],
     [2, "hotel", "Guests stayed on 30 and 31 December, paid at check-out on 1 January", 0, "The nights were in December: this year's revenue."],
     [2, "hotel", "A July booking paid in full in December", 1, "The stay is in July: next year's revenue."],
-    [2, "hotel", "Insurance paid in December for next year", 1, "Next year's cover: next year's expense."]
+    [2, "hotel", "Insurance paid in December for next year", 1, "Next year's cover: next year's expense."],
+    [1, "forno", "Easter doves sold on 30 March of next year", 1, "Sold next year: next year's revenue."],
+    [1, "forno", "Electricity used in October, paid in October", 0, "Used this year: this year's expense."],
+    [1, "forno", "Birthday cake sold on 28 December", 0, "Sold in December: this year's revenue."],
+    [1, "forno", "Bakers' wages for February", 1, "February's work: next year's expense."],
+    [1, "forno", "Leaflets for the January sales, printed and used in January", 1, "Used in January: next year's expense."],
+    [1, "forno", "Bread delivered to the school on 20 December", 0, "Delivered in December: this year's revenue."],
+    [1, "forno", "Water bill for March of next year", 1, "Used next March: next year's expense."],
+    [1, "forno", "Panettoni sold at the Christmas market on 18 December", 0, "Sold in December: this year's revenue."],
+    [2, "verdi", "Audit work done in March next year, paid in advance in December", 1, "Paid in December but done in March: next year's revenue (a liability until then)."],
+    [2, "verdi", "Office rent for December, paid on 10 January", 0, "December's use of the office: this year's expense (accrued)."],
+    [2, "verdi", "Training course delivered on 15 December, paid on 20 February", 0, "Delivered in December: this year's revenue."],
+    [2, "verdi", "Software licence paid in December for next year", 1, "It covers next year: next year's expense (prepaid until then)."],
+    [2, "hotel", "Christmas dinner served on 25 December, paid on 5 January", 0, "Served in December: this year's revenue."],
+    [2, "hotel", "Heating used in December, bill arrives in February", 0, "Used in December: this year's expense (accrued)."],
+    [2, "hotel", "Easter weekend stays, deposit received in November", 1, "The stays are next year: next year's revenue."],
+    [2, "hotel", "Laundry of guests' sheets done on 31 December, invoiced in January", 0, "The service was used in December: this year's expense."],
+    [2, "forno", "Oven depreciation for the months of this year", 0, "The use of the oven this year: this year's expense."],
+    [2, "forno", "Loan interest for December, paid with the January instalment", 0, "December's interest: this year's expense (accrued)."]
   ];
   function orderJob(tier, clients, r) {
     for (let tries = 0; tries < 50; tries++) {
       const pool = ORDER_ITEMS.filter(o => o[0] <= tier && clients.includes(o[1]));
-      const picked = r.shuffle(pool).slice(0, 4);
+      const ok = clients.filter(c => pool.filter(o => o[1] === c).length >= 4);
+      if (!ok.length) break;
+      const client = r.pick(ok);
+      // The freshest documents of one client, with a little shuffle so the mix changes.
+      const ordered = freshOrder(r, pool.filter(o => o[1] === client), o => "order:" + o[2]);
+      const picked = r.shuffle(ordered.slice(0, 4 + Math.min(tries, 3))).slice(0, 4);
       const years = new Set(picked.map(p => p[3]));
       if (years.size === 2 && picked.length === 4) {
-        const client = picked[0][1];
+        picked.forEach(o => remember("order:" + o[2]));
         return {
           type: "order", client, pickup: "inbox", work: "desk",
           items: picked.map(p => ({ text: p[2], year: Y + p[3], why: p[4] })), years: [Y, Y + 1],
@@ -132,8 +196,8 @@
   }
 
   function fillJob(tier, clients, r) {
-    const kinds = D.FILL_TIER[tier].filter(k => k !== "timesheet" || clients.includes("verdi")).filter(k => k !== "hotelNights" || clients.includes("hotel"));
-    const kind = r.pick(tier >= 2 && r.chance(0.25) ? D.FILL_TIER[1] : kinds);
+    const kinds = D.FILL_TIER[tier].filter(k => k !== "timesheet" || clients.includes("verdi")).filter(k => (k !== "hotelNights" && k !== "insurance") || clients.includes("hotel"));
+    const kind = pickFresh(r, tier >= 2 && r.chance(0.25) ? D.FILL_TIER[1] : kinds, k => "fill:" + k);
     const f = FILLS[kind](r);
     return Object.assign({ type: "fill", pickup: "inbox", work: "desk" }, f);
   }
@@ -233,6 +297,70 @@
           { key: "jan", label: `Revenue for ${Y + 1} (€)`, answer: total - dec, why: `The other 2 nights: ${eur(total - dec)}.` }
         ]
       };
+    },
+    creditSale(r) {
+      const a = 10 * r.int(8, 40), b = 10 * r.int(8, 40);
+      return {
+        client: "forno", doc: { kind: "Sales invoice", title: "Invoice · Forno Rossi → Bar Duomo · pay in 30 days", lines: [["Bread and croissants", eur(a)], ["Birthday cakes", eur(b)], ["Payment", "in 30 days"]] },
+        brief: "Record the sale. The bar hasn't paid yet.",
+        fields: [{ key: "total", label: "Revenue from this sale (€)", answer: a + b, why: `${eur(a)} + ${eur(b)} = ${eur(a + b)}: delivered today, so it's revenue today even if unpaid.` }],
+        choice: { label: "What the bar owes goes in…", options: D.ELEMENTS, answer: "Asset", why: "The right to collect the money is a trade receivable: an asset." }
+      };
+    },
+    mixer(r) {
+      const price = 100 * r.int(15, 50), ship = 10 * r.int(5, 20), setup = 10 * r.int(5, 30), service = 10 * r.int(3, 12);
+      const cost = price + ship + setup;
+      return {
+        client: "forno", doc: { kind: "Purchase invoice", title: "Invoice · Macchine Brianza · new dough mixer", lines: [["Mixer", eur(price)], ["Transport to the bakery", eur(ship)], ["Installation", eur(setup)], ["Cleaning service, first month", eur(service)]] },
+        brief: "Which costs are part of the mixer, and where does it go?",
+        fields: [{ key: "cost", label: "Cost of the mixer to record (€)", answer: cost, why: `Price + transport + installation = ${eur(price)} + ${eur(ship)} + ${eur(setup)} = ${eur(cost)}. Getting it ready to use is part of its cost; the monthly cleaning (${eur(service)}) is an expense.` }],
+        choice: { label: "The mixer goes in…", options: D.ELEMENTS, answer: "Asset", why: "Used for years: property, plant and equipment." }
+      };
+    },
+    monthProfit(r) {
+      const sales = 50 * r.int(160, 300), flour = 50 * r.int(15, 40), wages = 100 * r.int(25, 45), rent = 100 * r.int(9, 16), loan = 500 * r.int(2, 10);
+      const profit = sales - flour - wages - rent;
+      return {
+        client: "forno", doc: { kind: "Month summary", title: "Forno Rossi · this month", lines: [["Bread and cakes sold", eur(sales)], ["Flour and butter used", eur(flour)], ["Wages", eur(wages)], ["Rent", eur(rent)], ["New bank loan received", eur(loan)]] },
+        brief: "Work out the month's profit. Careful: not every line is revenue or expense.",
+        fields: [{ key: "profit", label: "Profit for the month (€)", answer: profit, neg: true, why: `${eur(sales)} − ${eur(flour)} − ${eur(wages)} − ${eur(rent)} = ${eur(profit)}. The loan is cash and a liability, not revenue.` }],
+        choice: { label: "The new loan goes in…", options: D.ELEMENTS, answer: "Liability", why: "Borrowed money must be repaid: a liability." }
+      };
+    },
+    depreciation(r) {
+      const life = r.pick([4, 5, 8, 10]), cost = life * 1200 * r.int(1, 8), residual = r.chance(0.5) ? 0 : life * 120 * r.int(1, 4);
+      const m = r.pick([1, 4, 7, 10]), months = 13 - m, yearly = (cost - residual) / life, dep = round2(yearly * months / 12);
+      return {
+        client: r.pick(["forno", "verdi", "hotel"]), doc: { kind: "Fixed asset card", title: "Fixed asset card · new equipment", lines: [["Cost", eur(cost)], ["Residual value", eur(residual)], ["Useful life", `${life} years, straight line`], ["In use from", `1 ${MONTHS[m - 1]} ${Y}`]] },
+        brief: `Year-end at 31 December ${Y}.`,
+        fields: [
+          { key: "dep", label: `Depreciation for ${Y} (€)`, answer: dep, tol: 1, why: `(${eur(cost)} − ${eur(residual)}) ÷ ${life} = ${eur(yearly)} a year × ${months}/12 = ${eur(dep)}.` },
+          { key: "nbv", label: "Net book value at 31 Dec (€)", answer: round2(cost - dep), tol: 1, why: `${eur(cost)} − ${eur(dep)} = ${eur(cost - dep)}.` }
+        ]
+      };
+    },
+    interest(r) {
+      const loan = 1200 * r.int(5, 40), rate = r.pick([3, 4, 5, 6, 8]), m = r.pick([4, 7, 9, 10]), months = 13 - m;
+      const int = round2(loan * rate / 100 * months / 12);
+      return {
+        client: "forno", doc: { kind: "Loan agreement", title: "Loan · Banca Brera → Forno Rossi", lines: [["Amount", eur(loan)], ["Interest", `${rate}% a year`], ["Received on", `1 ${MONTHS[m - 1]} ${Y}`], ["Interest paid", `once a year, on 1 ${MONTHS[m - 1]}`]] },
+        brief: `Year-end at 31 December ${Y}: nothing has been paid to the bank yet.`,
+        fields: [
+          { key: "int", label: `Interest expense for ${Y} (€)`, answer: int, tol: 1, why: `${eur(loan)} × ${rate}% × ${months}/12 = ${eur(int)}.` },
+          { key: "acc", label: "Accrued interest owed at 31 Dec (€)", answer: int, tol: 1, why: "None of it is paid yet: all of it is owed at year-end." }
+        ]
+      };
+    },
+    insurance(r) {
+      const yearly = 120 * r.int(5, 25), m = r.pick([3, 5, 7, 9, 11]), used = 13 - m, exp = yearly / 12 * used;
+      return {
+        client: r.pick(["verdi", "hotel"]), doc: { kind: "Insurance policy", title: "Insurance policy · 12 months", lines: [["Premium paid", eur(yearly)], ["Paid on", `1 ${MONTHS[m - 1]} ${Y}`], ["Cover", "12 months from that day"]] },
+        brief: `Year-end at 31 December ${Y}: split the premium between the years.`,
+        fields: [
+          { key: "exp", label: `Insurance expense for ${Y} (€)`, answer: exp, why: `${eur(yearly)} ÷ 12 = ${eur(yearly / 12)} a month × ${used} months = ${eur(exp)}.` },
+          { key: "pre", label: "Prepaid insurance at 31 Dec (€)", answer: yearly - exp, why: `${eur(yearly)} − ${eur(exp)} = ${eur(yearly - exp)}: cover not used yet, an asset.` }
+        ]
+      };
     }
   };
 
@@ -246,7 +374,7 @@
   function clientJob(career, r, forceType) {
     const rank = rankFor(career), tier = tierOf(career);
     const type = forceType || r.pick(MIX[tier]);
-    const job = MAKERS[type](tier, rank.clients, r);
+    const job = withMemory(career, () => MAKERS[type](tier, rank.clients, r));
     job.id = jobId();
     job.tier = tier;
     return job;
@@ -563,11 +691,20 @@
   }
 
   // ---------- The day ----------
+  // The day's job types: drawn from the mix, at most two of a kind and never the same twice running.
+  function dayTypes(career, r, n) {
+    const mix = MIX[tierOf(career)], out = [];
+    for (let i = 0; i < n; i++) {
+      const ok = mix.filter(t => t !== out[i - 1] && out.filter(x => x === t).length < 2);
+      out.push(r.pick(ok.length ? ok : mix));
+    }
+    return out;
+  }
   function planDay(career, r) {
     const jobs = [];
     const ev = firmEvent(career);
     if (ev) jobs.push(ev);
-    for (let i = 0; i < D.JOBS_PER_DAY; i++) jobs.push(clientJob(career, r));
+    dayTypes(career, r, D.JOBS_PER_DAY).forEach(t => jobs.push(clientJob(career, r, t)));
     return { jobs };
   }
 
@@ -587,7 +724,7 @@
       v: 1, mode: "career", map: "office", x: 4, y: 6, dir: "up", sound: true, reportTries: 0,
       rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
       sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60, lario: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
-      queue: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
+      queue: [], recent: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
       stats: { jobs: 0, right: 0, days: 0, steps: 0, reports: [] }
     };
   }
@@ -598,14 +735,15 @@
     out.sat = Object.assign(newCareer().sat, s.sat);
     out.stats = Object.assign(newCareer().stats, s.stats);
     ["clientRev", "jobsOk"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
-    ["ledger", "queue"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    ["ledger", "queue", "recent"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    out.recent = out.recent.filter(k => typeof k === "string").slice(-RECENT_MAX);
     if (out.rank === "accountant") out.rank = "analyst";
     if (!D.RANKS.some(r => r.id === out.rank)) out.rank = "intern";
     return out;
   }
 
   const api = {
-    eur, acct, cfCategory, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
+    eur, acct, cfCategory, withMemory, remember, pickFresh, freshOrder, dayTypes, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
     weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };

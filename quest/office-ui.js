@@ -460,7 +460,7 @@
   // A mock exam: eight past-exam style questions in a row, two points each.
   async function mockExam() {
     const s = S();
-    const jobs = X.mockExam(E.rnd);
+    const jobs = X.mockExam(E.rnd, s);
     await E.say(`Mock exam: ${jobs.length} questions like the written exam, financial accounting and consolidation. Paper and pen ready. No hints until the end of each question.`, "Giulia");
     E.closeDialog();
     E.music("battle");

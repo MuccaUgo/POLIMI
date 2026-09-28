@@ -200,6 +200,11 @@
     [1, "The owners put €20,000 into the business for new shares", 1, 0, "Financing", 1, "Cash and share capital in the balance sheet, a financing inflow, and a share issue in the changes in equity."],
     [1, "The bakery pays €1,000 of dividends to its owners", 1, 0, "Financing", 1, "Cash down and equity down: a distribution, never an expense. Financing outflow; it appears in the changes in equity."],
     [1, "Flour for €400 arrives on credit and sits in the storeroom", 1, 0, null, 0, "Inventory and a payable: balance sheet only. It becomes an expense when used; no cash has moved yet."],
+    [1, "Flour worth €250 is used to bake today's bread", 1, 1, null, 0, "Inventory goes down (balance sheet) and becomes a cost (income statement). The cash left when the flour was bought."],
+    [1, "A €600 repair invoice arrives, to be paid next month", 1, 1, null, 0, "An expense now and a payable in the balance sheet. No cash has moved yet."],
+    [1, "This year's income tax is recorded, to be paid next June: €1,200", 1, 1, null, 0, "Tax expense in the income statement and a tax liability in the balance sheet; the cash goes out next year."],
+    [1, "The gas bill of €350 for this month is paid", 1, 1, "Operating", 0, "An expense of the month, paid in cash: operating outflow."],
+    [1, "The van is bought with a €15,000 bank loan, paid directly to the dealer", 1, 0, null, 0, "Van up and loan up in the balance sheet. No cash passed through the bakery's account: a non-cash transaction."],
     [1, "The bakery pays the mill the €400 it owed", 1, 0, "Operating", 0, "The payable is settled with cash: operating outflow. The expense comes when the flour is used."],
     [2, "A customer pays a €200 deposit for a cake to be delivered next month", 1, 0, "Operating", 0, "Cash in and a contract liability; no revenue until delivery."],
     [2, "Rent for the next six months is paid in advance: €6,000", 1, 0, "Operating", 0, "A prepaid expense (asset) and an operating outflow; the expense comes month by month."],
@@ -213,8 +218,7 @@
   const YESNO = ["Yes", "No"], SECTIONS = ["Operating", "Investing", "Financing", "No cash"];
   function statements(tier, clients, r) {
     const pool = IMPACTS.filter(x => x[0] <= tier);
-    const fresh = pool.filter(x => x[0] === tier);
-    const [, text, bs, is, cfs, sce, why] = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
+    const [, text, bs, is, cfs, sce, why] = O.pickFresh(r, pool, x => "impact:" + x[1], x => x[0] === tier);
     const yn = v => (v ? "Yes" : "No");
     return {
       type: "reclass", client: "forno", pickup: "inbox", work: "desk", cats: null, typeLabel: "WHICH STATEMENTS?", docKind: "Transaction · which statements?",
