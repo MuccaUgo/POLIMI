@@ -80,7 +80,15 @@ past-exam theory questions with every option explained; the equity method over s
 consolidation with NCI at fair value or proportionate share, full or partial goodwill, fair value
 adjustments with deferred taxes and intra-group eliminations; EBIT rebuilt from the indirect cash flow
 statement, income statements by nature and by function, ROE from turnover and margins, the financial leverage
-formula, the impairment test and net profit from the equity section. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
+formula, the impairment test and net profit from the equity section. At level 3 the desks also hand out the recurring patterns of the past
+exams as multiple-choice questions with fresh numbers (`office-exam.js`): EBIT from the cash flow statement,
+income statements by nature and from net profit upwards, margins and quality of earnings, ROE/ROS/ROA from the
+ratios, net profit and CFO, NFP/EBITDA, DSO from the current ratio or from NOWC, ITR and DPO, the cost of
+debt, budgeted ROE, NPM from DSO and DPO, the leverage formula, CAPEX and carrying amounts, the payout ratio
+from the cash flow statement, goodwill and NCI, and the equity method. Every wrong option is the result of a
+typical mistake named in the official solutions, "None of the other answers" is sometimes right, and a
+step-by-step solution follows. One morning option is an eight-question **mock exam**; the menu's **Exam prep**
+page lists every pattern met, weakest first. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
 your personnel file; in the adventure, **SAVE BACKUP** is in the menu. Either exports the save as a file or
 a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).

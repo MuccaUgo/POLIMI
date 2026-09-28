@@ -431,6 +431,8 @@
       out.study[t] = { level: [1, 2, 3].includes(x.level) ? x.level : 1, hist: Array.isArray(x.hist) ? x.hist.slice(-ADVANCE.window) : [], right: x.right | 0, done: x.done | 0 };
     });
     if (!["books", "cons", "fa"].includes(out.activity)) out.activity = "books";
+    if (!out.patterns || typeof out.patterns !== "object") out.patterns = {};
+    if (!out.mock || typeof out.mock !== "object") out.mock = null;
     return out;
   };
 
