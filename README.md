@@ -40,22 +40,11 @@ and issues an opinion: **unmodified** (every line right, no hints), **qualified*
 
 Cost accounting (chapters 6–9) and consolidation (chapter 10) will join the same desk later.
 
-## Pixel-art RPG: Ledger Quest
-
-[`quest/`](quest/) is a separate game: a Game Boy-style adventure in the kingdom of Balancia, whose Great Ledger
-has been torn apart. Chapter I takes place in the village of Assetton and teaches the five elements of the
-financial statements. You explore the map with a d-pad or by tapping, talk to villagers, open chests, shop
-and rest, and fight turn-based battles against monsters made of misplaced coins: each attack is a question
-(which box does this item belong in, true or false, the odd one out). A right answer deals damage, and three in
-a row make a combo; a wrong one costs HP and shows its consequence. You level up, reach the guarded Cave of
-Confusion and defeat the three-phase Box Mixer. All pixel art is drawn in code, the chiptune music and sound
-effects are generated in the browser, and the game saves itself and works offline.
-
 ## Pixel-art career: PolimiAFC
 
-The same app in [`quest/`](quest/) is now called **PolimiAFC** and opens on a title screen with two modes:
-the Ledger Quest adventure above, and a **career** at PolimiAFC S.p.A., an accounting firm that is itself a
-company with shares. You start as an intern in a pixel-art office. Clients drop documents in the inbox and you
+[`quest/`](quest/) is **PolimiAFC**, a pixel-art **career** at PolimiAFC S.p.A., an accounting firm that is
+itself a company with shares. (It began as the Ledger Quest RPG; the adventure has since been retired to focus
+on the career, and old adventure saves are dropped.) You start as an intern in a pixel-art office. Clients drop documents in the inbox and you
 carry each one where it belongs: into the right coloured cabinet (Assets, Liabilities, Equity, Revenue,
 Expenses), to your desk to fill in a stock count, a payslip or a rent receipt, or to sort a year-end cut-off
 pile. The phone rings with timed questions, and Marco, the senior, asks you to find the document he filed
@@ -93,9 +82,8 @@ debt, budgeted ROE, NPM from DSO and DPO, the leverage formula, CAPEX and carryi
 from the cash flow statement, goodwill and NCI, and the equity method. Every wrong option is the result of a
 typical mistake named in the official solutions, "None of the other answers" is sometimes right, and a
 step-by-step solution follows. One morning option is an eight-question **mock exam**; the menu's **Exam prep**
-page lists every pattern met, weakest first. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
-your personnel file; in the adventure, **SAVE BACKUP** is in the menu. Either exports the save as a file or
-a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
+page lists every pattern met, weakest first. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
+file, exported as a file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
@@ -164,9 +152,10 @@ sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
 desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
-quest/          PolimiAFC: Ledger Quest RPG (art.js, world.js, logic.js) and career mode (office-art.js, office-data.js,
-                office-logic.js, office-ui.js), save backups (backup.js), sharing the engine in game.js, plus index.html, style.css, sw.js, manifest.json, icons
-quest/tests/    art, map, question, battle, save, career, analysis, study-desk, backup and service-worker tests
+quest/          PolimiAFC career: engine (game.js, art.js, world.js, logic.js), the office and its rules (office-art.js,
+                office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-ui.js),
+                save backups (backup.js), plus index.html, style.css, sw.js, manifest.json, icons
+quest/tests/    engine, career, analysis, statements, study-desk, exam, backup and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```
 

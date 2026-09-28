@@ -4,7 +4,7 @@ const path = require("node:path");
 const load = f => require(path.join(__dirname, "..", f));
 global.window = globalThis;
 global.QuestWorld = load("world.js");
-const L = load("logic.js");
+load("logic.js");
 load("office-data.js");
 const O = load("office-logic.js");
 const B = load("backup.js");
@@ -24,10 +24,10 @@ test("a career survives the trip through a file and through a code", () => {
 });
 
 test("pasted codes may carry spaces and line breaks", () => {
-  const p = B.pack("quest", L.newGame());
+  const p = B.pack("career", O.newCareer());
   const code = B.toCode(p);
   const messy = "  " + code.slice(0, 20) + "\n" + code.slice(20, 50) + " " + code.slice(50) + "\n";
-  assert.equal(B.parse(messy).kind, "quest");
+  assert.equal(B.parse(messy).kind, "career");
 });
 
 test("wrong or damaged input is refused with a clear message", () => {
@@ -36,7 +36,8 @@ test("wrong or damaged input is refused with a clear message", () => {
   assert.throws(() => B.parse("PAFC1-%%%"), /doesn't look like/);
   assert.throws(() => B.parse(JSON.stringify({ app: "other", kind: "career", data: {} })), /doesn't look like/);
   assert.throws(() => B.parse(JSON.stringify({ app: "polimiafc", kind: "career", data: { mode: "x" } })), /damaged/);
-  assert.throws(() => B.parse(JSON.stringify({ app: "polimiafc", kind: "quest", data: { map: 3 } })), /damaged/);
+  assert.throws(() => B.parse(JSON.stringify({ app: "polimiafc", kind: "quest", data: { map: "town", player: {} } })), /retired/);
+  assert.throws(() => B.pack("quest", {}), /Unknown/);
   assert.throws(() => B.pack("chess", {}), /Unknown/);
   const code = B.toCode(B.pack("career", O.newCareer()));
   assert.throws(() => B.parse(code.slice(0, code.length - 12)), /whole code/);

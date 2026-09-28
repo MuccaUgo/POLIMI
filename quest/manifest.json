@@ -1,7 +1,7 @@
 {
   "name": "PolimiAFC",
   "short_name": "PolimiAFC",
-  "description": "A pixel-art accounting game: a career at PolimiAFC S.p.A., from intern to partner, plus the Ledger Quest adventure.",
+  "description": "A pixel-art accounting career at PolimiAFC S.p.A.: bookkeeping, consolidation and financial analysis desks, mock exams for the AFC course.",
   "lang": "en",
   "start_url": "./index.html",
   "scope": "./",

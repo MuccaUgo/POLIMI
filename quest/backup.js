@@ -4,7 +4,7 @@
   "use strict";
   const APP = "polimiafc";
   const PREFIX = "PAFC1-";
-  const KINDS = { career: "career", quest: "adventure" };
+  const KINDS = { career: "career" };
 
   function pack(kind, data, when) {
     if (!KINDS[kind]) throw new Error("Unknown save type.");
@@ -43,12 +43,12 @@
     } catch (e) {
       throw new Error("This doesn't look like a PolimiAFC save. Check that you copied the whole code.");
     }
+    if (obj && obj.app === APP && obj.kind === "quest") throw new Error("This is a Ledger Quest adventure save: the adventure has been retired, only careers can be imported.");
     if (!obj || obj.app !== APP || !KINDS[obj.kind] || !obj.data || typeof obj.data !== "object") {
       throw new Error("This doesn't look like a PolimiAFC save.");
     }
     const d = obj.data;
     if (obj.kind === "career" && d.mode !== "career") throw new Error("This career save is damaged.");
-    if (obj.kind === "quest" && (!d.player || typeof d.map !== "string")) throw new Error("This adventure save is damaged.");
     return { kind: obj.kind, data: d, saved: obj.saved || null };
   }
 
