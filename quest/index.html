@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-<title>Ledger Quest</title>
-<meta name="description" content="A pixel-art RPG about accounting: sort every coin into the right box and save the Great Ledger of Balancia." />
+<title>PolimiAFC</title>
+<meta name="description" content="PolimiAFC: a pixel-art accounting game. Build a career at PolimiAFC S.p.A., from intern to partner, or play the Ledger Quest adventure." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon-180.png" />
 <meta name="theme-color" content="#1c1a2e" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Ledger Quest" />
+<meta name="apple-mobile-web-app-title" content="PolimiAFC" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +22,7 @@
 <body>
 <div id="console">
   <div id="hud">
-    <span id="hudPlace">Assetton</span>
+    <span id="hudPlace">PolimiAFC</span>
     <span id="hudStats"></span>
   </div>
   <div id="screen">
@@ -33,6 +33,7 @@
       <div id="dlgChoices"></div>
       <span id="dlgMore" aria-hidden="true">▼</span>
     </div>
+    <div id="task" hidden></div>
     <div id="fade"></div>
   </div>
   <div id="pad">
@@ -83,8 +84,12 @@
 <div id="overlay" hidden></div>
 
 <script src="art.js"></script>
+<script src="office-art.js"></script>
 <script src="world.js"></script>
 <script src="logic.js"></script>
+<script src="office-data.js"></script>
+<script src="office-logic.js"></script>
+<script src="office-ui.js"></script>
 <script src="game.js"></script>
 </body>
 </html>

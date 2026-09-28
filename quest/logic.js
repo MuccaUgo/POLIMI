@@ -163,6 +163,7 @@
     return { x: n.x, y: n.y };
   }
   function npcVisible(state, n) {
+    if (typeof n.visible === "function") return n.visible(state);
     if (n.id === "boss") return !state.flags.boss;
     return true;
   }

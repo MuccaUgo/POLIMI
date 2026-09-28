@@ -530,11 +530,11 @@
   // ---------- Save ----------
   function newCareer() {
     return {
-      v: 1, mode: "career", map: "office", x: 6, y: 8, dir: "up", sound: true,
+      v: 1, mode: "career", map: "office", x: 4, y: 6, dir: "up", sound: true, reportTries: 0,
       rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
       sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
       queue: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
-      stats: { jobs: 0, right: 0, days: 0, reports: [] }
+      stats: { jobs: 0, right: 0, days: 0, steps: 0, reports: [] }
     };
   }
   function normalizeCareer(s) {

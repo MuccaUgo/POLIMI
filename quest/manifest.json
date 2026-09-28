@@ -1,7 +1,7 @@
 {
-  "name": "Ledger Quest",
-  "short_name": "Ledger Quest",
-  "description": "A pixel-art RPG about accounting: sort every coin into the right box and save the Great Ledger.",
+  "name": "PolimiAFC",
+  "short_name": "PolimiAFC",
+  "description": "A pixel-art accounting game: a career at PolimiAFC S.p.A., from intern to partner, plus the Ledger Quest adventure.",
   "lang": "en",
   "start_url": "./index.html",
   "scope": "./",
