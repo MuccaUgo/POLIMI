@@ -3,7 +3,7 @@
 Personal revision sites for my Management Engineering courses at Politecnico di Milano. Not an official
 university project: these are study aids built from my own course material.
 
-The root page is a portal listing the courses; each course is a self-contained static site in its own folder.
+The root page is a portal listing the courses and the practice game; each one is a self-contained static site in its own folder.
 
 ## Courses
 
@@ -11,6 +11,28 @@ The root page is a portal listing the courses; each course is a self-contained s
 |---|---|---|
 | [`afc/`](afc/) | Accounting, Finance & Control | The AFC26 programme and lecture calendar, plus a **three-chapter Study Map**: ten parts each for Financial Accounting, Cost Accounting and Financial Statement Consolidation. **Financial Accounting**: 46 concept cards, 83 questions — IFRS reporting, Recovery lecture notes and EPS. **Cost Accounting**: 39 concept cards, 42 questions — cost classifications, configurations and allocation methods. **Consolidation**: ten memory parts from both Lecture 03 videos, including worked examples and a correction to the STAR–LIGHT NCI slide |
 | [`sm/`](sm/) | Strategy & Marketing | **Introduction**: 39 concept cards, 31 questions — the company and its legal forms, ownership from foundation to IPO, shareholder and stakeholder value, corporate governance and ESG. **The Concept of Strategy** (chapter 1): 66 concept cards, 74 questions — what strategy is, its levels and the SBU, the business strategy formulation process from orientation to control, intended against emergent strategy, and vision, mission, purpose and culture. Cards the six *Fundamentals of Strategy* lectures expand on carry a **Going deeper** section naming the lecture. **External Analysis** (chapter 2): 45 concept cards, 42 questions — STEEP, Porter's five forces with entry and exit barriers, substitutes, buyer and supplier power, complements and network effects, competitor analysis, strategic groups, profit pool mapping and segmentation. The hub records that class has reached STEEP. A **Study Map** organises the material into the 10 + 10 + 8 blocks from *Things to Remember*. `sm/CONTENT_REVIEW.md` records where the sources differ |
+
+## Practice game: AFC Closing Desk
+
+[`desk/`](desk/) is a practice game for Accounting, Finance & Control, built for the iPhone. You play the
+accountant: the management decisions are already taken, the documents (invoices, bank statements, contracts,
+stock counts, memos) are on your desk, and your job is to fill in the working paper — the income statement,
+balance-sheet sections, cash flow statement or schedule the case asks for. An auditor then checks every line
+and issues an opinion: **unmodified** (every line right, no hints), **qualified** (at least 75%) or **adverse**.
+
+- **Content.** Financial accounting chapters 1–5 of the course's numerical exercises: 50 case types, 25 of
+  them the PDF's own exercises and 25 new ones on the same topics. Each case type generates new numbers every
+  time; the first time a PDF case type comes up it uses the PDF's original numbers.
+- **Levels.** Each chapter has Basic, Intermediate and Advanced levels. A level clears after 10, 10 and 6
+  passed cases respectively, with every case type met at least once; clearing it unlocks the next. Clearing
+  levels raises your rank from Trainee to Financial Controller.
+- **Daily close** picks five cases a day from the unlocked levels. **Re-audit** replays, with the same numbers,
+  the cases that did not get a clean opinion.
+- **On the phone.** A built-in keypad (no system keyboard) accepts calculations such as `84000÷7×3` or
+  `64000×5%`; hints show the formula; live tie-out checks flag a cash flow or balance that does not reconcile.
+  It installs to the home screen and works offline.
+
+Cost accounting (chapters 6–9) and consolidation (chapter 10) will join the same desk later.
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
 holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
@@ -76,8 +98,13 @@ afc/            Accounting, Finance & Control hub (index.html, styles.css, data.
 afc/tests/      data, quiz and service-worker tests
 sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
+desk/           AFC Closing Desk game (index.html, styles.css, core.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
+desk/tests/     engine, case and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```
+
+In the desk, `core.js` is the engine (seeded generators, the keypad's expression parser, grading, levels and
+progress), each `cases/chN.js` registers that chapter's case types, and `app.js` renders the screens.
 
 In each hub, `data.js` holds the concept cards and question bank, while `app.js` renders the concepts browser
 and runs the quiz. No frameworks, no backend, no external dependencies.
@@ -91,10 +118,14 @@ Marketing, slate for the portal). The chosen theme is stored once under `polimi_
 ```bash
 node --test afc/tests/*.test.js
 node --test sm/tests/*.test.js
+node --test desk/tests/*.test.js
 ```
 
 The suites load `data.js` in a sandbox and check the bank's structure, that every answer key matches its
 explanation, that the numeric exercises recompute correctly, and that each service worker only ever touches
-caches scoped to its own folder. `afc/tests/course.test.js` also checks the calendar against the published
+caches scoped to its own folder. The desk suite checks the 25 PDF exercises against solutions worked out
+independently, builds every case type from hundreds of seeds (well-formed lines, amounts in cents, tie-out
+checks that reconcile, realistic figures), and covers the keypad parser, grading tolerances, level unlocking,
+re-audits, the daily close and the streak. `afc/tests/course.test.js` also checks the calendar against the published
 schedule: 29 slots with 5 of them off, dates in order on the course's Monday/Wednesday pattern, and every
 lecture belonging to a declared module.

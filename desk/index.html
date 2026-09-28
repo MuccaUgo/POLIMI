@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AFC Closing Desk</title>
+<meta name="description" content="A practice game for Accounting, Finance &amp; Control: you are the accountant, the documents are on your desk, and the auditor checks your statements." />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Closing Desk" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="format-detection" content="telephone=no" />
+<script>(function(){try{var t=localStorage.getItem('polimi_theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='dark'?'#192621':'#ffffff';}catch(e){}})();</script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app"><main class="wrap"><p class="small">Loading the desk…</p></main></div>
+<div id="keypad" class="keypad" hidden></div>
+<div id="sheet" class="sheet" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<noscript><p style="padding:16px">The Closing Desk needs JavaScript.</p></noscript>
+
+<script src="core.js"></script>
+<script src="cases/ch1.js"></script>
+<script src="cases/ch2.js"></script>
+<script src="cases/ch3.js"></script>
+<script src="cases/ch4.js"></script>
+<script src="cases/ch5.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
