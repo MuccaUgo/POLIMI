@@ -20,6 +20,12 @@ stock counts, memos) are on your desk, and your job is to fill in the working pa
 balance-sheet sections, cash flow statement or schedule the case asks for. An auditor then checks every line
 and issues an opinion: **unmodified** (every line right, no hints), **qualified** (at least 75%) or **adverse**.
 
+- **First week (onboarding).** Before the chapters, an optional warm-up in the story of a junior accountant's
+  first week at an accounting firm, keeping the books of five very different clients: a textile manufacturer,
+  a bakery, a subscription software company, a hotel and a consultancy. One idea a day — the five elements,
+  the accounting equation, revenue versus cash, prepayments and accruals, a first profit and cash summary —
+  with short tap-to-answer questions that get harder, a note on how the idea differs between the clients,
+  and a ten-question probation review. Every wrong answer shows its consequence.
 - **Content.** Financial accounting chapters 1–5 of the course's numerical exercises: 50 case types, 25 of
   them the PDF's own exercises and 25 new ones on the same topics. Each case type generates new numbers every
   time; the first time a PDF case type comes up it uses the PDF's original numbers.
@@ -98,7 +104,7 @@ afc/            Accounting, Finance & Control hub (index.html, styles.css, data.
 afc/tests/      data, quiz and service-worker tests
 sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
-desk/           AFC Closing Desk game (index.html, styles.css, core.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
+desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```

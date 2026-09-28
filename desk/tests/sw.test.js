@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
 const prefix = `afc-closing-desk:${scope}:`;
-const currentCache = `${prefix}v1`;
+const currentCache = `${prefix}v2`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
 const deferred = () => {
@@ -109,7 +109,7 @@ test("activation deletes only this app's stale caches and waits before claiming 
   const claimed = deferred();
   const sw = worker({ delete: () => deleted.promise, claim: () => claimed.promise });
   const siblingCache = "afc-closing-desk:https://muccaugo.github.io/OtherApp/:v1";
-  for (const name of [`${prefix}v0`, currentCache, siblingCache, "other-app", "afc-closing-desk-v1"]) {
+  for (const name of [`${prefix}v1`, currentCache, siblingCache, "other-app", "afc-closing-desk-v1"]) {
     sw.seed(name, `${scope}index.html`, name);
   }
   const event = sw.dispatch("activate");

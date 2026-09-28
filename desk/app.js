@@ -67,8 +67,12 @@
     closeKeypad();
     closeSheet();
     hideToast();
+    ob = null;
     const parts = location.hash.replace(/^#\/?/, "").split("/");
     if (parts[0] === "ch" && CHAPTERS[+parts[1]]) renderChapter(+parts[1]);
+    else if (parts[0] === "week") renderWeek();
+    else if (parts[0] === "day" && O.DAYS.some(d => d.id === parts[1])) openDay(parts[1]);
+    else if (parts[0] === "probation") openProbation();
     else if (parts[0] === "case" && current) renderCase();
     else renderHome();
     window.scrollTo(0, 0);
@@ -82,7 +86,7 @@
     const plan = C.dailyPlan(progress, today());
     persist();
     const dailyDone = plan.items.filter(i => i.stars != null).length;
-    const cards = [];
+    const cards = [weekCard()];
     if (current && !current.audit) {
       const k = C.makeCase(current.id, current.seed);
       const n = k.cells.filter(c => filled(current.entries[c.key])).length;
@@ -171,6 +175,195 @@
         <div class="ch-head"><div class="eyebrow">Chapter ${String(ch).padStart(2, "0")}</div><h2>${esc(info.title)}</h2><p>${esc(info.blurb)}</p></div>
         ${levels}
       </main>`;
+  }
+
+  // ---------- First week (onboarding) ----------
+  const O = window.DeskOnboarding;
+  let ob = null; // the open day or probation: { kind, id, q, picked, slide, finished, ... }
+  const person = key => O.PEOPLE[key];
+  function speech(key, text, extra) {
+    const p = person(key);
+    return `<div class="speech ${extra || ""}"><span class="avatar" aria-hidden="true">${p.icon}</span><div><strong>${esc(p.name)}</strong>${p.role ? `<span class="small"> · ${esc(p.role)}</span>` : ""}<p>${esc(text)}</p></div></div>`;
+  }
+  function clientChip(id) {
+    const c = O.clientById(id);
+    return `<span class="client-chip"><span aria-hidden="true">${c.icon}</span>${esc(c.name)} <em>${esc(c.kind)}</em></span>`;
+  }
+
+  function weekCard() {
+    const s = O.state(progress);
+    if (s.probation.passed) {
+      return `<a class="quick-card" href="#/week"><span class="q-icon">🎓</span><span class="q-body"><strong>Probation passed</strong><span class="small">Replay your first week at ${esc(O.FIRM)}</span></span><span class="chev">›</span></a>`;
+    }
+    const day = O.currentDay(progress);
+    const done = O.DAYS.filter(d => O.dayState(progress, d.id).done).length;
+    const label = day ? `${day.short} · ${day.title}` : "Probation review";
+    return `<a class="quick-card first-week" href="#/week"><span class="q-icon">☕</span><span class="q-body"><strong>${done ? "Your first week" : "Start here: your first day"}</strong><span class="small">${done}/5 days · next: ${esc(label)}</span></span><span class="chev">›</span></a>`;
+  }
+
+  function renderWeek() {
+    ob = null;
+    const s = O.state(progress);
+    const days = O.DAYS.map((d, i) => {
+      const st = O.dayState(progress, d.id), open = O.dayUnlocked(progress, d.id);
+      const status = st.done ? `<span class="status cleared">Done ✓</span>` : open ? `<span class="status">${st.points}/${O.TARGET} ☕</span>` : `<span class="status">🔒</span>`;
+      const inner = `<span class="ch-num">${d.short}</span><span class="ch-body"><strong>${esc(d.title)}</strong><span class="small">Day ${i + 1}${st.answered ? ` · ${st.correct}/${st.answered} right` : ""}</span></span>${status}`;
+      return open ? `<a class="chapter-card" href="#/day/${d.id}">${inner}</a>` : `<div class="chapter-card soon">${inner}</div>`;
+    }).join("");
+    const pOpen = O.probationUnlocked(progress);
+    const pInner = `<span class="ch-num">🎓</span><span class="ch-body"><strong>Probation review</strong><span class="small">${O.PROBATION_SIZE} mixed questions · ${O.PROBATION_PASS} to pass${s.probation.tries ? ` · best ${s.probation.best}/${O.PROBATION_SIZE}` : ""}</span></span>${s.probation.passed ? `<span class="status cleared">Passed ✓</span>` : pOpen ? "" : `<span class="status">🔒</span>`}`;
+    const clients = O.CLIENTS.map(c => `<article class="client-card"><div class="client-top"><span class="client-icon" aria-hidden="true">${c.icon}</span><div><strong>${esc(c.name)}</strong><span class="small">${esc(c.kind)}</span></div></div><p>${esc(c.what)}</p><ul>${c.traits.map(t => `<li>${esc(t)}</li>`).join("")}</ul></article>`).join("");
+    app.innerHTML = bar(`<a class="back-btn" href="#/" aria-label="Back to the desk">‹</a>`, "Your first week", esc(O.FIRM)) + `
+      <main class="wrap" id="main">
+        <section class="desk-hero">
+          <div class="eyebrow">Day one</div>
+          <h2>Welcome to ${esc(O.FIRM)}</h2>
+          <p class="small">You've just joined an accounting firm as a junior accountant. The clients make the decisions; you make sure every euro lands in the right place. One idea a day, lots of short exercises, then the probation review.</p>
+        </section>
+        <details class="clients" ${O.DAYS.some(d => O.dayState(progress, d.id).answered) ? "" : "open"}>
+          <summary class="block-title"><h3>Your five clients</h3><span class="toggle"></span></summary>
+          <div class="client-grid">${clients}</div>
+        </details>
+        <div class="section-head"><h3>The week</h3><span>${O.TARGET} ☕ to finish a day · a mistake costs one</span></div>
+        <div class="chapters">${days}${pOpen ? `<a class="chapter-card" href="#/probation">${pInner}</a>` : `<div class="chapter-card soon">${pInner}</div>`}</div>
+        <p class="small week-note">The chapters on the desk stay open whenever you want them: the first week is a warm-up, not a gate.</p>
+      </main>`;
+  }
+
+  function openDay(id) {
+    if (!O.dayUnlocked(progress, id)) return go("#/week");
+    const st = O.dayState(progress, id);
+    ob = { kind: "day", id, slide: st.briefed ? null : 0, q: null, picked: null, finished: false };
+    if (st.briefed) nextQuestion();
+    renderDay();
+  }
+  function nextQuestion() {
+    ob.q = O.question(ob.id, O.dayState(progress, ob.id).points, rnd);
+    ob.picked = null;
+  }
+
+  function renderDay() {
+    const day = O.DAYS.find(d => d.id === ob.id), st = O.dayState(progress, ob.id);
+    const head = bar(`<a class="back-btn" href="#/week" aria-label="Back to the week">‹</a>`, `${day.short} · ${esc(day.title)}`, esc(O.FIRM), `<button class="pill-count" data-act="brief" aria-label="Read the briefing again">☕ ${Math.min(st.points, O.TARGET)}/${O.TARGET}</button>`);
+    let body, dock;
+    if (ob.slide != null) {
+      const [who, text] = day.briefing[ob.slide];
+      const last = ob.slide === day.briefing.length - 1;
+      body = `<div class="eyebrow">Morning briefing · ${ob.slide + 1}/${day.briefing.length}</div>${speech(who, text, "big")}`;
+      dock = `<button class="primary" data-act="slide">${last ? "Let's start →" : "Next →"}</button>`;
+    } else if (ob.finished) {
+      const [who, text] = day.email;
+      const idx = O.DAYS.indexOf(day), next = O.DAYS[idx + 1];
+      body = `<section class="verdict v3"><div class="verdict-top"><span class="stamp">Approved</span><span class="stars">☕☕☕</span></div><h2>${esc(day.title)}: done</h2><p>${st.correct}/${st.answered} right today.</p></section>
+        <div class="rule"><strong>What changes between clients</strong>${esc(day.takeaway)}</div>
+        <div class="block-title"><h3>📥 New email</h3></div>${speech(who, text, "email")}`;
+      dock = `<a class="ghost" href="#/week">Week</a>${next ? `<a class="primary" href="#/day/${next.id}">${esc(next.short)}: ${esc(next.title)} →</a>` : `<a class="primary" href="#/probation">Probation review →</a>`}`;
+    } else {
+      body = questionHTML(ob.q, ob.picked, `<div class="meter coffee" aria-hidden="true"><span style="width:${pct(Math.min(st.points, O.TARGET), O.TARGET)}%"></span></div><p class="small tier">${["", "Warm-up", "Getting harder", "Tricky ones"][O.tierFor(st.points)]}${st.done ? " · day already done, practising" : ""}</p>`);
+      dock = ob.picked == null ? `<span class="dock-info">Tap an answer</span>` : `<button class="primary" data-act="obnext">Next question →</button>`;
+    }
+    app.innerHTML = head + `<main class="wrap ob" id="main">${body}</main><div class="dock"><div class="dock-inner">${dock}</div></div>`;
+  }
+
+  function questionHTML(q, picked, top) {
+    const answered = picked != null;
+    const opts = q.options.map((o, i) => {
+      let cls = "ob-option";
+      if (answered && o.correct) cls += " right";
+      else if (answered && i === picked) cls += " wrong";
+      return `<button type="button" class="${cls}" data-opt-i="${i}" ${answered ? "disabled" : ""}>${esc(o.label)}</button>`;
+    }).join("");
+    let feedback = "";
+    if (answered) {
+      const o = q.options[picked];
+      const line = rnd.pick(o.correct ? O.CHEERS : O.OOPS);
+      feedback = `<section class="ob-feedback ${o.correct ? "good" : "bad"}" aria-live="polite">${speech(line[0], line[1])}
+        ${o.correct ? "" : `<p class="consequence">⚠️ ${esc(o.consequence)}</p>`}
+        <p class="why"><b>Why:</b> ${esc(q.explain)}</p>${q.bars ? barsHTML(q.bars) : ""}</section>`;
+    }
+    return `${top || ""}<section class="ob-card">${clientChip(q.client)}
+        <p class="ob-context">${esc(q.context)}</p>${q.list ? `<ul class="ob-list">${q.list.map(l => `<li>${esc(l)}</li>`).join("")}</ul>` : ""}
+        <h2 class="ob-prompt">${esc(q.prompt)}</h2>
+        <div class="ob-options ${q.layout === "grid" ? "grid" : ""}">${opts}</div></section>${feedback}`;
+  }
+
+  function barsHTML(b) {
+    const max = Math.max(b.before.A, b.after.A);
+    const row = (label, s) => `<div class="eq-row"><span class="eq-label">${label}</span><div class="eq-bars"><div class="eq-bar a" style="width:${pct(s.A, max)}%"><span>A ${esc(C.fmt(s.A))}</span></div><div class="eq-bar le"><div class="l" style="width:${pct(s.L, max)}%"><span>L ${esc(C.fmt(s.L))}</span></div><div class="e" style="width:${pct(s.E, max)}%"><span>E ${esc(C.fmt(s.E))}</span></div></div></div></div>`;
+    return `<div class="eq">${row("Before", b.before)}${row("After", b.after)}<p class="small">Assets = Liabilities + Equity, before and after ⚖️</p></div>`;
+  }
+
+  function pickOption(i) {
+    if (!ob || ob.picked != null || !ob.q) return;
+    ob.picked = i;
+    const right = !!ob.q.options[i].correct;
+    if (ob.kind === "day") {
+      const finishedNow = O.answer(progress, ob.id, right);
+      persist();
+      ob.finishNext = finishedNow;
+      renderDay();
+    } else {
+      if (right) ob.score++;
+      renderProbation();
+    }
+    const fb = $(".ob-feedback");
+    if (fb) fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  function openProbation() {
+    if (!O.probationUnlocked(progress)) return go("#/week");
+    ob = { kind: "probation", qs: O.probation(String(Date.now())), i: 0, score: 0, picked: null, done: false };
+    ob.q = ob.qs[0];
+    renderProbation();
+  }
+  function renderProbation() {
+    const head = bar(`<a class="back-btn" href="#/week" aria-label="Back to the week">‹</a>`, "Probation review", esc(O.FIRM), `<span class="pill-count">${ob.done ? ob.score : ob.i + 1}/${O.PROBATION_SIZE}</span>`);
+    let body, dock;
+    if (ob.done) {
+      const passed = ob.score >= O.PROBATION_PASS;
+      body = passed
+        ? `<section class="certificate"><div class="eyebrow">${esc(O.FIRM)}</div><h2>Probation passed</h2><p>This certifies that you scored <b>${ob.score}/${O.PROBATION_SIZE}</b> and know an asset from an expense, revenue from cash, and a prepayment from an accrual.</p><p class="small">Signed: Giulia, Partner · Witnessed: Marco, who ate your biscuit</p><span class="stamp">Hired</span></section>
+          ${speech("giulia", "Welcome to the team for real. Your next assignments are on the Closing Desk: full working papers, and an auditor who is much less friendly than Marco. Start with chapter 1.")}`
+        : `<section class="verdict v1"><div class="verdict-top"><span class="stamp">Not yet</span></div><h2>${ob.score}/${O.PROBATION_SIZE}</h2><p>You need ${O.PROBATION_PASS}. Replay the days that felt shaky, then try again — new questions every time.</p></section>
+          ${speech("marco", "Don't worry, I failed mine twice. The second time because of the printer.")}`;
+      dock = passed ? `<a class="ghost" href="#/week">Week</a><a class="primary" href="#/ch/1">Chapter 1 →</a>` : `<a class="ghost" href="#/week">Week</a><button class="primary" data-act="probagain">Try again</button>`;
+    } else {
+      body = questionHTML(ob.q, ob.picked, `<p class="small tier">Score so far: ${ob.score} · ${O.PROBATION_PASS} needed</p>`);
+      dock = ob.picked == null ? `<span class="dock-info">Tap an answer</span>` : `<button class="primary" data-act="probnext">${ob.i + 1 < ob.qs.length ? "Next question →" : "See the result →"}</button>`;
+    }
+    app.innerHTML = head + `<main class="wrap ob" id="main">${body}</main><div class="dock"><div class="dock-inner">${dock}</div></div>`;
+  }
+
+  function onboardingAction(act) {
+    if (act === "slide") {
+      const day = O.DAYS.find(d => d.id === ob.id);
+      if (ob.slide < day.briefing.length - 1) ob.slide++;
+      else {
+        ob.slide = null;
+        O.dayState(progress, ob.id).briefed = true;
+        persist();
+        if (!ob.q) nextQuestion();
+      }
+      renderDay();
+    } else if (act === "brief") {
+      ob.slide = 0;
+      renderDay();
+    } else if (act === "obnext") {
+      if (ob.finishNext) { ob.finishNext = false; ob.finished = true; }
+      else nextQuestion();
+      renderDay();
+    } else if (act === "probnext") {
+      if (ob.i + 1 < ob.qs.length) { ob.i++; ob.q = ob.qs[ob.i]; ob.picked = null; }
+      else {
+        ob.done = true;
+        O.finishProbation(progress, ob.score);
+        persist();
+      }
+      renderProbation();
+    } else if (act === "probagain") openProbation();
+    else return false;
+    window.scrollTo(0, 0);
+    return true;
   }
 
   // ---------- Starting cases ----------
@@ -603,7 +796,7 @@
 
   // ---------- Clicks ----------
   app.addEventListener("click", ev => {
-    const t = ev.target.closest("[data-act],[data-cell],[data-choice],[data-play]");
+    const t = ev.target.closest("[data-act],[data-cell],[data-choice],[data-play],[data-opt-i]");
     if (!t) {
       if (active && !ev.target.closest(".keypad")) closeKeypad();
       return;
@@ -624,7 +817,9 @@
       const ch = +location.hash.split("/")[2];
       return startLevel(ch, +t.dataset.play);
     }
+    if (t.dataset.optI != null) return pickOption(+t.dataset.optI);
     const act = t.dataset.act;
+    if (ob && onboardingAction(act)) return;
     if (act === "theme") toggleTheme();
     else if (act === "resume") go("#/case");
     else if (act === "daily") startDaily();
