@@ -256,6 +256,7 @@
   function grade(job, answer) {
     if (job.type === "sort") return { ok: answer === job.answer };
     if (job.type === "quick") return { ok: !!answer && answer.correct === true, timeout: answer === "timeout" };
+    if (job.type === "mcq") return { ok: !!answer && answer.correct === true };
     if (job.type === "spot") return { ok: answer.line === job.wrongAt && answer.fix === job.answer, foundLine: answer.line === job.wrongAt };
     if (job.type === "build") {
       const right = job.items.map((it, i) => answer.placed[i] === it.element);
@@ -298,7 +299,7 @@
   }
 
   // ---------- Rewards ----------
-  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, reclass: 5, report: 25 };
+  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, reclass: 5, mcq: 3, report: 25 };
   function reward(career, job, ok) {
     const base = Math.round(XP[job.type] * (XP_MULT[job.tier] || 1));
     if (ok) {
