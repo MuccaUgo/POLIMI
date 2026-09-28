@@ -2,7 +2,7 @@
    The game engine (game.js) hands over its tools with install(); rules live in office-logic.js. */
 (function () {
   "use strict";
-  const W = window.QuestWorld, D = window.OfficeData, O = window.OfficeLogic, ST = window.OfficeStudy;
+  const W = window.QuestWorld, D = window.OfficeData, O = window.OfficeLogic, ST = window.OfficeStudy, X = window.OfficeExam;
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const eur = O.eur;
   let E = null;           // the engine
@@ -354,6 +354,7 @@
     const before = O.interviewStatus(s).state;
     const rw = O.reward(s, job, g.ok);
     const newLevel = ST.recordStudy(s, job, g.ok);
+    recordPattern(s, job, g.ok);
     if (job.type === "posting") O.post(s, job.title, job.lines);
     s.carrying = null;
     E.sfx(g.ok ? "coin" : "hurt");
@@ -426,12 +427,62 @@
     await chooseActivity();
   }
 
+  // Results by exam pattern, to show the weak spots.
+  function recordPattern(s, job, ok) {
+    if (!job.pattern) return;
+    s.patterns = s.patterns || {};
+    const p = s.patterns[job.pattern] || (s.patterns[job.pattern] = [0, 0]);
+    if (ok) p[0]++;
+    p[1]++;
+  }
+
+  // A mock exam: eight past-exam style questions in a row, two points each.
+  async function mockExam() {
+    const s = S();
+    const jobs = X.mockExam(E.rnd);
+    await E.say(`Mock exam: ${jobs.length} questions like the written exam, financial accounting and consolidation. Paper and pen ready. No hints until the end of each question.`, "Giulia");
+    E.closeDialog();
+    E.music("battle");
+    const res = [];
+    for (let i = 0; i < jobs.length; i++) {
+      const ctx = { mock: true, n: i + 1, of: jobs.length };
+      const answer = await screenFor(jobs[i], ctx);
+      const g = O.grade(jobs[i], answer);
+      res.push(g.ok);
+      recordPattern(s, jobs[i], g.ok);
+      O.reward(s, Object.assign({}, jobs[i], { client: null }), g.ok);
+      E.sfx(g.ok ? "coin" : "hurt");
+      await resultScreen(jobs[i], g, answer, null, ctx);
+    }
+    E.music("office");
+    const score = res.filter(Boolean).length, pts = score * 2, max = jobs.length * 2;
+    s.mock = s.mock || { runs: 0, best: 0, last: 0 };
+    s.mock.runs++; s.mock.last = pts; s.mock.best = Math.max(s.mock.best, pts);
+    hud(); E.save();
+    E.sfx(score / jobs.length >= 0.75 ? "level" : "blip");
+    await screen(`<div class="jhead"><span>📝 MOCK EXAM</span><span>RESULT</span></div>
+      <div class="verdict ${score / jobs.length >= 0.6 ? "ok" : "ko"}">${pts}/${max} POINTS</div>
+      <ul class="res">${jobs.map((j, i) => `<li class="${res[i] ? "y" : "n"}">${res[i] ? "✔" : "✘"} ${esc(j.pattern || "Theory")}</li>`).join("")}</ul>
+      <p class="small">${score / jobs.length >= 0.75 ? "Exam-ready on this set. Keep it up." : score / jobs.length >= 0.5 ? "Close. Practise the ✘ patterns on the desks, then try again." : "Not yet: go back to the desks for the ✘ patterns."} Your weak spots are in the menu.</p>${go("BACK TO THE OFFICE ▶")}`, (root, done) => {
+      root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); } };
+    });
+  }
+
   // Each morning: the day's work. Giulia's memos for the company books arrive whatever you choose.
   async function chooseActivity() {
     const s = S();
-    const opts = ["📒 Client bookkeeping", `🏢 Consolidation desk · ${levelName(ST.studyOf(s, "cons").level)}`, `📊 Financial analysis desk · ${levelName(ST.studyOf(s, "fa").level)}`];
+    const opts = ["📒 Client bookkeeping", `🏢 Consolidation desk · ${levelName(ST.studyOf(s, "cons").level)}`, `📊 Financial analysis desk · ${levelName(ST.studyOf(s, "fa").level)}`, "📝 Mock exam (8 questions)"];
     const c = await E.ask("Good morning! What's on your plate today? (My memos for the company books come either way.)", opts, "Giulia");
     E.closeDialog();
+    if (c === 3) {
+      s.activity = "books";
+      await mockExam();
+      const ev = O.firmEvent(s);
+      s.queue = ev ? [ev] : [];
+      hud(); E.save();
+      if (!s.queue.length) return afterJob();
+      return E.say("After the mock exam, just my memo for the books today. Then you can go home.", "Giulia");
+    }
     s.activity = ["books", "cons", "fa"][c];
     s.queue = O.planDay(s, E.rnd).jobs;
     hud(); E.save();
@@ -448,7 +499,7 @@
       bind(root, v => { root.onclick = null; root.oninput = null; root.onchange = null; resolve(v); });
     });
   }
-  const head = (job, ctx) => `<div class="jhead"><span>${job.track ? `${ST.TRACKS[job.track].icon} ${esc(ST.TRACKS[job.track].short)}` : clientLine(job.client)}</span><span>${ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : job.track ? levelName(job.level).toUpperCase() : TYPE_LABEL[job.type]}</span></div>`;
+  const head = (job, ctx) => `<div class="jhead"><span>${ctx && ctx.mock ? "📝 PAST-EXAM STYLE" : job.track ? `${ST.TRACKS[job.track].icon} ${esc(ST.TRACKS[job.track].short)}` : clientLine(job.client)}</span><span>${ctx && ctx.mock ? `MOCK EXAM ${ctx.n}/${ctx.of}` : ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : job.track ? levelName(job.level).toUpperCase() : TYPE_LABEL[job.type]}</span></div>`;
   const docHtml = doc => `<div class="doc"><div class="doc-kind">${esc(doc.kind)}</div><div class="doc-title">${esc(doc.title)}</div>
     <table>${doc.lines.map((row, i) => i === 0 && row[0] === "" ? `<tr class="th">${row.map(c => `<th>${esc(c)}</th>`).join("")}</tr>` : `<tr>${row.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>
     ${doc.facts ? `<ul class="facts">${doc.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}</div>`;
@@ -592,7 +643,7 @@
   }
 
   function mcqScreen(job, ctx) {
-    return screen(`${head(job, ctx)}<p class="small">${esc(job.brief)}</p><p class="question">${esc(job.question)}</p>
+    return screen(`${head(job, ctx)}${job.pattern ? `<div class="lbl">${esc(job.pattern)}</div>` : ""}<p class="small">${esc(job.brief)}</p>${job.doc ? docHtml(job.doc) : ""}<p class="question">${esc(job.question)}</p>
       <div class="chips list" data-g="a">${job.options.map((o, i) => `<button type="button" data-v="${i}"><span>${"ABCD"[i]}. ${esc(o.label)}</span></button>`).join("")}</div>${go()}`, (root, done) => {
       const st = {};
       root.onclick = ev => {
@@ -690,7 +741,8 @@
       body = `<ul class="res">${job.fields.map((f, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.right[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}
         ${job.choice ? `<li class="${g.choiceOk ? "y" : "n"}">${g.choiceOk ? "✔" : "✘"} ${esc(job.choice.label)} <b>${esc(job.choice.answer)}</b><br><small>${esc(job.choice.why)}</small></li>` : ""}</ul>`;
     } else if (job.type === "mcq") {
-      body = `<p class="question">${esc(job.question)}</p><ul class="res">${job.options.map((o, i) => `<li class="${o.correct ? "y" : o === answer ? "n" : ""}">${o.correct ? "✔" : o === answer ? "✘" : "·"} ${"ABCD"[i]}. ${esc(o.label)}<br><small>${esc(o.why)}</small></li>`).join("")}</ul>`;
+      body = `<p class="question">${esc(job.question)}</p><ul class="res">${job.options.map((o, i) => `<li class="${o.correct ? "y" : o === answer ? "n" : ""}">${o.correct ? "✔" : o === answer ? "✘" : "·"} ${"ABCD"[i]}. ${esc(o.label)}<br><small>${esc(o.why)}</small></li>`).join("")}</ul>
+        ${job.solution ? `<div class="lbl">Solution</div><ol class="sol">${job.solution.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}`;
     } else if (job.type === "reclass") {
       body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}
         ${job.fields.map((f, i) => `<li class="${g.fieldsRight[i] ? "y" : "n"}">${g.fieldsRight[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.fieldsRight[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}</ul>`;
@@ -698,7 +750,7 @@
       body = `<div class="lbl">The right entry</div><ul class="res">${job.lines.map(l => `<li>${lineText(l)}</li>`).join("")}</ul><p>${esc(job.why)}</p>
         ${ok ? "" : `<p class="cons">${g.balanced ? "It balanced, but the accounts or amounts weren't right." : "Your entry didn't even balance!"} Marco fixed the books for you. He sighed loudly.</p>`}`;
     }
-    const reward = ctx && ctx.interview ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${O.bonusFor(job.tier) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}</div>`;
+    const reward = ctx && (ctx.interview || ctx.mock) ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${O.bonusFor(job.tier) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}</div>`;
     return screen(`${head(job, ctx)}<div class="verdict ${ok ? "ok" : "ko"}">${ok ? "✔ WELL DONE!" : "✘ NOT QUITE"}</div>${reward}${body}${go("CONTINUE ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.sfx("blip"); E.hideOverlay(); done(); } };
     });
@@ -877,6 +929,7 @@
       <div class="menu-list">
         <button data-m="books">▸ COMPANY BOOKS</button>
         <button data-m="dash">▸ DASHBOARD</button>
+        <button data-m="weak">▸ EXAM PREP · WEAK SPOTS</button>
         <button data-m="ladder">▸ CAREER LADDER</button>
         <button data-m="codex">▸ CODEX</button>
         <button data-m="title">▸ TITLE SCREEN</button>
@@ -896,6 +949,14 @@
         root.onclick = null;
         await (m === "books" ? companyBooks() : dashboard());
         return menu();
+      }
+      if (m === "weak") {
+        const rows = Object.entries(s.patterns || {}).sort((a, b) => a[1][0] / a[1][1] - b[1][0] / b[1][1]);
+        return E.showOverlay(`<div class="panel box"><h2>EXAM PREP</h2>
+          <div class="row"><span>Mock exams</span><span>${s.mock ? `${s.mock.runs} · best ${s.mock.best}/16 · last ${s.mock.last}/16` : "none yet"}</span></div>
+          <p class="small">Every past-exam pattern you've met, weakest first. Practise them on the desks (level 3) or in a mock exam.</p>
+          ${rows.length ? rows.map(([k, [ok, n]]) => `<div class="row"><span>${ok / n >= 0.75 ? "✔" : ok / n >= 0.5 ? "~" : "✘"} ${esc(k)}</span><span>${ok}/${n}</span></div>`).join("") : `<p class="small">No exam patterns yet: reach level 3 on a desk, or choose a mock exam one morning.</p>`}
+          <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
       }
       if (m === "ladder") return E.showOverlay(`<div class="panel box"><h2>CAREER LADDER</h2>
         ${D.RANKS.map(x => `<div class="row"><span>${x.id === s.rank ? "▶ " : ""}${esc(x.name)}${x.soon ? " 🔒" : ""}</span><span>${x.xp} XP · ${eur(x.salary)}/day</span></div>`).join("")}
