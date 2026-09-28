@@ -232,3 +232,13 @@ input, select, textarea { -webkit-user-select: text; user-select: text; }
 .xpbar { margin: 6px 0 2px; }
 .cert-in { text-align: center; }
 .big-rank { font-family: var(--pixel); font-size: 14px; color: #2f6b34; margin: 10px 0 14px; line-height: 1.6; }
+
+/* ---------- Save backups ---------- */
+.title .menu-list.import { width: min(100%, 340px); }
+.title .menu-list.import button { background: transparent; color: var(--cream); border-color: #3a3654; }
+.filebtn { position: relative; display: flex; align-items: center; font-family: var(--pixel); font-size: 10px; min-height: 46px; padding: 8px 12px; background: var(--cream); color: var(--ink); border: 3px solid var(--ink); border-radius: 4px; cursor: pointer; }
+.filebtn:active { background: var(--gold); }
+.filebtn input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo, monospace; font-size: 16px; line-height: 1.2; padding: 6px 8px; border: 2px solid var(--ink); border-radius: 3px; background: #fff; color: var(--ink); resize: vertical; word-break: break-all; }
+.bk-msg { color: #26615f; }
+.bk-msg:empty { display: none; }

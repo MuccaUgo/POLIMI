@@ -791,6 +791,7 @@
         <button data-m="dash">▸ DASHBOARD</button>
         <button data-m="ladder">▸ CAREER LADDER</button>
         <button data-m="codex">▸ CODEX</button>
+        <button data-m="backup">▸ SAVE BACKUP</button>
         <button data-m="title">▸ TITLE SCREEN</button>
         <button data-m="close">▸ BACK TO WORK</button>
       </div></div>`);
@@ -804,6 +805,7 @@
       if (m === "close") return end();
       if (m === "back") return main();
       if (m === "title") { root.onclick = null; E.toTitle(); return; }
+      if (m === "backup") { root.onclick = null; await E.backup(); return menu(); }
       if (m === "books" || m === "dash") {
         root.onclick = null;
         await (m === "books" ? companyBooks() : dashboard());
