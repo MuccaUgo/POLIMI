@@ -68,7 +68,12 @@ end you write the annual report (income statement, balance sheet, weighted-avera
 trial balance; the closing entry and the shareholders' meeting follow (5% to the legal reserve, art. 2430
 c.c., and a dividend). You earn a daily salary plus a bonus for good work. Promotions are never automatic:
 once you have the XP you choose when to take a hard six-question interview with Giulia. Intern, Junior
-Accountant and Financial Analyst are playable; higher ranks open as new content arrives. The Financial
+Accountant and Financial Analyst are playable. The four statements are kept distinct throughout: the
+cabinets are grouped under BALANCE SHEET (A, L, E) and INCOME STATEMENT (R, X); a "which statements?" job asks
+which of the balance sheet, income statement, cash flow statement (and its section) and statement of changes in
+equity record a transaction; the whiteboard explains what each statement answers and how they link, with
+PolimiAFC's own figures; and the firm's annual report includes a cash flow statement and a statement of changes
+in equity built from its ledger; higher ranks open as new content arrives. The Financial
 Analyst (`office-analysis.js`, from AFC Lecture 05) works on a listed client, Lario Energia: sorting the four
 kinds of public source, the Form 20-F, reclassifying the balance sheet (fixed assets, NOWC, NFP, provisions,
 equity; invested capital = coverage) and the income statement (value added, EBITDA, EBIT, pretax and net

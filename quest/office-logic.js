@@ -326,8 +326,16 @@
   const calendarYear = career => Y + career.year - 1;
 
   // ---------- The firm's ledger ----------
-  function post(career, label, lines, when) {
-    career.ledger.push({ label, lines: normalizeLines(lines), year: career.year, q: quarterOf(career.day), day: career.day, when: when || "" });
+  // `at` overrides the date (the shareholders' meeting belongs to the next year).
+  function post(career, label, lines, when, at) {
+    const d = at || { year: career.year, q: quarterOf(career.day), day: career.day };
+    career.ledger.push({ label, lines: normalizeLines(lines), year: d.year, q: d.q, day: d.day, when: when || "" });
+  }
+  // Which section of the cash flow statement an entry's cash belongs to.
+  function cfCategory(label) {
+    if (/is born|bank loan|capital increase|loan repayment|dividend/i.test(label)) return "financing";
+    if (/laptop supplier|laptops/i.test(label)) return "investing";
+    return "operating";
   }
   function balances(career, filter) {
     const b = {};
@@ -420,6 +428,17 @@
     const totalEq = round2(b.shareCapital + b.sharePremium + reserves + p.profit);
     const eps = round2(p.profit / weightedShares(career));
     const L = (key, label, answer, why, opts) => Object.assign({ key, label, answer, why }, opts);
+    // Cash flow statement: every cash movement of the year, by section.
+    const cf = { operating: 0, investing: 0, financing: 0 };
+    career.ledger.filter(e => e.year === career.year && e.label !== "Closing entry").forEach(e => e.lines.forEach(([id, v]) => { if (id === "cash") cf[cfCategory(e.label)] = round2(cf[cfCategory(e.label)] + v); }));
+    const open = balances(career, e => e.year < career.year);
+    const dCash = round2(b.cash - open.cash);
+    // Statement of changes in equity.
+    const eqOf = x => round2(x.shareCapital + x.sharePremium + x.legalReserve + x.retained);
+    const openEq = eqOf(open);
+    const yearEntries = balances(career, e => e.year === career.year && e.label !== "Closing entry");
+    const issues = round2(yearEntries.shareCapital + yearEntries.sharePremium);
+    const declared = round2(career.ledger.filter(e => e.year === career.year && /shareholders' meeting/i.test(e.label)).reduce((t, e) => t + e.lines.filter(([id]) => id === "dividendsPayable").reduce((u, [, v]) => u + v, 0), 0));
     return {
       sections: [
         { title: `Income statement ${calendarYear(career)}`, lines: [
@@ -442,6 +461,19 @@
           L("profitBS", "Profit for the year", p.profit, "The same profit as the income statement, not yet allocated."),
           L("totalEquity", "Total equity", totalEq, "Capital + premium + reserves + profit.", { total: true }),
           L("totalEL", "Total equity and liabilities", round2(totalEq + totalLiab), "Must equal total assets.", { total: true })
+        ] },
+        { title: `Cash flow statement ${calendarYear(career)}`, lines: [
+          L("cfo", "Cash flow from operating activities", cf.operating, "Cash from clients − cash paid for salaries, rent, supplies, interest: the day-to-day business."),
+          L("cfi", "Cash flow from investing activities", cf.investing, "Cash paid for long-term assets (the laptops)."),
+          L("cff", "Cash flow from financing activities", cf.financing, "Cash from shareholders and banks, minus loan repayments and dividends paid."),
+          L("dcash", "Change in cash", dCash, "Operating + investing + financing = cash at the end − cash at the start of the year (the balance sheet).", { total: true })
+        ] },
+        { title: `Statement of changes in equity ${calendarYear(career)}`, lines: [
+          L("eqOpen", "Equity at 1 January", openEq, "Last year's closing equity (capital, premium, reserves)."),
+          L("eqIssue", "Shares issued (capital + premium)", issues, "New shares: nominal value to share capital, the excess to the premium reserve."),
+          L("eqProfit", "Profit for the year", p.profit, "From the income statement."),
+          L("eqDiv", "Dividends declared", -declared, "Approved by the shareholders' meeting this year; they reduce equity (never an expense)."),
+          L("eqClose", "Equity at 31 December", totalEq, "Opening + shares issued + profit − dividends: the same total equity as the balance sheet.", { total: true })
         ] },
         { title: "Per share", lines: [
           L("shares", "Weighted-average shares", weightedShares(career), career.year === 1 ? "100,000 all year + 20,000 × 6/12 (issued on 1 July) = 110,000." : "120,000 shares all year.", { fmt: "qty" }),
@@ -484,7 +516,7 @@
     if (reserve) lines.push(["legalReserve", reserve]);
     if (dividend) lines.push(["dividendsPayable", dividend]);
     return {
-      id: jobId(), type: "posting", pickup: "giulia", work: "books", title: "The shareholders' meeting", tier: tierOf(career), nLines: lines.length,
+      id: jobId(), type: "posting", pickup: "giulia", work: "books", title: "The shareholders' meeting", tier: tierOf(career), nLines: lines.length, agm: true,
       memo: `The shareholders approved the annual report. Of the ${eur(profit)} profit: 5% to the legal reserve (${eur(reserve)})${dividend ? `, and a dividend of €0.05 per share on ${shares.toLocaleString("en-US")} shares (${eur(dividend)}), to be paid in January` : ""}. The rest stays in retained earnings.`,
       lines, why: `Italian law (art. 2430 c.c.) puts 5% of profit in the legal reserve until it reaches 20% of share capital. ${dividend ? "The declared dividend leaves retained earnings and becomes a liability until it's paid — never an expense." : ""}`
     };
@@ -573,7 +605,7 @@
   }
 
   const api = {
-    eur, acct, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
+    eur, acct, cfCategory, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
     weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };
