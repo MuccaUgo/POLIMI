@@ -220,7 +220,7 @@
     const opts = [];
     if (memo) opts.push("Take your memo");
     if (s.phase === "report") opts.push("About the annual report…");
-    opts.push("Ask for a promotion interview", "How is the company doing?", "Bye");
+    opts.push("Ask for a promotion interview", "How is the company doing?", "A copy of my personnel file", "Bye");
     const c = opts[await E.ask(memo ? `Giulia: “${memo.close ? "Quarter close. " : ""}${memo.title}: I have a memo for the books.”` : `Giulia: “${pick(D.LINES.giuliaIdle)}”`, opts, who)];
     E.closeDialog();
     if (c === "Take your memo") {
@@ -232,6 +232,16 @@
     if (c === "About the annual report…") return E.say("Every figure comes from the books. Take the trial balance, build the income statement and the balance sheet, and don't forget EPS: the shareholders always ask.", who);
     if (c === "How is the company doing?") return dashboard();
     if (c === "Ask for a promotion interview") return interview();
+    if (c === "A copy of my personnel file") return personnelFile();
+  }
+
+  // The career backup, asked of Giulia: your personnel file, to keep somewhere safe.
+  async function personnelFile() {
+    const who = "Giulia";
+    await E.say("A copy of your personnel file? Sensible. Auditors love a backup, and so do I.", who);
+    E.closeDialog();
+    await E.backup();
+    return E.say("Keep it somewhere safe. If this computer ever melts, bring it back through IMPORT A SAVE on the title screen and you'll be at your desk as if nothing happened.", who);
   }
 
   async function marco() {
@@ -395,6 +405,7 @@
     s.queue = O.planDay(s, E.rnd).jobs;
     hud(); E.save();
     await E.fade(false);
+    if (s.stats.days === 1) await E.say("One more thing, now that you're on the payroll: whenever you want a copy of your personnel file, just ask me. Keep it safe, and your career is safe.", "Giulia");
     if (newYear) await E.say(`Happy new year! ${O.calendarYear(s)} starts. The books carry on: last year's balances are this year's opening ones.`, "Giulia");
     else if (O.quarterOf(s.day) !== O.quarterOf(s.day - 1)) await E.say(`A new quarter begins: Q${O.quarterOf(s.day)}.`, "Tip");
   }
@@ -791,7 +802,6 @@
         <button data-m="dash">▸ DASHBOARD</button>
         <button data-m="ladder">▸ CAREER LADDER</button>
         <button data-m="codex">▸ CODEX</button>
-        <button data-m="backup">▸ SAVE BACKUP</button>
         <button data-m="title">▸ TITLE SCREEN</button>
         <button data-m="close">▸ BACK TO WORK</button>
       </div></div>`);
@@ -805,7 +815,6 @@
       if (m === "close") return end();
       if (m === "back") return main();
       if (m === "title") { root.onclick = null; E.toTitle(); return; }
-      if (m === "backup") { root.onclick = null; await E.backup(); return menu(); }
       if (m === "books" || m === "dash") {
         root.onclick = null;
         await (m === "books" ? companyBooks() : dashboard());

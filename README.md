@@ -68,8 +68,9 @@ end you write the annual report (income statement, balance sheet, weighted-avera
 trial balance; the closing entry and the shareholders' meeting follow (5% to the legal reserve, art. 2430
 c.c., and a dividend). You earn a daily salary plus a bonus for good work. Promotions are never automatic:
 once you have the XP you choose when to take a hard six-question interview with Giulia. Intern and Junior
-Accountant are playable; higher ranks open as new content arrives. Career and adventure save separately. Saves live in the browser; **SAVE BACKUP** in either menu exports one as a
-file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
+Accountant are playable; higher ranks open as new content arrives. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
+your personnel file; in the adventure, **SAVE BACKUP** is in the menu. Either exports the save as a file or
+a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now

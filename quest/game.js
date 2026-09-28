@@ -731,7 +731,7 @@
     const p = BK.pack(kind, S);
     const code = BK.toCode(p);
     return new Promise(resolve => {
-      showOverlay(`<div class="panel box"><h2>SAVE BACKUP</h2>
+      showOverlay(`<div class="panel box"><h2>${kind === "career" ? "YOUR PERSONNEL FILE" : "SAVE BACKUP"}</h2>
         <p>${kind === "career" ? "Your career" : "Your adventure"}: ${esc(describe(kind, S))}</p>
         <p class="small">Keep a copy somewhere safe (the Files app, Notes, iCloud Drive or an email to yourself). To carry on, even on another device, choose IMPORT A SAVE on the title screen.</p>
         <div class="menu-list"><button data-b="file">▸ SAVE AS A FILE</button><button data-b="copy">▸ COPY THE CODE</button></div>
