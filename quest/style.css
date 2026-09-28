@@ -242,3 +242,11 @@ input, select, textarea { -webkit-user-select: text; user-select: text; }
 textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo, monospace; font-size: 16px; line-height: 1.2; padding: 6px 8px; border: 2px solid var(--ink); border-radius: 3px; background: #fff; color: var(--ink); resize: vertical; word-break: break-all; }
 .bk-msg { color: #26615f; }
 .bk-msg:empty { display: none; }
+
+/* ---------- Study desks ---------- */
+.doc tr.th th { font-family: var(--pixel); font-size: 7px; text-align: right; padding: 2px 0 4px 10px; color: #26615f; }
+.doc tr.th th:first-child { text-align: left; padding-left: 0; }
+.doc td + td + td { padding-left: 10px; }
+.facts { margin: 8px 0 0; padding-left: 18px; font-size: 18px; }
+.facts li { margin: 2px 0; }
+.res li:not(.y):not(.n) { color: #55556a; }

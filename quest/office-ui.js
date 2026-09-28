@@ -2,7 +2,7 @@
    The game engine (game.js) hands over its tools with install(); rules live in office-logic.js. */
 (function () {
   "use strict";
-  const W = window.QuestWorld, D = window.OfficeData, O = window.OfficeLogic;
+  const W = window.QuestWorld, D = window.OfficeData, O = window.OfficeLogic, ST = window.OfficeStudy;
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const eur = O.eur;
   let E = null;           // the engine
@@ -57,13 +57,15 @@
   );
 
   // ---------- Small helpers ----------
-  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS", reclass: "ANALYSIS" };
+  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS", reclass: "ANALYSIS", mcq: "EXAM QUESTION" };
+  const levelName = l => l === 3 ? "EXAM LEVEL" : `level ${l}`;
   const WHERE = { cabinet: "the right CABINET", desk: "YOUR DESK", books: "the company BOOKS", marco: "Marco", phone: "your phone" };
   const ELEMENT_SHORT = { Asset: "Asset", Liability: "Liab.", Equity: "Equity", Revenue: "Rev.", Expense: "Exp." };
   const article = w => /^[AEIOU]/i.test(w) ? "an" : "a";
   const clientLine = id => id ? `${D.CLIENTS[id].icon} ${esc(D.CLIENTS[id].name)}` : "🏢 PolimiAFC S.p.A.";
   function docName(job) {
     if (job.type === "posting") return `Memo: ${job.title}`;
+    if (job.type === "mcq") return `Exam question · ${ST.TRACKS[job.track].short.toLowerCase()}`;
     if (job.type === "build") return `Year-end file · ${D.CLIENTS[job.client].name}`;
     if (job.type === "order") return `Cut-off pile · ${D.CLIENTS[job.client].name}`;
     if (job.type === "reclass") return `${job.docKind.split(" · ")[0]} · ${D.CLIENTS[job.client].name}`;
@@ -142,7 +144,8 @@
     if (s.phase === "home") return "✔ All done! Clock out by the door";
     const n = s.queue.length;
     const call = s.queue.some(j => j.pickup === "phone");
-    return `${s.phase === "close" ? "Quarter close · " : ""}${n} job${n === 1 ? "" : "s"} left${call ? " · ☎ ringing!" : " · ! = pick up"}`;
+    const desk = s.activity === "cons" || s.activity === "fa" ? `${ST.TRACKS[s.activity].icon} ${levelName(ST.studyOf(s, s.activity).level)} · ` : "";
+    return `${s.phase === "close" ? "Quarter close · " : desk}${n} job${n === 1 ? "" : "s"} left${call ? " · ☎ ringing!" : " · ! = pick up"}`;
   }
 
   // ---------- Walking onto the door mat ----------
@@ -195,11 +198,15 @@
     s.queue = O.planDay(s, E.rnd).jobs;
     hud();
     await E.say("Look for the ! marks: that's where work is waiting. Giulia has the first memo — tap her, or walk up and press A.", "Tip");
+    await E.say("From tomorrow, every morning you choose the day's work: client bookkeeping, the consolidation desk or the financial analysis desk.", "Tip");
   }
   function resume() {
     const s = S();
     if (s.phase === "intro") return E.script(begin);
-    if (s.phase === "work" && !s.queue.length && !s.carrying) s.queue = O.planDay(s, E.rnd).jobs;
+    if (s.phase === "work" && !s.queue.length && !s.carrying) {
+      if (s.stats.days > 0) return E.script(chooseActivity);
+      s.queue = O.planDay(s, E.rnd).jobs;
+    }
     hud();
   }
 
@@ -336,6 +343,7 @@
     if (job.type === "quick") return quickScreen(job, ctx);
     if (job.type === "posting") return postingScreen(job, ctx);
     if (job.type === "reclass") return reclassScreen(job, ctx);
+    if (job.type === "mcq") return mcqScreen(job, ctx);
     return Promise.resolve(null);
   }
   async function finish(job, answer) {
@@ -345,11 +353,16 @@
     if (g.ok) s.stats.right++;
     const before = O.interviewStatus(s).state;
     const rw = O.reward(s, job, g.ok);
+    const newLevel = ST.recordStudy(s, job, g.ok);
     if (job.type === "posting") O.post(s, job.title, job.lines);
     s.carrying = null;
     E.sfx(g.ok ? "coin" : "hurt");
     hud(); E.save();
     await resultScreen(job, g, answer, rw);
+    if (newLevel) {
+      E.sfx("level");
+      await E.say(`${ST.TRACKS[job.track].name}: you've reached ${newLevel === 3 ? "the EXAM LEVEL. From now on the files look like the past exams" : `level ${newLevel}. Harder files from tomorrow`}.`, "Giulia");
+    }
     const st = O.interviewStatus(s);
     if (before === "needXp" && st.state === "ready") {
       await E.say(`You have enough experience to interview for ${st.rank.name}. It's never automatic: ask me whenever you feel ready.`, "Giulia");
@@ -404,12 +417,25 @@
     await E.fade(true);
     s.x = 4; s.y = 6; s.dir = "up";
     s.phase = "work";
-    s.queue = O.planDay(s, E.rnd).jobs;
+    s.queue = [];
     hud(); E.save();
     await E.fade(false);
     if (s.stats.days === 1) await E.say("One more thing, now that you're on the payroll: whenever you want a copy of your personnel file, just ask me. Keep it safe, and your career is safe.", "Giulia");
     if (newYear) await E.say(`Happy new year! ${O.calendarYear(s)} starts. The books carry on: last year's balances are this year's opening ones.`, "Giulia");
     else if (O.quarterOf(s.day) !== O.quarterOf(s.day - 1)) await E.say(`A new quarter begins: Q${O.quarterOf(s.day)}.`, "Tip");
+    await chooseActivity();
+  }
+
+  // Each morning: the day's work. Giulia's memos for the company books arrive whatever you choose.
+  async function chooseActivity() {
+    const s = S();
+    const opts = ["📒 Client bookkeeping", `🏢 Consolidation desk · ${levelName(ST.studyOf(s, "cons").level)}`, `📊 Financial analysis desk · ${levelName(ST.studyOf(s, "fa").level)}`];
+    const c = await E.ask("Good morning! What's on your plate today? (My memos for the company books come either way.)", opts, "Giulia");
+    E.closeDialog();
+    s.activity = ["books", "cons", "fa"][c];
+    s.queue = O.planDay(s, E.rnd).jobs;
+    hud(); E.save();
+    if (s.activity !== "books") await E.say(`${ST.TRACKS[s.activity].name}: the files are in the inbox. Each one climbs towards the level of the written exam.`, "Tip");
   }
 
   // ---------- Screens ----------
@@ -422,9 +448,10 @@
       bind(root, v => { root.onclick = null; root.oninput = null; root.onchange = null; resolve(v); });
     });
   }
-  const head = (job, ctx) => `<div class="jhead"><span>${clientLine(job.client)}</span><span>${ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : TYPE_LABEL[job.type]}</span></div>`;
+  const head = (job, ctx) => `<div class="jhead"><span>${job.track ? `${ST.TRACKS[job.track].icon} ${esc(ST.TRACKS[job.track].short)}` : clientLine(job.client)}</span><span>${ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : job.track ? levelName(job.level).toUpperCase() : TYPE_LABEL[job.type]}</span></div>`;
   const docHtml = doc => `<div class="doc"><div class="doc-kind">${esc(doc.kind)}</div><div class="doc-title">${esc(doc.title)}</div>
-    <table>${doc.lines.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}</table></div>`;
+    <table>${doc.lines.map((row, i) => i === 0 && row[0] === "" ? `<tr class="th">${row.map(c => `<th>${esc(c)}</th>`).join("")}</tr>` : `<tr>${row.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>
+    ${doc.facts ? `<ul class="facts">${doc.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}</div>`;
   const chips = (group, values, labels) => `<div class="chips" data-g="${group}">${values.map((v, i) => `<button type="button" data-v="${esc(v)}">${esc(labels ? labels[i] : v)}</button>`).join("")}</div>`;
   const numInput = (key, label, neg) => `<label class="fld"><span>${esc(label)}</span><span class="inp">${neg ? `<button type="button" class="neg" data-neg="${key}">±</button>` : ""}<input data-k="${key}" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="€"></span></label>`;
   // Chip groups: one choice per group, kept in `state`.
@@ -456,6 +483,7 @@
     if (job.doc) body = docHtml(job.doc);
     else if (job.type === "build") body = `<div class="doc"><div class="doc-kind">Year-end file</div><div class="doc-title">${job.items.length} items to place</div></div>`;
     else if (job.type === "order") body = `<div class="doc"><div class="doc-kind">Cut-off pile</div><div class="doc-title">${job.items.length} documents from around New Year</div></div>`;
+    else if (job.type === "mcq") body = `<div class="doc"><div class="doc-kind">Exam question</div><div class="doc-title">One question, four answers</div></div>`;
     else if (job.type === "reclass") body = `<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div><div class="doc-title">${job.items.length} items to classify</div></div>`;
     return screen(`${head(job)}${body}<p class="brief">${esc(job.brief || "")}</p>
       <p class="where">Take it to <b>${esc(WHERE[job.work])}</b>.</p>${go("GOT IT ▶")}`, (root, done) => {
@@ -563,6 +591,20 @@
     });
   }
 
+  function mcqScreen(job, ctx) {
+    return screen(`${head(job, ctx)}<p class="small">${esc(job.brief)}</p><p class="question">${esc(job.question)}</p>
+      <div class="chips list" data-g="a">${job.options.map((o, i) => `<button type="button" data-v="${i}"><span>${"ABCD"[i]}. ${esc(o.label)}</span></button>`).join("")}</div>${go()}`, (root, done) => {
+      const st = {};
+      root.onclick = ev => {
+        if (chipHandler(root, st, ev)) return;
+        if (!ev.target.closest("[data-go]")) return;
+        if (st.a == null) return nag(root, "Choose an answer.");
+        E.hideOverlay();
+        done(job.options[+st.a]);
+      };
+    });
+  }
+
   function reclassScreen(job, ctx) {
     return screen(`${head(job, ctx)}<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div></div><p class="brief">${esc(job.brief)}</p>
       <p class="small">${job.cats.map((c, i) => job.short[i] === c ? "" : `<b>${esc(job.short[i])}</b> = ${esc(c)}`).filter(Boolean).join(" · ")}${job.cats.includes("NOWC") ? " · <b>NOWC</b> = net operating working capital · <b>NFP</b> = net financial position" : ""}</p>
@@ -647,6 +689,8 @@
     } else if (job.type === "fill") {
       body = `<ul class="res">${job.fields.map((f, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.right[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}
         ${job.choice ? `<li class="${g.choiceOk ? "y" : "n"}">${g.choiceOk ? "✔" : "✘"} ${esc(job.choice.label)} <b>${esc(job.choice.answer)}</b><br><small>${esc(job.choice.why)}</small></li>` : ""}</ul>`;
+    } else if (job.type === "mcq") {
+      body = `<p class="question">${esc(job.question)}</p><ul class="res">${job.options.map((o, i) => `<li class="${o.correct ? "y" : o === answer ? "n" : ""}">${o.correct ? "✔" : o === answer ? "✘" : "·"} ${"ABCD"[i]}. ${esc(o.label)}<br><small>${esc(o.why)}</small></li>`).join("")}</ul>`;
     } else if (job.type === "reclass") {
       body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}
         ${job.fields.map((f, i) => `<li class="${g.fieldsRight[i] ? "y" : "n"}">${g.fieldsRight[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.fieldsRight[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}</ul>`;
@@ -829,6 +873,7 @@
       <div class="row"><span>Bonus so far today</span><span>${eur(s.bonus || 0)}</span></div>
       <div class="row"><span>Your savings</span><span>${eur(s.money)}</span></div>
       <div class="row"><span>Jobs right</span><span>${s.stats.right}/${s.stats.jobs} (${acc})</span></div>
+      ${["cons", "fa"].map(t => { const d = ST.studyOf(s, t); return `<div class="row"><span>${ST.TRACKS[t].icon} ${esc(ST.TRACKS[t].name)}</span><span>${levelName(d.level)} · ${d.right}/${d.done}</span></div>`; }).join("")}
       <div class="menu-list">
         <button data-m="books">▸ COMPANY BOOKS</button>
         <button data-m="dash">▸ DASHBOARD</button>

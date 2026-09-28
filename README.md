@@ -72,7 +72,15 @@ Accountant and Financial Analyst are playable; higher ranks open as new content 
 Analyst (`office-analysis.js`, from AFC Lecture 05) works on a listed client, Lario Energia: sorting the four
 kinds of public source, the Form 20-F, reclassifying the balance sheet (fixed assets, NOWC, NFP, provisions,
 equity; invested capital = coverage) and the income statement (value added, EBITDA, EBIT, pretax and net
-income), segmental analysis, ROE and the payout ratio. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
+income), segmental analysis, ROE and the payout ratio. Every morning Giulia asks what the day's work is: client bookkeeping,
+the **consolidation desk** or the **financial analysis desk** (`office-study.js`); her memos for the company
+books arrive either way. Each desk climbs three levels (6 right out of the last 8 to move up), the third being
+the level of the AFC written exam, on the patterns of `AFC26_ExamQuestions` and the Lecture 04 exercises:
+past-exam theory questions with every option explained; the equity method over several years; full
+consolidation with NCI at fair value or proportionate share, full or partial goodwill, fair value
+adjustments with deferred taxes and intra-group eliminations; EBIT rebuilt from the indirect cash flow
+statement, income statements by nature and by function, ROE from turnover and margins, the financial leverage
+formula, the impairment test and net profit from the equity section. Career and adventure save separately. Saves live in the browser. For a backup of the career you ask Giulia for a copy of
 your personnel file; in the adventure, **SAVE BACKUP** is in the menu. Either exports the save as a file or
 a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).
@@ -145,7 +153,7 @@ desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboardi
 desk/tests/     engine, case and service-worker tests
 quest/          PolimiAFC: Ledger Quest RPG (art.js, world.js, logic.js) and career mode (office-art.js, office-data.js,
                 office-logic.js, office-ui.js), save backups (backup.js), sharing the engine in game.js, plus index.html, style.css, sw.js, manifest.json, icons
-quest/tests/    art, map, question, battle, save, career, backup and service-worker tests
+quest/tests/    art, map, question, battle, save, career, analysis, study-desk, backup and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```
 
