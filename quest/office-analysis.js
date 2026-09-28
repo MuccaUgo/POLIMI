@@ -183,11 +183,61 @@
     L3("Why do investors care about the independent auditors?", "They state the report gives a true and fair view", ["They set the dividend", "They prepare the budget", "They choose the CEO"], "The external auditors' report is required for listed companies.")
   );
 
+  // ---------- Which statements does a transaction touch? ----------
+  // Balance sheet (a date), income statement (the year, accrual), cash flow statement (the year, cash; section),
+  // statement of changes in equity (movements in equity other than through profit: owners, reserves).
+  // [tier, text, BS, IS, CFS section or null, SCE, why]
+  const IMPACTS = [
+    [1, "The bakery sells bread for €300, paid in cash", 1, 1, "Operating", 0, "Revenue in the income statement; cash up in the balance sheet and an operating inflow in the cash flow statement."],
+    [1, "The bakery sells a catering order for €500, to be paid next month", 1, 1, null, 0, "Revenue now (accrual) and a receivable in the balance sheet; no cash yet, so nothing in the cash flow statement."],
+    [1, "A customer pays last month's €500 invoice", 1, 0, "Operating", 0, "The receivable becomes cash: balance sheet and an operating inflow. No new revenue."],
+    [1, "The bakery buys a new oven for €8,000, paid in cash", 1, 0, "Investing", 0, "A long-term asset: balance sheet, and an investing outflow. Not an expense today."],
+    [1, "Depreciation of the oven for the year: €800", 1, 1, null, 0, "An expense (income statement) and a lower oven value (balance sheet). Depreciation moves no cash."],
+    [1, "The bakers' wages for the month are paid: €3,000", 1, 1, "Operating", 0, "An expense of the month, paid in cash: operating outflow."],
+    [1, "The bank lends the bakery €10,000", 1, 0, "Financing", 0, "Cash and a loan in the balance sheet, a financing inflow. A loan is never revenue."],
+    [1, "The bakery repays €2,000 of the loan", 1, 0, "Financing", 0, "Less cash and less debt; a financing outflow. Repaying principal isn't an expense."],
+    [1, "Interest on the loan is paid: €300", 1, 1, "Operating", 0, "Interest is an expense; paid in cash. The course puts interest paid in the operating section."],
+    [1, "The owners put €20,000 into the business for new shares", 1, 0, "Financing", 1, "Cash and share capital in the balance sheet, a financing inflow, and a share issue in the changes in equity."],
+    [1, "The bakery pays €1,000 of dividends to its owners", 1, 0, "Financing", 1, "Cash down and equity down: a distribution, never an expense. Financing outflow; it appears in the changes in equity."],
+    [1, "Flour for €400 arrives on credit and sits in the storeroom", 1, 0, null, 0, "Inventory and a payable: balance sheet only. It becomes an expense when used; no cash has moved yet."],
+    [1, "The bakery pays the mill the €400 it owed", 1, 0, "Operating", 0, "The payable is settled with cash: operating outflow. The expense comes when the flour is used."],
+    [2, "A customer pays a €200 deposit for a cake to be delivered next month", 1, 0, "Operating", 0, "Cash in and a contract liability; no revenue until delivery."],
+    [2, "Rent for the next six months is paid in advance: €6,000", 1, 0, "Operating", 0, "A prepaid expense (asset) and an operating outflow; the expense comes month by month."],
+    [2, "December wages are recorded but will be paid in January", 1, 1, null, 0, "This year's expense and a liability; no cash until January."],
+    [2, "An impairment test cuts a machine's value by €1,500", 1, 1, null, 0, "An impairment loss (income statement) and a lower asset value (balance sheet). No cash."],
+    [2, "The shop building is revalued upwards by €10,000 (revaluation model)", 1, 0, null, 1, "Asset up and a revaluation surplus in equity: it goes through the changes in equity, not the income statement."],
+    [2, "An old van is sold for cash at exactly its book value, €3,000", 1, 0, "Investing", 0, "One asset becomes cash: an investing inflow. At book value there's no gain in the income statement."],
+    [2, "The shareholders' meeting moves 5% of last year's profit to the legal reserve", 1, 0, null, 1, "A movement between equity items (retained earnings → legal reserve): the changes in equity show it; no cash, no income statement."],
+    [2, "New shares are issued at €3 each (nominal €1)", 1, 0, "Financing", 1, "Cash in; €1 per share to share capital and €2 to the share premium reserve. Financing inflow, and a share issue in the changes in equity."]
+  ];
+  const YESNO = ["Yes", "No"], SECTIONS = ["Operating", "Investing", "Financing", "No cash"];
+  function statements(tier, clients, r) {
+    const pool = IMPACTS.filter(x => x[0] <= tier);
+    const fresh = pool.filter(x => x[0] === tier);
+    const [, text, bs, is, cfs, sce, why] = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
+    const yn = v => (v ? "Yes" : "No");
+    return {
+      type: "reclass", client: "forno", pickup: "inbox", work: "desk", cats: null, typeLabel: "WHICH STATEMENTS?", docKind: "Transaction · which statements?",
+      brief: `“${text}.” Which financial statements record it directly?`,
+      items: [
+        { label: "Balance sheet (position at a date)", cats: YESNO, cat: yn(bs), why },
+        { label: "Income statement (revenues and expenses of the year)", cats: YESNO, cat: yn(is), why },
+        { label: "Cash flow statement (cash of the year)", cats: SECTIONS, short: ["Operat.", "Invest.", "Financ.", "No cash"], cat: cfs || "No cash", why },
+        { label: "Statement of changes in equity (owners and reserves)", cats: YESNO, cat: yn(sce), why }
+      ],
+      fields: [], note: "Every revenue and expense reaches equity at year end through the profit: the changes in equity here means owners' transactions and movements between reserves."
+    };
+  }
+  O.MAKERS.statements = statements;
+  O.MIX[1].push("statements", "statements");
+  O.MIX[2].push("statements");
+  O.MIX[3].push("statements");
+
   // ---------- Register the analyst's jobs ----------
   Object.assign(O.MAKERS, { reclassBS, reclassIS, ratio, segment, sources });
   O.MIX[3].push("reclassBS", "reclassBS", "reclassIS", "reclassIS", "ratio", "segment", "sources", "quick");
 
-  const api = { BS_CATS, BS_ITEMS, SRC_CATS, SOURCES, SEGMENTS, reclassBS, reclassIS, ratio, segment, sources };
+  const api = { IMPACTS, statements, BS_CATS, BS_ITEMS, SRC_CATS, SOURCES, SEGMENTS, reclassBS, reclassIS, ratio, segment, sources };
   root.OfficeAnalysis = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

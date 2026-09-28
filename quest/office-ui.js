@@ -98,9 +98,30 @@
     else if (mark === "?") { ctx.fillRect(px + 1, py + 1, 4, 1); ctx.fillRect(px + 4, py + 2, 1, 1); ctx.fillRect(px + 2, py + 3, 2, 1); ctx.fillRect(px + 2, py + 5, 2, 1); }
     else { ctx.fillRect(px + 1, py + 2, 4, 1); ctx.fillRect(px + 2, py + 3, 2, 1); ctx.fillRect(px + 1, py + 4, 4, 1); ctx.fillRect(px + 2, py + 5, 2, 1); }
   }
+  // 3×5 pixel letters for the labels over the cabinets.
+  const GLYPH = {
+    A: [".#.", "#.#", "###", "#.#", "#.#"], B: ["##.", "#.#", "##.", "#.#", "##."], C: [".##", "#..", "#..", "#..", ".##"],
+    E: ["###", "#..", "##.", "#..", "###"], H: ["#.#", "#.#", "###", "#.#", "#.#"], I: ["###", ".#.", ".#.", ".#.", "###"],
+    L: ["#..", "#..", "#..", "#..", "###"], N: ["##.", "#.#", "#.#", "#.#", "#.#"], S: [".##", "#..", ".#.", "..#", "##."],
+    T: ["###", ".#.", ".#.", ".#.", ".#."], ".": ["...", "...", "...", "...", ".#."], " ": ["...", "...", "...", "...", "..."]
+  };
+  function pixelText(ctx, text, x, y, color) {
+    ctx.fillStyle = color;
+    [...text].forEach((ch, k) => (GLYPH[ch] || GLYPH[" "]).forEach((row, j) => [...row].forEach((c, i) => { if (c === "#") ctx.fillRect(x + k * 4 + i, y + j, 1, 1); })));
+  }
+  // The cabinets grouped by statement: A, L, E in the balance sheet; R, X in the income statement.
+  function statementLabels(ctx, cam) {
+    const y = 9 - cam.y;
+    ctx.fillStyle = "#26615f"; ctx.fillRect(16 - cam.x, y, 47, 7);
+    ctx.fillStyle = "#8f2f2c"; ctx.fillRect(65 - cam.x, y, 30, 7);
+    pixelText(ctx, "BAL. SHEET", 20 - cam.x, y + 1, "#fdfcf5");
+    pixelText(ctx, "INC.ST.", 66 - cam.x, y + 1, "#fdfcf5");
+  }
   function drawOver(ctx, cam, frame) {
     const s = S();
-    if (!s || s.mode !== "career" || s.phase === "intro") return;
+    if (!s || s.mode !== "career") return;
+    statementLabels(ctx, cam);
+    if (s.phase === "intro") return;
     const at = (p, color, mark) => bubble(ctx, p.x - cam.x / 16, p.y - cam.y / 16, color, mark, frame);
     const job = s.carrying;
     if (job) {
@@ -177,7 +198,7 @@
     if (tile === "i") return inbox();
     if (tile === "q") return E.say(`☕ ${pick(COFFEE)}`);
     if (tile === "p") return E.say("A ficus. It has survived three audits and one very long budget meeting.");
-    if (tile === "v" || tile === "V") return dashboard();
+    if (tile === "v" || tile === "V") return fourStatements();
     if (tile === "O") return E.say("Milan in the rain. Somewhere out there, a client is losing a receipt.");
     if (tile === "m") return E.say("Marco's desk: three calculators, zero plants, one mug that says “I ♥ ACCRUALS”.");
     if (tile === "o" || tile === "j") return E.say("Giulia's desk. Talk to her — she's the one behind it.");
@@ -321,8 +342,8 @@
 
   async function cabinet(i) {
     const s = S(), job = s.carrying;
-    if (!job || job.type !== "sort") return E.say(`The ${CABINETS[i].toUpperCase()} cabinet. ${CAB_BLURB[i]}`);
-    const c = await E.ask(`File “${job.doc.lines[0][1]}” in the ${CABINETS[i].toUpperCase()} cabinet?`, ["Yes, file it", "Not yet"]);
+    if (!job || job.type !== "sort") return E.say(`The ${CABINETS[i].toUpperCase()} cabinet, part of the ${i < 3 ? "BALANCE SHEET (the position on one date)" : "INCOME STATEMENT (the flows of the year)"}. ${CAB_BLURB[i]}`);
+    const c = await E.ask(`File “${job.doc.lines[0][1]}” in the ${CABINETS[i].toUpperCase()} cabinet (${i < 3 ? "balance sheet" : "income statement"})?`, ["Yes, file it", "Not yet"]);
     if (c !== 0) return;
     E.closeDialog();
     return finish(job, D.ELEMENTS[i]);
@@ -355,7 +376,7 @@
     const rw = O.reward(s, job, g.ok);
     const newLevel = ST.recordStudy(s, job, g.ok);
     recordPattern(s, job, g.ok);
-    if (job.type === "posting") O.post(s, job.title, job.lines);
+    if (job.type === "posting") O.post(s, job.title, job.lines, "", job.agm ? { year: s.year + 1, q: 1, day: 1 } : null);
     s.carrying = null;
     E.sfx(g.ok ? "coin" : "hurt");
     hud(); E.save();
@@ -499,7 +520,7 @@
       bind(root, v => { root.onclick = null; root.oninput = null; root.onchange = null; resolve(v); });
     });
   }
-  const head = (job, ctx) => `<div class="jhead"><span>${ctx && ctx.mock ? "📝 PAST-EXAM STYLE" : job.track ? `${ST.TRACKS[job.track].icon} ${esc(ST.TRACKS[job.track].short)}` : clientLine(job.client)}</span><span>${ctx && ctx.mock ? `MOCK EXAM ${ctx.n}/${ctx.of}` : ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : job.track ? levelName(job.level).toUpperCase() : TYPE_LABEL[job.type]}</span></div>`;
+  const head = (job, ctx) => `<div class="jhead"><span>${ctx && ctx.mock ? "📝 PAST-EXAM STYLE" : job.track ? `${ST.TRACKS[job.track].icon} ${esc(ST.TRACKS[job.track].short)}` : clientLine(job.client)}</span><span>${ctx && ctx.mock ? `MOCK EXAM ${ctx.n}/${ctx.of}` : ctx && ctx.interview ? `INTERVIEW ${ctx.n}/${ctx.of}` : job.track ? levelName(job.level).toUpperCase() : job.typeLabel || TYPE_LABEL[job.type]}</span></div>`;
   const docHtml = doc => `<div class="doc"><div class="doc-kind">${esc(doc.kind)}</div><div class="doc-title">${esc(doc.title)}</div>
     <table>${doc.lines.map((row, i) => i === 0 && row[0] === "" ? `<tr class="th">${row.map(c => `<th>${esc(c)}</th>`).join("")}</tr>` : `<tr>${row.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>
     ${doc.facts ? `<ul class="facts">${doc.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}</div>`;
@@ -658,8 +679,9 @@
 
   function reclassScreen(job, ctx) {
     return screen(`${head(job, ctx)}<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div></div><p class="brief">${esc(job.brief)}</p>
-      <p class="small">${job.cats.map((c, i) => job.short[i] === c ? "" : `<b>${esc(job.short[i])}</b> = ${esc(c)}`).filter(Boolean).join(" · ")}${job.cats.includes("NOWC") ? " · <b>NOWC</b> = net operating working capital · <b>NFP</b> = net financial position" : ""}</p>
-      ${job.items.map((it, i) => `<div class="item"><div>${esc(it.label)}${it.amount != null ? ` <b>${Math.round(it.amount).toLocaleString("en-US")}</b>` : ""}</div>${chips("c" + i, job.cats, job.short)}</div>`).join("")}
+      ${job.cats ? `<p class="small">${job.cats.map((c, i) => job.short[i] === c ? "" : `<b>${esc(job.short[i])}</b> = ${esc(c)}`).filter(Boolean).join(" · ")}${job.cats.includes("NOWC") ? " · <b>NOWC</b> = net operating working capital · <b>NFP</b> = net financial position" : ""}</p>` : ""}
+      ${job.note ? `<p class="small">${esc(job.note)}</p>` : ""}
+      ${job.items.map((it, i) => `<div class="item"><div>${esc(it.label)}${it.amount != null ? ` <b>${Math.round(it.amount).toLocaleString("en-US")}</b>` : ""}</div>${chips("c" + i, it.cats || job.cats, it.short || (it.cats ? null : job.short))}</div>`).join("")}
       ${job.fields.map(f => numInput(f.key, f.label, f.neg)).join("")}${go()}`, (root, done) => {
       const st = {};
       root.onclick = ev => {
@@ -724,7 +746,8 @@
     let body = "";
     const ok = g.ok;
     if (job.type === "sort") {
-      body = ok ? `<p>${esc(job.why)}</p>` : `<p>You filed it under <b>${esc(answer)}</b>, but it's ${article(job.answer)} <b>${esc(job.answer.toLowerCase())}</b>.</p>
+      const stmt = e => ["Revenue", "Expense"].includes(e) ? "the income statement" : "the balance sheet";
+      body = ok ? `<p>${esc(job.why)}</p><p class="small">${esc(job.answer)} → it's reported in <b>${stmt(job.answer)}</b>.</p>` : `<p>You filed it under <b>${esc(answer)}</b>, but it's ${article(job.answer)} <b>${esc(job.answer.toLowerCase())}</b>, reported in <b>${stmt(job.answer)}</b>.</p>
         ${D.TRAPS[`${job.answer}>${answer}`] ? `<p class="cons">${esc(D.TRAPS[`${job.answer}>${answer}`])}</p>` : ""}<p>${esc(job.why)}</p>`;
     } else if (job.type === "quick") {
       const right = job.options.find(o => o.correct).label;
@@ -744,7 +767,8 @@
       body = `<p class="question">${esc(job.question)}</p><ul class="res">${job.options.map((o, i) => `<li class="${o.correct ? "y" : o === answer ? "n" : ""}">${o.correct ? "✔" : o === answer ? "✘" : "·"} ${"ABCD"[i]}. ${esc(o.label)}<br><small>${esc(o.why)}</small></li>`).join("")}</ul>
         ${job.solution ? `<div class="lbl">Solution</div><ol class="sol">${job.solution.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}`;
     } else if (job.type === "reclass") {
-      body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}
+      const oneWhy = job.items.every(it => it.why === job.items[0].why);
+      body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] || oneWhy ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}${oneWhy ? `<li><small>${esc(job.items[0].why)}</small></li>` : ""}
         ${job.fields.map((f, i) => `<li class="${g.fieldsRight[i] ? "y" : "n"}">${g.fieldsRight[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.fieldsRight[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}</ul>`;
     } else if (job.type === "posting") {
       body = `<div class="lbl">The right entry</div><ul class="res">${job.lines.map(l => `<li>${lineText(l)}</li>`).join("")}</ul><p>${esc(job.why)}</p>
@@ -787,6 +811,32 @@
       <div class="lbl">Latest entries</div>${last.length ? `<ul class="res">${last.map(e => `<li><b>${esc(e.label)}</b> <small>Q${e.q} ${D.Y + e.year - 1}</small><br>${e.lines.map(lineText).join("<br>")}</li>`).join("")}</ul>` : `<p class="small">No entries yet.</p>`}
       ${go("CLOSE ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); } };
+    });
+  }
+
+  // The whiteboard: the four statements, what each one answers and how they link, with PolimiAFC's own numbers.
+  function fourStatements() {
+    const s = S();
+    const b = O.balances(s), open = O.balances(s, e => e.year < s.year);
+    const flows = O.balances(s, e => e.year === s.year && e.label !== "Closing entry");
+    const profit = O.profitOf(flows).profit;
+    const eq = b.shareCapital + b.sharePremium + b.legalReserve + b.retained + profit;
+    const card = (icon, name, q, when, logic, inside, now) => `<div class="stmt"><div class="stmt-h">${icon} ${esc(name)}</div>
+      <p><b>${esc(q)}</b></p><p class="small">${esc(when)} · ${esc(logic)}</p><p class="small">${esc(inside)}</p>${now ? `<p class="now">PolimiAFC now: ${now}</p>` : ""}</div>`;
+    return screen(`<div class="jhead"><span>🏢 THE WHITEBOARD</span><span>THE FOUR STATEMENTS</span></div>
+      ${card("⚖", "Balance sheet", "What do we own and owe, and whose money is it?", "A photo on one date (31 December)", "Accrual logic", "Assets = liabilities + equity. Three of the five cabinets live here: A, L and E.", `total assets ${eur(b.cash + b.receivables + b.prepaid + b.equipment)}`)}
+      ${card("📈", "Income statement", "Did we earn more than we used up this year?", "A film of the year", "Accrual logic: revenue when earned, expenses when used", "Revenues − expenses = profit. The R and X cabinets live here.", `profit so far ${eur(profit)}`)}
+      ${card("💶", "Cash flow statement", "Where did the cash come from, and where did it go?", "A film of the year", "Cash logic: only when money moves", "Operating (the business), investing (long-term assets), financing (banks and shareholders).", `change in cash this year ${eur(b.cash - open.cash)}`)}
+      ${card("🧾", "Statement of changes in equity", "How did the owners' stake change?", "A film of the year", "Opening equity → closing equity", "+ profit, + shares issued, − dividends, and moves between reserves.", `equity ${eur(eq)}`)}
+      <div class="lbl">How they link</div>
+      <ul class="res"><li>Profit (income statement) → goes into equity (changes in equity) → equity in the balance sheet.</li>
+      <li>Operating + investing + financing (cash flow statement) = cash at the end − cash at the start (balance sheet).</li>
+      <li>Same event, different statements: selling on credit is revenue (income statement) and a receivable (balance sheet), but no cash yet. Buying a machine is an asset and an investing outflow, not an expense.</li></ul>
+      <div class="menu-list"><button type="button" data-dash>▸ SEE THE DASHBOARD</button></div>${go("CLOSE ▶")}`, (root, done) => {
+      root.onclick = async ev => {
+        if (ev.target.closest("[data-dash]")) { root.onclick = null; E.hideOverlay(); await dashboard(); done(); return; }
+        if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); }
+      };
     });
   }
 
@@ -968,6 +1018,7 @@
         <dt>LEGAL RESERVE</dt><dd>Italian S.p.A.s set aside 5% of each year's profit until the reserve reaches 20% of share capital (art. 2430 c.c.).</dd>
         <dt>DIVIDENDS</dt><dd>Approved by the shareholders' meeting, they leave retained earnings and are a liability until paid. Never an expense.</dd>
         <dt>EPS</dt><dd>Earnings per share = profit ÷ weighted-average number of shares in the year.</dd>
+        <dt>THE FOUR STATEMENTS</dt><dd>Balance sheet: the position on one date. Income statement: revenues and expenses of the year (accrual). Cash flow statement: cash in and out of the year, in three sections (operating, investing, financing). Statement of changes in equity: from opening to closing equity (profit, shares issued, dividends, reserves). Profit links the income statement to equity; the change in cash links the cash flow statement to the balance sheet.</dd>
         <dt>RECLASSIFIED BALANCE SHEET</dt><dd>Invested capital (fixed assets + NOWC) = coverage (equity + NFP + provisions). Reclassification isn't compulsory: it makes statements readable and comparable.</dd>
         <dt>NOWC</dt><dd>Net operating working capital = trade receivables + inventories − trade and tax payables. Cash is not in it.</dd>
         <dt>NFP</dt><dd>Net financial position = bonds + bank debts + other financial liabilities − cash. High isn't necessarily bad, if the debt funds investments that earn more than it costs.</dd>
