@@ -256,3 +256,5 @@ textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo,
 .stmt-h { font-family: var(--pixel); font-size: 9px; color: #26615f; margin-bottom: 4px; }
 .stmt p { margin: 4px 0; }
 .stmt .now { font-size: 17px; color: #8a6238; }
+.pills { gap: 12px; }
+.pill:disabled { opacity: .6; }
