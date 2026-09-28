@@ -29,10 +29,15 @@
   const TYPE_NAMES = { A: "Assets", L: "Liabilities", E: "Equity", R: "Revenue", X: "Expenses" };
 
   // ---------- Ranks ----------
+  // Every step up is a job interview you choose to take; later ranks open as their content arrives.
   const RANKS = [
     { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno"] },
     { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "verdi", "hotel"] },
-    { id: "accountant", name: "Accountant", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "pixel"], soon: true }
+    { id: "accountant", name: "Accountant", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "pixel"], soon: true },
+    { id: "senior", name: "Senior Accountant", xp: 900, salary: 180, clients: ["forno", "verdi", "hotel", "pixel", "lario"], soon: true },
+    { id: "supervisor", name: "Supervisor", xp: 1500, salary: 240, soon: true },
+    { id: "manager", name: "Manager", xp: 2300, salary: 320, soon: true },
+    { id: "partner", name: "Partner", xp: 3300, salary: 450, soon: true }
   ];
 
   const FEE_PER_JOB = 1200; // what PolimiAFC bills a client for each job done right
