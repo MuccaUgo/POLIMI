@@ -2,7 +2,7 @@
    Runs both the Ledger Quest adventure and the career mode (office-ui.js). */
 (function () {
   "use strict";
-  const A = window.QuestArt, W = window.QuestWorld, L = window.QuestLogic, UI = window.OfficeUI, OL = window.OfficeLogic;
+  const A = window.QuestArt, W = window.QuestWorld, L = window.QuestLogic, UI = window.OfficeUI, OL = window.OfficeLogic, BK = window.SaveBackup;
   const $ = s => document.querySelector(s);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const TILE = 16, VW = 10, VH = 9;
@@ -642,6 +642,7 @@
           <button data-t="qnew">▸ NEW ADVENTURE</button>
         </div>
       </div>
+      <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button></div>
       <p class="help">D-pad or tap to move · A to use · B for the menu</p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
@@ -662,6 +663,7 @@
       const b = ev.target.closest("[data-t]"); if (!b) return;
       overlay.onclick = null;
       const t = b.dataset.t;
+      if (t === "import") { await importScreen(); return; }
       if (t === "cnew" || t === "qnew") {
         const had = t === "cnew" ? job : quest;
         if (had && !confirm(t === "cnew" ? "Start a new career? Your saved career will be replaced." : "Start a new adventure? Your saved adventure will be replaced.")) { titleScreen(); return; }
@@ -671,9 +673,7 @@
         startWorld();
         await script(UI.begin);
       } else if (t === "cgo") {
-        S = OL.normalizeCareer(job);
-        startWorld();
-        UI.resume();
+        resumeSave("career", job);
       } else if (t === "qnew") {
         S = L.newGame();
         startWorld();
@@ -683,13 +683,112 @@
           await say("Head out of the door (down, at the bottom) to meet Old Abacus.", "Tip");
         });
       } else {
-        S = L.normalize(quest);
-        startWorld();
+        resumeSave("quest", quest);
       }
     };
   }
+  function resumeSave(kind, data) {
+    if (kind === "career") { S = OL.normalizeCareer(data); startWorld(); UI.resume(); }
+    else { S = L.normalize(data); startWorld(); }
+  }
+
+  // ---------- Backups: export and import saves ----------
+  const saveKey = kind => kind === "career" ? CAREER_KEY : QUEST_KEY;
+  function describe(kind, d) {
+    if (kind === "career") {
+      const c = OL.normalizeCareer(d);
+      return `${OL.rankFor(c).name} · day ${c.day}, Q${OL.quarterOf(c.day)} ${OL.calendarYear(c)} · ${c.xp} XP · €${Math.round(c.money).toLocaleString("en-US")}`;
+    }
+    const q = L.normalize(d);
+    return `Level ${q.player.level} · ${q.player.gold} gold · ${W.MAPS[q.map].name}`;
+  }
+  async function saveFile(p) {
+    const name = BK.fileName(p), text = BK.toText(p);
+    const blob = new Blob([text], { type: "application/json" });
+    try {
+      const f = new File([blob], name, { type: "application/json" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) {
+        await navigator.share({ files: [f], title: "PolimiAFC save" });
+        return "Shared. On iPhone, “Save to Files” keeps it in the Files app.";
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return "Cancelled.";
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    return `Downloaded ${name}.`;
+  }
+  async function copyText(text, area) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) {
+      try { area.focus(); area.select(); return document.execCommand("copy"); } catch (e2) { return false; }
+    }
+  }
+  function backupScreen(kind) {
+    save();
+    const p = BK.pack(kind, S);
+    const code = BK.toCode(p);
+    return new Promise(resolve => {
+      showOverlay(`<div class="panel box"><h2>SAVE BACKUP</h2>
+        <p>${kind === "career" ? "Your career" : "Your adventure"}: ${esc(describe(kind, S))}</p>
+        <p class="small">Keep a copy somewhere safe (the Files app, Notes, iCloud Drive or an email to yourself). To carry on, even on another device, choose IMPORT A SAVE on the title screen.</p>
+        <div class="menu-list"><button data-b="file">▸ SAVE AS A FILE</button><button data-b="copy">▸ COPY THE CODE</button></div>
+        <textarea class="code" readonly rows="3" aria-label="Save code">${esc(code)}</textarea>
+        <p class="small bk-msg" id="bkMsg"></p>
+        <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
+      const msg = t => { $("#bkMsg").textContent = t; };
+      overlay.onclick = async ev => {
+        const b = ev.target.closest("[data-b], [data-m]"); if (!b) return;
+        SFX.select();
+        if (b.dataset.m === "back") { overlay.onclick = null; hideOverlay(); resolve(); return; }
+        if (b.dataset.b === "file") msg(await saveFile(p));
+        if (b.dataset.b === "copy") msg(await copyText(code, overlay.querySelector("textarea")) ? "Code copied. Paste it into Notes or a message to yourself." : "Couldn't copy automatically: select the code above and copy it.");
+      };
+    });
+  }
+  function importScreen() {
+    return new Promise(resolve => {
+      showOverlay(`<div class="panel box"><h2>IMPORT A SAVE</h2>
+        <p class="small">Choose a backup file, or paste a save code. Career and adventure are recognised automatically.</p>
+        <div class="menu-list"><label class="filebtn">▸ CHOOSE A FILE<input type="file" id="bkFile" accept=".json,application/json,text/plain"></label></div>
+        <textarea class="code" id="bkCode" rows="3" placeholder="…or paste the code here (PAFC1-…)" aria-label="Save code"></textarea>
+        <p class="small bk-msg" id="bkMsg"></p>
+        <div class="menu-list"><button data-b="load">▸ LOAD THE CODE</button><button data-m="back">▸ BACK</button></div></div>`);
+      const msg = t => { $("#bkMsg").textContent = t; };
+      const use = text => {
+        let got;
+        try { got = BK.parse(text); } catch (e) { SFX.bump(); msg(e.message); return; }
+        const name = got.kind === "career" ? "career" : "adventure";
+        const existing = load(saveKey(got.kind));
+        if (existing && !confirm(`Replace your saved ${name} with this one?\n\nNow: ${describe(got.kind, existing)}\nBackup: ${describe(got.kind, got.data)}`)) { msg("Nothing changed."); return; }
+        const data = got.kind === "career" ? OL.normalizeCareer(got.data) : L.normalize(got.data);
+        try { localStorage.setItem(saveKey(got.kind), JSON.stringify(data)); } catch (e) { msg("Couldn't store the save on this device."); return; }
+        overlay.onclick = null;
+        SFX.level();
+        resolve();
+        resumeSave(got.kind, data);
+      };
+      $("#bkFile").addEventListener("change", ev => {
+        const f = ev.target.files && ev.target.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => use(String(r.result));
+        r.onerror = () => msg("Couldn't read that file.");
+        r.readAsText(f);
+      });
+      overlay.onclick = ev => {
+        const b = ev.target.closest("[data-b], [data-m]"); if (!b) return;
+        SFX.select();
+        if (b.dataset.m === "back") { overlay.onclick = null; resolve(); titleScreen(); return; }
+        if (b.dataset.b === "load") use($("#bkCode").value);
+      };
+    });
+  }
   function startWorld() {
     hideOverlay();
+    // Ask the browser not to clear the saves when space runs low.
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) {}
     $("#btnSound").textContent = S.sound ? "SOUND" : "MUTED";
     currentSong = null;
     music(W.MAPS[S.map].music);
@@ -717,6 +816,7 @@
           <button data-m="items">▸ ITEMS</button>
           <button data-m="codex">▸ CODEX</button>
           <button data-m="quest">▸ QUEST LOG</button>
+          <button data-m="backup">▸ SAVE BACKUP</button>
           <button data-m="title">▸ TITLE SCREEN</button>
           <button data-m="close">▸ BACK TO THE GAME</button>
         </div>`);
@@ -729,6 +829,7 @@
       if (m === "close") { overlay.onclick = null; hideOverlay(); busy = false; hud(); save(); return; }
       if (m === "back") return menu();
       if (m === "title") { overlay.onclick = null; save(); titleScreen(); return; }
+      if (m === "backup") { overlay.onclick = null; backupScreen("quest").then(() => { busy = false; openMenu(); }); return; }
       if (m === "useBalm") {
         if (p.items.balm > 0 && p.hp < L.maxHp(p.level)) { p.items.balm--; p.hp = Math.min(L.maxHp(p.level), p.hp + 20); SFX.level(); }
         return overlay.onclick({ target: { closest: () => ({ dataset: { m: "items" } }) } });
@@ -850,7 +951,7 @@
   UI.install({
     state: () => S, rnd, say, sayAll, ask, closeDialog, script, showOverlay, hideOverlay, overlay, music, save, fade, wait,
     sfx: name => SFX[name] && SFX[name](), tileAt: L.tileAt, isBusy: () => busy, setBusy: v => { busy = v; },
-    toTitle: () => { save(); titleScreen(); }
+    toTitle: () => { save(); titleScreen(); }, backup: () => backupScreen("career")
   });
   titleScreen();
   requestAnimationFrame(loop);

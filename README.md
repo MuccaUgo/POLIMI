@@ -68,7 +68,9 @@ end you write the annual report (income statement, balance sheet, weighted-avera
 trial balance; the closing entry and the shareholders' meeting follow (5% to the legal reserve, art. 2430
 c.c., and a dividend). You earn a daily salary plus a bonus for good work. Promotions are never automatic:
 once you have the XP you choose when to take a hard six-question interview with Giulia. Intern and Junior
-Accountant are playable; higher ranks open as new content arrives. Career and adventure save separately.
+Accountant are playable; higher ranks open as new content arrives. Career and adventure save separately. Saves live in the browser; **SAVE BACKUP** in either menu exports one as a
+file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
+device (`backup.js`).
 
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
 holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
@@ -137,8 +139,8 @@ sm/tests/       same tests for the Strategy & Marketing bank
 desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
 quest/          PolimiAFC: Ledger Quest RPG (art.js, world.js, logic.js) and career mode (office-art.js, office-data.js,
-                office-logic.js, office-ui.js), sharing the engine in game.js, plus index.html, style.css, sw.js, manifest.json, icons
-quest/tests/    art, map, question, battle, save, career and service-worker tests
+                office-logic.js, office-ui.js), save backups (backup.js), sharing the engine in game.js, plus index.html, style.css, sw.js, manifest.json, icons
+quest/tests/    art, map, question, battle, save, career, backup and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```
 
