@@ -150,8 +150,7 @@
   function mcq(track, level) {
     return (r) => {
       const pool = MCQ.filter(q => q[0] === track && q[1] <= level);
-      const fresh = pool.filter(q => q[1] === level);
-      const q = r.pick(fresh.length && r.chance(0.6) ? fresh : pool);
+      const q = O.pickFresh(r, pool, x => "mcq:" + x[2], x => x[1] === level);
       return { type: "mcq", question: q[2], options: r.shuffle(q[3].map(([label, correct, why]) => ({ label, correct, why }))), brief: "Past-exam style: exactly one answer is right. Work by exclusion." };
     };
   }
@@ -386,7 +385,8 @@
   };
   function studyJob(career, track, r) {
     const level = studyOf(career, track).level;
-    const job = r.pick(PLAN[track][level])(r);
+    // Rotate through the desk's exercise kinds too, so the same pattern doesn't come back day after day.
+    const job = O.withMemory(career, () => O.pickFresh(r, PLAN[track][level], g => "gen:" + track + level + ":" + PLAN[track][level].indexOf(g))(r));
     return Object.assign(job, { id: "s" + Date.now().toString(36) + Math.floor(r.next() * 1e6).toString(36), track, level, client: "lario", pickup: "inbox", work: "desk", tier: O.tierOf(career) });
   }
 

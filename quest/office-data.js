@@ -91,7 +91,41 @@
     ["hotel", 2, "Booking report", "Guest deposits for stays next summer", "Liability", [5000, 20000], "The hotel owes those stays: a contract liability."],
     ["hotel", 2, "Laundry invoice", "Laundry service used this month", "Expense", [600, 2000], "Used up this month: an expense."],
     ["hotel", 2, "Stock count", "Bed linen and towels in the store room", "Asset", [2000, 6000], "Supplies still to be used: an asset."],
-    ["hotel", 2, "Fixed asset register", "Depreciation of the hotel furniture this year", "Expense", [3000, 9000], "The part of the furniture used up this year: an expense."]
+    ["hotel", 2, "Fixed asset register", "Depreciation of the hotel furniture this year", "Expense", [3000, 9000], "The part of the furniture used up this year: an expense."],
+    ["forno", 1, "Cash count", "Coins and notes in the till at closing time", "Asset", [150, 900], "Cash on hand is an asset, just like cash in the bank."],
+    ["forno", 1, "Purchase invoice", "A new dough mixer, paid in cash", "Asset", [1500, 5000], "It will knead dough for years: equipment, an asset."],
+    ["forno", 1, "Electricity bill", "Electricity used by the shop this month", "Expense", [150, 500], "Used up this month: an expense."],
+    ["forno", 1, "Water bill", "Water used this month", "Expense", [40, 160], "Used up this month: an expense."],
+    ["forno", 1, "Insurance receipt", "Shop insurance for this month", "Expense", [60, 200], "This month's cover is used up this month: an expense."],
+    ["forno", 1, "Card terminal report", "Sales paid by card today", "Revenue", [300, 1500], "Bread sold is revenue, whether paid in cash or by card."],
+    ["forno", 1, "Invoice", "Bread delivered to the café next door, paid at once", "Revenue", [200, 900], "Goods delivered to a customer: revenue."],
+    ["forno", 1, "Bank statement", "Bank fees charged this month", "Expense", [10, 60], "A cost of the month's banking: an expense."],
+    ["forno", 1, "Loan statement", "Interest on the bank loan for this month", "Expense", [40, 200], "Interest is the cost of borrowing: an expense (the repayment of the loan itself isn't)."],
+    ["forno", 1, "Tax notice", "VAT the bakery must pay to the tax office next month", "Liability", [300, 1500], "Owed to the State: a liability."],
+    ["forno", 1, "Credit card statement", "Card balance still to be paid to the bank", "Liability", [200, 900], "Money owed to the bank: a liability."],
+    ["forno", 1, "Shelf count", "Paper bags and cake boxes still in the cupboard", "Asset", [80, 400], "Packaging not yet used: an asset (inventory of supplies)."],
+    ["forno", 1, "Repair invoice", "The plumber fixed a leaking pipe", "Expense", [80, 400], "A repair keeps things working, it adds nothing lasting: an expense."],
+    ["forno", 1, "Ad invoice", "Leaflets advertising the new cakes", "Expense", [100, 500], "Advertising is used up as it runs: an expense."],
+    ["forno", 1, "Company deed", "New shares bought by a second owner", "Equity", [5000, 20000], "Money put in by owners for shares is equity."],
+    ["forno", 1, "Land registry", "The small shop the bakery owns", "Asset", [60000, 150000], "A building owned and used for years: an asset."],
+    ["forno", 2, "Loan statement", "Loan instalment due within the next 12 months", "Liability", [1000, 4000], "Still owed to the bank: a liability (a current one)."],
+    ["forno", 2, "Payroll ledger", "Staff severance (TFR) built up so far", "Liability", [2000, 9000], "Owed to the staff when they leave: a liability (a provision)."],
+    ["forno", 2, "Fixed asset register", "Depreciation of the oven for this year", "Expense", [500, 2000], "The part of the oven used up this year: an expense."],
+    ["forno", 2, "Credit note", "Refund promised to a café for stale bread", "Liability", [30, 200], "The bakery owes the refund: a liability (and less revenue)."],
+    ["forno", 2, "Insurance receipt", "Insurance paid now for the whole of next year", "Asset", [600, 2000], "The cover isn't used yet: a prepaid expense, an asset."],
+    ["verdi", 2, "Office lease", "Office rent for this month", "Expense", [1500, 4000], "This month's use of the office: an expense."],
+    ["verdi", 2, "Software licence", "A client-management software bought outright, used for 3 years", "Asset", [2000, 8000], "Used for years: an intangible asset."],
+    ["verdi", 2, "Tax notice", "Income tax for the year, due in June", "Liability", [3000, 12000], "Owed to the State: a tax liability."],
+    ["verdi", 2, "Bank statement", "Cash in Verdi's current account", "Asset", [5000, 30000], "Cash is an asset."],
+    ["verdi", 2, "Invoice", "Training day delivered to a client this week", "Revenue", [1500, 5000], "A service delivered: revenue."],
+    ["verdi", 2, "Share register", "Share capital paid in by the partners", "Equity", [10000, 50000], "The partners' capital is equity."],
+    ["hotel", 2, "Restaurant report", "Dinners served in the hotel restaurant last night", "Revenue", [800, 3000], "Meals provided to guests: revenue."],
+    ["hotel", 2, "Payslips", "Receptionists' and cleaners' wages this month", "Expense", [12000, 30000], "This month's work, used up: an expense."],
+    ["hotel", 2, "Energy bill", "Heating for the hotel this month", "Expense", [2000, 7000], "Used up this month: an expense."],
+    ["hotel", 2, "City tax report", "Tourist tax collected from guests, to be paid to the city", "Liability", [500, 3000], "Collected for the city, not earned: owed to the city, a liability."],
+    ["hotel", 2, "Agency statement", "Commission owed to the booking website for last month", "Liability", [800, 4000], "Owed and unpaid: a liability."],
+    ["hotel", 2, "Minibar count", "Drinks and snacks in the minibars and store", "Asset", [800, 3000], "Goods still to be sold: inventory, an asset."],
+    ["hotel", 2, "Invoice", "Conference room hired to a company, paid in 30 days", "Asset", [1500, 6000], "The company owes the hotel: a trade receivable."]
   ];
   const ELEMENTS = ["Asset", "Liability", "Equity", "Revenue", "Expense"];
   const TRAPS = {
@@ -136,7 +170,29 @@
     [2, "verdi", "Staff earned a bonus in December, paid in January. December expense?", "Yes, and a liability at year-end", ["No, January's", "It's equity", "Only when paid"], "Earned in December: December's expense, still owed at year-end."],
     [2, "hotel", "Guests paid now for rooms next July. Revenue this year?", "No, a liability until they stay", ["Yes, all of it", "Half of it", "It's equity"], "Revenue comes night by night, when the rooms are provided."],
     [2, "hotel", "Our mortgage is €500,000. Is it part of equity?", "No, it's a liability", ["Yes", "It's revenue", "It's an asset"], "Money owed to the bank is a liability."],
-    [2, "hotel", "Collecting a guest's unpaid bill from last month: new revenue?", "No, only cash in", ["Yes, revenue today", "It's equity", "It's a liability"], "The revenue was last month's; now the receivable turns into cash."]
+    [2, "hotel", "Collecting a guest's unpaid bill from last month: new revenue?", "No, only cash in", ["Yes, revenue today", "It's equity", "It's a liability"], "The revenue was last month's; now the receivable turns into cash."],
+    [1, "forno", "A café bought €150 of bread and will pay next week. Revenue today?", "Yes: revenue now, and a receivable", ["No, only when paid", "It's a liability", "It's equity"], "Delivered today: revenue today. The café owes the money: a receivable (an asset)."],
+    [1, "forno", "I paid the mill €400 I owed them. Is that an expense today?", "No: cash down, payable down", ["Yes, €400 expense", "It's revenue", "It's equity"], "Paying a debt only settles a liability; the cost came when the flour was used."],
+    [1, "forno", "I repaid €1,000 of the bank loan. An expense?", "No: less cash and less debt", ["Yes, all of it", "Half of it", "It's revenue"], "Repaying principal isn't a cost. Only the interest is."],
+    [1, "forno", "The bank charged me €200 of interest. What is it?", "An expense", ["A liability forever", "An asset", "Equity"], "Interest is the cost of borrowing: an expense."],
+    [1, "forno", "I took €300 from the till for myself. Is it a bakery expense?", "No, it's a withdrawal by the owner", ["Yes, a wage", "It's revenue", "It's an asset"], "Money taken by an owner isn't a business cost: it reduces equity."],
+    [1, "forno", "Flour used today for the bread. Still an asset?", "No, now it's an expense", ["Yes, still inventory", "It's a liability", "It's revenue"], "Once used, inventory becomes a cost of the bread sold."],
+    [1, "forno", "Revenue €5,000, expenses €3,800 this month. Profit?", "€1,200", ["€8,800", "€5,000", "€3,800"], "Profit = revenue − expenses = €5,000 − €3,800."],
+    [1, "forno", "Assets €50,000 and liabilities €30,000. Equity?", "€20,000", ["€80,000", "€50,000", "€30,000"], "Equity = assets − liabilities."],
+    [1, "forno", "I bought the van with a loan. What happened to my equity?", "Nothing: an asset and a liability", ["It went up", "It went down", "It doubled"], "Van up, debt up by the same amount: equity is unchanged."],
+    [1, "forno", "Where do I see how much cash I have at year-end?", "Balance sheet", ["Income statement", "Only in the till", "Nowhere"], "The balance sheet shows the position at a date, cash included."],
+    [1, "forno", "Where do I see this year's profit?", "Income statement", ["Balance sheet only", "The bank statement", "The till report"], "Revenues and expenses of the year, and profit, are in the income statement."],
+    [1, "forno", "My shop's rent for this month: €1,200. What is it?", "An expense", ["An asset", "A liability", "Equity"], "This month's use of the shop is used up: an expense."],
+    [1, "forno", "I bought flour on credit. What went up?", "Inventory and payables", ["Revenue and cash", "Expenses and cash", "Equity"], "An asset (flour) and a liability (owed to the mill), by the same amount."],
+    [1, "forno", "Profit this year was €6,000. Where does it end up?", "In equity", ["In liabilities", "In revenue", "Nowhere"], "Profit belongs to the owners: it increases equity."],
+    [2, "forno", "The oven cost €10,000 and lasts 10 years. This year's cost?", "€1,000 of depreciation", ["€10,000", "Nothing", "€100"], "Straight-line depreciation: €10,000 ÷ 10 years = €1,000 a year."],
+    [2, "forno", "December's gas bill arrives in January. December expense?", "Yes, with an accrued liability", ["No, January's", "Only when paid", "It's equity"], "Used in December: December's expense, owed at year-end."],
+    [2, "forno", "Is depreciation a cash outflow?", "No, no cash moves", ["Yes, every year", "Only at year-end", "Only the first year"], "The cash left when the oven was bought; depreciation only spreads the cost."],
+    [2, "verdi", "A client will surely not pay a €2,000 invoice. What now?", "A loss: write the receivable down", ["Nothing", "More revenue", "A new liability"], "A receivable that won't be collected loses its value: an expense and a lower asset."],
+    [2, "verdi", "We bought software we'll use for 3 years. Expense now?", "No, an intangible asset", ["Yes, all of it", "It's equity", "It's a liability"], "Used for years: an intangible asset, amortised over its life."],
+    [2, "hotel", "Guests paid €2,000 of city tax that we pass to the city. Revenue?", "No, a liability to the city", ["Yes, revenue", "It's equity", "Half of it"], "We only collect it for the city: we owe it."],
+    [2, "hotel", "A guest stays 31 Dec to 2 Jan and pays at check-out. This year's revenue?", "One night's revenue", ["Nothing, paid in January", "Both nights", "Only the deposit"], "Revenue follows the nights: one night in December."],
+    [2, "hotel", "We paid next year's insurance in December. December expense?", "No, a prepaid asset", ["Yes, all of it", "Half of it", "It's a liability"], "The cover is for next year: an asset until used."]
   ];
 
   // ---------- The firm's first year: what Giulia decides, day by day ----------
@@ -166,7 +222,7 @@
 
   // ---------- Fill-in forms ----------
   // Each template builds a form from a random generator. Kept here as descriptions; the maths lives in logic.js.
-  const FILL_TIER = { 1: ["stock", "till", "payslips", "supplier"], 2: ["prepaid", "accrued", "deposit", "timesheet", "hotelNights"] };
+  const FILL_TIER = { 1: ["stock", "till", "payslips", "supplier", "creditSale", "mixer", "monthProfit"], 2: ["prepaid", "accrued", "deposit", "timesheet", "hotelNights", "depreciation", "interest", "insurance"] };
   FILL_TIER[3] = FILL_TIER[2];
 
   // ---------- Order (by period) ----------

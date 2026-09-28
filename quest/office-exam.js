@@ -526,8 +526,10 @@
   ST.PLAN.cons[3] = ST.PLAN.cons[3].concat(CONS3, CONS3);
 
   // A mock exam: financial accounting and consolidation questions, exam style.
-  function mockExam(r) {
-    const fa = r.shuffle(FA3).slice(0, 5).map(f => f(r));
+  // With a career, the patterns seen longest ago come first, so back-to-back mocks differ.
+  function mockExam(r, career) {
+    const pickFA = () => O.freshOrder(r, FA3, f => "gen:mock:" + FA3.indexOf(f)).slice(0, 5).map(f => { O.remember("gen:mock:" + FA3.indexOf(f)); return f; });
+    const fa = (career ? O.withMemory(career, pickFA) : r.shuffle(FA3).slice(0, 5)).map(f => f(r));
     const cons = [r.pick(CONS3)(r), ST.mcq("cons", 3)(r)];
     const theory = ST.mcq("fa", 3)(r);
     return r.shuffle(fa.concat(cons, [theory])).map((j, i) => Object.assign(j, { mock: true, n: i + 1 }));
