@@ -140,7 +140,7 @@ test("promotion interviews: optional, at the next level, with a wait after a fai
   assert.equal(O.interviewStatus(s).state, "ready");
   assert.equal(O.finishInterview(s, O.INTERVIEW.pass), true);
   assert.equal(s.rank, "junior");
-  s.xp = 10000;
+  s.rank = "analyst"; s.xp = 10000;
   assert.equal(O.interviewStatus(s).state, "soon", "later ranks are announced but closed");
 });
 
