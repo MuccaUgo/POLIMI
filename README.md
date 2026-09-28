@@ -40,6 +40,17 @@ and issues an opinion: **unmodified** (every line right, no hints), **qualified*
 
 Cost accounting (chapters 6–9) and consolidation (chapter 10) will join the same desk later.
 
+## Pixel-art RPG: Ledger Quest
+
+[`quest/`](quest/) is a separate game: a Game Boy-style adventure in the kingdom of Balancia, whose Great Ledger
+has been torn apart. Chapter I takes place in the village of Assetton and teaches the five elements of the
+financial statements. You explore the map with a d-pad or by tapping, talk to villagers, open chests, shop
+and rest, and fight turn-based battles against monsters made of misplaced coins: each attack is a question
+(which box does this item belong in, true or false, the odd one out). A right answer deals damage, and three in
+a row make a combo; a wrong one costs HP and shows its consequence. You level up, reach the guarded Cave of
+Confusion and defeat the three-phase Box Mixer. All pixel art is drawn in code, the chiptune music and sound
+effects are generated in the browser, and the game saves itself and works offline.
+
 The Accounting, Finance & Control hub started life at `/fa/` as a Financial Accounting hub. That path now
 holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
 over from the `fa_` key prefix to `afc_` the first time the new hub loads.
@@ -106,6 +117,8 @@ sm/             Strategy & Marketing hub (same structure)
 sm/tests/       same tests for the Strategy & Marketing bank
 desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
+quest/          Ledger Quest RPG (index.html, style.css, art.js, world.js, logic.js, game.js, sw.js, manifest.json, icons)
+quest/tests/    art, map, question, battle, save and service-worker tests
 fa/index.html   redirect from the hub's former path
 ```
 
@@ -125,6 +138,7 @@ Marketing, slate for the portal). The chosen theme is stored once under `polimi_
 node --test afc/tests/*.test.js
 node --test sm/tests/*.test.js
 node --test desk/tests/*.test.js
+node --test quest/tests/*.test.js
 ```
 
 The suites load `data.js` in a sandbox and check the bank's structure, that every answer key matches its
