@@ -642,7 +642,7 @@
           <button data-t="qnew">▸ NEW ADVENTURE</button>
         </div>
       </div>
-      <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button></div>
+      <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
       <p class="help">D-pad or tap to move · A to use · B for the menu</p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
@@ -664,6 +664,7 @@
       overlay.onclick = null;
       const t = b.dataset.t;
       if (t === "import") { await importScreen(); return; }
+      if (t === "update") { refreshApp(); return; }
       if (t === "cnew" || t === "qnew") {
         const had = t === "cnew" ? job : quest;
         if (had && !confirm(t === "cnew" ? "Start a new career? Your saved career will be replaced." : "Start a new adventure? Your saved adventure will be replaced.")) { titleScreen(); return; }
@@ -895,6 +896,30 @@
   $("#btnB").addEventListener("pointerdown", ev => { ev.preventDefault(); ac(); pressB(); });
   $("#btnMenu").addEventListener("click", () => { ac(); if ($("#dialog").hidden) openMenu(); });
   $("#btnSound").addEventListener("click", () => { if (S) toggleSound(); });
+  $("#btnUpdate").addEventListener("click", () => refreshApp());
+
+  // Update to the latest published version: save, fetch every file fresh (bypassing the browser cache),
+  // clear this app's offline copy and reload. The saved game is kept.
+  async function refreshApp() {
+    const btn = $("#btnUpdate");
+    if (!navigator.onLine) { btn.textContent = "OFFLINE"; setTimeout(() => { btn.textContent = "⟳ UPDATE"; }, 1500); return; }
+    save();
+    btn.textContent = "UPDATING…";
+    btn.disabled = true;
+    try {
+      const files = ["./", "index.html", "manifest.json"].concat([...document.querySelectorAll("script[src], link[rel=stylesheet][href]")].map(el => el.getAttribute("src") || el.getAttribute("href")).filter(u => !/^https?:/.test(u)));
+      await Promise.all(files.map(f => fetch(f, { cache: "reload" }).catch(() => {})));
+      if ("serviceWorker" in navigator) {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (reg) await reg.update().catch(() => {});
+      }
+      if (window.caches) {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter(k => k.startsWith("ledger-quest:")).map(k => caches.delete(k)));
+      }
+    } catch (e) {}
+    location.reload();
+  }
 
   // Tap on the map: walk there, or walk next to a person or object and use it.
   cv.addEventListener("pointerdown", ev => {
