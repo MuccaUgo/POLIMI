@@ -1,12 +1,14 @@
-/* Ledger Quest — the game: rendering, controls, scripts, battles, sound and saving. */
+/* PolimiAFC — the engine: rendering, controls, scripts, battles, sound and saving.
+   Runs both the Ledger Quest adventure and the career mode (office-ui.js). */
 (function () {
   "use strict";
-  const A = window.QuestArt, W = window.QuestWorld, L = window.QuestLogic;
+  const A = window.QuestArt, W = window.QuestWorld, L = window.QuestLogic, UI = window.OfficeUI, OL = window.OfficeLogic;
   const $ = s => document.querySelector(s);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
-  const SAVE_KEY = "quest_save";
+  const QUEST_KEY = "quest_save", CAREER_KEY = "afc_career";
+  const career = () => !!S && S.mode === "career";
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -19,15 +21,19 @@
   let held = null;
 
   // ---------- Storage ----------
-  function load() { try { const raw = localStorage.getItem(SAVE_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
-  function save() { if (S) try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) {} }
+  function load(key) { try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
+  function save() { if (S) try { localStorage.setItem(career() ? CAREER_KEY : QUEST_KEY, JSON.stringify(S)); } catch (e) {} }
 
   // ---------- Art caches ----------
   const TILE_DEF = {
     ".": ["grass"], ",": ["grass", "tallGrass"], "=": ["path"], "T": ["grass", "tree"], "R": ["grass", "rock"], "f": ["grass", "flowers"],
     "~": ["water"], "b": ["bridge"], "^": ["roof"], "#": [null, "wallWindow"], "D": [null, "door"], "F": ["fence"], "S": ["grass", "sign"],
     "C": ["grass", "chest"], "W": ["grass", "well"], "M": [null, "cave"], "|": ["wall"], "w": ["floor"], "x": ["mat"], "B": ["floor", "bed"],
-    "t": ["floor", "table"], "k": ["floor", "shelf"], "c": ["floor", "counter"], "n": ["caveWall"], "g": ["caveFloor"]
+    "t": ["floor", "table"], "k": ["floor", "shelf"], "c": ["floor", "counter"], "n": ["caveWall"], "g": ["caveFloor"],
+    // The PolimiAFC office
+    "_": ["carpet"], "1": ["carpet", "cab1"], "2": ["carpet", "cab2"], "3": ["carpet", "cab3"], "4": ["carpet", "cab4"], "5": ["carpet", "cab5"],
+    "d": ["carpet", "deskPC"], "L": ["carpet", "ledger"], "p": ["carpet", "plant"], "q": ["carpet", "coffee"], "i": ["carpet", "inbox"],
+    "o": ["carpet", "bossDeskL"], "j": ["carpet", "bossDeskR"], "m": ["carpet", "table"], "v": ["wall", "boardL"], "V": ["wall", "boardR"], "O": ["wall", "officeWindow"]
   };
   const tileCache = {};
   function tileImg(ch, variant) {
@@ -82,7 +88,8 @@
     coin: () => { tone(988, 0.07, "square", 0.05); tone(1319, 0.14, "square", 0.05, 0.07); },
     encounter: () => [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, 0.07, "square", 0.05, i * 0.06)),
     level: () => [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.12, "square", 0.06, i * 0.1)),
-    win: () => [784, 784, 784, 1047].forEach((f, i) => tone(f, i === 3 ? 0.4 : 0.1, "square", 0.06, i * 0.12))
+    win: () => [784, 784, 784, 1047].forEach((f, i) => tone(f, i === 3 ? 0.4 : 0.1, "square", 0.06, i * 0.12)),
+    ring: () => [0, 0.16, 0.5, 0.66].forEach(t => { tone(1320, 0.1, "square", 0.03, t); tone(1100, 0.1, "square", 0.03, t + 0.08); })
   };
   const N = n => n ? 440 * Math.pow(2, (n - 69) / 12) : 0; // MIDI note to Hz
   const SONGS = {
@@ -90,6 +97,7 @@
     home: { bpm: 96, lead: [67, 0, 72, 71, 69, 0, 67, 0, 65, 0, 69, 67, 64, 0, 0, 0, 67, 0, 72, 74, 76, 0, 74, 72, 71, 0, 67, 69, 72, 0, 0, 0], bass: [48, 48, 45, 45, 41, 41, 43, 43, 48, 48, 45, 45, 41, 43, 48, 48] },
     cave: { bpm: 100, lead: [57, 0, 60, 0, 59, 0, 55, 0, 57, 0, 64, 0, 63, 0, 0, 0, 57, 0, 60, 62, 63, 0, 62, 60, 59, 0, 56, 0, 57, 0, 0, 0], bass: [45, 45, 45, 45, 44, 44, 44, 44, 45, 45, 43, 43, 44, 44, 45, 45] },
     battle: { bpm: 168, lead: [69, 72, 76, 72, 69, 72, 76, 79, 77, 76, 74, 72, 74, 71, 67, 71, 69, 72, 76, 81, 79, 77, 76, 74, 72, 74, 76, 77, 76, 72, 69, 0], bass: [45, 45, 45, 45, 41, 41, 43, 43, 45, 45, 45, 45, 41, 43, 45, 45] },
+    office: { bpm: 112, lead: [72, 0, 76, 79, 77, 0, 74, 0, 72, 0, 69, 72, 71, 0, 67, 0, 72, 0, 76, 79, 81, 0, 79, 77, 76, 74, 72, 74, 72, 0, 0, 0], bass: [48, 55, 45, 52, 41, 48, 43, 50, 48, 55, 45, 52, 41, 43, 48, 48] },
     boss: { bpm: 176, lead: [64, 64, 67, 64, 70, 69, 67, 64, 63, 63, 66, 63, 69, 67, 66, 63, 64, 67, 71, 76, 75, 71, 67, 64, 65, 64, 63, 62, 63, 66, 64, 0], bass: [40, 40, 40, 40, 39, 39, 39, 39, 40, 40, 43, 43, 39, 39, 40, 40] }
   };
   function music(name) {
@@ -154,6 +162,7 @@
     const list = ents.map(e => ({ y: e.pos.y * TILE, draw: () => drawNpc(e.n, e.pos, cam) }));
     list.push({ y: hp.y, draw: () => ctx.drawImage(charImg("humanoid", "hero", S.dir, hero.moving && hero.t < 8 ? (hero.stepOdd ? 1 : 0) : 0), Math.round(hp.x - cam.x), Math.round(hp.y - cam.y)) });
     list.sort((a, b) => a.y - b.y).forEach(e => e.draw());
+    if (career()) UI.drawOver(ctx, cam, frame);
     if (S.map === "cave" && !S.flags.boss) {
       // A faint purple glow in the boss room.
       ctx.fillStyle = `rgba(108,60,150,${0.08 + 0.05 * Math.sin(frame / 20)})`;
@@ -179,6 +188,8 @@
   // ---------- HUD ----------
   function hud() {
     if (!S) return;
+    if (career()) return UI.hud();
+    $("#task").hidden = true;
     const p = S.player, max = L.maxHp(p.level);
     $("#hudPlace").textContent = W.MAPS[S.map].name;
     $("#hudStats").innerHTML = `<span>Lv${p.level}</span><span class="hp-mini"><i style="width:${Math.round(p.hp / max * 100)}%"></i></span><span>${p.hp}/${max}</span><span>💰${p.gold}</span>`;
@@ -212,6 +223,7 @@
     if (S.cooldown > 0) S.cooldown--;
     const warp = (W.MAPS[S.map].warps || []).find(w => w.x === S.x && w.y === S.y);
     if (warp) { hero.queue = []; await changeMap(warp.to, warp.tx, warp.ty, warp.dir); return; }
+    if (career() && UI.onStep()) { hero.queue = []; return; }
     if (L.tileAt(S.map, S.x, S.y) === "," && S.flags.tutorial && S.cooldown === 0 && rnd.chance(L.ENCOUNTER_RATE)) {
       hero.queue = [];
       S.cooldown = 4;
@@ -311,12 +323,13 @@
     if (busy || hero.moving) return;
     const f = facing();
     let npc = L.npcAt(S, S.map, f.x, f.y);
-    if (!npc && L.tileAt(S.map, f.x, f.y) === "c") { // talk across a counter
+    if (!npc && "coj".includes(L.tileAt(S.map, f.x, f.y) || "?")) { // talk across a counter or a desk
       const [dx, dy] = DELTA[S.dir];
       npc = L.npcAt(S, S.map, f.x + dx, f.y + dy);
     }
-    if (npc) return script(() => talk(npc));
     const t = L.tileAt(S.map, f.x, f.y);
+    if (career()) return script(() => UI.use(npc, t));
+    if (npc) return script(() => talk(npc));
     if (t === "S") return script(() => say(W.LINES.sign, "Signpost"));
     if (t === "W") return script(() => say(W.LINES.well));
     if (t === "C") return script(() => openChest(chestAt(f.x, f.y)));
@@ -603,17 +616,33 @@
 
   function titleScreen() {
     busy = true;
-    const saved = load();
+    S = null;
+    held = null; hero.queue = []; hero.moving = false;
+    clearTimeout(musicTimer); currentSong = null;
+    $("#task").hidden = true;
+    $("#hudPlace").textContent = "PolimiAFC"; $("#hudStats").innerHTML = "";
+    const quest = load(QUEST_KEY), job = load(CAREER_KEY);
     showOverlay(`<div class="title">
-      <h1 class="logo">LEDGER<br>QUEST</h1>
-      <p class="subtitle">CHAPTER I<br>THE FIVE BOXES</p>
+      <h1 class="logo">POLIMI<br>AFC</h1>
+      <p class="subtitle">AN ACCOUNTING GAME</p>
       <canvas id="titleCv" width="80" height="48"></canvas>
-      <div class="menu-list">
-        ${saved ? `<button data-t="continue">▸ CONTINUE</button>` : ""}
-        <button data-t="new">▸ NEW GAME</button>
+      <div class="mode">
+        <h3>CAREER</h3>
+        <p>PolimiAFC S.p.A. · from intern to partner. Keep the clients' books and the firm's own.</p>
+        <div class="menu-list">
+          ${job ? `<button data-t="cgo">▸ CONTINUE · ${esc((OL.rankFor(OL.normalizeCareer(job)).name || "").toUpperCase())}</button>` : ""}
+          <button data-t="cnew">▸ NEW CAREER</button>
+        </div>
       </div>
-      <p class="help">D-pad or tap to move · A to talk · B for the menu</p>
-      <p class="help blink">An accounting adventure</p>
+      <div class="mode">
+        <h3>ADVENTURE</h3>
+        <p>Ledger Quest · Chapter I, the Five Boxes. A pixel RPG.</p>
+        <div class="menu-list">
+          ${quest ? `<button data-t="qgo">▸ CONTINUE</button>` : ""}
+          <button data-t="qnew">▸ NEW ADVENTURE</button>
+        </div>
+      </div>
+      <p class="help">D-pad or tap to move · A to use · B for the menu</p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
     tc.imageSmoothingEnabled = false;
@@ -624,16 +653,28 @@
       tc.clearRect(0, 0, 80, 48);
       const hop = Math.abs(Math.sin(f / 12)) * 6;
       tc.drawImage(charImg("humanoid", "hero", "right", Math.floor(f / 10) % 2), 10, 26);
-      tc.drawImage(charImg("slime"), 52, 26 - hop);
-      tc.drawImage(charImg("page"), 32, 6 + Math.sin(f / 15) * 2);
+      tc.drawImage(charImg("humanoid", "giulia", "left", 0), 54, 26);
+      tc.drawImage(charImg("page"), 32, 6 + Math.sin(f / 15) * 2 - hop / 3);
       requestAnimationFrame(anim);
     };
     anim();
     overlay.onclick = async ev => {
       const b = ev.target.closest("[data-t]"); if (!b) return;
       overlay.onclick = null;
-      if (b.dataset.t === "new") {
-        if (saved && !confirm("Start a new game? Your saved game will be replaced.")) { titleScreen(); return; }
+      const t = b.dataset.t;
+      if (t === "cnew" || t === "qnew") {
+        const had = t === "cnew" ? job : quest;
+        if (had && !confirm(t === "cnew" ? "Start a new career? Your saved career will be replaced." : "Start a new adventure? Your saved adventure will be replaced.")) { titleScreen(); return; }
+      }
+      if (t === "cnew") {
+        S = OL.newCareer();
+        startWorld();
+        await script(UI.begin);
+      } else if (t === "cgo") {
+        S = OL.normalizeCareer(job);
+        startWorld();
+        UI.resume();
+      } else if (t === "qnew") {
         S = L.newGame();
         startWorld();
         await script(async () => {
@@ -642,7 +683,7 @@
           await say("Head out of the door (down, at the bottom) to meet Old Abacus.", "Tip");
         });
       } else {
-        S = L.normalize(saved);
+        S = L.normalize(quest);
         startWorld();
       }
     };
@@ -660,6 +701,7 @@
   function openMenu() {
     if (busy || hero.moving || !S) return;
     busy = true;
+    if (career()) return UI.menu();
     const p = S.player, max = L.maxHp(p.level);
     const acc = S.stats.answered ? Math.round(S.stats.correct / S.stats.answered * 100) + "%" : "—";
     const page = main => showOverlay(`<div class="panel box">${main}</div>`);
@@ -675,6 +717,7 @@
           <button data-m="items">▸ ITEMS</button>
           <button data-m="codex">▸ CODEX</button>
           <button data-m="quest">▸ QUEST LOG</button>
+          <button data-m="title">▸ TITLE SCREEN</button>
           <button data-m="close">▸ BACK TO THE GAME</button>
         </div>`);
     };
@@ -685,6 +728,7 @@
       const m = b.dataset.m;
       if (m === "close") { overlay.onclick = null; hideOverlay(); busy = false; hud(); save(); return; }
       if (m === "back") return menu();
+      if (m === "title") { overlay.onclick = null; save(); titleScreen(); return; }
       if (m === "useBalm") {
         if (p.items.balm > 0 && p.hp < L.maxHp(p.level)) { p.items.balm--; p.hp = Math.min(L.maxHp(p.level), p.hp + 20); SFX.level(); }
         return overlay.onclick({ target: { closest: () => ({ dataset: { m: "items" } }) } });
@@ -783,12 +827,13 @@
 
   const KEYS = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right", w: "up", s: "down", a: "left", d: "right" };
   document.addEventListener("keydown", ev => {
+    if (ev.target.closest && ev.target.closest("input, select, textarea")) return;
     if (ev.repeat && !KEYS[ev.key]) return;
     const dir = KEYS[ev.key];
     if (dir) { ev.preventDefault(); held = dir; hero.queue = []; if (!busy) tryMove(dir); return; }
     if (["z", "Z", "Enter", " "].includes(ev.key)) {
       ev.preventDefault(); ac();
-      if (!overlay.hidden) { const b = overlay.querySelector("[data-t], [data-e]"); if (b) b.click(); return; }
+      if (!overlay.hidden) { const b = overlay.querySelector("[data-t], [data-e], [data-go]"); if (b) b.click(); return; }
       if (!$("#battle").hidden) { const n = $("#bNext"); if (n && !$("#bResult").hidden) n.click(); return; }
       pressA();
     }
@@ -800,8 +845,13 @@
   document.addEventListener("gesturestart", ev => ev.preventDefault());
 
   // Test hook for automated play-throughs (no effect on normal play).
-  window.__quest = { state: () => S, battle: () => battleState, fight, changeMap };
+  window.__quest = { state: () => S, battle: () => battleState, fight, changeMap, ui: UI };
 
+  UI.install({
+    state: () => S, rnd, say, sayAll, ask, closeDialog, script, showOverlay, hideOverlay, overlay, music, save, fade, wait,
+    sfx: name => SFX[name] && SFX[name](), tileAt: L.tileAt, isBusy: () => busy, setBusy: v => { busy = v; },
+    toTitle: () => { save(); titleScreen(); }
+  });
   titleScreen();
   requestAnimationFrame(loop);
 
