@@ -137,6 +137,14 @@
 
   const ORDER_ITEMS = [
     // [tier, client, text, year offset (0 this year, 1 next year), why]
+    [1, "pixel", "App subscriptions for December, paid in December", 0, "The service is given in December: this year's revenue."],
+    [1, "pixel", "App subscriptions for January, paid in January", 1, "January's service: next year's revenue."],
+    [1, "pixel", "Cloud servers used in November", 0, "Used this year: this year's expense."],
+    [1, "pixel", "Developers' salaries for January", 1, "January's work: next year's expense."],
+    [1, "pixel", "Ads for the December launch, shown in December", 0, "Used in December: this year's expense."],
+    [1, "pixel", "Co-working desks for February", 1, "February's use: next year's expense."],
+    [1, "pixel", "Custom app delivered to a gym on 29 December", 0, "Delivered in December: this year's revenue."],
+    [1, "pixel", "Launch event for the new app version, held on 15 January", 1, "The event is in January: next year's expense."],
     [1, "forno", "Bread sold on 12 December, paid at the counter", 0, "Sold in December: this year's revenue."],
     [1, "forno", "Bread sold on 4 January", 1, "Sold in January: next year's revenue."],
     [1, "forno", "Gas used in November, bill paid in November", 0, "Used this year: this year's expense."],
@@ -204,42 +212,109 @@
   const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const FILLS = {
     stock(r) {
-      const lines = [["Flour sacks", r.int(4, 20), 25], ["Butter blocks", r.int(5, 30), 8], ["Sugar packs", r.int(5, 40), 3]];
+      const sc = r.pick([
+        { client: "forno", title: "Stock count · Forno Rossi · 31 December", goods: [["Flour sacks", 4, 20, 25], ["Butter blocks", 5, 30, 8], ["Sugar packs", 5, 40, 3], ["Eggs (trays)", 5, 25, 6], ["Chocolate bars", 10, 40, 4], ["Olive oil tins", 2, 10, 30]] },
+        { client: "pixel", title: "Stock count · Pixel Loop · 31 December", goods: [["Branded T-shirts", 10, 60, 9], ["Sticker packs", 20, 100, 2], ["Mugs", 10, 40, 6], ["Spare phone chargers", 5, 20, 15], ["USB keys with the demo", 10, 50, 5]] }
+      ]);
+      const lines = r.shuffle(sc.goods.slice()).slice(0, 3).map(([n, lo, hi, p]) => [n, r.int(lo, hi), p]);
       const total = lines.reduce((s, l) => s + l[1] * l[2], 0);
       return {
-        client: "forno", doc: { kind: "Stock count", title: "Stock count · Forno Rossi · 31 December", lines: lines.map(l => [l[0], `${l[1]} × ${eur(l[2])}`]) },
+        client: sc.client, doc: { kind: "Stock count", title: sc.title, lines: lines.map(l => [l[0], `${l[1]} × ${eur(l[2])}`]) },
         brief: "Value the closing inventory and say where it goes.",
         fields: [{ key: "total", label: "Closing inventory (€)", answer: total, why: lines.map(l => `${l[1]} × ${eur(l[2])}`).join(" + ") + ` = ${eur(total)}.` }],
-        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Asset", why: "Unused stock is inventory: an asset until it's used." }
+        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Asset", why: "Goods not yet used or sold are inventory: an asset until then." }
       };
     },
     till(r) {
-      const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(d => [d, 10 * r.int(20, 90)]);
-      const total = days.reduce((s, d) => s + d[1], 0);
+      const sc = r.pick([
+        { client: "forno", kind: "Till report", title: "Till report · Forno Rossi · one week", rows: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], lo: 20, hi: 90, what: "the week's sales", why: "Bread sold to customers is revenue." },
+        { client: "forno", kind: "Market stall report", title: "Christmas market stall · Forno Rossi", rows: ["Fri 13 Dec", "Sat 14 Dec", "Sun 15 Dec", "Sat 21 Dec", "Sun 22 Dec"], lo: 30, hi: 150, what: "the stall's sales", why: "Panettoni sold at the stall are revenue." },
+        { client: "pixel", kind: "App store report", title: "App store report · Pixel Loop · one month", rows: ["Week 1", "Week 2", "Week 3", "Week 4"], lo: 80, hi: 400, what: "the month's subscriptions", why: "Subscriptions sold to users are revenue." }
+      ]);
+      const rows = sc.rows.map(d => [d, 10 * r.int(sc.lo, sc.hi)]);
+      const total = rows.reduce((s, d) => s + d[1], 0);
       return {
-        client: "forno", doc: { kind: "Till report", title: "Till report · Forno Rossi · one week", lines: days.map(d => [d[0], eur(d[1])]) },
-        brief: "Record the week's sales.",
-        fields: [{ key: "total", label: "Revenue for the week (€)", answer: total, why: `Sum of the six days: ${eur(total)}.` }],
-        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Revenue", why: "Bread sold to customers is revenue." }
+        client: sc.client, doc: { kind: sc.kind, title: sc.title, lines: rows.map(d => [d[0], eur(d[1])]) },
+        brief: `Record ${sc.what}.`,
+        fields: [{ key: "total", label: "Revenue (€)", answer: total, why: `Sum of the ${rows.length} lines: ${eur(total)}.` }],
+        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Revenue", why: sc.why }
       };
     },
     payslips(r) {
-      const a = 10 * r.int(140, 220), b = 10 * r.int(140, 220);
+      const sc = r.pick([
+        { client: "forno", who: ["Baker Anna", "Baker Luca", "Shop assistant Sara", "Apprentice Omar", "Baker Giorgio"], lo: 140, hi: 220, why: "The staff's work was used up this month: an expense." },
+        { client: "pixel", who: ["Developer Chiara", "Developer Tommaso", "Designer Yuki", "Tester Paolo", "Developer Elena"], lo: 220, hi: 380, why: "The team's work was used up this month: an expense." }
+      ]);
+      const staff = r.shuffle(sc.who.slice()).slice(0, r.int(2, 3)).map(n => [n, 10 * r.int(sc.lo, sc.hi)]);
+      const total = staff.reduce((s, x) => s + x[1], 0);
       return {
-        client: "forno", doc: { kind: "Payslips", title: "Payslips · Forno Rossi · this month", lines: [["Baker Anna", eur(a)], ["Baker Luca", eur(b)]] },
+        client: sc.client, doc: { kind: "Payslips", title: `Payslips · ${D.CLIENTS[sc.client].name} · this month`, lines: staff.map(x => [x[0], eur(x[1])]) },
         brief: "Record this month's staff cost.",
-        fields: [{ key: "total", label: "Staff cost for the month (€)", answer: a + b, why: `${eur(a)} + ${eur(b)} = ${eur(a + b)}.` }],
-        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Expense", why: "The bakers' work was used up this month: an expense." }
+        fields: [{ key: "total", label: "Staff cost for the month (€)", answer: total, why: staff.map(x => eur(x[1])).join(" + ") + ` = ${eur(total)}.` }],
+        choice: { label: "It goes in…", options: D.ELEMENTS, answer: "Expense", why: sc.why }
       };
     },
     supplier(r) {
-      const q = r.int(5, 30), p = r.pick([18, 20, 22, 25]), del = r.pick([15, 20, 30]);
+      const sc = r.pick([
+        { client: "forno", from: "Mulino Adda", what: "Flour sacks", q: [5, 30], p: [18, 20, 22, 25], who: "the mill" },
+        { client: "forno", from: "Latteria Brianza", what: "Butter blocks", q: [10, 40], p: [6, 7, 8, 9], who: "the dairy" },
+        { client: "forno", from: "Cartotecnica Como", what: "Cake boxes (packs)", q: [5, 25], p: [12, 15, 18], who: "the packaging supplier" },
+        { client: "pixel", from: "HW Store Milano", what: "Monitors", q: [2, 8], p: [150, 180, 220], who: "the hardware store" },
+        { client: "pixel", from: "Print Lab", what: "Event banners", q: [2, 10], p: [40, 55, 70], who: "the print shop" }
+      ]);
+      const q = r.int(sc.q[0], sc.q[1]), p = r.pick(sc.p), del = r.pick([15, 20, 30, 40]), days = r.pick([30, 60, 90]);
       const total = q * p + del;
       return {
-        client: "forno", doc: { kind: "Supplier invoice", title: "Invoice · Mulino Adda · due in 30 days", lines: [["Flour sacks", `${q} × ${eur(p)}`], ["Delivery", eur(del)], ["Payment", "in 30 days"]] },
-        brief: "Record what the bakery owes the mill.",
-        fields: [{ key: "total", label: "Amount owed to the mill (€)", answer: total, why: `${q} × ${eur(p)} + ${eur(del)} delivery = ${eur(total)}.` }],
+        client: sc.client, doc: { kind: "Supplier invoice", title: `Invoice · ${sc.from} · due in ${days} days`, lines: [[sc.what, `${q} × ${eur(p)}`], ["Delivery", eur(del)], ["Payment", `in ${days} days`]] },
+        brief: `Record what ${D.CLIENTS[sc.client].name} owes ${sc.who}.`,
+        fields: [{ key: "total", label: `Amount owed to ${sc.who} (€)`, answer: total, why: `${q} × ${eur(p)} + ${eur(del)} delivery = ${eur(total)}.` }],
         choice: { label: "The debt goes in…", options: D.ELEMENTS, answer: "Liability", why: "Unpaid at the date: a trade payable, a liability." }
+      };
+    },
+    creditSale(r) {
+      const sc = r.pick([
+        { client: "forno", to: r.pick(["Bar Duomo", "Caffè Brera", "Scuola Manzoni", "Hotel Lago"]), a: "Bread and croissants", b: "Birthday cakes", lo: 8, hi: 40 },
+        { client: "forno", to: r.pick(["Studio Verdi", "Palestra Olimpia", "Comune di Lecco"]), a: "Catering: sandwiches", b: "Catering: pastries", lo: 15, hi: 60 },
+        { client: "pixel", to: r.pick(["Palestra Olimpia", "Forno Rossi", "Hotel Lago", "Libreria Dante"]), a: "Custom booking app", b: "Set-up and training", lo: 50, hi: 300 }
+      ]);
+      const a = 10 * r.int(sc.lo, sc.hi), b = 10 * r.int(sc.lo, sc.hi), days = r.pick([30, 60]);
+      return {
+        client: sc.client, doc: { kind: "Sales invoice", title: `Invoice · ${D.CLIENTS[sc.client].name} → ${sc.to} · pay in ${days} days`, lines: [[sc.a, eur(a)], [sc.b, eur(b)], ["Payment", `in ${days} days`]] },
+        brief: `Record the sale. ${sc.to} hasn't paid yet.`,
+        fields: [{ key: "total", label: "Revenue from this sale (€)", answer: a + b, why: `${eur(a)} + ${eur(b)} = ${eur(a + b)}: delivered today, so it's revenue today even if unpaid.` }],
+        choice: { label: `What ${sc.to} owes goes in…`, options: D.ELEMENTS, answer: "Asset", why: "The right to collect the money is a trade receivable: an asset." }
+      };
+    },
+    mixer(r) {
+      const sc = r.pick([
+        { client: "forno", from: "Macchine Brianza", what: "Dough mixer", service: "Cleaning service, first month", p: [15, 50] },
+        { client: "forno", from: "Forni Italia", what: "Deck oven", service: "Oven cleaning, first month", p: [40, 120] },
+        { client: "pixel", from: "HW Store Milano", what: "Server rack", service: "Remote monitoring, first month", p: [20, 80] },
+        { client: "pixel", from: "Ufficio Design", what: "Meeting-room furniture", service: "Office cleaning, first month", p: [10, 40] }
+      ]);
+      const price = 100 * r.int(sc.p[0], sc.p[1]), ship = 10 * r.int(5, 20), setup = 10 * r.int(5, 30), service = 10 * r.int(3, 12);
+      const cost = price + ship + setup, thing = sc.what.toLowerCase();
+      return {
+        client: sc.client, doc: { kind: "Purchase invoice", title: `Invoice · ${sc.from} · ${thing}`, lines: r.shuffle([[sc.what, eur(price)], ["Transport", eur(ship)], ["Installation", eur(setup)], [sc.service, eur(service)]]) },
+        brief: `Which costs are part of the ${thing}, and where does it go?`,
+        fields: [{ key: "cost", label: `Cost of the ${thing} to record (€)`, answer: cost, why: `Price + transport + installation = ${eur(price)} + ${eur(ship)} + ${eur(setup)} = ${eur(cost)}. Getting it ready to use is part of its cost; the monthly service (${eur(service)}) is an expense.` }],
+        choice: { label: `The ${thing} goes in…`, options: D.ELEMENTS, answer: "Asset", why: "Used for years: property, plant and equipment." }
+      };
+    },
+    monthProfit(r) {
+      const sc = r.pick([
+        { client: "forno", rev: ["Bread and cakes sold", 160, 300], costs: [["Flour and butter used", 15, 40], ["Wages", 50, 90], ["Rent", 18, 32]],
+          trap: r.pick([["New bank loan received", "Liability", "Borrowed money must be repaid: a liability.", "The loan is cash and a liability, not revenue."], ["New oven bought", "Asset", "Used for years: an asset.", "The oven is an asset, not a cost of the month (only its depreciation will be)."], ["Money put in by the owners", "Equity", "The owners' contribution is equity.", "The owners' money is equity, not revenue."]]) },
+        { client: "pixel", rev: ["Subscriptions sold", 200, 500], costs: [["Salaries", 80, 160], ["Cloud servers", 5, 30], ["Co-working desks", 8, 30]],
+          trap: r.pick([["Business angel's money for shares", "Equity", "Money paid for shares is equity.", "The angel's money is equity, not revenue."], ["Laptops bought", "Asset", "Used for years: equipment.", "The laptops are an asset, not a cost of the month."], ["Start-up fund loan received", "Liability", "Borrowed money must be repaid: a liability.", "The loan is cash and a liability, not revenue."]]) }
+      ]);
+      const sales = 50 * r.int(sc.rev[1], sc.rev[2]), costs = sc.costs.map(([n, lo, hi]) => [n, 50 * r.int(lo, hi)]), trapAmt = 500 * r.int(2, 20);
+      const profit = sales - costs.reduce((s, c) => s + c[1], 0);
+      return {
+        client: sc.client, doc: { kind: "Month summary", title: `${D.CLIENTS[sc.client].name} · this month`, lines: r.shuffle([[sc.rev[0], eur(sales)], ...costs.map(c => [c[0], eur(c[1])]), [sc.trap[0], eur(trapAmt)]]) },
+        brief: "Work out the month's profit. Careful: not every line is revenue or expense.",
+        fields: [{ key: "profit", label: "Profit for the month (€)", answer: profit, neg: true, why: `${eur(sales)} − ${costs.map(c => eur(c[1])).join(" − ")} = ${eur(profit)}. ${sc.trap[3]}` }],
+        choice: { label: `“${sc.trap[0]}” goes in…`, options: D.ELEMENTS, answer: sc.trap[1], why: sc.trap[2] }
       };
     },
     prepaid(r) {
@@ -296,35 +371,6 @@
           { key: "dec", label: `Revenue for ${Y} (€)`, answer: dec, why: `Nights of 29, 30 and 31 December: 3 × ${rooms} rooms × ${eur(rate)} = ${eur(dec)}.` },
           { key: "jan", label: `Revenue for ${Y + 1} (€)`, answer: total - dec, why: `The other 2 nights: ${eur(total - dec)}.` }
         ]
-      };
-    },
-    creditSale(r) {
-      const a = 10 * r.int(8, 40), b = 10 * r.int(8, 40);
-      return {
-        client: "forno", doc: { kind: "Sales invoice", title: "Invoice · Forno Rossi → Bar Duomo · pay in 30 days", lines: [["Bread and croissants", eur(a)], ["Birthday cakes", eur(b)], ["Payment", "in 30 days"]] },
-        brief: "Record the sale. The bar hasn't paid yet.",
-        fields: [{ key: "total", label: "Revenue from this sale (€)", answer: a + b, why: `${eur(a)} + ${eur(b)} = ${eur(a + b)}: delivered today, so it's revenue today even if unpaid.` }],
-        choice: { label: "What the bar owes goes in…", options: D.ELEMENTS, answer: "Asset", why: "The right to collect the money is a trade receivable: an asset." }
-      };
-    },
-    mixer(r) {
-      const price = 100 * r.int(15, 50), ship = 10 * r.int(5, 20), setup = 10 * r.int(5, 30), service = 10 * r.int(3, 12);
-      const cost = price + ship + setup;
-      return {
-        client: "forno", doc: { kind: "Purchase invoice", title: "Invoice · Macchine Brianza · new dough mixer", lines: [["Mixer", eur(price)], ["Transport to the bakery", eur(ship)], ["Installation", eur(setup)], ["Cleaning service, first month", eur(service)]] },
-        brief: "Which costs are part of the mixer, and where does it go?",
-        fields: [{ key: "cost", label: "Cost of the mixer to record (€)", answer: cost, why: `Price + transport + installation = ${eur(price)} + ${eur(ship)} + ${eur(setup)} = ${eur(cost)}. Getting it ready to use is part of its cost; the monthly cleaning (${eur(service)}) is an expense.` }],
-        choice: { label: "The mixer goes in…", options: D.ELEMENTS, answer: "Asset", why: "Used for years: property, plant and equipment." }
-      };
-    },
-    monthProfit(r) {
-      const sales = 50 * r.int(160, 300), flour = 50 * r.int(15, 40), wages = 100 * r.int(25, 45), rent = 100 * r.int(9, 16), loan = 500 * r.int(2, 10);
-      const profit = sales - flour - wages - rent;
-      return {
-        client: "forno", doc: { kind: "Month summary", title: "Forno Rossi · this month", lines: [["Bread and cakes sold", eur(sales)], ["Flour and butter used", eur(flour)], ["Wages", eur(wages)], ["Rent", eur(rent)], ["New bank loan received", eur(loan)]] },
-        brief: "Work out the month's profit. Careful: not every line is revenue or expense.",
-        fields: [{ key: "profit", label: "Profit for the month (€)", answer: profit, neg: true, why: `${eur(sales)} − ${eur(flour)} − ${eur(wages)} − ${eur(rent)} = ${eur(profit)}. The loan is cash and a liability, not revenue.` }],
-        choice: { label: "The new loan goes in…", options: D.ELEMENTS, answer: "Liability", why: "Borrowed money must be repaid: a liability." }
       };
     },
     depreciation(r) {

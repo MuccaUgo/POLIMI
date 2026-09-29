@@ -31,11 +31,11 @@
   // ---------- Ranks ----------
   // Every step up is a job interview you choose to take; later ranks open as their content arrives.
   const RANKS = [
-    { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno"],
-      blurb: "The five elements, simple documents, and assets = liabilities + equity." },
-    { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "verdi", "hotel"],
+    { id: "intern", name: "Intern", xp: 0, salary: 60, clients: ["forno", "pixel"],
+      blurb: "The five elements, simple documents, and assets = liabilities + equity: a bakery and a small software start-up." },
+    { id: "junior", name: "Junior Accountant", xp: 150, salary: 90, clients: ["forno", "pixel", "verdi", "hotel"],
       blurb: "New clients bring new documents: accruals, prepayments, deposits, cut-off. Harder work, better pay." },
-    { id: "analyst", name: "Financial Analyst", xp: 450, salary: 130, clients: ["forno", "verdi", "hotel", "lario"],
+    { id: "analyst", name: "Financial Analyst", xp: 450, salary: 130, clients: ["forno", "pixel", "verdi", "hotel", "lario"],
       blurb: "You read a listed group's annual report like an analyst: sources, the reclassified balance sheet and income statement, segments, ROE and payout." },
     { id: "senior", name: "Senior Accountant", xp: 900, salary: 180, clients: ["forno", "verdi", "hotel", "lario", "pixel"], soon: true },
     { id: "supervisor", name: "Supervisor", xp: 1500, salary: 240, soon: true },
@@ -60,6 +60,20 @@
   // ---------- Items: what arrives on the desk ----------
   // [client, tier (1 intern, 2 junior), document kind, item, element, amount range, why]
   const ITEMS = [
+    ["pixel", 1, "Bank statement", "Cash in Pixel Loop's bank account", "Asset", [3000, 25000], "Cash is an asset: the start-up controls it and can spend it."],
+    ["pixel", 1, "App store report", "App subscriptions sold this month", "Revenue", [1500, 9000], "Subscriptions sold to users are revenue."],
+    ["pixel", 1, "Purchase invoice", "Two laptops for the developers", "Asset", [2000, 5000], "Used for several years: equipment, an asset."],
+    ["pixel", 1, "Cloud bill", "Cloud servers used this month", "Expense", [200, 1500], "Used up this month to run the app: an expense."],
+    ["pixel", 1, "Payslips", "The developers' salaries for this month", "Expense", [5000, 12000], "This month's work, used up this month: an expense."],
+    ["pixel", 1, "Rent receipt", "Co-working desks for this month", "Expense", [400, 1500], "This month's use of the desks: an expense."],
+    ["pixel", 1, "Loan agreement", "Loan from the regional start-up fund", "Liability", [10000, 40000], "Borrowed money must be repaid: a liability."],
+    ["pixel", 1, "Cloud statement", "Amount still owed to the cloud provider", "Liability", [200, 1200], "Owed to a supplier: a trade payable."],
+    ["pixel", 1, "Company deed", "Money the two founders put in for shares", "Equity", [5000, 20000], "The owners' contribution is equity."],
+    ["pixel", 1, "Share subscription", "Money a business angel paid for new shares", "Equity", [20000, 80000], "Money paid in by a new shareholder for shares is equity, not revenue."],
+    ["pixel", 1, "Ad invoice", "Social media ads for this month's launch", "Expense", [300, 2000], "Advertising is used up as it runs: an expense."],
+    ["pixel", 1, "Purchase invoice", "Desks and office chairs", "Asset", [800, 3000], "Used for years: furniture, an asset."],
+    ["pixel", 1, "Phone bill", "Phone and internet for this month", "Expense", [60, 250], "Used up this month: an expense."],
+    ["pixel", 1, "Tax notice", "VAT Pixel Loop must pay to the tax office", "Liability", [300, 2000], "Owed to the State: a liability."],
     ["forno", 1, "Bank statement", "Cash in the bakery's bank account", "Asset", [2000, 9000], "Cash is an asset: the bakery controls it and can spend it tomorrow."],
     ["forno", 1, "Till report", "Bread and cakes sold at the counter this week", "Revenue", [800, 3000], "Sales to customers are revenue."],
     ["forno", 1, "Stock count", "Flour and butter in the storeroom", "Asset", [300, 1500], "Ingredients not yet used are inventory: an asset."],
@@ -154,6 +168,14 @@
   // ---------- Phone calls: quick questions with a timer ----------
   // [tier, client, question, answer, [wrong options…], why]
   const CALLS = [
+    [1, "pixel", "Users paid €900 for this month's subscriptions. Is that revenue?", "Yes, this month's revenue", ["No, it's equity", "Only next year", "It's a liability"], "The service is given this month and paid: revenue."],
+    [1, "pixel", "We bought two laptops for €3,000. An expense this month?", "No, an asset (equipment)", ["Yes, all of it", "It's equity", "It's a liability"], "Used for years: an asset, depreciated bit by bit."],
+    [1, "pixel", "A business angel put in €50,000 for new shares. Did we earn it?", "No, it's equity", ["Yes, revenue", "It's a liability", "It's an expense"], "Money from shareholders for shares is equity, never revenue."],
+    [1, "pixel", "This month's server bill is €400. What is it?", "An expense", ["An asset", "Equity", "Revenue"], "Used up this month: an expense."],
+    [1, "pixel", "We borrowed €20,000 from the start-up fund. Did our equity grow?", "No: cash up and a liability up", ["Yes, by €20,000", "Yes, by half", "It went down"], "A loan adds cash and a debt of the same amount: equity is unchanged."],
+    [1, "pixel", "We still owe €250 to the cloud provider. What is it?", "A liability", ["An asset", "Equity", "An expense of next year"], "An amount owed to a supplier: a trade payable."],
+    [1, "pixel", "Subscriptions €9,000, salaries €6,000, desks €1,000. Profit?", "€2,000", ["€16,000", "€9,000", "€3,000"], "Profit = revenue − expenses = €9,000 − €6,000 − €1,000."],
+    [1, "pixel", "We own €40,000 of assets and owe €15,000. Our equity?", "€25,000", ["€55,000", "€40,000", "€15,000"], "Equity = assets − liabilities."],
     [1, "forno", "I sold €300 of bread today, paid in cash. Is that revenue?", "Yes, revenue of today", ["No, only cash", "No, it's equity", "Only when I bank it"], "Delivered and paid: revenue today, and cash too."],
     [1, "forno", "I bought flour I haven't used yet. Is it a cost already?", "No, it's inventory (an asset)", ["Yes, an expense today", "It's a liability", "It's equity"], "Unused ingredients are inventory: they become a cost when used."],
     [1, "forno", "The bank lent me €5,000. Did I earn €5,000?", "No: cash up, and a liability", ["Yes, it's revenue", "It's equity", "It's an expense"], "A loan must be repaid: no revenue at all."],

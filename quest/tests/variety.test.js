@@ -13,7 +13,7 @@ const S = load("office-study.js");
 // The phone calls an intern gets: none comes back before all the others have been heard.
 test("no phone call repeats until the whole pool has come round", () => {
   const s = O.newCareer(), r = L.rng(5);
-  const pool = D.CALLS.filter(c => c[0] === 1 && c[1] === "forno").map(c => c[2]);
+  const pool = D.CALLS.filter(c => c[0] === 1 && O.rankFor(s).clients.includes(c[1])).map(c => c[2]);
   const heard = [];
   for (let i = 0; i < pool.length * 2; i++) heard.push(O.clientJob(s, r, "quick").question);
   assert.equal(new Set(heard.slice(0, pool.length)).size, pool.length);
@@ -22,7 +22,7 @@ test("no phone call repeats until the whole pool has come round", () => {
 
 test("filing jobs use every document before any comes back", () => {
   const s = O.newCareer(), r = L.rng(9);
-  const pool = O.itemsFor(1, ["forno"]).map(i => i[3]);
+  const pool = O.itemsFor(1, O.rankFor(s).clients).map(i => i[3]);
   const seen = [];
   for (let i = 0; i < pool.length; i++) seen.push(O.clientJob(s, r, "sort").doc.lines[0][1]);
   assert.equal(new Set(seen).size, pool.length);
@@ -83,4 +83,12 @@ test("the study desks rotate their exercise kinds", () => {
   for (let i = 0; i < n; i++) S.studyJob(s, "fa", r);
   const gens = s.recent.filter(k => k.startsWith("gen:fa3:"));
   assert.equal(gens.length, n);
+});
+
+test("an intern works for more than one client, in every kind of job", () => {
+  const s = O.newCareer(), r = L.rng(6);
+  assert.ok(O.rankFor(s).clients.length >= 2);
+  const seen = {};
+  for (let d = 0; d < 40; d++) for (const j of O.planDay(s, r).jobs) if (j.client) (seen[j.type] = seen[j.type] || new Set()).add(j.client);
+  for (const t of ["sort", "quick", "fill", "spot", "build", "order"]) assert.ok(seen[t] && seen[t].size >= 2, t);
 });

@@ -82,7 +82,13 @@ debt, budgeted ROE, NPM from DSO and DPO, the leverage formula, CAPEX and carryi
 from the cash flow statement, goodwill and NCI, and the equity method. Every wrong option is the result of a
 typical mistake named in the official solutions, "None of the other answers" is sometimes right, and a
 step-by-step solution follows. One morning option is an eight-question **mock exam**; the menu's **Exam prep**
-page lists every pattern met, weakest first. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
+page lists every pattern met, weakest first. The financial analysis desk also covers steps 2 and 3 of
+Lectures 05–06 (`office-planning.js`): common size analysis, vertical and horizontal, on Eni's 2024–2025
+figures and on generated firms, percentage points against relative changes, and financial planning (equity
+against debt, matching maturities, committed and uncommitted credit lines, factoring with and without
+recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Interns keep two clients, a
+bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
+don't repeat until their pool has gone round. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
 file, exported as a file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).
 
@@ -153,7 +159,7 @@ sm/tests/       same tests for the Strategy & Marketing bank
 desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
 quest/          PolimiAFC career: engine (game.js, art.js, world.js, logic.js), the office and its rules (office-art.js,
-                office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-ui.js),
+                office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-planning.js, office-ui.js),
                 save backups (backup.js), plus index.html, style.css, sw.js, manifest.json, icons
 quest/tests/    engine, career, analysis, statements, study-desk, exam, backup and service-worker tests
 fa/index.html   redirect from the hub's former path
