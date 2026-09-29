@@ -525,7 +525,7 @@
     <table>${doc.lines.map((row, i) => i === 0 && row[0] === "" ? `<tr class="th">${row.map(c => `<th>${esc(c)}</th>`).join("")}</tr>` : `<tr>${row.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>
     ${doc.facts ? `<ul class="facts">${doc.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}</div>`;
   const chips = (group, values, labels) => `<div class="chips" data-g="${group}">${values.map((v, i) => `<button type="button" data-v="${esc(v)}">${esc(labels ? labels[i] : v)}</button>`).join("")}</div>`;
-  const numInput = (key, label, neg) => `<label class="fld"><span>${esc(label)}</span><span class="inp">${neg ? `<button type="button" class="neg" data-neg="${key}">±</button>` : ""}<input data-k="${key}" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="€"></span></label>`;
+  const numInput = (key, label, neg) => `<label class="fld"><span>${esc(label)}</span><span class="inp">${neg ? `<button type="button" class="neg" data-neg="${key}">±</button>` : ""}<input data-k="${key}" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="${/%/.test(label) ? "%" : /€/.test(label) ? "€" : ""}"></span></label>`;
   // Chip groups: one choice per group, kept in `state`.
   function chipHandler(root, state, ev) {
     const neg = ev.target.closest("[data-neg]");
@@ -1024,6 +1024,13 @@
         <dt>NFP</dt><dd>Net financial position = bonds + bank debts + other financial liabilities − cash. High isn't necessarily bad, if the debt funds investments that earn more than it costs.</dd>
         <dt>RECLASSIFIED INCOME STATEMENT</dt><dd>Revenues − raw materials − G&A = value added; − personnel = EBITDA; − D&A = EBIT; − net financial expenses ± extraordinary items = pretax income; − tax = net income.</dd>
         <dt>ROE AND PAYOUT</dt><dd>ROE = net profit ÷ equity. Payout = dividends paid ÷ previous year's net profit.</dd>
+        <dt>COMMON SIZE</dt><dd>Vertical: each item as a % of total assets (balance sheet) or of revenues (income statement), same year. Horizontal: each item's change against a base year. A ratio that moves from 4.97% to 5.22% changes by 0.25 points, or +5.19% in relative terms: say which one.</dd>
+        <dt>EQUITY VS DEBT</dt><dd>Debt: a maturity, interest promised by contract, paid first on default, interest deductible (tax shield), covenants but no vote. Equity: no maturity, residual returns, paid last, dividends not deductible, votes. So equity costs more.</dd>
+        <dt>MATCH MATURITY</dt><dd>Long uses (plants, acquisitions) need long money: equity, bank loans, bonds, leasing. Short, self-liquidating uses (seasonal stock, receivables) need short money: credit lines, factoring.</dd>
+        <dt>CREDIT LINES</dt><dd>A ceiling, not a loan: interest only on what is used. Committed: the bank has promised, a small fee on the unused part. Uncommitted: cheaper, but the bank can withdraw it at any time.</dd>
+        <dt>FACTORING</dt><dd>Selling an invoice for cash before it's paid. Without recourse: a true sale, the factor bears the loss, the receivable leaves the balance sheet (receivables and DSO fall). With recourse: the firm bears the loss, the receivable stays and the advance is a financial debt in the NFP.</dd>
+        <dt>IFRS 16 LEASES</dt><dd>A right-of-use asset and a lease liability. The rent becomes depreciation + interest: EBITDA goes up, net debt goes up, leverage ratios change even though the business doesn't.</dd>
+        <dt>BONDS</dt><dd>Face value, coupon, maturity, yield (what you really earn). Investment grade from AAA down to BBB−; below is high yield. Eni: A−.</dd>
         <dt>SOURCES</dt><dd>Financial disclosures, industry and economic data, non-financial disclosures, market data. In a Form 20-F: Item 3.D risks, Item 5 management's review, Part III the statements.</dd></dl>
         <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
     };
