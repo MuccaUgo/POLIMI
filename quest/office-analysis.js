@@ -200,7 +200,7 @@
     [1, "The owners put €20,000 into the business for new shares", 1, 0, "Financing", 1, "Cash and share capital in the balance sheet, a financing inflow, and a share issue in the changes in equity."],
     [1, "The bakery pays €1,000 of dividends to its owners", 1, 0, "Financing", 1, "Cash down and equity down: a distribution, never an expense. Financing outflow; it appears in the changes in equity."],
     [1, "Flour for €400 arrives on credit and sits in the storeroom", 1, 0, null, 0, "Inventory and a payable: balance sheet only. It becomes an expense when used; no cash has moved yet."],
-    [1, "Flour worth €250 is used to bake today's bread", 1, 1, null, 0, "Inventory goes down (balance sheet) and becomes a cost (income statement). The cash left when the flour was bought."],
+    [1, "Flour worth €250 is used to bake bread that is all sold today", 1, 1, null, 0, "Raw materials inventory goes down (balance sheet) and becomes cost of goods sold (income statement). The cash left when the flour was bought. Had the bread stayed unsold, it would still be inventory (finished goods)."],
     [1, "A €600 repair invoice arrives, to be paid next month", 1, 1, null, 0, "An expense now and a payable in the balance sheet. No cash has moved yet."],
     [1, "This year's income tax is recorded, to be paid next June: €1,200", 1, 1, null, 0, "Tax expense in the income statement and a tax liability in the balance sheet; the cash goes out next year."],
     [1, "The gas bill of €350 for this month is paid", 1, 1, "Operating", 0, "An expense of the month, paid in cash: operating outflow."],
