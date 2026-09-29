@@ -76,7 +76,7 @@
     ["pixel", 1, "Tax notice", "VAT Pixel Loop must pay to the tax office", "Liability", [300, 2000], "Owed to the State: a liability."],
     ["forno", 1, "Bank statement", "Cash in the bakery's bank account", "Asset", [2000, 9000], "Cash is an asset: the bakery controls it and can spend it tomorrow."],
     ["forno", 1, "Till report", "Bread and cakes sold at the counter this week", "Revenue", [800, 3000], "Sales to customers are revenue."],
-    ["forno", 1, "Stock count", "Flour and butter in the storeroom", "Asset", [300, 1500], "Ingredients not yet used are inventory: an asset."],
+    ["forno", 1, "Stock count", "Flour and butter in the storeroom", "Asset", [300, 1500], "Ingredients not yet used are raw materials inventory: an asset. They become a cost when the bread made with them is sold."],
     ["forno", 1, "Purchase invoice", "The new oven, bought this month", "Asset", [4000, 12000], "The oven will bake for years: property, plant and equipment."],
     ["forno", 1, "Gas bill", "Gas used by the ovens this month", "Expense", [200, 700], "Used up this month to bake: an expense."],
     ["forno", 1, "Payslips", "The two bakers' wages for this month", "Expense", [2500, 4200], "This month's work, used up this month: an expense."],
@@ -198,7 +198,7 @@
     [1, "forno", "I repaid €1,000 of the bank loan. An expense?", "No: less cash and less debt", ["Yes, all of it", "Half of it", "It's revenue"], "Repaying principal isn't a cost. Only the interest is."],
     [1, "forno", "The bank charged me €200 of interest. What is it?", "An expense", ["A liability forever", "An asset", "Equity"], "Interest is the cost of borrowing: an expense."],
     [1, "forno", "I took €300 from the till for myself. Is it a bakery expense?", "No, it's a withdrawal by the owner", ["Yes, a wage", "It's revenue", "It's an asset"], "Money taken by an owner isn't a business cost: it reduces equity."],
-    [1, "forno", "Flour used today for the bread. Still an asset?", "No, now it's an expense", ["Yes, still inventory", "It's a liability", "It's revenue"], "Once used, inventory becomes a cost of the bread sold."],
+    [1, "forno", "The flour used for today's bread, all sold today. Still an asset?", "No: it's now part of the cost of the bread sold", ["Yes, still inventory", "It's a liability", "It's revenue"], "Used for bread that was sold: a cost of the year (cost of goods sold). Flour still in the storeroom stays raw materials inventory; bread baked but not yet sold would be finished goods inventory, also an asset."],
     [1, "forno", "Revenue €5,000, expenses €3,800 this month. Profit?", "€1,200", ["€8,800", "€5,000", "€3,800"], "Profit = revenue − expenses = €5,000 − €3,800."],
     [1, "forno", "Assets €50,000 and liabilities €30,000. Equity?", "€20,000", ["€80,000", "€50,000", "€30,000"], "Equity = assets − liabilities."],
     [1, "forno", "I bought the van with a loan. What happened to my equity?", "Nothing: an asset and a liability", ["It went up", "It went down", "It doubled"], "Van up, debt up by the same amount: equity is unchanged."],
@@ -244,7 +244,7 @@
 
   // ---------- Fill-in forms ----------
   // Each template builds a form from a random generator. Kept here as descriptions; the maths lives in logic.js.
-  const FILL_TIER = { 1: ["stock", "till", "payslips", "supplier", "creditSale", "mixer", "monthProfit"], 2: ["prepaid", "accrued", "deposit", "timesheet", "hotelNights", "depreciation", "interest", "insurance"] };
+  const FILL_TIER = { 1: ["stock", "till", "payslips", "supplier", "creditSale", "mixer", "monthProfit", "flourUsed"], 2: ["prepaid", "accrued", "deposit", "timesheet", "hotelNights", "depreciation", "interest", "insurance", "flourCogs"] };
   FILL_TIER[3] = FILL_TIER[2];
 
   // ---------- Order (by period) ----------

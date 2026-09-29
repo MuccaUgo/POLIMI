@@ -148,7 +148,7 @@
     [1, "forno", "Bread sold on 12 December, paid at the counter", 0, "Sold in December: this year's revenue."],
     [1, "forno", "Bread sold on 4 January", 1, "Sold in January: next year's revenue."],
     [1, "forno", "Gas used in November, bill paid in November", 0, "Used this year: this year's expense."],
-    [1, "forno", "Flour used for January's bread", 1, "Used in January: next year's expense."],
+    [1, "forno", "Flour used for bread baked and sold in January", 1, "Used for January's sales: next year's cost."],
     [1, "forno", "Bakers' December wages, paid on 31 December", 0, "December's work: this year's expense."],
     [1, "forno", "Shop rent for January, paid on 2 January", 1, "January's rent: next year's expense."],
     [1, "forno", "Christmas cakes delivered on 23 December", 0, "Delivered in December: this year's revenue."],
@@ -211,6 +211,37 @@
   }
   const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const FILLS = {
+    // Raw materials: what is used is opening stock + purchases − closing stock.
+    flourUsed(r) {
+      const open = 25 * r.int(8, 40), buy = 25 * r.int(40, 160), close = 25 * r.int(4, 30);
+      const used = open + buy - close;
+      return {
+        client: "forno", doc: { kind: "Flour ledger", title: `Flour · Forno Rossi · ${Y}`, lines: [["In the storeroom on 1 January", eur(open)], ["Bought during the year", eur(buy)], ["Still in the storeroom on 31 December", eur(close)]] },
+        brief: "How much flour went into the bread this year?",
+        fields: [{ key: "used", label: "Flour used in the year (€)", answer: used, why: `Opening ${eur(open)} + purchases ${eur(buy)} − closing ${eur(close)} = ${eur(used)}. Buying isn't using: what's left in the storeroom is still inventory.` }],
+        choice: { label: `The ${eur(close)} of flour left on 31 December is…`, options: D.ELEMENTS, answer: "Asset", why: "Raw materials not yet used: inventory, an asset. It becomes a cost next year, when it's used." }
+      };
+    },
+    // Materials used ≠ cost of goods sold: products made but not sold are still inventory (finished goods).
+    flourCogs(r) {
+      // Built from the unit cost, so every figure comes out in whole cents.
+      const unit = r.pick([6, 7.5, 8, 9, 10, 12]), n = 50 * r.int(4, 16), made = unit * n;
+      const labour = 50 * Math.round(made * r.int(25, 40) / 100 / 50), used = made - labour;
+      const open = 50 * r.int(4, Math.max(4, Math.min(20, Math.floor(used / 100)))), close = 50 * r.int(2, 16), buy = used - open + close;
+      const left = r.int(10, Math.round(n * 0.2)), fgClose = left * unit, cogs = made - fgClose;
+      return {
+        client: "forno", doc: { kind: "Christmas production", title: `Panettoni · Forno Rossi · ${Y}`, lines: [
+          ["Flour and butter on 1 January", eur(open)], ["Flour and butter bought", eur(buy)], ["Flour and butter left on 31 December", eur(close)],
+          ["Bakers' wages for the panettoni", eur(labour)], ["Panettoni made (none at the start)", `${n}`], ["Panettoni still unsold on 31 December", `${left}`]] },
+        brief: "Three different figures: materials used, products still in the shop, cost of the products sold.",
+        fields: [
+          { key: "used", label: "Materials used (€)", answer: used, why: `${eur(open)} + ${eur(buy)} − ${eur(close)} = ${eur(used)}.` },
+          { key: "fg", label: "Unsold panettoni: finished goods inventory (€)", answer: fgClose, why: `Production cost ${eur(used)} + ${eur(labour)} = ${eur(made)}, i.e. ${eur(made)} ÷ ${n} = ${eur(unit)} a panettone; ${left} unsold × ${eur(unit)} = ${eur(fgClose)}, still an asset.` },
+          { key: "cogs", label: "Cost of goods sold (€)", answer: cogs, why: `Production cost ${eur(made)} − unsold ${eur(fgClose)} = ${eur(cogs)}: only the panettoni sold become a cost of the year (matching).` }],
+        choice: { label: "The unsold panettoni are…", options: ["Finished goods inventory (an asset)", "Raw materials inventory", "A cost of the year"], answer: "Finished goods inventory (an asset)",
+          why: "Made but not sold: finished goods. They become cost of goods sold when they're sold next year." }
+      };
+    },
     stock(r) {
       const sc = r.pick([
         { client: "forno", title: "Stock count · Forno Rossi · 31 December", goods: [["Flour sacks", 4, 20, 25], ["Butter blocks", 5, 30, 8], ["Sugar packs", 5, 40, 3], ["Eggs (trays)", 5, 25, 6], ["Chocolate bars", 10, 40, 4], ["Olive oil tins", 2, 10, 30]] },
@@ -303,7 +334,7 @@
     },
     monthProfit(r) {
       const sc = r.pick([
-        { client: "forno", rev: ["Bread and cakes sold", 160, 300], costs: [["Flour and butter used", 15, 40], ["Wages", 50, 90], ["Rent", 18, 32]],
+        { client: "forno", rev: ["Bread and cakes sold", 160, 300], costs: [["Flour and butter used for the bread sold", 15, 40], ["Wages", 50, 90], ["Rent", 18, 32]],
           trap: r.pick([["New bank loan received", "Liability", "Borrowed money must be repaid: a liability.", "The loan is cash and a liability, not revenue."], ["New oven bought", "Asset", "Used for years: an asset.", "The oven is an asset, not a cost of the month (only its depreciation will be)."], ["Money put in by the owners", "Equity", "The owners' contribution is equity.", "The owners' money is equity, not revenue."]]) },
         { client: "pixel", rev: ["Subscriptions sold", 200, 500], costs: [["Salaries", 80, 160], ["Cloud servers", 5, 30], ["Co-working desks", 8, 30]],
           trap: r.pick([["Business angel's money for shares", "Equity", "Money paid for shares is equity.", "The angel's money is equity, not revenue."], ["Laptops bought", "Asset", "Used for years: equipment.", "The laptops are an asset, not a cost of the month."], ["Start-up fund loan received", "Liability", "Borrowed money must be repaid: a liability.", "The loan is cash and a liability, not revenue."]]) }
@@ -501,9 +532,27 @@
 
   // ---------- The firm's ledger ----------
   // `at` overrides the date (the shareholders' meeting belongs to the next year).
-  function post(career, label, lines, when, at) {
+  // ref identifies the job the entry comes from: an entry already in the books is never posted twice.
+  function post(career, label, lines, when, at, ref) {
     const d = at || { year: career.year, q: quarterOf(career.day), day: career.day };
-    career.ledger.push({ label, lines: normalizeLines(lines), year: d.year, q: d.q, day: d.day, when: when || "" });
+    if (ref && isPosted(career, ref, label, d)) return false;
+    const e = { label, lines: normalizeLines(lines), year: d.year, q: d.q, day: d.day, when: when || "" };
+    if (ref) e.ref = ref;
+    career.ledger.push(e);
+    return true;
+  }
+  // Saves from before refs existed are matched on the label and the date.
+  function isPosted(career, ref, label, at) {
+    return career.ledger.some(e => e.ref ? e.ref === ref : e.label === label && e.year === at.year && e.day === at.day);
+  }
+  const dayKey = career => `${career.year}-${career.day}`;
+  // Each finished job is remembered, so a reload can't grade or pay it twice.
+  function markDone(career, id) {
+    if (!Array.isArray(career.done)) career.done = [];
+    if (career.done.includes(id)) return false;
+    career.done.push(id);
+    if (career.done.length > 80) career.done.splice(0, career.done.length - 80);
+    return true;
   }
   // Which section of the cash flow statement an entry's cash belongs to.
   function cfCategory(label) {
@@ -545,7 +594,9 @@
     if (career.year === 1) ev = D.YEAR_ONE.find(e => e.day === career.day);
     else ev = laterYearEvent(career);
     if (!ev) return null;
-    return { id: jobId(), type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length };
+    const id = `fe:${career.year}:${career.day}`;
+    if (isPosted(career, id, ev.title, { year: career.year, day: career.day })) return null;
+    return { id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length };
   }
   function laterYearEvent(career) {
     const b = balances(career);
@@ -582,7 +633,8 @@
       } else if (kind === "staff") {
         ev = { title: "Salaries", memo: `${text}: ${eur(amt)}, paid.`, lines: [["wages", amt], ["cash", -amt]], why: "The staff's work in the period is an expense; it's paid, so cash goes down." };
       }
-      if (ev) jobs.push({ id: jobId(), type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length, close: true });
+      const id = `qc:${career.year}:${q}:${kind}`;
+      if (ev && !isPosted(career, id, ev.title, { year: career.year, day: career.day })) jobs.push({ id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length, close: true });
     }
     return jobs;
   }
@@ -670,6 +722,9 @@
 
   // Closing entry: this year's revenue and expenses move into retained earnings.
   function closeYear(career) {
+    // Already closed (a reload after the report): return the same profit, post nothing.
+    const done = career.ledger.find(e => e.label === "Closing entry" && e.year === career.year);
+    if (done) { const r = done.lines.find(l => l[0] === "retained"); return r ? r[1] : 0; }
     const flows = balances(career, e => e.year === career.year && e.label !== "Closing entry");
     const lines = [];
     D.ACCOUNTS.filter(a => a.type === "R" || a.type === "X").forEach(a => { if (flows[a.id]) lines.push([a.id, -flows[a.id]]); });
@@ -681,6 +736,7 @@
   // The shareholders' meeting: 5% to the legal reserve (up to 20% of capital) and, if profit allows, a dividend.
   function agm(career, profit) {
     if (profit <= 0) return null;
+    if (isPosted(career, `agm:${career.year}`, "The shareholders' meeting", { year: career.year + 1, day: 1 })) return null;
     const b = balances(career);
     const cap = b.shareCapital * 0.2;
     const reserve = round2(Math.min(profit * 0.05, Math.max(0, cap - b.legalReserve)));
@@ -690,7 +746,7 @@
     if (reserve) lines.push(["legalReserve", reserve]);
     if (dividend) lines.push(["dividendsPayable", dividend]);
     return {
-      id: jobId(), type: "posting", pickup: "giulia", work: "books", title: "The shareholders' meeting", tier: tierOf(career), nLines: lines.length, agm: true,
+      id: `agm:${career.year}`, type: "posting", pickup: "giulia", work: "books", title: "The shareholders' meeting", tier: tierOf(career), nLines: lines.length, agm: true,
       memo: `The shareholders approved the annual report. Of the ${eur(profit)} profit: 5% to the legal reserve (${eur(reserve)})${dividend ? `, and a dividend of €0.05 per share on ${shares.toLocaleString("en-US")} shares (${eur(dividend)}), to be paid in January` : ""}. The rest stays in retained earnings.`,
       lines, why: `Italian law (art. 2430 c.c.) puts 5% of profit in the legal reserve until it reaches 20% of share capital. ${dividend ? "The declared dividend leaves retained earnings and becomes a liability until it's paid — never an expense." : ""}`
     };
@@ -737,6 +793,26 @@
   }
 
   // ---------- The day ----------
+  // Moves the day on as soon as its queue is empty. It runs in the same step as the job that emptied
+  // the queue, so the save never holds a finished day that still looks open. Returns what happened.
+  function advance(career) {
+    if (career.queue.length || career.carrying) return null;
+    if (career.phase === "work") {
+      if (career.day % D.DAYS_PER_QUARTER !== 0) { career.phase = "home"; return "home"; }
+      career.queue = quarterClose(career);
+      career.phase = "close";
+      if (career.queue.length) return "close";
+    }
+    if (career.phase === "close") {
+      const key = quarterKey(career);
+      if (career.closedQ !== key) { clientQuarter(career); career.closedQ = key; }
+      if (quarterOf(career.day) === 4) { career.phase = "report"; return "report"; }
+      career.phase = "home";
+      return "closed";
+    }
+    if (career.phase === "agm") { career.phase = "home"; return "agm"; }
+    return null;
+  }
   // The day's job types: drawn from the mix, at most two of a kind and never the same twice running.
   function dayTypes(career, r, n) {
     const mix = MIX[tierOf(career)], out = [];
@@ -770,7 +846,7 @@
       v: 1, mode: "career", map: "office", x: 4, y: 6, dir: "up", sound: true, reportTries: 0,
       rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
       sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60, lario: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
-      queue: [], recent: [], carrying: null, dayDone: 0, exam: false, phase: "intro",
+      queue: [], recent: [], done: [], planned: "", closedQ: "", carrying: null, dayDone: 0, exam: false, phase: "intro",
       stats: { jobs: 0, right: 0, days: 0, steps: 0, reports: [] }
     };
   }
@@ -781,7 +857,8 @@
     out.sat = Object.assign(newCareer().sat, s.sat);
     out.stats = Object.assign(newCareer().stats, s.stats);
     ["clientRev", "jobsOk"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
-    ["ledger", "queue", "recent"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    ["ledger", "queue", "recent", "done"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    ["planned", "closedQ"].forEach(k => { if (typeof out[k] !== "string") out[k] = ""; });
     out.recent = out.recent.filter(k => typeof k === "string").slice(-RECENT_MAX);
     if (out.rank === "accountant") out.rank = "analyst";
     if (!D.RANKS.some(r => r.id === out.rank)) out.rank = "intern";
@@ -789,7 +866,7 @@
   }
 
   const api = {
-    eur, acct, cfCategory, withMemory, remember, pickFresh, freshOrder, dayTypes, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
+    eur, acct, cfCategory, isPosted, dayKey, markDone, advance, withMemory, remember, pickFresh, freshOrder, dayTypes, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
     weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };

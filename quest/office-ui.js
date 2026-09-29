@@ -211,22 +211,31 @@
     "An espresso. The capsules in the cupboard are supplies; the one in the machine is now an expense."
   ];
 
+  // The day's jobs are planned once: `planned` remembers for which day, so a reload doesn't plan it again.
+  function plan(s, jobs) {
+    s.queue = jobs || O.planDay(s, E.rnd).jobs;
+    s.planned = O.dayKey(s);
+  }
   async function begin() {
     const s = S();
     const g = W.NPCS.find(n => n.id === "giulia");
     await E.sayAll(D.LINES.firstDay, g.name);
     s.phase = "work";
-    s.queue = O.planDay(s, E.rnd).jobs;
-    hud();
+    plan(s);
+    hud(); E.save();
     await E.say("Look for the ! marks: that's where work is waiting. Giulia has the first memo — tap her, or walk up and press A.", "Tip");
     await E.say("From tomorrow, every morning you choose the day's work: client bookkeeping, the consolidation desk or the financial analysis desk.", "Tip");
   }
   function resume() {
     const s = S();
     if (s.phase === "intro") return E.script(begin);
-    if (s.phase === "work" && !s.queue.length && !s.carrying) {
-      if (s.stats.days > 0) return E.script(chooseActivity);
-      s.queue = O.planDay(s, E.rnd).jobs;
+    if (!s.queue.length && !s.carrying) {
+      if (s.phase === "work") {
+        // Today's jobs are all done: move the day on instead of planning it again.
+        if (s.planned === O.dayKey(s)) return E.script(() => afterJob());
+        if (s.stats.days > 0) return E.script(chooseActivity);
+        plan(s);
+      } else if (s.phase === "close" || s.phase === "agm") return E.script(() => afterJob());
     }
     hud();
   }
@@ -369,6 +378,8 @@
   }
   async function finish(job, answer) {
     const s = S();
+    // A job already finished (possible only after a reload) is never graded, paid or posted again.
+    if (job.id && !O.markDone(s, job.id)) { s.carrying = null; hud(); E.save(); return afterJob(); }
     const g = O.grade(job, answer);
     s.stats.jobs++;
     if (g.ok) s.stats.right++;
@@ -376,8 +387,9 @@
     const rw = O.reward(s, job, g.ok);
     const newLevel = ST.recordStudy(s, job, g.ok);
     recordPattern(s, job, g.ok);
-    if (job.type === "posting") O.post(s, job.title, job.lines, "", job.agm ? { year: s.year + 1, q: 1, day: 1 } : null);
+    if (job.type === "posting") O.post(s, job.title, job.lines, "", job.agm ? { year: s.year + 1, q: 1, day: 1 } : null, job.id);
     s.carrying = null;
+    const next = O.advance(s);
     E.sfx(g.ok ? "coin" : "hurt");
     hud(); E.save();
     await resultScreen(job, g, answer, rw);
@@ -389,40 +401,25 @@
     if (before === "needXp" && st.state === "ready") {
       await E.say(`You have enough experience to interview for ${st.rank.name}. It's never automatic: ask me whenever you feel ready.`, "Giulia");
     }
-    await afterJob();
+    await afterJob(next);
   }
 
-  async function afterJob() {
+  // What Giulia says once the queue is empty. The state has already moved on (O.advance, saved with
+  // the last job), so this part is only words and screens: a reload here loses nothing and repeats nothing.
+  async function afterJob(next) {
     const s = S();
-    if (s.queue.length || s.carrying) return;
+    if (next === undefined) { next = O.advance(s); hud(); E.save(); }
+    hud();
     const q = O.quarterOf(s.day);
-    if (s.phase === "work") {
-      if (s.day % D.DAYS_PER_QUARTER === 0) {
-        s.queue = O.quarterClose(s);
-        s.phase = "close";
-        hud();
-        return E.say(`Last day of Q${q}! Before anyone goes home, we close the quarter: invoices, rent, salaries. My memos are waiting.`, "Giulia");
-      }
-      s.phase = "home"; hud();
-      return E.say("That's everything for today. Clock out by the door and collect your pay!", "Tip");
-    }
-    if (s.phase === "close") {
-      O.clientQuarter(s);
-      await dashboard(`Q${q} ${O.calendarYear(s)} IS CLOSED`);
-      if (q === 4) {
-        s.phase = "report"; hud();
-        return E.sayAll([
-          "Year end! The shareholders want the annual report: income statement, balance sheet and earnings per share.",
-          "Take the figures from the company books. If it balances, the coffee's on me. The good one."
-        ], "Giulia");
-      }
-      s.phase = "home"; hud();
-      return E.say("Quarter closed. Clock out by the door!", "Tip");
-    }
-    if (s.phase === "agm") {
-      s.phase = "home"; hud();
-      return E.say(`Year ${O.calendarYear(s)} is in the books. Go home, you've earned it.`, "Giulia");
-    }
+    if (next === "close") return E.say(`Last day of Q${q}! Before anyone goes home, we close the quarter: invoices, rent, salaries. My memos are waiting.`, "Giulia");
+    if (next === "home") return E.say("That's everything for today. Clock out by the door and collect your pay!", "Tip");
+    if (next === "closed" || next === "report") await dashboard(`Q${q} ${O.calendarYear(s)} IS CLOSED`);
+    if (next === "closed") return E.say("Quarter closed. Clock out by the door!", "Tip");
+    if (next === "report") return E.sayAll([
+      "Year end! The shareholders want the annual report: income statement, balance sheet and earnings per share.",
+      "Take the figures from the company books. If it balances, the coffee's on me. The good one."
+    ], "Giulia");
+    if (next === "agm") return E.say(`Year ${O.calendarYear(s)} is in the books. Go home, you've earned it.`, "Giulia");
   }
 
   async function goHome() {
@@ -499,13 +496,13 @@
       s.activity = "books";
       await mockExam();
       const ev = O.firmEvent(s);
-      s.queue = ev ? [ev] : [];
+      plan(s, ev ? [ev] : []);
       hud(); E.save();
       if (!s.queue.length) return afterJob();
       return E.say("After the mock exam, just my memo for the books today. Then you can go home.", "Giulia");
     }
     s.activity = ["books", "cons", "fa"][c];
-    s.queue = O.planDay(s, E.rnd).jobs;
+    plan(s);
     hud(); E.save();
     if (s.activity !== "books") await E.say(`${ST.TRACKS[s.activity].name}: the files are in the inbox. Each one climbs towards the level of the written exam.`, "Tip");
   }
@@ -902,21 +899,23 @@
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); } };
     });
     if (!reveal) { O.reward(s, { type: "report", tier: 1 }, false); hud(); return E.say("Take your time. Every figure is in the books.", "Giulia"); }
+    // Everything the report changes happens here, at once, and is saved before any words.
     const rw = O.reward(s, { type: "report", tier: O.tierOf(s) }, g.pass);
     if (g.clean) s.bonus = (s.bonus || 0) + 40;
     s.stats.reports.push({ year: O.calendarYear(s), n: g.n, total: g.total, tries: s.reportTries });
     s.reportTries = 0;
     const profit = O.closeYear(s);
+    const meeting = O.agm(s, profit);
+    s.queue = meeting ? [meeting] : [];
+    s.phase = "agm";
+    const next = meeting ? null : O.advance(s);
+    hud(); E.save();
     const eps = report.sections[2].lines[1].answer;
     await E.sayAll([
       g.clean ? `Perfect! Coffee's on me. ${rw.xp > 0 ? `(+${rw.xp} XP and a €40 bonus.)` : ""}` : g.pass ? `Approved. A few notes from the auditors, but it balances. (+${rw.xp} XP)` : "We'll file it as corrected. Next year, fewer red marks please.",
       `I posted the closing entry: revenue and expenses go to zero, and the ${profit >= 0 ? "profit" : "loss"} of ${eur(profit)} moves into retained earnings. EPS: €${eps.toFixed(2)}.`
     ], "Giulia");
-    const meeting = O.agm(s, profit);
-    if (!meeting) { s.phase = "agm"; return afterJob(); }
-    s.queue = [meeting];
-    s.phase = "agm";
-    hud();
+    if (!meeting) return afterJob(next);
     return E.say("Now the shareholders' meeting decides what to do with the profit. My memo is on my desk.", "Giulia");
   }
 
