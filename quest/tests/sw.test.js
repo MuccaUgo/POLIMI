@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
 const prefix = `ledger-quest:${scope}:`;
-const currentCache = `${prefix}v12`;
+const currentCache = `${prefix}v13`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
 const deferred = () => {
@@ -216,4 +216,10 @@ test("every file the page and manifest load is precached and exists", () => {
       assert.ok(existsSync(path.join(root, file)), `${file} in the precache list exists`);
     }
   });
+});
+
+test("the version on the title screen matches the service worker cache", () => {
+  const game = readFileSync(path.join(__dirname, "..", "game.js"), "utf8");
+  const sw = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
+  assert.equal(game.match(/const VERSION = (\d+);/)[1], sw.match(/\}v(\d+)`/)[1]);
 });

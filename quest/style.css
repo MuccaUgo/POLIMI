@@ -21,11 +21,11 @@ button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulat
 #hud { width: var(--sw); display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--pixel); font-size: 9px; color: var(--cream); padding: 4px 2px 6px; white-space: nowrap; }
 #hudStats { display: flex; gap: 10px; align-items: center; }
 #screen {
-  --sw: min(calc(100vw - 24px), calc((100dvh - var(--safe-t) - var(--safe-b) - 250px) / 0.9), 540px);
+  --sw: min(calc(100vw - 24px), calc((100dvh - var(--safe-t) - var(--safe-b) - 210px) / 0.9), 540px);
   position: relative; width: var(--sw); aspect-ratio: 160 / 144; background: #000;
   border: 4px solid #0b0a12; border-radius: 6px; box-shadow: 0 0 0 3px #3a3654, 0 10px 30px #0008; overflow: hidden;
 }
-#console { --sw: min(calc(100vw - 24px), calc((100dvh - var(--safe-t) - var(--safe-b) - 250px) / 0.9), 540px); }
+#console { --sw: min(calc(100vw - 24px), calc((100dvh - var(--safe-t) - var(--safe-b) - 210px) / 0.9), 540px); }
 #cv { width: 100%; height: 100%; display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
 #fade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .18s linear; }
 #fade.on { opacity: 1; }
@@ -48,27 +48,18 @@ button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulat
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ---------- Controls ---------- */
-#pad { width: var(--sw); flex: 1; min-height: 190px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; align-items: center; padding-top: 10px; }
-.dpad { position: relative; width: 150px; height: 150px; justify-self: start; margin-left: 4px; }
-.dp { position: absolute; width: 50px; height: 50px; background: #2b2842; border: none; box-shadow: inset 0 -4px 0 #151322, 0 2px 0 #0b0a12; }
-.dp:active, .dp.on { background: #3d3960; box-shadow: inset 0 2px 0 #151322; }
-.dp.up { left: 50px; top: 0; border-radius: 8px 8px 0 0; }
-.dp.down { left: 50px; top: 100px; border-radius: 0 0 8px 8px; }
-.dp.left { left: 0; top: 50px; border-radius: 8px 0 0 8px; }
-.dp.right { left: 100px; top: 50px; border-radius: 0 8px 8px 0; }
-.dp.mid { left: 50px; top: 50px; background: #2b2842; box-shadow: none; }
-.dp::after { content: ""; position: absolute; inset: 0; margin: auto; width: 0; height: 0; border: 8px solid transparent; }
-.dp.up::after { border-bottom-color: #8a86b0; transform: translateY(-4px); }
-.dp.down::after { border-top-color: #8a86b0; transform: translateY(4px); }
-.dp.left::after { border-right-color: #8a86b0; transform: translateX(-4px); }
-.dp.right::after { border-left-color: #8a86b0; transform: translateX(4px); }
-.dp.mid::after { display: none; }
-.ab { position: relative; justify-self: end; width: 150px; height: 130px; margin-right: 4px; }
-.round { position: absolute; width: 64px; height: 64px; border-radius: 50%; border: none; font-family: var(--pixel); font-size: 16px; color: #fff3; background: #a02c2c; box-shadow: inset 0 -5px 0 #6a1c1c, 0 3px 0 #0b0a12; }
-.round:active { transform: translateY(2px); box-shadow: inset 0 2px 0 #6a1c1c; }
-.round.a { right: 0; top: 6px; }
-.round.b { left: 0; top: 52px; }
-.pills { grid-column: 1 / -1; display: flex; justify-content: center; gap: 18px; padding-top: 6px; }
+#pad { width: var(--sw); flex: 1; min-height: 0; display: flex; flex-direction: column; padding-top: 10px; gap: 8px; }
+#todo { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+#todo .todo-h { font-family: var(--pixel); font-size: 8px; letter-spacing: 1px; color: #8a86b0; padding: 2px 2px 0; }
+#todo button { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 46px; padding: 6px 12px; text-align: left; font-family: var(--text); font-size: 21px; line-height: 1; color: var(--ink); background: var(--cream); border: 3px solid var(--ink); border-radius: 4px; box-shadow: inset 0 -4px 0 #c9b58a; }
+#todo button:active { transform: translateY(1px); box-shadow: inset 0 -2px 0 #c9b58a; }
+#todo button.hot { background: #f4d24c; }
+#todo button .n { margin-left: auto; font-family: var(--pixel); font-size: 9px; }
+#todo .cabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+#todo .cabs button { flex-direction: column; justify-content: center; gap: 3px; padding: 4px 2px; min-height: 52px; font-size: 16px; text-align: center; }
+#todo .cabs b { font-family: var(--pixel); font-size: 12px; }
+#todo p { margin: 0; font-size: 19px; color: var(--cream); }
+.pills { display: flex; justify-content: center; gap: 18px; padding-top: 6px; }
 .pill { font-family: var(--pixel); font-size: 8px; letter-spacing: 1px; color: #bdb8da; background: #2b2842; border: none; border-radius: 999px; padding: 8px 14px; box-shadow: inset 0 -3px 0 #151322; }
 .pill:active { transform: translateY(1px); }
 
@@ -211,3 +202,4 @@ textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo,
 .stmt .now { font-size: 17px; color: #8a6238; }
 .pills { gap: 12px; }
 .pill:disabled { opacity: .6; }
+.title .version { margin: 6px 0 0; font-family: var(--pixel); font-size: 7px; color: #6f6a92; text-align: center; }
