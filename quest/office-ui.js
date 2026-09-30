@@ -154,10 +154,40 @@
     const r = O.rankFor(s);
     document.querySelector("#hudPlace").textContent = `DAY ${s.day} · Q${O.quarterOf(s.day)} ${O.calendarYear(s)}`;
     document.querySelector("#hudStats").innerHTML = `<span>${esc(r.name.replace(" Accountant", "").toUpperCase())}</span><span>XP ${s.xp}</span><span>€${Math.round(s.money).toLocaleString("en-US")}</span>`;
+    // The list below the screen says where the work is, so the strip over the office stays hidden.
     const task = document.querySelector("#task");
-    task.hidden = false;
+    task.hidden = true;
     task.textContent = taskText(s);
+    const todo = document.querySelector("#todo");
+    if (todo) todo.innerHTML = todoHtml(s);
   }
+  // Below the screen: where the work is. Each button walks there and uses it, like tapping the office.
+  const goBtn = (p, label, extra = "", hot = false) => `<button type="button" class="${hot ? "hot" : ""}" data-gx="${p.x}" data-gy="${p.y}">${label}${extra ? `<span class="n">${extra}</span>` : ""}</button>`;
+  function todoHtml(s) {
+    if (s.phase === "intro") return `<div class="todo-h">TODAY</div>${goBtn(npcSpot("giulia"), "👩‍💼 Talk to Giulia", "", true)}`;
+    const job = s.carrying;
+    if (job) {
+      const head = `<div class="todo-h">IN YOUR HANDS · ${esc(docName(job).toUpperCase())}</div>`;
+      if (job.work === "cabinet") return `${head}<p>Which cabinet does it go in?</p><div class="cabs">${CABINETS.map((c, i) => `<button type="button" data-gx="${i + 1}" data-gy="1"><b>${c[0]}</b>${esc(c)}</button>`).join("")}</div>`;
+      if (job.work === "desk" || job.work === "phone") return head + goBtn(SPOT.desk, "🖥 Work on it at your desk", "", true);
+      if (job.work === "books") return head + goBtn(SPOT.books, "📘 Open the company books", "", true);
+      if (job.work === "marco") return head + goBtn(npcSpot("marco"), "🧑‍💼 Check it with Marco", "", true);
+    }
+    const count = p => s.queue.filter(j => j.pickup === p).length;
+    const rows = [];
+    if (count("phone")) rows.push(goBtn(SPOT.desk, "☎ Answer the phone", "RINGING", true));
+    if (count("giulia")) rows.push(goBtn(npcSpot("giulia"), "👩‍💼 Giulia's memo", count("giulia") > 1 ? String(count("giulia")) : ""));
+    if (count("inbox")) rows.push(goBtn(SPOT.inbox, "📥 Documents in the inbox", String(count("inbox"))));
+    if (count("marco")) rows.push(goBtn(npcSpot("marco"), "🧑‍💼 Marco needs a check", ""));
+    if (s.phase === "report") rows.push(goBtn(SPOT.books, "📘 Write the annual report", "", true));
+    if (s.phase === "home") rows.push(goBtn(SPOT.door, "🚪 Clock out and get paid", "", true));
+    const head = s.phase === "close" ? "QUARTER CLOSE" : s.phase === "home" ? "ALL DONE" : `TODAY · ${s.queue.length} JOB${s.queue.length === 1 ? "" : "S"} LEFT`;
+    return `<div class="todo-h">${head}</div>${rows.join("")}`;
+  }
+  if (typeof document !== "undefined") document.addEventListener("click", ev => {
+    const b = ev.target.closest && ev.target.closest("#todo [data-gx]");
+    if (b && E && E.walkTo) E.walkTo(+b.dataset.gx, +b.dataset.gy);
+  });
   function taskText(s) {
     if (s.phase === "intro") return "Your first day!";
     if (s.carrying) return `📄 ${docName(s.carrying)} → ${WHERE[s.carrying.work]}`;
@@ -223,7 +253,7 @@
     s.phase = "work";
     plan(s);
     hud(); E.save();
-    await E.say("Look for the ! marks: that's where work is waiting. Giulia has the first memo — tap her, or walk up and press A.", "Tip");
+    await E.say("Look for the ! marks: that's where work is waiting. Giulia has the first memo: tap her, or tap “Giulia's memo” in the list below the screen.", "Tip");
     await E.say("From tomorrow, every morning you choose the day's work: client bookkeeping, the consolidation desk or the financial analysis desk.", "Tip");
   }
   function resume() {

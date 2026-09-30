@@ -8,6 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
+  const VERSION = 13; // shown on the title screen; the same number as the service worker cache (sw.js)
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -275,11 +276,13 @@
     held = null; hero.queue = []; hero.moving = false;
     clearTimeout(musicTimer); currentSong = null;
     $("#task").hidden = true;
+    $("#todo").innerHTML = "";
     $("#hudPlace").textContent = "PolimiAFC"; $("#hudStats").innerHTML = "";
     const job = load(CAREER_KEY);
     showOverlay(`<div class="title">
       <h1 class="logo">POLIMI<br>AFC</h1>
       <p class="subtitle">AN ACCOUNTING CAREER</p>
+      <p class="version">VERSION ${VERSION}</p>
       <canvas id="titleCv" width="80" height="48"></canvas>
       <div class="mode">
         <p>PolimiAFC S.p.A. · from intern to partner. Keep the clients' books and the firm's own, study at the consolidation and analysis desks, and take mock exams.</p>
@@ -289,7 +292,7 @@
         </div>
       </div>
       <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
-      <p class="help">D-pad or tap to move · A to use · B for the menu</p>
+      <p class="help">Tap the office to walk and use things, or tap a job in the list below the screen.</p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
     tc.imageSmoothingEnabled = false;
@@ -441,14 +444,6 @@
     if (!$("#dialog").hidden) { if (dlgResolve) dlgResolve(); return; }
     openMenu();
   }
-  document.querySelectorAll(".dp[data-dir]").forEach(btn => {
-    const dir = btn.dataset.dir;
-    btn.addEventListener("pointerdown", ev => { ev.preventDefault(); ac(); held = dir; hero.queue = []; btn.classList.add("on"); if (!busy) tryMove(dir); else if (!$("#dialog").hidden && dlgResolve) dlgResolve(); });
-    const up = () => { if (held === dir) held = null; btn.classList.remove("on"); };
-    ["pointerup", "pointercancel", "pointerleave"].forEach(t => btn.addEventListener(t, up));
-  });
-  $("#btnA").addEventListener("pointerdown", ev => { ev.preventDefault(); ac(); pressA(); });
-  $("#btnB").addEventListener("pointerdown", ev => { ev.preventDefault(); ac(); pressB(); });
   $("#btnMenu").addEventListener("click", () => { ac(); if ($("#dialog").hidden) openMenu(); });
   $("#btnSound").addEventListener("click", () => { if (S) toggleSound(); });
   $("#btnUpdate").addEventListener("click", () => refreshApp());
@@ -482,8 +477,11 @@
     if (!$("#dialog").hidden) { if (dlgResolve) dlgResolve(); return; }
     if (busy || !S) return;
     const r = cv.getBoundingClientRect(), cam = camera();
-    const tx = Math.floor(((ev.clientX - r.left) / r.width * 160 + cam.x) / TILE);
-    const ty = Math.floor(((ev.clientY - r.top) / r.height * 144 + cam.y) / TILE);
+    walkTo(Math.floor(((ev.clientX - r.left) / r.width * 160 + cam.x) / TILE), Math.floor(((ev.clientY - r.top) / r.height * 144 + cam.y) / TILE));
+  });
+  // Walks to a tile; if it can't be stood on (a desk, a person), walks next to it, faces it and uses it.
+  function walkTo(tx, ty) {
+    if (busy || !S) return;
     if (tx === S.x && ty === S.y) return;
     if (L.tileAt(S.map, tx, ty) == null) return;
     let steps = L.walkable(S, S.map, tx, ty) ? L.path(S, S.map, S.x, S.y, tx, ty) : null;
@@ -503,7 +501,7 @@
     hero.queue = steps.slice();
     if (then) hero.queue.push(then);
     if (!hero.moving) continueWalking();
-  });
+  }
 
   const KEYS = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right", w: "up", s: "down", a: "left", d: "right" };
   document.addEventListener("keydown", ev => {
@@ -528,7 +526,7 @@
   UI.install({
     state: () => S, rnd, say, sayAll, ask, closeDialog, script, showOverlay, hideOverlay, overlay, music, save, fade, wait,
     sfx: name => SFX[name] && SFX[name](), tileAt: L.tileAt, isBusy: () => busy, setBusy: v => { busy = v; },
-    toTitle: () => { save(); titleScreen(); }, backup: () => backupScreen()
+    toTitle: () => { save(); titleScreen(); }, backup: () => backupScreen(), walkTo: (x, y) => { ac(); walkTo(x, y); }
   });
   titleScreen();
   requestAnimationFrame(loop);
