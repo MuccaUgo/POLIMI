@@ -37,17 +37,21 @@
     <div id="fade"></div>
   </div>
   <div id="pad">
-    <div id="tabs" role="tablist">
-      <button type="button" role="tab" data-tab="books">📒 BOOKS</button>
-      <button type="button" role="tab" data-tab="codex">📖 CODEX</button>
+    <div id="tabs">
+      <button type="button" data-tab="books" aria-pressed="false">📒 BOOKS</button>
+      <button type="button" data-tab="codex" aria-pressed="false">📖 CODEX</button>
     </div>
-    <div id="tabBody"></div>
     <div class="pills">
       <button id="btnSound" class="pill">SOUND</button>
       <button id="btnMenu" class="pill">MENU</button>
       <button id="btnUpdate" class="pill" aria-label="Update the game to the latest version">⟳ UPDATE</button>
     </div>
   </div>
+</div>
+
+<div id="sheet" hidden role="dialog" aria-labelledby="sheetTitle">
+  <div class="sheet-h"><span id="sheetTitle"></span><button type="button" id="sheetClose" aria-label="Close">✕</button></div>
+  <div id="tabBody"></div>
 </div>
 
 <div id="overlay" hidden></div>

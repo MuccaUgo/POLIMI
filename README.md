@@ -88,7 +88,7 @@ figures and on generated firms, percentage points against relative changes, and 
 against debt, matching maturities, committed and uncommitted credit lines, factoring with and without
 recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Interns keep two clients, a
 bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
-don't repeat until their pool has gone round. Below the screen, two tabs: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
+don't repeat until their pool has gone round. Below the screen, two buttons open pop-up panels: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
 books stand (totals hidden while you write the annual report) and how each client is doing; **CODEX**
 holds every definition the game uses, from the basics to consolidation, with a search. The office is
 played by tapping. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel

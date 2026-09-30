@@ -160,25 +160,42 @@
     refreshTab();
   }
 
-  // ---------- Below the screen: BOOKS and CODEX ----------
-  let tab = "books";
+  // ---------- BOOKS and CODEX: sheets that pop up from the bottom on demand ----------
+  let tab = "books", open = false;
   try { tab = localStorage.getItem("afc_tab") === "codex" ? "codex" : "books"; } catch (e) {}
+  const TAB_TITLE = { books: "📒 THE BOOKS", codex: "📖 CODEX" };
   function refreshTab(force) {
-    const body = document.querySelector("#tabBody");
-    if (!body) return;
-    document.querySelectorAll("#tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === tab ? "true" : "false"));
+    const sheet = document.querySelector("#sheet"), body = document.querySelector("#tabBody");
+    if (!sheet || !body) return;
+    document.querySelectorAll("#tabs [data-tab]").forEach(b => b.setAttribute("aria-pressed", open && b.dataset.tab === tab ? "true" : "false"));
+    sheet.hidden = !open;
+    if (!open) return;
+    // Just above the two buttons, so they stay visible to close it or switch to the other one.
+    const top = document.querySelector("#tabs").getBoundingClientRect().top;
+    sheet.style.bottom = Math.round(window.innerHeight - top + 8) + "px";
+    // It fills the free space between the office and the buttons, without covering the office.
+    const screenBottom = document.querySelector("#screen").getBoundingClientRect().bottom;
+    sheet.style.maxHeight = Math.round(Math.max(220, top - screenBottom - 16)) + "px";
+    document.querySelector("#sheetTitle").textContent = TAB_TITLE[tab];
     if (tab === "books") { const s = S(); body.innerHTML = s && s.mode === "career" ? booksHtml(s) : ""; return; }
     // The codex is drawn once, so typing in the search box isn't interrupted.
-    if (force || !body.querySelector("#codexQ")) { body.innerHTML = codexHtml(); filterCodex(body, ""); }
+    if (force || !body.querySelector("#codexQ")) { body.innerHTML = codexHtml(); filterCodex(body, ""); body.scrollTop = 0; }
   }
+  function openSheet(t) {
+    open = !(open && t === tab); // the same button again closes it
+    tab = t;
+    try { localStorage.setItem("afc_tab", tab); } catch (e) {}
+    refreshTab(true);
+  }
+  function closeSheet() { if (!open) return; open = false; refreshTab(); }
   if (typeof document !== "undefined") {
     document.addEventListener("click", ev => {
       const b = ev.target.closest && ev.target.closest("#tabs [data-tab]");
-      if (!b) return;
-      tab = b.dataset.tab;
-      try { localStorage.setItem("afc_tab", tab); } catch (e) {}
-      refreshTab(true);
+      if (b) return openSheet(b.dataset.tab);
+      if (ev.target.closest && ev.target.closest("#sheetClose")) closeSheet();
     });
+    // Back to the office (a tap on it) closes the sheet.
+    document.addEventListener("pointerdown", ev => { if (ev.target.id === "cv") closeSheet(); });
     document.addEventListener("input", ev => { if (ev.target.id === "codexQ") filterCodex(document.querySelector("#tabBody"), ev.target.value); });
   }
 
