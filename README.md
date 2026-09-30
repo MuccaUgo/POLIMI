@@ -88,7 +88,10 @@ figures and on generated firms, percentage points against relative changes, and 
 against debt, matching maturities, committed and uncommitted credit lines, factoring with and without
 recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Interns keep two clients, a
 bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
-don't repeat until their pool has gone round. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
+don't repeat until their pool has gone round. Below the screen, two tabs: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
+books stand (totals hidden while you write the annual report) and how each client is doing; **CODEX**
+holds every definition the game uses, from the basics to consolidation, with a search. The office is
+played by tapping. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
 file, exported as a file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
 device (`backup.js`).
 
@@ -159,7 +162,7 @@ sm/tests/       same tests for the Strategy & Marketing bank
 desk/           AFC Closing Desk game (index.html, styles.css, core.js, onboarding.js, app.js, cases/ch1–ch5.js, sw.js, manifest.json, icons)
 desk/tests/     engine, case and service-worker tests
 quest/          PolimiAFC career: engine (game.js, art.js, world.js, logic.js), the office and its rules (office-art.js,
-                office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-planning.js, office-ui.js),
+                office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-planning.js, office-codex.js, office-ui.js),
                 save backups (backup.js), plus index.html, style.css, sw.js, manifest.json, icons
 quest/tests/    engine, career, analysis, statements, study-desk, exam, backup and service-worker tests
 fa/index.html   redirect from the hub's former path

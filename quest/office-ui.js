@@ -154,40 +154,79 @@
     const r = O.rankFor(s);
     document.querySelector("#hudPlace").textContent = `DAY ${s.day} · Q${O.quarterOf(s.day)} ${O.calendarYear(s)}`;
     document.querySelector("#hudStats").innerHTML = `<span>${esc(r.name.replace(" Accountant", "").toUpperCase())}</span><span>XP ${s.xp}</span><span>€${Math.round(s.money).toLocaleString("en-US")}</span>`;
-    // The list below the screen says where the work is, so the strip over the office stays hidden.
     const task = document.querySelector("#task");
-    task.hidden = true;
+    task.hidden = false;
     task.textContent = taskText(s);
-    const todo = document.querySelector("#todo");
-    if (todo) todo.innerHTML = todoHtml(s);
+    refreshTab();
   }
-  // Below the screen: where the work is. Each button walks there and uses it, like tapping the office.
-  const goBtn = (p, label, extra = "", hot = false) => `<button type="button" class="${hot ? "hot" : ""}" data-gx="${p.x}" data-gy="${p.y}">${label}${extra ? `<span class="n">${extra}</span>` : ""}</button>`;
-  function todoHtml(s) {
-    if (s.phase === "intro") return `<div class="todo-h">TODAY</div>${goBtn(npcSpot("giulia"), "👩‍💼 Talk to Giulia", "", true)}`;
-    const job = s.carrying;
-    if (job) {
-      const head = `<div class="todo-h">IN YOUR HANDS · ${esc(docName(job).toUpperCase())}</div>`;
-      if (job.work === "cabinet") return `${head}<p>Which cabinet does it go in?</p><div class="cabs">${CABINETS.map((c, i) => `<button type="button" data-gx="${i + 1}" data-gy="1"><b>${c[0]}</b>${esc(c)}</button>`).join("")}</div>`;
-      if (job.work === "desk" || job.work === "phone") return head + goBtn(SPOT.desk, "🖥 Work on it at your desk", "", true);
-      if (job.work === "books") return head + goBtn(SPOT.books, "📘 Open the company books", "", true);
-      if (job.work === "marco") return head + goBtn(npcSpot("marco"), "🧑‍💼 Check it with Marco", "", true);
-    }
-    const count = p => s.queue.filter(j => j.pickup === p).length;
-    const rows = [];
-    if (count("phone")) rows.push(goBtn(SPOT.desk, "☎ Answer the phone", "RINGING", true));
-    if (count("giulia")) rows.push(goBtn(npcSpot("giulia"), "👩‍💼 Giulia's memo", count("giulia") > 1 ? String(count("giulia")) : ""));
-    if (count("inbox")) rows.push(goBtn(SPOT.inbox, "📥 Documents in the inbox", String(count("inbox"))));
-    if (count("marco")) rows.push(goBtn(npcSpot("marco"), "🧑‍💼 Marco needs a check", ""));
-    if (s.phase === "report") rows.push(goBtn(SPOT.books, "📘 Write the annual report", "", true));
-    if (s.phase === "home") rows.push(goBtn(SPOT.door, "🚪 Clock out and get paid", "", true));
-    const head = s.phase === "close" ? "QUARTER CLOSE" : s.phase === "home" ? "ALL DONE" : `TODAY · ${s.queue.length} JOB${s.queue.length === 1 ? "" : "S"} LEFT`;
-    return `<div class="todo-h">${head}</div>${rows.join("")}`;
+
+  // ---------- Below the screen: BOOKS and CODEX ----------
+  let tab = "books";
+  try { tab = localStorage.getItem("afc_tab") === "codex" ? "codex" : "books"; } catch (e) {}
+  function refreshTab(force) {
+    const body = document.querySelector("#tabBody");
+    if (!body) return;
+    document.querySelectorAll("#tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === tab ? "true" : "false"));
+    if (tab === "books") { const s = S(); body.innerHTML = s && s.mode === "career" ? booksHtml(s) : ""; return; }
+    // The codex is drawn once, so typing in the search box isn't interrupted.
+    if (force || !body.querySelector("#codexQ")) { body.innerHTML = codexHtml(); filterCodex(body, ""); }
   }
-  if (typeof document !== "undefined") document.addEventListener("click", ev => {
-    const b = ev.target.closest && ev.target.closest("#todo [data-gx]");
-    if (b && E && E.walkTo) E.walkTo(+b.dataset.gx, +b.dataset.gy);
-  });
+  if (typeof document !== "undefined") {
+    document.addEventListener("click", ev => {
+      const b = ev.target.closest && ev.target.closest("#tabs [data-tab]");
+      if (!b) return;
+      tab = b.dataset.tab;
+      try { localStorage.setItem("afc_tab", tab); } catch (e) {}
+      refreshTab(true);
+    });
+    document.addEventListener("input", ev => { if (ev.target.id === "codexQ") filterCodex(document.querySelector("#tabBody"), ev.target.value); });
+  }
+
+  // PolimiAFC's balance sheet and income statement from the books, and how the clients are doing.
+  function booksHtml(s) {
+    const b = O.balances(s), acc = t => D.ACCOUNTS.filter(a => a.type === t), sum = t => acc(t).reduce((x, a) => x + b[a.id], 0);
+    const profit = O.profitOf(b).profit; // revenue and expenses since the last closing entry
+    const hide = s.phase === "report"; // no totals while the player writes the annual report
+    const row = (name, v, cls = "") => `<div class="row ${cls}"><span>${esc(name)}</span><span>${eur(v)}</span></div>`;
+    const lines = t => acc(t).filter(a => b[a.id] || a.type === "A").map(a => row(a.name, b[a.id])).join("");
+    const tot = (name, v) => hide ? "" : row(name, v, "tot");
+    const year = O.calendarYear(s);
+    const clients = O.rankFor(s).clients.map(id => {
+      const c = D.CLIENTS[id], hist = (s.clientRev[id] || []).slice(-8), sat = s.sat[id] == null ? 60 : s.sat[id];
+      const last = hist[hist.length - 1], prev = hist.length > 1 ? hist[hist.length - 2] : c.base;
+      const growth = last ? Math.round((last / prev - 1) * 1000) / 10 : 0, max = Math.max(1, ...hist);
+      const spark = hist.length ? `<span class="spark">${hist.map(v => `<i style="height:${Math.max(8, Math.round(v / max * 100))}%"></i>`).join("")}</span>` : "";
+      return `<div class="cl"><div class="row"><span>${c.icon} ${esc(c.name)}</span>${spark}</div>
+        <div class="row small"><span>Satisfaction ${sat}%</span><span>${last ? `${eur(last)} last quarter (${growth >= 0 ? "+" : ""}${growth}%)` : esc(c.kind)}</span></div></div>`;
+    }).join("");
+    const done = s.jobsOk[O.quarterKey(s)] || 0;
+    return `<div class="bk-h">🏢 POLIMIAFC S.P.A. · BALANCE SHEET TODAY</div>
+      ${lines("A")}${tot("Total assets", sum("A"))}
+      ${lines("L")}${tot("Total liabilities", sum("L"))}
+      ${lines("E")}${hide ? "" : row(`Profit ${year} so far`, profit)}${tot("Total equity", sum("E") + profit)}
+      ${tot("Total liabilities and equity", sum("L") + sum("E") + profit)}
+      <div class="bk-h">📈 INCOME STATEMENT ${year} · SO FAR</div>
+      ${acc("R").map(a => row(a.name, b[a.id])).join("")}${acc("X").filter(a => b[a.id]).map(a => row(a.name, -b[a.id])).join("")}
+      ${tot("Profit", profit)}
+      ${hide ? `<p class="small">Totals are hidden while you write the annual report.</p>` : ""}
+      <div class="bk-h">🤝 CLIENTS</div>${clients}
+      <p class="small">This quarter: ${done} job${done === 1 ? "" : "s"} done right → ${eur(done * D.FEE_PER_JOB)} to invoice at the quarter close.</p>`;
+  }
+
+  const CX = () => window.OfficeCodex;
+  function codexHtml() {
+    return `<input id="codexQ" type="search" placeholder="Search: NOWC, factoring, goodwill…" autocomplete="off" enterkeyhint="search">
+      <div id="codexList">${CX().TOPICS.map(t => `<div class="cx-t" data-topic="${esc(t)}">${esc(t.toUpperCase())}</div>${CX().CODEX.filter(e => e[0] === t).map(([, term, def]) => `<div class="cx" data-topic="${esc(t)}" data-k="${esc((term + " " + def + " " + t).toLowerCase())}"><b>${esc(term)}</b><span>${esc(def)}</span></div>`).join("")}`).join("")}</div>
+      <p class="small" id="codexNone" hidden>Nothing found. Try another word.</p>`;
+  }
+  function filterCodex(body, q) {
+    if (!body) return;
+    const t = String(q || "").trim().toLowerCase(), shown = new Set();
+    body.querySelectorAll(".cx").forEach(el => { const on = !t || el.dataset.k.includes(t); el.hidden = !on; if (on) shown.add(el.dataset.topic); });
+    body.querySelectorAll(".cx-t").forEach(el => { el.hidden = !shown.has(el.dataset.topic); });
+    const none = body.querySelector("#codexNone");
+    if (none) none.hidden = shown.size > 0;
+  }
   function taskText(s) {
     if (s.phase === "intro") return "Your first day!";
     if (s.carrying) return `📄 ${docName(s.carrying)} → ${WHERE[s.carrying.work]}`;
@@ -1042,25 +1081,8 @@
         <p class="small">Every step up is a job interview with Giulia. It's never automatic: once you have the XP, you choose when to take it. 🔒 = coming soon.</p>
         <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
       if (m === "codex") return E.showOverlay(`<div class="panel box"><h2>CODEX</h2><dl>
-        ${W.CODEX.map(([t, d]) => `<dt>${esc(t.toUpperCase())}</dt><dd>${esc(d)}</dd>`).join("")}
-        <dt>SHARE CAPITAL AND PREMIUM</dt><dd>Shares issued above their nominal value: capital takes the nominal value, the rest goes to the share premium reserve.</dd>
-        <dt>LEGAL RESERVE</dt><dd>Italian S.p.A.s set aside 5% of each year's profit until the reserve reaches 20% of share capital (art. 2430 c.c.).</dd>
-        <dt>DIVIDENDS</dt><dd>Approved by the shareholders' meeting, they leave retained earnings and are a liability until paid. Never an expense.</dd>
-        <dt>EPS</dt><dd>Earnings per share = profit ÷ weighted-average number of shares in the year.</dd>
-        <dt>THE FOUR STATEMENTS</dt><dd>Balance sheet: the position on one date. Income statement: revenues and expenses of the year (accrual). Cash flow statement: cash in and out of the year, in three sections (operating, investing, financing). Statement of changes in equity: from opening to closing equity (profit, shares issued, dividends, reserves). Profit links the income statement to equity; the change in cash links the cash flow statement to the balance sheet.</dd>
-        <dt>RECLASSIFIED BALANCE SHEET</dt><dd>Invested capital (fixed assets + NOWC) = coverage (equity + NFP + provisions). Reclassification isn't compulsory: it makes statements readable and comparable.</dd>
-        <dt>NOWC</dt><dd>Net operating working capital = trade receivables + inventories − trade and tax payables. Cash is not in it.</dd>
-        <dt>NFP</dt><dd>Net financial position = bonds + bank debts + other financial liabilities − cash. High isn't necessarily bad, if the debt funds investments that earn more than it costs.</dd>
-        <dt>RECLASSIFIED INCOME STATEMENT</dt><dd>Revenues − raw materials − G&A = value added; − personnel = EBITDA; − D&A = EBIT; − net financial expenses ± extraordinary items = pretax income; − tax = net income.</dd>
-        <dt>ROE AND PAYOUT</dt><dd>ROE = net profit ÷ equity. Payout = dividends paid ÷ previous year's net profit.</dd>
-        <dt>COMMON SIZE</dt><dd>Vertical: each item as a % of total assets (balance sheet) or of revenues (income statement), same year. Horizontal: each item's change against a base year. A ratio that moves from 4.97% to 5.22% changes by 0.25 points, or +5.19% in relative terms: say which one.</dd>
-        <dt>EQUITY VS DEBT</dt><dd>Debt: a maturity, interest promised by contract, paid first on default, interest deductible (tax shield), covenants but no vote. Equity: no maturity, residual returns, paid last, dividends not deductible, votes. So equity costs more.</dd>
-        <dt>MATCH MATURITY</dt><dd>Long uses (plants, acquisitions) need long money: equity, bank loans, bonds, leasing. Short, self-liquidating uses (seasonal stock, receivables) need short money: credit lines, factoring.</dd>
-        <dt>CREDIT LINES</dt><dd>A ceiling, not a loan: interest only on what is used. Committed: the bank has promised, a small fee on the unused part. Uncommitted: cheaper, but the bank can withdraw it at any time.</dd>
-        <dt>FACTORING</dt><dd>Selling an invoice for cash before it's paid. Without recourse: a true sale, the factor bears the loss, the receivable leaves the balance sheet (receivables and DSO fall). With recourse: the firm bears the loss, the receivable stays and the advance is a financial debt in the NFP.</dd>
-        <dt>IFRS 16 LEASES</dt><dd>A right-of-use asset and a lease liability. The rent becomes depreciation + interest: EBITDA goes up, net debt goes up, leverage ratios change even though the business doesn't.</dd>
-        <dt>BONDS</dt><dd>Face value, coupon, maturity, yield (what you really earn). Investment grade from AAA down to BBB−; below is high yield. Eni: A−.</dd>
-        <dt>SOURCES</dt><dd>Financial disclosures, industry and economic data, non-financial disclosures, market data. In a Form 20-F: Item 3.D risks, Item 5 management's review, Part III the statements.</dd></dl>
+        ${CX().CODEX.map(([, t, d]) => `<dt>${esc(t.toUpperCase())}</dt><dd>${esc(d)}</dd>`).join("")}</dl>
+        <p class="small">The same codex, with a search, is in the CODEX tab below the screen.</p>
         <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
     };
   }
