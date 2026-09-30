@@ -8,7 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 15; // shown on the title screen; the same number as the service worker cache (sw.js)
+  const VERSION = 16; // shown on the title screen; the same number as the service worker cache (sw.js)
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
