@@ -79,8 +79,8 @@ test("the modules the hub already covers point back to a background topic", () =
   const withRevise = modules.filter(m => m.revise).map(m => [m.title, m.revise]);
   assert.deepEqual(withRevise, [
     ["Foundations", "Financial Accounting"],
-    ["Financial Statements", "Financial Accounting"],
-    ["Financial Analysis", "Financial Accounting"],
+    ["Financial Statements", "Consolidation"],
+    ["Financial Analysis", "Financial Analysis"],
     ["Planning & Control", "Cost Accounting"]
   ]);
 });
@@ -101,4 +101,59 @@ test("every module's background topic exists in the question bank", () => {
     const count = cats.filter(c => topic.categories.includes(c)).length;
     assert.ok(count > 0, `${m.title}: topic ${m.revise} has no questions`);
   }
+});
+
+test("the course facts match the Lecture 02 deck", () => {
+  assert.equal(course.lecturer, "Michela Arnaboldi");
+  // Four assistants are named on the team slide; Laura Porta was missing from the first transcription.
+  assert.deepEqual(course.assistants.sort(),
+    ["Claudia Rizzuti", "Eleonora Carloni", "Laura Porta", "Romain Lerouge"]);
+  assert.equal(course.slots.length, 2);
+  assert.ok(course.slots.some(s => /Monday/.test(s) && /14\.30/.test(s)));
+  assert.ok(course.slots.some(s => /Wednesday/.test(s) && /8\.45/.test(s)));
+  assert.match(course.book, /Arnaboldi.*Azzone.*Giorgino.*2014/);
+});
+
+test("the assessment adds up to the published weights", () => {
+  const weights = course.assessment.filter(a => /%$/.test(a.weight)).map(a => parseInt(a.weight, 10));
+  assert.deepEqual(weights, [20, 20, 60]);
+  assert.equal(weights.reduce((a, b) => a + b, 0), 100);
+  // The oral is not part of the 100: it moves the result by two points either way.
+  const oral = course.assessment.find(a => /Oral/.test(a.part));
+  assert.match(oral.weight, /2 points/);
+});
+
+test("the course structure is the A, F, C one the course states", () => {
+  assert.deepEqual(course.structure.map(b => b.block), ["Accounting", "Finance", "Control"]);
+  for (const block of course.structure) {
+    assert.ok(block.items.length >= 3, `${block.block}: too few topics`);
+  }
+  // Every calendar module belongs to one of those blocks, or to the course itself.
+  const blocks = new Set(["Accounting", "Finance", "Control", "Course"]);
+  for (const m of modules) {
+    assert.ok(blocks.has(m.block), `${m.title}: unknown block ${m.block}`);
+  }
+});
+
+test("all three prerequisites are named, and the uncovered one says so", () => {
+  assert.equal(course.prerequisites.length, 3);
+  const names = course.prerequisites.map(p => p.name);
+  assert.deepEqual(names, ["Financial Accounting", "Cost Accounting", "Decision making"]);
+
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS.map(t => t.name) });", data);
+  const topics = JSON.parse(data.json).topics;
+
+  for (const p of course.prerequisites) {
+    if (p.topic) assert.ok(topics.includes(p.topic), `${p.name}: topic ${p.topic} not in the bank`);
+    else assert.match(p.detail, /not in this hub yet/, `${p.name}: an uncovered prerequisite must say so`);
+  }
+});
+
+test("lectures the two sources disagree on are flagged", () => {
+  const flagged = calendar.filter(l => l.conflict);
+  assert.equal(flagged.length, 2);
+  assert.deepEqual(flagged.map(l => l.date), ["2026-10-14", "2026-10-26"]);
+  for (const l of flagged) assert.ok(l.conflict.includes("Lecture 02 deck"));
 });

@@ -224,6 +224,12 @@ main:focus { outline: none; }
 .module-revise button { width: 100%; justify-content: space-between; padding: 10px 14px; font-size: 11px; }
 #moduleGrid .topic { display: flex; flex-direction: column; }
 #moduleGrid .module-revise { margin-top: auto; }
+ul.plain { list-style: none; padding: 0; margin: 10px 0 0; }
+ul.plain li { font-size: 13px; color: var(--text2); padding: 5px 0 5px 14px; position: relative; }
+ul.plain li::before { content: '\2022'; position: absolute; left: 0; color: var(--accent); }
+#assessmentList .lecture-date, #prereqList .lecture-date { width: 62px; }
+#assessmentList .lecture-date .day { font-size: 13px; letter-spacing: 0; }
+.badge.conflict { border-color: var(--warn); color: var(--warn); background: transparent; cursor: help; }
 .session-resume, .quiz-notice { padding: 16px; margin: 18px 0; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
 .session-resume button { margin-top: 8px; }
 .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden; }

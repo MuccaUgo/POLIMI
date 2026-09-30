@@ -1,7 +1,13 @@
 // Study data for the Accounting, Finance & Control annexures and lecture notes.
 const TOPICS = [
- { name: "Financial Accounting", categories: ["Principles", "Balance Sheet", "Income Statement", "Cash Flow", "Notes & Reporting"] },
- { name: "Cost Accounting", categories: ["Cost Basics", "Cost Classification", "Cost Configurations", "Allocation Methods"] }
+ { name: "Financial Accounting", categories: ["Principles", "Balance Sheet", "Income Statement", "Cash Flow", "Notes & Reporting"],
+   note: "Prerequisite \u2014 revise before the course builds on it. Reviewed in the Lecture 03 video, Financial Statement Review." },
+ { name: "Cost Accounting", categories: ["Cost Basics", "Cost Classification", "Cost Configurations", "Allocation Methods"],
+   note: "Prerequisite \u2014 revise before the course builds on it. Named as groundwork for Planning & Control." },
+ { name: "Consolidation", categories: ["Groups & Control", "Consolidation Process", "Goodwill & Minorities"],
+   note: "Course content \u2014 the Lecture 03 @HOME videos, taught on 21 September and examined in the 23 September exercises." },
+ { name: "Financial Analysis", categories: ["The Six Steps", "Context", "Reclassification", "Financial Planning", "Common Size"],
+   note: "Course content \u2014 Lectures 05 and 06. Steps 1 to 3 and financial planning; indicators, benchmarking and interpretation come next." }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
@@ -539,8 +545,8 @@ const CONCEPTS = [
    "cat": "Balance Sheet",
    "title": "Investment Property",
    "meaning": "Land or a building held to earn rental income, benefit from capital appreciation, or both, rather than to support the company's own production or administration.",
-   "how": "The lecture measures it initially at cost. Under the fair value model, later changes in fair value go to profit or loss and the property is not depreciated. Under the cost model, depreciable buildings are depreciated, impairment is considered, and fair value is disclosed in the notes.",
-   "trap": "The same building can be PPE when used by the company and investment property when held for rent. PPE revaluation gains normally enter an equity surplus; investment-property fair value changes enter profit or loss.",
+   "how": "The lecture measures it initially at cost. Under the fair value model, later changes in fair value go to profit or loss and the property is not depreciated. Under the cost model, depreciable buildings are depreciated, impairment is considered, and fair value is disclosed in the notes. IAS 40 gives as examples land held for long-term capital appreciation, land held for undecided future use, and a building leased out or held vacant to be leased out under an operating lease.",
+   "trap": "The same building can be PPE when used by the company and investment property when held for rent. PPE revaluation gains normally enter an equity surplus; investment-property fair value changes enter profit or loss. Under the fair value model the impairment test is not required either, because the asset is already remeasured each period.",
    "deep": {
      "text": "For financial analysis, ask why the property is held before comparing its carrying amount with another company's. A fair value gain can raise profit without bringing in cash, while cost-model depreciation lowers profit without a current cash payment. The accounting policy can therefore affect both profit and asset-based ratios.",
      "source": "Financial Statements Recovery, slides 30–31"
@@ -1072,6 +1078,468 @@ const CONCEPTS = [
   "meaning": "It is suggested when the incidence of overhead is high and those indirect resources are absorbed by heterogeneous activities.",
   "how": "In that situation a single allocation basis cannot provide realistic information on how overhead is consumed, because different activities are driven by different things.",
   "trap": "The choice of activity drivers is arbitrary and usually depends on the data available. ABC narrows the subjectivity of allocation; it does not eliminate it."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "What a Group Is",
+  "meaning": "A group of companies is an economic entity formed by a set of companies that remain separate legal entities.",
+  "how": "It contains a controlling entity, the parent or holding, and one or more controlled entities, the subsidiaries.",
+  "trap": "Economic entity, not legal entity. The group is one thing for accounting purposes and many things in law, which is exactly why consolidated statements have to be built."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Why Group Accounting Is Needed",
+  "meaning": "To provide more reliable information about the composition of the assets and liabilities of the group.",
+  "how": "In the parent's own accounts a subsidiary appears as a single line, an equity investment of, say, 100. That line is the same whether the subsidiary holds plant and inventories or nothing but cash, so the parent's balance sheet alone cannot show what the group actually owns and owes.",
+  "trap": "The problem is not the total but the composition. The parent's accounts can be perfectly correct and still hide what the 100 is made of."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "The Three Types of Investment",
+  "meaning": "The accounting treatment follows the relationship the parent has with the other entity.",
+  "how": "Control, typically above 50% of voting rights, means full consolidation under IFRS 10 and IFRS 3. Significant influence, typically above 20%, means the equity method under IAS 28. Joint control means a treatment that depends on the type of arrangement, under IFRS 11.",
+  "trap": "The percentages are indicators, not definitions. Control is defined by substance, and a parent can control with 40% if the remaining 60% is dispersed."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "The Definition of Control",
+  "meaning": "An investor controls an investee when it is exposed, or has rights, to variable returns from its involvement with the investee, and has the ability to affect those returns through its power over the investee.",
+  "how": "Four elements carry the definition: rights, voting or contractual, that are substantive, meaning there is a practical and current ability to exercise them; power over the relevant activities, those that significantly affect returns, such as purchases and sales, working capital, investments, R&D and financing; exposure to variable returns, positive, negative or both; and the ability to affect those returns, as a principal rather than an agent.",
+  "trap": "All three legs are needed together: power, exposure to variable returns, and the link between the two. A large shareholding with no power over the relevant activities is not control."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "The Equity Method",
+  "meaning": "Used when the investor holds significant influence over the investee but does not control it.",
+  "how": "Significant influence is the power to participate in the financial and operating policy decisions of the investee, but not to control or jointly control those policies. The investment is recognised initially at cost; afterwards its carrying amount is increased or decreased by the investor's share of the investee's profit or loss after the acquisition date, and distributions received reduce it.",
+  "trap": "Dividends from an associate do not become income under the equity method: they reduce the carrying amount, because the share of profit has already been recognised."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "What IFRS 10 Establishes",
+  "meaning": "The principles for preparing and presenting consolidated financial statements when an entity controls one or more other entities.",
+  "how": "It requires a parent that controls other entities to prepare consolidated statements, defines the principles of control, sets out the accounting requirements and procedures to follow, and sets out the exceptions to the consolidation requirement.",
+  "trap": "IFRS 10 is about control and procedure. The measurement of what is acquired in a business combination, including goodwill, belongs to IFRS 3."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "What a Consolidated Statement Shows",
+  "meaning": "Consolidated financial statements combine the statements of separate companies belonging to the same group into one statement for the entire group.",
+  "how": "They show the accounts of the group as though the different legal entities were a single legal entity.",
+  "trap": "The as-if-one-entity rule is what drives every elimination that follows: anything that happened inside the single entity must disappear."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "The Two Phases of Consolidation",
+  "meaning": "Consolidation runs in two phases: pre-consolidation adjustments, then the consolidation process proper.",
+  "how": "Pre-consolidation covers the closing period, accounting policies and reporting currency. The process then combines like items, offsets the investment against the subsidiary's equity, and eliminates intragroup transactions in full.",
+  "trap": "The adjustments come first for a reason: combining figures drawn up to different dates, under different policies or in different currencies would add up quantities that are not comparable."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Aligning the Closing Period",
+  "meaning": "All the statements being combined should refer to the same closing date.",
+  "how": "When a subsidiary closes on a different date, it prepares interim financial statements at the parent's closing date. Where that is not feasible, different dates are allowed on three conditions: the difference does not exceed three months, the length of the financial year and the difference stay constant over time, and adjustments are made for significant transactions and events falling between the two dates.",
+  "trap": "Three months is a ceiling with conditions attached, not a free allowance. The difference also has to be stable year on year, otherwise the comparison over time breaks."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Aligning Accounting Policies",
+  "meaning": "Subsidiaries may apply different accounting policies from those the group adopts for similar transactions.",
+  "how": "Two routes are available: applying the group's policies in the subsidiary's own accounts, to the extent that local law allows it, or requiring the subsidiary to provide individual statements adjusted for consolidation purposes.",
+  "trap": "The adjustment is for consolidation, not a change to the subsidiary's statutory accounts, which may be bound by local law to a different standard such as US GAAP or China GAAP."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Translating the Reporting Currency",
+  "meaning": "Companies keeping their accounts in another currency have to be translated into the reporting currency of the consolidated statements.",
+  "how": "Income statement items, including the profit for the year, are translated at the effective exchange rate at the date of each transaction or at the average rate of the year. Balance sheet items, except the profit for the year, are translated at the exchange rate at the closing date.",
+  "trap": "Because the two sides use different rates, a translation difference appears. It is not a gain or a loss: it goes to a separate equity reserve, the translation reserve."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Step 1 — Combine",
+  "meaning": "Add the assets, liabilities, equity, income, expenses and cash flows of the parent to those of its subsidiaries, item by item according to accounting category.",
+  "how": "The combination is for 100% of the subsidiary, whatever percentage the parent owns.",
+  "trap": "Combining 100% is not an error when the parent owns less. The share that does not belong to the parent is dealt with afterwards, as non-controlling interests."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Step 2 — Offset",
+  "meaning": "Eliminate the carrying amount of the parent's investment in each subsidiary against the parent's portion of that subsidiary's equity.",
+  "how": "Without it the same wealth would be counted twice: once as the investment line in the parent's accounts and once as the subsidiary's own assets and liabilities, which have just been added in. Any non-controlling interest and any goodwill are recognised at this point.",
+  "trap": "In the textbook case the investment equals the subsidiary's book equity and the two simply cancel. Real cases rarely do, and what is left over is precisely goodwill or a minority share."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Step 3 — Eliminate Intragroup Transactions",
+  "meaning": "IFRS 10 requires intragroup transactions between entities of the group to be eliminated in full.",
+  "how": "That covers intragroup revenues and costs, receivables and payables, intercompany profits and losses on inventories and fixed assets, and intragroup dividends. Consolidated statements must present only transactions made with third parties outside the group.",
+  "trap": "The test is the as-if-one-entity view: supplying goods from one group company to another is moving them between two warehouses of the same firm, and financing a subsidiary is moving cash between divisions."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Eliminating a Service Between Group Companies",
+  "meaning": "The worked case of an intragroup service, settled only in part.",
+  "how": "Company A holds 80% of B and supplies services to B for 500; A records operating revenue and B records operating cost. At 31 December the transaction is only partly settled, leaving intercompany receivables and payables of 300. Two adjustments follow: eliminate A's revenue of 500 against B's cost of 500, and eliminate A's receivable of 300 against B's payable of 300.",
+  "trap": "The elimination is in full, 500 and 300, even though the parent owns only 80%. The minority share is handled through non-controlling interests, not by eliminating a proportion."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Combining at Fair Value",
+  "meaning": "The first departure from the simplest case: items are combined at fair value, not at book value.",
+  "how": "All the subsidiary's assets and liabilities are recognised at their fair values at the time control is acquired. The differences between book and fair value are temporary differences that will raise or lower future tax, so they are recognised as deferred tax liabilities, on asset surpluses, or deferred tax assets, on liability surpluses.",
+  "trap": "A surplus on an asset creates a deferred tax liability, and a surplus on a provision creates a deferred tax asset. Getting the direction the wrong way round is the usual slip."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Goodwill in a Business Combination",
+  "meaning": "An asset representing the future economic benefits arising from assets acquired in a business combination that are not individually identified and separately recognised.",
+  "how": "It is the difference between the cost of acquisition and the parent's interest in the fair value of the subsidiary's net assets and liabilities at the acquisition date. If positive, the price paid exceeds the fair value of the equity attributable to the parent, and it is recognised as an asset in the consolidated statements.",
+  "trap": "A negative difference is not negative goodwill on the balance sheet. The fair values are reviewed first, and if the difference survives it goes to the income statement as a gain."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "The Goodwill Formula",
+  "meaning": "Goodwill at acquisition, stated as a three-line calculation.",
+  "how": "Fair value of the consideration transferred, plus the fair value of the non-controlling interest, less the fair value of the net assets at acquisition.",
+  "trap": "The non-controlling interest is added, not subtracted. The formula measures the whole entity's premium, and the treatment of that second line is exactly what the two measurement choices below decide."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Goodwill Worked Through",
+  "meaning": "The Mickey-Mouse case: Mickey buys 100% of Mouse for 2,700.",
+  "how": "Mouse's equity is 1,500 of common stock plus 500 of retained earnings, so 2,000. Fair values equal book values except plant, worth 1,000 more, and provisions, worth 200 more. At a 50% tax rate the plant surplus creates a deferred tax liability of 500 and the provision surplus a deferred tax asset of 100. Goodwill is then 2,700 − 2,000 − 1,000 + 500 + 200 − 100 = 300.",
+  "trap": "Without the fair value step, goodwill would have looked like 2,700 − 2,000 = 700. Recognising the surpluses and their tax effects moves 400 of that into identifiable assets and liabilities."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Non-controlling Interests",
+  "meaning": "What arises when a subsidiary is not wholly controlled.",
+  "how": "A parent owning 85% of a subsidiary still consolidates 100% of its net assets and results, and reports non-controlling interests of 15%.",
+  "trap": "Consolidate all, then split. The minority does not reduce what is combined; it appears as a separate line within equity."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Two Ways to Measure the Minority",
+  "meaning": "At the acquisition date the investor may measure a non-controlling interest in two ways.",
+  "how": "At fair value, which is the full goodwill method, or at the non-controlling interest's proportionate share of the investee's identifiable net assets. The choice changes how much goodwill is recognised: the full method captures the goodwill of the whole entity, the proportionate method only the parent's share.",
+  "trap": "Same acquisition, two different goodwill figures and two different minority figures, both correct. The method has to be stated before the numbers can be read."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "The Two Methods Worked Through",
+  "meaning": "The STAR-LIGHT case: STAR buys 60% of LIGHT for 300 million, the fair value of the non-controlling interest is 200 million, LIGHT's book equity is 190 and the tax rate is 40%.",
+  "how": "Fair values exceed book values on a building, land and a trademark: 470 against 170, a surplus of 300, which net of 40% tax is 180. Full goodwill method: total value is 300 + 200 = 500, less book equity of 190 and net surpluses of 180, giving goodwill of 130. Proportionate method: the minority is 190 × 0.4 = 76, and goodwill is 300 − (190 × 0.6) − (180 × 0.6) = 300 − 114 − 108 = 78.",
+  "trap": "The surpluses are taken net of tax in both methods. Under the proportionate method every term is scaled to the parent's 60%, which is why its goodwill is smaller."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "What Financial Analysis Is",
+  "meaning": "A process in which financial data and other pertinent information are selected, evaluated and interpreted in order to formulate an assessment of the company's present and future financial condition and performances.",
+  "how": "It matters for internal accountability, towards managers, and for external accountability: shareholders and potential investors determining a share's market price and its selling price at an IPO or FPO, debtholders determining credit stability, and other actors such as government, since a company pays taxes and creates employment.",
+  "trap": "Selected, evaluated and interpreted: three verbs, and the analysis is not finished at the first. A ratio that has not been interpreted has not answered anything."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "The Six Steps",
+  "meaning": "The path the course follows, from a published figure to a value.",
+  "how": "1. Understanding the context. 2. First analysis of financial performances. 3. Comparison over time, common size analysis. 4. Analysis with indicators. 5. Benchmarking with other companies. 6. Interpretation and discussion.",
+  "trap": "Each step earns the next: a figure needs a scheme, a year needs a scale, a movement needs a perspective, a ratio needs a peer, and a comparison needs a story."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Where the Six Steps Are Going",
+  "meaning": "The goal the whole path serves is the enterprise value.",
+  "how": "It is stated as a present value: PV = Σ NCFt / (1+k)^t, the discounted sum of the net cash flows. The steps build the understanding that the inputs to that formula require.",
+  "trap": "The value itself is not observable. That is why the analysis works backwards from published statements rather than reading a number off the page."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Financial Planning Is Not a Seventh Step",
+  "meaning": "Financial planning is a zoom on step 2, not an extra step in the sequence.",
+  "how": "Step 2 reclassifies the balance sheet into two columns: the invested capital on one side and its coverage on the other. Financial planning reads the second column — how the invested capital is covered.",
+  "trap": "It sits inside the reclassification, which is why it appears between steps 2 and 4 in the diagram rather than at the end."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Relative Change in the Eni Figures",
+  "meaning": "The delta column in the course's Eni example is a relative change, not a difference in percentage points.",
+  "how": "ROE moves from 4.97% in 2024 to 5.22% in 2025, and the delta shown is 5.19%, which is 5.22/4.97 − 1. The payout ratio moves from 0.64 to 1.21, a delta of 89.61%.",
+  "trap": "A ROE rising from 4.97% to 5.22% has gained 0.25 percentage points but 5.19% in relative terms. Reading the delta as points would overstate nothing here and understate a great deal elsewhere."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Reading Italian Financial Notation",
+  "meaning": "The Eni statements use Italian number notation, which inverts the separators an English reader expects.",
+  "how": "The dot separates thousands and the comma separates decimals. So €10.193 million means €10,193 million, about €10.2 billion, and 19,82% means 19.82%.",
+  "trap": "This is a reading trap rather than an accounting one, and it is stated explicitly in the course material because it changes a figure by three orders of magnitude."
+ },
+ {
+  "cat": "Context",
+  "title": "The Four Sources",
+  "meaning": "Step 1 starts by selecting sources, and there are four kinds of public source.",
+  "how": "Industry and economic data, covering segments and key external factors such as the price of a raw material. Market data: market price of the stock, volume traded, value of bonds. Financial disclosures: financial statement schemes, shareholder letter, segmental analysis, country report. Non-financial disclosures: the sustainability report.",
+  "trap": "The method is triangulation: no single source settles the picture, which is why four are listed rather than one."
+ },
+ {
+  "cat": "Context",
+  "title": "Understanding the Business First",
+  "meaning": "Before the numbers, the analysis establishes what drives the business.",
+  "how": "For Eni: an energy company integrated along the entire value chain, operating in 62 countries with over 32 thousand employees, in business since 1953, controlled by the Italian Ministry of Economy and Finance, vertically integrated, active in conventional oil and gas and in new energies and decarbonisation.",
+  "trap": "Ownership is part of the context. A company controlled by a ministry does not face the same pressures as a widely held one, whatever the ratios say."
+ },
+ {
+  "cat": "Context",
+  "title": "Why the Oil Price Matters for Eni",
+  "meaning": "The key external factor the course uses to show how industry data feeds the analysis.",
+  "how": "Eni's performance is strongly linked to the oil price, which has moved through pandemic lockdowns that drove it down sharply, a post-pandemic recovery that pushed it up rapidly, then the impact of conflicts and geopolitical tensions, and now a progressive stabilisation downwards reflected in the results.",
+  "trap": "The external factor explains the movement in the results before any ratio is computed. Attributing that movement to management would be the mistake step 1 exists to prevent."
+ },
+ {
+  "cat": "Context",
+  "title": "What Financial Disclosures Include",
+  "meaning": "The third source, and the one closest to the numbers.",
+  "how": "Financial statement schemes in the annual report, the shareholder letter, segmental analysis, and other reports such as the fact book and the statutory auditors' report. Some are mandatory for public companies, subject also to local regulation, and it is not uncommon for companies to publish non-mandatory reports on their website.",
+  "trap": "Mandatory and voluntary sit side by side on the same website. Knowing which is which tells you how much weight a document can carry."
+ },
+ {
+  "cat": "Context",
+  "title": "The Annual Report as a Starting Point",
+  "meaning": "Eni's annual report opens with a management report before the consolidated statements.",
+  "how": "It covers activities, business model and strategy, the responsible and sustainable approach, the letter to shareholders, stakeholder engagement, integrated risk management, governance and the operating and financial review. The second half is given to the consolidated financial statements and annexes.",
+  "trap": "The management report is easily readable and gives an overview of the business and the strategy with both financial and non-financial highlights. It is management's own account, which is its value and its limit."
+ },
+ {
+  "cat": "Context",
+  "title": "Why a Second Report: Form 20-F",
+  "meaning": "The same company, the same year and the same figures, written twice.",
+  "how": "The 20-F addresses US investors and the SEC, whose mission is to protect investors; Eni's shares trade on the NYSE under the ticker E and its 2025 Form 20-F was filed on 23 March 2026. The CEO and the CFO personally certify the report, and a misleading statement can be taken to court under US securities law. It also has a fixed structure: the same numbered items for every foreign company listed in the US.",
+  "trap": "The fixed structure is the practical gain: every foreign issuer's risks sit in the same numbered place, which makes comparison possible."
+ },
+ {
+  "cat": "Context",
+  "title": "How to Use a Form 20-F",
+  "meaning": "Three places to go in the document.",
+  "how": "Item 3.D, risk factors: what could break the numbers, and by how much. Item 5, the operating and financial review: why the numbers moved this year, in management's words. Part III, financial statements and notes, with the auditor's report under PCAOB standards. The advice is to start from Item 3.D.",
+  "trap": "Eni's first risk factor is exposure to changing commodity prices and margins, which is where the figure quantifying it comes from. The risk section carries numbers, not only prose."
+ },
+ {
+  "cat": "Context",
+  "title": "Who Can File a Form 20-F",
+  "meaning": "It is the standardised annual report required of foreign private issuers with equity listed on US exchanges.",
+  "how": "It lets US investors compare an investment alongside domestic equities, and it is made available to shareholders through the company's website. To qualify as a foreign private issuer, more than 50% of the voting securities must be held by foreign investors.",
+  "trap": "The 50% test is about who holds the shares, not where the company is incorporated."
+ },
+ {
+  "cat": "Context",
+  "title": "Non-financial Disclosures",
+  "meaning": "The fourth source, which varies more between companies than the others.",
+  "how": "For large and public corporations it generally includes sustainability reporting setting goals and achievements across environmental impact, human capital and governance; country reports, which are more sensitive to local regulation; and other non-financial reports. Eni's include the Fact Book, the sustainability report and investor presentations.",
+  "trap": "ESG indicators are data too. The course treats them as part of the analysis rather than as a separate exercise."
+ },
+ {
+  "cat": "Context",
+  "title": "What the Auditors Certify",
+  "meaning": "The auditors' role in the source list.",
+  "how": "They certify the IFRS figures.",
+  "trap": "They do not certify the adjusted ones. A company's adjusted results and its breakdown of special items are management's presentation, and they sit outside the audited perimeter."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "What Reclassification Is For",
+  "meaning": "Reorganising the financial statements to increase their readability, underline key financial results and improve comparability between different enterprises.",
+  "how": "The objects of reclassification and adjustment are the balance sheet and the income statement.",
+  "trap": "Reclassification is not compulsory and different approaches exist. Two analysts can reclassify the same statements differently and both be right, which is why the scheme has to be stated."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "The Two Columns of the Reclassified Balance Sheet",
+  "meaning": "The IAS/IFRS balance sheet puts the emphasis on current against non-current; the reclassified one puts it on investment against who finances the investment.",
+  "how": "On the left, invested capital: fixed or non-current assets, net operating working capital, provisions, and assets held for sale with their directly related liabilities. On the right, coverage: shareholders' equity plus the net financial position.",
+  "trap": "The right-hand column is debt with an explicit interest rate plus equity. Trade payables do not appear there: they have already been netted inside the working capital on the left."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Net Operating Working Capital",
+  "meaning": "The investment tied up in the operating cycle.",
+  "how": "NOWC is trade and other receivables, plus inventories including ordered work in progress, minus payables — payables including deferred tax liabilities and current tax liabilities.",
+  "trap": "Cash and cash equivalents are not in NOWC: they belong to the net financial position. And the payables are pulled across from the liabilities side, which is what makes the figure net."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Net Financial Position",
+  "meaning": "The difference between all current and non-current financial debts — bank loans, bonds and leases — and cash and cash equivalents.",
+  "how": "It is the portion of debt that cannot be repaid instantly. It is also called net financial debt.",
+  "trap": "A high NFP is not necessarily bad. If the company generates value and earns a return on the debt after interest expenses, it is growing through that debt and making the right investments."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "The Reclassified Income Statement",
+  "meaning": "A cascade that isolates the operating, financial and fiscal results.",
+  "how": "Total revenues, less raw materials and general and administrative expenses, gives VALUE ADDED. Less personnel costs gives EBITDA. Less depreciation and amortisation gives EBIT. Less net financial expenses gives earnings before tax and extraordinary items; with extraordinary gains and losses, pretax income; less tax, net income.",
+  "trap": "Value added is the value the company adds to external resources, so personnel sits below it while raw materials and services sit above. Putting labour among the external resources would break the meaning of the line."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Value Added",
+  "meaning": "The difference between revenues and cost of goods sold, also called gross profit.",
+  "how": "The purpose of reclassifying the income statement is to bring out three figures in particular: EBIT, EBITDA and value added.",
+  "trap": "It measures what the firm adds to what it buys in. The name changes between schemes but the position in the cascade does not."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "IFRS Figures Against Adjusted Figures",
+  "meaning": "A company may publish its own schemes alongside the IFRS ones.",
+  "how": "Eni's annual report contains adjusted results and a breakdown of special items, a summarised group balance sheet, and its own measures of leverage and net borrowings, stated before and after IFRS 16.",
+  "trap": "Adjusted figures are useful and unaudited. Before and after IFRS 16 are two different net borrowings for the same company, so the basis has to travel with the number."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Segmental Analysis",
+  "meaning": "The second sub-step of the first analysis of performance, alongside reclassification.",
+  "how": "It splits a company's results by market or by product, which helps with companies operating in several regions or in entirely different businesses. Netflix in 2020 segmented revenues and userbase by geography: UCAN, EMEA, LATAM and APAC. Eni reports sales by segment in its Form 20-F.",
+  "trap": "Sales are not profits. A segment can be the largest by revenue and not the largest by result, which is the whole reason for reading the segment tables."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "The Question Financial Planning Answers",
+  "meaning": "How is the invested capital covered?",
+  "how": "The question unfolds into five: how much, from whom, for how long, at what cost, and who keeps control. Each answer is a contract, with a maturity, a price and a claim on the firm.",
+  "trap": "Cost is only one of the five. A cheaper source that shortens maturity or hands over control is not automatically the better one."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Equity Against Debt, Five Ways",
+  "meaning": "The two columns of the coverage differ on more than price.",
+  "how": "Maturity: debt is fixed by contract, equity has none. Remuneration: debt pays interest promised by contract, equity is residual — dividends and value, never promised. Priority on default: debt first, equity last. Tax: interest is deductible, a tax shield, dividends are not. Governance: debt brings covenants but no vote, equity brings votes and control of the firm.",
+  "trap": "Equity costs more for two structural reasons, not because shareholders are greedy: it is last in line and it has no tax shield."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Match Maturity and Risk",
+  "meaning": "A source should last as long as the use it pays for.",
+  "how": "Fixed assets last years and are risky, so they are funded with long money: equity and long-term debt such as bank loans, bonds and leasing. Net working capital turns over in months and is self-liquidating, so it is funded with short money: credit lines and factoring.",
+  "trap": "The rule is about duration, not about cost. Funding a plant with a credit line is cheap right up to the day the line is withdrawn."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Three Ways to Raise Equity",
+  "meaning": "Retained earnings, a capital increase, and a listing.",
+  "how": "Retained earnings are the profit shareholders leave in the firm instead of taking it as dividends: no new shareholders and no issuing costs, but it grows only as fast as profits. A capital increase issues new shares for cash, with existing shareholders able to buy first under the pre-emption right, the diritto di opzione; if they do not, their stake is diluted. A listing, the IPO, offers shares on a stock exchange for the first time, opening the door to many investors but bringing a prospectus, periodic reports and the scrutiny of the market.",
+  "trap": "In Italy most firms grow on retained earnings and bank debt: listing is the exception, not the rule."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "What Every Debt Contract Answers",
+  "meaning": "Four questions, whatever the form of the debt.",
+  "how": "How much: the principal. At what price: interest, fixed or floating. Until when: maturity and repayment. What if not: guarantees and collateral. Short term, under 12 months, means credit lines, factoring and commercial paper; long term means bank loans, bonds and leasing.",
+  "trap": "The four questions are the same for a credit line and a bond. What changes is who answers them and how quickly the answer can be withdrawn."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Lines of Credit",
+  "meaning": "A ceiling, not a loan: an agreement in which a bank sets a maximum amount the firm can borrow whenever it needs, repay, and borrow again over an agreed period.",
+  "how": "The firm pays interest only on the amount actually used. On a committed line it also pays a small fee on the unused part; a committed line means the bank has promised, so the firm can draw up to the limit whenever it wants. An uncommitted line is cheaper, with no fee on the unused part, but can be withdrawn at any time.",
+  "trap": "Uncommitted lines are withdrawn often in a crisis, which is exactly when the firm needs them. The saved fee is the price of that risk."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Factoring",
+  "meaning": "Selling an invoice before it is paid: cash today instead of in 90 days.",
+  "how": "On an invoice of €100 due in 90 days, the factor advances €80 today; when the customer pays €100 to the factor, the firm receives the rest less the factor's price. Without recourse, at a price of €2, the firm ends with €98 instead of €100, but €80 of it 90 days earlier.",
+  "trap": "The cost is not only the fee. What the firm is buying is 90 days, and whether the receivable leaves the balance sheet depends on which version is used."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Factoring With and Without Recourse",
+  "meaning": "The two versions differ on who bears the loss if the customer never pays.",
+  "how": "Without recourse the factor bears the loss; the receivable leaves the firm's balance sheet on day one as a true sale, so there is no debt and receivables and DSO fall. With recourse the firm gives the advance back plus interest; the receivable never left the balance sheet, and the advance was a financial debt inside the net financial position until repaid.",
+  "trap": "The price difference reflects the risk transfer: the factor charges more without recourse precisely because it carries the loss. And only that version changes the ratios."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Bank Loans and Bonds",
+  "meaning": "The two long-term routes, one through an intermediary and one through the market.",
+  "how": "A term loan borrows a fixed amount repaid in instalments, against guarantees — what the bank can take if the firm does not pay; a syndicated loan is a very large loan shared by several banks, and in Italy a long relationship with the bank lowers the price. A bond borrows from the market instead: key elements are face value, coupon, maturity and yield, with types including fixed or floating rate, zero coupon bought at a discount, and convertible into shares.",
+  "trap": "Rating sets the price. Investment grade runs down to BBB−, below which is high yield, riskier and paying more; Eni is A− at S&P, A3 at Moody's and A− at Fitch, a safe borrower, so it pays less."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "The Eni Retail Bond",
+  "meaning": "A bond sold to families, not only to banks and funds, in January 2023.",
+  "how": "It raised €2 bn against demand of more than €10 bn, with a 4.30% coupon and maturity in February 2028. It was sustainability-linked: the interest is tied to Eni meeting its sustainability targets.",
+  "trap": "Demand exceeded the issue five times over. The interesting question the case poses is why a company would sell to families at all, when institutional money was clearly available."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Leasing and IFRS 16",
+  "meaning": "Leasing uses an asset and pays instalments instead of buying it; since 2019 IFRS 16 puts almost every lease on the balance sheet.",
+  "how": "A right-of-use asset appears on one side and a lease liability on the other. Rent disappears from operating costs and becomes depreciation plus interest, so EBITDA goes up; the lease liability is debt, so the net financial position and leverage go up.",
+  "trap": "The business has not changed and three headline figures have. This is the clearest case of the general warning: financing choices move the ratios."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Common Size Analysis",
+  "meaning": "Step 3: the comparison of data across years.",
+  "how": "It comes in two forms. Vertical common size analysis looks at the change in the percentage incidence of an item within its own document. Horizontal common size analysis looks at the variation in the value of items taking a specific year as the reference, the base case.",
+  "trap": "Vertical asks how big a share of this year an item is; horizontal asks how much it moved against another year. Both are percentages and they answer different questions."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Vertical Common Size",
+  "meaning": "Taking the values of a year's financial statements and displaying every amount as a percentage of an aggregate.",
+  "how": "In the balance sheet the base is normally total assets; in the income statement it is sales or revenues. In Eni's 2025 statements property, plant and equipment is 36.87% of total assets, and total revenues are the 100% against which every income statement line is read.",
+  "trap": "The base has to be stated. The same item can be shown against its own subtotal and against the grand total, which is why Eni's table carries both a partial and a total column."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Horizontal Common Size",
+  "meaning": "Taking a year as the base and displaying later years' amounts as a percentage of that base value.",
+  "how": "It is useful for comparing the growth or reduction of different items over time. In Eni's 2025 figures, trade and other receivables fall 26.42% against 2024 while other current financial assets rise 241.94%.",
+  "trap": "A very large percentage often means a very small base. Assets held for sale rise 1,805.95% because they started from €420 million, not because something enormous happened."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Reading a Movement Back to the Business",
+  "meaning": "A common size figure is the beginning of the explanation, not the end of it.",
+  "how": "Eni's trade receivables fall by €3,576 million; the annual report attributes €1,621 million to the Global Gas & LNG Portfolio and Power segment, €903 million to Exploration & Production and €821 million to the Plenitude business line, driven by the decline in energy commodity prices and by working capital optimisation.",
+  "trap": "The percentage tells you where to look. The notes and the segment breakdown tell you why, and step 6 is where the two are put together."
+ },
+ {
+  "cat": "Principles",
+  "title": "Benchmark Treatment and Allowed Treatment",
+  "meaning": "For several items IAS/IFRS permit two models and express a preference between them.",
+  "how": "The benchmark treatment is the suggested accounting criterion; the allowed treatment is the accepted alternative. For property, plant and equipment the cost model is the benchmark and revaluation the alternative. For investment property under IAS 40 it is the other way round: fair value is the benchmark and cost the alternative.",
+  "trap": "Benchmark does not mean compulsory, and which model is the benchmark changes from item to item. IAS 16 and IAS 40 point in opposite directions."
+ },
+ {
+  "cat": "Principles",
+  "title": "Value in Use",
+  "meaning": "A third measurement reference alongside historical cost and fair value.",
+  "how": "An item is evaluated at the discounted present value of the estimated future cash flows expected to arise from its continuing use, plus its disposal at the end of its useful life.",
+  "trap": "It is the firm's own value for the asset, not the market's. That is why the recoverable amount in an impairment test takes the higher of value in use and fair value: the asset is worth whichever of using it or selling it is better."
+ },
+ {
+  "cat": "Principles",
+  "title": "Earnings per Share",
+  "meaning": "Entities whose securities are publicly traded, or that are issuing securities to the public, must present earnings per share.",
+  "how": "Basic EPS divides the profit or loss attributable to ordinary equity holders of the parent, after all expenses including taxes, minority interests and preference dividends, by the weighted average number of ordinary shares outstanding during the period. Diluted EPS adjusts that denominator for the effects of dilutive options and convertible instruments.",
+  "trap": "The objective is comparison: between different enterprises in the same period, and between different periods for the same enterprise. Both figures must be presented, not only the flattering one."
+ },
+ {
+  "cat": "Principles",
+  "title": "Three Values of a Share",
+  "meaning": "The same share carries three different values, and the course uses all of them.",
+  "how": "Nominal value is the value at which shares are initially offered. Market value is what they trade at. Book value is equity divided by the number of shares. Capital in the balance sheet is the number of shares times the nominal unit value, less treasury shares and shareholders' receivables.",
+  "trap": "Once the firm is trading, the value of ordinary shares is usually different from the nominal value. Using the nominal value to size a company is the standard error."
+ },
+ {
+  "cat": "Principles",
+  "title": "Costs Excluded from the Balance Sheet",
+  "meaning": "Not every category of intangible may be capitalised under IAS/IFRS.",
+  "how": "Start-up, pre-opening and pre-operating costs, training costs and advertising costs are excluded from the balance sheet.",
+  "trap": "They do not disappear: they are accounted for in the income statement. The exclusion moves them between documents, with consequences for both the economic and the cash result."
  }
 ];
 
@@ -3456,5 +3924,1373 @@ const QUESTIONS = [
    "D": "Incorrect. The pool is the overhead to be allocated, defined before the split across activities, not per cost object."
   },
   "recap": "Correct. Traditional methods take the cost pool, apply one allocation basis and one coefficient, and reach the cost objects. ABC inserts activities in between: overhead is divided across activities, each activity gets its own driver and coefficient, and only then are activity costs apportioned to the cost objects."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Which Treatment for Which Relationship",
+  "question": "A parent has control over company X, significant influence over Y, and joint control over Z. Which accounting method applies to each?",
+  "options": {
+   "A": "Full consolidation for X, the equity method for Y, and a treatment depending on the type of arrangement for Z.",
+   "B": "The equity method for all three, since all are investments.",
+   "C": "Full consolidation for all three, since all are part of the group.",
+   "D": "Full consolidation for X and Z, the equity method for Y."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Control means full consolidation under IFRS 10 and IFRS 3; significant influence means the equity method under IAS 28; joint control means a treatment that depends on the type of arrangement, under IFRS 11.",
+   "B": "Incorrect. The equity method is reserved for significant influence.",
+   "C": "Incorrect. Only control triggers full consolidation.",
+   "D": "Incorrect. Joint control does not automatically mean full consolidation; the treatment depends on the arrangement."
+  },
+  "recap": "Correct. Control means full consolidation under IFRS 10 and IFRS 3; significant influence means the equity method under IAS 28; joint control means a treatment that depends on the type of arrangement, under IFRS 11."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "When 40% Is Control",
+  "question": "A parent holds 40% of a company; the remaining 60% is dispersed among many shareholders holding at most 1% each. Does the parent control it?",
+  "options": {
+   "A": "No, because control requires more than 50% of voting rights.",
+   "B": "Yes, if it is exposed to variable returns and has the ability to affect them through its power over the relevant activities.",
+   "C": "No, because control cannot be established below 50% under IFRS 10.",
+   "D": "Yes, automatically, because it is the largest shareholder."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. More than 50% is an indicator of control, not its definition.",
+   "B": "Correct. An investor controls an investee when it is exposed, or has rights, to variable returns from its involvement and has the ability to affect those returns through its power over the investee. With the rest of the capital dispersed, a 40% holding can carry that power.",
+   "C": "Incorrect. IFRS 10 defines control in substance, which is why the case of 40% against a dispersed 60% is used as the example.",
+   "D": "Incorrect. Being the largest shareholder does not by itself establish power over the relevant activities."
+  },
+  "recap": "Correct. An investor controls an investee when it is exposed, or has rights, to variable returns from its involvement and has the ability to affect those returns through its power over the investee. With the rest of the capital dispersed, a 40% holding can carry that power."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Dividends from an Associate",
+  "question": "Under the equity method, how is a distribution received from the investee treated?",
+  "options": {
+   "A": "As income in the income statement, like any dividend.",
+   "B": "It reduces the carrying amount of the investment.",
+   "C": "It is eliminated in full as an intragroup transaction.",
+   "D": "It increases the carrying amount of the investment."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Recognising it as income would count the same profit twice, since the share of the investee's profit has already been recognised.",
+   "B": "Correct. After initial recognition at cost, the carrying amount of the investment is increased or decreased by the investor's share of the investee's profit or loss after the acquisition date, and distributions received from the investee reduce it.",
+   "C": "Incorrect. Full elimination of intragroup dividends applies to consolidated subsidiaries, not to associates under the equity method.",
+   "D": "Incorrect. It is the share of profit that increases the carrying amount; the distribution takes part of it back out."
+  },
+  "recap": "Correct. After initial recognition at cost, the carrying amount of the investment is increased or decreased by the investor's share of the investee's profit or loss after the acquisition date, and distributions received from the investee reduce it."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Why Consolidate at All",
+  "question": "A parent's own balance sheet shows an equity investment of 100 in a wholly owned subsidiary. What does consolidation add?",
+  "options": {
+   "A": "Nothing: the 100 already represents the subsidiary.",
+   "B": "It restates the 100 at fair value.",
+   "C": "It shows the composition of the group's assets and liabilities, which the single line cannot: the same 100 could be plant and inventories, or nothing but cash.",
+   "D": "It removes the subsidiary from the group's accounts."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The line carries the value but not the composition, and the composition is what the reader needs.",
+   "B": "Incorrect. Fair value adjustments arise on acquisition; they are not the purpose of consolidating.",
+   "C": "Correct. Group accounting is needed to provide more reliable information about the composition of the assets and liabilities of the group. A subsidiary holding plant of 150 and inventories of 100 against debt of 150, and one holding cash of 250 against debt of 150, appear identically in the parent's accounts.",
+   "D": "Incorrect. Consolidation brings the subsidiary in, item by item."
+  },
+  "recap": "Correct. Group accounting is needed to provide more reliable information about the composition of the assets and liabilities of the group. A subsidiary holding plant of 150 and inventories of 100 against debt of 150, and one holding cash of 250 against debt of 150, appear identically in the parent's accounts."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "The Order of Operations",
+  "question": "Which sequence describes consolidation?",
+  "options": {
+   "A": "Combine, offset the investment against the subsidiary's equity, eliminate intragroup transactions — after aligning closing period, accounting policies and reporting currency.",
+   "B": "Eliminate intragroup transactions, then combine, then translate currencies.",
+   "C": "Offset first, then combine what is left.",
+   "D": "Combine and publish; adjustments are made only if the auditor requires them."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Pre-consolidation adjustments come first — closing period, accounting policies, reporting currency — and then the process combines like items, offsets the carrying amount of the investment against the parent's portion of the subsidiary's equity, and eliminates intragroup transactions in full.",
+   "B": "Incorrect. There is nothing to eliminate before the statements have been combined, and translation belongs to the adjustments that precede everything.",
+   "C": "Incorrect. The offset removes a double count created by the combination, so it cannot come first.",
+   "D": "Incorrect. The adjustments are part of the procedure IFRS 10 sets out, not an audit remedy."
+  },
+  "recap": "Correct. Pre-consolidation adjustments come first — closing period, accounting policies, reporting currency — and then the process combines like items, offsets the carrying amount of the investment against the parent's portion of the subsidiary's equity, and eliminates intragroup transactions in full."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Different Closing Dates",
+  "question": "A subsidiary closes its year on 30 September and the parent on 31 December. What does consolidation require?",
+  "options": {
+   "A": "The subsidiary's figures are used as they are, since three months is within tolerance.",
+   "B": "The subsidiary prepares interim statements at the parent's closing date; failing that, the gap is allowed if it stays within three months, the year length and the gap remain constant over time, and significant transactions between the two dates are adjusted for.",
+   "C": "The parent must move its own closing date to match the subsidiary's.",
+   "D": "The subsidiary is excluded from consolidation."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The three-month allowance carries two further conditions and is the fallback, not the first option.",
+   "B": "Correct. When the closing date of a subsidiary differs from the parent's, the subsidiary prepares interim financial statements at the parent's closing date. Where that is not feasible, different dates are allowed provided the difference does not exceed three months, the duration of the financial year and the difference remain constant over time, and adjustments are made for significant transactions and events occurring between the two dates.",
+   "C": "Incorrect. The alignment is asked of the subsidiary, not the parent.",
+   "D": "Incorrect. A controlled entity is consolidated; a different closing date is an adjustment, not an exemption."
+  },
+  "recap": "Correct. When the closing date of a subsidiary differs from the parent's, the subsidiary prepares interim financial statements at the parent's closing date. Where that is not feasible, different dates are allowed provided the difference does not exceed three months, the duration of the financial year and the difference remain constant over time, and adjustments are made for significant transactions and events occurring between the two dates."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Where the Translation Difference Goes",
+  "question": "Income statement items are translated at the transaction or average rate and balance sheet items at the closing rate. What follows, and how is it treated?",
+  "options": {
+   "A": "A translation difference arises and is recognised in a special owners' equity reserve, the translation reserve.",
+   "B": "A translation difference arises and is recognised as a financial expense.",
+   "C": "No difference arises, because the two rates are reconciled first.",
+   "D": "A difference arises and is added to goodwill."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. If the rate used for translating income statement values does not coincide with the one used for the balance sheet, a translation difference arises and is classified in a special owners' equity reserve named the translation reserve.",
+   "B": "Incorrect. It is not a result of the period: it is an equity item.",
+   "C": "Incorrect. The two rates are deliberately different, which is what creates the difference.",
+   "D": "Incorrect. Goodwill arises on acquisition from the price paid against fair values, not from translation."
+  },
+  "recap": "Correct. If the rate used for translating income statement values does not coincide with the one used for the balance sheet, a translation difference arises and is classified in a special owners' equity reserve named the translation reserve."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "How Much of a Subsidiary Is Combined",
+  "question": "A parent owns 85% of a subsidiary. What proportion of the subsidiary's assets and liabilities is combined in step 1?",
+  "options": {
+   "A": "85%, matching the shareholding.",
+   "B": "100%.",
+   "C": "85% of assets and 100% of liabilities.",
+   "D": "None until the offset has been calculated."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Proportional combination is not what full consolidation does.",
+   "B": "Correct. The parent consolidates 100% of the subsidiary's net assets and results, and then reports non-controlling interests of 15%. Combine everything, then split.",
+   "C": "Incorrect. Both sides are combined in full.",
+   "D": "Incorrect. Combination is the first step and the offset follows it."
+  },
+  "recap": "Correct. The parent consolidates 100% of the subsidiary's net assets and results, and then reports non-controlling interests of 15%. Combine everything, then split."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Eliminating a Partly Settled Intragroup Service",
+  "question": "A holds 80% of B. A supplied services to B for 500, recorded as revenue by A and cost by B. At 31 December the transaction is settled only in part, leaving intercompany receivables and payables of 300. What is eliminated?",
+  "options": {
+   "A": "400 of revenue and cost, and 240 of receivables and payables, being the 80% share.",
+   "B": "500 of revenue against 500 of cost, and 300 of receivables against 300 of payables.",
+   "C": "Only the unsettled 300, since the settled part has already left the group.",
+   "D": "Nothing, because the two entries already cancel in the combined totals."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. IFRS 10 requires intragroup transactions to be eliminated in full, not in proportion to the shareholding.",
+   "B": "Correct. Two adjustments follow: eliminate the revenue recorded by A of 500 against the cost recorded by B of 500, and eliminate A's receivable of 300 against B's payable of 300. The minority is handled through non-controlling interests, not by eliminating a proportion.",
+   "C": "Incorrect. The settled part still passed between two group companies and never reached a third party.",
+   "D": "Incorrect. Revenue and cost do not cancel on their own: both would inflate the consolidated income statement unless removed."
+  },
+  "recap": "Correct. Two adjustments follow: eliminate the revenue recorded by A of 500 against the cost recorded by B of 500, and eliminate A's receivable of 300 against B's payable of 300. The minority is handled through non-controlling interests, not by eliminating a proportion."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Fair Value and Deferred Tax on Consolidation",
+  "question": "On acquisition, a subsidiary's plant is worth 1,000 more than its book value and its provisions are worth 200 more. At a 50% tax rate, what is recognised?",
+  "options": {
+   "A": "A deferred tax liability of 500 on the plant surplus and a deferred tax asset of 100 on the provisions surplus.",
+   "B": "A deferred tax asset of 500 on the plant and a deferred tax liability of 100 on the provisions.",
+   "C": "A single deferred tax liability of 600 on the total surplus.",
+   "D": "No deferred tax, since the surpluses arise only on consolidation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. All the subsidiary's assets and liabilities are recognised at fair value when control is acquired, and the differences between book and fair value are temporary differences. The asset surplus of 1,000 gives a deferred tax liability of 1,000 × 0.5 = 500, and the liability surplus of 200 gives a deferred tax asset of 200 × 0.5 = 100.",
+   "B": "Incorrect. The directions are inverted: an asset worth more than its tax base creates a future tax obligation, hence a liability.",
+   "C": "Incorrect. The two surpluses run in opposite directions and cannot be netted into one liability.",
+   "D": "Incorrect. The tax effects on the surpluses must be considered; that is the whole point of the fair value variation."
+  },
+  "recap": "Correct. All the subsidiary's assets and liabilities are recognised at fair value when control is acquired, and the differences between book and fair value are temporary differences. The asset surplus of 1,000 gives a deferred tax liability of 1,000 × 0.5 = 500, and the liability surplus of 200 gives a deferred tax asset of 200 × 0.5 = 100."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "What Goodwill Is on Consolidation",
+  "question": "How is goodwill defined when a parent consolidates a subsidiary?",
+  "options": {
+   "A": "The excess of the subsidiary's book equity over the price paid.",
+   "B": "The difference between the cost of acquisition and the parent's interest in the fair value of the subsidiary's net assets and liabilities at the acquisition date.",
+   "C": "The subsidiary's retained earnings at the acquisition date.",
+   "D": "The fair value surplus on identifiable assets."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That describes a negative difference, which is treated differently.",
+   "B": "Correct. Goodwill represents the future economic benefits arising from assets acquired in a business combination that are not individually identified and separately recognised, measured as the difference between the cost of acquisition and the parent's interest in the fair value of the subsidiary's net assets and liabilities at the acquisition date.",
+   "C": "Incorrect. Retained earnings are part of the equity that the investment is offset against.",
+   "D": "Incorrect. Surpluses on identifiable assets are recognised on those assets; goodwill is what remains after they have been."
+  },
+  "recap": "Correct. Goodwill represents the future economic benefits arising from assets acquired in a business combination that are not individually identified and separately recognised, measured as the difference between the cost of acquisition and the parent's interest in the fair value of the subsidiary's net assets and liabilities at the acquisition date."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "A Negative Difference",
+  "question": "The price paid is lower than the fair value of the equity attributable to the parent. What happens?",
+  "options": {
+   "A": "Negative goodwill is recognised as an asset with a negative sign.",
+   "B": "The difference is deducted from the subsidiary's equity.",
+   "C": "The estimates of the fair values of the subsidiary's assets and liabilities are reviewed; if the negative difference still exists, it is allocated to the income statement as a gain.",
+   "D": "The acquisition is restated at the fair value of the net assets."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. There is no negative asset; the outcome is a gain, not a balance sheet item.",
+   "B": "Incorrect. The subsidiary's equity is offset against the investment, not adjusted for the bargain.",
+   "C": "Correct. If the difference is negative, the estimates of the fair values of the subsidiary's assets and liabilities should be reviewed first; the negative difference, if it still exists, must be allocated to the income statement as a gain.",
+   "D": "Incorrect. The cost of the acquisition is what it was; the review is of the fair values, not of the price."
+  },
+  "recap": "Correct. If the difference is negative, the estimates of the fair values of the subsidiary's assets and liabilities should be reviewed first; the negative difference, if it still exists, must be allocated to the income statement as a gain."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Computing Goodwill with Surpluses",
+  "question": "Mickey buys 100% of Mouse for 2,700. Mouse's equity is 1,500 of common stock and 500 of retained earnings. Plant is worth 1,000 more than book and provisions 200 more, at a 50% tax rate. What goodwill is recognised?",
+  "options": {
+   "A": "700.",
+   "B": "300.",
+   "C": "1,000.",
+   "D": "Nil."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. 700 is the price less book equity alone, before the fair value surpluses and their tax effects are recognised.",
+   "B": "Correct. Goodwill is 2,700 − 2,000 of book equity − 1,000 of plant surplus + 500 of deferred tax liability + 200 of provisions surplus − 100 of deferred tax asset = 300.",
+   "C": "Incorrect. 1,000 is the plant surplus, which is recognised on the plant itself rather than as goodwill.",
+   "D": "Incorrect. The price exceeds the fair value of the identifiable net assets, so a positive residual remains."
+  },
+  "recap": "Correct. Goodwill is 2,700 − 2,000 of book equity − 1,000 of plant surplus + 500 of deferred tax liability + 200 of provisions surplus − 100 of deferred tax asset = 300."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Full Goodwill or Proportionate Share",
+  "question": "STAR buys 60% of LIGHT for 300; the fair value of the non-controlling interest is 200, LIGHT's book equity is 190, and net surpluses after 40% tax are 180. What goodwill arises under each measurement choice?",
+  "options": {
+   "A": "130 under the full goodwill method and 78 under the proportionate method.",
+   "B": "78 under the full goodwill method and 130 under the proportionate method.",
+   "C": "130 under both, since goodwill does not depend on the choice.",
+   "D": "110 under the full goodwill method and 66 under the proportionate method."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Under the full goodwill method the total value is 300 + 200 = 500, less book equity of 190 and net surpluses of 180, giving 130. Under the proportionate method every term is scaled to 60%: 300 − (190 × 0.6 = 114) − (180 × 0.6 = 108) = 78, with the minority at 190 × 0.4 = 76.",
+   "B": "Incorrect. The figures are inverted: the full method captures the goodwill of the whole entity and is therefore larger.",
+   "C": "Incorrect. The choice is exactly what changes the goodwill recognised.",
+   "D": "Incorrect. Neither figure follows from the data; the surpluses are already net of the 40% tax."
+  },
+  "recap": "Correct. Under the full goodwill method the total value is 300 + 200 = 500, less book equity of 190 and net surpluses of 180, giving 130. Under the proportionate method every term is scaled to 60%: 300 − (190 × 0.6 = 114) − (180 × 0.6 = 108) = 78, with the minority at 190 × 0.4 = 76."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Why the Minority Is Added in the Formula",
+  "question": "In the goodwill calculation — fair value of consideration transferred, plus fair value of the non-controlling interest, less fair value of net assets at acquisition — why is the second line added?",
+  "options": {
+   "A": "Because the minority has also paid for the acquisition.",
+   "B": "Because the calculation measures the premium over the fair value of the net assets for the whole entity, not only for the parent's share.",
+   "C": "Because non-controlling interests are a liability of the group.",
+   "D": "Because it offsets the deferred tax on the surpluses."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The minority pays nothing in the transaction; its interest is measured, not purchased.",
+   "B": "Correct. Goodwill at acquisition is the fair value of the consideration transferred, plus the fair value of the non-controlling interest, less the fair value of the net assets at acquisition. Adding the minority makes the numerator cover 100% of the entity, which is what the full goodwill method recognises.",
+   "C": "Incorrect. Non-controlling interests sit within equity, not among liabilities.",
+   "D": "Incorrect. Deferred tax is recognised separately, on the surpluses themselves."
+  },
+  "recap": "Correct. Goodwill at acquisition is the fair value of the consideration transferred, plus the fair value of the non-controlling interest, less the fair value of the net assets at acquisition. Adding the minority makes the numerator cover 100% of the entity, which is what the full goodwill method recognises."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "The Six Steps in Order",
+  "question": "Which sequence is the financial analysis process as the course sets it out?",
+  "options": {
+   "A": "Reclassify, common size, indicators, benchmark, context, interpret.",
+   "B": "Understanding the context; first analysis of financial performances; comparison over time with common size; analysis with indicators; benchmarking with other companies; interpretation and discussion.",
+   "C": "Context, indicators, benchmark, reclassify, common size, interpret.",
+   "D": "Orientation, diagnosis, decision-making, implementation, control, review."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The context comes first: the scheme cannot be chosen before the business is understood.",
+   "B": "Correct. Those are the six steps, and each earns the next — a figure needs a scheme, a year needs a scale, a movement needs a perspective, a ratio needs a peer, and a comparison needs a story.",
+   "C": "Incorrect. Indicators and benchmarking come after the statements have been reclassified and put on a common scale.",
+   "D": "Incorrect. That is a strategy formulation process, from a different course."
+  },
+  "recap": "Correct. Those are the six steps, and each earns the next — a figure needs a scheme, a year needs a scale, a movement needs a perspective, a ratio needs a peer, and a comparison needs a story."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "What the Path Is For",
+  "question": "The six steps are drawn around a goal at the centre. What is it, and why is the path needed?",
+  "options": {
+   "A": "Net profit, which is read directly from the income statement.",
+   "B": "Market capitalisation, which is read from the stock exchange.",
+   "C": "Enterprise value, stated as PV = Σ NCFt / (1+k)^t, which is not observable and so has to be built up from published statements.",
+   "D": "EBITDA, which the reclassification produces."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Net profit is one figure the reclassification produces, not the goal of the path.",
+   "B": "Incorrect. Market capitalisation is one of the market data inputs in step 1.",
+   "C": "Correct. The goal at the centre is the enterprise value, the discounted sum of net cash flows, and the diagram marks it as not observable. The steps build the understanding its inputs require.",
+   "D": "Incorrect. EBITDA is an intermediate result of step 2."
+  },
+  "recap": "Correct. The goal at the centre is the enterprise value, the discounted sum of net cash flows, and the diagram marks it as not observable. The steps build the understanding its inputs require."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Where Financial Planning Belongs",
+  "question": "Financial planning is presented alongside the six steps. How does it relate to them?",
+  "options": {
+   "A": "It is a seventh step, carried out after interpretation.",
+   "B": "It is a zoom on step 2, reading the coverage column of the reclassified balance sheet.",
+   "C": "It replaces step 4, the analysis with indicators.",
+   "D": "It precedes step 1, since funding is decided before any analysis."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The material states explicitly that it is not a seventh step.",
+   "B": "Correct. Step 2 splits the balance sheet into invested capital and its coverage; financial planning reads the second column and answers how the invested capital is covered.",
+   "C": "Incorrect. Indicators remain step 4, and the path returns to them after the zoom.",
+   "D": "Incorrect. It is a reading of the reclassified statements, so it follows them."
+  },
+  "recap": "Correct. Step 2 splits the balance sheet into invested capital and its coverage; financial planning reads the second column and answers how the invested capital is covered."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Reading the Delta Column",
+  "question": "Eni's ROE moves from 4.97% in 2024 to 5.22% in 2025 and the delta column shows 5.19%. What does that figure mean?",
+  "options": {
+   "A": "The relative change, 5.22/4.97 − 1.",
+   "B": "The change in percentage points, 5.22 − 4.97.",
+   "C": "The average of the two years.",
+   "D": "The growth of net profit over the period."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The delta column is a relative change: 5.22%/4.97% − 1 = 5.19%. In percentage points the move is only 0.25.",
+   "B": "Incorrect. The difference in points is 0.25, not 5.19.",
+   "C": "Incorrect. The average of the two would be around 5.1%, and an average is not a delta.",
+   "D": "Incorrect. Net profit actually fell slightly over the same period, from €2,764 million to €2,758 million."
+  },
+  "recap": "Correct. The delta column is a relative change: 5.22%/4.97% − 1 = 5.19%. In percentage points the move is only 0.25."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Reading the Numbers Themselves",
+  "question": "In Eni's statements a line reads € 10.193 and a ratio reads 19,82%. How should these be read?",
+  "options": {
+   "A": "€10.193 million and 19.82 basis points.",
+   "B": "€10,193 million, about €10.2 billion, and 19.82%.",
+   "C": "€10.193 billion and 1,982%.",
+   "D": "€10 million and 19 point 82 million."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The first reading is off by three orders of magnitude, and the second confuses percent with basis points.",
+   "B": "Correct. The figures use Italian notation: the dot separates thousands and the comma separates decimals, so € 10.193 million means €10,193 million and 19,82% means 19.82%.",
+   "C": "Incorrect. The unit is already millions, and the comma is a decimal separator.",
+   "D": "Incorrect. The dot is a thousands separator, not a decimal point."
+  },
+  "recap": "Correct. The figures use Italian notation: the dot separates thousands and the comma separates decimals, so € 10.193 million means €10,193 million and 19,82% means 19.82%."
+ },
+ {
+  "cat": "Context",
+  "title": "The Four Public Sources",
+  "question": "Step 1 selects sources of data. Which four kinds does the course list?",
+  "options": {
+   "A": "Industry and economic data, market data, financial disclosures, non-financial disclosures.",
+   "B": "Balance sheet, income statement, cash flow statement, notes.",
+   "C": "Competitors, customers, suppliers, regulators.",
+   "D": "Annual report, interim report, press releases, analyst notes."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The four kinds of public source are industry and economic data, market data, financial disclosures and non-financial disclosures, and the method is triangulation between them.",
+   "B": "Incorrect. Those are documents inside the financial disclosures, one of the four sources.",
+   "C": "Incorrect. Those are actors in the external environment, from a strategy framework rather than this one.",
+   "D": "Incorrect. Those are all items within the financial disclosures source."
+  },
+  "recap": "Correct. The four kinds of public source are industry and economic data, market data, financial disclosures and non-financial disclosures, and the method is triangulation between them."
+ },
+ {
+  "cat": "Context",
+  "title": "Why Eni Publishes Twice",
+  "question": "Eni publishes an annual report and also a Form 20-F, with the same figures for the same year. Why?",
+  "options": {
+   "A": "Because IFRS requires two versions of every annual report.",
+   "B": "Because the 20-F addresses US investors and the SEC, is personally certified by the CEO and CFO under US securities law, and follows a fixed structure of numbered items common to every foreign issuer listed in the US.",
+   "C": "Because the 20-F restates the figures under US GAAP.",
+   "D": "Because the 20-F covers only the second half of the year."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. No such requirement exists; the second report follows from the US listing.",
+   "B": "Correct. Eni's shares trade on the NYSE under the ticker E and its 2025 Form 20-F was filed on 23 March 2026. The reader is different, the writer answers for it personally in court, and the numbered items sit in the same place for every foreign private issuer.",
+   "C": "Incorrect. The figures are the same; Eni reports under IAS/IFRS in both.",
+   "D": "Incorrect. It is an annual report covering the same year."
+  },
+  "recap": "Correct. Eni's shares trade on the NYSE under the ticker E and its 2025 Form 20-F was filed on 23 March 2026. The reader is different, the writer answers for it personally in court, and the numbered items sit in the same place for every foreign private issuer."
+ },
+ {
+  "cat": "Context",
+  "title": "Where to Start in a Form 20-F",
+  "question": "Which three places does the course send you to in a Form 20-F, and where should you start?",
+  "options": {
+   "A": "Item 3.D risk factors, Item 5 the operating and financial review, and Part III the financial statements and notes — starting from Item 3.D.",
+   "B": "The cover page, the glossary and the exhibits — starting from the cover.",
+   "C": "Part I, Part II and Part III in order.",
+   "D": "The shareholder letter, the fact book and the sustainability report."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Item 3.D says what could break the numbers and by how much; Item 5 says why the numbers moved this year in management's words; Part III holds the statements and notes with the auditor's report under PCAOB standards. The advice is to start from Item 3.D, where Eni's first risk factor is exposure to changing commodity prices and margins.",
+   "B": "Incorrect. Those are preliminary sections, useful but not where the analysis begins.",
+   "C": "Incorrect. Reading in order is not the method proposed; three specific places are named.",
+   "D": "Incorrect. Those are documents outside the 20-F."
+  },
+  "recap": "Correct. Item 3.D says what could break the numbers and by how much; Item 5 says why the numbers moved this year in management's words; Part III holds the statements and notes with the auditor's report under PCAOB standards. The advice is to start from Item 3.D, where Eni's first risk factor is exposure to changing commodity prices and margins."
+ },
+ {
+  "cat": "Context",
+  "title": "What the Auditors Cover",
+  "question": "Eni publishes IFRS results and adjusted results. What do the auditors certify?",
+  "options": {
+   "A": "Both, since they appear in the same document.",
+   "B": "The adjusted figures, which are the ones management stands behind.",
+   "C": "The IFRS figures, not the adjusted ones.",
+   "D": "Neither: auditors certify only the cash flow statement."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Appearing in the same document does not bring a figure inside the audited perimeter.",
+   "B": "Incorrect. The adjusted results are management's own presentation, with a breakdown of special items.",
+   "C": "Correct. The auditors certify the IFRS figures, not the adjusted ones, which is why the analysis has to note which basis a figure comes from.",
+   "D": "Incorrect. The audit covers the consolidated financial statements as a whole."
+  },
+  "recap": "Correct. The auditors certify the IFRS figures, not the adjusted ones, which is why the analysis has to note which basis a figure comes from."
+ },
+ {
+  "cat": "Context",
+  "title": "The Foreign Private Issuer Test",
+  "question": "What qualifies a company for foreign private issuer status in the US, allowing it to file a Form 20-F?",
+  "options": {
+   "A": "That it is incorporated outside the United States.",
+   "B": "That more than 50% of its voting securities are held by foreign investors.",
+   "C": "That it reports under IAS/IFRS rather than US GAAP.",
+   "D": "That its shares are listed on more than one exchange."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The test is about who holds the shares, not where the company is registered.",
+   "B": "Correct. To be eligible for the status of foreign company in the US, more than 50% of voting securities must be held by foreign investors. The Form 20-F is then required of foreign private issuers with listed equity shares on US exchanges.",
+   "C": "Incorrect. The accounting standard used is a separate matter.",
+   "D": "Incorrect. A dual listing is neither necessary nor sufficient."
+  },
+  "recap": "Correct. To be eligible for the status of foreign company in the US, more than 50% of voting securities must be held by foreign investors. The Form 20-F is then required of foreign private issuers with listed equity shares on US exchanges."
+ },
+ {
+  "cat": "Context",
+  "title": "Context Before Conclusions",
+  "question": "Eni's results weaken in a year in which the oil price stabilises downwards after a post-pandemic surge and a period of geopolitical tension. What does step 1 contribute here?",
+  "options": {
+   "A": "It identifies the key external factor driving the business, so the movement is not attributed to management before the environment has been accounted for.",
+   "B": "It computes the ratios that quantify the decline.",
+   "C": "It compares Eni with its competitors.",
+   "D": "It reclassifies the income statement to isolate the operating result."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Industry and economic data identify what drives the business — for Eni, the oil price, through lockdowns, the post-pandemic recovery, conflicts and geopolitical tensions, and the current downward stabilisation reflected in the results.",
+   "B": "Incorrect. Ratios are step 4.",
+   "C": "Incorrect. Comparison with peers is step 5, benchmarking.",
+   "D": "Incorrect. Reclassification is step 2."
+  },
+  "recap": "Correct. Industry and economic data identify what drives the business — for Eni, the oil price, through lockdowns, the post-pandemic recovery, conflicts and geopolitical tensions, and the current downward stabilisation reflected in the results."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "What Reclassification Changes",
+  "question": "What does reclassification aim to achieve, and is it compulsory?",
+  "options": {
+   "A": "To increase readability, underline key financial results and improve comparability between enterprises; it is not compulsory and different approaches exist.",
+   "B": "To correct errors in the published statements; it is compulsory for listed companies.",
+   "C": "To restate the statements under a different accounting standard; it is required by IFRS.",
+   "D": "To convert the statements into the reporting currency; it is required on consolidation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Reclassification reorganises the financial statements to increase readability, underline key financial results and improve comparability between different enterprises. It is not compulsory and different approaches exist, which is why the scheme used has to be stated.",
+   "B": "Incorrect. It does not correct anything: the published figures are the input.",
+   "C": "Incorrect. No change of standard is involved.",
+   "D": "Incorrect. Currency translation is a pre-consolidation adjustment, a different matter."
+  },
+  "recap": "Correct. Reclassification reorganises the financial statements to increase readability, underline key financial results and improve comparability between different enterprises. It is not compulsory and different approaches exist, which is why the scheme used has to be stated."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "The Two Columns",
+  "question": "What does the reclassified balance sheet emphasise, and what sits in each column?",
+  "options": {
+   "A": "Current against non-current, as in the IAS/IFRS scheme.",
+   "B": "Investment against who finances it: invested capital — fixed assets, net operating working capital, provisions and assets held for sale — covered by shareholders' equity plus the net financial position.",
+   "C": "Operating against financial items, with tax in a third column.",
+   "D": "Assets against liabilities, with equity excluded."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Current against non-current is the emphasis of the IAS/IFRS scheme that reclassification moves away from.",
+   "B": "Correct. The reclassified balance sheet puts the emphasis on investments against who is financing them: invested capital on one side, coverage — equity plus net financial position — on the other.",
+   "C": "Incorrect. That structure belongs to the reclassified income statement.",
+   "D": "Incorrect. Equity is the first item of the coverage column."
+  },
+  "recap": "Correct. The reclassified balance sheet puts the emphasis on investments against who is financing them: invested capital on one side, coverage — equity plus net financial position — on the other."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "What Goes into NOWC",
+  "question": "Which items make up net operating working capital?",
+  "options": {
+   "A": "Trade and other receivables, plus inventories including ordered work in progress, plus cash.",
+   "B": "Trade and other receivables, plus inventories including ordered work in progress, minus payables including deferred tax liabilities and current tax liabilities.",
+   "C": "Current assets minus current liabilities, including cash and short-term debt.",
+   "D": "Inventories minus payables only."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Cash and cash equivalents are not considered in NOWC; they belong to the net financial position.",
+   "B": "Correct. NOWC takes trade and other receivables plus inventories, including ordered work in progress, and deducts payables, which include deferred tax liabilities and current tax liabilities. The payables are taken across from the liabilities side, which is what makes the figure net.",
+   "C": "Incorrect. Including cash and short-term financial debt would mix the operating cycle with the financing decision.",
+   "D": "Incorrect. Receivables are part of it too."
+  },
+  "recap": "Correct. NOWC takes trade and other receivables plus inventories, including ordered work in progress, and deducts payables, which include deferred tax liabilities and current tax liabilities. The payables are taken across from the liabilities side, which is what makes the figure net."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "What the Net Financial Position Is",
+  "question": "How is the net financial position computed, and what does a high value mean?",
+  "options": {
+   "A": "All current and non-current financial debts less cash and cash equivalents; a high value is not necessarily bad, if the company earns a return on the debt after interest.",
+   "B": "Total liabilities less total assets; a high value always signals distress.",
+   "C": "Trade payables less trade receivables; a high value means slow collection.",
+   "D": "Equity less fixed assets; a high value means over-capitalisation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The NFP, or net financial debt, is the difference between all current and non-current financial liabilities — bank loans, bonds and leases — and cash and cash equivalents. It is the portion of debt that cannot be repaid instantly. Having a high NFP is not necessarily a bad thing: if the company generates value and earns a return on the debt even after interest expenses, it is growing through that debt.",
+   "B": "Incorrect. That would be negative equity, a different concept.",
+   "C": "Incorrect. Trade items belong to the working capital, not the financial position.",
+   "D": "Incorrect. That describes a coverage margin, not the NFP."
+  },
+  "recap": "Correct. The NFP, or net financial debt, is the difference between all current and non-current financial liabilities — bank loans, bonds and leases — and cash and cash equivalents. It is the portion of debt that cannot be repaid instantly. Having a high NFP is not necessarily a bad thing: if the company generates value and earns a return on the debt even after interest expenses, it is growing through that debt."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Where Personnel Costs Sit",
+  "question": "In the reclassified income statement, why do personnel costs fall below value added rather than above it?",
+  "options": {
+   "A": "Because they are a financial rather than an operating cost.",
+   "B": "Because value added measures what the company adds to external resources, and labour is internal.",
+   "C": "Because personnel costs are not deductible.",
+   "D": "Because they are treated as an extraordinary item."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Personnel costs are firmly in the operating block, above EBITDA.",
+   "B": "Correct. Value added is total revenues less raw materials and general and administrative expenses: the value the company adds to external resources. Personnel costs are deducted next, giving EBITDA, because labour is the firm's own contribution rather than something bought in.",
+   "C": "Incorrect. Deductibility has no bearing on the position in the cascade.",
+   "D": "Incorrect. Extraordinary items sit far below, after net financial expenses."
+  },
+  "recap": "Correct. Value added is total revenues less raw materials and general and administrative expenses: the value the company adds to external resources. Personnel costs are deducted next, giving EBITDA, because labour is the firm's own contribution rather than something bought in."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "The Cascade to Net Income",
+  "question": "In the reclassified income statement, which subtraction turns EBITDA into EBIT?",
+  "options": {
+   "A": "Personnel costs.",
+   "B": "Net financial expenses.",
+   "C": "Depreciation and amortisation.",
+   "D": "Income tax."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Personnel costs are what turn value added into EBITDA.",
+   "B": "Incorrect. Net financial expenses take EBIT down to earnings before tax and extraordinary items.",
+   "C": "Correct. Total revenues less raw materials and G&A gives value added; less personnel costs gives EBITDA; less depreciation and amortisation gives EBIT; less net financial expenses gives earnings before tax and extraordinary items; then extraordinary items, then tax, give net income.",
+   "D": "Incorrect. Tax is the last deduction, turning pretax income into net income."
+  },
+  "recap": "Correct. Total revenues less raw materials and G&A gives value added; less personnel costs gives EBITDA; less depreciation and amortisation gives EBIT; less net financial expenses gives earnings before tax and extraordinary items; then extraordinary items, then tax, give net income."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Reading a Segment Table",
+  "question": "What does segmental analysis add, and what warning comes with it?",
+  "options": {
+   "A": "It splits results by market or product; the warning is that sales are not profits, so the largest segment by revenue need not be the largest by result.",
+   "B": "It splits results by accounting standard; the warning is that IFRS and US GAAP are not comparable.",
+   "C": "It splits results by year; the warning is that percentages need a base.",
+   "D": "It splits results by shareholder; the warning is that minorities distort the totals."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Segmental analysis splits the results of a company by market or by product, which helps with companies operating in several regions or in different businesses — Netflix by UCAN, EMEA, LATAM and APAC, Eni by business segment. And sales are not profits.",
+   "B": "Incorrect. Segments are geographies or businesses, not standards.",
+   "C": "Incorrect. Splitting by year is the common size analysis of step 3.",
+   "D": "Incorrect. Shareholder structure is not a segmentation dimension here."
+  },
+  "recap": "Correct. Segmental analysis splits the results of a company by market or by product, which helps with companies operating in several regions or in different businesses — Netflix by UCAN, EMEA, LATAM and APAC, Eni by business segment. And sales are not profits."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "The Five Questions of Coverage",
+  "question": "Financial planning asks how the invested capital is covered. Into which questions does that unfold?",
+  "options": {
+   "A": "How much, from whom, for how long, at what cost, and who keeps control.",
+   "B": "How much, how fast, how safe, how liquid, how profitable.",
+   "C": "Which assets, which liabilities, which equity, which reserves, which provisions.",
+   "D": "Who decides, who audits, who reports, who pays, who owns."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The single question unfolds into how much, from whom, for how long, at what cost and who keeps control. Each answer is a contract, with a maturity, a price and a claim on the firm.",
+   "B": "Incorrect. Those are properties of a source but not the five questions posed.",
+   "C": "Incorrect. Those are balance sheet categories, not the questions financing choices answer.",
+   "D": "Incorrect. Governance is one of the five dimensions, not the whole list."
+  },
+  "recap": "Correct. The single question unfolds into how much, from whom, for how long, at what cost and who keeps control. Each answer is a contract, with a maturity, a price and a claim on the firm."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Why Equity Costs More Than Debt",
+  "question": "Equity is a more expensive source than debt. Which two structural reasons does the course give?",
+  "options": {
+   "A": "Shareholders demand higher returns and issuing shares is administratively costly.",
+   "B": "Equity is last in line on default, and it has no tax shield since dividends are not deductible.",
+   "C": "Equity has a fixed maturity and equity holders have no vote.",
+   "D": "Equity is always raised on public markets, which charge more."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Issuing costs exist but are not the structural reason; retained earnings have none and are still equity.",
+   "B": "Correct. On default, debt is paid first and equity last. On tax, interest is deductible and creates a tax shield, while dividends are not deductible. Equity also has no fixed maturity and its remuneration is residual, never promised.",
+   "C": "Incorrect. Both are inverted: it is debt that has a maturity fixed by contract, and equity that carries the votes.",
+   "D": "Incorrect. Retained earnings and private capital increases are equity raised outside public markets."
+  },
+  "recap": "Correct. On default, debt is paid first and equity last. On tax, interest is deductible and creates a tax shield, while dividends are not deductible. Equity also has no fixed maturity and its remuneration is residual, never promised."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Matching Uses and Sources",
+  "question": "A firm funds a new plant with an uncommitted credit line. What rule does this break, and why does it matter?",
+  "options": {
+   "A": "None: the credit line is the cheapest source available.",
+   "B": "Match maturity and risk: fixed assets last years and are risky, so they need long money — equity and long-term debt — while short money suits self-liquidating working capital. An uncommitted line can be withdrawn at any time, often in a crisis.",
+   "C": "The tax shield rule, since interest on a credit line is not deductible.",
+   "D": "The pre-emption rule, which requires shareholders to be offered the funding first."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Cheapness is not the criterion; the rule is about duration.",
+   "B": "Correct. A source should last as long as the use it pays for. Fixed assets are years-long and risky and belong with long funds; net working capital turns over in months and is self-liquidating, so short funds suit it. An uncommitted line carries no fee on the unused part precisely because the bank can withdraw it.",
+   "C": "Incorrect. Interest is deductible whatever the form of the debt.",
+   "D": "Incorrect. Pre-emption concerns a capital increase, not bank funding."
+  },
+  "recap": "Correct. A source should last as long as the use it pays for. Fixed assets are years-long and risky and belong with long funds; net working capital turns over in months and is self-liquidating, so short funds suit it. An uncommitted line carries no fee on the unused part precisely because the bank can withdraw it."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "The Pre-emption Right",
+  "question": "In a capital increase, what is the pre-emption right — the diritto di opzione — and what happens if a shareholder does not use it?",
+  "options": {
+   "A": "The right of existing shareholders to buy the new shares first; if they do not, their stake is diluted.",
+   "B": "The right of the company to buy back its own shares before issuing new ones.",
+   "C": "The right of new investors to be offered shares before the market.",
+   "D": "The right of shareholders to a fixed dividend before new shares are issued."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. In a capital increase the firm issues new shares and receives cash; existing shareholders can buy them first under the pre-emption right, and if they do not, their stake is diluted.",
+   "B": "Incorrect. That is a buyback, a different operation.",
+   "C": "Incorrect. The right belongs to existing shareholders, not to new ones.",
+   "D": "Incorrect. Equity remuneration is residual and never promised."
+  },
+  "recap": "Correct. In a capital increase the firm issues new shares and receives cash; existing shareholders can buy them first under the pre-emption right, and if they do not, their stake is diluted."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Committed or Uncommitted",
+  "question": "What distinguishes a committed line of credit from an uncommitted one?",
+  "options": {
+   "A": "A committed line charges no interest on the used part.",
+   "B": "On a committed line the bank has promised availability up to the limit and the firm pays a small fee even on the unused part; an uncommitted line is cheaper but can be withdrawn at any time.",
+   "C": "A committed line is always long term; an uncommitted line is always short term.",
+   "D": "A committed line appears in the net financial position; an uncommitted one does not."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Interest is paid on the amount actually used under either form.",
+   "B": "Correct. A line of credit is a ceiling rather than a loan: the firm borrows up to the limit as needed, repays and borrows again, paying interest only on what it uses. Committed means the bank has promised, at the price of a fee on the unused part; uncommitted saves that fee and can be withdrawn at any time, often in a crisis.",
+   "C": "Incorrect. Both are short-term instruments, under 12 months.",
+   "D": "Incorrect. Drawn amounts are financial debt in either case."
+  },
+  "recap": "Correct. A line of credit is a ceiling rather than a loan: the firm borrows up to the limit as needed, repays and borrows again, paying interest only on what it uses. Committed means the bank has promised, at the price of a fee on the unused part; uncommitted saves that fee and can be withdrawn at any time, often in a crisis."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "Factoring and the Balance Sheet",
+  "question": "A firm sells a €100 invoice to a factor, receiving €80 today. In which version does the receivable leave the balance sheet, and what are the consequences?",
+  "options": {
+   "A": "With recourse: the receivable is sold, so it leaves, and no debt arises.",
+   "B": "In neither version: the receivable stays until the customer pays.",
+   "C": "In both versions, since the invoice has been sold either way.",
+   "D": "Without recourse: it is a true sale, so the receivable leaves on day one, no debt arises, and receivables and DSO fall."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. With recourse the receivable never leaves, and the €80 advance is a financial debt inside the net financial position until repaid.",
+   "B": "Incorrect. Without recourse it does leave, on day one.",
+   "C": "Incorrect. Only the version in which the factor bears the loss qualifies as a true sale.",
+   "D": "Correct. Without recourse the factor bears the loss if the customer never pays, which is why its price is higher; the receivable leaves the balance sheet as a true sale, no debt is recorded, and receivables and DSO fall."
+  },
+  "recap": "Correct. Without recourse the factor bears the loss if the customer never pays, which is why its price is higher; the receivable leaves the balance sheet as a true sale, no debt is recorded, and receivables and DSO fall."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "What Rating Buys",
+  "question": "Eni is rated A− by S&P, A3 by Moody's and A− by Fitch. What does that imply for its bonds?",
+  "options": {
+   "A": "It is investment grade, a safe borrower, so it pays less. Investment grade runs down to BBB−, below which is high yield, riskier and paying more.",
+   "B": "It is high yield, so it pays more than the market average.",
+   "C": "The rating determines the face value of the bond.",
+   "D": "The rating exempts it from publishing a prospectus."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. On the S&P scale investment grade runs down to BBB−; below that is high yield, riskier and paying more. Eni at A− is a safe borrower, so it pays less.",
+   "B": "Incorrect. A− is well inside investment grade.",
+   "C": "Incorrect. Face value is what the holder gets back; the rating affects the yield.",
+   "D": "Incorrect. A prospectus is an issuing requirement, unrelated to the rating."
+  },
+  "recap": "Correct. On the S&P scale investment grade runs down to BBB−; below that is high yield, riskier and paying more. Eni at A− is a safe borrower, so it pays less."
+ },
+ {
+  "cat": "Financial Planning",
+  "title": "What IFRS 16 Does to the Ratios",
+  "question": "Since 2019 IFRS 16 puts almost every lease on the balance sheet. What happens to EBITDA, net financial position and leverage?",
+  "options": {
+   "A": "All three fall, because the asset is capitalised.",
+   "B": "EBITDA goes up, while net financial position and leverage go down.",
+   "C": "EBITDA goes up, and net financial position and leverage go up too.",
+   "D": "None of them changes: the lease is only reclassified within operating costs."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Capitalising the lease adds a liability, so debt measures rise.",
+   "B": "Incorrect. The lease liability is debt, so both rise rather than fall.",
+   "C": "Correct. A right-of-use asset and a lease liability appear on the balance sheet; rent leaves operating costs and becomes depreciation plus interest, so EBITDA goes up, and because the lease liability is debt, the net financial position and leverage go up as well.",
+   "D": "Incorrect. The rent is removed from operating costs entirely, which is what lifts EBITDA."
+  },
+  "recap": "Correct. A right-of-use asset and a lease liability appear on the balance sheet; rent leaves operating costs and becomes depreciation plus interest, so EBITDA goes up, and because the lease liability is debt, the net financial position and leverage go up as well."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Vertical or Horizontal",
+  "question": "One analysis shows property, plant and equipment as 36.87% of Eni's total assets in 2025; another shows trade receivables down 26.42% against 2024. Which is which?",
+  "options": {
+   "A": "The first is horizontal and the second vertical.",
+   "B": "The first is vertical, showing the incidence of an item within its own document; the second is horizontal, showing the variation against a base year.",
+   "C": "Both are vertical, since both are percentages.",
+   "D": "Both are horizontal, since both compare 2025 with earlier years."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The two are inverted: a share of total assets is an incidence within one year's document.",
+   "B": "Correct. Vertical common size analysis shows the change in percentage incidence of items within their own document; horizontal common size analysis shows the variation in value of items taking a specific year as the base case.",
+   "C": "Incorrect. Being a percentage does not make an analysis vertical; the question it answers does.",
+   "D": "Incorrect. The incidence figure concerns 2025 alone."
+  },
+  "recap": "Correct. Vertical common size analysis shows the change in percentage incidence of items within their own document; horizontal common size analysis shows the variation in value of items taking a specific year as the base case."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Choosing the Base",
+  "question": "On what base is a vertical common size analysis normally computed?",
+  "options": {
+   "A": "Total assets in the balance sheet and sales or revenues in the income statement.",
+   "B": "Equity in the balance sheet and net profit in the income statement.",
+   "C": "The previous year's figures in both documents.",
+   "D": "The industry average in both documents."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. In the balance sheet the vertical analysis is normally performed using total assets as the base; in the income statement, sales or revenues.",
+   "B": "Incorrect. Neither is used as the base, and both are themselves read against the base.",
+   "C": "Incorrect. Taking a previous year as reference is the horizontal analysis.",
+   "D": "Incorrect. Comparison with other companies is step 5, benchmarking."
+  },
+  "recap": "Correct. In the balance sheet the vertical analysis is normally performed using total assets as the base; in the income statement, sales or revenues."
+ },
+ {
+  "cat": "Common Size",
+  "title": "A Very Large Percentage",
+  "question": "Eni's assets held for sale rise by 1,805.95% between 2024 and 2025. What should the analyst conclude?",
+  "options": {
+   "A": "That the company has almost entirely changed its asset base.",
+   "B": "That the figure is an error in the statements.",
+   "C": "That the base was small — €420 million — so a large percentage need not mean a large amount, and the absolute figures have to be read alongside it.",
+   "D": "That the horizontal analysis cannot be applied to this line."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Total assets fell 6.72% over the same period, so nothing of that scale happened.",
+   "B": "Incorrect. The percentage is correctly computed; it is the reading that needs care.",
+   "C": "Correct. Assets held for sale moved from €420 million to €8,005 million. The percentage is real but the base was small, which is why horizontal analysis is read together with the absolute values.",
+   "D": "Incorrect. It applies; the result simply needs interpreting."
+  },
+  "recap": "Correct. Assets held for sale moved from €420 million to €8,005 million. The percentage is real but the base was small, which is why horizontal analysis is read together with the absolute values."
+ },
+ {
+  "cat": "Common Size",
+  "title": "From Percentage to Explanation",
+  "question": "Eni's trade receivables fall by €3,576 million. Where does the analysis go next?",
+  "options": {
+   "A": "To the notes and the segment breakdown, which attribute the fall to specific segments and to the decline in energy commodity prices and working capital optimisation.",
+   "B": "To the benchmark, comparing the percentage with competitors.",
+   "C": "To the reclassification, which recomputes the figure.",
+   "D": "Nowhere: the percentage is the conclusion of the analysis."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The annual report attributes €1,621 million to the Global Gas & LNG Portfolio and Power segment, €903 million to Exploration & Production and €821 million to the Plenitude business line, driven by the decline in energy commodity prices and by working capital optimisation. The percentage says where to look; the notes say why.",
+   "B": "Incorrect. Benchmarking is step 5 and comes after the movement has been understood.",
+   "C": "Incorrect. Reclassification is step 2 and precedes the common size analysis.",
+   "D": "Incorrect. Interpretation is step 6, and the process explicitly does not stop at the number."
+  },
+  "recap": "Correct. The annual report attributes €1,621 million to the Global Gas & LNG Portfolio and Power segment, €903 million to Exploration & Production and €821 million to the Plenitude business line, driven by the decline in energy commodity prices and by working capital optimisation. The percentage says where to look; the notes say why."
+ },
+ {
+  "cat": "Principles",
+  "title": "Benchmark or Allowed",
+  "question": "For property, plant and equipment and for investment property, which model is the benchmark treatment in each case?",
+  "options": {
+   "A": "The cost model for both.",
+   "B": "The cost model for PPE and the fair value model for investment property.",
+   "C": "The fair value model for both.",
+   "D": "The fair value model for PPE and the cost model for investment property."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. IAS 40 encourages fair value valuation for investment property.",
+   "B": "Correct. The benchmark treatment is the suggested criterion and the allowed treatment the accepted alternative. Under IAS 16 the cost model is the benchmark for PPE and revaluation the alternative; under IAS 40 fair value is the benchmark for investment property and cost the alternative.",
+   "C": "Incorrect. For PPE the cost model is the preferred one.",
+   "D": "Incorrect. The two are inverted."
+  },
+  "recap": "Correct. The benchmark treatment is the suggested criterion and the allowed treatment the accepted alternative. Under IAS 16 the cost model is the benchmark for PPE and revaluation the alternative; under IAS 40 fair value is the benchmark for investment property and cost the alternative."
+ },
+ {
+  "cat": "Principles",
+  "title": "Investment Property at Fair Value",
+  "question": "A company measures its investment property under the fair value model. What follows?",
+  "options": {
+   "A": "Gains and losses go to profit or loss for the period, the asset is not depreciated, and the impairment test is not required.",
+   "B": "Gains go to a revaluation surplus in equity and the asset is depreciated.",
+   "C": "The asset is depreciated and tested for impairment annually.",
+   "D": "Fair value is disclosed in the notes only, with the balance sheet carrying cost."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Under IAS 40's fair value model, gains or losses from changes in fair value are included in net profit or loss for the period in which they arise and the assets are not depreciated. If that criterion is adopted the impairment test is not required.",
+   "B": "Incorrect. That is the treatment of a PPE revaluation under IAS 16, where the surplus goes to equity.",
+   "C": "Incorrect. Depreciation and impairment belong to the cost model.",
+   "D": "Incorrect. Disclosing fair value in the notes is what companies adopting the cost model must do."
+  },
+  "recap": "Correct. Under IAS 40's fair value model, gains or losses from changes in fair value are included in net profit or loss for the period in which they arise and the assets are not depreciated. If that criterion is adopted the impairment test is not required."
+ },
+ {
+  "cat": "Principles",
+  "title": "Basic and Diluted EPS",
+  "question": "What distinguishes diluted earnings per share from basic earnings per share?",
+  "options": {
+   "A": "Diluted EPS uses profit before tax, basic EPS uses profit after tax.",
+   "B": "Diluted EPS adjusts the weighted average number of ordinary shares for the effects of dilutive options and convertible instruments.",
+   "C": "Diluted EPS excludes minority interests from the numerator.",
+   "D": "Diluted EPS is computed only at the end of a capital increase."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Both take profit attributable to ordinary equity holders after all expenses including taxes, minority interests and preference dividends.",
+   "B": "Correct. Basic EPS divides that profit by the weighted average number of ordinary shares outstanding during the period; diluted EPS adjusts that denominator with the effects of dilutive options such as convertible instruments.",
+   "C": "Incorrect. Minority interests are already deducted in the numerator of both.",
+   "D": "Incorrect. Both must be presented by entities whose securities are publicly traded or being issued to the public."
+  },
+  "recap": "Correct. Basic EPS divides that profit by the weighted average number of ordinary shares outstanding during the period; diluted EPS adjusts that denominator with the effects of dilutive options such as convertible instruments."
+ },
+ {
+  "cat": "Principles",
+  "title": "Which Value of a Share",
+  "question": "A company has equity of €600 million and 200 million shares with a nominal value of €1, trading at €9. What are the nominal, book and market values per share?",
+  "options": {
+   "A": "Nominal €1, book €3, market €9.",
+   "B": "Nominal €3, book €1, market €9.",
+   "C": "Nominal €1, book €9, market €3.",
+   "D": "All three are €1, since the nominal value fixes them."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Nominal value is the value at which shares were initially offered, here €1. Book value is equity divided by the number of shares: €600m / 200m = €3. Market value is what they trade at, €9. Once the firm is trading, the value of ordinary shares is usually different from the nominal value.",
+   "B": "Incorrect. The nominal value is given as €1 and the book value is computed from equity.",
+   "C": "Incorrect. Book and market are inverted.",
+   "D": "Incorrect. The nominal value fixes only the capital line, not what a share is worth."
+  },
+  "recap": "Correct. Nominal value is the value at which shares were initially offered, here €1. Book value is equity divided by the number of shares: €600m / 200m = €3. Market value is what they trade at, €9. Once the firm is trading, the value of ordinary shares is usually different from the nominal value."
+ },
+ {
+  "cat": "Principles",
+  "title": "Costs That Cannot Be Capitalised",
+  "question": "Which of these must be accounted for in the income statement rather than recognised on the balance sheet under IAS/IFRS?",
+  "options": {
+   "A": "A purchased patent.",
+   "B": "Goodwill arising on an acquisition.",
+   "C": "Start-up, training and advertising costs.",
+   "D": "Development costs meeting the recognition criteria."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A purchased patent is an identifiable intangible with a finite life and is recognised at cost.",
+   "B": "Incorrect. Goodwill acquired in a business combination is recognised as an intangible asset with indefinite life.",
+   "C": "Correct. The main items excluded by IAS/IFRS from the balance sheet are start-up, pre-opening and pre-operating costs, training costs and advertising costs. They are accounted for in the income statement instead, which has consequences for both the economic and the cash result.",
+   "D": "Incorrect. Those are capitalised when the criteria are met."
+  },
+  "recap": "Correct. The main items excluded by IAS/IFRS from the balance sheet are start-up, pre-opening and pre-operating costs, training costs and advertising costs. They are accounted for in the income statement instead, which has consequences for both the economic and the cash result."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Group as an Economic Entity",
+  "question": "A group is described as an economic entity formed by a set of companies. What is the tension in that definition?",
+  "options": {
+   "A": "There is none: a group is a single legal entity.",
+   "B": "The companies remain separate legal entities while forming one economic entity, which is why consolidated statements have to be built rather than simply read off.",
+   "C": "The group exists in law but not in economics.",
+   "D": "The parent ceases to exist once the group is formed."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The members stay separate legal entities; that is the whole difficulty.",
+   "B": "Correct. A group of companies is an economic entity formed by a set of companies that are separate legal entities, containing a controlling entity — the parent or holding — and one or more subsidiaries. Consolidated statements exist to present the economic entity that no single set of statutory accounts shows.",
+   "C": "Incorrect. It is the other way round: the economic entity has no separate legal personality.",
+   "D": "Incorrect. The parent continues to publish its own accounts alongside the consolidated ones."
+  },
+  "recap": "Correct. A group of companies is an economic entity formed by a set of companies that are separate legal entities, containing a controlling entity — the parent or holding — and one or more subsidiaries. Consolidated statements exist to present the economic entity that no single set of statutory accounts shows."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Which Standard Governs Which",
+  "question": "Match the relationship to its reference standard.",
+  "options": {
+   "A": "Control: IFRS 10 and IFRS 3. Significant influence: IAS 28. Joint control: IFRS 11.",
+   "B": "Control: IAS 28. Significant influence: IFRS 10. Joint control: IFRS 3.",
+   "C": "All three are governed by IFRS 10.",
+   "D": "Control: IFRS 11. Significant influence: IFRS 3. Joint control: IAS 28."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Control leads to full consolidation under IFRS 10, with IFRS 3 for the business combination; significant influence leads to the equity method under IAS 28; joint control is governed by IFRS 11, with the treatment depending on the type of arrangement.",
+   "B": "Incorrect. IAS 28 is the equity method standard, for significant influence.",
+   "C": "Incorrect. IFRS 10 covers consolidation where control exists, not the other two relationships.",
+   "D": "Incorrect. All three assignments are wrong."
+  },
+  "recap": "Correct. Control leads to full consolidation under IFRS 10, with IFRS 3 for the business combination; significant influence leads to the equity method under IAS 28; joint control is governed by IFRS 11, with the treatment depending on the type of arrangement."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "Substantive Rights",
+  "question": "IFRS 10 requires the rights supporting control to be substantive. What does that mean?",
+  "options": {
+   "A": "That they are written in the company's articles of association.",
+   "B": "That they exceed 50% of the voting capital.",
+   "C": "That there is a practical ability to exercise them and a current ability to direct the relevant activities, even where the interest is passive.",
+   "D": "That they have been exercised at least once in the past year."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Contractual rights count too, and being written down does not make a right exercisable.",
+   "B": "Incorrect. A threshold of voting capital is an indicator, not the substantive test.",
+   "C": "Correct. Rights — voting, potential voting or contractual — are substantive when there is a practical ability to exercise them and a current ability to direct the relevant activities; the interest may be passive.",
+   "D": "Incorrect. A current ability suffices; past exercise is not required."
+  },
+  "recap": "Correct. Rights — voting, potential voting or contractual — are substantive when there is a practical ability to exercise them and a current ability to direct the relevant activities; the interest may be passive."
+ },
+ {
+  "cat": "Groups & Control",
+  "title": "What Counts as a Relevant Activity",
+  "question": "Control requires power over the investee's relevant activities. Which are they?",
+  "options": {
+   "A": "The activities that significantly affect the investee's returns: purchases and sales, working capital, investments, R&D and financing.",
+   "B": "The activities listed in the investee's statutory purpose.",
+   "C": "Only the appointment of the board of directors.",
+   "D": "Only the activities carried out with other group companies."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Relevant activities are those that significantly affect the investee's returns, and IFRS 10 asks how decisions over them are made. Purchases and sales, working capital, investments, R&D and financing are the examples given.",
+   "B": "Incorrect. The statutory purpose describes what the company may do, not what drives its returns.",
+   "C": "Incorrect. Board appointment is one route to power, not the definition of the activities.",
+   "D": "Incorrect. Relevant activities are the investee's own, whoever the counterparty."
+  },
+  "recap": "Correct. Relevant activities are those that significantly affect the investee's returns, and IFRS 10 asks how decisions over them are made. Purchases and sales, working capital, investments, R&D and financing are the examples given."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Why Adjustments Come First",
+  "question": "Why are closing period, accounting policies and reporting currency dealt with before anything is combined?",
+  "options": {
+   "A": "Because auditors require it in that order.",
+   "B": "Because combining figures drawn up to different dates, under different policies or in different currencies would add up quantities that are not comparable.",
+   "C": "Because IFRS 10 forbids combining before an audit.",
+   "D": "Because the parent's own statements must be published first."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The reason is arithmetic, not procedural.",
+   "B": "Correct. Pre-consolidation adjustments align the closing period, the accounting policies and the reporting currency precisely so that the items being added together measure the same thing.",
+   "C": "Incorrect. No such prohibition exists; the sequence follows from comparability.",
+   "D": "Incorrect. The order of publication is unrelated."
+  },
+  "recap": "Correct. Pre-consolidation adjustments align the closing period, the accounting policies and the reporting currency precisely so that the items being added together measure the same thing."
+ },
+ {
+  "cat": "Consolidation Process",
+  "title": "Why Intragroup Transactions Disappear",
+  "question": "Consolidated statements eliminate intragroup transactions in full. What is the underlying principle?",
+  "options": {
+   "A": "That such transactions are usually made at non-market prices.",
+   "B": "That the group has no legal personality.",
+   "C": "That consolidated statements show the group as though it were a single legal entity, so they must present only transactions with third parties outside the group.",
+   "D": "That the tax authorities disregard them."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Transfer pricing is a separate matter; the elimination applies whatever the price.",
+   "B": "Incorrect. True, but it is not the reason: the reason is the as-if-one-entity presentation.",
+   "C": "Correct. From the perspective of the consolidated statements, transactions between group companies are equivalent to transactions between divisions within a single company, and such transactions cannot be presented: the statements must show only what the group did with third parties.",
+   "D": "Incorrect. Tax treatment does not drive the consolidation procedure."
+  },
+  "recap": "Correct. From the perspective of the consolidated statements, transactions between group companies are equivalent to transactions between divisions within a single company, and such transactions cannot be presented: the statements must show only what the group did with third parties."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Where Goodwill Comes From",
+  "question": "In which circumstances is goodwill recognised?",
+  "options": {
+   "A": "Whenever a company's market value exceeds its book value.",
+   "B": "Only when there is an exchange transaction involving the purchase of an entire business, at a price above the fair value of the identifiable net assets acquired.",
+   "C": "Whenever a company invests in another, at any percentage.",
+   "D": "Whenever a subsidiary is profitable."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A gap between market and book value is not recorded; internally generated goodwill is never recognised.",
+   "B": "Correct. Goodwill arises when a company acquires another for a price in excess of the fair value of the net identifiable assets acquired, and is recorded only when there is an exchange transaction involving the purchase of an entire business.",
+   "C": "Incorrect. An investment carried under the equity method does not produce consolidated goodwill in this way.",
+   "D": "Incorrect. Profitability of a subsidiary does not create goodwill in the group accounts."
+  },
+  "recap": "Correct. Goodwill arises when a company acquires another for a price in excess of the fair value of the net identifiable assets acquired, and is recorded only when there is an exchange transaction involving the purchase of an entire business."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "Consolidating More Than You Own",
+  "question": "A parent owning 85% consolidates 100% of the subsidiary and reports non-controlling interests of 15%. Where do those interests appear?",
+  "options": {
+   "A": "Among liabilities, as an obligation to the minority shareholders.",
+   "B": "Within equity, as a separate line.",
+   "C": "Netted against goodwill.",
+   "D": "They do not appear: they are eliminated with the investment."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The minority has a residual claim, not a contractual one, so it is not a liability.",
+   "B": "Correct. Non-controlling interests arise when a subsidiary is not wholly controlled. The group consolidates 100% of net assets and results and reports the share not belonging to the parent as a separate line within equity.",
+   "C": "Incorrect. Under the full goodwill method the minority's fair value is added in the goodwill calculation, but it is still reported separately.",
+   "D": "Incorrect. The offset removes the parent's portion of the subsidiary's equity; the minority's portion is what remains."
+  },
+  "recap": "Correct. Non-controlling interests arise when a subsidiary is not wholly controlled. The group consolidates 100% of net assets and results and reports the share not belonging to the parent as a separate line within equity."
+ },
+ {
+  "cat": "Goodwill & Minorities",
+  "title": "How the Choice Changes the Minority",
+  "question": "In the STAR-LIGHT case the non-controlling interest is either 200 or 76 depending on the measurement chosen. What are those two figures?",
+  "options": {
+   "A": "200 is its fair value under the full goodwill method; 76 is its proportionate share of the investee's identifiable net assets, 190 x 0.4.",
+   "B": "200 is the price paid by STAR; 76 is the tax effect on the surpluses.",
+   "C": "200 is the book value and 76 the fair value.",
+   "D": "200 is the goodwill and 76 the surplus on the trademark."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The investor may measure the non-controlling interest at fair value, which is the full goodwill method and gives 200, or at the non-controlling interest's proportionate share of the investee's identifiable net assets, which gives the book value of that share: 190 x 0.4 = 76.",
+   "B": "Incorrect. STAR paid 300 for 60%, and the tax effect on the surpluses is 120.",
+   "C": "Incorrect. 76 is a proportionate book measure and 200 the fair value, so the labels are inverted.",
+   "D": "Incorrect. Goodwill is 130 or 78 depending on the method."
+  },
+  "recap": "Correct. The investor may measure the non-controlling interest at fair value, which is the full goodwill method and gives 200, or at the non-controlling interest's proportionate share of the investee's identifiable net assets, which gives the book value of that share: 190 x 0.4 = 76."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "What Each Step Earns",
+  "question": "The six steps are introduced with a phrase for each transition. Which pairing is right?",
+  "options": {
+   "A": "A figure needs a scheme; a year needs a scale; a movement needs a perspective; a ratio needs a peer; a comparison needs a story.",
+   "B": "A figure needs a peer; a year needs a story; a ratio needs a scheme.",
+   "C": "A scheme needs a figure; a scale needs a year; a story needs a comparison.",
+   "D": "Every step needs a benchmark before it can be read."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The reclassification gives the figure a scheme, the common size gives a year a scale, the indicators give a movement a perspective, the benchmark gives a ratio a peer, and the interpretation gives a comparison a story.",
+   "B": "Incorrect. The pairings are shuffled; a peer belongs to the benchmarking step.",
+   "C": "Incorrect. The direction is reversed in each case.",
+   "D": "Incorrect. Benchmarking is step 5, and the earlier steps stand without it."
+  },
+  "recap": "Correct. The reclassification gives the figure a scheme, the common size gives a year a scale, the indicators give a movement a perspective, the benchmark gives a ratio a peer, and the interpretation gives a comparison a story."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Who Financial Analysis Is For",
+  "question": "Financial analysis is said to serve both internal and external accountability. Which external users does the course name?",
+  "options": {
+   "A": "Only shareholders and potential investors.",
+   "B": "Shareholders and potential investors, debtholders determining credit stability, and other actors such as government, since a company pays taxes and creates employment.",
+   "C": "Only the auditors and the SEC.",
+   "D": "Only competitors carrying out a benchmark."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Shareholders are one group among several named.",
+   "B": "Correct. Internally it serves managers; externally it serves shareholders and potential investors determining a share's market price and its selling price at an IPO or FPO, debtholders determining credit stability, and other actors such as government, because the company pays taxes and creates employment.",
+   "C": "Incorrect. Auditors certify the statements; they are not the audience of the analysis.",
+   "D": "Incorrect. Competitors may benchmark, but they are not the users listed."
+  },
+  "recap": "Correct. Internally it serves managers; externally it serves shareholders and potential investors determining a share's market price and its selling price at an IPO or FPO, debtholders determining credit stability, and other actors such as government, because the company pays taxes and creates employment."
+ },
+ {
+  "cat": "The Six Steps",
+  "title": "Which Steps Are Covered So Far",
+  "question": "Lectures 05 and 06 cover part of the path. Which steps, and what comes next?",
+  "options": {
+   "A": "Steps 1 to 3 — context, reclassification with segmental analysis, and common size — plus financial planning as a zoom on step 2. Indicators, benchmarking and interpretation come next.",
+   "B": "Steps 4 to 6 only.",
+   "C": "All six steps in a single lecture.",
+   "D": "Step 1 only, with the rest left to the exercises."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Lecture 05 covers step 1, understanding the context, and step 2, the first analysis of performances through reclassification and segmental analysis; Lecture 06 covers financial planning, the coverage column of step 2, and step 3, common size analysis. Step 4 indicators, step 5 benchmarking and step 6 interpretation follow.",
+   "B": "Incorrect. Those are precisely the steps still to come.",
+   "C": "Incorrect. The path is spread across several lectures.",
+   "D": "Incorrect. Reclassification and common size are both covered in these lectures."
+  },
+  "recap": "Correct. Lecture 05 covers step 1, understanding the context, and step 2, the first analysis of performances through reclassification and segmental analysis; Lecture 06 covers financial planning, the coverage column of step 2, and step 3, common size analysis. Step 4 indicators, step 5 benchmarking and step 6 interpretation follow."
+ },
+ {
+  "cat": "Context",
+  "title": "What the Management Report Offers",
+  "question": "Eni's annual report opens with a management report. What is its value, and what is its limit?",
+  "options": {
+   "A": "It is easily readable and gives an overview of the business and strategy with both financial and non-financial highlights; it is management's own account.",
+   "B": "It is audited line by line and therefore the most reliable section.",
+   "C": "It contains the consolidated financial statements.",
+   "D": "It is required by the SEC rather than by IFRS."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The management report covers activities, business model and strategy, the responsible and sustainable approach, the letter to shareholders, stakeholder engagement, integrated risk management, governance and the operating and financial review. It is easily readable and gives an overview with financial and non-financial highlights — written by management, which is both its value and its limit.",
+   "B": "Incorrect. The auditors certify the financial statements; the management report is management's narrative.",
+   "C": "Incorrect. Those occupy the second half of the report.",
+   "D": "Incorrect. It is part of the annual report, distinct from the Form 20-F."
+  },
+  "recap": "Correct. The management report covers activities, business model and strategy, the responsible and sustainable approach, the letter to shareholders, stakeholder engagement, integrated risk management, governance and the operating and financial review. It is easily readable and gives an overview with financial and non-financial highlights — written by management, which is both its value and its limit."
+ },
+ {
+  "cat": "Context",
+  "title": "Reading a Ratio from a Provider",
+  "question": "Market data is one of the four sources. What caution does the course attach to it?",
+  "options": {
+   "A": "That share prices are delayed by fifteen minutes.",
+   "B": "To check how a provider defines its ratios.",
+   "C": "That market data cannot be used for listed companies.",
+   "D": "That volume traded is not public information."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Delay is a technical matter, not the caution given.",
+   "B": "Correct. Market data covers the market price of the stock, volume traded and the value of bonds — share price and market capitalisation — and the instruction attached is to check how a provider defines its ratios, since the same name can cover different calculations.",
+   "C": "Incorrect. Market data exists precisely for listed companies.",
+   "D": "Incorrect. Volume traded is listed among the public market data."
+  },
+  "recap": "Correct. Market data covers the market price of the stock, volume traded and the value of bonds — share price and market capitalisation — and the instruction attached is to check how a provider defines its ratios, since the same name can cover different calculations."
+ },
+ {
+  "cat": "Reclassification",
+  "title": "Which Debts Belong to the Coverage",
+  "question": "In the reclassified balance sheet, which liabilities appear in the coverage column alongside equity?",
+  "options": {
+   "A": "All liabilities of the company.",
+   "B": "Trade payables and financial debts together.",
+   "C": "Debts with an explicit interest rate — the net financial position — and not trade payables, which have already been netted inside working capital.",
+   "D": "Only non-current liabilities."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Operating liabilities are dealt with on the invested capital side.",
+   "B": "Incorrect. Including trade payables in both places would double-count them.",
+   "C": "Correct. The coverage column is shareholders' equity plus the net financial position, which is debt with an explicit interest rate. Trade payables are subtracted inside net operating working capital, on the invested capital side.",
+   "D": "Incorrect. The current portion of financial debt belongs to the net financial position too."
+  },
+  "recap": "Correct. The coverage column is shareholders' equity plus the net financial position, which is debt with an explicit interest rate. Trade payables are subtracted inside net operating working capital, on the invested capital side."
+ },
+ {
+  "cat": "Common Size",
+  "title": "What Common Size Compares",
+  "question": "Step 3 is described as a comparison over time. What does common size analysis do that the raw statements do not?",
+  "options": {
+   "A": "It corrects the figures for inflation.",
+   "B": "It puts a year on a scale, so that items can be read as percentages either of an aggregate within the same document or of a base year.",
+   "C": "It compares the company with its competitors.",
+   "D": "It restates the statements under a second accounting standard."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. No inflation adjustment is involved.",
+   "B": "Correct. Common size analysis comes in two forms: vertical, showing the percentage incidence of items within their own document, and horizontal, showing the variation in value against a base year. That is the scale a year needs.",
+   "C": "Incorrect. Comparison with other companies is step 5, benchmarking.",
+   "D": "Incorrect. That would be a restatement, not a common size analysis."
+  },
+  "recap": "Correct. Common size analysis comes in two forms: vertical, showing the percentage incidence of items within their own document, and horizontal, showing the variation in value against a base year. That is the scale a year needs."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Partial and Total Columns",
+  "question": "Eni's vertical analysis shows property, plant and equipment at 57.30% in one column and 36.87% in another. How can both be right?",
+  "options": {
+   "A": "One is 2024 and the other 2025.",
+   "B": "One is before tax and the other after.",
+   "C": "One is the incidence within non-current assets and the other within total assets: the base has to be stated.",
+   "D": "One is vertical and the other horizontal."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Both belong to the 2025 vertical analysis.",
+   "B": "Incorrect. Tax does not enter a balance sheet incidence.",
+   "C": "Correct. The table carries a partial column and a total column: 57.30% is PPE against the non-current assets subtotal and 36.87% is PPE against total assets. The same item read against two different bases gives two correct figures, which is why the base must be stated.",
+   "D": "Incorrect. The horizontal figure for that line is −15.58%."
+  },
+  "recap": "Correct. The table carries a partial column and a total column: 57.30% is PPE against the non-current assets subtotal and 36.87% is PPE against total assets. The same item read against two different bases gives two correct figures, which is why the base must be stated."
+ },
+ {
+  "cat": "Common Size",
+  "title": "A Percentage That Needs Its Absolute",
+  "question": "Eni's other current financial assets rise 241.94% while total assets fall 6.72%. What does the pair tell you?",
+  "options": {
+   "A": "That the horizontal analysis is inconsistent.",
+   "B": "That a large percentage on a small line can coexist with a small movement in the whole, so percentages are read alongside absolute values.",
+   "C": "That other current financial assets are now the largest asset.",
+   "D": "That total assets were mis-stated in 2024."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Both figures are correctly computed from the same statements.",
+   "B": "Correct. Other current financial assets moved from €1,085 million to €3,710 million, a large relative change on a line that is 2.71% of total assets. The horizontal percentage says where to look; the absolute figures say how much it matters.",
+   "C": "Incorrect. Property, plant and equipment remains far larger at 36.87% of total assets.",
+   "D": "Incorrect. Nothing in the data suggests a misstatement."
+  },
+  "recap": "Correct. Other current financial assets moved from €1,085 million to €3,710 million, a large relative change on a line that is 2.71% of total assets. The horizontal percentage says where to look; the absolute figures say how much it matters."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Where the Income Statement Base Comes From",
+  "question": "In Eni's 2025 vertical analysis of the income statement, purchases, services and other are shown at -80.2%. Of what?",
+  "options": {
+   "A": "Of total assets.",
+   "B": "Of total revenues, €83,629 million, which is the 100% base.",
+   "C": "Of operating profit.",
+   "D": "Of the 2024 figure for the same line."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Total assets is the base for the balance sheet, not the income statement.",
+   "B": "Correct. In the income statement the vertical common size analysis uses sales or revenues as the base. Eni's total revenues of €83,629 million are the 100%, against which purchases, services and other of €67,056 million are 80.2%.",
+   "C": "Incorrect. Operating profit is itself read against revenues, at 6.0%.",
+   "D": "Incorrect. Comparison with the prior year is the horizontal analysis, shown at -6% for that line."
+  },
+  "recap": "Correct. In the income statement the vertical common size analysis uses sales or revenues as the base. Eni's total revenues of €83,629 million are the 100%, against which purchases, services and other of €67,056 million are 80.2%."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Two Percentages for One Line",
+  "question": "Eni's operating profit is shown as 6.0% in one column and -4% in another. What is each?",
+  "options": {
+   "A": "6.0% is the vertical incidence on revenues; -4% is the horizontal change against 2024.",
+   "B": "6.0% is the margin and -4% the tax rate.",
+   "C": "6.0% is 2024 and -4% is 2025.",
+   "D": "Both are horizontal, on different base years."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. The vertical column reads operating profit of €5,010 million against total revenues of €83,629 million, giving 6.0%. The horizontal column compares it with the €5,238 million of 2024, giving -4%.",
+   "B": "Incorrect. Income taxes are shown separately, at -3.6% of revenues.",
+   "C": "Incorrect. Both columns describe 2025.",
+   "D": "Incorrect. Only one of the two is a comparison over time."
+  },
+  "recap": "Correct. The vertical column reads operating profit of €5,010 million against total revenues of €83,629 million, giving 6.0%. The horizontal column compares it with the €5,238 million of 2024, giving -4%."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Which Analysis Answers Which Question",
+  "question": "You want to know whether inventories have become a bigger part of Eni's assets, and separately whether they grew. Which analysis answers each?",
+  "options": {
+   "A": "Vertical for both.",
+   "B": "Vertical for whether they are a bigger part of assets; horizontal for whether they grew.",
+   "C": "Horizontal for both.",
+   "D": "Neither: both questions need the benchmark step."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The vertical analysis says nothing about movement between years.",
+   "B": "Correct. Vertical common size shows the percentage incidence of an item within its own document — inventories at 3.75% of Eni's total assets in 2025. Horizontal common size shows the variation against a base year — inventories down 17.83% against 2024.",
+   "C": "Incorrect. The horizontal analysis says nothing about relative weight.",
+   "D": "Incorrect. Benchmarking compares with other companies; both questions concern this company alone."
+  },
+  "recap": "Correct. Vertical common size shows the percentage incidence of an item within its own document — inventories at 3.75% of Eni's total assets in 2025. Horizontal common size shows the variation against a base year — inventories down 17.83% against 2024."
+ },
+ {
+  "cat": "Common Size",
+  "title": "Where Common Size Sits in the Path",
+  "question": "Common size analysis is step 3. What has to be done before it, and what follows?",
+  "options": {
+   "A": "Nothing before; indicators follow.",
+   "B": "Context and reclassification come before; indicators, benchmarking and interpretation follow.",
+   "C": "Benchmarking comes before; interpretation follows.",
+   "D": "Indicators come before; benchmarking follows."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A year cannot be put on a scale before the figures have a scheme.",
+   "B": "Correct. Step 1 understands the context and step 2 reclassifies and segments; step 3 puts a year on a scale through common size; then step 4 indicators, step 5 benchmarking and step 6 interpretation.",
+   "C": "Incorrect. Benchmarking is step 5, two steps later.",
+   "D": "Incorrect. Indicators are step 4, after common size."
+  },
+  "recap": "Correct. Step 1 understands the context and step 2 reclassifies and segments; step 3 puts a year on a scale through common size; then step 4 indicators, step 5 benchmarking and step 6 interpretation."
  }
 ];

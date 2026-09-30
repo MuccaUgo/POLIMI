@@ -1,10 +1,34 @@
 // Course programme and lecture calendar for Accounting, Finance & Control (AFC26),
-// transcribed from the calendar published by Professor Arnaboldi. Dates fall in 2026.
+// from AFC26_Calendar_Arnaboldi and the Lecture 02 deck, Introduction to the Course.
+// Dates fall in 2026.
 const COURSE = {
   code: "AFC26",
   title: "Accounting, Finance & Control",
-  lecturer: "Professor Arnaboldi",
-  assistants: ["Assistant Lerouge", "Assistant Carloni", "Assistant Rizzuti"]
+  lecturer: "Michela Arnaboldi",
+  cohort: "Students from [A] included to [CE] excluded",
+  assistants: ["Eleonora Carloni", "Laura Porta", "Claudia Rizzuti", "Romain Lerouge"],
+  slots: ["Monday 14.30, room BL.27.0.3", "Wednesday 8.45, room L.07"],
+  materials: "WeBeep (webeep.polimi.it)",
+  book: "Arnaboldi, M., Azzone, G. and Giorgino, M. (2014). Performance Measurement and Management for Engineers. Elsevier, NY",
+  // Final grade = (challenge 1 x 0.2) + (challenge 2 x 0.2) + (written test x 0.6), then the oral.
+  assessment: [
+    { part: "Challenge 1", weight: "20%", note: "4-hour in-class sprint, 26 October 2026" },
+    { part: "Challenge 2", weight: "20%", note: "4-hour in-class sprint, 14 December 2026" },
+    { part: "Written test", weight: "60%", note: "Question and exercise types in AFC26_ExamQuestions" },
+    { part: "Oral exam", weight: "\u00b12 points", note: "Optional; can also fail the exam" }
+  ],
+  // The syllabus as the course states it, one block per letter.
+  structure: [
+    { block: "Accounting", items: ["Financial accounting recovery", "Financial statement analysis", "Financial statement consolidation"] },
+    { block: "Finance", items: ["Cash flow", "Relative valuation", "Value proxies"] },
+    { block: "Control", items: ["Planning and control cycle", "Budgeting", "KPIs, corporate costs, TPS, variance analysis", "Reporting and dashboard"] }
+  ],
+  // Three prerequisites are named; the hub covers two of them today.
+  prerequisites: [
+    { name: "Financial Accounting", detail: "Structure and content of annual reports: balance sheet, income statement, cash flow statement, IAS/IFRS.", topic: "Financial Accounting" },
+    { name: "Cost Accounting", detail: "Definition of cost, cost classification, cost allocation.", topic: "Cost Accounting" },
+    { name: "Decision making", detail: "Short term decisions with contribution margin and break-even point; long term decisions with NPV. Covered by MOOC weeks 3 and 4 \u2014 not in this hub yet." }
+  ]
 };
 
 // Each lecture: ISO date, the topic exactly as published, delivery mode, who runs it,
@@ -19,10 +43,10 @@ const CALENDAR = [
   { date: "2026-10-05", topic: "Theory on Financial Analysis — Part 2", mode: "Onsite", who: "Professor Arnaboldi", module: "Financial Analysis" },
   { date: "2026-10-07", topic: "Financial Analysis Reclassification and exercises", mode: "Onsite", who: "Assistant Carloni", module: "Financial Analysis" },
   { date: "2026-10-12", topic: "Practical session on Financial Analysis and Benchmarking", mode: "Onsite", who: "Assistant Carloni", module: "Financial Analysis" },
-  { date: "2026-10-14", topic: "F1 Cash Flow — Direct measurement of PV, Part 1", mode: "Online (TBC)", who: "Professor Arnaboldi", module: "Valuation" },
+  { date: "2026-10-14", topic: "F1 Cash Flow — Direct measurement of PV, Part 1", mode: "Online (TBC)", who: "Professor Arnaboldi", module: "Valuation", conflict: "The Lecture 02 deck lists this as Online (TBD) with Assistant Carloni." },
   { date: "2026-10-19", topic: "F1 Cash Flow — Direct measurement of PV, Part 2", mode: "Onsite", who: "Professor Arnaboldi", module: "Valuation" },
   { date: "2026-10-21", topic: "NO LECTURE", note: "MSc Graduation", off: true },
-  { date: "2026-10-26", topic: "First Challenge: Financial Statement Analysis", mode: "Onsite", who: "Assistant Lerouge · Assistant Rizzuti", module: "Challenges" },
+  { date: "2026-10-26", topic: "First Challenge: Financial Statement Analysis", mode: "Onsite", who: "Assistant Lerouge · Assistant Rizzuti", module: "Challenges", conflict: "The Lecture 02 deck lists Professor Arnaboldi for this slot." },
   { date: "2026-10-28", topic: "Exercises on DCF, Part 2", mode: "Onsite", who: "Assistant Lerouge", module: "Valuation" },
   { date: "2026-11-02", topic: "NO LECTURE", note: "Mid-terms", off: true },
   { date: "2026-11-04", topic: "NO LECTURE", note: "Mid-terms", off: true },
@@ -45,34 +69,41 @@ const CALENDAR = [
 const MODULES = [
   {
     title: "Foundations",
+    block: "Course",
     blurb: "Basic terminology and a self-assessment of where you stand before the course builds on it.",
     revise: "Financial Accounting"
   },
   {
     title: "Financial Statements",
+    block: "Accounting",
     blurb: "Recovering a set of financial statements and consolidating a group, first on video and then in exercises.",
-    revise: "Financial Accounting"
+    revise: "Consolidation"
   },
   {
     title: "Financial Analysis",
+    block: "Accounting",
     blurb: "Three theory lectures, then reclassification, exercises and a practical session on benchmarking.",
-    revise: "Financial Accounting"
+    revise: "Financial Analysis"
   },
   {
     title: "Valuation",
+    block: "Finance",
     blurb: "Cash flow and the direct measurement of present value, discounted cash flow exercises, and relative valuation."
   },
   {
     title: "Planning & Control",
+    block: "Control",
     blurb: "Budgeting and corporate costs, then non-financial KPIs and transfer pricing, each with its own exercise session.",
     revise: "Cost Accounting"
   },
   {
     title: "Sustainability",
+    block: "Course",
     blurb: "A plenary lecture to all cohorts."
   },
   {
     title: "Challenges",
+    block: "Course",
     blurb: "Two group challenges — financial statement analysis and an executive dashboard design lab — plus the exam simulation."
   }
 ];

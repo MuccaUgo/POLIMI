@@ -126,6 +126,34 @@
       progressEl.textContent = done + " of " + total + " lectures done";
     }
 
+    // Course structure, assessment and prerequisites: rendered only where COURSE declares them.
+    var glance = $("courseGlance");
+    if (glance && typeof COURSE !== "undefined" && COURSE.structure) {
+      glance.innerHTML = COURSE.structure.map(function (b) {
+        return '<div class="topic"><div class="kicker">' + esc(b.block) + "</div>" +
+          "<strong>" + esc(b.items.length + (b.items.length === 1 ? " topic" : " topics")) + "</strong><ul class=\"plain\">" +
+          b.items.map(function (i) { return "<li>" + esc(i) + "</li>"; }).join("") + "</ul></div>";
+      }).join("");
+    }
+    var assess = $("assessmentList");
+    if (assess && typeof COURSE !== "undefined" && COURSE.assessment) {
+      assess.innerHTML = COURSE.assessment.map(function (a) {
+        return '<div class="lecture"><div class="lecture-date"><span class="day">' + esc(a.weight) + "</span></div>" +
+          '<div class="lecture-body"><strong>' + esc(a.part) + '</strong><p class="small">' + esc(a.note) + "</p></div></div>";
+      }).join("");
+    }
+    var prereq = $("prereqList");
+    if (prereq && typeof COURSE !== "undefined" && COURSE.prerequisites) {
+      prereq.innerHTML = COURSE.prerequisites.map(function (p) {
+        var here = p.topic && topicList().some(function (t) { return t.name === p.topic; });
+        return '<div class="lecture' + (here ? "" : " off") + '">' +
+          '<div class="lecture-date"><span class="dow">' + (here ? "in hub" : "missing") + "</span></div>" +
+          '<div class="lecture-body"><strong>' + esc(p.name) + '</strong><p class="small">' + esc(p.detail) + "</p></div>" +
+          (here ? '<button class="ghost" data-mode="practice10" data-cat="topic:' + esc(p.topic) +
+            '">Practice <span aria-hidden="true">&#8594;</span></button>' : "") + "</div>";
+      }).join("");
+    }
+
     var modulesEl = $("moduleGrid");
     if (modulesEl && typeof MODULES !== "undefined") {
       modulesEl.innerHTML = MODULES.map(function (m) {
@@ -133,7 +161,7 @@
         var passed = lectures.filter(function (l) { return lectureDate(l.date) < now; }).length;
         var count = lectures.length + (lectures.length === 1 ? " lecture" : " lectures");
         var pool = m.revise ? QUESTIONS.filter(function (q) { return topicOf(q.cat) === m.revise; }) : [];
-        return '<div class="topic"><div class="kicker">Module</div>' +
+        return '<div class="topic"><div class="kicker">' + esc(m.block ? m.block : "Module") + "</div>" +
           "<strong>" + esc(m.title) + "</strong>" +
           "<p>" + esc(m.blurb) + "</p>" +
           '<p class="small">' + esc(count) + " · " + passed + " done</p>" +
@@ -160,6 +188,7 @@
           ? '<p class="small">' + esc(l.note || "") + "</p>"
           : '<p class="small">' + esc(l.who) + "</p>") +
         "</div>" +
+        (l.conflict ? '<span class="badge conflict" title="' + esc(l.conflict) + '">sources differ</span>' : "") +
         (l.off ? "" : '<span class="badge mode">' + esc(l.mode) + "</span>") +
         (isToday ? '<span class="badge today-badge">Today</span>' : "") +
         "</div>";

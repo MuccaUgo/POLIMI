@@ -2,6 +2,7 @@
 
 Annexure 2 (Financial Accounting): revisione del 15 settembre 2026, chiusa il 16 settembre 2026.
 Annexure 3 (Cost Accounting): revisione del 16 settembre 2026.
+Slide del corso (Lect 02–06, cartella Drive AFC): revisione del 30 settembre 2026.
 
 **Decisione: le risposte restano quelle dell'annexure del corso.** È quello che l'esame chiede, quindi
 domande, risposte corrette e spiegazioni non sono state modificate. Dove il materiale segue uno standard
@@ -85,6 +86,68 @@ con il FIFO «allocation is done only for resources sustained during the period�
 numeratore FIFO dovrebbe essere il solo Ct. La scheda *Initial Inventories: Average and FIFO* descrive la
 distinzione a parole, come fa il testo, senza costruire domande sulla formula stampata.
 
+# Slide del corso — allineamento del 30 settembre 2026
+
+## 6. Fatti del corso corretti
+
+Il deck *Lect 02 — Introduction to the Course* ha corretto diverse cose che erano state dedotte dal solo
+calendario:
+
+- **Docente**: Michela Arnaboldi (prima solo «Professor Arnaboldi»).
+- **Assistenti**: sono **quattro** — Eleonora Carloni, Laura Porta, Claudia Rizzuti, Romain Lerouge. Laura
+  Porta mancava del tutto.
+- **Orari e aule**: lunedì 14.30 (BL.27.0.3), mercoledì 8.45 (L.07).
+- **Valutazione**: voto finale = (Challenge 1 × 0,2) + (Challenge 2 × 0,2) + (prova scritta × 0,6), poi
+  l'orale che vale ±2 punti o la bocciatura. Gli sprint in aula di 4 ore sono il 26 ottobre e il 14 dicembre,
+  con **presenza obbligatoria** per chi vuole la valutazione da frequentante.
+- **Libro**: Arnaboldi, Azzone, Giorgino (2014), *Performance Measurement and Management for Engineers*.
+
+## 7. La struttura del corso non era quella
+
+I moduli con cui il calendario era stato raggruppato erano una mia ricostruzione. La struttura vera è
+**A / F / C**, dichiarata nel deck:
+
+- **Accounting**: financial accounting recovery, financial statement analysis, financial statement consolidation
+- **Finance**: cash flow, relative valuation, value proxies
+- **Control**: planning and control cycle, budgeting, KPI/corporate costs/TPS/variance analysis, reporting e dashboard
+
+I gruppi del calendario restano, ma ognuno porta ora il blocco A/F/C a cui appartiene, e la struttura
+ufficiale è mostrata nella scheda Programme.
+
+## 8. Il calendario e il deck introduttivo non coincidono
+
+Due slot divergono fra `AFC26_Calendar_Arnaboldi` e il deck *Lect 02*:
+
+| Data | File calendario | Deck Lect 02 |
+|---|---|---|
+| 14-ott | Online (TBC), Professor Arnaboldi | Online (TBD), Assistant Carloni |
+| 26-ott | Assistant Lerouge · Assistant Rizzuti | Professor Arnaboldi |
+
+Il sito mostra la versione del file calendario, con un badge **«sources differ»** sulla riga e la versione
+alternativa nel tooltip. Il deck stesso avverte che il calendario è «always a work-in-progress».
+
+## 9. Manca il terzo prerequisito
+
+Il corso ne dichiara **tre**, non due:
+
+1. Financial Accounting ✔ nell'hub
+2. Cost Accounting ✔ nell'hub
+3. **Decision making** ✘ — decisioni di breve periodo (margine di contribuzione, break-even) e di lungo
+   periodo (NPV), MOOC settimane 3 e 4
+
+Il terzo non è nell'hub e non c'è un annexure che lo copra. È segnalato nella home e nella scheda Programme
+come mancante, invece di essere inventato da conoscenza generale.
+
+## 10. Il video di ripasso conferma le schede esistenti
+
+Il deck *Lect 03 — Financial Statement Review* ripassa il prerequisito di Financial Accounting e coincide con
+quanto già presente. Ha aggiunto sei schede su punti che l'annexure non trattava esplicitamente: benchmark
+treatment contro allowed treatment, il value in use, l'investment property IAS 40 (dove il fair value è il
+*benchmark*, al contrario di IAS 16), l'earnings per share base e diluito, i tre valori di un'azione, e i
+costi esclusi dallo stato patrimoniale.
+
 ## Limite della verifica
 
-Verifiche mirate, non una validazione completa delle 83 schede e delle 125 domande.
+Verifiche mirate, non una validazione completa delle 150 schede e delle 197 domande. Non sono ancora stati
+usati: `AFC26_Lect_04` (esercizi su recovery e consolidation), il file esercizi omonimo e
+**`AFC26_ExamQuestions.pdf`**, che contiene domande ed esercizi delle prove scritte degli anni precedenti.

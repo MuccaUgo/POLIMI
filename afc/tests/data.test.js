@@ -6,8 +6,9 @@ const path = require("node:path");
 const vm = require("node:vm");
 const context = {};
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
-  ";this.bank = JSON.parse(JSON.stringify(QUESTIONS)); this.categories = CATEGORIES;", context);
+  ";this.bank = JSON.parse(JSON.stringify(QUESTIONS)); this.categories = CATEGORIES; this.cards = JSON.parse(JSON.stringify(CONCEPTS));", context);
 const bank = JSON.parse(JSON.stringify(context.bank));
+context.cards = JSON.parse(JSON.stringify(context.cards));
 
 function question(title) {
   const matches = bank.filter(q => q.title === title);
@@ -20,7 +21,7 @@ function selectedNumbers(title) {
 }
 
 test("expanded bank has complete, unique questions and explanations in all five areas", () => {
-  assert.ok(bank.length >= 125);
+  assert.ok(bank.length >= 197);
   const titles = new Set(), prompts = new Set();
   for (const q of bank) {
     assert.ok(context.categories.includes(q.cat), q.title);
@@ -182,7 +183,7 @@ test("every area belongs to exactly one topic, and the topics cover the bank", (
     "conceptCats: CONCEPTS.map(c => c.cat) });", data);
   const { topics, categories, conceptCats } = JSON.parse(data.json);
 
-  assert.deepEqual(topics.map(t => t.name), ["Financial Accounting", "Cost Accounting"]);
+  assert.deepEqual(topics.map(t => t.name), ["Financial Accounting", "Cost Accounting", "Consolidation", "Financial Analysis"]);
   const flat = topics.flatMap(t => t.categories);
   assert.deepEqual(flat, categories, "CATEGORIES must be the topics' areas, in order");
   assert.equal(new Set(flat).size, flat.length, "an area may not appear under two topics");
@@ -194,7 +195,62 @@ test("every area belongs to exactly one topic, and the topics cover the bank", (
   for (const topic of topics) {
     const qs = bank.filter(q => topic.categories.includes(q.cat));
     const cs = conceptCats.filter(c => topic.categories.includes(c));
-    assert.ok(qs.length >= 40, `${topic.name}: only ${qs.length} questions`);
-    assert.ok(cs.length >= 39, `${topic.name}: only ${cs.length} concept cards`);
+    assert.ok(qs.length >= 24, `${topic.name}: only ${qs.length} questions`);
+    assert.ok(cs.length >= 22, `${topic.name}: only ${cs.length} concept cards`);
+  }
+});
+
+test("every topic says whether it is a prerequisite or course content", () => {
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS });", data);
+  for (const topic of JSON.parse(data.json).topics) {
+    assert.equal(typeof topic.note, "string", `${topic.name}: missing note`);
+    assert.match(topic.note, /Prerequisite|Course content/,
+      `${topic.name}: the note must classify the topic`);
+  }
+});
+
+test("the reclassified schemes are stated as the course states them", () => {
+  const byTitle = t => context.cards.find(c => c.title === t);
+
+  const nowc = byTitle("Net Operating Working Capital");
+  assert.match(nowc.how, /receivables/i);
+  assert.match(nowc.how, /inventories/i);
+  assert.match(nowc.how, /minus payables/i);
+  // Cash belongs to the NFP, not to working capital: the single most common slip.
+  assert.match(nowc.trap, /Cash and cash equivalents are not in NOWC/);
+
+  const nfp = byTitle("Net Financial Position");
+  assert.match(nfp.meaning, /minus cash|and cash and cash equivalents|less cash/i);
+  assert.match(nfp.trap, /not necessarily bad/i);
+
+  const is = byTitle("The Reclassified Income Statement");
+  for (const step of ["VALUE ADDED", "EBITDA", "EBIT"]) {
+    assert.ok(is.how.includes(step), `missing rung: ${step}`);
+  }
+  assert.match(is.trap, /personnel/i);
+});
+
+test("consolidation keeps the full-elimination rule visible", () => {
+  const byTitle = t => context.cards.find(c => c.title === t);
+  assert.match(byTitle("Step 1 — Combine").trap, /100%/);
+  assert.match(byTitle("Step 3 — Eliminate Intragroup Transactions").meaning, /in full/i);
+  assert.match(byTitle("Non-controlling Interests").how, /85|100%/);
+
+  // The two goodwill methods must both be present with their own figures.
+  const two = byTitle("The Two Methods Worked Through");
+  assert.ok(two.how.includes("130") && two.how.includes("78"),
+    "both goodwill figures must be stated");
+});
+
+test("the six steps are listed in order", () => {
+  const card = context.cards.find(c => c.title === "The Six Steps");
+  const order = ["context", "first analysis", "common size", "indicators", "benchmarking", "interpretation"];
+  let at = -1;
+  for (const step of order) {
+    const i = card.how.toLowerCase().indexOf(step);
+    assert.ok(i > at, `step out of order or missing: ${step}`);
+    at = i;
   }
 });
