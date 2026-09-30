@@ -885,6 +885,25 @@
         ${acc.map(a => `<div class="row"><span>${esc(a.name)}</span><span>${eur(b[a.id])}</span></div>`).join("")}</div>`;
     }).join("");
   }
+  // For the annual report: every entry of the year (the cash flow statement and the changes in equity
+  // need them) and last year's closing position, so nothing has to be remembered from months ago.
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function yearJournalHtml(s) {
+    const entries = s.ledger.filter(e => e.year === s.year && e.label !== "Closing entry");
+    if (!entries.length) return `<p class="small">No entries yet this year.</p>`;
+    return `<p class="small">Day n of the game = month n of the year. Cash lines tell you what goes in the cash flow statement.</p><ul class="res">${entries.map(e =>
+      `<li><b>${esc(e.label)}</b> <small>${MONTHS[(e.day - 1) % 12]} ${O.calendarYear(s)}</small><br>${e.lines.map(lineText).join("<br>")}</li>`).join("")}</ul>`;
+  }
+  function openingHtml(s) {
+    if (s.year === 1) return `<p class="small">PolimiAFC S.p.A. was born this year: every balance started at zero.</p>`;
+    const b = O.balances(s, e => e.year < s.year);
+    return ["A", "L", "E"].map(t => {
+      const acc = D.ACCOUNTS.filter(a => a.type === t);
+      const tot = acc.reduce((x, a) => x + b[a.id], 0);
+      return `<div class="tb"><div class="tb-h"><span>${D.TYPE_NAMES[t]}</span><span>${eur(tot)}</span></div>
+        ${acc.filter(a => b[a.id]).map(a => `<div class="row"><span>${esc(a.name)}</span><span>${eur(b[a.id])}</span></div>`).join("")}</div>`;
+    }).join("");
+  }
   function companyBooks() {
     const s = S();
     const last = s.ledger.slice(-6).reverse();
@@ -958,6 +977,8 @@
       <p class="brief">Fill in the annual report from the books. Totals must add up; EPS to two decimals.</p>
       <details class="tbwrap"><summary>📒 Trial balance before closing</summary>${trialBalanceHtml(s)}
         <p class="small">Shares: 100,000 from the start; 20,000 more issued on 1 July ${D.Y}.</p></details>
+      <details class="tbwrap"><summary>📜 This year's journal (every entry)</summary>${yearJournalHtml(s)}</details>
+      <details class="tbwrap"><summary>📄 Last year's balance sheet (31 December ${O.calendarYear(s) - 1})</summary>${openingHtml(s)}</details>
       ${report.sections.map(sec => `<div class="lbl">${esc(sec.title)}</div>${sec.lines.map(l => numInput(l.key, l.label, true).replace("<label class=\"fld\">", `<label class="fld${l.total ? " total" : ""}">`)).join("")}`).join("")}
       ${go("SIGN THE REPORT ▶")}`, (root, done) => {
       root.onclick = ev => {
