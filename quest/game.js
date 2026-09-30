@@ -8,7 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 17; // shown on the title screen; the same number as the service worker cache (sw.js)
+  const VERSION = 18; // shown on the title screen; the same number as the service worker cache (sw.js)
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -333,24 +333,36 @@
     const c = OL.normalizeCareer(d);
     return `${OL.rankFor(c).name} · day ${c.day}, Q${OL.quarterOf(c.day)} ${OL.calendarYear(c)} · ${c.xp} XP · €${Math.round(c.money).toLocaleString("en-US")}`;
   }
+  // Saving a file from a web app: the share menu (iPhone: “Save to Files”) where available, otherwise a
+  // download. Returns { ok, text } — ok only when we know the copy was handed over.
   async function saveFile(p) {
     const name = BK.fileName(p), text = BK.toText(p);
     const blob = new Blob([text], { type: "application/json" });
-    try {
-      const f = new File([blob], name, { type: "application/json" });
-      if (navigator.canShare && navigator.canShare({ files: [f] })) {
+    const candidates = [];
+    try { candidates.push(new File([blob], name, { type: "application/json" })); } catch (e) {}
+    try { candidates.push(new File([text], name.replace(/\.json$/, ".txt"), { type: "text/plain" })); } catch (e) {}
+    for (const f of candidates) {
+      let can = false;
+      try { can = !!(navigator.canShare && navigator.canShare({ files: [f] })); } catch (e) {}
+      if (!can) continue;
+      try {
         await navigator.share({ files: [f], title: "PolimiAFC save" });
-        return "Shared. On iPhone, “Save to Files” keeps it in the Files app.";
+        return { ok: true, text: `Done. If you chose “Save to Files”, the file is in the Files app (Recents): ${f.name}.` };
+      } catch (e) {
+        if (e && e.name === "AbortError") return { ok: false, text: "Nothing saved: the share menu was closed. Try again and choose “Save to Files”." };
+        break;
       }
-    } catch (e) {
-      if (e && e.name === "AbortError") return "Cancelled.";
+    }
+    // A home-screen app on iPhone can't download files: say so instead of pretending.
+    if (navigator.standalone || (window.matchMedia && matchMedia("(display-mode: standalone)").matches && /iP(hone|ad|od)/.test(navigator.userAgent))) {
+      return { ok: false, text: "This app can't save files on this device. Use COPY THE CODE and paste it into Notes, or open the game in Safari and try again." };
     }
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url; a.download = name;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 10000);
-    return `Downloaded ${name}.`;
+    return { ok: true, text: `Download started: ${name}. Look in your Downloads folder (on iPhone: Files app → Downloads).` };
   }
   async function copyText(text, area) {
     try { await navigator.clipboard.writeText(text); return true; } catch (e) {
@@ -364,7 +376,9 @@
     return new Promise(resolve => {
       showOverlay(`<div class="panel box"><h2>YOUR PERSONNEL FILE</h2>
         <p>Your career: ${esc(describe(S))}</p>
-        <p class="small">Keep a copy somewhere safe (the Files app, Notes, iCloud Drive or an email to yourself). To carry on, even on another device, choose IMPORT A SAVE on the title screen.</p>
+        <p class="small">The game already saves itself on this device. This is a spare copy, for a new phone or if the browser's data is cleared. Keep it somewhere safe; to use it, choose IMPORT A SAVE on the title screen.</p>
+        <p class="small"><b>Last copy:</b> <span id="bkLast">${S.lastBackup ? esc(new Date(S.lastBackup).toLocaleString()) : "never"}</span></p>
+        <p class="small">SAVE AS A FILE opens the share menu: choose <b>“Save to Files”</b>, pick a folder (iCloud Drive is safest) and tap Save.</p>
         <div class="menu-list"><button data-b="file">▸ SAVE AS A FILE</button><button data-b="copy">▸ COPY THE CODE</button></div>
         <textarea class="code" readonly rows="3" aria-label="Save code">${esc(code)}</textarea>
         <p class="small bk-msg" id="bkMsg"></p>
@@ -374,8 +388,9 @@
         const b = ev.target.closest("[data-b], [data-m]"); if (!b) return;
         SFX.select();
         if (b.dataset.m === "back") { overlay.onclick = null; hideOverlay(); resolve(); return; }
-        if (b.dataset.b === "file") msg(await saveFile(p));
-        if (b.dataset.b === "copy") msg(await copyText(code, overlay.querySelector("textarea")) ? "Code copied. Paste it into Notes or a message to yourself." : "Couldn't copy automatically: select the code above and copy it.");
+        const done = () => { S.lastBackup = new Date().toISOString(); save(); $("#bkLast").textContent = new Date(S.lastBackup).toLocaleString(); };
+        if (b.dataset.b === "file") { const r = await saveFile(p); if (r.ok) done(); msg(r.text); }
+        if (b.dataset.b === "copy") { const ok = await copyText(code, overlay.querySelector("textarea")); if (ok) done(); msg(ok ? "Code copied. Now paste it into Notes or a message to yourself: that paste is your copy." : "Couldn't copy automatically: select the code above and copy it."); }
       };
     });
   }
