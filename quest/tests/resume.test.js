@@ -123,3 +123,19 @@ test("old saves gain the new fields", () => {
   const s = O.normalizeCareer({ mode: "career", rank: "intern", ledger: [], queue: [] });
   assert.deepEqual([s.done, s.planned, s.closedQ], [[], "", ""]);
 });
+
+test("the 'rent used' memo gives the figures to work out the amount, also in saves from before", () => {
+  const s = O.newCareer();
+  s.day = 6;
+  const job = O.quarterClose(s).find(j => j.title === "Rent used");
+  assert.match(job.memo, /€9,000/);
+  assert.match(job.memo, /April to June/);
+  assert.match(job.why, /€1,500 a month/);
+  const old = JSON.parse(JSON.stringify(s));
+  old.queue = [Object.assign({}, job, { memo: "Three more months of the prepaid rent have been used (April to June): adjust the books." })];
+  old.carrying = null;
+  const back = O.normalizeCareer(old);
+  assert.match(back.queue[0].memo, /€9,000/);
+  assert.match(back.queue[0].memo, /April to June/);
+  assert.deepEqual(back.queue[0].lines, job.lines);
+});

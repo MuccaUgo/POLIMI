@@ -611,6 +611,12 @@
     return null;
   }
 
+  // The rent paid in advance on day 4 of year 1 is used up three months at a time: the memo gives the
+  // figures to work out the part used (the player does the division, not their memory).
+  const rentPaid = () => { const e = D.YEAR_ONE.find(x => x.title === "Rent in advance"); return e ? e.lines.find(l => l[0] === "prepaid")[1] : 9000; };
+  const rentUsedMemo = months => `Three more months of the prepaid rent have been used (${months}). Remember: on day 4 we paid ${eur(rentPaid())} in advance for the six months from April to September. Move the part used from prepaid rent to rent expense.`;
+  const rentUsedWhy = amt => `${eur(rentPaid())} ÷ 6 months = ${eur(rentPaid() / 6)} a month; × 3 months = ${eur(amt)}. The prepaid asset goes down and this quarter's rent expense goes up. No cash moves now: it left on day 4.`;
+
   // The postings to make when a quarter closes.
   function quarterClose(career) {
     const q = quarterOf(career.day);
@@ -629,7 +635,7 @@
       } else if (kind === "rentCash") {
         ev = { title: "Quarterly rent", memo: `Rent for the quarter paid by bank transfer: ${eur(D.RENT_QUARTER)}.`, lines: [["rent", D.RENT_QUARTER], ["cash", -D.RENT_QUARTER]], why: "This quarter's use of the office: an expense, paid in cash." };
       } else if (kind === "rentUsed") {
-        ev = { title: "Rent used", memo: `Three more months of the prepaid rent have been used (${text}): adjust the books.`, lines: [["rent", amt], ["prepaid", -amt]], why: `The prepaid asset is used up month by month: ${eur(amt)} becomes this quarter's expense. No cash moves now.` };
+        ev = { title: "Rent used", memo: rentUsedMemo(text), lines: [["rent", amt], ["prepaid", -amt]], why: rentUsedWhy(amt) };
       } else if (kind === "staff") {
         ev = { title: "Salaries", memo: `${text}: ${eur(amt)}, paid.`, lines: [["wages", amt], ["cash", -amt]], why: "The staff's work in the period is an expense; it's paid, so cash goes down." };
       }
@@ -859,6 +865,14 @@
     ["clientRev", "jobsOk"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
     ["ledger", "queue", "recent", "done"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
     ["planned", "closedQ"].forEach(k => { if (typeof out[k] !== "string") out[k] = ""; });
+    // Rent memos saved before they carried the figures get them now.
+    const fixRent = j => {
+      if (!j || j.title !== "Rent used" || /in advance for/.test(j.memo || "")) return j;
+      const m = (j.memo || "").match(/\(([^)]+)\)/), rent = (j.lines || []).find(l => l[0] === "rent");
+      return Object.assign({}, j, { memo: rentUsedMemo(m ? m[1] : "three months"), why: rent ? rentUsedWhy(rent[1]) : j.why });
+    };
+    out.queue = out.queue.map(fixRent);
+    out.carrying = fixRent(out.carrying);
     out.recent = out.recent.filter(k => typeof k === "string").slice(-RECENT_MAX);
     if (out.rank === "accountant") out.rank = "analyst";
     if (!D.RANKS.some(r => r.id === out.rank)) out.rank = "intern";
