@@ -8,7 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 13; // shown on the title screen; the same number as the service worker cache (sw.js)
+  const VERSION = 14; // shown on the title screen; the same number as the service worker cache (sw.js)
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -276,7 +276,7 @@
     held = null; hero.queue = []; hero.moving = false;
     clearTimeout(musicTimer); currentSong = null;
     $("#task").hidden = true;
-    $("#todo").innerHTML = "";
+    $("#tabBody").innerHTML = "";
     $("#hudPlace").textContent = "PolimiAFC"; $("#hudStats").innerHTML = "";
     const job = load(CAREER_KEY);
     showOverlay(`<div class="title">
@@ -292,7 +292,7 @@
         </div>
       </div>
       <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
-      <p class="help">Tap the office to walk and use things, or tap a job in the list below the screen.</p>
+      <p class="help">Tap the office to walk and use things. Below the screen: the firm's books and the codex.</p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
     tc.imageSmoothingEnabled = false;

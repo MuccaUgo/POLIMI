@@ -37,7 +37,11 @@
     <div id="fade"></div>
   </div>
   <div id="pad">
-    <div id="todo" aria-label="Where the work is"></div>
+    <div id="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="books">📒 BOOKS</button>
+      <button type="button" role="tab" data-tab="codex">📖 CODEX</button>
+    </div>
+    <div id="tabBody"></div>
     <div class="pills">
       <button id="btnSound" class="pill">SOUND</button>
       <button id="btnMenu" class="pill">MENU</button>
@@ -58,6 +62,7 @@
 <script src="office-study.js"></script>
 <script src="office-exam.js"></script>
 <script src="office-planning.js"></script>
+<script src="office-codex.js"></script>
 <script src="office-ui.js"></script>
 <script src="backup.js"></script>
 <script src="game.js"></script>
