@@ -8,7 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 19;
+  const VERSION = 20;
   // Suggestions and thanks go to the author's Politecnico address.
   const CONTACT = "marco7.casati@mail.polimi.it";
   const contactHref = () => `mailto:${CONTACT}?subject=${encodeURIComponent("PolimiAFC · suggestion")}&body=${encodeURIComponent(`\n\n— PolimiAFC version ${VERSION}`)}`; // shown on the title screen; the same number as the service worker cache (sw.js)
