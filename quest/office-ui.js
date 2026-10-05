@@ -1088,6 +1088,7 @@
         <button data-m="weak">▸ EXAM PREP · WEAK SPOTS</button>
         <button data-m="ladder">▸ CAREER LADDER</button>
         <button data-m="codex">▸ CODEX</button>
+        <a class="menu-link" href="${E.contactHref()}">✉ SUGGESTIONS OR THANKS</a>
         <button data-m="title">▸ TITLE SCREEN</button>
         <button data-m="close">▸ BACK TO WORK</button>
       </div></div>`);

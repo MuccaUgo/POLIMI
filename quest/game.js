@@ -8,7 +8,10 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 18; // shown on the title screen; the same number as the service worker cache (sw.js)
+  const VERSION = 19;
+  // Suggestions and thanks go to the author's Politecnico address.
+  const CONTACT = "marco7.casati@mail.polimi.it";
+  const contactHref = () => `mailto:${CONTACT}?subject=${encodeURIComponent("PolimiAFC · suggestion")}&body=${encodeURIComponent(`\n\n— PolimiAFC version ${VERSION}`)}`; // shown on the title screen; the same number as the service worker cache (sw.js)
 
   const cv = $("#cv"), ctx = cv.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -293,6 +296,7 @@
       </div>
       <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
       <p class="help">Tap the office to walk and use things. Below the screen: the firm's books and the codex.</p>
+      <p class="contact">Suggestions or thanks? <a href="${contactHref()}">✉ Write to Marco</a><br><span>${CONTACT}</span></p>
     </div>`);
     const tc = $("#titleCv").getContext("2d");
     tc.imageSmoothingEnabled = false;
@@ -541,7 +545,7 @@
   UI.install({
     state: () => S, rnd, say, sayAll, ask, closeDialog, script, showOverlay, hideOverlay, overlay, music, save, fade, wait,
     sfx: name => SFX[name] && SFX[name](), tileAt: L.tileAt, isBusy: () => busy, setBusy: v => { busy = v; },
-    toTitle: () => { save(); titleScreen(); }, backup: () => backupScreen(), walkTo: (x, y) => { ac(); walkTo(x, y); }
+    toTitle: () => { save(); titleScreen(); }, backup: () => backupScreen(), contactHref, walkTo: (x, y) => { ac(); walkTo(x, y); }
   });
   titleScreen();
   requestAnimationFrame(loop);
