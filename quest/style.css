@@ -215,3 +215,7 @@ textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo,
 .pill:disabled { opacity: .6; }
 .title .version { margin: 6px 0 0; font-family: var(--pixel); font-size: 7px; color: #6f6a92; text-align: center; }
 #tabBody .cx span { font-size: 17px; }
+.title .contact { margin: 14px 0 0; font-size: 18px; color: #bdb8da; text-align: center; line-height: 1.2; }
+.title .contact a { color: #f4d24c; }
+.title .contact span { font-size: 15px; color: #8a86b0; }
+.menu-list a.menu-link { display: block; font-family: var(--pixel); font-size: 10px; text-align: left; min-height: 46px; box-sizing: border-box; padding: 16px 12px 8px; background: var(--cream); color: var(--ink); border: 3px solid var(--ink); border-radius: 4px; text-decoration: none; }
