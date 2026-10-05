@@ -370,6 +370,8 @@
 
   async function marco() {
     const s = S(), who = "Marco";
+    // His check already in your hands (e.g. after a reload): carry on with it.
+    if (s.carrying && s.carrying.work === "marco") { E.closeDialog(); return work(s.carrying); }
     const job = s.queue.find(j => j.pickup === "marco");
     if (!job) return E.say(pick(D.LINES.marcoIdle), who);
     if (s.carrying) return E.say("Busy? Finish that first, then come and save me from myself.", who);
