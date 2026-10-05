@@ -219,3 +219,12 @@ textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo,
 .title .contact a { color: #f4d24c; }
 .title .contact span { font-size: 15px; color: #8a86b0; }
 .menu-list a.menu-link { display: block; font-family: var(--pixel); font-size: 10px; text-align: left; min-height: 46px; box-sizing: border-box; padding: 16px 12px 8px; background: var(--cream); color: var(--ink); border: 3px solid var(--ink); border-radius: 4px; text-decoration: none; }
+.share { text-align: center; }
+.share .qr { display: block; width: min(66vw, 264px); height: auto; margin: 6px auto; image-rendering: pixelated; border: 3px solid var(--ink); border-radius: 4px; }
+.share .link { font-size: 18px; word-break: break-all; margin: 6px 0 10px; }
+.share .menu-list { text-align: left; }
+.title .install { width: min(100%, 340px); margin: 14px auto 0; padding: 10px 12px; border: 3px dashed #f4d24c; border-radius: 6px; text-align: left; font-size: 18px; color: var(--cream); line-height: 1.1; }
+.title .install b { font-family: var(--pixel); font-size: 9px; color: #f4d24c; }
+.title .install p { margin: 6px 0 0; }
+.title .install .small { color: #bdb8da; }
+.title .install .menu-list { margin-top: 6px; }

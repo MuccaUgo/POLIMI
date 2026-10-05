@@ -8,7 +8,19 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 20;
+  const VERSION = 21;
+  const GAME_URL = "https://muccaugo.github.io/POLIMI/quest/";
+  // Installing on the Home screen. Android/Chrome offers its own install prompt; iPhone needs Safari's Share menu.
+  let installEvt = null;
+  window.addEventListener("beforeinstallprompt", ev => { ev.preventDefault(); installEvt = ev; const b = document.querySelector('[data-t="install"]'); if (b) b.hidden = false; });
+  const isInstalled = () => !!(navigator.standalone || (window.matchMedia && matchMedia("(display-mode: standalone)").matches));
+  const platform = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : "other";
+  const INSTALL_HOWTO = {
+    ios: "Open this page in Safari, tap Share (the square with the arrow), then “Add to Home Screen”.",
+    android: "In Chrome tap “Install app” below, or the ⋮ menu → “Add to Home screen” / “Install app”.",
+    other: "On a phone: iPhone → Safari, Share → “Add to Home Screen”. Android → Chrome, ⋮ menu → “Install app”."
+  };
+  const INSTALL_TEXT = "Install it first: on iPhone open it in Safari, tap Share → “Add to Home Screen”; on Android open it in Chrome, ⋮ menu → “Install app”. Then always play from the icon: the career is saved on the phone, and on iPhone the icon and Safari keep separate saves.";
   // Suggestions and thanks go to the author's Politecnico address.
   const CONTACT = "marco7.casati@mail.polimi.it";
   const contactHref = () => `mailto:${CONTACT}?subject=${encodeURIComponent("PolimiAFC · suggestion")}&body=${encodeURIComponent(`\n\n— PolimiAFC version ${VERSION}`)}`; // shown on the title screen; the same number as the service worker cache (sw.js)
@@ -294,7 +306,10 @@
           <button data-t="cnew">▸ NEW CAREER</button>
         </div>
       </div>
-      <div class="menu-list import"><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
+      ${isInstalled() ? "" : `<div class="install"><b>📲 Add it to your Home screen</b><p>${esc(INSTALL_HOWTO[platform()])}</p>
+        <p class="small">Then always play from the icon: your career is saved on the phone${platform() === "ios" ? ", and the icon and Safari keep separate saves" : ""}.</p>
+        <div class="menu-list"><button data-t="install" ${installEvt ? "" : "hidden"}>▸ INSTALL APP</button></div></div>`}
+      <div class="menu-list import"><button data-t="share">⇪ SHARE THE GAME</button><button data-t="import">▸ IMPORT A SAVE</button><button data-t="update">⟳ UPDATE THE GAME</button></div>
       <p class="help">Tap the office to walk and use things. Below the screen: the firm's books and the codex.</p>
       <p class="contact">Suggestions or thanks? <a href="${contactHref()}">✉ Write to Marco</a><br><span>${CONTACT}</span></p>
     </div>`);
@@ -317,6 +332,11 @@
       overlay.onclick = null;
       const t = b.dataset.t;
       if (t === "import") { await importScreen(); return; }
+      if (t === "share") { await shareScreen(); return; }
+      if (t === "install") {
+        if (installEvt) { installEvt.prompt(); try { await installEvt.userChoice; } catch (e) {} installEvt = null; }
+        titleScreen(); return;
+      }
       if (t === "update") { refreshApp(); return; }
       if (t === "cnew") {
         if (job && !confirm("Start a new career? Your saved career will be replaced.")) { titleScreen(); return; }
@@ -395,6 +415,33 @@
         const done = () => { S.lastBackup = new Date().toISOString(); save(); $("#bkLast").textContent = new Date(S.lastBackup).toLocaleString(); };
         if (b.dataset.b === "file") { const r = await saveFile(p); if (r.ok) done(); msg(r.text); }
         if (b.dataset.b === "copy") { const ok = await copyText(code, overlay.querySelector("textarea")); if (ok) done(); msg(ok ? "Code copied. Now paste it into Notes or a message to yourself: that paste is your copy." : "Couldn't copy automatically: select the code above and copy it."); }
+      };
+    });
+  }
+  // Share the game: a QR code to scan from another phone, the system share menu, an email, the link.
+  function shareScreen() {
+    const text = "PolimiAFC: a pixel-art accounting career to practise for the AFC exam at Politecnico di Milano. Play it on your phone:";
+    const mail = `mailto:?subject=${encodeURIComponent("PolimiAFC · an accounting game for the AFC exam")}&body=${encodeURIComponent(`${text}\n${GAME_URL}\n\n${INSTALL_TEXT}`)}`;
+    return new Promise(resolve => {
+      showOverlay(`<div class="panel box share"><h2>SHARE THE GAME</h2>
+        <p class="small">Let a friend scan this with the phone's camera:</p>
+        <img class="qr" src="qr.svg" alt="QR code of ${esc(GAME_URL)}" width="264" height="264">
+        <p class="link">${esc(GAME_URL)}</p>
+        <p class="small">${esc(INSTALL_TEXT)}</p>
+        <div class="menu-list">
+          ${navigator.share ? `<button data-b="share">⇪ SHARE… (MESSAGES, WHATSAPP…)</button>` : ""}
+          <a class="menu-link" href="${mail}">✉ SEND BY EMAIL</a>
+          <button data-b="copy">▸ COPY THE LINK</button>
+          <button data-m="back">▸ BACK</button>
+        </div>
+        <p class="small bk-msg" id="bkMsg"></p></div>`);
+      const msg = t => { $("#bkMsg").textContent = t; };
+      overlay.onclick = async ev => {
+        const b = ev.target.closest("[data-b], [data-m]"); if (!b) return;
+        SFX.select();
+        if (b.dataset.m === "back") { overlay.onclick = null; resolve(); titleScreen(); return; }
+        if (b.dataset.b === "share") { try { await navigator.share({ title: "PolimiAFC", text: `${text}\n${INSTALL_TEXT}`, url: GAME_URL }); msg("Shared. Thanks!"); } catch (e) { if (!e || e.name !== "AbortError") msg("Couldn't open the share menu: copy the link instead."); } }
+        if (b.dataset.b === "copy") { try { await navigator.clipboard.writeText(GAME_URL); msg("Link copied."); } catch (e) { msg("Select the link above and copy it."); } }
       };
     });
   }
