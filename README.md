@@ -99,6 +99,16 @@ The Accounting, Finance & Control hub started life at `/fa/` as a Financial Acco
 holds a redirect page that retires the old service worker and forwards to `/afc/`; saved progress is carried
 over from the `fa_` key prefix to `afc_` the first time the new hub loads.
 
+## Pixel-art internships: Polimi Interns
+
+[`interns/`](interns/) is **Polimi Interns**, a single-player pixel-art game about learning real jobs. You create
+a student (look, hair, clothes, glasses, degree programme), walk around Piazza Leonardo da Vinci and accept an
+internship at the Career Service in Edificio 1, then take the tram to the host company. The first track is
+Finance & Control at Brera Components S.r.l.: onboarding with the tutor, Giulia, then a September bank
+reconciliation graded line by line. Progress is counted in completed projects and badges, not levels. Weeks
+3–12 of the AFC internship and the other tracks are still placeholders. One self-contained `index.html`; the
+save lives in `localStorage` under `polimi-interns-v03`.
+
 ## What each hub offers
 
 - **Programme** *(Accounting, Finance & Control only)* — the AFC26 modules and the lecture calendar, with the
@@ -165,6 +175,7 @@ quest/          PolimiAFC career: engine (game.js, art.js, world.js, logic.js), 
                 office-data.js, office-logic.js, office-analysis.js, office-study.js, office-exam.js, office-planning.js, office-codex.js, office-ui.js),
                 save backups (backup.js), plus index.html, style.css, sw.js, manifest.json, icons
 quest/tests/    engine, career, analysis, statements, study-desk, exam, backup and service-worker tests
+interns/        Polimi Interns: one self-contained index.html (engine, pixel art and content)
 fa/index.html   redirect from the hub's former path
 ```
 
