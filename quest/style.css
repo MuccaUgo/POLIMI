@@ -228,3 +228,21 @@ textarea.code { width: 100%; margin-top: 10px; font-family: ui-monospace, Menlo,
 .title .install p { margin: 6px 0 0; }
 .title .install .small { color: #bdb8da; }
 .title .install .menu-list { margin-top: 6px; }
+/* ---------- The pocket calculator (under SUBMIT) ---------- */
+.calcbox { margin-top: 10px; }
+.calc-toggle { width: 100%; min-height: 42px; font-family: var(--pixel); font-size: 9px; letter-spacing: 1px; color: var(--ink); background: var(--cream); border: 2px dashed var(--ink); border-radius: 4px; }
+.calc { margin-top: 6px; padding: 8px; background: var(--ink); border-radius: 6px; }
+.calc[hidden] { display: none; }
+.calc-screen { background: #c9d6a3; color: #1c2a12; border-radius: 3px; padding: 4px 8px; text-align: right; font-family: var(--text); margin-bottom: 6px; box-shadow: inset 0 2px 0 #9aa77a; }
+.calc-expr { font-size: 24px; min-height: 26px; word-break: break-all; }
+.calc-res { font-size: 18px; min-height: 20px; color: #3d5228; }
+.calc-keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+.calc-keys button { min-height: 42px; font-family: var(--text); font-size: 24px; color: var(--ink); background: var(--paper); border: none; border-radius: 4px; box-shadow: inset 0 -3px 0 #c9b58a; }
+.calc-keys button:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 #c9b58a; }
+.calc-keys button.op { background: var(--cream); }
+.calc-keys button.fn { background: #e9b8b0; }
+.calc-keys button.use { grid-column: span 3; font-family: var(--pixel); font-size: 9px; background: #93d46a; }
+.calc-keys button.eq { grid-column: span 2; background: #f4d24c; }
+.calc-keys button[hidden] { display: none; }
+.calc-keys button.use[hidden] + .eq { grid-column: span 5; }
+input.calc-filled { background: #f4d24c !important; transition: background .2s; }
