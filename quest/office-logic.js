@@ -658,7 +658,7 @@
     const totalLiab = round2(b.payables + b.wagesPayable + b.loan + b.dividendsPayable);
     const reserves = round2(b.legalReserve + b.retained);
     const totalEq = round2(b.shareCapital + b.sharePremium + reserves + p.profit);
-    const eps = round2(p.profit / weightedShares(career));
+    const eps = round4(p.profit / weightedShares(career)); // rounded only when shown: €21,600 ÷ 110,000 = €0.1964, not €0.20
     const L = (key, label, answer, why, opts) => Object.assign({ key, label, answer, why }, opts);
     // Cash flow statement: every cash movement of the year, by section.
     const cf = { operating: 0, investing: 0, financing: 0 };

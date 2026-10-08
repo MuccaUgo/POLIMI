@@ -1027,7 +1027,7 @@
     const eps = report.sections[2].lines[1].answer;
     await E.sayAll([
       g.clean ? `Perfect! Coffee's on me. ${rw.xp > 0 ? `(+${rw.xp} XP and a €40 bonus.)` : ""}` : g.pass ? `Approved. A few notes from the auditors, but it balances. (+${rw.xp} XP)` : "We'll file it as corrected. Next year, fewer red marks please.",
-      `I posted the closing entry: revenue and expenses go to zero, and the ${profit >= 0 ? "profit" : "loss"} of ${eur(profit)} moves into retained earnings. EPS: €${eps.toFixed(2)}.`
+      `I posted the closing entry: revenue and expenses go to zero, and the ${profit >= 0 ? "profit" : "loss"} of ${eur(profit)} moves into retained earnings. EPS: €${eps.toFixed(4)}, about €${eps.toFixed(2)}.`
     ], "Giulia");
     if (!meeting) return afterJob(next);
     return E.say("Now the shareholders' meeting decides what to do with the profit. My memo is on my desk.", "Giulia");
