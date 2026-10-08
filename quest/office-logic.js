@@ -596,13 +596,13 @@
     if (!ev) return null;
     const id = `fe:${career.year}:${career.day}`;
     if (isPosted(career, id, ev.title, { year: career.year, day: career.day })) return null;
-    return { id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length };
+    return { id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length, dps: ev.dps };
   }
   function laterYearEvent(career) {
     const b = balances(career);
     const d = career.day;
     if (d === 1 && b.wagesPayable > 0) return { title: "Paying December wages", memo: `Pay the December wages we owed: ${eur(b.wagesPayable)}.`, lines: [["wagesPayable", -b.wagesPayable], ["cash", -b.wagesPayable]], why: "Settling a liability: cash down, wages payable down. The expense was already recorded last year." };
-    if (d === 2 && b.dividendsPayable > 0) return { title: "Paying the dividend", memo: `Pay the shareholders the dividend approved by the meeting: ${eur(b.dividendsPayable)}.`, lines: [["dividendsPayable", -b.dividendsPayable], ["cash", -b.dividendsPayable]], why: "The dividend became a liability when the meeting approved it; paying it just settles the debt." };
+    if (d === 2 && b.dividendsPayable > 0) return { dps: round4(b.dividendsPayable / b.shareCapital), title: "Paying the dividend", memo: `Pay the shareholders the dividend approved by the meeting: ${eur(b.dividendsPayable)}.`, lines: [["dividendsPayable", -b.dividendsPayable], ["cash", -b.dividendsPayable]], why: "The dividend became a liability when the meeting approved it; paying it just settles the debt." };
     if (d === 4) return { title: "Office supplies", memo: "Paper, toner and coffee for the year: €400, paid by card.", lines: [["consumables", 400], ["cash", -400]], why: "Used up in the period: an expense." };
     if (d === 6 && b.loan >= 6000) return { title: "Loan repayment", memo: "Repay €6,000 of the Banca Brera loan.", lines: [["loan", -6000], ["cash", -6000]], why: "Repaying principal lowers the debt and the cash. It's not an expense." };
     if (d === 10 && b.loan > 0) { const i = round2(b.loan * 0.04); return { title: "Loan interest", memo: `Pay a year's interest on the loan: 4% on ${eur(b.loan)}.`, lines: [["interest", i], ["cash", -i]], why: `${eur(b.loan)} × 4% = ${eur(i)}: this year's interest expense.` }; }
@@ -741,6 +741,11 @@
   }
   // The shareholders' meeting: 5% to the legal reserve (up to 20% of capital) and, if profit allows, a dividend.
   function agm(career, profit) {
+    const m = agmMeeting(career, profit);
+    if (m && career.shares > 0 && m.lines.some(l => l[0] === "dividendsPayable")) m.memo += ` Your ${career.shares.toLocaleString("en-US")} shares will receive ${eur(career.shares * 0.05)} when it's paid.`;
+    return m;
+  }
+  function agmMeeting(career, profit) {
     if (profit <= 0) return null;
     if (isPosted(career, `agm:${career.year}`, "The shareholders' meeting", { year: career.year + 1, day: 1 })) return null;
     const b = balances(career);
@@ -792,10 +797,63 @@
     if (score >= INTERVIEW.pass) {
       career.rank = nextRank(career).id;
       career.interviewRetry = 0;
+      grantShares(career);
       return true;
     }
     career.interviewRetry = daysPlayed + INTERVIEW.waitDays;
     return false;
+  }
+
+  // ---------- Your PolimiAFC shares ----------
+  // Each promotion comes with shares that Giulia, a founding shareholder, transfers from her own stake. The number
+  // of shares in the company doesn't change, so PolimiAFC's books, EPS and annual report don't either: a deal
+  // between shareholders is not the company's transaction. The higher the rank, the bigger the grant.
+  const SHARE_GRANT = { junior: 200, analyst: 500, senior: 1000, supervisor: 2000, manager: 3500, partner: 6000 };
+  const round4 = x => Math.round(x * 10000) / 10000;
+  function grantShares(career) {
+    const n = SHARE_GRANT[career.rank] || 0;
+    if (!n) return 0;
+    career.shares = (career.shares || 0) + n;
+    if (!Array.isArray(career.shareLog)) career.shareLog = [];
+    career.shareLog.push({ rank: career.rank, shares: n, year: career.year, day: career.day });
+    return n;
+  }
+  // Your stake, from the books: shares in the company = share capital ÷ €1 nominal; book value = equity ÷ shares.
+  function myStake(career) {
+    const b = balances(career), outstanding = Math.round(b.shareCapital);
+    const equity = b.shareCapital + b.sharePremium + b.legalReserve + b.retained + profitOf(b).profit;
+    const shares = career.shares || 0, bvps = outstanding ? equity / outstanding : 0;
+    return { shares, outstanding, pct: outstanding ? shares / outstanding * 100 : 0, bvps: round4(bvps), value: round2(shares * round4(bvps)), dividends: round2(career.dividends || 0) };
+  }
+  // On the day the dividend is paid, a shareholder works out their own part (and then receives it).
+  function dividendJob(career) {
+    const b = balances(career), shares = career.shares || 0, outstanding = Math.round(b.shareCapital);
+    if (career.year < 2 || career.day !== 2 || !shares || !(b.dividendsPayable > 0) || !outstanding) return null;
+    const id = `div:${career.year}`;
+    if ((career.done || []).includes(id)) return null;
+    const dps = round4(b.dividendsPayable / outstanding), mine = round2(shares * dps), pct = round2(shares / outstanding * 100);
+    return {
+      id, type: "fill", pickup: "inbox", work: "desk", tier: tierOf(career), dividend: { amount: mine, dps, shares },
+      typeLabel: "YOUR SHARES",
+      doc: { kind: "Dividend notice", title: `PolimiAFC S.p.A. · dividend on the ${calendarYear(career) - 1} profit`, lines: [
+        ["Dividend per share", eur(dps)], ["Shares in the company", outstanding.toLocaleString("en-US")], ["Your shares", shares.toLocaleString("en-US")]] },
+      brief: "The shareholders' meeting approved a dividend, and today the company pays it. Work out your part.",
+      fields: [
+        { key: "mine", label: "Your dividend (€)", answer: mine, dec: true, tol: 0.01, why: `${shares.toLocaleString("en-US")} shares × ${eur(dps)} = ${eur(mine)}.` },
+        { key: "pct", label: "Your stake in the company (%)", answer: pct, dec: true, tol: 0.01, why: `${shares.toLocaleString("en-US")} ÷ ${outstanding.toLocaleString("en-US")} = ${pct}% of PolimiAFC.` }],
+      choice: { label: "In PolimiAFC's books, your dividend is…", options: ["Part of the dividend paid: cash and the dividend payable go down", "A staff cost, because you work here", "Nothing: it's a private matter"], answer: "Part of the dividend paid: cash and the dividend payable go down",
+        why: "To the company you're a shareholder like any other: your dividend is part of the total it pays out, never an expense. Only your salary is a staff cost." }
+    };
+  }
+  // Paid once, whatever the answer: the shareholder's money doesn't depend on the exercise.
+  function receiveDividend(career, job) {
+    if (!job || !job.dividend) return 0;
+    if (!Array.isArray(career.divPaid)) career.divPaid = [];
+    if (career.divPaid.includes(job.id)) return 0;
+    career.divPaid.push(job.id);
+    career.money = round2((career.money || 0) + job.dividend.amount);
+    career.dividends = round2((career.dividends || 0) + job.dividend.amount);
+    return job.dividend.amount;
   }
 
   // ---------- The day ----------
@@ -852,7 +910,7 @@
       v: 1, mode: "career", map: "office", x: 4, y: 6, dir: "up", sound: true, reportTries: 0,
       rank: "intern", xp: 0, money: 0, bonus: 0, streak: 0, day: 1, year: 1, interviewRetry: 0,
       sat: { forno: 60, verdi: 60, hotel: 60, pixel: 60, lario: 60 }, clientRev: {}, jobsOk: {}, ledger: [],
-      queue: [], recent: [], done: [], planned: "", closedQ: "", carrying: null, dayDone: 0, exam: false, phase: "intro",
+      queue: [], recent: [], done: [], planned: "", closedQ: "", carrying: null, shares: 0, dividends: 0, shareLog: [], divPaid: [], dayDone: 0, exam: false, phase: "intro",
       stats: { jobs: 0, right: 0, days: 0, steps: 0, reports: [] }
     };
   }
@@ -863,7 +921,8 @@
     out.sat = Object.assign(newCareer().sat, s.sat);
     out.stats = Object.assign(newCareer().stats, s.stats);
     ["clientRev", "jobsOk"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
-    ["ledger", "queue", "recent", "done"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    ["ledger", "queue", "recent", "done", "shareLog", "divPaid"].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+    ["shares", "dividends"].forEach(k => { if (!(typeof out[k] === "number" && out[k] >= 0)) out[k] = 0; });
     ["planned", "closedQ"].forEach(k => { if (typeof out[k] !== "string") out[k] = ""; });
     // Rent memos saved before they carried the figures get them now.
     const fixRent = j => {
@@ -880,7 +939,7 @@
   }
 
   const api = {
-    eur, acct, cfCategory, isPosted, dayKey, markDone, advance, withMemory, remember, pickFresh, freshOrder, dayTypes, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
+    eur, acct, cfCategory, isPosted, dayKey, markDone, advance, SHARE_GRANT, grantShares, myStake, dividendJob, receiveDividend, withMemory, remember, pickFresh, freshOrder, dayTypes, rankFor, nextRank, tierOf, bonusFor, MIX, INTERVIEW_PLAN, itemsFor, clientJob, MAKERS, FILLS, ORDER_ITEMS, grade, gradePosting, imbalance, normalizeLines, side,
     reward, quarterOf, quarterKey, calendarYear, post, balances, profitOf, quarterly, trialOK, firmEvent, quarterClose,
     weightedShares, annualReport, gradeReport, closeYear, agm, INTERVIEW, interviewStatus, planInterview, finishInterview, planDay, clientQuarter, newCareer, normalizeCareer
   };

@@ -8,7 +8,7 @@
   const TILE = 16, VW = 10, VH = 9;
   const DELTA = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
   const CAREER_KEY = "afc_career";
-  const VERSION = 22;
+  const VERSION = 23;
   const GAME_URL = "https://muccaugo.github.io/POLIMI/quest/";
   // Installing on the Home screen. Android/Chrome offers its own install prompt; iPhone needs Safari's Share menu.
   let installEvt = null;

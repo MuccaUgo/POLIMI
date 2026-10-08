@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
 const prefix = `ledger-quest:${scope}:`;
-const currentCache = `${prefix}v22`;
+const currentCache = `${prefix}v23`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
 const deferred = () => {

@@ -31,6 +31,9 @@
     ["Equity", "Share capital and premium", "Shares issued above their nominal value: share capital takes the nominal value, the rest goes to the share premium reserve."],
     ["Equity", "Legal reserve", "Italian S.p.A.s set aside 5% of each year's profit until the reserve reaches 20% of share capital (art. 2430 c.c.)."],
     ["Equity", "Dividends", "Approved by the shareholders' meeting, they leave retained earnings and are a liability until paid. Never an expense."],
+    ["Equity", "Dividend per share", "The dividend declared ÷ the number of shares. A shareholder receives dividend per share × the shares they own."],
+    ["Equity", "Book value per share", "Equity ÷ number of shares: what each share is worth in the books (not its market price)."],
+    ["Equity", "Shares changing hands", "When a shareholder sells or gives shares to someone else, the company records nothing: same share capital, same number of shares, same EPS. Only new shares issued by the company enter its books."],
     ["Equity", "Retained earnings", "Past profits kept in the business instead of being paid out: equity."],
     ["Equity", "EPS", "Earnings per share = profit ÷ weighted-average number of shares in the year. Keep all the decimals until the end; round only when you show it."],
     // ---------- The statements ----------
