@@ -74,6 +74,7 @@ function career({ seed, years, skill, reloads }) {
     const refs = s.ledger.filter(e => e.ref).map(e => e.ref);
     if (new Set(refs).size !== refs.length) fail("an entry was booked twice");
     if (Object.values(O.balances(s)).some(v => !Number.isFinite(v)) || !Number.isFinite(s.money)) fail("a figure is not a number");
+    if (O.balances(s).cash < 0) fail(`cash below zero: ${O.balances(s).cash}`);
     if (O.interviewStatus(s).state === "ready") {
       const jobs = O.planInterview(s, r), before = s.ledger.length, shares = s.shares;
       jobs.forEach(j => { if (!O.grade(j, correct(j)).ok) fail("an interview question rejects its right answer"); });
@@ -112,9 +113,9 @@ for (const skill of [0.5, 0.85, 0.99]) {
       assert.ok(JSON.stringify(s).length < 150 * 1024, "the save stays small");
       assert.ok(s.recent.length <= 150 && s.done.length <= 80, "the memories stay bounded");
       assert.equal(new Set(s.divPaid).size, s.divPaid.length, "each dividend paid once");
-      // A good player keeps the firm solvent. (A weaker player can drive the cash below zero over the years: a known
-      // issue of the game's economy, still to be decided.)
-      if (skill >= 0.85) assert.ok(years.every(y => y.cash >= 0), `seed ${seed}: cash below zero`);
+      // The credit line keeps the bank account above zero, even for a weak player; a good one never needs it for long.
+      assert.ok(years.every(y => y.cash >= 0), `seed ${seed}: cash below zero`);
+      if (skill >= 0.85) assert.equal(O.balances(s).creditLine, 0, `seed ${seed}: the credit line is paid back`);
     }
   });
 }

@@ -556,7 +556,7 @@
   }
   // Which section of the cash flow statement an entry's cash belongs to.
   function cfCategory(label) {
-    if (/is born|bank loan|capital increase|loan repayment|dividend/i.test(label)) return "financing";
+    if (/is born|bank loan|capital increase|loan repayment|dividend|drawing on the credit line|repaying the credit line/i.test(label)) return "financing";
     if (/laptop supplier|laptops/i.test(label)) return "investing";
     return "operating";
   }
@@ -642,8 +642,39 @@
       const id = `qc:${career.year}:${q}:${kind}`;
       if (ev && !isPosted(career, id, ev.title, { year: career.year, day: career.day })) jobs.push({ id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length, close: true });
     }
+    // The credit line: interest on what was used during the quarter, then a draw if cash would run low, or a repayment
+    // if there's plenty. All measured before this close's own credit-line entries, so working it out again (after a
+    // reload) gives the same answer and never books a second draw or an interest on today's draw.
+    if (career.closedQ === quarterKey(career)) return jobs;
+    const own = `qc:${career.year}:${q}:line`;
+    const b = balances(career, e => !(e.ref && e.ref.startsWith(own)));
+    const add = (kind, ev) => {
+      const id = `qc:${career.year}:${q}:${kind}`;
+      if (!isPosted(career, id, ev.title, { year: career.year, day: career.day })) jobs.push({ id, type: "posting", pickup: "giulia", work: "books", title: ev.title, memo: ev.memo, lines: ev.lines, why: ev.why, tier: tierOf(career), nLines: ev.lines.length, close: true });
+    };
+    if (b.creditLine > 0) {
+      const i = Math.round(b.creditLine * CREDIT_LINE.rate / 4);
+      add("lineInterest", { title: "Interest on the credit line", memo: `Interest on the credit line for the quarter: ${CREDIT_LINE.rate * 100}% a year on the ${eur(b.creditLine)} we're using, paid today.`, lines: [["interest", i], ["cash", -i]],
+        why: `${eur(b.creditLine)} × ${CREDIT_LINE.rate * 100}% × 3/12 = ${eur(i)}. Interest is paid only on what is used, not on the whole limit: an expense, and cash goes down. (A committed line also charges a small fee on the unused part: we leave it out here.)` });
+    }
+    const settled = isPosted(career, `${own}Draw`, "Drawing on the credit line", { year: career.year, day: career.day }) || isPosted(career, `${own}Repay`, "Repaying the credit line", { year: career.year, day: career.day });
+    const after = round2(balances(career).cash + jobs.reduce((s, j) => s + j.lines.filter(l => l[0] === "cash").reduce((x, l) => x + l[1], 0), 0));
+    if (settled) { /* this quarter's draw or repayment is already in the books */ }
+    else if (after < CREDIT_LINE.floor) {
+      const draw = Math.min(CREDIT_LINE.limit - b.creditLine, Math.ceil((CREDIT_LINE.target - after) / 5000) * 5000);
+      // First thing in the close, so the bank account never dips below zero while the bills are paid.
+      if (draw > 0) { add("lineDraw", { title: "Drawing on the credit line", memo: `After this quarter's payments our cash would be only ${eur(after)}. Before paying, I'm drawing ${eur(draw)} from our committed credit line with Banca Brera (limit ${eur(CREDIT_LINE.limit)}).`, lines: [["cash", draw], ["creditLine", draw]],
+        why: "Borrowed money: cash goes up and so does a liability, the credit line used. It's short-term financing (a financing inflow), not revenue. We'll pay it back when the cash comes in." });
+        if (jobs.length && jobs[jobs.length - 1].id.endsWith(":lineDraw")) jobs.unshift(jobs.pop()); }
+    } else if (b.creditLine > 0 && after > CREDIT_LINE.repayAbove) {
+      const back = Math.min(b.creditLine, Math.floor((after - CREDIT_LINE.target) / 5000) * 5000);
+      if (back > 0) add("lineRepay", { title: "Repaying the credit line", memo: `Cash is comfortable again (${eur(after)} after this quarter's payments): repay ${eur(back)} of the credit line.`, lines: [["creditLine", -back], ["cash", -back]],
+        why: "Less cash, less debt: a financing outflow. Repaying what we borrowed is not an expense; only the interest was." });
+    }
     return jobs;
   }
+  // A committed line with Banca Brera: the safety net that keeps the bank account from going below zero.
+  const CREDIT_LINE = { limit: 500000, rate: 0.06, floor: 15000, target: 25000, repayAbove: 60000 };
 
   // ---------- Annual report ----------
   function weightedShares(career) {
@@ -655,7 +686,7 @@
     const flows = balances(career, e => e.year === career.year && e.label !== "Closing entry");
     const p = profitOf(flows);
     const totalAssets = round2(b.cash + b.receivables + b.prepaid + b.equipment);
-    const totalLiab = round2(b.payables + b.wagesPayable + b.loan + b.dividendsPayable);
+    const totalLiab = round2(b.payables + b.wagesPayable + b.loan + b.creditLine + b.dividendsPayable);
     const reserves = round2(b.legalReserve + b.retained);
     const totalEq = round2(b.shareCapital + b.sharePremium + reserves + p.profit);
     const eps = round4(p.profit / weightedShares(career)); // rounded only when shown: €21,600 ÷ 110,000 = €0.1964, not €0.20
@@ -686,7 +717,7 @@
           L("prepaid", "Prepaid rent", b.prepaid, "Rent paid for future months."),
           L("equipment", "Equipment (net)", b.equipment, "Cost − depreciation so far."),
           L("totalAssets", "Total assets", totalAssets, "Sum of the assets.", { total: true }),
-          L("liabilities", "Total liabilities", totalLiab, "Trade payables + wages payable + bank loan + dividends payable.", { total: true }),
+          L("liabilities", "Total liabilities", totalLiab, "Trade payables + wages payable + bank loan + credit line used + dividends payable.", { total: true }),
           L("shareCapital", "Share capital", b.shareCapital, "Number of shares × nominal value."),
           L("sharePremium", "Share premium reserve", b.sharePremium, "What shareholders paid above nominal value."),
           L("reserves", "Legal reserve and retained earnings", reserves, "Profits of earlier years kept in the company."),
@@ -697,7 +728,7 @@
         { title: `Cash flow statement ${calendarYear(career)}`, lines: [
           L("cfo", "Cash flow from operating activities", cf.operating, "Cash from clients − cash paid for salaries, rent, supplies, interest: the day-to-day business."),
           L("cfi", "Cash flow from investing activities", cf.investing, "Cash paid for long-term assets (the laptops)."),
-          L("cff", "Cash flow from financing activities", cf.financing, "Cash from shareholders and banks, minus loan repayments and dividends paid."),
+          L("cff", "Cash flow from financing activities", cf.financing, "Cash from shareholders and banks (loan, credit line), minus repayments and dividends paid."),
           L("dcash", "Change in cash", dCash, "Operating + investing + financing = cash at the end − cash at the start of the year (the balance sheet).", { total: true })
         ] },
         { title: `Statement of changes in equity ${calendarYear(career)}`, lines: [

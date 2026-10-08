@@ -14,6 +14,7 @@
     { id: "payables", name: "Trade payables", type: "L" },
     { id: "wagesPayable", name: "Wages payable", type: "L" },
     { id: "loan", name: "Bank loan", type: "L" },
+    { id: "creditLine", name: "Bank credit line", type: "L" },
     { id: "dividendsPayable", name: "Dividends payable", type: "L" },
     { id: "shareCapital", name: "Share capital", type: "E" },
     { id: "sharePremium", name: "Share premium reserve", type: "E" },
@@ -43,7 +44,7 @@
     { id: "partner", name: "Partner", xp: 3300, salary: 450, soon: true }
   ];
 
-  const FEE_PER_JOB = 1200; // what PolimiAFC bills a client for each job done right
+  const FEE_PER_JOB = 1500; // what PolimiAFC bills a client for each job done right (a 70% player about breaks even)
   const JOBS_PER_DAY = 5;
   const DAYS_PER_QUARTER = 3;
   const SHARES_START = 100000;

@@ -1,6 +1,6 @@
 const APP_SCOPE = new URL(self.registration.scope);
 const CACHE_PREFIX = `ledger-quest:${APP_SCOPE.href}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v24`;
+const CACHE_NAME = `${CACHE_PREFIX}v25`;
 const APP_ASSETS = [
   "./",
   "./index.html",
