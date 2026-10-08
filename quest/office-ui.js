@@ -69,7 +69,7 @@
     if (job.type === "build") return `Year-end file · ${D.CLIENTS[job.client].name}`;
     if (job.type === "order") return `Cut-off pile · ${D.CLIENTS[job.client].name}`;
     if (job.type === "reclass") return `${job.docKind.split(" · ")[0]} · ${D.CLIENTS[job.client].name}`;
-    if (job.doc) return `${job.doc.kind} · ${D.CLIENTS[job.client].name}`;
+    if (job.doc) return `${job.doc.kind} · ${job.client ? D.CLIENTS[job.client].name : "PolimiAFC"}`;
     return TYPE_LABEL[job.type];
   }
 
@@ -300,6 +300,9 @@
   // The day's jobs are planned once: `planned` remembers for which day, so a reload doesn't plan it again.
   function plan(s, jobs) {
     s.queue = jobs || O.planDay(s, E.rnd).jobs;
+    // Dividend day: as a shareholder you work out your own part too (whatever the desk you chose).
+    const dj = O.dividendJob(s);
+    if (dj && !s.queue.some(j => j.id === dj.id)) s.queue.push(dj);
     s.planned = O.dayKey(s);
   }
   async function begin() {
@@ -476,11 +479,13 @@
     const newLevel = ST.recordStudy(s, job, g.ok);
     recordPattern(s, job, g.ok);
     if (job.type === "posting") O.post(s, job.title, job.lines, "", job.agm ? { year: s.year + 1, q: 1, day: 1 } : null, job.id);
+    const dividend = O.receiveDividend(s, job);
     s.carrying = null;
     const next = O.advance(s);
     E.sfx(g.ok ? "coin" : "hurt");
     hud(); E.save();
     await resultScreen(job, g, answer, rw);
+    if (dividend) await E.say(`Your dividend is in your account: +${eur(dividend)}. From the company's side it's just part of the dividend it paid out; for you it's income from your shares.`, "Giulia");
     if (newLevel) {
       E.sfx("level");
       await E.say(`${ST.TRACKS[job.track].name}: you've reached ${newLevel === 3 ? "the EXAM LEVEL. From now on the files look like the past exams" : `level ${newLevel}. Harder files from tomorrow`}.`, "Giulia");
@@ -1061,12 +1066,18 @@
       <div class="row"><span>Interview</span><span>${score}/${jobs.length}</span></div>
       <div class="row"><span>Daily salary</span><span>${eur(r.salary)}</span></div>
       <div class="row"><span>Your clients</span><span>${r.clients.map(id => D.CLIENTS[id].icon).join(" ")}</span></div>
+      ${O.SHARE_GRANT[r.id] ? `<div class="row"><span>PolimiAFC shares from Giulia</span><span>+${O.SHARE_GRANT[r.id].toLocaleString("en-US")} (you own ${s.shares.toLocaleString("en-US")})</span></div>` : ""}
       <p>${esc(r.blurb || "Harder work, better pay.")}</p></div>${go("BACK TO WORK ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.hideOverlay(); done(); } };
     });
     const prev = D.RANKS[D.RANKS.findIndex(x => x.id === r.id) - 1];
     const fresh = r.clients.filter(c => !prev || !prev.clients.includes(c)).map(c => D.CLIENTS[c].name);
-    return E.say(`Congratulations, ${r.name}!${fresh.length ? ` ${fresh.join(" and ")} ${fresh.length === 1 ? "is" : "are"} yours from tomorrow.` : ""}`, who);
+    await E.say(`Congratulations, ${r.name}!${fresh.length ? ` ${fresh.join(" and ")} ${fresh.length === 1 ? "is" : "are"} yours from tomorrow.` : ""}`, who);
+    const g = O.SHARE_GRANT[r.id];
+    if (g) await E.sayAll([
+      `And ${g.toLocaleString("en-US")} PolimiAFC shares, from my own stake: I'm a founding shareholder. You now own ${s.shares.toLocaleString("en-US")} of ${O.myStake(s).outstanding.toLocaleString("en-US")}.`,
+      "Note for the accountant in you: a sale between shareholders isn't PolimiAFC's transaction. No entry in our books, the same number of shares, the same EPS. When the company pays a dividend, you get your part."
+    ], who);
   }
 
   // ---------- The career menu ----------
@@ -1082,6 +1093,11 @@
       <div class="row"><span>Daily salary</span><span>${eur(r.salary)}</span></div>
       <div class="row"><span>Bonus so far today</span><span>${eur(s.bonus || 0)}</span></div>
       <div class="row"><span>Your savings</span><span>${eur(s.money)}</span></div>
+      ${(() => { const k = O.myStake(s); return k.shares
+        ? `<div class="row"><span>PolimiAFC shares</span><span>${k.shares.toLocaleString("en-US")} · ${k.pct.toFixed(2)}%</span></div>
+           <div class="row"><span>Book value (equity ÷ shares)</span><span>€${k.bvps.toFixed(4)} × ${k.shares.toLocaleString("en-US")} = ${eur(k.value)}</span></div>
+           <div class="row"><span>Dividends received</span><span>${eur(k.dividends)}</span></div>`
+        : `<div class="row"><span>PolimiAFC shares</span><span>none yet</span></div><p class="small">Your next promotion comes with PolimiAFC shares; the higher the rank, the more.</p>`; })()}
       <div class="row"><span>Jobs right</span><span>${s.stats.right}/${s.stats.jobs} (${acc})</span></div>
       ${["cons", "fa"].map(t => { const d = ST.studyOf(s, t); return `<div class="row"><span>${ST.TRACKS[t].icon} ${esc(ST.TRACKS[t].name)}</span><span>${levelName(d.level)} · ${d.right}/${d.done}</span></div>`; }).join("")}
       <div class="menu-list">
@@ -1118,8 +1134,8 @@
           <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
       }
       if (m === "ladder") return E.showOverlay(`<div class="panel box"><h2>CAREER LADDER</h2>
-        ${D.RANKS.map(x => `<div class="row"><span>${x.id === s.rank ? "▶ " : ""}${esc(x.name)}${x.soon ? " 🔒" : ""}</span><span>${x.xp} XP · ${eur(x.salary)}/day</span></div>`).join("")}
-        <p class="small">Every step up is a job interview with Giulia. It's never automatic: once you have the XP, you choose when to take it. 🔒 = coming soon.</p>
+        ${D.RANKS.map(x => `<div class="row"><span>${x.id === s.rank ? "▶ " : ""}${esc(x.name)}${x.soon ? " 🔒" : ""}</span><span>${x.xp} XP · ${eur(x.salary)}/day${O.SHARE_GRANT[x.id] ? ` · +${O.SHARE_GRANT[x.id].toLocaleString("en-US")} shares` : ""}</span></div>`).join("")}
+        <p class="small">Every step up is a job interview with Giulia. It's never automatic: once you have the XP, you choose when to take it. Each promotion also brings PolimiAFC shares from Giulia's stake. 🔒 = coming soon.</p>
         <div class="menu-list"><button data-m="back">▸ BACK</button></div></div>`);
       if (m === "codex") return E.showOverlay(`<div class="panel box"><h2>CODEX</h2><dl>
         ${CX().CODEX.map(([, t, d]) => `<dt>${esc(t.toUpperCase())}</dt><dd>${esc(d)}</dd>`).join("")}</dl>

@@ -90,7 +90,9 @@ recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Int
 bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
 don't repeat until their pool has gone round. Below the screen, two buttons open pop-up panels: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
 books stand (totals hidden while you write the annual report) and how each client is doing; **CODEX**
-holds every definition the game uses, from the basics to consolidation, with a search. Every screen with sums to do has a pop-up calculator under SUBMIT; USE puts
+holds every definition the game uses, from the basics to consolidation, with a search. Each promotion brings PolimiAFC shares from Giulia, more the higher the rank: a transfer between shareholders
+that leaves the company's books untouched; when the company pays a dividend you work out your part and receive it.
+Every screen with sums to do has a pop-up calculator under SUBMIT; USE puts
 its result in the box being filled in. The office is
 played by tapping. The career saves itself in the browser. For a backup you ask Giulia for a copy of your personnel
 file, exported as a file or a copyable code (`PAFC1-…`), and **IMPORT A SAVE** on the title screen restores it, also on another
