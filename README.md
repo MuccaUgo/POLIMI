@@ -86,7 +86,11 @@ page lists every pattern met, weakest first. The financial analysis desk also co
 Lectures 05–06 (`office-planning.js`): common size analysis, vertical and horizontal, on Eni's 2024–2025
 figures and on generated firms, percentage points against relative changes, and financial planning (equity
 against debt, matching maturities, committed and uncommitted credit lines, factoring with and without
-recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Interns keep two clients, a
+recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Steps 4 and 5, from Lectures
+07–08 and the Eni vs TotalEnergies exercise session (`office-indicators.js`), add the indicators by reader
+(shareholders, overall company, other stakeholders, and liquidity on an accrual and a cash basis), OPEX and
+CAPEX, the analyst's leverage formula with the risk / efficiency matrix, residual income against ROA (the
+hotel case), and benchmarking: the segment mix, reading the notes, choosing a peer. Interns keep two clients, a
 bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
 don't repeat until their pool has gone round. Below the screen, two buttons open pop-up panels: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
 books stand (totals hidden while you write the annual report) and how each client is doing; **CODEX**
