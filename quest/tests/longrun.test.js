@@ -14,6 +14,7 @@ load("office-analysis.js");
 const ST = load("office-study.js");
 load("office-exam.js");
 load("office-planning.js");
+load("office-indicators.js");
 
 function correct(job) {
   if (job.type === "sort") return job.answer;
