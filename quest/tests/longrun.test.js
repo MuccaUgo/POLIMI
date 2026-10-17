@@ -15,6 +15,9 @@ const ST = load("office-study.js");
 load("office-exam.js");
 load("office-planning.js");
 load("office-indicators.js");
+load("office-consolidation.js");
+load("office-codex.js");
+load("office-variety.js");
 
 function correct(job) {
   if (job.type === "sort") return job.answer;
@@ -25,13 +28,17 @@ function correct(job) {
   if (job.type === "fill") return { values: Object.fromEntries(job.fields.map(f => [f.key, f.answer])), choice: job.choice && job.choice.answer };
   if (job.type === "posting") return { lines: job.lines };
   if (job.type === "reclass") return { placed: job.items.map(i => i.cat), values: Object.fromEntries((job.fields || []).map(f => [f.key, f.answer])) };
+  if (job.type === "truefalse") return job.statements.map(st => st.truth);
+  if (job.type === "match") return job.pairs.map(p => p.def);
+  if (job.type === "sequence") return job.steps.slice();
   throw new Error(job.type);
 }
 
 function career({ seed, years, skill, reloads }) {
   const r = L.rng(seed), rnd = () => r.next();
   let s = O.normalizeCareer(O.newCareer());
-  const problems = [], years_ = [];
+  const problems = [], years_ = [], cases = [];
+  let surprises = 0;
   const fail = m => { if (problems.length < 10) problems.push(`year ${s.year} day ${s.day} (${s.phase}): ${m}`); };
   const plan = jobs => {
     s.queue = jobs || O.planDay(s, r).jobs;
@@ -47,6 +54,8 @@ function career({ seed, years, skill, reloads }) {
   };
   const finish = job => {
     if (!O.markDone(s, job.id)) return fail("a finished job came back");
+    if (job.surprise) surprises++;
+    if (job.caseRef) { if (job.caseRef.step !== s.cases.step || job.caseRef.n !== s.cases.n) fail(`case episode ${job.id} out of turn`); cases.push(job.id); }
     if (!O.grade(job, correct(job)).ok) fail(`a ${job.type} job rejects its own right answer`);
     const ok = rnd() < skill;
     O.reward(s, job, ok);
@@ -102,18 +111,22 @@ function career({ seed, years, skill, reloads }) {
     else if (s.phase === "home") endOfDay();
     else { fail("stuck: nothing to do and no way on"); break; }
   }
-  return { s, problems, years: years_ };
+  return { s, problems, years: years_, surprises, cases };
 }
 
 for (const skill of [0.5, 0.85, 0.99]) {
   test(`ten years for a player who gets ${skill * 100}% right, with frequent reloads: books, reports and saves hold up`, () => {
     for (const seed of [1, 2]) {
-      const { s, problems, years } = career({ seed, years: 10, skill, reloads: 0.3 });
+      const o = career({ seed, years: 10, skill, reloads: 0.3 }), { s, problems, years } = o;
       assert.deepEqual(problems, [], `seed ${seed}`);
       assert.equal(years.length, 10, "ten annual reports");
       assert.ok(JSON.stringify(s).length < 150 * 1024, "the save stays small");
       assert.ok(s.recent.length <= 150 && s.done.length <= 80, "the memories stay bounded");
       assert.equal(new Set(s.divPaid).size, s.divPaid.length, "each dividend paid once");
+      assert.ok(o.surprises > 5, "some surprise calls came");
+      assert.equal(new Set(o.cases).size, o.cases.length, "no case episode twice");
+      const ep = o.cases.map(id => id.split(":").slice(1).map(Number));
+      assert.ok(ep.length >= 10 && ep.every(([n, k], i) => i === 0 || (n === ep[i - 1][0] ? k === ep[i - 1][1] + 1 : n === ep[i - 1][0] + 1 && k === 0)), "the case episodes come in order, one case after the other");
       // The credit line keeps the bank account above zero, even for a weak player; a good one never needs it for long.
       assert.ok(years.every(y => y.cash >= 0), `seed ${seed}: cash below zero`);
       if (skill >= 0.85) assert.equal(O.balances(s).creditLine, 0, `seed ${seed}: the credit line is paid back`);

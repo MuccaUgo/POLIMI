@@ -479,6 +479,21 @@
       return { ok: right.every(Boolean) && choiceOk, right, choiceOk };
     }
     if (job.type === "posting") return gradePosting(job, answer.lines);
+    // True or false in a hurry: one slip is allowed.
+    if (job.type === "truefalse") {
+      const right = job.statements.map((st, i) => !!answer && answer[i] === st.truth);
+      return { ok: right.filter(Boolean).length >= job.statements.length - 1, right, timeout: !!answer && answer.timeout };
+    }
+    // Term → definition: every pair right.
+    if (job.type === "match") {
+      const right = job.pairs.map((p, i) => !!answer && answer[i] === p.def);
+      return { ok: right.every(Boolean), right };
+    }
+    // Steps in order: answer is the list of steps as tapped.
+    if (job.type === "sequence") {
+      const right = job.steps.map((st, i) => !!answer && answer[i] === st);
+      return { ok: right.every(Boolean), right };
+    }
     if (job.type === "reclass") {
       const right = job.items.map((it, i) => answer.placed[i] === it.cat);
       const fieldsRight = (job.fields || []).map(f => Math.abs((answer.values[f.key] == null ? NaN : answer.values[f.key]) - f.answer) <= (f.tol || 0.5));
@@ -504,7 +519,7 @@
   }
 
   // ---------- Rewards ----------
-  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, reclass: 5, mcq: 3, report: 25 };
+  const XP = { sort: 3, quick: 3, spot: 4, build: 5, order: 4, fill: 4, posting: 4, reclass: 5, mcq: 3, truefalse: 4, match: 4, sequence: 4, report: 25 };
   function reward(career, job, ok) {
     const base = Math.round(XP[job.type] * (XP_MULT[job.tier] || 1));
     if (ok) {

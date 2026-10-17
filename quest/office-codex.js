@@ -109,6 +109,8 @@
     ["Consolidation", "Non-controlling interests", "The part of the subsidiary's equity not owned by the parent. Shown within equity, never as a liability."],
     ["Consolidation", "Intra-group eliminations", "Revenues and costs, receivables and payables, and dividends between group companies are eliminated in full, whoever sells and whatever the ownership."],
     ["Consolidation", "Deferred taxes on fair value", "PPE uplifted to fair value: a deferred tax liability = uplift × tax rate (more tax in the future). A liability measured higher gives a deferred tax asset."],
+    ["Consolidation", "Pre-consolidation adjustments", "Before combining: 1.1 the same closing period (interim statements, or a gap of at most three months, constant, adjusted for significant events); 1.2 the group's accounting policies; 1.3 the group's reporting currency."],
+    ["Consolidation", "Translation reserve", "A foreign subsidiary's income statement is translated at the average rate (or each transaction's rate), its balance sheet, except the profit for the year, at the closing rate. The difference goes to a translation reserve in equity."],
     ["Consolidation", "Negative goodwill", "Price below the fair value of the net assets: first review the estimates, then book the rest as a gain in the income statement."]
   ];
   const TOPICS = [...new Set(CODEX.map(e => e[0]))];
