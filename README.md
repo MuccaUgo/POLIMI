@@ -90,7 +90,14 @@ recourse, IFRS 16 leases, bond yields and ratings, the interest tax shield). Ste
 07–08 and the Eni vs TotalEnergies exercise session (`office-indicators.js`), add the indicators by reader
 (shareholders, overall company, other stakeholders, and liquidity on an accrual and a cash basis), OPEX and
 CAPEX, the analyst's leverage formula with the risk / efficiency matrix, residual income against ROA (the
-hotel case), and benchmarking: the segment mix, reading the notes, choosing a peer. Interns keep two clients, a
+hotel case), and benchmarking: the segment mix, reading the notes, choosing a peer. The consolidation desk
+(`office-consolidation.js`, Lectures 03–04) adds types of investment, combine and offset, intra-group eliminations,
+fair values with deferred taxes, NCI with full or partial goodwill, and translation into the group's currency. Quick
+formats on the course's own content (`office-variety.js`) mix in on every desk: true or false against the clock,
+match the terms (from the codex), put in order (the reclassified income statement, the six steps, the consolidation
+steps, the indirect method), and explain to the client (interpreting the numbers). Some mornings bring a surprise
+call with a bonus, and the financial analysis desk runs the Lario case file: one company, five episodes, from the
+reclassification to the benchmark, on the same figures. Interns keep two clients, a
 bakery and a software start-up, and the game remembers what you've seen, so documents, calls and exercises
 don't repeat until their pool has gone round. Below the screen, two buttons open pop-up panels: **BOOKS** shows PolimiAFC's balance sheet and income statement as the
 books stand (totals hidden while you write the annual report) and how each client is doing; **CODEX**

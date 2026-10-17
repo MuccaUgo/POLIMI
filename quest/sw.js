@@ -1,6 +1,6 @@
 const APP_SCOPE = new URL(self.registration.scope);
 const CACHE_PREFIX = `ledger-quest:${APP_SCOPE.href}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v26`;
+const CACHE_NAME = `${CACHE_PREFIX}v27`;
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -16,7 +16,9 @@ const APP_ASSETS = [
   "./office-exam.js",
   "./office-planning.js",
   "./office-indicators.js",
+  "./office-consolidation.js",
   "./office-codex.js",
+  "./office-variety.js",
   "./office-ui.js",
   "./calculator.js",
   "./backup.js",

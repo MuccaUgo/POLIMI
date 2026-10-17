@@ -57,7 +57,7 @@
   );
 
   // ---------- Small helpers ----------
-  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS", reclass: "ANALYSIS", mcq: "EXAM QUESTION" };
+  const TYPE_LABEL = { sort: "FILING", quick: "PHONE CALL", spot: "FIND THE ERROR", build: "BUILD THE STATEMENTS", order: "YEAR-END CUT-OFF", fill: "FILL IN", posting: "THE COMPANY BOOKS", reclass: "ANALYSIS", mcq: "EXAM QUESTION", truefalse: "TRUE OR FALSE", match: "MATCH THE TERMS", sequence: "PUT IN ORDER" };
   const levelName = l => l === 3 ? "EXAM LEVEL" : `level ${l}`;
   const WHERE = { cabinet: "the right CABINET", desk: "YOUR DESK", books: "the company BOOKS", marco: "Marco", phone: "your phone" };
   const ELEMENT_SHORT = { Asset: "Asset", Liability: "Liab.", Equity: "Equity", Revenue: "Rev.", Expense: "Exp." };
@@ -65,7 +65,9 @@
   const clientLine = id => id ? `${D.CLIENTS[id].icon} ${esc(D.CLIENTS[id].name)}` : "🏢 PolimiAFC S.p.A.";
   function docName(job) {
     if (job.type === "posting") return `Memo: ${job.title}`;
-    if (job.type === "mcq") return `Exam question · ${ST.TRACKS[job.track].short.toLowerCase()}`;
+    if (job.type === "mcq") return job.docKind || `Exam question · ${job.track ? ST.TRACKS[job.track].short.toLowerCase() : "PolimiAFC"}`;
+    if (job.type === "truefalse") return "True or false · 5 statements";
+    if (job.type === "match" || job.type === "sequence") return job.docKind;
     if (job.type === "build") return `Year-end file · ${D.CLIENTS[job.client].name}`;
     if (job.type === "order") return `Cut-off pile · ${D.CLIENTS[job.client].name}`;
     if (job.type === "reclass") return `${job.docKind.split(" · ")[0]} · ${D.CLIENTS[job.client].name}`;
@@ -465,6 +467,9 @@
     if (job.type === "posting") return postingScreen(job, ctx);
     if (job.type === "reclass") return reclassScreen(job, ctx);
     if (job.type === "mcq") return mcqScreen(job, ctx);
+    if (job.type === "truefalse") return truefalseScreen(job, ctx);
+    if (job.type === "match") return matchScreen(job, ctx);
+    if (job.type === "sequence") return sequenceScreen(job, ctx);
     return Promise.resolve(null);
   }
   async function finish(job, answer) {
@@ -598,6 +603,10 @@
     plan(s);
     hud(); E.save();
     if (s.activity !== "books") await E.say(`${ST.TRACKS[s.activity].name}: the files are in the inbox. Each one climbs towards the level of the written exam.`, "Tip");
+    const kase = s.queue.find(j => j.caseRef);
+    if (kase && kase.caseRef.step === 0) await E.say("A new case for you: Lario Energia's last two years, one step a day on this desk. Same figures every day, from the reclassification to the benchmark.", "Giulia");
+    const sp = s.queue.find(j => j.surprise);
+    if (sp) await E.say(sp.surprise.intro, "Giulia");
   }
 
   // ---------- Screens ----------
@@ -645,8 +654,11 @@
     if (job.doc) body = docHtml(job.doc);
     else if (job.type === "build") body = `<div class="doc"><div class="doc-kind">Year-end file</div><div class="doc-title">${job.items.length} items to place</div></div>`;
     else if (job.type === "order") body = `<div class="doc"><div class="doc-kind">Cut-off pile</div><div class="doc-title">${job.items.length} documents from around New Year</div></div>`;
-    else if (job.type === "mcq") body = `<div class="doc"><div class="doc-kind">Exam question</div><div class="doc-title">One question, four answers</div></div>`;
+    else if (job.type === "mcq") body = `<div class="doc"><div class="doc-kind">${esc(job.docKind || "Exam question")}</div><div class="doc-title">One question, ${job.options.length} possible answers</div></div>`;
     else if (job.type === "reclass") body = `<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div><div class="doc-title">${job.items.length} items to classify</div></div>`;
+    else if (job.type === "truefalse") body = `<div class="doc"><div class="doc-kind">True or false</div><div class="doc-title">${job.statements.length} statements, against the clock</div></div>`;
+    else if (job.type === "match") body = `<div class="doc"><div class="doc-kind">${esc(job.docKind)}</div><div class="doc-title">${job.pairs.length} terms to match</div></div>`;
+    else if (job.type === "sequence") body = `<div class="doc"><div class="doc-kind">Put in order</div><div class="doc-title">${esc(job.docKind)}</div></div>`;
     return screen(`${head(job)}${body}<p class="brief">${esc(job.brief || "")}</p>
       <p class="where">Take it to <b>${esc(WHERE[job.work])}</b>.</p>${go("GOT IT ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.sfx("blip"); E.hideOverlay(); done(); } };
@@ -659,8 +671,9 @@
     });
   }
 
+  const callerLine = job => job.surprise ? `<div class="call">☎ <b>${esc(job.surprise.who)}</b> on the line · bonus +€${job.surprise.bonus}</div>` : "";
   function fillScreen(job, ctx) {
-    return screen(`${head(job, ctx)}${docHtml(job.doc)}<p class="brief">${esc(job.brief)}</p>
+    return screen(`${head(job, ctx)}${callerLine(job)}${docHtml(job.doc)}<p class="brief">${esc(job.brief)}</p>
       ${job.fields.map(f => numInput(f.key, f.label, f.neg)).join("")}
       ${job.choice ? `<div class="lbl">${esc(job.choice.label)}</div>${chips("choice", job.choice.options)}` : ""}${go()}`, (root, done) => {
       const st = {};
@@ -754,7 +767,7 @@
   }
 
   function mcqScreen(job, ctx) {
-    return screen(`${head(job, ctx)}${job.pattern ? `<div class="lbl">${esc(job.pattern)}</div>` : ""}<p class="small">${esc(job.brief)}</p>${job.doc ? docHtml(job.doc) : ""}<p class="question">${esc(job.question)}</p>
+    return screen(`${head(job, ctx)}${callerLine(job)}${job.pattern ? `<div class="lbl">${esc(job.pattern)}</div>` : ""}<p class="small">${esc(job.brief)}</p>${job.doc ? docHtml(job.doc) : ""}<p class="question">${esc(job.question)}</p>
       <div class="chips list" data-g="a">${job.options.map((o, i) => `<button type="button" data-v="${i}"><span>${"ABCD"[i]}. ${esc(o.label)}</span></button>`).join("")}</div>${go()}`, (root, done) => {
       const st = {};
       root.onclick = ev => {
@@ -763,6 +776,68 @@
         if (st.a == null) return nag(root, "Choose an answer.");
         E.hideOverlay();
         done(job.options[+st.a]);
+      };
+    });
+  }
+
+  // True or false against the clock: five statements, one slip allowed.
+  function truefalseScreen(job, ctx) {
+    if (job.pickup === "phone" || job.surprise) E.sfx("ring");
+    const who = job.surprise ? callerLine(job) : job.pickup === "phone" && job.client ? `<div class="call">☎ <b>${esc(D.CLIENTS[job.client].name)}</b> on the line</div>` : "";
+    return screen(`${head(job, ctx)}${who}<p class="brief">${esc(job.brief)}</p><div class="timer"><i></i></div>
+      ${job.statements.map((st, i) => `<div class="item tf"><div>${i + 1}. ${esc(st.text)}</div>${chips("s" + i, ["true", "false"], ["TRUE", "FALSE"])}</div>`).join("")}${go()}`, (root, done) => {
+      const st = {}, bar = root.querySelector(".timer i"), t0 = Date.now(), total = (job.seconds || 50) * 1000;
+      const answers = () => job.statements.map((_, i) => st["s" + i] == null ? null : st["s" + i] === "true");
+      let over = false;
+      const finish = v => { if (over) return; over = true; clearInterval(tick); E.hideOverlay(); done(v); };
+      const tick = setInterval(() => {
+        const left = Math.max(0, 1 - (Date.now() - t0) / total);
+        bar.style.width = (left * 100) + "%";
+        bar.parentElement.classList.toggle("low", left < 0.3);
+        if (left <= 0) { const a = answers(); a.timeout = true; finish(a); }
+      }, 100);
+      root.onclick = ev => {
+        if (chipHandler(root, st, ev)) return;
+        if (!ev.target.closest("[data-go]")) return;
+        const a = answers();
+        if (a.some(x => x === null)) return nag(root, "Answer all five (or let the clock run out).");
+        finish(a);
+      };
+    });
+  }
+  // Four terms, four definitions (A–D).
+  function matchScreen(job, ctx) {
+    const L = "ABCD";
+    return screen(`${head(job, ctx)}${callerLine(job)}<p class="brief">${esc(job.brief)}</p>
+      <ol class="defs">${job.defs.map((d, i) => `<li><b>${L[i]}.</b> ${esc(d)}</li>`).join("")}</ol>
+      ${job.pairs.map((p, i) => `<div class="item"><div><b>${esc(p.term)}</b></div>${chips("m" + i, job.defs.map((_, k) => String(k)), job.defs.map((_, k) => L[k]))}</div>`).join("")}${go()}`, (root, done) => {
+      const st = {};
+      root.onclick = ev => {
+        if (chipHandler(root, st, ev)) return;
+        if (!ev.target.closest("[data-go]")) return;
+        const a = job.pairs.map((_, i) => st["m" + i]);
+        if (a.some(x => x == null)) return nag(root, "Give every term a definition.");
+        E.hideOverlay();
+        done(a.map(k => job.defs[+k]));
+      };
+    });
+  }
+  // Tap the steps in order; tapping a numbered one takes it (and those after it) back.
+  function sequenceScreen(job, ctx) {
+    return screen(`${head(job, ctx)}<div class="doc"><div class="doc-kind">Put in order</div><div class="doc-title">${esc(job.docKind)}</div></div><p class="brief">${esc(job.brief)}</p>
+      <div class="seq">${job.shown.map((x, i) => `<button type="button" data-s="${i}"><span class="n"></span><span>${esc(x)}</span></button>`).join("")}</div>
+      <button type="button" class="again" data-reset>↺ Start again</button>${go()}`, (root, done) => {
+      let order = [];
+      const paint = () => root.querySelectorAll("[data-s]").forEach(b => { const k = order.indexOf(+b.dataset.s); b.classList.toggle("on", k >= 0); b.querySelector(".n").textContent = k >= 0 ? String(k + 1) : "·"; });
+      paint();
+      root.onclick = ev => {
+        const b = ev.target.closest("[data-s]");
+        if (b) { const i = +b.dataset.s, k = order.indexOf(i); order = k >= 0 ? order.slice(0, k) : order.concat(i); E.sfx("blip"); return paint(); }
+        if (ev.target.closest("[data-reset]")) { order = []; return paint(); }
+        if (!ev.target.closest("[data-go]")) return;
+        if (order.length < job.shown.length) return nag(root, "Tap every step, in order.");
+        E.hideOverlay();
+        done(order.map(i => job.shown[i]));
       };
     });
   }
@@ -860,11 +935,18 @@
       const oneWhy = job.items.every(it => it.why === job.items[0].why);
       body = `<ul class="res">${job.items.map((it, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(it.label)} → <b>${esc(it.cat)}</b>${g.right[i] || oneWhy ? "" : `<br><small>${esc(it.why)}</small>`}</li>`).join("")}${oneWhy ? `<li><small>${esc(job.items[0].why)}</small></li>` : ""}
         ${job.fields.map((f, i) => `<li class="${g.fieldsRight[i] ? "y" : "n"}">${g.fieldsRight[i] ? "✔" : "✘"} ${esc(f.label)}: <b>${fieldVal(f, f.answer)}</b>${g.fieldsRight[i] ? "" : ` (you wrote ${fieldVal(f, answer.values[f.key])})`}<br><small>${esc(f.why)}</small></li>`).join("")}</ul>`;
+    } else if (job.type === "truefalse") {
+      const n = g.right.filter(Boolean).length;
+      body = `${g.timeout ? `<p class="cons">Time's up!</p>` : ""}<p class="small">${n}/${job.statements.length} right${ok ? "" : ": one slip is allowed, not two"}.</p><ul class="res">${job.statements.map((st, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${esc(st.text)} → <b>${st.truth ? "TRUE" : "FALSE"}</b><br><small>${esc(st.why)}</small></li>`).join("")}</ul>`;
+    } else if (job.type === "match") {
+      body = `<ul class="res">${job.pairs.map((p, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} <b>${esc(p.term)}</b><br><small>${esc(p.def)}</small></li>`).join("")}</ul><p class="small">The full definitions are in the CODEX.</p>`;
+    } else if (job.type === "sequence") {
+      body = `<div class="lbl">The right order</div><ul class="res">${job.steps.map((x, i) => `<li class="${g.right[i] ? "y" : "n"}">${g.right[i] ? "✔" : "✘"} ${i + 1}. ${esc(x)}</li>`).join("")}</ul><p>${esc(job.why)}</p>`;
     } else if (job.type === "posting") {
       body = `<div class="lbl">The right entry</div><ul class="res">${job.lines.map(l => `<li>${lineText(l)}</li>`).join("")}</ul><p>${esc(job.why)}</p>
         ${ok ? "" : `<p class="cons">${g.balanced ? "It balanced, but the accounts or amounts weren't right." : "Your entry didn't even balance!"} Marco fixed the books for you. He sighed loudly.</p>`}`;
     }
-    const reward = ctx && (ctx.interview || ctx.mock) ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${O.bonusFor(job.tier) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}</div>`;
+    const reward = ctx && (ctx.interview || ctx.mock) ? "" : `<div class="reward">${rw.xp > 0 ? `+${rw.xp} XP` : `${rw.xp} XP`}${ok ? ` · bonus +€${O.bonusFor(job.tier) + (rw.bonus ? 2 : 0)}` : ""}${S().streak >= 3 && ok ? ` · 🔥 streak ${S().streak}` : ""}${rw && rw.surprise ? ` · ☎ surprise bonus +€${rw.surprise}` : ""}</div>`;
     return screen(`${head(job, ctx)}<div class="verdict ${ok ? "ok" : "ko"}">${ok ? "✔ WELL DONE!" : "✘ NOT QUITE"}</div>${reward}${body}${go("CONTINUE ▶")}`, (root, done) => {
       root.onclick = ev => { if (ev.target.closest("[data-go]")) { E.sfx("blip"); E.hideOverlay(); done(); } };
     });
