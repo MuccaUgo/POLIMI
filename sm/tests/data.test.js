@@ -78,7 +78,9 @@ const numericCases = [
   // relative market share: own share over the largest competitor's
   ["Relative Market Share", [22 / 11]],
   // E = (300/1200) / (-1/6.90), shown as an absolute value with two decimals
-  ["Elasticity from a Price Test", [round2(Math.abs((300 / 1200) / (-1 / 6.90)))]]
+  ["Elasticity from a Price Test", [round2(Math.abs((300 / 1200) / (-1 / 6.90)))]],
+  // NPS = % promoters - % detractors
+  ["Computing the NPS", [38 - 20]]
 ];
 for (const [title, expected] of numericCases) {
   test(`answer-key arithmetic: ${title}`, () => assert.deepEqual(selectedNumbers(title), expected));
@@ -93,7 +95,7 @@ test("the two decks are declared as topics that partition the areas", () => {
   assert.deepEqual(topics.map(t => t.name), [
     "Introduction", "The Concept of Strategy", "External Analysis",
     "Competitive Advantage", "Internal Analysis", "SWOT & Alternatives", "Business Model", "Corporate Strategy",
-    "Market Demand", "Segmentation", "Targeting & Positioning"
+    "Market Demand", "Segmentation", "Targeting & Positioning", "Product, Services & Experience"
   ]);
   const flat = topics.flatMap(t => t.categories);
   assert.deepEqual(flat, categories, "CATEGORIES must be the topics' areas, in order");
@@ -342,21 +344,49 @@ test("a topic note renders only for the topic that declares one", () => {
   assert.match(page, /id="conceptTopicNote"/, "index.html must host the note element");
 });
 
-test("the decks added in October 2026 cover every area with cards and questions", () => {
+test("the decks added from October 2026 cover every area with cards and questions", () => {
   const data = {};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
     ";this.json = JSON.stringify({ topics: TOPICS });", data);
   const added = JSON.parse(data.json).topics.slice(3);
-  assert.equal(added.length, 8);
+  assert.equal(added.length, 9);
   for (const topic of added) {
     for (const area of topic.categories) {
       assert.ok(bank.filter(q => q.cat === area).length >= 3, `${area}: too few questions`);
       assert.ok(context.cards.filter(c => c.cat === area).length >= 3, `${area}: too few cards`);
     }
   }
-  // Lecture 3 is built from notes: its topic must say so until the slides arrive.
-  const notes = added.find(t => t.name === "Targeting & Positioning");
-  assert.match(notes.note, /notes/);
+  // Lecture 3 now comes from the official slides: no topic may still claim to be built from notes.
+  for (const topic of added) assert.ok(!/notes/.test(topic.note || ""), `${topic.name}: still marked as built from notes`);
+});
+
+test("the marketing lectures 3 and 4 state the slides' frameworks in full", () => {
+  const byTitle = t => {
+    const card = context.cards.find(c => c.title === t);
+    assert.ok(card, `missing card: ${t}`);
+    return card;
+  };
+  const coverage = byTitle("Five Market Coverage Approaches").how;
+  for (const [approach, firm] of [["Single segment", "Rolex"], ["Market specialisation", "Armani"],
+    ["Product specialisation", "Lego"], ["Selective specialisation", "Zeiss"], ["Total coverage", "Coca-Cola"]]) {
+    assert.ok(coverage.includes(approach) && coverage.includes(firm), `coverage approach missing: ${approach} (${firm})`);
+  }
+  const strategies = byTitle("Targeting Strategies and Business Strategy").how;
+  for (const pair of ["cost leadership", "differentiation", "focus"]) assert.ok(strategies.includes(pair), pair);
+  const steps = byTitle("The Four-Step Traditional Approach").how;
+  for (const step of ["Identification", "rating", "Reduction", "Analysis"]) assert.ok(steps.includes(step), `positioning step missing: ${step}`);
+  const levels = byTitle("The Product Hierarchy").how;
+  for (const level of ["Core benefit", "Basic product", "Expected product", "Augmented product", "Potential product"]) {
+    assert.ok(levels.includes(level), `product level missing: ${level}`);
+  }
+  const mix = byTitle("4Ps, 4Cs and 7Ps").how;
+  for (const p of ["people", "process", "physical evidence"]) assert.ok(mix.includes(p), `service P missing: ${p}`);
+  const service = byTitle("Service Characteristics and Risk").how;
+  for (const trait of ["Non-storeability", "simultaneous", "labour intensity", "variability", "intangibility"]) {
+    assert.ok(service.includes(trait), `service characteristic missing: ${trait}`);
+  }
+  const cx = byTitle("Measuring CX: CSI, CES and NPS").how;
+  for (const kpi of ["Customer Satisfaction Index", "Customer Effort Score", "Net Promoter Score"]) assert.ok(cx.includes(kpi), kpi);
 });
 
 test("the October decks state the course's key figures and definitions", () => {

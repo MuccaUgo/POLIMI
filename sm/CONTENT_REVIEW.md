@@ -94,8 +94,8 @@ Aggiunti al sito, dalla stessa revisione:
   per area). Le soglie del test per questi capitoli sono più basse di quelle dei primi tre: vanno alzate man mano.
 - **Lezione di marketing 3** (*targeting e positioning*): le slide non erano disponibili. La scheda e le quattro concept
   card sono costruite dagli appunti a mano dello studente (M3) e dal Kotler; l'area lo dichiara nella sua nota. Alcuni
-  esempi degli appunti sui pattern di targeting erano illeggibili e sono stati lasciati fuori. **Da sostituire con le
-  slide appena arrivano.**
+  esempi degli appunti sui pattern di targeting erano illeggibili e sono stati lasciati fuori. Sostituita il 22 ottobre:
+  vedi §6.
 - **Confine Covered/Next**: il capitolo 2 è ora segnato come coperto in aula. Le lezioni sono andate oltre (esercizio
   Starbucks sull'internal analysis del 6 ottobre, tre lezioni di marketing).
 - Due schemi delle slide di marketing sono usciti in disordine dall'estrazione del testo e sono stati ricostruiti nella
@@ -106,3 +106,26 @@ Aggiunti al sito, dalla stessa revisione:
 - Le schede riportano anche le letture delle lezioni registrate (vision come *industry foresight*, mission come
   *strategic intent*, processo in cinque macro-fasi, criteri estesi della decisione strategica, Abell per i confini della
   business area), sempre accanto alla versione delle slide.
+
+## 6. 22 ottobre 2026 — lezioni di marketing 3 e 4 dalle slide
+
+- **Lezione 3** (*Marketing strategy and positioning*, 15 ottobre): scheda, flashcard, concept card e domande ora vengono
+  dalle slide ufficiali e sostituiscono la versione dagli appunti. Le tre aree nuove sono *Targeting*, *Positioning Tools
+  & Methods* e *Positioning & Repositioning*. Cambiano rispetto agli appunti: l'approccio tradizionale ha **quattro**
+  passi (non tre), l'esempio di *total coverage* è **Coca-Cola** (non L'Oréal), e si aggiungono matrice di targeting,
+  legame con le strategie di Porter, repertory grid, laddering, POP/POD e riposizionamento (Zara, Gucci).
+- **Lezione 4** (*Marketing mix (tactics)*, 22 ottobre): nuovo deck M4 e nuova area *Product, Services & Experience*
+  (marketing mix e prodotto, ciclo di vita, servizi, customer experience e customer journey), con un caso scritto nuovo
+  (*Termica Alpina*) e un esercizio numerico sul Net Promoter Score.
+- Da verificare sul PDF, perché l'estrazione del testo ha mescolato le figure:
+  - **matrice di targeting** (slide 11): le quattro celle sono chiare; non è chiaro in quale cella stia ciascuno dei
+    quattro segmenti calzaturieri, quindi la scheda li elenca senza collocarli;
+  - **POP/POD** (slide 69): l'esempio Apple (“your data”, sicurezza) è attaccato ai *competitive POPs*, come
+    nell'ordine del testo estratto;
+  - **analisi della varianza** (slide 60): letta come dispersione delle valutazioni di ogni marca (bassa = percezione
+    netta, alta = percezione confusa);
+  - **varianti del ciclo di vita** (slide 34): nomi dei tre andamenti riportati; gli esempi sul grafico non sono
+    attribuibili con certezza e sono stati omessi;
+  - la slide del confronto si intitola *BMW vs Volvo* ma descrive la **Mercedes A-Class**: le schede usano A-Class.
+- La **formula dell'NPS** (% promotori − % detrattori) non è nelle slide, che danno solo la definizione: è segnata come
+  formula standard dove compare.
