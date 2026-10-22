@@ -72,7 +72,13 @@ const numericCases = [
   // €160m at €240m pre-money: public share, then a 20% holder after dilution
   ["Dilution at the IPO", [round2(160 / 400 * 100), 20, round2(20 * 240 / 400)]],
   // SV = EV - debt + cash
-  ["From Enterprise Value to Shareholder Value", [850 - 300 + 70]]
+  ["From Enterprise Value to Shareholder Value", [850 - 300 + 70]],
+  // two doublings at a 25% learning rate: 40 x 0.75 x 0.75
+  ["Learning Curve Arithmetic", [round2(40 * 0.75 * 0.75)]],
+  // relative market share: own share over the largest competitor's
+  ["Relative Market Share", [22 / 11]],
+  // E = (300/1200) / (-1/6.90), shown as an absolute value with two decimals
+  ["Elasticity from a Price Test", [round2(Math.abs((300 / 1200) / (-1 / 6.90)))]]
 ];
 for (const [title, expected] of numericCases) {
   test(`answer-key arithmetic: ${title}`, () => assert.deepEqual(selectedNumbers(title), expected));
@@ -84,17 +90,24 @@ test("the two decks are declared as topics that partition the areas", () => {
     ";this.json = JSON.stringify({ topics: TOPICS, categories: CATEGORIES });", data);
   const { topics, categories } = JSON.parse(data.json);
 
-  assert.deepEqual(topics.map(t => t.name), ["Introduction", "The Concept of Strategy", "External Analysis"]);
+  assert.deepEqual(topics.map(t => t.name), [
+    "Introduction", "The Concept of Strategy", "External Analysis",
+    "Competitive Advantage", "Internal Analysis", "SWOT & Alternatives", "Business Model", "Corporate Strategy",
+    "Market Demand", "Segmentation", "Targeting & Positioning"
+  ]);
   const flat = topics.flatMap(t => t.categories);
   assert.deepEqual(flat, categories, "CATEGORIES must be the topics' areas, in order");
   assert.equal(new Set(flat).size, flat.length, "an area may not appear under two topics");
 
-  // Each deck has to stand on its own as a study unit.
+  // Each deck has to stand on its own as a study unit. The first three chapters carry the full bank;
+  // the decks added in October 2026 start with a first pass that grows as the lectures are reviewed.
+  const full = ["Introduction", "The Concept of Strategy", "External Analysis"];
   for (const topic of topics) {
     const qs = bank.filter(q => topic.categories.includes(q.cat));
     const cs = context.cards.filter(c => topic.categories.includes(c.cat));
-    assert.ok(qs.length >= 31, `${topic.name}: only ${qs.length} questions`);
-    assert.ok(cs.length >= 39, `${topic.name}: only ${cs.length} concept cards`);
+    const [minQ, minC] = full.includes(topic.name) ? [31, 39] : [4, 4];
+    assert.ok(qs.length >= minQ, `${topic.name}: only ${qs.length} questions`);
+    assert.ok(cs.length >= minC, `${topic.name}: only ${cs.length} concept cards`);
   }
 });
 
@@ -245,8 +258,9 @@ test("chapter 2 covers each of its five areas and reports the current lecture bo
     "Substitutes, Buyers & Suppliers", "Complements & Competitors"
   ]);
   assert.equal(typeof topic.note, "string");
-  assert.match(topic.note, /covered.*STEEP/i);
-  assert.match(topic.note, /Five Forces.*next/i);
+  // The class has moved past chapter 2: the note must say so and no longer announce parts as next.
+  assert.match(topic.note, /covered in class/i);
+  assert.doesNotMatch(topic.note, /\bnext\b/i);
 
   for (const area of topic.categories) {
     assert.ok(bank.filter(q => q.cat === area).length >= 8, `${area}: too few questions`);
@@ -277,9 +291,7 @@ test("the Things to Remember study map has 10 + 10 + 8 linked blocks", () => {
 
   assert.ok(context.studyMap[0].blocks.every(b => b.status === "covered"));
   assert.ok(context.studyMap[1].blocks.every(b => b.status === "covered"));
-  assert.deepEqual(Array.from(context.studyMap[2].blocks, b => b.status), [
-    "covered", "covered", "next", "next", "next", "next", "next", "next"
-  ]);
+  assert.ok(context.studyMap[2].blocks.every(b => b.status === "covered"), "chapter 2 has been covered in class");
 });
 
 test("the five forces and their determinants are stated", () => {
@@ -328,4 +340,45 @@ test("a topic note renders only for the topic that declares one", () => {
   assert.match(app, /openTopic && openTopic\.note/, "the note must be optional per topic");
   const page = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
   assert.match(page, /id="conceptTopicNote"/, "index.html must host the note element");
+});
+
+test("the decks added in October 2026 cover every area with cards and questions", () => {
+  const data = {};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../data.js"), "utf8") +
+    ";this.json = JSON.stringify({ topics: TOPICS });", data);
+  const added = JSON.parse(data.json).topics.slice(3);
+  assert.equal(added.length, 8);
+  for (const topic of added) {
+    for (const area of topic.categories) {
+      assert.ok(bank.filter(q => q.cat === area).length >= 3, `${area}: too few questions`);
+      assert.ok(context.cards.filter(c => c.cat === area).length >= 3, `${area}: too few cards`);
+    }
+  }
+  // Lecture 3 is built from notes: its topic must say so until the slides arrive.
+  const notes = added.find(t => t.name === "Targeting & Positioning");
+  assert.match(notes.note, /notes/);
+});
+
+test("the October decks state the course's key figures and definitions", () => {
+  const byTitle = t => context.cards.find(c => c.title === t);
+  assert.match(byTitle("Scale versus Learning").how, /20 to 30 percent/);
+  const vrio = byTitle("The VRIO Test").how;
+  for (const outcome of ["disadvantage", "parity", "short-term", "mid-term", "sustainable"]) {
+    assert.ok(vrio.includes(outcome), `VRIO outcome missing: ${outcome}`);
+  }
+  const blocks = byTitle("The Nine Building Blocks").how.toLowerCase();
+  for (const b of ["customer segments", "value proposition", "channels", "customer relationships", "revenue streams",
+                   "key resources", "key activities", "key partners", "cost structure"]) {
+    assert.ok(blocks.includes(b), `canvas block missing: ${b}`);
+  }
+  assert.match(byTitle("The BCG Matrix").how, /largest competitor/);
+  assert.match(byTitle("The JCPenney Lesson").how, /1,800 stores/);
+  const levels = byTitle("Market Qualification Levels").how;
+  for (const level of ["Potential", "Qualified", "Available", "Served", "Penetrated"]) {
+    assert.ok(levels.includes(level), `market level missing: ${level}`);
+  }
+  const good = byTitle("What Makes a Good Segment").how;
+  for (const c of ["Measurability", "Accessibility", "Homogeneity", "Importance", "Duration"]) {
+    assert.ok(good.includes(c), `segment criterion missing: ${c}`);
+  }
 });

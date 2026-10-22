@@ -1,10 +1,21 @@
-// Strategy & Marketing study data, generated from the course decks by V. Chiesa,
-// MSc Management Engineering: the Introduction and chapter 1, The Concept of Strategy.
+// Strategy & Marketing study data, generated from the course decks by V. Chiesa (Introduction and
+// chapters 1-7) and G. Peggiani (marketing lectures 1-2), MSc Management Engineering. Marketing lecture 3
+// is built from the student's notes until its slides are available. The deck sheets, flashcards, cases
+// and oral questions live in content.js.
 const TOPICS = [
  { name: "Introduction", categories: ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"] },
  { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] },
  { name: "External Analysis", categories: ["External Analysis", "STEEP", "Five Forces", "Substitutes, Buyers & Suppliers", "Complements & Competitors"],
-   note: "Chapter 2 \u2014 the course has covered the external-analysis overview and STEEP. Five Forces, competitor analysis, profit pool mapping, customer analysis, key success factors, and opportunities and threats are next." }
+   note: "Chapter 2 \u2014 covered in class. The lectures have since moved on to chapters 3 to 7 and to the first marketing lectures, which now have their own areas below." },
+ { name: "Competitive Advantage", categories: ["Sources of Advantage", "Cost & Differentiation", "Grand Strategies & Positioning"] },
+ { name: "Internal Analysis", categories: ["Resources & Value Chain", "VRIO & Imitability", "Strengths & Weaknesses"] },
+ { name: "SWOT & Alternatives", categories: ["SWOT & Roadmapping", "Repositioning"] },
+ { name: "Business Model", categories: ["Canvas Building Blocks", "Business Model Patterns"] },
+ { name: "Corporate Strategy", categories: ["Vertical Integration", "Diversification", "Portfolio Analysis"] },
+ { name: "Market Demand", categories: ["Marketing Basics", "Demand & Customer Value", "B2C & B2B Buying"] },
+ { name: "Segmentation", categories: ["Segmentation Basics", "Segmentation Bases", "Segmentation Methods"] },
+ { name: "Targeting & Positioning", categories: ["Targeting & Positioning"],
+   note: "Marketing lecture 3 \u2014 built from the student's handwritten notes and Kotler, because the lecture slides are not in the hub yet. Check it against the slides when they are available." }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
@@ -48,16 +59,16 @@ const STUDY_MAP = [
  {
   "chapter": "03",
   "name": "External Analysis",
-  "subtitle": "8 blocks · covered through STEEP",
+  "subtitle": "8 blocks · covered in class",
   "blocks": [
    { "title": "Purpose and structure of external analysis", "summary": "External analysis evaluates the business area from the standpoint of the average generic competitor, not from one firm's strengths and weaknesses. It moves from the macroenvironment to industry structure, competitors, customers, key success factors and finally opportunities and threats.", "keyPoints": ["Define the business area first, because the relevant customers, competitors and substitutes depend on its boundaries.", "Use STEEP to identify macro forces that influence the arena but sit outside any single company's control.", "Analyse industry economics, competitors and customers to understand profitability, behaviour and demand.", "Derive key success factors from what demand requires and what competition makes necessary.", "Summarise the evidence as external opportunities and threats before combining it with internal analysis."], "exam": "Maintain the generic-player perspective. When the analysis starts describing what one company is good or bad at, it has moved into internal analysis.", "filter": "External Analysis", "status": "covered" },
    { "title": "STEEP analysis", "summary": "STEEP scans social, technological, economic, ecological and political forces that can reshape the business area. The task is to select relevant factors, understand their direction and assess whether their impact is positive, negative or uncertain.", "keyPoints": ["Social factors include demographics, income distribution, lifestyles, education and cultural change.", "Technological factors include innovation trajectories, digitalisation, infrastructure, patents and the pace of obsolescence.", "Economic factors include growth, inflation, interest and exchange rates, employment and purchasing power.", "Ecological factors cover climate, resources, pollution, regulation and environmental constraints on production and demand.", "Political factors include governments, taxation, trade policy, regulation, geopolitical stability and institutional choices."], "exam": "A STEEP list is not enough. Select factors relevant to the business area and explain their likely direction, impact, time horizon and uncertainty.", "filter": "STEEP", "status": "covered" },
-   { "title": "Porter's Five Forces", "summary": "The model explains average industry profitability through rivalry, threat of entry, substitutes, buyer power and supplier power. Stronger competitive forces reduce attractiveness; entry barriers protect incumbents, while high exit barriers can keep unprofitable capacity in the market.", "keyPoints": ["Rivalry rises with many balanced competitors, slow growth, low differentiation, high fixed costs, excess capacity and high exit barriers.", "The threat of entry falls when scale economies, capital needs, switching costs, access, differentiation or regulation create barriers.", "Substitutes come from another industry but perform the same function, limiting the price and profit an industry can sustain.", "Powerful buyers press prices down or demand more value; powerful suppliers raise input prices or restrict terms and availability.", "Industry attractiveness is inversely related to the combined strength of these competitive pressures."], "exam": "A strong force is unfavourable for average profitability. Also keep entry barriers and exit barriers separate: high entry barriers help incumbents, while high exit barriers intensify rivalry.", "filter": "Five Forces", "status": "next" },
-   { "title": "Competitor analysis", "summary": "Competitor analysis identifies direct rivals, gathers competitive intelligence and anticipates their objectives, assumptions and likely moves. Strategic groups help separate firms that compete with similar positions from those following different models in the same industry.", "keyPoints": ["Identify the competitors that serve similar customers and needs with comparable products or business models.", "Study each rival's objectives, current strategy, resources, capabilities, assumptions and likely reactions.", "Competitive intelligence uses lawful public and market information to reduce uncertainty about rival behaviour.", "Strategic-group maps cluster firms with similar strategic dimensions such as price, breadth, quality, channels or integration.", "Mobility barriers make movement between groups difficult and help explain differences in rivalry and profitability."], "exam": "A substitute is not automatically a direct competitor. Competitors operate inside the defined arena; substitutes come from outside it while satisfying the same function.", "filter": "Complements & Competitors", "status": "next" },
-   { "title": "Profit pool mapping", "summary": "A profit pool maps revenue and profit across the activities of an industry's value chain. The largest revenue segment is not necessarily the most profitable, so the analysis reveals where value is actually captured rather than merely where sales occur.", "keyPoints": ["Break the industry's value chain into economically meaningful activities or stages.", "Estimate the revenue generated by each activity and the profit retained there during the same period.", "Represent width as revenue and height as margin so the area reflects the absolute profit pool.", "Compare activities to find where bargaining power, scarcity, differentiation or recurring relationships concentrate profit.", "Use the result to question where the firm should participate, integrate, partner or shift resources."], "exam": "Revenue share and profit share are different. A large low-margin activity can generate less profit than a smaller stage with a high margin.", "filter": "Complements & Competitors", "status": "next" },
-   { "title": "Customers and market demand", "summary": "Customer analysis studies total demand, its evolution, buying criteria and the segments with different needs or behaviours. Segmentation matters because an apparently attractive market can contain groups with very different willingness to pay and bargaining power.", "keyPoints": ["Measure market size, growth, cyclicality and the drivers that expand or contract total demand.", "Identify who buys, who uses, who influences and who pays; these roles may belong to different actors.", "Understand customer needs, purchase criteria, willingness to pay, price sensitivity and switching behaviour.", "Segment customers into groups that are internally similar and meaningfully different in needs or economics.", "Evaluate segment size, growth, accessibility, profitability and bargaining power rather than relying only on headline market growth."], "exam": "Segmentation is not just demographic description. A useful segment must change how demand, value, competition or the required strategy is understood.", "filter": "Substitutes, Buyers & Suppliers", "status": "next" },
-   { "title": "Key success factors", "summary": "Key success factors are the conditions any firm must meet to compete successfully in a specific business area. They come from demand and competition, so they are external requirements—not the same thing as the resources or strengths a particular firm already owns.", "keyPoints": ["Start with demand: what do customers value, how do they choose and what must an acceptable offer deliver?", "Add competition: which capabilities or positions are necessary to survive the dominant forces and rival behaviour?", "Keep the list short and specific to the business area; generic virtues such as 'good management' explain little.", "Distinguish threshold factors required to participate from factors that can create superior performance.", "Internal analysis later asks whether the focal company possesses the resources and capabilities needed to meet them."], "exam": "A key success factor is an external industry requirement; a strength is an internal firm attribute. Do not write the same list under both headings without testing ownership.", "filter": "External Analysis", "status": "next" },
-   { "title": "Opportunities and threats", "summary": "The final step translates the external evidence into opportunities and threats for firms in the business area. Opportunities and threats are external by definition; a firm's inability to respond is an internal weakness and belongs on the other side of SWOT.", "keyPoints": ["Opportunities are external developments that could improve demand, positioning, profitability or access to resources.", "Threats are external developments that could reduce attractiveness, intensify competition or undermine existing value creation.", "Each item should follow from evidence in STEEP, industry, competitor or customer analysis rather than from brainstorming alone.", "State the mechanism, affected actors, likely magnitude, timing and uncertainty to make the conclusion actionable.", "The same trend can create an opportunity for some firms and a threat for others, but the underlying event remains external."], "exam": "Do not label an internal deficiency as a threat. The external change is the threat; lacking the capability to respond is a weakness revealed by internal analysis.", "filter": "External Analysis", "status": "next" }
+   { "title": "Porter's Five Forces", "summary": "The model explains average industry profitability through rivalry, threat of entry, substitutes, buyer power and supplier power. Stronger competitive forces reduce attractiveness; entry barriers protect incumbents, while high exit barriers can keep unprofitable capacity in the market.", "keyPoints": ["Rivalry rises with many balanced competitors, slow growth, low differentiation, high fixed costs, excess capacity and high exit barriers.", "The threat of entry falls when scale economies, capital needs, switching costs, access, differentiation or regulation create barriers.", "Substitutes come from another industry but perform the same function, limiting the price and profit an industry can sustain.", "Powerful buyers press prices down or demand more value; powerful suppliers raise input prices or restrict terms and availability.", "Industry attractiveness is inversely related to the combined strength of these competitive pressures."], "exam": "A strong force is unfavourable for average profitability. Also keep entry barriers and exit barriers separate: high entry barriers help incumbents, while high exit barriers intensify rivalry.", "filter": "Five Forces", "status": "covered" },
+   { "title": "Competitor analysis", "summary": "Competitor analysis identifies direct rivals, gathers competitive intelligence and anticipates their objectives, assumptions and likely moves. Strategic groups help separate firms that compete with similar positions from those following different models in the same industry.", "keyPoints": ["Identify the competitors that serve similar customers and needs with comparable products or business models.", "Study each rival's objectives, current strategy, resources, capabilities, assumptions and likely reactions.", "Competitive intelligence uses lawful public and market information to reduce uncertainty about rival behaviour.", "Strategic-group maps cluster firms with similar strategic dimensions such as price, breadth, quality, channels or integration.", "Mobility barriers make movement between groups difficult and help explain differences in rivalry and profitability."], "exam": "A substitute is not automatically a direct competitor. Competitors operate inside the defined arena; substitutes come from outside it while satisfying the same function.", "filter": "Complements & Competitors", "status": "covered" },
+   { "title": "Profit pool mapping", "summary": "A profit pool maps revenue and profit across the activities of an industry's value chain. The largest revenue segment is not necessarily the most profitable, so the analysis reveals where value is actually captured rather than merely where sales occur.", "keyPoints": ["Break the industry's value chain into economically meaningful activities or stages.", "Estimate the revenue generated by each activity and the profit retained there during the same period.", "Represent width as revenue and height as margin so the area reflects the absolute profit pool.", "Compare activities to find where bargaining power, scarcity, differentiation or recurring relationships concentrate profit.", "Use the result to question where the firm should participate, integrate, partner or shift resources."], "exam": "Revenue share and profit share are different. A large low-margin activity can generate less profit than a smaller stage with a high margin.", "filter": "Complements & Competitors", "status": "covered" },
+   { "title": "Customers and market demand", "summary": "Customer analysis studies total demand, its evolution, buying criteria and the segments with different needs or behaviours. Segmentation matters because an apparently attractive market can contain groups with very different willingness to pay and bargaining power.", "keyPoints": ["Measure market size, growth, cyclicality and the drivers that expand or contract total demand.", "Identify who buys, who uses, who influences and who pays; these roles may belong to different actors.", "Understand customer needs, purchase criteria, willingness to pay, price sensitivity and switching behaviour.", "Segment customers into groups that are internally similar and meaningfully different in needs or economics.", "Evaluate segment size, growth, accessibility, profitability and bargaining power rather than relying only on headline market growth."], "exam": "Segmentation is not just demographic description. A useful segment must change how demand, value, competition or the required strategy is understood.", "filter": "Substitutes, Buyers & Suppliers", "status": "covered" },
+   { "title": "Key success factors", "summary": "Key success factors are the conditions any firm must meet to compete successfully in a specific business area. They come from demand and competition, so they are external requirements—not the same thing as the resources or strengths a particular firm already owns.", "keyPoints": ["Start with demand: what do customers value, how do they choose and what must an acceptable offer deliver?", "Add competition: which capabilities or positions are necessary to survive the dominant forces and rival behaviour?", "Keep the list short and specific to the business area; generic virtues such as 'good management' explain little.", "Distinguish threshold factors required to participate from factors that can create superior performance.", "Internal analysis later asks whether the focal company possesses the resources and capabilities needed to meet them."], "exam": "A key success factor is an external industry requirement; a strength is an internal firm attribute. Do not write the same list under both headings without testing ownership.", "filter": "External Analysis", "status": "covered" },
+   { "title": "Opportunities and threats", "summary": "The final step translates the external evidence into opportunities and threats for firms in the business area. Opportunities and threats are external by definition; a firm's inability to respond is an internal weakness and belongs on the other side of SWOT.", "keyPoints": ["Opportunities are external developments that could improve demand, positioning, profitability or access to resources.", "Threats are external developments that could reduce attractiveness, intensify competition or undermine existing value creation.", "Each item should follow from evidence in STEEP, industry, competitor or customer analysis rather than from brainstorming alone.", "State the mechanism, affected actors, likely magnitude, timing and uncertainty to make the conclusion actionable.", "The same trend can create an opportunity for some firms and a threat for others, but the underlying event remains external."], "exam": "Do not label an internal deficiency as a threat. The external change is the threat; lacking the capability to respond is a weakness revealed by internal analysis.", "filter": "External Analysis", "status": "covered" }
   ]
  }
 ];
@@ -1256,6 +1267,454 @@ const CONCEPTS = [
   "meaning": "What the map is used to decide.",
   "how": "How do profits distribute along the supply chain? Are there business areas of the supply chain where profitability is growing? Are there opportunities for expanding the firm's business into other areas of the supply chain?",
   "trap": "The third question is the strategic one: the map is a search for where else to compete, not only a description of where the money currently is."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "Competitive Advantage Defined",
+  "meaning": "When two or more firms compete within the same market, one has a competitive advantage over its rivals when it earns, or has the potential to earn, a persistently higher rate of profit.",
+  "how": "The deck splits the topic into four questions: how and why a company makes more or less profit than its competitors, the types and sources of competitive advantage, the selection of the grand strategy, and the company's positioning.",
+  "trap": "Two words carry the definition. Potential: a firm can hold an advantage it is not yet exploiting. Persistently: one good year is not an advantage."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "External and Internal Sources of Change",
+  "meaning": "Competitive advantage emerges from change, and Grant separates where the change comes from.",
+  "how": "External sources are changing customer demand, changing prices and technological change. Internal sources explain why change hits firms differently: resources are heterogeneous, some firms have greater creative and innovative capability, and some are faster and more effective in exploiting change.",
+  "trap": "External change is an opportunity for every firm in the market. What turns it into an advantage for one of them is the internal side: who is equipped to exploit it."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "Zara and the Speed of Response",
+  "meaning": "The deck's example of a firm exploiting fast-changing customer demand.",
+  "how": "Zara designs on the basis of sales in its stores (a pull model), brings products to market in as little as four weeks, invests in attractive showcases, merchandising and stores, and plans on fabrics and semi-finished products rather than finished goods. The result is a very high rotation rate at reduced risk.",
+  "trap": "The advantage is speed, not the lowest price: in the words of Inditex's former CEO, stocks in clothing are like fresh products, highly perishable."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Cost Drivers",
+  "meaning": "The levers behind a cost advantage: delivering the same or similar products as competitors at lower cost.",
+  "how": "Capacity utilization (how saturated assets and resources are), economies of scale, economies of learning, production techniques, product design, and preferential access to input factors such as people, raw materials, capital and services, often through location.",
+  "trap": "Scale is one driver out of six. A smaller firm can still win on utilization, design, technique or location."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Scale versus Learning",
+  "meaning": "Two different sources of lower unit cost that are easily confused.",
+  "how": "Economies of scale are captured at one point in time when output increases, from technical input-output relationships, indivisibilities and specialised equipment, down to the minimum efficient scale; beyond a point there are diseconomies of scale as coordination costs grow. Economies of learning accumulate over time: costs decline about 20 to 30 percent in real terms each time cumulative production doubles. Learning flattens out but has no diseconomies.",
+  "trap": "The learning curve is not automatic. The slides stress that the cost decline requires management."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Drivers of Uniqueness",
+  "meaning": "The supply-side sources of a differentiation advantage.",
+  "how": "Product features and performance, service procedures, intensity of marketing campaigns and brand, technology embodied, quality of inputs, availability of complements (an ecosystem), skills and experience of employees, and location. Differentiation also needs product integrity, communication of the product's characteristics and reputation built through quality signals, advertising spending and premium prices.",
+  "trap": "Differentiation is usually a bundle of factors, and it is costly: the deck adds that differentiation does not mean neglecting costs."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Porter's Grand Strategies",
+  "meaning": "The four basic positions obtained by crossing competitive scope with strategic position.",
+  "how": "With a broad scope a firm pursues cost leadership or differentiation; with a narrow scope, focused cost leadership or focused differentiation. An integration strategy combines cost leadership and differentiation, as IKEA, Toyota and Target do.",
+  "trap": "Cost leadership means being the lowest-cost organisation, lower than all competitors. Being second- or third-lowest is always at risk of being undercut on price."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Integration Strategy",
+  "meaning": "A strategy that combines differentiation and cost leadership.",
+  "how": "Its drivers create value and cut cost at the same time: quality, which raises perceived value and lowers after-sale costs; economies of scope; and mass customisation. Target competes with Nordstrom on cost and with Walmart on the shopping experience, almost reaching Walmart's cost position.",
+  "trap": "Done badly it leaves the firm stuck in the middle, with neither the lowest cost nor a difference customers value."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Positioning and the Perceptual Map",
+  "meaning": "Positioning is the firm's decision about how it wants to be perceived: designing the offer and image to occupy a precise place in the target customers' minds (Kotler).",
+  "how": "First identify the attributes customers consider important for purchase, then map the firm's offer and its competitors' on them; the value curve shows the relative level on each key variable. Positioning succeeds when it addresses a specific target, focuses on the variables relevant for that segment, offers an exclusive or at least superior advantage in customers' perception, and is durable and consistent over time.",
+  "trap": "You do not need the best product. BMW stresses the joy of driving and Volvo safety: they win different customers by stressing different purchase criteria."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "Core Competencies",
+  "meaning": "The strategic resources at the root of a company's competitive advantage: unique strengths deeply embedded within the company.",
+  "how": "They are created by the interplay of resources (tangible and intangible assets), capabilities (the organisational and managerial skills to orchestrate the resources) and activities (business processes such as delivery, purchasing and product development). Examples from the deck: Netflix's AI for licensing content and personalised recommendations, IKEA's low-cost functional design, Coca-Cola's marketing and distribution.",
+  "trap": "A core competence is rarely a single asset. It is a combination, which is also why it is hard to copy."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "Porter's Value Chain",
+  "meaning": "An effective way of representing a company as a set of activities linked to its competitive advantage.",
+  "how": "Primary activities create the product and transfer it to the buyer: inbound logistics, operations, outbound logistics, marketing and sales, and service. Support activities serve them and each other: firm infrastructure, human resource management, technology development and procurement.",
+  "trap": "Procurement is a support activity even though the inputs it buys feed inbound logistics, and after-sale service is a primary activity."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "Resources and Organisational Capabilities",
+  "meaning": "What the firm has, and what it can do with it.",
+  "how": "Tangible resources are physical and financial means, easy to find on the balance sheet. Intangible resources include brand equity, reputation, culture and intellectual property. Human resources are skills, knowledge, experience and motivation. Organisational capabilities are the skills to orchestrate these resources and deploy them strategically; they are intangible by nature and include structure, routines and culture, as in 3M's innovation process, Walmart's logistics and UPS's delivery process.",
+  "trap": "Capabilities never appear on the balance sheet, yet they are often the hardest source of advantage to imitate."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "The VRIO Test",
+  "meaning": "Four questions that decide whether a resource, capability or competency is strategically important.",
+  "how": "Valuable: relevant to fulfilling a customer need. Rare: scarce and in short supply. Costly to imitate. Organized to capture value. Not valuable gives a competitive disadvantage; valuable but not rare gives parity; valuable and rare but easy to imitate gives a short-term advantage; valuable, rare and inimitable but not organized gives a mid-term advantage; all four give a sustainable advantage.",
+  "trap": "A valuable resource that every rival also has gives parity, not advantage."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "Isolating Mechanisms",
+  "meaning": "The four characteristics that make resources difficult to imitate.",
+  "how": "Unique physical resources, including intellectual property (patents, designs, copyrights, trademarks, trade secrets) and assets such as mines and oil wells. Path dependence: resources built through a continuous process of accumulation that firms cannot compress. Causal ambiguity: competitors cannot understand how the advantage was created, typical when it rests on organisational capabilities. Economic deterrence: the market cannot support two players.",
+  "trap": "Path dependence is about time, not money: a rival with more cash still cannot buy years of accumulated learning."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "Organized to Capture Value",
+  "meaning": "The O in VRIO: the firm must be able to exploit what it owns.",
+  "how": "Appropriate organisational structure, processes, coordinating mechanisms and management systems must be in place to exploit the potential of resources and competencies fully. This is where organisational capabilities come in: the firm's capacity to deploy resources for a desired end result.",
+  "trap": "A firm can own a valuable, rare and inimitable resource and still waste it. The EMI and Raytheon lessons make the same point from another angle."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "Value Chain for Cost Analysis",
+  "meaning": "How to apply the value chain when the firm pursues a cost advantage.",
+  "how": "Three phases: identify the activities generating the most relevant costs (a Pareto analysis; fixed or variable, internal or external costs; differences in how competitors run them), identify the specific cost drivers of each activity, and identify opportunities for cost reduction. In the car industry, for example, component prices depend on the number of components, order sizes, purchases per supplier and supplier location.",
+  "trap": "Start from the costs that matter, which is what the Pareto analysis is for, not from the activities that are easiest to analyse."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "Linking Value Chains for Differentiation",
+  "meaning": "How to apply the value chain when the firm pursues differentiation.",
+  "how": "Three phases: identify the key performance for the customer, identify the activities that affect it and how, and identify differentiation opportunities. In the metal containers example the producer's activities are linked to the customer's: distinctive can design supports the customer's marketing, tight tolerances avoid breakdowns on its canning lines, fast and flexible delivery cuts its inventory, and skilled maintenance keeps its packaging lines running.",
+  "trap": "In B2B the value is created in the customer's value chain, so you have to map theirs, not only your own."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "Appraising Resources: The Four Zones",
+  "meaning": "Benchmarking strategic resources against competitors to identify strengths and weaknesses.",
+  "how": "Each resource or capability is rated for strategic importance and relative strength on a 1 to 10 scale, where 5 means parity with competitors. High importance and high strength are key strengths; high importance and low strength are key weaknesses; low importance and high strength are superfluous strengths; low and low is the zone of irrelevance. In the Volkswagen example engineering is a key strength, product development and marketing are key weaknesses, and government relations is a superfluous strength.",
+  "trap": "A superfluous strength is still a strength. The question is whether to keep investing in it, not whether it exists."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "SWOT as the End of Diagnosis",
+  "meaning": "The SWOT analysis crosses the internal analysis (strengths and weaknesses) with the external analysis (opportunities and threats).",
+  "how": "It closes the diagnosis phase of the strategic decisions process and feeds the generation and selection of strategic alternatives, which belong to strategy formulation.",
+  "trap": "SWOT describes the situation; it does not choose the alternative. That choice comes from the crossings and the roadmap."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "The Four Strategic Questions",
+  "meaning": "Crossing the SWOT quadrants turns the analysis into strategic alternatives (Rothaermel).",
+  "how": "S–O: how can we use our strengths to take advantage of opportunities? S–T: how can we use our strengths to reduce the likelihood and impact of threats? W–O: how can we overcome the weaknesses that prevent us from taking advantage of opportunities? W–T: how can we overcome the weaknesses that will make threats a reality? The course applies it to McDonald's.",
+  "trap": "Four lists of bullet points are not a SWOT analysis. The value is in the crossings, which produce concrete actions."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "Roadmapping Strategic Actions",
+  "meaning": "Turning the generated alternatives into a sequence of actions.",
+  "how": "Each strategic action is assessed against two conditions: the expected economic impact, in terms of profit generated or loss reduced, and the expected implementation problems, in terms of actions to be taken, organisational change and number of activities involved. Placing actions on these two dimensions creates the roadmap.",
+  "trap": "High impact alone does not decide priority: an action with severe implementation problems may come after an easier one with a similar impact."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "Repositioning",
+  "meaning": "A strategy to change the target audience's perception of the company's products or services.",
+  "how": "It becomes necessary when a company is mispositioned, failing to connect its brand with its target audience, but also when changes are under way. The deck lists five reasons: stronger competition, faulty positioning (an under-positioned or too narrowly defined brand), product evolution and customer trends, environmental changes, and future plans.",
+  "trap": "It is a difficult transition because the brand image in customers' minds is deep-seated: keeping continuity with the past helps customers keep recognising the product."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "Signs Repositioning Is Needed",
+  "meaning": "The warning signals listed in the deck, with the cases that illustrate them.",
+  "how": "A downward trend in sales, a shrinking core audience, industry shake-ups, product line updates inconsistent with the old brand promise, a value proposition outdated for the current culture or market, lack of appeal to younger generations, and brand confusion or negative associations. Lego in 2003 (new CEO Knudstorp, sale of theme parks, crowdsourcing from fans, partnerships), McDonald's (from fast food to fresh, from unhealthy to healthy) and Domino's (new recipe and a transparent campaign) repositioned successfully.",
+  "trap": "Repositioning is not reserved for failing brands: changes in customer trends or the firm's future plans can call for it too."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "The JCPenney Lesson",
+  "meaning": "The deck's example of a repositioning that left the firm stuck in the middle.",
+  "how": "In 2011 Ron Johnson, who had built Apple's retail stores, moved JCPenney from cost leadership towards an integration strategy: in-store boutiques, exclusive merchandise, no clearance racks and no discount coupons, implemented in all 1,800 stores at once without pre-testing. Within 12 months sales fell by 25 percent, and less than 18 months in he was replaced by his predecessor.",
+  "trap": "The failure was as much in the implementation as in the idea: no pre-testing, and removing what core customers valued."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "Business Model Defined",
+  "meaning": "A comprehensive set of strategic decisions defining the way a company creates value, transfers value to its customers and captures value.",
+  "how": "Drafting a business model is a powerful tool to evaluate strategic alternatives, checking their soundness and their consistency with the overall structure of the company. The most widely used representation is the Business Model Canvas (Osterwalder, 2010).",
+  "trap": "A business model is not the revenue model: revenue streams are one of nine building blocks."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "The Nine Building Blocks",
+  "meaning": "The canvas describes a business model through nine blocks.",
+  "how": "Customer segments, value proposition, channels, customer relationships, revenue streams, key resources, key activities, key partners and cost structure. Two alternative readings group them as value network, value proposition and customer interface, and economic model; or as value creation on the left and value capture on the right.",
+  "trap": "The cost structure is not an independent choice: it is a direct result of all the other blocks, and ideally each cost can be traced back to one of them."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "Channels and Customer Relationships",
+  "meaning": "How the company reaches customers and what kind of relationship it keeps with each segment.",
+  "how": "Channels are direct (sales force, web) or indirect (dealers, partners, wholesalers) and serve five functions: create awareness, support evaluation, allow purchase, deliver the value proposition and support the customer after the sale. Relationships range from personal assistance and dedicated personal assistance to self-service, automated services, online communities and co-creation.",
+  "trap": "Match cost to value: cost-intensive channels for very profitable clients, cost-efficient ones for unprofitable clients; and customers paying a high price expect a high-touch relationship."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Bait and Hook",
+  "meaning": "An attractive, inexpensive or free initial offer that encourages continuing future purchases of related products.",
+  "how": "Gillette sells the razor handle once and the blades frequently, with a built-in lock-in. Nespresso, invented by Eric Favre in 1975 and patented in 1976, took off after Jean-Paul Gaillard introduced the Le Club community, reduced machine prices while raising capsule prices, turned the office machine into a luxury consumer brand and licensed machine production to other companies.",
+  "trap": "The profit is in the hook, not the bait. Without a lock-in such as patents or compatibility, customers buy the bait and the hook elsewhere."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Multi-sided Business Models",
+  "meaning": "Business models that serve several interdependent customer segments with distinct value propositions.",
+  "how": "Xbox and PlayStation sell high-performance consoles to hard-core gamers at a loss and earn royalties from game developers, while the Wii sold profitable hardware to casual gamers. Google offers free search to web surfers, targeted ads to advertisers and free content services to content owners, with one main revenue stream, keyword auctions, subsidising the other offers.",
+  "trap": "The segments are interdependent: the free side is not charity, it is what makes the paying side valuable."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Free, Freemium and Business Model Innovation",
+  "meaning": "Patterns that give part of the offer away, and how to design new models.",
+  "how": "In the free model the basic service is free and someone else pays, as advertisers pay for the Metro free commuter paper. In freemium the basic service is free and premium services are paid: paid SkypeOut calls were less than 10% of total usage, while over 90% of Skype users used the free service. Dell's direct sales and assemble-to-order model was itself a business model innovation. The method to innovate is the “what if…” question: map the existing model, change one or more blocks, and work out the changes needed in the others.",
+  "trap": "Dell's innovation was not the PC but the business model: no retailer margin, immediate payment and very low stock."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "Three Corporate Decisions",
+  "meaning": "Corporate strategy deals with three decisions about where the firm competes.",
+  "how": "In which stages of the industry value chain to participate, which determines vertical integration; what range of products and services to offer, which determines diversification; and where to compete, which determines geographic scope and internationalisation.",
+  "trap": "Corporate strategy decides where to compete; business strategy decides how to compete within each business."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "Advantages and Risks of Vertical Integration",
+  "meaning": "Integrating backward (towards suppliers) or forward (towards customers) along the industry value chain.",
+  "how": "Advantages: embodying higher margins, reducing transaction costs, improving quality, securing critical supplies (backward) and distribution channels (forward), learning, independence from suppliers, and easier scheduling and planning. Risks: compounding risk, lower flexibility, low incentives to lower costs because of a captive market, and lower efficiency than specialised suppliers.",
+  "trap": "The captive market is the subtle risk: an in-house supplier does not have to win the business, so it has less reason to cut costs."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "Forms of Vertical Relations",
+  "meaning": "Vertical integration is one end of a spectrum.",
+  "how": "From low to high commitment and formalisation: spot sales and purchases, informal supplier-customer relationships, long-term contracts, agency agreements and franchises, supplier-customer partnerships, joint ventures, and full vertical integration. Taper integration combines integration with reliance on outside suppliers or distributors. De Beers integrated forward into jewellery (“from mine to finger”); Lenovo's end-to-end model with its own manufacturing is a source of cost advantage.",
+  "trap": "Integration is not a yes-or-no choice: lighter forms can secure supply or channels without the risks of ownership."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Motives for Diversification",
+  "meaning": "Why firms enter new businesses, and how thinking on it has changed.",
+  "how": "The traditional motives are growth, risk reduction, escape from unattractive industry environments and the use of surplus cash flow, as the large cash holdings of Big Tech show. After the diversification era of 1950 to 1980 came refocusing, driven by the emphasis on shareholder value, turbulence that favoured specialisation, and the recognition that sharing resources and capabilities is the real source of advantage.",
+  "trap": "Growth and risk reduction alone are not a source of advantage; the refocusing era is the evidence."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Economies of Scope",
+  "meaning": "Economies that exist when using a resource across multiple activities uses less of that resource than carrying out the activities independently.",
+  "how": "They arise from tangible and intangible assets such as distribution channels, R&D labs, sales forces, IT systems, brands and production facilities (P&G, Honda), from organisational capabilities (LVMH), and from contracting out and licensing (Disney). Diversification can also exploit internal markets, financial resources and shared administrative activities.",
+  "trap": "Economies of scope come from sharing, so they exist only where businesses are actually related."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Related versus Unrelated Portfolios",
+  "meaning": "Real portfolios mix related and unrelated businesses.",
+  "how": "Unrelated portfolios offer financial economies, restructuring, internal capital markets, risk reduction and shared human resources and administration, at the cost of coordination costs, cultural heterogeneity and organisational complexity. Related portfolios add shared resources, economies of scale and scope and critical mass, at the cost of coordination complexity, higher risk than unrelated portfolios and managerial complexity. Rumelt's types run from single business (over 95% of revenues from one business) and dominant business (70 to 95%) to related and unrelated diversification (under 70%).",
+  "trap": "Related portfolios carry higher risk than unrelated ones: what they share also exposes them to the same shocks."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "The BCG Matrix",
+  "meaning": "A portfolio tool that classifies businesses by market growth and relative market share.",
+  "how": "Relative market share is the company's share divided by the share of its largest competitor, excluding the company itself, with a cut-off at 1. Stars combine high growth and high share, cash cows low growth and high share, question marks high growth and low share, and dogs low growth and low share.",
+  "trap": "Relative, not absolute: a 22% share is high only if the largest rival has less than 22%."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "The GE/McKinsey Matrix",
+  "meaning": "A nine-cell strategy screen developed by McKinsey for GE in 1971.",
+  "how": "Its two dimensions, market segment attractiveness and business strength, are each built from many weighted variables. Attractiveness: market size, growth rate, profit margin potential, competitive intensity, cyclical or seasonal sales and position on the learning curve. Strength: relative market share, price competitiveness, quality perception, market knowledge and customer loyalty, sales effectiveness and geographic coverage. Cells fall into three zones: invest and grow, selectivity and earnings, harvest and divest.",
+  "trap": "Unlike BCG it uses multiple measures for each axis, so the same business can land differently depending on the weights chosen."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "General Electric's Break-up",
+  "meaning": "The deck's example of a conglomerate that unwound.",
+  "how": "GE spanned power, renewable energy, aviation, healthcare, financial services (GE Capital) and digital. The deck lists ill-judged acquisitions, overoptimism, accounting practices in which GE Capital assets were bought and sold to keep earnings rising, and management systems based on manager rotation. GE is now three independent listed companies: GE Aerospace, the legal successor, GE HealthCare and GE Vernova.",
+  "trap": "The problems listed are managerial, not only a matter of the businesses' attractiveness."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "Market, Exchange and Transaction",
+  "meaning": "The basic vocabulary of marketing: market, customer, exchange and value.",
+  "how": "A market is a system that facilitates the exchange of goods and services, bringing buyers and sellers into contact either directly or through intermediaries such as agents or institutions (Kotler). An industry is the set of sellers competing to serve a market. Exchange is the process of obtaining a desired product from someone by offering something in return; when an agreement is reached, a transaction takes place.",
+  "trap": "Market and industry are not synonyms: the market is the customers around a need, the industry is the sellers serving it."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "What Marketing Is",
+  "meaning": "Marketing, in the American Marketing Association's definition (2007, reaffirmed 2017), is the activity, set of institutions and processes for creating, communicating, delivering and exchanging offerings that have value for customers, clients, partners and society at large.",
+  "how": "Marketing starts with the customer's problem: customers rarely want products per se, products are means to achieve something. Modern marketing also takes the stakeholder perspective, not only customers and firm profits.",
+  "trap": "Marketing is not the same as selling or advertising: those are parts of it."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "Four Orientations to the Market",
+  "meaning": "How a company can approach the market, from “sell what you make” to “produce what can be sold”.",
+  "how": "Production orientation asks how to produce efficiently (Henry Ford: any colour, as long as it is black). Product orientation asks how to build the best product (Steve Jobs: people don't know what they want until you show it to them). Sales orientation asks how to sell what is produced (Sergio Zyman of Coca-Cola: sell more stuff to more people, more often, for more money). Marketing orientation asks what the market values and how to serve it better.",
+  "trap": "The Google Glass case shows the risk of the product orientation: forecast in 2013 to sell millions by 2016, it was withdrawn from sale in January 2015."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "Strategic and Operational Marketing",
+  "meaning": "The marketing reference framework split into choices and execution.",
+  "how": "Context analysis (external and internal), segmentation, targeting and positioning form strategic marketing: where to play and how to win. The value proposition defined through the marketing mix (product, place, price, promotion) and implementation and control form operational marketing: how to execute. Operational decisions have short- to medium-term effects, use limited resources, can be revised on market feedback and are often handled by middle management.",
+  "trap": "STP is strategic, not operational: it decides who to serve and how to be perceived before any 4P decision."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Need, Want and Demand",
+  "meaning": "Where the marketing process starts: understanding the market.",
+  "how": "A need is a perceived state of deprivation; a want is a need directed toward a specific solution; demand is a want backed by willingness and ability to buy. Market demand is the total quantity of a product or service that consumers are willing and able to purchase at a given price within a specific period. Demand is analysed from a macro viewpoint (defining, qualifying and measuring the market) and a micro viewpoint (needs, buying behaviour, offering and competitive system).",
+  "trap": "Demand needs both willingness and ability: a want without purchasing power is not demand."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Market Qualification Levels",
+  "meaning": "The market is narrowed in five steps, illustrated with the Range Rover Evoque in Italy.",
+  "how": "Potential market: people interested in premium SUVs. Qualified market: adults with a driving licence. Available market: upper-middle income professionals in big cities, earning over €85k, with a dealer nearby. Served or target market: urban professionals in Milan, Rome and Turin. Penetrated market: those who actually bought, for example 5,000 Evoques in 2024. Market share, an indicator of competitive capacity, is the company's sales over total market demand.",
+  "trap": "Each level is a subset of the previous one; penetration is measured against the served market, not the potential one."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Price Elasticity and Expansible Markets",
+  "meaning": "How sensitive demand is to price and to marketing effort.",
+  "how": "Price elasticity measures how a relative variation of price affects the relative variation of quantity sold: E = (ΔQ/Q) ÷ (ΔP/P). Demand is elastic when |E| is above 1 and inelastic below 1. An expansible market is one whose total demand can be significantly increased by marketing efforts; a non-expansible one stays close to its potential whatever the effort. Demand depends on endogenous variables controlled by the firm (price, product, point of sale, communication, personal relationship) and exogenous ones (macro-environment, economic trends, disposable income, competition, complements, substitutes).",
+  "trap": "Elasticity uses relative changes, not absolute ones: a €1 cut means very different things on a €6 and a €60 product."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Explicit and Hidden Customer Costs",
+  "meaning": "Customer value is the balance between customer benefits and customer costs, which are not only monetary.",
+  "how": "The marketing goal is to create customer value by providing benefits that are genuinely valued, in ways competitors fail to deliver, and by uncovering the costs and risks the customer incurs in the buying process and reducing them before competitors. Explicit costs and risks are monetary. Hidden costs are measured in effort (time to buy, difficulty processing the product's characteristics and understanding which information matters) and in risk of a poor choice.",
+  "trap": "Explicit costs are visible to every competitor, so cutting them contracts margins and leads to price wars; hidden costs are where differentiation is possible."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "The B2C Buying Process",
+  "meaning": "The five phases a consumer goes through, and why some are skipped.",
+  "how": "Problem recognition; information search (internal from past experience, external from personal, public and marketing sources); evaluation of alternatives against decision criteria; the purchase decision, about from whom and when to buy; and post-purchase behaviour, comparing expectations with experience. Customers skip or minimise steps when involvement is low; involvement depends on the importance (cost) of the purchase, its personal consequences and its effect on social and self-image.",
+  "trap": "Purchase and consumption are usually of limited importance in a consumer's life, which is why social, cultural and psychological variables weigh so much."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "The FCB Grid",
+  "meaning": "Foote, Cone & Belding's grid (1987) crosses involvement with thinking or feeling.",
+  "how": "High involvement and thinking (insurance, appliances, cameras) call for information, reviews, detailed rational arguments and guarantees. High involvement and feeling (sports cars, luxury watches, perfume) call for emotional storytelling and aspirational imagery. Low involvement and thinking (detergents, bleach, motor oil) call for promotions, price, distribution and reminders. Low involvement and feeling (snacks, soft drinks, beer) call for brand personality, packaging and sensory cues.",
+  "trap": "The grid tells you which marketing levers to pull, not which product is better."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "B2B Demand",
+  "meaning": "Business demand differs from consumer demand on almost every dimension.",
+  "how": "B2B markets are concentrated and interdependent; demand is derived from business needs and from demand for the end product; purchases come in high volumes, often through contracts; demand is less price-sensitive when the product is essential to operations; decisions are driven by efficiency, production needs and ROI; demand is more stable and forecastable; purchases are infrequent but recurring; and offers are often tailored.",
+  "trap": "Derived demand means a B2B supplier's fortunes depend on its customers' customers."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "The Purchasing Centre",
+  "meaning": "In B2B the buyer is not one person but a purchasing centre.",
+  "how": "Initiator: identifies the need. Influencer: provides information and evaluation criteria. Decider: has the authority to choose and approve. Buyer: has the formal authority to negotiate with the supplier. User: uses the product and may define specifications. In the 3D-printer example: the production manager, the lead industrial engineer, the COO or CEO, the procurement manager and the line workers. Its needs are technical, economic-financial, assistance and information needs.",
+  "trap": "Each role maximises different objectives, so the marketer must identify the roles, keep them distinct and approach each on its own objectives."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "Segmentation and the STP Process",
+  "meaning": "Segmentation is the marketing process through which the company divides the market into sub-groups with different demand profiles but internally homogeneous, for which management develops specific marketing plans.",
+  "how": "It is the first step of STP: segmentation (identify variables, slice the market, profile segments), targeting and positioning. It sits between undifferentiated marketing and one-to-one marketing, and it is needed because markets are too broad and too diverse in preferences, resources, locations, attitudes and buying habits.",
+  "trap": "There is no single best product: Prego tested 45 variants of tomato sauce and found preferences that only groups of customers share."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "Advantages and Costs of Segmenting",
+  "meaning": "Segmentation brings benefits to both sides, at a price.",
+  "how": "For the organisation: lower complexity in managing the market, prioritised allocation of marketing resources (by current and future value of segments) and increased competitive advantage, leading to sustainable profit growth. For the customer: convenience and time savings, tailored products and personalised experiences. Disadvantages: different products for different segments, higher production and distribution costs, fragmented advertising costs and more market research. Modularisation limits the cost of variety.",
+  "trap": "The costs grow with the number of segments, which is why the lecture insists on segments large enough to justify a targeted action."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "What Makes a Good Segment",
+  "meaning": "Segments need internal similarity and external diversity, plus five characteristics.",
+  "how": "Measurability: size and buying power can be measured. Accessibility: the segment can really be reached by marketing actions. Homogeneity within the segment and heterogeneity compared with others. Importance: large enough to justify a targeted marketing action. Duration: it can be exploited for a reasonable period of time.",
+  "trap": "A segment that cannot be reached with marketing actions is useless, however attractive its profile."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Product versus Customer Segmentation",
+  "meaning": "Two main approaches to segmenting a market.",
+  "how": "Segmenting by product, as GM did when it split the US car market into six segments in 1921, is simple, immediate and clear, but ignores customers' characteristics and gives little visibility of competition among products. In mature, competitive markets companies segment by customer: by characteristics (socio-demographic, geographic, psychographic), by behaviour (product usage, buying process) and by needs (benefits sought).",
+  "trap": "Product segmentation made sense when the main problem was production in markets with little competition."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Observability versus Differentiation Potential",
+  "meaning": "The segmentation bases trade ease of observation against potential for competitive differentiation.",
+  "how": "Socio-demographic variables (which group consumers belong to) are the easiest to observe but offer the least differentiation potential. Behavioural variables (what customers do), psychographic variables (how they think) and needs (what they want) are progressively harder to observe and offer more differentiation potential. Socio-demographics are easily available and stable but inaccurate and too broad alone; behaviour reflects real actions but its data is costly and raises privacy concerns; needs reveal what customers value but are hard to identify and quantify.",
+  "trap": "The most useful base for differentiation is the hardest to measure, which is why segmentation usually combines several bases."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Market versus Customer Segmentation",
+  "meaning": "The same principles applied to two different units of analysis.",
+  "how": "Market segmentation takes the whole market as its unit and relies on external research data (demographics, psychographics, surveys, panels) to produce segment profiles or personas and decide where to compete. Customer segmentation works on the company's own customer database and internal transaction data (recency, frequency and monetary value, purchase history, engagement, churn risk, customer lifetime value) to drive retention, upselling and cross-selling.",
+  "trap": "RFM and lifetime value belong to customer segmentation: they describe people who already buy from you."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "Cluster Analysis",
+  "meaning": "A mathematical segmentation method that needs data from a representative sample.",
+  "how": "K-means: choose the number of clusters k, select k random centroids, assign every point to the closest centroid, recompute the centroids of the new clusters, and repeat until the centroids stop changing, points stay in the same cluster or the maximum number of iterations is reached. In the smartwatch case 10,540 respondents aged 18 to 50 in Northern Italy were clustered on utility, privacy, social impact, brand, community impact and product; the “fashion lovers” see wearables as accessories.",
+  "trap": "The analyst still chooses k and the variables: a mathematical method is not free of judgement."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "Heuristic Segmentation Methods",
+  "meaning": "Empirical, mostly qualitative methods based on the marketer's experience.",
+  "how": "Successive elimination (Porter, 1987): a checklist of variables, pairwise comparison in a matrix, elimination of irrelevant crossings and contradictions, gradual combination of variables, then products entered by use (the Tesla example). The two-step approach (Wind and Cardozo, 1974): macro-segmentation on company-level variables, then micro-segmentation on decision makers' needs. The nested approach (Bonoma and Shapiro, 1982): five nests from the most observable to the most individual variables.",
+  "trap": "The two-step and nested approaches are built for B2B markets, where the firm and the individual decision makers are segmented separately."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "Validating and Describing Segments",
+  "meaning": "Segments must be tested before strategic decisions are made on them.",
+  "how": "Statistical validation checks reliability, discriminant validity and predictive power. Managerial validation checks that segments make sense in the real world, are recognisable by sales and marketing teams and can be served with a different marketing mix. Strategic validation checks fit with brand positioning and long-term objectives. Validated segments are then described in profiles, product-market mixes and personas (semi-fictional representations of an ideal customer); digital twins go further and simulate how a consumer would react to campaigns before launch.",
+  "trap": "A statistically perfect segment can still fail managerial validation if the sales force cannot recognise it."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Five Coverage Patterns",
+  "meaning": "After segmentation the firm chooses which segments to serve and how to cover them.",
+  "how": "Single-segment concentration: one line of products for one specific target, as luxury players such as Rolex or Ferrari do. Selective specialisation: different solutions for different targets. Product specialisation: the same solution for different markets. Market specialisation: different solutions for the same market. Full market coverage: broad solutions for every target, as L'Oréal does.",
+  "trap": "Product and market specialisation are easily swapped: product specialisation keeps the product and varies the market, market specialisation keeps the customer group and varies the products."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Choosing Target Segments",
+  "meaning": "Targeting weighs the attractiveness of each segment against the firm's fit with it.",
+  "how": "Attractiveness comes from the external analysis: size, growth, profitability and competitive intensity of the segment. Fit comes from the internal analysis: whether the firm's resources, competencies and objectives allow it to serve the segment better than rivals.",
+  "trap": "An attractive segment the firm cannot serve well is a trap: competitors with a better fit will take it."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Schema Theory in Positioning",
+  "meaning": "A schema is a mental framework, a set of ideas and expectations about something.",
+  "how": "In a restaurant you expect a menu, waiters and tables, and to pay at the end. When a new product fits consumers' existing schema, it is easy to understand and accept; when it does not fit, consumers may feel confused or resist it. Positioning has to take the target's schemas into account.",
+  "trap": "Being different helps only if customers can still recognise what the offer is."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "The Traditional Positioning Approach",
+  "meaning": "A three-step method to analyse and choose a position.",
+  "how": "Identify the relevant attributes, functional and emotional; rate them for the brand and its competitors, typically with Likert-scale surveys; reduce the attributes to a few dimensions and analyse the results, producing a perceptual map and its strategic implications. For emotional attributes, Aaker's brand personality dimensions are sincerity, excitement, competence, sophistication and ruggedness.",
+  "trap": "The map is only as good as the attributes: start from what customers consider important for purchase, not from what the company wants to communicate."
  }
 ];
 
@@ -4052,5 +4511,1183 @@ const QUESTIONS = [
    "D": "Incorrect. That is the SWOT, which combines the external and internal analyses."
   },
   "recap": "Correct. Profit pool mapping asks how profits distribute along the supply chain, whether there are business areas of the supply chain where profitability is growing, and whether there are opportunities for expanding the firm's business into other areas of the supply chain."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "Defining Competitive Advantage",
+  "question": "According to the deck, when does a firm possess a competitive advantage over its rivals in the same market?",
+  "options": {
+   "A": "When it holds the largest market share in its industry.",
+   "B": "When it earns, or has the potential to earn, a persistently higher rate of profit than its rivals.",
+   "C": "When it sells at the lowest price in the market.",
+   "D": "When its products have the best technical performance."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Market share can come with low profitability; the definition is about the rate of profit.",
+   "B": "Correct. Competitive advantage is a persistently higher rate of profit, actual or potential, against rivals in the same market.",
+   "C": "Incorrect. Low price is one way to compete, not the definition; a price cut without lower costs destroys profit.",
+   "D": "Incorrect. The deck explicitly calls the idea that you need the best product a conventional myth."
+  },
+  "recap": "Correct. Competitive advantage is a persistently higher rate of profit, actual or potential, against rivals in the same market."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "An Internal Source of Change",
+  "question": "Which of these is an internal source of competitive advantage in Grant's scheme?",
+  "options": {
+   "A": "Changing customer demand.",
+   "B": "Technological change.",
+   "C": "Some firms are faster and more effective than others in exploiting change.",
+   "D": "Changing prices."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Changing customer demand is an external source of change.",
+   "B": "Incorrect. Technological change is an external source of change.",
+   "C": "Correct. Resource heterogeneity, creative capability and speed in exploiting change are the internal sources that make the same change benefit some firms more than others.",
+   "D": "Incorrect. Changing prices are an external source of change."
+  },
+  "recap": "Correct. Resource heterogeneity, creative capability and speed in exploiting change are the internal sources that make the same change benefit some firms more than others."
+ },
+ {
+  "cat": "Sources of Advantage",
+  "title": "Zara's Pull Model",
+  "question": "What is at the heart of Zara's advantage as the deck presents it?",
+  "options": {
+   "A": "The lowest manufacturing costs in the industry, from outsourcing to Asia.",
+   "B": "Design driven by store sales, a time to market of as little as four weeks, and planning on fabrics rather than finished goods.",
+   "C": "Heavy advertising that builds a premium brand.",
+   "D": "Exclusive collaborations with famous designers."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Zara's case is about speed of response, not about having the lowest production cost.",
+   "B": "Correct. The pull model, the short time to market and planning on semi-finished products give a very high rotation rate at reduced risk.",
+   "C": "Incorrect. Zara's attractiveness comes from its stores and showcases and from fresh assortments, not from heavy advertising.",
+   "D": "Incorrect. Designer collaborations are not part of the case in the deck."
+  },
+  "recap": "Correct. The pull model, the short time to market and planning on semi-finished products give a very high rotation rate at reduced risk."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Scale or Learning?",
+  "question": "Which statement correctly distinguishes economies of scale from economies of learning?",
+  "options": {
+   "A": "Learning is captured at one point in time, while scale accumulates over time.",
+   "B": "Beyond a point there are diseconomies of scale, while learning flattens out but has no diseconomies.",
+   "C": "Both reduce costs automatically as output grows, without any management effort.",
+   "D": "Economies of learning exist only in labour-intensive industries."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. It is the reverse: scale is captured at a point in time, learning accumulates with cumulative output.",
+   "B": "Correct. Diseconomies of scale appear as coordination and management costs grow; learning declines at some point but has no diseconomies.",
+   "C": "Incorrect. The deck stresses that learning-curve cost declines do not occur automatically: they require management.",
+   "D": "Incorrect. The deck notes there are industries where learning is weak, but it does not restrict learning to labour-intensive ones."
+  },
+  "recap": "Correct. Diseconomies of scale appear as coordination and management costs grow; learning declines at some point but has no diseconomies."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Learning Curve Arithmetic",
+  "question": "Unit cost is €40 at a cumulative output of 1,000 units, and costs fall 25% each time cumulative output doubles. What is the unit cost at 4,000 units?",
+  "options": {
+   "A": "€20.00",
+   "B": "€22.50",
+   "C": "€30.00",
+   "D": "€10.00"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is a 50% total fall, as if costs dropped 25 points per doubling of the original cost; the decline compounds on the new cost each time.",
+   "B": "Correct. 4,000 is two doublings of 1,000, so the cost is 40 × 0.75 × 0.75 = €22.50.",
+   "C": "Incorrect. That is only one doubling (1,000 to 2,000).",
+   "D": "Incorrect. That would be a 75% cut, the result of subtracting the percentage three times."
+  },
+  "recap": "Correct. 4,000 is two doublings of 1,000, so the cost is 40 × 0.75 × 0.75 = €22.50."
+ },
+ {
+  "cat": "Cost & Differentiation",
+  "title": "Value of a Differentiation Advantage",
+  "question": "A differentiator keeps its price unchanged and, thanks to its unique features, sells 2,000 more units at a unit contribution margin of €15. How does the deck express the economic value created?",
+  "options": {
+   "A": "ΔCFFO = Δm × Q, because the margin rises.",
+   "B": "ΔCFFO = m × ΔQ = €30,000, because volume rises at an unchanged margin.",
+   "C": "ΔCFFO = m × Q, the whole contribution margin.",
+   "D": "ΔCFFO = ΔP × ΔQ."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the lever when the differentiator raises its price and sales stay unchanged.",
+   "B": "Correct. With the price unchanged the margin stays the same and sales grow: ΔCFFO = m × ΔQ = 15 × 2,000 = €30,000.",
+   "C": "Incorrect. That is the total contribution, not the change created by the advantage.",
+   "D": "Incorrect. This formula does not appear in the deck and mixes price and volume changes."
+  },
+  "recap": "Correct. With the price unchanged the margin stays the same and sales grow: ΔCFFO = m × ΔQ = 15 × 2,000 = €30,000."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Lowest, Not One of the Lowest",
+  "question": "Why does the deck insist that cost leadership means being the lowest-cost organisation, not one of the lowest?",
+  "options": {
+   "A": "Because only the lowest-cost firm can ignore quality.",
+   "B": "Because the second- or third-lowest is always at risk of being undercut on price.",
+   "C": "Because low cost is only possible with a narrow scope.",
+   "D": "Because the cost leader must also be the price leader in every segment."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The deck says the opposite: low cost cannot be pursued in disregard for quality.",
+   "B": "Correct. A firm that is not the lowest-cost player can be undercut by the one that is, so its position is fragile.",
+   "C": "Incorrect. Cost leadership is a broad-scope strategy; the narrow version is focused cost leadership.",
+   "D": "Incorrect. The deck does not require the cost leader to have the lowest price in every segment."
+  },
+  "recap": "Correct. A firm that is not the lowest-cost player can be undercut by the one that is, so its position is fragile."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Target as Integrator",
+  "question": "In the Nordstrom, Walmart and Target example, which strategy does Target follow?",
+  "options": {
+   "A": "Cost leadership.",
+   "B": "Differentiation.",
+   "C": "Integration.",
+   "D": "Focused differentiation."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Walmart is the cost leader with its no-frills approach.",
+   "B": "Incorrect. Nordstrom is the differentiator, with a luxury department-store experience.",
+   "C": "Correct. Target almost reaches Walmart's cost position through efficient logistics while offering a better shopping experience: it combines cost and differentiation.",
+   "D": "Incorrect. Target serves a broad market, not a narrow niche."
+  },
+  "recap": "Correct. Target almost reaches Walmart's cost position through efficient logistics while offering a better shopping experience: it combines cost and differentiation."
+ },
+ {
+  "cat": "Grand Strategies & Positioning",
+  "title": "Positioning without the Best Product",
+  "question": "What does the BMW versus Volvo example show?",
+  "options": {
+   "A": "That the brand with the best product always wins the market.",
+   "B": "That brands can win different customers by stressing different purchase criteria, without claiming the best product.",
+   "C": "That safety is the most important purchase criterion for cars.",
+   "D": "That positioning matters only for luxury goods."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The example is used against the myth that you must have the best product.",
+   "B": "Correct. BMW stresses the joy of driving and Volvo safety; neither has to prove its car is superior, because they appeal to different customers.",
+   "C": "Incorrect. Safety is Volvo's chosen criterion, not a universal ranking.",
+   "D": "Incorrect. Positioning applies to any product; the deck's other examples include beer, soap and toothpaste."
+  },
+  "recap": "Correct. BMW stresses the joy of driving and Volvo safety; neither has to prove its car is superior, because they appeal to different customers."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "Primary or Support?",
+  "question": "Which of these is a support activity in Porter's value chain?",
+  "options": {
+   "A": "Outbound logistics.",
+   "B": "Service.",
+   "C": "Procurement.",
+   "D": "Marketing and sales."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Outbound logistics (order processing, warehousing, distribution) is a primary activity.",
+   "B": "Incorrect. After-sale service is a primary activity.",
+   "C": "Correct. Procurement, together with firm infrastructure, human resource management and technology development, supports the primary activities.",
+   "D": "Incorrect. Marketing and sales is a primary activity."
+  },
+  "recap": "Correct. Procurement, together with firm infrastructure, human resource management and technology development, supports the primary activities."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "What a Core Competence Is",
+  "question": "How does the deck define core competencies?",
+  "options": {
+   "A": "The largest tangible assets on the company's balance sheet.",
+   "B": "Unique strengths deeply embedded in the company, created by the interplay of resources, capabilities and activities.",
+   "C": "The activities a company outsources to specialised partners.",
+   "D": "The personal skills of the chief executive."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Tangible assets are only one kind of resource and are usually the easiest to find and copy.",
+   "B": "Correct. Core competencies arise from the interplay of resources, capabilities and activities, which is what makes them unique and embedded.",
+   "C": "Incorrect. Outsourced activities are by definition not embedded in the company.",
+   "D": "Incorrect. A core competence belongs to the organisation, not to one person."
+  },
+  "recap": "Correct. Core competencies arise from the interplay of resources, capabilities and activities, which is what makes them unique and embedded."
+ },
+ {
+  "cat": "Resources & Value Chain",
+  "title": "Capabilities and the Balance Sheet",
+  "question": "Why are organisational capabilities rarely found on a firm's balance sheet?",
+  "options": {
+   "A": "Because accounting rules forbid reporting them as liabilities.",
+   "B": "Because they are intangible by nature: structure, routines and culture used to orchestrate resources.",
+   "C": "Because they belong to suppliers rather than to the firm.",
+   "D": "Because they have no economic value."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The point is not about liabilities: capabilities are skills, not recorded items.",
+   "B": "Correct. Capabilities are the intangible skills to orchestrate tangible, intangible and human resources, embodied in structure, routines and culture.",
+   "C": "Incorrect. Capabilities are the firm's own; collaborations are a way to access resources the firm lacks.",
+   "D": "Incorrect. They are often the foundation of a long-term, defendable advantage."
+  },
+  "recap": "Correct. Capabilities are the intangible skills to orchestrate tangible, intangible and human resources, embodied in structure, routines and culture."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "Valuable but Common",
+  "question": "A resource is valuable, but every competitor has it too. What does the VRIO framework conclude?",
+  "options": {
+   "A": "Sustainable competitive advantage.",
+   "B": "Competitive parity.",
+   "C": "Competitive disadvantage.",
+   "D": "Short-term competitive advantage."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A sustainable advantage needs the resource to be rare, costly to imitate and organized too.",
+   "B": "Correct. Valuable but not rare: every rival can deliver the same value, so the result is parity.",
+   "C": "Incorrect. Disadvantage is the outcome when the resource is not even valuable.",
+   "D": "Incorrect. A short-term advantage needs the resource to be rare as well as valuable."
+  },
+  "recap": "Correct. Valuable but not rare: every rival can deliver the same value, so the result is parity."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "Path Dependence",
+  "question": "Which isolating mechanism describes a resource that must be built through continuous accumulation over time and cannot be acquired instantly?",
+  "options": {
+   "A": "Causal ambiguity.",
+   "B": "Economic deterrence.",
+   "C": "Path dependence.",
+   "D": "Intellectual property protection."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Causal ambiguity is about rivals not understanding how the advantage was created.",
+   "B": "Incorrect. Economic deterrence is about a market too small to support two players.",
+   "C": "Correct. Path-dependent resources are created over time through competence accumulation, and firms cannot compress that time at will.",
+   "D": "Incorrect. Patents and trademarks protect unique resources legally; they are not about accumulation over time."
+  },
+  "recap": "Correct. Path-dependent resources are created over time through competence accumulation, and firms cannot compress that time at will."
+ },
+ {
+  "cat": "VRIO & Imitability",
+  "title": "Why Causal Ambiguity Protects",
+  "question": "Causal ambiguity makes an advantage hard to imitate because…",
+  "options": {
+   "A": "the firm holds a patent on the process.",
+   "B": "competitors cannot understand how the firm created the advantage, typically when it rests on organisational capabilities.",
+   "C": "the market is too small for a second player.",
+   "D": "the advantage depends on a single scarce raw material."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Patents are a unique resource protected by law, a different mechanism.",
+   "B": "Correct. When an advantage comes from capabilities rather than single resources, rivals cannot see what to copy.",
+   "C": "Incorrect. That is economic deterrence.",
+   "D": "Incorrect. A scarce raw material is a unique physical resource."
+  },
+  "recap": "Correct. When an advantage comes from capabilities rather than single resources, rivals cannot see what to copy."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "A Key Weakness",
+  "question": "In the resource appraisal matrix, a resource with high strategic importance and low relative strength is a…",
+  "options": {
+   "A": "superfluous strength.",
+   "B": "key weakness.",
+   "C": "zone of irrelevance.",
+   "D": "key strength."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A superfluous strength has low importance and high relative strength.",
+   "B": "Correct. It matters a lot and the firm is behind its competitors: a key weakness.",
+   "C": "Incorrect. The zone of irrelevance combines low importance with low strength.",
+   "D": "Incorrect. A key strength needs high relative strength as well as high importance."
+  },
+  "recap": "Correct. It matters a lot and the firm is behind its competitors: a key weakness."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "Reading Volkswagen's Appraisal",
+  "question": "In the Volkswagen appraisal, engineering scores 7 for strategic importance and 9 for relative strength. Where does it fall?",
+  "options": {
+   "A": "Key strengths.",
+   "B": "Superfluous strengths.",
+   "C": "Key weaknesses.",
+   "D": "Zone of irrelevance."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Above-parity strength (9) on a capability of high importance (7): the core technical strength of VW.",
+   "B": "Incorrect. Superfluous strengths have low strategic importance; engineering's is high.",
+   "C": "Incorrect. Key weaknesses have low relative strength; engineering is well above parity.",
+   "D": "Incorrect. The zone of irrelevance has low scores on both axes."
+  },
+  "recap": "Correct. Above-parity strength (9) on a capability of high importance (7): the core technical strength of VW."
+ },
+ {
+  "cat": "Strengths & Weaknesses",
+  "title": "Followers Beat Pioneers",
+  "question": "What lesson does the deck draw from the EMI and Raytheon examples?",
+  "options": {
+   "A": "Pioneers always capture the returns of a new product.",
+   "B": "Strategic resources are often activities or capabilities complementary to the product, so followers can capture the returns of a pioneer's innovation.",
+   "C": "A well-performing new product guarantees commercial success.",
+   "D": "Collaborations should be avoided because they leak strategic resources."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The lesson is the opposite: often it is the followers who gain the returns.",
+   "B": "Correct. Having a new product that performs well is not enough; complementary resources decide who profits, and collaborations are the main way to access them.",
+   "C": "Incorrect. The first lesson listed is that a performing new product does not necessarily mean success.",
+   "D": "Incorrect. The deck presents collaborations as the main way to access strategic resources a firm lacks."
+  },
+  "recap": "Correct. Having a new product that performs well is not enough; complementary resources decide who profits, and collaborations are the main way to access them."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "Where SWOT Sits",
+  "question": "In the strategic decisions process, what is the role of the SWOT analysis?",
+  "options": {
+   "A": "It selects the strategic alternative to implement.",
+   "B": "It closes the diagnosis by crossing internal strengths and weaknesses with external opportunities and threats, feeding the generation of alternatives.",
+   "C": "It measures the results of implementation in the control phase.",
+   "D": "It replaces the external analysis when data are missing."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Selecting alternatives belongs to strategy formulation; SWOT describes the situation.",
+   "B": "Correct. SWOT combines the outputs of the internal and external analyses at the end of diagnosis.",
+   "C": "Incorrect. Control comes after implementation and is a separate phase.",
+   "D": "Incorrect. SWOT uses the external analysis as an input; it cannot replace it."
+  },
+  "recap": "Correct. SWOT combines the outputs of the internal and external analyses at the end of diagnosis."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "An S–T Question",
+  "question": "Which question belongs to the S–T quadrant of the SWOT matrix?",
+  "options": {
+   "A": "How can we use our strengths to take advantage of opportunities?",
+   "B": "How can we use our strengths to reduce the likelihood and impact of threats?",
+   "C": "How can we overcome the weaknesses that prevent us from taking advantage of opportunities?",
+   "D": "How can we overcome the weaknesses that will make threats a reality?"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the S–O question.",
+   "B": "Correct. Strengths crossed with threats: using what the firm does well to defend against what could hurt it.",
+   "C": "Incorrect. That is the W–O question.",
+   "D": "Incorrect. That is the W–T question."
+  },
+  "recap": "Correct. Strengths crossed with threats: using what the firm does well to defend against what could hurt it."
+ },
+ {
+  "cat": "SWOT & Roadmapping",
+  "title": "Two Criteria for the Roadmap",
+  "question": "On which two criteria are strategic actions assessed to build the roadmap?",
+  "options": {
+   "A": "Market share and market growth.",
+   "B": "Expected economic impact and expected implementation problems.",
+   "C": "Strategic importance and relative strength.",
+   "D": "Probability of occurrence and impact on a −5 to +5 scale."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Those are the axes of the BCG matrix.",
+   "B": "Correct. Profit generated or loss reduced on one side, actions, organisational change and activities involved on the other.",
+   "C": "Incorrect. Those are the axes of the resource appraisal in internal analysis.",
+   "D": "Incorrect. That is the scoring method of the STEEP analysis."
+  },
+  "recap": "Correct. Profit generated or loss reduced on one side, actions, organisational change and activities involved on the other."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "Why Repositioning Is Hard",
+  "question": "Why does the deck describe repositioning as a transition that is very difficult to manage?",
+  "options": {
+   "A": "Because it always requires changing the company's legal form.",
+   "B": "Because the brand image in customers' minds is deep-seated, so continuity with the past is needed.",
+   "C": "Because it is allowed only when sales are falling.",
+   "D": "Because competitors are legally entitled to object."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Repositioning is about perception, not legal form.",
+   "B": "Correct. Customers' image of a brand is hard to move, which is why keeping some continuity eases product identification.",
+   "C": "Incorrect. The deck says repositioning is not only for failing brands.",
+   "D": "Incorrect. There is no such right in the deck."
+  },
+  "recap": "Correct. Customers' image of a brand is hard to move, which is why keeping some continuity eases product identification."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "Not Only for Failing Brands",
+  "question": "Which statement about repositioning is consistent with the deck?",
+  "options": {
+   "A": "A brand can reposition only after it fails.",
+   "B": "Repositioning can be needed without failure, for example when customer trends, technology or the firm's future plans change.",
+   "C": "Repositioning means changing the product while keeping customers' perception unchanged.",
+   "D": "Repositioning is the same as cutting prices."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The deck explicitly says a brand does not have to fail to reposition.",
+   "B": "Correct. Product evolution, customer trends, environmental changes and future plans are all listed reasons.",
+   "C": "Incorrect. Repositioning is precisely about changing the target audience's perception.",
+   "D": "Incorrect. Price cuts can be part of it, but repositioning is about perception, as Lego and Domino's show."
+  },
+  "recap": "Correct. Product evolution, customer trends, environmental changes and future plans are all listed reasons."
+ },
+ {
+  "cat": "Repositioning",
+  "title": "JCPenney's Implementation Mistake",
+  "question": "Which implementation choice does the deck single out in JCPenney's failed repositioning?",
+  "options": {
+   "A": "Testing the new format in a few selected stores for two years.",
+   "B": "Rolling out the drastic changes in all 1,800 stores at once without pre-testing.",
+   "C": "Hiring a CEO from inside the company.",
+   "D": "Increasing the number of discount coupons."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Pre-testing in selected stores is the industry best practice that JCPenney did not follow.",
+   "B": "Correct. Ron Johnson implemented the changes everywhere at once; asked about testing, he replied that Apple did not test.",
+   "C": "Incorrect. Johnson came from Apple, not from inside JCPenney.",
+   "D": "Incorrect. He removed the coupons, which upset core customers."
+  },
+  "recap": "Correct. Ron Johnson implemented the changes everywhere at once; asked about testing, he replied that Apple did not test."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "What a Business Model Describes",
+  "question": "According to the deck, a business model is a set of strategic decisions defining how a company…",
+  "options": {
+   "A": "sets its prices and discounts.",
+   "B": "creates value, transfers value to its customers and captures value.",
+   "C": "organises its legal entities and shareholders.",
+   "D": "chooses which industries to compete in."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Pricing touches only the revenue streams block.",
+   "B": "Correct. Value creation, transfer and capture are the three parts of the definition, and the canvas represents them in nine blocks.",
+   "C": "Incorrect. That is corporate governance and legal structure, not the business model.",
+   "D": "Incorrect. Choosing industries is corporate strategy."
+  },
+  "recap": "Correct. Value creation, transfer and capture are the three parts of the definition, and the canvas represents them in nine blocks."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "The Derived Block",
+  "question": "Which canvas block does the deck describe as a direct result of all the other building blocks?",
+  "options": {
+   "A": "Value proposition.",
+   "B": "Customer segments.",
+   "C": "Cost structure.",
+   "D": "Key partners."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The value proposition is a choice made for each segment, not a result of the other blocks.",
+   "B": "Incorrect. Customer segments are described as the heart of any business model.",
+   "C": "Correct. The cost structure follows from the other blocks; ideally each cost can be traced back to one of them.",
+   "D": "Incorrect. Key partners are a choice about what to do alone and what to do with others."
+  },
+  "recap": "Correct. The cost structure follows from the other blocks; ideally each cost can be traced back to one of them."
+ },
+ {
+  "cat": "Canvas Building Blocks",
+  "title": "Channel Economics",
+  "question": "How does the deck suggest matching channels to customers?",
+  "options": {
+   "A": "Use the same channel for every segment to cut costs.",
+   "B": "Use cost-intensive channels for very profitable clients and cost-efficient channels for unprofitable ones.",
+   "C": "Always prefer indirect channels because partners bear the costs.",
+   "D": "Use the cheapest channel for the most profitable clients."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Channels can differ by segment; that is one reason to define a distinct segment.",
+   "B": "Correct. Channel cost should follow client profitability.",
+   "C": "Incorrect. The deck lists both direct and indirect channels without ranking them.",
+   "D": "Incorrect. It is the reverse of the deck's rule."
+  },
+  "recap": "Correct. Channel cost should follow client profitability."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Bait and Hook Pairs",
+  "question": "Which pair of examples illustrates the bait-and-hook model in the deck?",
+  "options": {
+   "A": "Metro and Flickr.",
+   "B": "Gillette handles and blades; Nespresso machines and capsules.",
+   "C": "Xbox and Wii.",
+   "D": "Dell and Microsoft Office."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Metro illustrates the free model and Flickr freemium.",
+   "B": "Correct. A cheap initial purchase (handle, machine) drives frequent purchases of the related product (blades, capsules).",
+   "C": "Incorrect. Consoles illustrate how to manage multiple client segments.",
+   "D": "Incorrect. Dell is direct sales and assemble-to-order; Office is bundling and subscription."
+  },
+  "recap": "Correct. A cheap initial purchase (handle, machine) drives frequent purchases of the related product (blades, capsules)."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Dell's Innovation",
+  "question": "What kind of innovation does the deck attribute to Dell?",
+  "options": {
+   "A": "A breakthrough in PC hardware technology.",
+   "B": "A business model innovation: direct sales and assemble-to-order with minimal working capital.",
+   "C": "A new retail format with large stores.",
+   "D": "A freemium software offer."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Dell assembled components bought from partners; its products were not technologically new.",
+   "B": "Correct. Selling only directly, building to order and getting paid immediately with very low stocks was the innovation.",
+   "C": "Incorrect. Dell sold directly, avoiding retailers such as Wal-Mart.",
+   "D": "Incorrect. Freemium is the Skype and Flickr example."
+  },
+  "recap": "Correct. Selling only directly, building to order and getting paid immediately with very low stocks was the innovation."
+ },
+ {
+  "cat": "Business Model Patterns",
+  "title": "Freemium in Numbers",
+  "question": "In the deck's Skype example of the freemium model, what share of total usage came from paid SkypeOut calls?",
+  "options": {
+   "A": "About half.",
+   "B": "Less than 10%.",
+   "C": "Over 90%.",
+   "D": "Exactly 25%."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The paid share was far smaller.",
+   "B": "Correct. Paid SkypeOut calls accounted for less than 10% of total usage, with over 90% of users on the free service.",
+   "C": "Incorrect. Over 90% is the share of users on the free service.",
+   "D": "Incorrect. No such figure appears in the deck."
+  },
+  "recap": "Correct. Paid SkypeOut calls accounted for less than 10% of total usage, with over 90% of users on the free service."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "Backward or Forward?",
+  "question": "A car maker acquires the company that supplies its batteries. What move is this?",
+  "options": {
+   "A": "Forward vertical integration.",
+   "B": "Backward vertical integration.",
+   "C": "Related diversification into a new industry.",
+   "D": "Taper integration."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Forward integration moves towards distribution and customers.",
+   "B": "Correct. Moving upstream into the supply of inputs is backward integration.",
+   "C": "Incorrect. The battery maker sits in the car maker's own value chain, so this is vertical integration.",
+   "D": "Incorrect. Taper integration would combine own production with outside suppliers; the question describes full ownership of the supplier."
+  },
+  "recap": "Correct. Moving upstream into the supply of inputs is backward integration."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "A Risk of Integration",
+  "question": "Which of these is a risk of vertical integration listed in the deck?",
+  "options": {
+   "A": "Reducing transaction costs.",
+   "B": "Securing critical supplies.",
+   "C": "Low incentives to lower costs because of a captive market.",
+   "D": "Learning."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Reducing transaction costs is an advantage.",
+   "B": "Incorrect. Securing supplies (backward) and channels (forward) is an advantage.",
+   "C": "Correct. An in-house supplier serves a captive market and has less pressure to cut costs, alongside compounding risk, lower flexibility and lower efficiency.",
+   "D": "Incorrect. Learning is listed among the advantages."
+  },
+  "recap": "Correct. An in-house supplier serves a captive market and has less pressure to cut costs, alongside compounding risk, lower flexibility and lower efficiency."
+ },
+ {
+  "cat": "Vertical Integration",
+  "title": "Taper Integration",
+  "question": "What is taper integration?",
+  "options": {
+   "A": "Full ownership of every stage of the industry value chain.",
+   "B": "A combination of integration and reliance on outside suppliers and/or outside firms for distribution.",
+   "C": "A spot purchase of inputs at market prices.",
+   "D": "Diversification into unrelated industries."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is full vertical integration.",
+   "B": "Correct. The firm makes part of what it needs and buys or distributes the rest through outside firms.",
+   "C": "Incorrect. Spot purchases are the loosest form of vertical relation, with no integration.",
+   "D": "Incorrect. That is unrelated diversification, a different corporate decision."
+  },
+  "recap": "Correct. The firm makes part of what it needs and buys or distributes the rest through outside firms."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Economies of Scope Defined",
+  "question": "How does the deck define economies of scope?",
+  "options": {
+   "A": "Lower unit costs from producing larger volumes of one product.",
+   "B": "Cost declines as cumulative output doubles.",
+   "C": "Using a resource across multiple activities uses less of that resource than carrying out the activities independently.",
+   "D": "Higher margins from integrating with suppliers."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. That is economies of scale.",
+   "B": "Incorrect. That is the learning curve.",
+   "C": "Correct. Sharing resources across businesses is the source of advantage in related diversification.",
+   "D": "Incorrect. That is one advantage of vertical integration."
+  },
+  "recap": "Correct. Sharing resources across businesses is the source of advantage in related diversification."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Why Firms Refocused",
+  "question": "Which reasons does the deck give for the shift from the diversification era (1950–80) to refocusing?",
+  "options": {
+   "A": "Lower interest rates and cheaper acquisitions.",
+   "B": "Emphasis on shareholder value, turbulence favouring specialisation, and sharing resources and capabilities as the real source of advantage.",
+   "C": "New antitrust laws that forbade conglomerates.",
+   "D": "The disappearance of internal capital markets."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. These are not among the reasons given.",
+   "B": "Correct. The three reasons listed explain why diversification for its own sake lost favour.",
+   "C": "Incorrect. The deck does not mention antitrust as a cause.",
+   "D": "Incorrect. Internal capital markets are still listed among the advantages of diversified portfolios."
+  },
+  "recap": "Correct. The three reasons listed explain why diversification for its own sake lost favour."
+ },
+ {
+  "cat": "Diversification",
+  "title": "Drawbacks of Unrelated Portfolios",
+  "question": "Which disadvantages does the deck list for unrelated portfolios?",
+  "options": {
+   "A": "Coordination costs, cultural heterogeneity and organisational complexity.",
+   "B": "Loss of financial economies and of internal capital markets.",
+   "C": "Higher risk than related portfolios.",
+   "D": "Too many shared resources between businesses."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Running unrelated businesses together costs coordination, mixes cultures and complicates the organisation.",
+   "B": "Incorrect. Financial economies and internal capital markets are listed as advantages of unrelated portfolios.",
+   "C": "Incorrect. Higher risk than unrelated is a drawback of related portfolios.",
+   "D": "Incorrect. Unrelated businesses share little apart from human resources and administration."
+  },
+  "recap": "Correct. Running unrelated businesses together costs coordination, mixes cultures and complicates the organisation."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "Relative Market Share",
+  "question": "A business has a 22% market share; its largest competitor has 11%. What is its relative market share?",
+  "options": {
+   "A": "0.5",
+   "B": "1.1",
+   "C": "2",
+   "D": "11"
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. That is the competitor's share divided by the firm's, the wrong way round.",
+   "B": "Incorrect. Relative market share is a ratio, not a difference expressed in tens of points.",
+   "C": "Correct. 22 divided by 11 gives 2: the business is twice the size of its largest rival, above the cut-off of 1.",
+   "D": "Incorrect. That is the difference in percentage points, not the ratio."
+  },
+  "recap": "Correct. 22 divided by 11 gives 2: the business is twice the size of its largest rival, above the cut-off of 1."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "A Cash Cow",
+  "question": "A business has low market growth and a relative market share above 1. Which BCG quadrant is it in?",
+  "options": {
+   "A": "Star.",
+   "B": "Cash cow.",
+   "C": "Question mark.",
+   "D": "Dog."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Stars combine high share with high market growth.",
+   "B": "Correct. High relative share in a slow-growing market: a cash generator that can fund the rest of the portfolio.",
+   "C": "Incorrect. Question marks have high growth and low relative share.",
+   "D": "Incorrect. Dogs have both low growth and low relative share."
+  },
+  "recap": "Correct. High relative share in a slow-growing market: a cash generator that can fund the rest of the portfolio."
+ },
+ {
+  "cat": "Portfolio Analysis",
+  "title": "A Weak Business in an Attractive Market",
+  "question": "In the GE/McKinsey matrix, what is recommended for a business with weak strengths in a very attractive market?",
+  "options": {
+   "A": "Premium invest and grow.",
+   "B": "Opportunistic selectivity: invest to improve its strengths, keep it only if it can improve, otherwise divest.",
+   "C": "Harvest and divest immediately.",
+   "D": "Protective selectivity: keep it as a cash generator."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Premium invest and grow is for strong businesses in attractive markets.",
+   "B": "Correct. Cell 6: such businesses usually have to be funded by the rest of the group and are retained only if they can improve.",
+   "C": "Incorrect. Immediate exit is for businesses with neither strengths nor an attractive market.",
+   "D": "Incorrect. Protective selectivity is for strong businesses in unattractive markets."
+  },
+  "recap": "Correct. Cell 6: such businesses usually have to be funded by the rest of the group and are retained only if they can improve."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "Exchange and Transaction",
+  "question": "In the lecture's vocabulary, what turns an exchange into a transaction?",
+  "options": {
+   "A": "The payment of a price in money.",
+   "B": "Reaching an agreement between the parties.",
+   "C": "The intervention of an intermediary.",
+   "D": "The delivery of the product to the buyer."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Exchange is offering something in return, not necessarily money.",
+   "B": "Correct. Exchange is the process of obtaining a product by offering something in return; when an agreement is reached, a transaction takes place.",
+   "C": "Incorrect. Markets can work directly or through intermediaries; intermediaries are not what defines a transaction.",
+   "D": "Incorrect. Delivery follows the transaction; the agreement is what defines it."
+  },
+  "recap": "Correct. Exchange is the process of obtaining a product by offering something in return; when an agreement is reached, a transaction takes place."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "The Marketing Orientation",
+  "question": "Which starting question defines the marketing orientation?",
+  "options": {
+   "A": "How can we produce efficiently?",
+   "B": "How can we build the best product?",
+   "C": "How can we sell what we produce?",
+   "D": "What does the market value, and how can we serve it better?"
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. That is the production orientation.",
+   "B": "Incorrect. That is the product orientation.",
+   "C": "Incorrect. That is the sales orientation.",
+   "D": "Correct. The marketing orientation starts from what the market values: produce what can be sold rather than sell what you make."
+  },
+  "recap": "Correct. The marketing orientation starts from what the market values: produce what can be sold rather than sell what you make."
+ },
+ {
+  "cat": "Marketing Basics",
+  "title": "The Google Glass Case",
+  "question": "Which risk does the Google Glass case illustrate?",
+  "options": {
+   "A": "The risk of the production-based approach.",
+   "B": "The risk of the product-based approach: building a product without a market that wants it.",
+   "C": "The risk of excessive market research.",
+   "D": "The risk of a sales force that is too aggressive."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Production orientation is about efficiency, as in Ford's black cars.",
+   "B": "Correct. Forecast in 2013 to sell millions by 2016, Google Glass was withdrawn in January 2015: a strong product without enough demand.",
+   "C": "Incorrect. The case shows the opposite problem: not enough understanding of the market.",
+   "D": "Incorrect. The case is not about selling pressure."
+  },
+  "recap": "Correct. Forecast in 2013 to sell millions by 2016, Google Glass was withdrawn in January 2015: a strong product without enough demand."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Wants Backed by Ability",
+  "question": "What distinguishes demand from a want?",
+  "options": {
+   "A": "Demand is a want directed toward a specific solution.",
+   "B": "Demand is a want backed by willingness and ability to buy.",
+   "C": "Demand is a perceived state of deprivation.",
+   "D": "There is no difference: they are synonyms."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. A want directed to a specific solution is the definition of want.",
+   "B": "Correct. A want becomes demand when the customer is willing and able to buy.",
+   "C": "Incorrect. A perceived state of deprivation is a need.",
+   "D": "Incorrect. The lecture separates need, want and demand as three steps."
+  },
+  "recap": "Correct. A want becomes demand when the customer is willing and able to buy."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "The Served Market",
+  "question": "In the Range Rover Evoque example, the urban professionals in Milan, Rome and Turin on whom the marketing effort focuses are the…",
+  "options": {
+   "A": "potential market.",
+   "B": "available market.",
+   "C": "served (target) market.",
+   "D": "penetrated market."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The potential market is everyone interested in premium SUVs.",
+   "B": "Incorrect. The available market is high-income professionals in big cities near a dealer, before the firm's targeting choice.",
+   "C": "Correct. The served market is the part of the available market the firm decides to target.",
+   "D": "Incorrect. The penetrated market is the customers who actually bought."
+  },
+  "recap": "Correct. The served market is the part of the available market the firm decides to target."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Elasticity from a Price Test",
+  "question": "Cutting the price from €6.90 to €5.90 raises weekly sales from 1,200 to 1,500 units. What is the price elasticity of demand?",
+  "options": {
+   "A": "About −0.58 (inelastic)",
+   "B": "About −1.73 (elastic)",
+   "C": "About −0.25 (inelastic)",
+   "D": "About −1.00 (unit elastic)"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is the ratio turned upside down (ΔP/P ÷ ΔQ/Q).",
+   "B": "Correct. ΔQ/Q = 300/1,200 = +25%; ΔP/P = −1/6.90 = −14.5%; E = 25 ÷ −14.5 ≈ −1.73, so demand is elastic.",
+   "C": "Incorrect. That is only the relative change in quantity, without dividing by the relative change in price.",
+   "D": "Incorrect. Quantity changed by more in relative terms than price, so |E| is above 1."
+  },
+  "recap": "Correct. ΔQ/Q = 300/1,200 = +25%; ΔP/P = −1/6.90 = −14.5%; E = 25 ÷ −14.5 ≈ −1.73, so demand is elastic."
+ },
+ {
+  "cat": "Demand & Customer Value",
+  "title": "Why Not Compete on Explicit Costs",
+  "question": "Why does the lecture warn against competing only by reducing explicit customer costs?",
+  "options": {
+   "A": "Because explicit costs cannot be measured.",
+   "B": "Because every competitor sees them, so cutting them contracts margins and leads to price wars.",
+   "C": "Because customers ignore monetary costs.",
+   "D": "Because hidden costs are always larger than explicit ones."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Explicit costs are monetary and easy to measure.",
+   "B": "Correct. Visible monetary costs can be matched by any rival, which compresses contribution margins and triggers price wars.",
+   "C": "Incorrect. Customers weigh all costs, monetary ones included.",
+   "D": "Incorrect. The lecture does not rank their size; it says hidden costs are where differentiation is possible."
+  },
+  "recap": "Correct. Visible monetary costs can be matched by any rival, which compresses contribution margins and triggers price wars."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "Derived Demand",
+  "question": "B2B demand is described as derived. What does that mean?",
+  "options": {
+   "A": "It is driven by emotions and brand perception.",
+   "B": "It depends on business needs and on demand for the end product.",
+   "C": "It changes daily with fashion and seasons.",
+   "D": "It is always more price-elastic than consumer demand."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Emotions and brand perception drive consumer demand.",
+   "B": "Correct. Business customers buy because their own customers buy the end product.",
+   "C": "Incorrect. B2B demand is more stable and forecastable than consumer demand.",
+   "D": "Incorrect. B2B demand is less price-sensitive when the product is essential to operations."
+  },
+  "recap": "Correct. Business customers buy because their own customers buy the end product."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "Who Decides?",
+  "question": "In the lecture's 3D-printer example, who is the decider in the purchasing centre?",
+  "options": {
+   "A": "The production manager.",
+   "B": "The lead industrial engineer.",
+   "C": "The COO or CEO.",
+   "D": "The procurement manager."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The production manager identifies the need: the initiator.",
+   "B": "Incorrect. The lead engineer provides specifications and recommendations: the influencer.",
+   "C": "Correct. The COO or CEO has the final say on the investment: the decider.",
+   "D": "Incorrect. The procurement manager negotiates and buys: the buyer."
+  },
+  "recap": "Correct. The COO or CEO has the final say on the investment: the decider."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "Two Characteristics of Segments",
+  "question": "Which two characteristics must market segments show?",
+  "options": {
+   "A": "High growth and high profitability.",
+   "B": "Internal similarity and external diversity.",
+   "C": "Large size and low competition.",
+   "D": "Geographic proximity and shared income levels."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Growth and profitability matter for targeting, not for what makes a group a segment.",
+   "B": "Correct. Customers within a segment are alike, and different from those in other segments.",
+   "C": "Incorrect. Size is one of the five criteria of a good segment, but not the defining pair.",
+   "D": "Incorrect. Geography and income are possible variables, not the defining characteristics."
+  },
+  "recap": "Correct. Customers within a segment are alike, and different from those in other segments."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "Five Criteria of a Good Segment",
+  "question": "Which list gives the five characteristics of a good market segment?",
+  "options": {
+   "A": "Measurability, accessibility, homogeneity, importance, duration.",
+   "B": "Valuable, rare, inimitable, organized, durable.",
+   "C": "Specific, measurable, appropriate, realistic, timely.",
+   "D": "Price, product, place, promotion, people."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Size and buying power must be measurable, the segment reachable, internally homogeneous, important enough and lasting.",
+   "B": "Incorrect. That mixes the VRIO test with durability.",
+   "C": "Incorrect. That is SMART, for strategic objectives.",
+   "D": "Incorrect. That is an extended marketing mix."
+  },
+  "recap": "Correct. Size and buying power must be measurable, the segment reachable, internally homogeneous, important enough and lasting."
+ },
+ {
+  "cat": "Segmentation Basics",
+  "title": "A Cost of Segmenting",
+  "question": "Which of these does the lecture list as a disadvantage of segmentation?",
+  "options": {
+   "A": "Lower complexity in market management.",
+   "B": "Fragmentation of advertising and promotion costs.",
+   "C": "Prioritised allocation of marketing resources.",
+   "D": "Tailored products and services."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Lower complexity is an advantage for the organisation.",
+   "B": "Correct. Serving several segments splits advertising budgets, alongside higher production, distribution and research costs.",
+   "C": "Incorrect. Prioritising resources is an advantage.",
+   "D": "Incorrect. Tailored products are a benefit to the customer."
+  },
+  "recap": "Correct. Serving several segments splits advertising budgets, alongside higher production, distribution and research costs."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Highest Differentiation Potential",
+  "question": "Which segmentation base is hardest to observe but offers the highest potential for competitive differentiation?",
+  "options": {
+   "A": "Socio-demographic.",
+   "B": "Geographic.",
+   "C": "Customer needs.",
+   "D": "Product characteristics."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Socio-demographics are the easiest to observe and offer the least differentiation potential.",
+   "B": "Incorrect. Geographic variables are observable characteristics.",
+   "C": "Correct. What customers want is hard to identify and quantify, but it reveals what they value.",
+   "D": "Incorrect. Product segmentation ignores customers altogether."
+  },
+  "recap": "Correct. What customers want is hard to identify and quantify, but it reveals what they value."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Internal Data for Customer Segmentation",
+  "question": "Customer segmentation based on internal CRM data typically uses…",
+  "options": {
+   "A": "Census demographics and national surveys.",
+   "B": "Recency, frequency and monetary value of purchases, churn risk and customer lifetime value.",
+   "C": "The five competitive forces of the industry.",
+   "D": "Focus groups with non-customers."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. External research data are typical of market segmentation.",
+   "B": "Correct. RFM, purchase history, engagement, churn risk and lifetime value describe the existing customer base.",
+   "C": "Incorrect. The five forces describe industry structure, not customers.",
+   "D": "Incorrect. Non-customers are outside the company's own customer database."
+  },
+  "recap": "Correct. RFM, purchase history, engagement, churn risk and lifetime value describe the existing customer base."
+ },
+ {
+  "cat": "Segmentation Bases",
+  "title": "Wolfram's Student Version",
+  "question": "Which segmentation base does Wolfram's cheaper student version of Mathematica illustrate?",
+  "options": {
+   "A": "Socio-demographic.",
+   "B": "Geographic.",
+   "C": "Psychographic.",
+   "D": "Behavioural."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Students are identified by occupation, a socio-demographic characteristic; the aim is to make them regular customers after graduation.",
+   "B": "Incorrect. McDonald's regional menus are the lecture's geographic example.",
+   "C": "Incorrect. PRIZM's 66 lifestyle groups are the psychographic example.",
+   "D": "Incorrect. Daily, occasional and infrequent shavers are the behavioural example."
+  },
+  "recap": "Correct. Students are identified by occupation, a socio-demographic characteristic; the aim is to make them regular customers after graduation."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "When k-means Stops",
+  "question": "When does the k-means clustering procedure stop?",
+  "options": {
+   "A": "After exactly k iterations.",
+   "B": "When the centroids no longer change, points stay in the same cluster, or the maximum number of iterations is reached.",
+   "C": "When every cluster contains the same number of points.",
+   "D": "When the marketer approves the first assignment."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. k is the number of clusters, not of iterations.",
+   "B": "Correct. The algorithm repeats assignment and recomputation until it converges or hits the iteration limit.",
+   "C": "Incorrect. Clusters can be of different sizes.",
+   "D": "Incorrect. That would be a heuristic judgement, not the algorithm's rule."
+  },
+  "recap": "Correct. The algorithm repeats assignment and recomputation until it converges or hits the iteration limit."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "The Two-step Approach",
+  "question": "In Wind and Cardozo's two-step approach, what comes first?",
+  "options": {
+   "A": "Micro-segmentation on the needs of individual decision makers.",
+   "B": "Macro-segmentation on company-level variables such as industry, size and geography.",
+   "C": "A cluster analysis on survey data.",
+   "D": "The design of personas."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Micro-segmentation is the second step.",
+   "B": "Correct. The approach first groups organisations by external characteristics and purchase situations, then segments the individuals within them.",
+   "C": "Incorrect. The two-step approach is heuristic, not a clustering algorithm.",
+   "D": "Incorrect. Personas come after segments have been identified and validated."
+  },
+  "recap": "Correct. The approach first groups organisations by external characteristics and purchase situations, then segments the individuals within them."
+ },
+ {
+  "cat": "Segmentation Methods",
+  "title": "Managerial Validation",
+  "question": "Which question belongs to the managerial validation of segments?",
+  "options": {
+   "A": "Are the clusters statistically stable?",
+   "B": "Are the segments recognisable by sales and marketing teams, and can the firm design a different mix for each?",
+   "C": "Do the segments fit the brand's long-term objectives?",
+   "D": "Does segment membership predict purchase?"
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Stability is part of statistical validation.",
+   "B": "Correct. Managerial validation is a practicality check: do the segments make sense in the real world?",
+   "C": "Incorrect. Fit with long-term objectives is strategic validation.",
+   "D": "Incorrect. Predictive power is part of statistical validation."
+  },
+  "recap": "Correct. Managerial validation is a practicality check: do the segments make sense in the real world?"
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Same Solution, Different Markets",
+  "question": "Which coverage pattern offers the same solution to different markets?",
+  "options": {
+   "A": "Single-segment concentration.",
+   "B": "Market specialisation.",
+   "C": "Product specialisation.",
+   "D": "Full market coverage."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Single-segment concentration serves one target with one line.",
+   "B": "Incorrect. Market specialisation offers different solutions to the same market.",
+   "C": "Correct. The product stays the same and the markets vary.",
+   "D": "Incorrect. Full coverage offers broad solutions for every target."
+  },
+  "recap": "Correct. The product stays the same and the markets vary."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Broad Solutions for Every Target",
+  "question": "Which coverage pattern does L'Oréal illustrate, with broad solutions for every target?",
+  "options": {
+   "A": "Full market coverage.",
+   "B": "Selective specialisation.",
+   "C": "Single-segment concentration.",
+   "D": "Product specialisation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. L'Oréal serves practically every segment with its portfolio.",
+   "B": "Incorrect. Selective specialisation serves some unrelated targets with different solutions, not all of them.",
+   "C": "Incorrect. Single-segment concentration is the luxury example, such as Rolex or Ferrari.",
+   "D": "Incorrect. Product specialisation sells one solution to several markets."
+  },
+  "recap": "Correct. L'Oréal serves practically every segment with its portfolio."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "When an Offer Does Not Fit the Schema",
+  "question": "According to schema theory, what happens when a new product does not fit consumers' existing schema?",
+  "options": {
+   "A": "Consumers adopt it faster because it stands out.",
+   "B": "Consumers may feel confused or resist it.",
+   "C": "Nothing: schemas affect only services.",
+   "D": "Its price elasticity becomes zero."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Standing out helps only if the offer is still understood; a misfit makes it harder to accept.",
+   "B": "Correct. Products that fit an existing schema are easy to understand and accept; those that don't can confuse or meet resistance.",
+   "C": "Incorrect. Schemas apply to any offer, as the restaurant example shows for a service and holds for products too.",
+   "D": "Incorrect. Schema theory says nothing about elasticity."
+  },
+  "recap": "Correct. Products that fit an existing schema are easy to understand and accept; those that don't can confuse or meet resistance."
+ },
+ {
+  "cat": "Targeting & Positioning",
+  "title": "Brand Personality Dimensions",
+  "question": "Which list gives Aaker's brand personality dimensions?",
+  "options": {
+   "A": "Sincerity, excitement, competence, sophistication, ruggedness.",
+   "B": "Valuable, rare, inimitable, organized.",
+   "C": "Openness, conscientiousness, extraversion, agreeableness, neuroticism.",
+   "D": "Price, quality, safety, variety, convenience."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Aaker's five dimensions are used to rate the emotional attributes of a brand.",
+   "B": "Incorrect. That is VRIO, for resources.",
+   "C": "Incorrect. That is the Big Five model of personality, used in psychographic segmentation.",
+   "D": "Incorrect. Those are benefits sought, used in needs-based segmentation."
+  },
+  "recap": "Correct. Aaker's five dimensions are used to rate the emotional attributes of a brand."
+ },
+ {
+  "cat": "B2C & B2B Buying",
+  "title": "The FCB Grid in Practice",
+  "question": "According to the FCB grid, which marketing focus suits low-involvement, thinking purchases such as detergents or bleach?",
+  "options": {
+   "A": "Emotional storytelling and aspirational imagery.",
+   "B": "Detailed rational arguments, reviews and guarantees.",
+   "C": "Promotions, price, distribution and reminders.",
+   "D": "Brand personality, packaging and sensory cues."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Emotional storytelling and aspirational imagery suit high-involvement, feeling purchases such as sports cars or perfume.",
+   "B": "Incorrect. Rational arguments, reviews and guarantees suit high-involvement, thinking purchases such as insurance or appliances.",
+   "C": "Correct. Habitual, low-involvement purchases respond to promotions, price, distribution and reminders that keep the product visible in store or online.",
+   "D": "Incorrect. Brand personality, packaging and sensory cues suit low-involvement, feeling purchases such as snacks or soft drinks."
+  },
+  "recap": "Correct. Habitual, low-involvement purchases respond to promotions, price, distribution and reminders that keep the product visible in store or online."
  }
 ];

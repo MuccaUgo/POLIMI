@@ -62,6 +62,7 @@
     });
     var map = {
       home: "homeBtn", studyMap: "studyMapBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
+      decks: "decksBtn", flashcards: "flashBtn", drills: "drillsBtn", plan: "planBtn",
       testSection: currentMode === "full" ? "fullBtn" : currentMode === "practice10" ? "practiceBtn" : "examBtn"
     };
     var btn = $(map[sectionId]);
@@ -75,6 +76,8 @@
     if (id === "mistakes") renderMistakes();
     if (id === "home") renderHomeStats();
     if (id === "programme") renderProgramme();
+    // Decks, flashcards, drills and plan live in study.js, which renders on demand.
+    if (window.SM_STUDY && typeof window.SM_STUDY.onShow === "function") window.SM_STUDY.onShow(id);
     if (id !== "testSection") {
       questions = []; index = 0; answers = [];
       $("progress").style.width = "0%";
@@ -810,6 +813,9 @@
       });
     }
   }
+
+  // study.js navigates through the same section switcher.
+  window.SM_HUB = { showSection: showSection };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

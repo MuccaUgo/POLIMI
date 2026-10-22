@@ -83,3 +83,26 @@ products*. È lo stesso modello applicato a due scopi; le due schede sono separa
 Verifica mirata sui punti in cui slide e lezioni divergono, non una validazione completa delle 150 schede e
 delle 147 domande. Una slide del capitolo 1, *Ingredients of success of a military strategy*, è vuota nel PDF
 (solo il titolo): con ogni probabilità è stata commentata a voce e non è stata ricostruita.
+
+## 5. Ottobre 2026 — capitoli 3–7, marketing e strumenti di studio
+
+Aggiunti al sito, dalla stessa revisione:
+
+- **Capitoli 3–7** (slide di V. Chiesa: *Competitive advantage and grand strategy*, *Internal Analysis*, *SWOT and
+  Strategic Alternatives*, *Business Model Canvas*, *Corporate Strategy*) e **lezioni di marketing 1–2** (G. Peggiani,
+  1 e 8 ottobre). Per ciascuno: una scheda di sintesi, flashcard, e un primo giro di concept card e domande (da 4 a 12
+  per area). Le soglie del test per questi capitoli sono più basse di quelle dei primi tre: vanno alzate man mano.
+- **Lezione di marketing 3** (*targeting e positioning*): le slide non erano disponibili. La scheda e le quattro concept
+  card sono costruite dagli appunti a mano dello studente (M3) e dal Kotler; l'area lo dichiara nella sua nota. Alcuni
+  esempi degli appunti sui pattern di targeting erano illeggibili e sono stati lasciati fuori. **Da sostituire con le
+  slide appena arrivano.**
+- **Confine Covered/Next**: il capitolo 2 è ora segnato come coperto in aula. Le lezioni sono andate oltre (esercizio
+  Starbucks sull'internal analysis del 6 ottobre, tre lezioni di marketing).
+- Due schemi delle slide di marketing sono usciti in disordine dall'estrazione del testo e sono stati ricostruiti nella
+  forma standard: la **griglia FCB** (coinvolgimento × razionale/emotivo) e i **pro e contro dei metodi di previsione
+  della domanda**. Vanno verificati sul PDF.
+- Nel **VRIO** la distinzione tra vantaggio *short-term* (risorsa imitabile) e *mid-term* (non organizzata) è letta
+  dallo schema adattato da Rothaermel (2021), dove le etichette non sono collegate in modo univoco alle frecce.
+- Le schede riportano anche le letture delle lezioni registrate (vision come *industry foresight*, mission come
+  *strategic intent*, processo in cinque macro-fasi, criteri estesi della decisione strategica, Abell per i confini della
+  business area), sempre accanto alla versione delle slide.

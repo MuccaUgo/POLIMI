@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const scope = "https://muccaugo.github.io/TestLI/";
 const prefix = `strategy-marketing-hub:${scope}:`;
-const currentCache = `${prefix}v6`;
+const currentCache = `${prefix}v7`;
 const source = readFileSync(path.join(__dirname, "..", "sw.js"), "utf8");
 const tick = () => new Promise(setImmediate);
 const deferred = () => {
@@ -99,6 +99,8 @@ test("installation waits for precaching and skipWaiting, using absolute app asse
   assert.equal(sw.calls.skipWaiting, 1);
   assert.equal(done, false);
   assert.ok(sw.calls.assets.includes(`${scope}index.html`));
+  // The study tools ship as two extra scripts; both must be available offline.
+  for (const file of ["content.js", "study.js"]) assert.ok(sw.calls.assets.includes(`${scope}${file}`), `${file} not precached`);
   assert.ok(sw.calls.assets.every(url => url.startsWith(scope)));
   skipped.resolve();
   await event.done;
