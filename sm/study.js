@@ -206,33 +206,33 @@
   function examInfo() { var date = P.prefs.examDate || DEFAULT_EXAM; return { date: date, assumed: !P.prefs.examDate, days: daysBetween(today(), date) }; }
   function phaseOf(d, exam) { if (d < LECTURES_END) return 1; if (daysBetween(d, exam) > 21) return 2; return 3; }
   var PHASES = { 1: { name: "Keep pace", short: "Follow the lectures; review daily; one written drill a week" }, 2: { name: "Consolidate", short: "Close the gaps; full cases weekly; numbers and oral drills" }, 3: { name: "Exam mode", short: "Timed mock cases; oral simulations; cram weak decks" } };
+  // What repeats every week in each phase; the week list then shows only what is specific to that week.
+  var ROUTINE = {
+    1: ["Daily: flashcards (15–20 minutes) and one Practice 10 on the deck you are studying.", "After each lecture: save the slides in the S&amp;M folder on Drive and ask Claude to add the deck; read the sheet the same day.", "Weekend: 3 oral questions out loud and 3 number exercises."],
+    2: ["Daily: flashcards and one oral question.", "Re-read the sheets of your weakest decks; clear the Mistakes list."],
+    3: ["Oral simulation three times a week: 5 drawn questions in a row, aloud. One Exam test a day.", "Flashcards in “All cards” mode for every deck under 70% solid."]
+  };
+  function list(items) { return "<ul>" + items.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>"; }
   function weekPlan() {
     var ex = examInfo(), t = today(), p = t.split("-").map(Number), dow = (new Date(p[0], p[1] - 1, p[2]).getDay() + 6) % 7, ws = addDays(t, -dow);
     var weeks = [], i = 0, drill = 0, full = 0, ordered = [];
+    var unread = DECKS.filter(function (m) { return !(P.read[m.id] && P.read[m.id].on); });
     for (var qi = 0; qi < 3; qi++) CASES.forEach(function (c) { ordered.push({ c: c, q: c.qs[qi], qi: qi }); });
     while (ws <= ex.date && i < 30) {
       var we = addDays(ws, 6), ph = phaseOf(ws < t ? t : ws, ex.date), items = [];
-      if (i === 0) items.push("Catch up: read sheets 0–3 (Introduction, Strategy, External analysis, Competitive advantage) and start the daily flashcards.");
-      else if (i === 1) items.push("Catch up: read sheets 4–7 (Internal analysis, SWOT, Business model, Corporate strategy) and marketing M1–M3.");
+      if (i === 0 && unread.length) items.push("Catch up: " + unread.length + (unread.length === 1 ? " deck sheet" : " deck sheets") + " not yet marked as read.");
       if (ph === 1) {
-        if (i >= 2) items.push("After each lecture (strategy and marketing): add the new slides and ask Claude to add the deck; read the new sheet the same day.");
-        items.push("Daily: flashcards (about 15–20 minutes) + one Practice 10 on the deck you are studying.");
         var dr = ordered[drill % ordered.length]; drill++;
         items.push("Written drill: <b>" + esc(dr.c.title) + "</b>, question " + (dr.qi + 1) + " (" + dr.q.skill + ").");
-        items.push("Weekend: 3 oral questions out loud + 3 number exercises.");
       } else if (ph === 2) {
         var c = CASES[full % CASES.length]; full++;
         items.push("Full case: <b>" + esc(c.title) + "</b>, all three questions, about 25 minutes each.");
-        items.push("Re-read the sheets of your weakest decks; clear the Mistakes list.");
         if (ws <= PROJECT_DEADLINE && we >= addDays(PROJECT_DEADLINE, -13)) items.push("Optional group project (L’Oréal Brandstorm or P&amp;G): 15-slide deck due <b>7 Jan 2027</b>.");
-        items.push("Daily flashcards continue; one oral question a day.");
       } else {
         var c1 = CASES[full % CASES.length], c2 = CASES[(full + 1) % CASES.length]; full += 2;
-        items.push("Two timed mocks: <b>" + esc(c1.title) + "</b> and <b>" + esc(c2.title) + "</b> (written as in the exam, then compared with the outline).");
-        items.push("Oral simulation 3× this week: 5 drawn questions in a row, aloud. One Exam Test a day.");
-        items.push("Flashcards in “All cards” mode for every deck under 70% solid.");
+        items.push("Two timed mocks: <b>" + esc(c1.title) + "</b> and <b>" + esc(c2.title) + "</b>, written as in the exam, then compared with the outline.");
       }
-      weeks.push({ ws: ws, we: we, ph: ph, now: t >= ws && t <= we, html: "<ul>" + items.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" });
+      weeks.push({ ws: ws, we: we, ph: ph, now: t >= ws && t <= we, items: items, html: list(items) });
       ws = addDays(ws, 7); i++;
     }
     return weeks;
@@ -354,25 +354,30 @@
         '<div class="sx-today-side"><div class="eyebrow">Exam' + (ex.assumed ? " · date not set" : "") + '</div>' +
           '<div class="sx-row sx-end"><span class="sx-big sx-big-sm">' + Math.max(0, ex.days) + '</span><strong class="sx-big-label">days</strong></div>' +
           '<p class="small">' + (ex.assumed ? "Assuming " + esc(fmtDate(ex.date, { day: "numeric", month: "long", year: "numeric" })) + ". Set the real date in Plan." : esc(fmtDate(ex.date, { weekday: "short", day: "numeric", month: "long", year: "numeric" }))) + "</p>" +
-          '<div class="eyebrow sx-mt">This week · ' + PHASES[ph].name + '</div><div class="sx-week-now">' + (week ? week.html : PHASES[ph].short) + '</div>' +
+          '<div class="eyebrow sx-mt">This week · ' + PHASES[ph].name + '</div><div class="sx-week-now">' + list((week ? week.items : []).concat(ROUTINE[ph])) + '</div>' +
           '<button class="ghost sx-sm" data-section="plan">Full plan <span aria-hidden="true">→</span></button></div>' +
       "</div>";
   }
 
   /* ----- Decks: process maps and sheets ----- */
   function deckRow(m) {
-    var ma = mastery(m.id), ps = ma.total ? ma.solid / ma.total * 100 : 0, pl = ma.total ? ma.learning / ma.total * 100 : 0, rd = P.read[m.id] && P.read[m.id].on, tp = TOPIC_OF[m.id];
-    return '<div class="sx-deckrow"><span class="sx-deckno">' + esc(m.deck) + '</span><div class="sx-min0"><button class="sx-linkish" data-sx="sheet" data-id="' + m.id + '">' + esc(m.title) + "</button>" + (rd ? ' <span class="sx-read">· read</span>' : "") +
-      '<div class="sx-bar" title="' + ma.solid + " solid, " + ma.learning + " learning, " + (ma.total - ma.solid - ma.learning) + ' new"><span class="s" style="width:' + ps + '%"></span><span class="l" style="width:' + pl + '%"></span></div></div>' +
-      '<div class="sx-row sx-nowrap"><button class="ghost sx-sm" data-sx="sheet" data-id="' + m.id + '">Sheet</button><button class="ghost sx-sm" data-sx="rev" data-id="' + m.id + '">Cards</button>' +
-      (tp && hasTopic(tp) ? '<button class="ghost sx-sm" data-mode="practice10" data-cat="topic:' + esc(tp) + '">Quiz</button>' : "") + "</div></div>";
+    var ma = mastery(m.id), ps = ma.total ? ma.solid / ma.total * 100 : 0, pl = ma.total ? ma.learning / ma.total * 100 : 0, rd = P.read[m.id] && P.read[m.id].on;
+    return '<button class="sx-deckrow" data-sx="sheet" data-id="' + m.id + '"><span class="sx-deckno">' + esc(m.deck) + '</span><span class="sx-min0"><span class="sx-decktitle">' + esc(m.title) + "</span>" + (rd ? ' <span class="sx-read">✓ read</span>' : "") +
+      '<span class="sx-bar" title="' + ma.solid + " solid, " + ma.learning + " learning, " + (ma.total - ma.solid - ma.learning) + ' new"><span class="s" style="width:' + ps + '%"></span><span class="l" style="width:' + pl + '%"></span></span></span><span class="sx-chev" aria-hidden="true">›</span></button>';
   }
   function node(id, label, deckLabel) { return '<button class="sx-node" data-sx="sheet" data-id="' + id + '">' + label + "<small>deck " + deckLabel + "</small></button>"; }
   function renderDecks() {
     var host = $("#decksView"); if (!host) return;
     if (UI.deck) { host.innerHTML = sheetView(UI.deck); return; }
+    var read = DECKS.filter(function (m) { return P.read[m.id] && P.read[m.id].on; }).length;
     host.innerHTML =
-      '<div class="card"><div class="eyebrow">The course on one page</div><h2>The strategic decisions process</h2>' +
+      '<div class="card"><div class="sx-row sx-between"><div><div class="eyebrow">' + read + " of " + DECKS.length + ' sheets read</div><h2>Decks</h2></div><div class="sx-legend"><span><i class="s"></i>solid</span><span><i class="l"></i>learning</span><span><i></i>new</span></div></div>' +
+      '<p class="small">Open a deck to read its sheet. Its flashcards, concept cards, quiz and oral questions are one tap away from there.</p>' +
+      '<div class="eyebrow sx-mt">Strategy · Vittorio Chiesa</div>' + DECKS.filter(function (m) { return m.track !== "mkt"; }).map(deckRow).join("") +
+      '<div class="eyebrow sx-mt">Marketing · Gloria Peggiani</div>' + DECKS.filter(function (m) { return m.track === "mkt"; }).map(deckRow).join("") +
+      '<p class="small sx-mt sx-coming-line">Still to come: ' + esc(COMING.strategy.concat(COMING.marketing.slice(0, 4)).join(" · ")) + ".</p></div>" +
+      '<details class="card sx-maps"><summary><span class="eyebrow">The course on one page</span><strong>How the decks fit together</strong></summary>' +
+      '<div class="sx-mapblock"><h3 class="sx-h3">Strategy · the strategic decisions process</h3>' +
       '<p class="small">Every deck is a step of the same process. In the written exam, “Assess” lives in diagnosis, “Apply” uses the tools, “Envision” is formulation and implementation.</p>' +
       '<div class="sx-band"><span><b>Corporate level</b> · which industries, stages and businesses?</span><button class="ghost sx-sm" data-sx="sheet" data-id="corp">Corporate strategy · deck 7</button></div>' +
       '<p class="sx-arrow">↓ business level · how do we compete? ↓</p>' +
@@ -380,15 +385,11 @@
       '<div class="sx-phase"><h4>2 · Strategy formulation</h4>' + node("swot", "Generation &amp; selection of alternatives", "5") + node("swot", "Repositioning", "5") + '<div class="sx-node out">Roadmap: impact × implementation problems</div></div>' +
       '<div class="sx-phase"><h4>3 · Implementation</h4><div class="sx-node out">Actions implementation</div><div class="sx-node out">Control</div><p class="small">In answers, close every recommendation with actions, timing and KPIs. The recorded lectures add an orientation phase in front (vision, mission, SMART objectives).</p></div></div>' +
       '<div class="sx-band"><span><b>Foundations</b> · goal of the firm, shareholders &amp; stakeholders, governance, what strategy is</span><span class="sx-row"><button class="ghost sx-sm" data-sx="sheet" data-id="intro">Introduction · deck 0</button><button class="ghost sx-sm" data-sx="sheet" data-id="strat">Concept of strategy · deck 1</button></span></div></div>' +
-      '<div class="card"><div class="eyebrow">Marketing · Gloria Peggiani</div><h2>The marketing process</h2><p class="small">The same logic as strategy: analyse the context, choose where to play and how to win (STP), then decide how to execute (marketing mix), implement and control.</p>' +
+      '<div class="sx-mapblock"><h3 class="sx-h3">Marketing · the marketing process</h3><p class="small">The same logic as strategy: analyse the context, choose where to play and how to win (STP), then decide how to execute (marketing mix), implement and control.</p>' +
       '<div class="sx-process"><div class="sx-phase"><h4>Strategic marketing · where to play</h4>' + node("mk1", "Context analysis: market demand", "M1") + '<div class="sx-node out">→ with external (deck 2) and internal (deck 4) analysis</div>' + node("mk2", "Segmentation", "M2") + node("mk3", "Targeting &amp; positioning", "M3") + "</div>" +
       '<div class="sx-phase"><h4>Operational marketing · how to execute</h4>' + node("mk4", "Value proposition: marketing mix — product, services, experience", "M4") + '<div class="sx-node out">Price, place, promotion · branding (coming)</div><div class="sx-node out">Implementation &amp; control</div></div>' +
       '<div class="sx-phase"><h4>Transversal topics</h4><div class="sx-node out">Digital marketing</div><div class="sx-node out">Consumer behaviour tools, neuromarketing</div><div class="sx-node out">AI in marketing</div></div></div></div>' +
-      '<div class="card"><div class="sx-row sx-between"><h3 class="sx-h3">All decks</h3><div class="sx-legend"><span><i class="s"></i>solid (≥ 1 week)</span><span><i class="l"></i>learning</span><span><i></i>new</span></div></div>' +
-      '<div class="eyebrow sx-mt">Strategy · Vittorio Chiesa</div>' + DECKS.filter(function (m) { return m.track !== "mkt"; }).map(deckRow).join("") +
-      '<div class="eyebrow sx-mt">Marketing · Gloria Peggiani</div>' + DECKS.filter(function (m) { return m.track === "mkt"; }).map(deckRow).join("") + "</div>" +
-      '<div class="card"><h3 class="sx-h3">Still to come in the course</h3><p class="small">From the programme. When the slides are out, save them in the S&amp;M folder on Google Drive and ask Claude to add the new decks: your progress is kept.</p>' +
-      '<div class="kicker">Strategy</div><div class="sx-coming">' + COMING.strategy.map(function (x) { return "<span>" + esc(x) + "</span>"; }).join("") + '</div><div class="kicker sx-mt">Marketing</div><div class="sx-coming">' + COMING.marketing.map(function (x) { return "<span>" + esc(x) + "</span>"; }).join("") + "</div></div>";
+      "</details>";
   }
   function sheetView(id) {
     var m = MOD[id], i = DECKS.indexOf(m), prev = DECKS[i - 1], next = DECKS[i + 1], rd = P.read[id] && P.read[id].on, ma = mastery(id), tp = TOPIC_OF[id];
@@ -409,7 +410,7 @@
     if (REV) { host.innerHTML = flashCard(); return; }
     var s = stats(UI.revScope), n = UI.revMode === "cram" ? s.total : s.due + s.newToday;
     host.innerHTML = '<div class="card"><div class="eyebrow">Spaced repetition</div><h2>Flashcards</h2>' +
-      '<p class="small">Read the question, answer it in your head or out loud, then reveal and grade yourself honestly. Cards you know come back after longer and longer gaps; cards you miss come back today. Unlike the quizzes, nothing is multiple choice: you have to recall the answer, as in the written and oral exam.</p>' +
+      '<p class="small">Answer in your head or out loud, reveal, then grade yourself honestly. Cards you know come back later and later; cards you miss come back today.</p>' +
       '<div class="sx-row sx-end sx-gap">' +
         '<label class="sx-field" for="sx-rev-scope">Decks<select id="sx-rev-scope">' + trackOptions(UI.revScope, "All decks").replace("</option>", '</option><option value="str"' + (UI.revScope === "str" ? " selected" : "") + '>All strategy decks</option><option value="mkt"' + (UI.revScope === "mkt" ? " selected" : "") + ">All marketing decks</option>") + "</select></label>" +
         '<div class="sx-field"><span>Mode</span><div class="pillrow sx-pills"><button class="pill' + (UI.revMode === "due" ? " primary" : "") + '" data-sx="rmode" data-id="due" aria-pressed="' + (UI.revMode === "due") + '">Scheduled</button><button class="pill' + (UI.revMode === "cram" ? " primary" : "") + '" data-sx="rmode" data-id="cram" aria-pressed="' + (UI.revMode === "cram") + '">All cards</button></div></div></div>' +
@@ -525,21 +526,26 @@
   function renderPlan() {
     var host = $("#planView"); if (!host) return;
     var ex = examInfo(), weeks = weekPlan();
-    var rows = weeks.map(function (w) { return '<div class="sx-week' + (w.now ? " now" : "") + '"><div><div class="small">' + esc(fmtDate(w.ws)) + " – " + esc(fmtDate(w.we)) + '</div><span class="sx-chip">' + PHASES[w.ph].name + "</span>" + (w.now ? ' <span class="sx-chip assess">this week</span>' : "") + '</div><div class="sx-wfocus">' + w.html + "</div></div>"; }).join("");
-    host.innerHTML = '<div class="card"><div class="eyebrow">From now to the exam</div><h2>Study plan</h2>' +
+    var rows = weeks.map(function (w) { return '<div class="sx-week' + (w.now ? " now" : "") + '"><div><div class="small">' + esc(fmtDate(w.ws)) + " – " + esc(fmtDate(w.we)) + "</div>" + (w.now ? '<span class="sx-chip assess">this week</span>' : "") + '</div><div class="sx-wfocus">' + w.html + "</div></div>"; }).join("");
+    var phaseRows = [1, 2, 3].map(function (ph) {
+      var first = weeks.filter(function (w) { return w.ph === ph; })[0];
+      return '<div class="sx-phasebox"><div class="eyebrow">' + PHASES[ph].name + (first ? " · from " + esc(fmtDate(first.ws)) : "") + "</div>" + list(ROUTINE[ph]) + "</div>";
+    }).join("");
+    host.innerHTML = '<button class="ghost sx-sm" data-section="home">← Today</button>' +
+      '<div class="card"><div class="eyebrow">From now to the exam</div><h2>Study plan</h2>' +
       '<div class="sx-row sx-end sx-gap"><label class="sx-field" for="sx-exam-date">Written exam date<input class="searchbox" type="date" id="sx-exam-date" value="' + esc(P.prefs.examDate || "") + '" min="2026-11-01" max="2027-12-31"></label>' +
       '<label class="sx-field" for="sx-new-per-day">New flashcards per day<input type="number" id="sx-new-per-day" value="' + P.prefs.newPerDay + '" min="3" max="40" step="1"></label></div>' +
       '<p class="small">' + (ex.assumed ? "No date set: the plan assumes " + esc(fmtDate(ex.date, { day: "numeric", month: "long", year: "numeric" })) + " (winter session). Enter the real date when the calendar is published." : "Plan built for " + esc(fmtDate(ex.date, { weekday: "long", day: "numeric", month: "long", year: "numeric" })) + ".") +
-      " Lectures assumed to end around " + esc(fmtDate(LECTURES_END, { day: "numeric", month: "long" })) + ". To be admitted to the oral you need at least 18 in the written exam; final grade = 50% written + 50% oral + project bonus (−2 to +2).</p></div>" +
-      '<div class="card"><div class="sx-weeks">' + rows + "</div></div>" +
-      '<div class="card"><h3 class="sx-h3">Why the hub works this way</h3><div class="sx-method">' +
+      " Oral admission needs at least 18 in the written exam; final grade = 50% written + 50% oral + project bonus (−2 to +2).</p></div>" +
+      '<div class="card"><h3 class="sx-h3">Every week</h3><div class="sx-phases">' + phaseRows + "</div></div>" +
+      '<div class="card"><h3 class="sx-h3">Week by week</h3><div class="sx-weeks">' + rows + "</div></div>" +
+      '<details class="card sx-why"><summary><strong>Why the hub works this way</strong></summary><div class="sx-method">' +
         "<div><b>Retrieval, not rereading</b>Flashcards and oral questions make you pull the answer out of memory, which is what fixes it. Read a sheet once, then test yourself.</div>" +
         "<div><b>Spacing</b>Each card comes back just before you would forget it: 1, 3, 7, 14, 30 days. Fifteen minutes a day beats a weekend cram.</div>" +
-        "<div><b>Recognition checks</b>Practice 10 and the Exam Test are quick multiple-choice checks with an explanation for every option: good for spotting traps, not a substitute for writing.</div>" +
+        "<div><b>Recognition checks</b>Practice 10 and the Exam test are quick multiple-choice checks with an explanation for every option: good for spotting traps, not a substitute for writing.</div>" +
         "<div><b>Application</b>The written exam is case-based. Every week you write one answer and compare it with the outline" + (SAMPLE ? " or Claude’s grading" : "") + ".</div>" +
         "<div><b>Explaining aloud</b>The oral rewards structure: definition → framework → slide example → link to another deck. Practise it out loud with the timer.</div>" +
-      "</div></div>" +
-      '<div class="card"><h3 class="sx-h3">Adding new lectures</h3><p class="small sx-measure">More decks are coming (M&amp;A, internationalisation, disruption, and the marketing mix: pricing, branding, communication, distribution). Save the new PDFs in the S&amp;M folder on Google Drive and ask Claude to add the new decks: new sheets, flashcards, concept cards, quiz questions, cases and oral questions are added and your progress is kept.</p></div>';
+      "</div></details>";
     var ed = document.getElementById("sx-exam-date"); if (ed) ed.addEventListener("change", function () { P.prefs.examDate = ed.value || ""; P.prefs.t = Date.now(); saveP(); renderPlan(); renderToday(); });
     var np = document.getElementById("sx-new-per-day"); if (np) np.addEventListener("change", function () { P.prefs.newPerDay = Math.max(3, Math.min(40, parseInt(np.value, 10) || 12)); P.prefs.t = Date.now(); saveP(); renderPlan(); renderToday(); });
   }
