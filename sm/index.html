@@ -28,21 +28,14 @@
       </div>
       <div class="topbar-actions">
         <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
-        <button class="hamb" id="hambBtn" aria-label="Menu" aria-controls="mainNav" aria-expanded="false">Menu</button>
       </div>
     </div>
     <nav class="nav" id="mainNav" aria-label="Sections">
-      <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
-      <button id="decksBtn" data-section="decks">Decks</button>
-      <button id="studyMapBtn" data-section="studyMap">Study Map</button>
-      <button id="conceptsBtn" data-section="concepts">Concepts</button>
+      <button id="homeBtn" data-section="home" class="active" aria-current="page">Today</button>
+      <button id="decksBtn" data-section="decks">Learn</button>
       <button id="flashBtn" data-section="flashcards">Flashcards</button>
-      <button id="fullBtn" data-mode="full">Full Test</button>
-      <button id="practiceBtn" data-mode="practice10">Practice 10</button>
-      <button id="examBtn" data-mode="exam">Exam Test</button>
-      <button id="mistakesBtn" data-section="mistakes">Mistakes</button>
-      <button id="drillsBtn" data-section="drills">Cases &amp; Oral</button>
-      <button id="planBtn" data-section="plan">Plan</button>
+      <button id="quizBtn" data-section="practice">Quiz</button>
+      <button id="drillsBtn" data-section="drills">Exam</button>
     </nav>
     <div class="progress-wrap"><div class="progress" id="progress"></div></div>
   </div>
@@ -51,60 +44,26 @@
 <main id="mainContent" tabindex="-1">
   <section id="home" class="app-section">
     <div id="todayPanel" class="sx-host" aria-live="polite"></div>
-    <div class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Your strategy &amp; marketing study space</div>
-        <h2>A little practice.<br>A sharper view.</h2>
-        <p>From the company’s goal to positioning and the marketing mix. Read the decks, recall them with flashcards, check yourself with quizzes and practise the written and oral exam.</p>
-        <div class="hero-actions">
-          <button class="primary" data-mode="practice10">Start practicing <span aria-hidden="true">↗</span></button>
-          <button class="ghost" data-section="studyMap">Open study map</button>
-        </div>
-        <div class="hero-note">10 questions · Instant feedback · Go at your own pace</div>
+  </section>
+
+  <section id="practice" class="app-section hidden">
+    <nav class="subnav" aria-label="Quiz"><button class="active" aria-current="page" data-section="practice">Quiz</button><button data-section="mistakes">Mistakes</button></nav>
+    <div class="card">
+      <div class="eyebrow">Multiple choice</div>
+      <h2>Quiz</h2>
+      <p class="small">Quick checks with an explanation for every option. Good for spotting traps; the written exam still needs the cases in Exam.</p>
+      <div class="quiz-modes">
+        <div class="quiz-mode featured"><div><strong>Practice 10</strong><p class="small">Ten questions, feedback after each answer. One deck or all of them.</p></div><button class="primary" id="practiceBtn" data-mode="practice10">Start</button></div>
+        <div class="quiz-mode"><div><strong>Exam test</strong><p class="small">Ten mixed questions; score and explanations at the end.</p></div><button class="ghost" id="examBtn" data-mode="exam">Start</button></div>
+        <div class="quiz-mode"><div><strong>Whole bank</strong><p class="small">Every question in order, at your pace. It picks up where you stopped.</p></div><button class="ghost" id="continueBtn" data-mode="full">Start</button></div>
       </div>
-      <aside class="study-path" aria-label="Suggested study routine">
-        <div class="eyebrow">A simple study routine</div>
-        <ol>
-          <li><span class="step-number">01</span><div><strong>Get the idea</strong><p>Read the deck sheet and its concept cards; spot the exam trap.</p></div></li>
-          <li><span class="step-number">02</span><div><strong>Recall it</strong><p>Daily flashcards, then a short quiz on the area you’re studying.</p></div></li>
-          <li><span class="step-number">03</span><div><strong>Answer like the exam</strong><p>Write a case answer, explain a topic out loud, revisit your mistakes.</p></div></li>
-        </ol>
-        <div class="path-footer"><span aria-hidden="true">↺</span> Small sessions. Steady progress.</div>
-      </aside>
+      <h3 class="quiz-stats-title">Your results</h3>
+      <div class="stats-row" id="homeStats"></div>
     </div>
-    <div class="section-heading"><h3>Your progress</h3><span class="small">From completed tests · Saved in this browser</span></div>
-    <div class="stats-row" id="homeStats"></div>
-    <div class="section-heading"><h3>How would you like to study?</h3><span class="small">Pick up wherever you are</span></div>
-    <div class="mode-grid">
-      <article class="mode-card">
-        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">Aa</span><span class="small">Theory</span></div>
-        <h4>Concepts</h4>
-        <p>Clear explanations, worked cases and the traps to watch for. Find exactly what you need.</p>
-        <button class="ghost" data-section="concepts">Open concepts <span aria-hidden="true">→</span></button>
-      </article>
-      <article class="mode-card featured">
-        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">↗</span><span class="small">Quick practice</span></div>
-        <h4>Practice 10</h4>
-        <p>A fresh set of questions with feedback after every answer. Focus on one area or mix them all.</p>
-        <button class="primary" data-mode="practice10">Start practice <span aria-hidden="true">→</span></button>
-      </article>
-      <article class="mode-card">
-        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">≡</span><span class="small">Complete review</span></div>
-        <h4>Full Test</h4>
-        <p>Work through the question bank at your pace. Choose your order and resume a saved session.</p>
-        <button class="ghost" id="continueBtn" data-mode="full">Start Full Test</button>
-      </article>
-      <article class="mode-card">
-        <div class="mode-top"><span class="mode-symbol" aria-hidden="true">◎</span><span class="small">Check yourself</span></div>
-        <h4>Exam Test</h4>
-        <p>Ten mixed questions. Make your choices, then see your score and explanations at the end.</p>
-        <button class="ghost" data-mode="exam">Start exam <span aria-hidden="true">→</span></button>
-      </article>
-    </div>
-    <div class="review-prompt"><div><strong>Every mistake is a place to start.</strong><p class="small">Your saved mistakes bring the explanations back into focus.</p></div><button class="ghost" data-section="mistakes">Review mistakes <span aria-hidden="true">→</span></button></div>
   </section>
 
   <section id="studyMap" class="app-section hidden">
+    <nav class="subnav" aria-label="Learn"><button data-section="decks">Decks</button><button data-section="concepts">Concepts</button><button class="active" aria-current="page" data-section="studyMap">Things to remember</button></nav>
     <div class="card">
       <div class="study-map-intro">
         <div>
@@ -122,17 +81,19 @@
   </section>
 
   <section id="concepts" class="app-section hidden">
+    <nav class="subnav" aria-label="Learn"><button data-section="decks">Decks</button><button class="active" aria-current="page" data-section="concepts">Concepts</button><button data-section="studyMap">Things to remember</button></nav>
     <div class="card">
       <h2>Concepts</h2>
-      <p class="small">Each card gives the meaning, how it works in practice, and the typical exam trap. Pick a topic to narrow the areas below it. The note shows how far the class has reached. Cards that the recorded lectures expand on carry a <b>Going deeper</b> section naming the lecture it comes from.</p>
+      <p class="small">Pick a topic, or search across all of them. Each card gives the meaning; open it for how it works and the exam trap.</p>
       <div class="pillrow" id="conceptPills"></div>
       <p class="topic-note hidden" id="conceptTopicNote" role="status" aria-live="polite"></p>
       <input class="searchbox" id="conceptSearch" placeholder="Search concepts..." aria-label="Search concepts" />
       <p class="small result-count" id="conceptResultCount" role="status" aria-live="polite"></p>
       <div class="empty-state hidden" id="conceptEmpty"><h3>No matching concepts</h3><p>Try a different search or browse all areas.</p><button class="ghost" data-reset-concepts>Clear filters</button></div>
+      <div class="topic-grid topic-picker" id="conceptTopics"></div>
       <div class="topic-grid concepts-grid" id="conceptsGrid"></div>
-      <div class="callout warn">
-        <strong>High-frequency traps</strong>
+      <details class="callout warn traps">
+        <summary><strong>High-frequency traps</strong> <span class="small">· decks 0–2</span></summary>
         <div class="topic-grid">
           <div class="topic"><div class="kicker">Trap</div><strong>Percentages need a valuation</strong><p>A stake falling from 40% to 20% can be worth far more if the company grew from €10m to €60m. Never read dilution without the valuation behind it.</p></div>
           <div class="topic"><div class="kicker">Trap</div><strong>Post-money, not pre-money</strong><p>An investor's share is the investment divided by the post-money valuation, which already includes the cash injected.</p></div>
@@ -160,7 +121,7 @@
           <div class="topic"><div class="kicker">Trap</div><strong>Buyer and supplier power are dual</strong><p>High differentiation and high switching costs raise supplier power and lower buyer power. The same variable, opposite directions.</p></div>
           <div class="topic"><div class="kicker">Trap</div><strong>Revenue share ≠ profit share</strong><p>In the profit pool the widest bars are often the flattest: auto manufacturing is huge and thin, leasing is small and rich.</p></div>
         </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -192,15 +153,19 @@
   </section>
 
   <section id="mistakes" class="app-section hidden">
+    <nav class="subnav" aria-label="Quiz"><button data-section="practice">Quiz</button><button class="active" aria-current="page" data-section="mistakes">Mistakes</button></nav>
     <div class="card">
-      <h2>Mistakes Review</h2>
+      <h2>Mistakes</h2>
       <p class="small">Wrong answers are saved in this browser.</p>
       <div id="mistakeList"></div>
       <button class="ghost" id="clearMistakesBtn">Reset mistakes</button>
     </div>
   </section>
 
-  <section id="decks" class="app-section hidden"><div id="decksView" class="sx-host"></div></section>
+  <section id="decks" class="app-section hidden">
+    <nav class="subnav" aria-label="Learn"><button class="active" aria-current="page" data-section="decks">Decks</button><button data-section="concepts">Concepts</button><button data-section="studyMap">Things to remember</button></nav>
+    <div id="decksView" class="sx-host"></div>
+  </section>
   <section id="flashcards" class="app-section hidden"><div id="flashView" class="sx-host"></div></section>
   <section id="drills" class="app-section hidden"><div id="drillsView" class="sx-host"></div></section>
   <section id="plan" class="app-section hidden"><div id="planView" class="sx-host"></div></section>

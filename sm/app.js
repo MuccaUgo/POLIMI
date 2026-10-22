@@ -54,16 +54,20 @@
   /* ---------------- navigation ---------------- */
   function closeNav() {
     $("mainNav").classList.remove("open");
-    $("hambBtn").setAttribute("aria-expanded", "false");
+    if ($("hambBtn")) $("hambBtn").setAttribute("aria-expanded", "false");
   }
   function setActive(sectionId) {
     document.querySelectorAll("#mainNav button").forEach(function (b) {
       b.classList.remove("active"); b.removeAttribute("aria-current");
     });
+    // Five tabs: each one stands for a group of sections (Learn = decks, concepts, study map; Quiz = the
+    // quiz menu, a running test and the mistakes list; Today = today and the plan).
     var map = {
-      home: "homeBtn", studyMap: "studyMapBtn", concepts: "conceptsBtn", mistakes: "mistakesBtn", programme: "programmeBtn",
-      decks: "decksBtn", flashcards: "flashBtn", drills: "drillsBtn", plan: "planBtn",
-      testSection: currentMode === "full" ? "fullBtn" : currentMode === "practice10" ? "practiceBtn" : "examBtn"
+      home: "homeBtn", plan: "homeBtn", programme: "homeBtn",
+      decks: "decksBtn", concepts: "decksBtn", studyMap: "decksBtn",
+      flashcards: "flashBtn",
+      practice: "quizBtn", testSection: "quizBtn", mistakes: "quizBtn",
+      drills: "drillsBtn"
     };
     var btn = $(map[sectionId]);
     if (btn) { btn.classList.add("active"); btn.setAttribute("aria-current", "page"); }
@@ -74,7 +78,7 @@
     $(id).classList.remove("hidden");
     setActive(id);
     if (id === "mistakes") renderMistakes();
-    if (id === "home") renderHomeStats();
+    if (id === "home" || id === "practice") renderHomeStats();
     if (id === "programme") renderProgramme();
     // Decks, flashcards, drills and plan live in study.js, which renders on demand.
     if (window.SM_STUDY && typeof window.SM_STUDY.onShow === "function") window.SM_STUDY.onShow(id);
@@ -265,7 +269,7 @@
       return '<article class="topic concept-card" data-i="' + i + '" data-cat="' + esc(c.cat) + '">' +
         '<div class="kicker">' + esc(c.cat) + "</div><strong>" + esc(c.title) + "</strong>" +
         "<p><b>Meaning.</b> " + esc(c.meaning) + "</p>" +
-        '<details open><summary>How it works</summary><p class="mini">' + esc(c.how) + "</p></details>" +
+        '<details><summary>How it works</summary><p class="mini">' + esc(c.how) + "</p></details>" +
         '<details><summary>Typical trap</summary><p class="mini">' + esc(c.trap) + "</p></details>" +
         (c.deep ? '<details class="deep"><summary>Going deeper</summary><p class="mini">' + esc(c.deep.text) +
           '</p><p class="source">From the lecture <em>' + esc(c.deep.source) + "</em></p></details>" : "") +
@@ -273,6 +277,15 @@
         "</article>";
     }).join("");
 
+    // With no topic and no search, the page shows the topics to pick from instead of every card.
+    var picker = $("conceptTopics");
+    if (picker && multiTopic()) {
+      picker.innerHTML = topicList().map(function (t) {
+        var n = CONCEPTS.filter(function (c) { return t.categories.indexOf(c.cat) !== -1; }).length;
+        return '<button class="topic topic-pick" data-cat="topic:' + esc(t.name) + '"><span class="kicker">' + n + " concepts</span><strong>" +
+          esc(t.name) + '</strong><span class="small">' + esc(t.categories.join(" · ")) + "</span></button>";
+      }).join("");
+    }
     renderConceptPills("All");
   }
   function renderConceptPills(active) {
@@ -281,8 +294,9 @@
       topicList().forEach(function (t) { values.push("topic:" + t.name); });
       var open = active && active.indexOf("topic:") === 0 ? active.slice(6) : topicOf(active);
       var areas = [];
+      // Areas appear only under the open topic, so the pill row stays short.
       topicList().forEach(function (t) {
-        if (!open || t.name === open) areas = areas.concat(t.categories);
+        if (open && t.name === open) areas = areas.concat(t.categories);
       });
       if (areas.length) values.push("|");
       values = values.concat(areas);
@@ -309,15 +323,19 @@
     var cat = activePill ? activePill.dataset.cat : "All";
     var qtext = ($("conceptSearch").value || "").toLowerCase().trim();
     var shown = 0;
+    var picking = !!$("conceptTopics") && multiTopic() && cat === "All" && !qtext;
     document.querySelectorAll("#conceptsGrid .concept-card").forEach(function (el) {
       var c = CONCEPTS[Number(el.dataset.i)];
       var okCat = matchesFilter(cat, c.cat);
       var okText = !qtext || conceptSearchText(c).indexOf(qtext) !== -1;
       var visible = okCat && okText;
-      el.classList.toggle("hidden", !visible);
+      el.classList.toggle("hidden", !visible || picking);
       if (visible) shown++;
     });
-    if ($("conceptResultCount")) $("conceptResultCount").textContent = shown + " of " + CONCEPTS.length + " concepts";
+    if ($("conceptTopics")) $("conceptTopics").classList.toggle("hidden", !picking);
+    if ($("conceptResultCount")) $("conceptResultCount").textContent = picking
+      ? CONCEPTS.length + " concepts in " + topicList().length + " topics"
+      : shown + " of " + CONCEPTS.length + " concepts";
     if ($("conceptEmpty")) $("conceptEmpty").classList.toggle("hidden", shown !== 0);
     return shown;
   }
@@ -630,7 +648,7 @@
       '<div class="stat-pill"><strong>' + (s.totalAnswered || 0) + "</strong><span>Answered</span></div>";
     var saved = readSession("full");
     var cbtn = $("continueBtn");
-    if (cbtn) cbtn.textContent = saved ? "Resume Full Test · Q" + (saved.index + 1) : "Start Full Test";
+    if (cbtn) cbtn.textContent = saved ? "Resume · Q" + (saved.index + 1) : "Start";
   }
 
   function celebrate() {
@@ -731,12 +749,14 @@
     renderProgramme();
 
     $("themeToggle").addEventListener("click", toggleTheme);
-    $("hambBtn").setAttribute("aria-controls", "mainNav");
-    $("hambBtn").setAttribute("aria-expanded", "false");
-    $("hambBtn").addEventListener("click", function () {
-      var open = $("mainNav").classList.toggle("open");
-      $("hambBtn").setAttribute("aria-expanded", String(open));
-    });
+    if ($("hambBtn")) {
+      $("hambBtn").setAttribute("aria-controls", "mainNav");
+      $("hambBtn").setAttribute("aria-expanded", "false");
+      $("hambBtn").addEventListener("click", function () {
+        var open = $("mainNav").classList.toggle("open");
+        $("hambBtn").setAttribute("aria-expanded", String(open));
+      });
+    }
 
     document.body.addEventListener("click", function (e) {
       var mapBlock = e.target.closest("[data-map-filter]");
@@ -761,7 +781,7 @@
         $("conceptSearch").focus();
         return;
       }
-      var pill = e.target.closest("#conceptPills .pill");
+      var pill = e.target.closest("#conceptPills .pill, #conceptTopics .topic-pick");
       if (pill) {
         renderConceptPills(pill.dataset.cat);
         filterConcepts();
@@ -775,7 +795,7 @@
       if (e.target.closest("#startBtn")) { startQuiz(); return; }
       if (e.target.closest("#resumeBtn")) { resumeQuiz(currentMode); return; }
       if (e.target.closest("#restartBtn")) { openTest(currentMode); return; }
-      if (e.target.closest("#backHomeBtn")) { showSection("home"); return; }
+      if (e.target.closest("#backHomeBtn")) { showSection($("practice") ? "practice" : "home"); return; }
       if (e.target.closest("#clearMistakesBtn")) {
         try { localStorage.removeItem("sm_mistakes"); } catch (err) {}
         renderMistakes();
