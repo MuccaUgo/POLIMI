@@ -1,12 +1,14 @@
 const APP_SCOPE = new URL(self.registration.scope);
 const CACHE_PREFIX = `strategy-marketing-hub:${APP_SCOPE.href}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v6`;
+const CACHE_NAME = `${CACHE_PREFIX}v7`;
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./data.js",
+  "./content.js",
   "./app.js",
+  "./study.js",
   "./manifest.json",
   "./icon.svg"
 ].map(path => new URL(path, APP_SCOPE).href);

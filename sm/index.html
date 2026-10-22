@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Strategy &amp; Marketing Study Hub</title>
-<meta name="description" content="Concepts and practice questions on Strategy and Marketing: the company, legal forms, ownership and evolution, value, governance and ESG." />
+<meta name="description" content="Strategy and Marketing study hub: deck sheets, spaced-repetition flashcards, concept cards, quizzes, case-based written drills, oral questions, number exercises and a study plan." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon.svg" />
@@ -33,12 +33,16 @@
     </div>
     <nav class="nav" id="mainNav" aria-label="Sections">
       <button id="homeBtn" data-section="home" class="active" aria-current="page">Home</button>
+      <button id="decksBtn" data-section="decks">Decks</button>
       <button id="studyMapBtn" data-section="studyMap">Study Map</button>
       <button id="conceptsBtn" data-section="concepts">Concepts</button>
+      <button id="flashBtn" data-section="flashcards">Flashcards</button>
       <button id="fullBtn" data-mode="full">Full Test</button>
       <button id="practiceBtn" data-mode="practice10">Practice 10</button>
       <button id="examBtn" data-mode="exam">Exam Test</button>
       <button id="mistakesBtn" data-section="mistakes">Mistakes</button>
+      <button id="drillsBtn" data-section="drills">Cases &amp; Oral</button>
+      <button id="planBtn" data-section="plan">Plan</button>
     </nav>
     <div class="progress-wrap"><div class="progress" id="progress"></div></div>
   </div>
@@ -46,11 +50,12 @@
 
 <main id="mainContent" tabindex="-1">
   <section id="home" class="app-section">
+    <div id="todayPanel" class="sx-host" aria-live="polite"></div>
     <div class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Your strategy study space</div>
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Your strategy &amp; marketing study space</div>
         <h2>A little practice.<br>A sharper view.</h2>
-        <p>See how a company is built, owned and governed. Review the theory, test your understanding and learn from your mistakes.</p>
+        <p>From the company’s goal to segmentation and positioning. Read the decks, recall them with flashcards, check yourself with quizzes and practise the written and oral exam.</p>
         <div class="hero-actions">
           <button class="primary" data-mode="practice10">Start practicing <span aria-hidden="true">↗</span></button>
           <button class="ghost" data-section="studyMap">Open study map</button>
@@ -60,9 +65,9 @@
       <aside class="study-path" aria-label="Suggested study routine">
         <div class="eyebrow">A simple study routine</div>
         <ol>
-          <li><span class="step-number">01</span><div><strong>Get the idea</strong><p>Read a concept and spot the exam trap.</p></div></li>
-          <li><span class="step-number">02</span><div><strong>Put it into practice</strong><p>Try a short quiz on the area you’re studying.</p></div></li>
-          <li><span class="step-number">03</span><div><strong>Close the gaps</strong><p>Revisit mistakes, then check yourself in an exam.</p></div></li>
+          <li><span class="step-number">01</span><div><strong>Get the idea</strong><p>Read the deck sheet and its concept cards; spot the exam trap.</p></div></li>
+          <li><span class="step-number">02</span><div><strong>Recall it</strong><p>Daily flashcards, then a short quiz on the area you’re studying.</p></div></li>
+          <li><span class="step-number">03</span><div><strong>Answer like the exam</strong><p>Write a case answer, explain a topic out loud, revisit your mistakes.</p></div></li>
         </ol>
         <div class="path-footer"><span aria-hidden="true">↺</span> Small sessions. Steady progress.</div>
       </aside>
@@ -194,10 +199,17 @@
       <button class="ghost" id="clearMistakesBtn">Reset mistakes</button>
     </div>
   </section>
+
+  <section id="decks" class="app-section hidden"><div id="decksView" class="sx-host"></div></section>
+  <section id="flashcards" class="app-section hidden"><div id="flashView" class="sx-host"></div></section>
+  <section id="drills" class="app-section hidden"><div id="drillsView" class="sx-host"></div></section>
+  <section id="plan" class="app-section hidden"><div id="planView" class="sx-host"></div></section>
 </main>
 <footer class="site-footer"><span>Strategy &amp; Marketing <span aria-hidden="true">/</span> Study Hub</span><span>Your progress stays in this browser.</span></footer>
 
 <script src="data.js"></script>
+<script src="content.js"></script>
 <script src="app.js"></script>
+<script src="study.js"></script>
 </body>
 </html>
