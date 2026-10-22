@@ -15,7 +15,7 @@
     intro: "Introduction", strat: "The Concept of Strategy", ext: "External Analysis",
     ca: "Competitive Advantage", int: "Internal Analysis", swot: "SWOT & Alternatives",
     bmc: "Business Model", corp: "Corporate Strategy",
-    mk1: "Market Demand", mk2: "Segmentation", mk3: "Targeting & Positioning"
+    mk1: "Market Demand", mk2: "Segmentation", mk3: "Targeting & Positioning", mk4: "Product, Services & Experience"
   };
   function hasTopic(name) {
     return typeof TOPICS !== "undefined" && TOPICS.some(function (t) { return t.name === name; });
@@ -288,7 +288,11 @@
     funnel: { label: "Market levels", deck: "mk1", gen: function () {
       var pot = R(4, 20) * 500000, q = pick([50, 60, 70, 80]), a = pick([10, 15, 20, 25, 30]), s = pick([20, 30, 40, 50]), qual = pot * q / 100, av = qual * a / 100, serv = Math.round(av * s / 100), pen = Math.round(serv * pick([1, 2, 3, 4, 5, 8]) / 100 / 10) * 10, ans = pen / serv * 100;
       return { q: "Potential market: <b>" + fmt(pot) + "</b> people. " + q + "% are qualified, " + a + "% of the qualified are available, and the company serves " + s + "% of the available market. It has <b>" + fmt(pen) + "</b> customers. What share of the served market has it penetrated?", ans: ans, unit: "%", tol: 0.11,
-        sol: "Qualified = " + fmt(pot) + " × " + q + "% = " + fmt(qual) + "<br>Available = × " + a + "% = " + fmt(av) + "<br>Served = × " + s + "% = " + fmt(serv) + "<br>Penetration = " + fmt(pen) + " ÷ " + fmt(serv) + " = <b>" + f2(ans) + "%</b>" }; } }
+        sol: "Qualified = " + fmt(pot) + " × " + q + "% = " + fmt(qual) + "<br>Available = × " + a + "% = " + fmt(av) + "<br>Served = × " + s + "% = " + fmt(serv) + "<br>Penetration = " + fmt(pen) + " ÷ " + fmt(serv) + " = <b>" + f2(ans) + "%</b>" }; } },
+    nps: { label: "Net Promoter Score", deck: "mk4", gen: function () {
+      var n = pick([200, 400, 500, 800, 1000, 1200]), pr = R(15, 60), de = R(5, 35), pa = 100 - pr - de, P = n * pr / 100, D = n * de / 100, ans = pr - de;
+      return { q: "<b>" + fmt(n) + "</b> customers answer “How likely are you to recommend us?” (0–10): <b>" + fmt(P) + "</b> give 9–10, <b>" + fmt(n - P - D) + "</b> give 7–8 and <b>" + fmt(D) + "</b> give 0–6. Compute the NPS.", ans: ans, unit: "", tol: 0.5,
+        sol: "Promoters (9–10) = " + fmt(P) + " ÷ " + fmt(n) + " = " + pr + "%<br>Detractors (0–6) = " + fmt(D) + " ÷ " + fmt(n) + " = " + de + "%<br>Passives (" + pa + "%) count only in the total<br>NPS = " + pr + " − " + de + " = <b>" + ans + "</b> (standard formula; the slide defines NPS as the propensity for advocacy)" }; } }
   };
   function numCandidates(raw) {
     var s = String(raw).replace(/[€%\s]/g, ""), out = [];
@@ -378,7 +382,7 @@
       '<div class="sx-band"><span><b>Foundations</b> · goal of the firm, shareholders &amp; stakeholders, governance, what strategy is</span><span class="sx-row"><button class="ghost sx-sm" data-sx="sheet" data-id="intro">Introduction · deck 0</button><button class="ghost sx-sm" data-sx="sheet" data-id="strat">Concept of strategy · deck 1</button></span></div></div>' +
       '<div class="card"><div class="eyebrow">Marketing · Gloria Peggiani</div><h2>The marketing process</h2><p class="small">The same logic as strategy: analyse the context, choose where to play and how to win (STP), then decide how to execute (marketing mix), implement and control.</p>' +
       '<div class="sx-process"><div class="sx-phase"><h4>Strategic marketing · where to play</h4>' + node("mk1", "Context analysis: market demand", "M1") + '<div class="sx-node out">→ with external (deck 2) and internal (deck 4) analysis</div>' + node("mk2", "Segmentation", "M2") + node("mk3", "Targeting &amp; positioning", "M3") + "</div>" +
-      '<div class="sx-phase"><h4>Operational marketing · how to execute</h4><div class="sx-node out">Value proposition: marketing mix — product, price, place, promotion (coming)</div><div class="sx-node out">Implementation &amp; control</div></div>' +
+      '<div class="sx-phase"><h4>Operational marketing · how to execute</h4>' + node("mk4", "Value proposition: marketing mix — product, services, experience", "M4") + '<div class="sx-node out">Price, place, promotion · branding (coming)</div><div class="sx-node out">Implementation &amp; control</div></div>' +
       '<div class="sx-phase"><h4>Transversal topics</h4><div class="sx-node out">Digital marketing</div><div class="sx-node out">Consumer behaviour tools, neuromarketing</div><div class="sx-node out">AI in marketing</div></div></div></div>' +
       '<div class="card"><div class="sx-row sx-between"><h3 class="sx-h3">All decks</h3><div class="sx-legend"><span><i class="s"></i>solid (≥ 1 week)</span><span><i class="l"></i>learning</span><span><i></i>new</span></div></div>' +
       '<div class="eyebrow sx-mt">Strategy · Vittorio Chiesa</div>' + DECKS.filter(function (m) { return m.track !== "mkt"; }).map(deckRow).join("") +
@@ -535,7 +539,7 @@
         "<div><b>Application</b>The written exam is case-based. Every week you write one answer and compare it with the outline" + (SAMPLE ? " or Claude’s grading" : "") + ".</div>" +
         "<div><b>Explaining aloud</b>The oral rewards structure: definition → framework → slide example → link to another deck. Practise it out loud with the timer.</div>" +
       "</div></div>" +
-      '<div class="card"><h3 class="sx-h3">Adding new lectures</h3><p class="small sx-measure">More decks are coming (M&amp;A, internationalisation, disruption, and the marketing mix: pricing, branding, communication, distribution). Save the new PDFs in the S&amp;M folder on Google Drive and ask Claude to add the new decks: new sheets, flashcards, concept cards, quiz questions, cases and oral questions are added and your progress is kept. The M3 sheet is built from your notes: send the lecture 3 slides when you have them.</p></div>';
+      '<div class="card"><h3 class="sx-h3">Adding new lectures</h3><p class="small sx-measure">More decks are coming (M&amp;A, internationalisation, disruption, and the marketing mix: pricing, branding, communication, distribution). Save the new PDFs in the S&amp;M folder on Google Drive and ask Claude to add the new decks: new sheets, flashcards, concept cards, quiz questions, cases and oral questions are added and your progress is kept.</p></div>';
     var ed = document.getElementById("sx-exam-date"); if (ed) ed.addEventListener("change", function () { P.prefs.examDate = ed.value || ""; P.prefs.t = Date.now(); saveP(); renderPlan(); renderToday(); });
     var np = document.getElementById("sx-new-per-day"); if (np) np.addEventListener("change", function () { P.prefs.newPerDay = Math.max(3, Math.min(40, parseInt(np.value, 10) || 12)); P.prefs.t = Date.now(); saveP(); renderPlan(); renderToday(); });
   }

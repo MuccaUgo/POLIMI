@@ -1,7 +1,6 @@
 // Strategy & Marketing study data, generated from the course decks by V. Chiesa (Introduction and
-// chapters 1-7) and G. Peggiani (marketing lectures 1-2), MSc Management Engineering. Marketing lecture 3
-// is built from the student's notes until its slides are available. The deck sheets, flashcards, cases
-// and oral questions live in content.js.
+// chapters 1-7) and G. Peggiani (marketing lectures 1-4), MSc Management Engineering. The deck sheets,
+// flashcards, cases and oral questions live in content.js.
 const TOPICS = [
  { name: "Introduction", categories: ["The Company", "Legal Forms", "Ownership & Evolution", "Value & Objectives", "Governance & ESG"] },
  { name: "The Concept of Strategy", categories: ["What Strategy Is", "Levels of Strategy", "Strategy Process", "Intended & Emergent", "Vision, Mission & Purpose"] },
@@ -14,8 +13,9 @@ const TOPICS = [
  { name: "Corporate Strategy", categories: ["Vertical Integration", "Diversification", "Portfolio Analysis"] },
  { name: "Market Demand", categories: ["Marketing Basics", "Demand & Customer Value", "B2C & B2B Buying"] },
  { name: "Segmentation", categories: ["Segmentation Basics", "Segmentation Bases", "Segmentation Methods"] },
- { name: "Targeting & Positioning", categories: ["Targeting & Positioning"],
-   note: "Marketing lecture 3 \u2014 built from the student's handwritten notes and Kotler, because the lecture slides are not in the hub yet. Check it against the slides when they are available." }
+ { name: "Targeting & Positioning", categories: ["Targeting", "Positioning Tools & Methods", "Positioning & Repositioning"] },
+ { name: "Product, Services & Experience", categories: ["Marketing Mix & Product", "Product Life Cycle", "Services", "Customer Experience & Journey"],
+   note: "Marketing lecture 4 (22 October): the first P of the marketing mix. Price, place and promotion follow in the next lectures." }
 ];
 const CATEGORIES = TOPICS.reduce(function (all, t) { return all.concat(t.categories); }, []);
 
@@ -1689,32 +1689,354 @@ const CONCEPTS = [
   "trap": "A statistically perfect segment can still fail managerial validation if the sales force cannot recognise it."
  },
  {
-  "cat": "Targeting & Positioning",
-  "title": "Five Coverage Patterns",
-  "meaning": "After segmentation the firm chooses which segments to serve and how to cover them.",
-  "how": "Single-segment concentration: one line of products for one specific target, as luxury players such as Rolex or Ferrari do. Selective specialisation: different solutions for different targets. Product specialisation: the same solution for different markets. Market specialisation: different solutions for the same market. Full market coverage: broad solutions for every target, as L'Oréal does.",
-  "trap": "Product and market specialisation are easily swapped: product specialisation keeps the product and varies the market, market specialisation keeps the customer group and varies the products."
+  "cat": "Targeting",
+  "title": "The STP Process",
+  "meaning": "Segmentation, targeting and positioning close strategic marketing: where to play and how to win.",
+  "how": "Segmentation slices the market and profiles the segments. Targeting evaluates the attractiveness of each segment and selects the target segment(s). Positioning decides a unique position in the minds of the target and selects, develops, signals and maintains the chosen positioning concept. Strategic marketing runs from context analysis (external and internal) to STP; operational marketing then defines the value proposition through the marketing mix and handles implementation and control.",
+  "trap": "Positioning comes after targeting: a position only exists in the minds of a chosen target, never in the market as a whole."
  },
  {
-  "cat": "Targeting & Positioning",
-  "title": "Choosing Target Segments",
-  "meaning": "Targeting weighs the attractiveness of each segment against the firm's fit with it.",
-  "how": "Attractiveness comes from the external analysis: size, growth, profitability and competitive intensity of the segment. Fit comes from the internal analysis: whether the firm's resources, competencies and objectives allow it to serve the segment better than rivals.",
-  "trap": "An attractive segment the firm cannot serve well is a trap: competitors with a better fit will take it."
+  "cat": "Targeting",
+  "title": "Targeting and Segment Attractiveness",
+  "meaning": "Targeting is the strategic process through which a firm evaluates different market segments and selects one or more of them as the focus of its marketing efforts.",
+  "how": "Developing a plan for every segment may be neither feasible nor beneficial, so the firm chooses. Segment attractiveness is the strategic value and potential of serving a segment, and depends on three things: profitability (can these customers pay enough to ensure margins?), size and growth potential (is the segment large and/or expanding?) and structural attractiveness (level of competition, substitutes, power of buyers and suppliers).",
+  "trap": "Structural attractiveness is the five forces applied to a single segment: a large, growing segment can still be unattractive if rivalry or buyer power is high."
  },
  {
-  "cat": "Targeting & Positioning",
-  "title": "Schema Theory in Positioning",
-  "meaning": "A schema is a mental framework, a set of ideas and expectations about something.",
-  "how": "In a restaurant you expect a menu, waiters and tables, and to pay at the end. When a new product fits consumers' existing schema, it is easy to understand and accept; when it does not fit, consumers may feel confused or resist it. Positioning has to take the target's schemas into account.",
-  "trap": "Being different helps only if customers can still recognise what the offer is."
+  "cat": "Targeting",
+  "title": "The Targeting Matrix",
+  "meaning": "Segments are placed on two axes: their attractiveness and their compatibility with the firm's strategies and resources.",
+  "how": "High attractiveness and high compatibility: segments with high entry or presence priority. High attractiveness, low compatibility: high-interest segments, but they need high investment. Low attractiveness, high compatibility: segments to defend with marginal spaces, kept only if self-financing. Low and low: segments of no interest. The slide fills the matrix with sports-footwear segments: professional athletes and performance purists, active-lifestyle consumers, low-cost footwear buyers, luxury and fashion-driven consumers.",
+  "trap": "An attractive segment the firm is not equipped for is not a priority: it is an investment decision."
  },
  {
-  "cat": "Targeting & Positioning",
-  "title": "The Traditional Positioning Approach",
-  "meaning": "A three-step method to analyse and choose a position.",
-  "how": "Identify the relevant attributes, functional and emotional; rate them for the brand and its competitors, typically with Likert-scale surveys; reduce the attributes to a few dimensions and analyse the results, producing a perceptual map and its strategic implications. For emotional attributes, Aaker's brand personality dimensions are sincerity, excitement, competence, sophistication and ruggedness.",
-  "trap": "The map is only as good as the attributes: start from what customers consider important for purchase, not from what the company wants to communicate."
+  "cat": "Targeting",
+  "title": "Targeting Strategies and Business Strategy",
+  "meaning": "Three targeting strategies describe how many marketing plans the firm runs.",
+  "how": "Undifferentiated: a single marketing plan for the whole market, consistent with cost leadership. Differentiated: various marketing plans for different segments, consistent with differentiation. Concentrated: a single marketing plan concentrated on only one segment, consistent with focus (focalisation). The choice drives the marketing plans.",
+  "trap": "Undifferentiated targeting with a premium-priced, differentiated product is inconsistent: one plan for everybody needs a cost advantage."
+ },
+ {
+  "cat": "Targeting",
+  "title": "Five Market Coverage Approaches",
+  "meaning": "On a grid of markets (who buys) and products (what is offered), five coverage approaches refine the three targeting strategies.",
+  "how": "Single segment: one product for one market (Rolex, luxury mechanical watches for luxury-seeking consumers). Market specialisation: many products for one market (Armani: fashion, hotels and restaurants, Armani/Casa for sophisticated, design-oriented consumers). Product specialisation: one product for many markets (Lego: construction sets for children and families, adult fans, schools and STEM programmes). Selective specialisation: different products for different, unrelated markets (Zeiss: camera lenses for photographers, smartphone lenses, scientific and lithography optics). Total coverage: all products for all markets (Coca-Cola).",
+  "trap": "Product specialisation keeps the product and varies the market; market specialisation keeps the customer group and varies the products."
+ },
+ {
+  "cat": "Targeting",
+  "title": "The Lego Galidor Lesson",
+  "meaning": "Galidor, an early-2000s action-figure line far from the brick, marked the period in which Lego lost touch with its customers.",
+  "how": "Jørgen Vig Knudstorp: “One of the core problems was that the company no longer had any understanding of its customers.” Lego is the course's example of product specialisation, serving children, adult fans and education with construction sets; drifting away from what those customers valued hurt the company.",
+  "trap": "A specialisation is an advantage only while the firm keeps understanding the customers it specialises on."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Positioning in the Consumer's Mind",
+  "meaning": "Positioning is the phase in which the firm establishes how the market should perceive a specific offer.",
+  "how": "Kotler (2000): “designing the company's offer and image to occupy a specific place in the minds of target consumers”. The space dimension of positioning is the consumer's mind, and consumers automatically compare our offer with competitors'. The strategic roadmap: understand the positioning factors the target values most, the weight they give each, how competitors are positioned on those factors, then formulate an offer that fills the gaps and differentiates.",
+  "trap": "Positioning works on perception, not on the technical truth of the product."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Schema Theory and Consumer Resistance",
+  "meaning": "Schema theory, from cognitive psychology, explains how people organise knowledge into mental structures called schemata.",
+  "how": "A schema helps interpret new information by connecting it to what we already know. We hold countless schemas: for places (a restaurant: table, cutlery, menu, a waiter serving at my table), objects, people and abstract ideas (Christmas: grandmother, home). They explain how consumers interpret brands, products and ads (Halkias, 2015). If a new product does not fit an established schema, consumers may reject or ignore it.",
+  "trap": "Being different helps only if customers can still connect the offer to existing knowledge, categories and brand associations."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Perceptual Maps, Spider Charts and Value Curves",
+  "meaning": "Three tools represent the positioning of brands, products or services graphically.",
+  "how": "A perceptual map asks consumers to rate brands on attributes (for example price and quality) and plots the ratings on a two-dimensional grid; an empty area may be a true opportunity or strategic void. Maps work at two levels: strategic product positioning (how strong the product's position is and what sets it apart) and strategic portfolio positioning (the mix of products or brands in a portfolio). A spider (radar) chart compares many attributes at the same time. A value curve plots the relative performance of a firm across the key attributes customers care about.",
+  "trap": "A perceptual map shows two dimensions only: if customers choose on more attributes, use a spider chart or a value curve."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Value Curve Diagnosis",
+  "meaning": "Diagnosing a customer value proposition means drawing three value curves.",
+  "how": "The first curve is the value proposition the firm promises to its target customers, the second the one it actually delivers, the third the future value proposition of its strongest competitor. Comparing promise and delivery shows execution gaps; comparing with the competitor's future curve shows where the advantage will erode.",
+  "trap": "Comparing the firm's curve only with competitors' current offers misses both the gap between promise and delivery and the competitor's next move."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "The Four-Step Traditional Approach",
+  "meaning": "The traditional approach to positioning an offering has four steps.",
+  "how": "1. Identification of the relevant attributes. 2. Attribute rating, usually with Likert scales. 3. Reduction of the number of attributes, with principal component analysis. 4. Analysis of the results and strategic implications, through variance analysis and gap analysis on the perceptual map.",
+  "trap": "The map is only as good as the attributes: start from what customers consider when buying, not from what the company wants to say."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Functional and Emotional Attributes",
+  "meaning": "Positioning attributes are either functional or emotional.",
+  "how": "Functional attributes are the tangible, objective features that can be measured, compared or tested; they answer “what does the product do?” (durability, speed, battery life, protein content, price, fuel efficiency). Emotional attributes are intangible associations; they answer “how does the product make me feel?” (status, confidence, comfort, safety, joy). Aaker's brand personality framework (sincerity, excitement, competence, sophistication, ruggedness) helps describe the emotional side. Attributes are identified by experts (induced) or elicited from consumers (deduced).",
+  "trap": "Price is a functional attribute; the status a premium price signals is an emotional one."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Repertory Grid and Laddering",
+  "meaning": "Two consumer-driven techniques to identify the relevant attributes.",
+  "how": "Kelly's repertory grid: selection of elements (brands, products, ads); triading, in which the respondent sees three at a time and says how two are alike and different from the third, stating their own constructs (Gmail is friendlier than Outlook and Yahoo Mail: friendly / not friendly); rating of every element on each construct (e.g. 1 to 7); analysis of the grid with cluster or factor analysis. Laddering (Reynolds and Gutman, 1988), within the means-end chain, climbs from attributes (concrete features) to consequences (what they do for the consumer) to values (life goals): less alcohol, avoid getting drunk, socialise, sense of belonging.",
+  "trap": "The grid tells you how consumers distinguish brands; laddering tells you why an attribute matters to them."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Likert Scales and Principal Component Analysis",
+  "meaning": "The rating and reduction steps of the traditional approach.",
+  "how": "A Likert scale (Rensis Likert, 1930s) lets respondents express degrees of agreement with a statement instead of yes or no: “Esselunga is a brand I trust”, from 1 strongly disagree to 5 strongly agree. Principal component analysis then reduces many correlated attributes to a few dimensions: durability and material quality merge into “premium value”, so the map can use axes such as premium value and modern versus classic.",
+  "trap": "Reducing attributes is not dropping them: the components summarise several attributes that move together."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Variance and Gap Analysis",
+  "meaning": "The analysis step reads the perceptual map in two ways.",
+  "how": "Variance analysis looks at how dispersed the ratings of each brand are: low variance means respondents agree on where the brand sits, high variance a blurred perception. Gap analysis identifies white spaces, areas of the map where no or few brands are positioned. They can be opportunities for differentiation or innovation, provided the space corresponds to consumer needs.",
+  "trap": "An empty space on the map may be empty because nobody wants that combination."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Irrelevant Criteria: The Megapixel Trap",
+  "meaning": "Consumers sometimes judge products on a criterion that has little to do with performance.",
+  "how": "Camera buyers compare megapixels, yet picture quality depends on the size of the light sensor: a Canon EOS 5D Mark IV has 30.4 megapixels, a Xiaomi 12T Pro 200. A company with superior quality must educate consumers and communicate the benefits of the characteristics that actually influence performance.",
+  "trap": "Matching rivals on the irrelevant criterion reinforces it; the firm should shift attention to the criterion it is good at."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Winning the Battle for the Mind",
+  "meaning": "Customers do not switch immediately and effortlessly to better products.",
+  "how": "Competition for the customer's mind is not won by demonstrating a better product, but by increasing the importance of your criterion in customers' evaluation and choice and associating your brand strongly with it. Mercedes A-Class stresses the joy of driving and an exciting positioning; Volvo XC60 is associated with safety. Neither claims to be better overall: they appeal to different customers through different purchase criteria.",
+  "trap": "“Better” is defined by the criterion the customer uses: change the criterion and you change who wins."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Positioning Chooses Your Competitors",
+  "meaning": "“You cannot choose your relatives, so you are stuck with the competitors you have”: the slides answer no.",
+  "how": "Three reasons: the choice of criteria determines your competitive set; emphasising comparison versus independent positioning influences who you compete with; pricing places you in a competitive set.",
+  "trap": "Competitors are not a given of the industry: they follow from the positioning choices."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Points of Parity and Points of Difference",
+  "meaning": "PODs and POPs are the associations a positioning is built on.",
+  "how": "Points of difference are attributes or benefits consumers strongly associate with a brand, evaluate positively and believe they could not find to the same extent in a competing brand. Points of parity are associations not necessarily unique to the brand, which may be shared with others. Category POPs are viewed as essential to be a credible offer in a product category; competitive POPs negate competitors' PODs (the slide's example: Apple's focus on “your data” and security).",
+  "trap": "PODs without the category POPs fail: customers first need to believe the offer belongs to the category."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Repositioning Strategies",
+  "meaning": "Repositioning is the deliberate modification of a brand's existing positioning.",
+  "how": "It responds to changes in the environment (economic shifts, cultural change, generational trends), in demand (preferences and expectations), in competition, or in internal objectives (a new product line, innovation, an image refresh). Shift positioning changes the perception of one or more features through one or more marketing levers. Extension positioning launches a new product on different segments with different perceptions. Reinforced positioning stays on the same product and extends its perceptions.",
+  "trap": "Extension adds a second position next to the first; shift moves the existing one."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Repositioning versus Rebranding",
+  "meaning": "Repositioning changes perception; rebranding changes identity.",
+  "how": "Repositioning changes how the market perceives a company or its products without altering the brand's core identity, by adjusting messages, product features, prices or channels. Rebranding is a comprehensive transformation of identity: name, promise, core values, mission, visual identity and go-to-market. Examples: LEGO, from wooden toys (1932) to plastic injection moulding (1947) to the patented brick (1958); Jaguar, acquired by Ford (1989) and Tata (2008), rebranded in 2024 as an all-electric luxury brand under “Copy Nothing”.",
+  "trap": "A new logo is not a rebranding on its own, and a new campaign is not a repositioning on its own."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Zara and Gucci Repositioning",
+  "meaning": "Two fashion brands repositioned by acting on product and price, channels and communication together.",
+  "how": "Zara moves towards premium value: premium sub-lines and designer collaborations at higher prices; experience stores such as El Apartamento in Madrid and more flagships; editorial campaigns, a design-influencer narrative, sustainability, repairs and Zara Pre-Owned. Gucci, by 2015 facing an ageing classic-luxury clientele and younger buyers: Alessandro Michele's bold, eclectic design, accessible luxury items (sneakers, belts, small leather goods, scarves) and collaborations (Adidas, The North Face); online and digital channels for Millennials and Gen Z, the metaverse; a tone moving from elitist to inclusive, a cultural brand tied to art, music and youth subcultures.",
+  "trap": "A repositioning carried by communication alone is not credible: product, price and channels have to move with it."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "4Ps, 4Cs and 7Ps",
+  "meaning": "The marketing mix is the set of levers that turn the positioning into a value proposition.",
+  "how": "The 4Ps (McCarthy, 1960): product, price, place, promotion. The 4Cs (Lauterborn, 1990) read the mix from the customer's side: customer solution, cost to the customer, convenience, communication. The 7Ps (Zeithaml, Bitner and Gremler, 2010) add three Ps for services: people (the employees who deliver the service), process (customer-oriented systems, procedures and policies that execute it) and physical evidence (everything customers see: the environment, layout and interior design, packaging, branding, how staff dress and act).",
+  "trap": "The 4Cs are not new levers: they are the customer's view of the same four Ps."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Consistency Rules of the Marketing Mix",
+  "meaning": "To be effective, the marketing mix has to respect six rules.",
+  "how": "It must be consistent with customer needs; consistent with the objectives of competitive advantage; consistent with the positioning objectives; capable of an effort (marketing investment) appropriate to the market-share objectives; internally consistent among its components; consistent with general corporate policies.",
+  "trap": "Each lever can be right on its own and the mix still fail: a premium product sold through discount channels breaks internal consistency."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "What a Product Is",
+  "meaning": "The course gives a narrow and a broad definition of product.",
+  "how": "Narrow view (Giacomazzi, 2002): the object resulting from transforming materials into a good that can be offered on the market to satisfy wants or needs. Broad view (Kotler): anything that can be offered to a market to satisfy a want or need, including physical goods, services, experiences, events, persons, places, properties, organisations, information and ideas. Products are classified by durability (durable and non-durable goods) and by tangibility (durables, non-durables, services).",
+  "trap": "Marketing uses the broad view: a city, a concert or a consultant can be “products”."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "The Product Hierarchy",
+  "meaning": "A product can be read on five levels, from the benefit sought to all possible future additions.",
+  "how": "Core benefit: the fundamental service or benefit the customer seeks (“the customer doesn't want a drill: they want a hole”). Basic product: the basic technical specifications, the thing (the drill with motor, chuck and bit). Expected product: the minimal attributes looked for when buying (ergonomic grip, several speeds, safety certification, warranty). Augmented product: complementary features and services beyond expectations, which create the competitive differential (carrying case, extended warranty or free maintenance, app integration). Potential product: all possible additions that could excite customers (a rent-or-swap subscription, a community platform).",
+  "trap": "Competing on the expected level only matches rivals; the differential is built on the augmented product."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Classifying Consumer Goods",
+  "meaning": "Consumer goods are classified by shopping habits.",
+  "how": "Convenience goods are purchased frequently and with minimum effort: staples bought regularly (toothpaste), impulse goods bought without planning (a candy bar), emergency goods bought when a need is urgent (an umbrella in a rainstorm). Shopping goods are compared on quality, price and style (furniture, clothing, major appliances). Specialty goods have unique characteristics for which buyers make a special effort (Mercedes). Unsought goods are not normally thought of (smoke detectors, gravestones).",
+  "trap": "The same category can fall in different classes for different buyers: what matters is the shopping effort."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Classifying Industrial Goods",
+  "meaning": "Industrial goods are classified by their role in the production process.",
+  "how": "Materials and parts enter the product completely: raw materials (farm products such as wheat or cotton; natural products such as fish, lumber, crude oil, iron ore) and manufactured materials and parts (component materials such as iron, cement, wires; component parts such as tyres, motors, castings). Capital items enter it partially: installations (buildings, factories, mainframes, elevators, big machinery) and equipment (hand tools, lift trucks, desks, computers). Supplies and business services do not enter it: maintenance and repair items, operating supplies (lubricants, paper), maintenance and repair services and business advisory services (legal, consulting, advertising).",
+  "trap": "Capital items are long-lasting; supplies are short-lasting. Both help make the product without becoming part of it."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Product Differentiation Levers",
+  "meaning": "A unique positioning is obtained by differentiating the product and its related services.",
+  "how": "Product levers: form, features, customisation, performance quality, conformance quality, durability, reliability, repairability, style, design, packaging and labelling. Examples: ibuprofen as capsules, powder or chewables (form); Samsung's Space Zoom (features); Nike shoes designed by the customer, a case of co-creation (customisation); Patagonia (durability); Toyota and Kaizen (reliability); Fairphone's modular parts (repairability); the Tiffany Blue Box (packaging); MUJI's minimalist anti-branding (design).",
+  "trap": "Customisation through co-creation turns a mass product into a personal expression of identity: the customer becomes part of the design."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Performance versus Conformance Quality",
+  "meaning": "Two different kinds of quality, with different competitive uses.",
+  "how": "Performance quality is how well the product performs: Dyson's visibly superior suction and engineering justify premium prices in an industry of similar appliances. Conformance quality is how consistently every unit meets the promised standard: McDonald's offers (almost) the same taste, speed and cleanliness everywhere, so customers choose it for predictable satisfaction and trust, not for surprise.",
+  "trap": "A fast-food chain does not need the best burger: it needs the same burger everywhere."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "The Four Stages of the Life Cycle",
+  "meaning": "Products go through introduction, growth, maturity and decline, each with its own marketing objective.",
+  "how": "Introduction: very low knowledge, slow sales, negative profits; create awareness, educate, reduce perceived risk, encourage first use. Growth: knowledge and sales rise fast, profits grow with economies of scale; build preference and expand share before competitors enter. Maturity: high knowledge, sales plateau, profits stable but under price pressure; defend share, maximise profitability, refresh the brand, find niches and extensions. Decline: interest fades, sales and margins shrink; harvest the remaining value and manage the phase-out.",
+  "trap": "In maturity the goal is profit and share defence, not growth at any cost."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "The Innovation Adoption Curve",
+  "meaning": "Each life-cycle stage targets a different group of adopters.",
+  "how": "The adoption curve is bell-shaped: innovators and early adopters (visionaries) buy first, then the early majority (pragmatists), the late majority (conservatives) and finally the laggards. Introduction targets innovators and early adopters, growth the early majority, maturity the late majority, decline the laggards (habitual or price-sensitive buyers). Every stage needs a different marketing strategy.",
+  "trap": "The same message cannot serve visionaries and pragmatists: the first buy novelty, the second proof."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Marketing Mix along the Life Cycle",
+  "meaning": "The four Ps change from stage to stage.",
+  "how": "Introduction: product focused on the core benefit with few variants; skimming (high) or penetration (low) pricing; selective distribution; informative promotion. Growth: improved versions and new features; gradual price increase to reach profitability while gaining share; expanded distribution and new markets; persuasive promotion highlighting brand differences. Maturity: line extensions and differentiation; stable prices or reductions and promotions to defend share; maximum distribution intensity; reminder advertising and loyalty. Decline: simplified range; discounting or liquidation; coverage reduced to profitable or loyal channels; minimal promotion or a repositioning.",
+  "trap": "Skimming and penetration are both introduction-stage choices: the right one depends on the goals."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Netflix DVD Life Cycle",
+  "meaning": "Netflix's DVD-by-mail business is the course's example of a full life cycle.",
+  "how": "Introduction, 1997: 925 titles, up to 4 DVDs at a time in red envelopes, penetration price of $15.95 a month, one hub serving the Santa Cruz County area, informative “no late fees, no due dates” communication. Growth, by 2003: 2 million subscribers and the first full-year profit, next-day delivery for 90% of users, Cinematch (2000) and star ratings (2001), about $17.99 a month, 40+ distribution centres by 2005, mass media and referral campaigns. Maturity, from 2005: 35,000 titles, 1 million DVDs a day, 1/3/5-DVD tiers, the Netflix Prize, a price cut to $16.99 against Blockbuster, retention and loyalty programmes. Decline, from 2008: streaming offered free to disc subscribers, a niche of rural, cinephile and older users, the DVD.com spin-off (2016), centres closed, no advertising.",
+  "trap": "Netflix managed the decline of its own product by launching the substitute itself."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Life Cycle Variants",
+  "meaning": "Not every product follows the bell-shaped curve.",
+  "how": "The slides show three variants of sales over time: the growth-slump-maturity pattern, the cycle-recycle pattern (a primary cycle followed by a smaller recycle) and the scalloped pattern (a succession of cycles).",
+  "trap": "Reading a temporary slump as decline can lead a firm to harvest a product that is about to recover."
+ },
+ {
+  "cat": "Services",
+  "title": "What a Service Is",
+  "meaning": "Services are the intangible end of the tangibility classification.",
+  "how": "Kotler, Keller and Lane (2006): “A service is any act or performance that one party can offer to another that is essentially intangible and does not result in the ownership of anything. Its production may or may not be tied to a physical product.” The service economy is the sector that creates and distributes services.",
+  "trap": "No ownership passes: the customer buys a performance, not an object."
+ },
+ {
+  "cat": "Services",
+  "title": "Drivers of the Service Economy",
+  "meaning": "Three groups of forces explain the shift towards a service economy.",
+  "how": "Structural economic and social change: rising incomes, an ageing population, higher industrial productivity, globalisation, urbanisation. Technological advancement: information and communication technologies, automation, AI. Evolving customer needs: the convenience economy and culture, well-being, personalisation.",
+  "trap": "Services are not only “the other sector”: they grow inside manufacturing too, through servitization."
+ },
+ {
+  "cat": "Services",
+  "title": "Servitization",
+  "meaning": "Servitization is a business strategy in which companies shift from just selling products to offering integrated services that increase customer value.",
+  "how": "Benefits: improved competitive positioning, stable and recurring revenues, access to product-usage data, alignment with ESG and sustainability goals. Challenges: operational complexity and higher costs, more business and financial risk, cultural and organisational change. Rolls-Royce, in aviation, sells engine usage hours (“power by the hour”): airlines pay for engine performance and uptime, while Rolls-Royce manages maintenance and guarantees performance.",
+  "trap": "Servitization moves risk to the seller: Rolls-Royce earns only while the engine works."
+ },
+ {
+  "cat": "Services",
+  "title": "The Goods-Services Continuum",
+  "meaning": "Most offers mix goods and services in different proportions.",
+  "how": "Pure tangible goods with little differentiation and little service (salt, soap, flour); tangible goods with accompanying services that matter for complex products (cars, high-tech); hybrid offers where both are significant (restaurants); services with some facilitating goods (airlines serving drinks and snacks during transport); pure services with few products involved (baby-sitting, legal consultancy).",
+  "trap": "Even a pure tangible good can be differentiated through the services around it."
+ },
+ {
+  "cat": "Services",
+  "title": "Differentiation through Services",
+  "meaning": "Besides the product's own characteristics, firms differentiate through additional services.",
+  "how": "Ordering ease, delivery, installation, customer training, customer consulting, maintenance and repair, customer care, returns, warranties. Examples: IKEA makes self-installation part of its identity, enabling scale and low cost; Amazon's one-click ordering and frictionless checkout; Domino's “30 minutes or less” delivery promise; Zalando's free returns within 100 days, which remove the risk of not trying clothes on; AppleCare's premium support and Genius Bars, which reinforce the “it just works” positioning.",
+  "trap": "A service lever works when it removes the customer's main risk or effort in that category: returns in online fashion, delivery time for pizza."
+ },
+ {
+  "cat": "Services",
+  "title": "Service Characteristics and Risk",
+  "meaning": "Services have five characteristics with marketing implications.",
+  "how": "Non-storeability; simultaneous and contextual production and consumption; labour intensity; variability; intangibility. Because services are generally high in experience and credence qualities, there is more risk in their purchase (Kotler and Keller, 2012). Physical evidence, people and process, the three service Ps, make the offer tangible and reliable.",
+  "trap": "Credence qualities cannot be judged even after use: for those services, trust and tangible cues do the selling."
+ },
+ {
+  "cat": "Services",
+  "title": "Service and CX Management",
+  "meaning": "A total organisational approach that makes the service quality perceived by the customer the inspiring force of management.",
+  "how": "The general orientation of management changes in three ways: from the benefit based on the product to the total benefit in the relationship with the customer; from short-term transactions to long-term relationships; from the technical quality of the product to the total quality perceived by the customer.",
+  "trap": "Technical quality is necessary, but the customer judges the total perceived quality."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "The Experience Economy",
+  "meaning": "Pine and Gilmore (1998) describe a progression of economic value from commodities to goods, services and experiences.",
+  "how": "Each step adds value and moves the offer away from price competition: the customer buys a product, but what they want is the experience it makes possible. Moving from commodity to experience is a route to competitive advantage.",
+  "trap": "An experience is not a decoration on the product: it is the offer the customer is actually paying for."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Defining Customer Experience",
+  "meaning": "The course gives two academic definitions and its own synthesis.",
+  "how": "Lemon and Verhoef (2016): a multidimensional construct encompassing customers' cognitive, emotional, behavioural, sensory and social responses throughout the entire customer journey. Meyer and Schwager (2007): the internal and subjective response customers have to any direct or indirect contact with a company. Synthesis: experience results from the interaction between an individual and a brand across a series of touchpoints along the journey. Experiences are unique, memorable, intimate and holistic.",
+  "trap": "Experience includes indirect contacts too: a review read on a third-party site is part of it."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Customer Journey Elements and Objectives",
+  "meaning": "The customer journey identifies the path a user takes in the relationship with the organisation.",
+  "how": "Its elements: who (the customer persona), what (interactions), where (touchpoints), when (stages and activities), how (experience and emotions). Each user can start and end the journey at a different point. Objectives: understand customers' experience; identify the touchpoints that matter more or less; identify gaps between organisational functions, data flows or channels that cause frustration. The ultimate goal is a frictionless experience for the user that is also effective and efficient for the organisation.",
+  "trap": "A journey designed only from the user's side can be unaffordable; the goal joins the user and the business perspectives."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Customer Journey Building Blocks",
+  "meaning": "Step 1 of journey work identifies four building blocks.",
+  "how": "Customer personas: motivations and objectives (functional and emotional), difficulties and frustrations. Stages of the fruition process: pre-fruition, fruition, post-fruition, drawn from the customer's perspective. Activities carried out at each stage, active or passive, often with loops. Touchpoints: the individual transactions through which customers interact with the business, owned by the firm or external (website, third-party sites, social networks, office, word of mouth, press). The four steps of journey work are: building blocks, mapping the relationships, analysing experiential gaps, building the to-be journey.",
+  "trap": "Touchpoints the firm does not own, such as reviews or word of mouth, still belong on the map."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Segments versus Personas",
+  "meaning": "Personas are incarnations of a company's target segment.",
+  "how": "A segment is a group of customers similar to each other and different from other groups in demographics, buying and using behaviour, preferences: it requires a deductive approach. A persona is a semi-fictional representation of the segment's ideal or typical customer, based on data, interviews, previous market knowledge and some assumptions; it lets the company understand customers at a personal level through identification, and requires an inductive approach.",
+  "trap": "A persona does not replace the segment: it embodies it so that the team can design for a person."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Experiential Gaps and Moments of Truth",
+  "meaning": "Step 3 analyses how personas perceive and experience every touchpoint.",
+  "how": "For each interaction it records customer expectations, gaps and opportunities. An experiential gap is the discrepancy between a customer's expectations and the actual experience at a specific touchpoint: the promised value does not match the perceived value. Moments of truth are key interactions that disproportionately shape the overall perception: the delivery for Amazon, the first impression on arrival at the property for Airbnb. In the smartwatch example, queues and crowding at the point of sale and dependence on third-party reviews were the main areas to improve.",
+  "trap": "Fixing every touchpoint equally wastes resources: the moments of truth deserve priority."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Measuring CX: CSI, CES and NPS",
+  "meaning": "Three indicators measure customer experience along the journey.",
+  "how": "Customer Satisfaction Index (CSI): average satisfaction measured on a /100 scale. Customer Effort Score (CES): the effort perceived by the customer. Net Promoter Score (NPS): the propensity for advocacy. The standard NPS computation, not shown on the slide, asks how likely the customer is to recommend the brand on a 0 to 10 scale and subtracts the percentage of detractors (0 to 6) from the percentage of promoters (9 and 10).",
+  "trap": "Satisfaction, effort and advocacy can diverge: a satisfied customer who had to work hard may still not recommend you."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Designing the To-Be Journey",
+  "meaning": "After mapping the as-is journey, the firm designs the ideal path it wants customers to experience.",
+  "how": "The to-be journey is aligned with customer expectations and the brand promise. Its steps: define the desired customer experience; redesign the touchpoints; introduce new enablers; visualise the new flow; validate with customers.",
+  "trap": "A to-be journey that is not validated with customers is still the company's assumption."
  }
 ];
 
@@ -5596,82 +5918,6 @@ const QUESTIONS = [
   "recap": "Correct. Managerial validation is a practicality check: do the segments make sense in the real world?"
  },
  {
-  "cat": "Targeting & Positioning",
-  "title": "Same Solution, Different Markets",
-  "question": "Which coverage pattern offers the same solution to different markets?",
-  "options": {
-   "A": "Single-segment concentration.",
-   "B": "Market specialisation.",
-   "C": "Product specialisation.",
-   "D": "Full market coverage."
-  },
-  "correct": "C",
-  "expl": {
-   "A": "Incorrect. Single-segment concentration serves one target with one line.",
-   "B": "Incorrect. Market specialisation offers different solutions to the same market.",
-   "C": "Correct. The product stays the same and the markets vary.",
-   "D": "Incorrect. Full coverage offers broad solutions for every target."
-  },
-  "recap": "Correct. The product stays the same and the markets vary."
- },
- {
-  "cat": "Targeting & Positioning",
-  "title": "Broad Solutions for Every Target",
-  "question": "Which coverage pattern does L'Oréal illustrate, with broad solutions for every target?",
-  "options": {
-   "A": "Full market coverage.",
-   "B": "Selective specialisation.",
-   "C": "Single-segment concentration.",
-   "D": "Product specialisation."
-  },
-  "correct": "A",
-  "expl": {
-   "A": "Correct. L'Oréal serves practically every segment with its portfolio.",
-   "B": "Incorrect. Selective specialisation serves some unrelated targets with different solutions, not all of them.",
-   "C": "Incorrect. Single-segment concentration is the luxury example, such as Rolex or Ferrari.",
-   "D": "Incorrect. Product specialisation sells one solution to several markets."
-  },
-  "recap": "Correct. L'Oréal serves practically every segment with its portfolio."
- },
- {
-  "cat": "Targeting & Positioning",
-  "title": "When an Offer Does Not Fit the Schema",
-  "question": "According to schema theory, what happens when a new product does not fit consumers' existing schema?",
-  "options": {
-   "A": "Consumers adopt it faster because it stands out.",
-   "B": "Consumers may feel confused or resist it.",
-   "C": "Nothing: schemas affect only services.",
-   "D": "Its price elasticity becomes zero."
-  },
-  "correct": "B",
-  "expl": {
-   "A": "Incorrect. Standing out helps only if the offer is still understood; a misfit makes it harder to accept.",
-   "B": "Correct. Products that fit an existing schema are easy to understand and accept; those that don't can confuse or meet resistance.",
-   "C": "Incorrect. Schemas apply to any offer, as the restaurant example shows for a service and holds for products too.",
-   "D": "Incorrect. Schema theory says nothing about elasticity."
-  },
-  "recap": "Correct. Products that fit an existing schema are easy to understand and accept; those that don't can confuse or meet resistance."
- },
- {
-  "cat": "Targeting & Positioning",
-  "title": "Brand Personality Dimensions",
-  "question": "Which list gives Aaker's brand personality dimensions?",
-  "options": {
-   "A": "Sincerity, excitement, competence, sophistication, ruggedness.",
-   "B": "Valuable, rare, inimitable, organized.",
-   "C": "Openness, conscientiousness, extraversion, agreeableness, neuroticism.",
-   "D": "Price, quality, safety, variety, convenience."
-  },
-  "correct": "A",
-  "expl": {
-   "A": "Correct. Aaker's five dimensions are used to rate the emotional attributes of a brand.",
-   "B": "Incorrect. That is VRIO, for resources.",
-   "C": "Incorrect. That is the Big Five model of personality, used in psychographic segmentation.",
-   "D": "Incorrect. Those are benefits sought, used in needs-based segmentation."
-  },
-  "recap": "Correct. Aaker's five dimensions are used to rate the emotional attributes of a brand."
- },
- {
   "cat": "B2C & B2B Buying",
   "title": "The FCB Grid in Practice",
   "question": "According to the FCB grid, which marketing focus suits low-involvement, thinking purchases such as detergents or bleach?",
@@ -5689,5 +5935,803 @@ const QUESTIONS = [
    "D": "Incorrect. Brand personality, packaging and sensory cues suit low-involvement, feeling purchases such as snacks or soft drinks."
   },
   "recap": "Correct. Habitual, low-involvement purchases respond to promotions, price, distribution and reminders that keep the product visible in store or online."
+ },
+ {
+  "cat": "Targeting",
+  "title": "What Targeting Selects",
+  "question": "Which statement defines targeting as the course does?",
+  "options": {
+   "A": "Dividing the market into internally homogeneous groups.",
+   "B": "Designing the offer's image to occupy a place in consumers' minds.",
+   "C": "Evaluating market segments and selecting one or more as the focus of the marketing efforts.",
+   "D": "Setting the four Ps for each segment the firm serves."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. That is segmentation, the step before targeting.",
+   "B": "Incorrect. That is Kotler's definition of positioning, the step after targeting.",
+   "C": "Correct. Targeting evaluates the segments and selects those the firm will focus on, because serving every segment may be neither feasible nor beneficial.",
+   "D": "Incorrect. Setting the four Ps is operational marketing, after STP."
+  },
+  "recap": "Correct. Targeting evaluates the segments and selects those the firm will focus on, because serving every segment may be neither feasible nor beneficial."
+ },
+ {
+  "cat": "Targeting",
+  "title": "Three Sources of Segment Attractiveness",
+  "question": "According to the slides, segment attractiveness depends on which three elements?",
+  "options": {
+   "A": "Measurability, accessibility and durability.",
+   "B": "Customer characteristics, behaviour and needs.",
+   "C": "Form, features and customisation.",
+   "D": "Profitability, size and growth potential, structural attractiveness."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Those are criteria of a good segment from segmentation, not of its attractiveness.",
+   "B": "Incorrect. Those are the dimensions used to segment customers.",
+   "C": "Incorrect. Those are product differentiation levers.",
+   "D": "Correct. Attractiveness is the strategic value and potential of a segment: can it pay enough, is it large or growing, and how hostile is its structure (competition, substitutes, buyer and supplier power)?"
+  },
+  "recap": "Correct. Attractiveness is the strategic value and potential of a segment: can it pay enough, is it large or growing, and how hostile is its structure (competition, substitutes, buyer and supplier power)?"
+ },
+ {
+  "cat": "Targeting",
+  "title": "Attractive but Hard to Serve",
+  "question": "A segment is highly attractive but has low compatibility with the firm's strategies and resources. Where does it sit in the targeting matrix?",
+  "options": {
+   "A": "High-interest segment, but high investment.",
+   "B": "Segment with high entry or presence priority.",
+   "C": "Segment to defend with marginal spaces.",
+   "D": "Segment of no interest."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. It is worth considering, but the firm would have to invest heavily to build what it lacks.",
+   "B": "Incorrect. High priority needs both high attractiveness and high compatibility.",
+   "C": "Incorrect. Defending with marginal, self-financing spaces is for low-attractiveness segments the firm fits well.",
+   "D": "Incorrect. No interest is the low-attractiveness, low-compatibility cell."
+  },
+  "recap": "Correct. It is worth considering, but the firm would have to invest heavily to build what it lacks."
+ },
+ {
+  "cat": "Targeting",
+  "title": "Concentrated Targeting and Business Strategy",
+  "question": "Which business strategy matches a concentrated targeting strategy?",
+  "options": {
+   "A": "Cost leadership.",
+   "B": "Focus (focalisation).",
+   "C": "Differentiation.",
+   "D": "Total market coverage."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Cost leadership matches undifferentiated targeting: one plan for the whole market.",
+   "B": "Correct. A single marketing plan concentrated on one segment is the marketing side of a focus strategy.",
+   "C": "Incorrect. Differentiation matches differentiated targeting, with plans for several segments.",
+   "D": "Incorrect. Total coverage is a coverage approach, not a business strategy."
+  },
+  "recap": "Correct. A single marketing plan concentrated on one segment is the marketing side of a focus strategy."
+ },
+ {
+  "cat": "Targeting",
+  "title": "Armani's Coverage Approach",
+  "question": "Armani offers fashion and accessories, hotels and restaurants, and Armani/Casa interiors, all to sophisticated, design-oriented consumers. Which coverage approach is this?",
+  "options": {
+   "A": "Product specialisation.",
+   "B": "Selective specialisation.",
+   "C": "Single segment.",
+   "D": "Market specialisation."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Product specialisation sells one product to many markets, as Lego does with construction sets.",
+   "B": "Incorrect. Selective specialisation serves different, unrelated markets with different products, as Zeiss does.",
+   "C": "Incorrect. Single segment is one product for one market, as Rolex does.",
+   "D": "Correct. Many products for one customer group: market specialisation."
+  },
+  "recap": "Correct. Many products for one customer group: market specialisation."
+ },
+ {
+  "cat": "Targeting",
+  "title": "Zeiss's Coverage Approach",
+  "question": "Zeiss sells camera lenses to photographers, high-quality lenses for smartphone users and scientific optics to scientists and industry. Which coverage approach does the slide illustrate?",
+  "options": {
+   "A": "Selective specialisation.",
+   "B": "Market specialisation.",
+   "C": "Total coverage.",
+   "D": "Product specialisation."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Each product goes to a different, unrelated market: the cells form a diagonal on the market × product grid.",
+   "B": "Incorrect. Market specialisation serves one customer group with many products.",
+   "C": "Incorrect. Total coverage would offer every product to every market, as Coca-Cola does.",
+   "D": "Incorrect. Product specialisation offers the same product to many markets."
+  },
+  "recap": "Correct. Each product goes to a different, unrelated market: the cells form a diagonal on the market × product grid."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Kotler's Positioning",
+  "question": "Kotler (2000) defines positioning as:",
+  "options": {
+   "A": "the process of dividing a market into groups with different needs.",
+   "B": "designing the company's offer and image to occupy a specific place in the minds of target consumers.",
+   "C": "the choice of the price level relative to competitors.",
+   "D": "the list of attributes on which consumers rate brands."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That describes segmentation.",
+   "B": "Correct. Positioning is a space dimension, and the space is the consumer's mind.",
+   "C": "Incorrect. Price can signal a position but is only one lever of the mix.",
+   "D": "Incorrect. Attributes are an input to the positioning analysis, not its definition."
+  },
+  "recap": "Correct. Positioning is a space dimension, and the space is the consumer's mind."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "The Third Curve",
+  "question": "Value curve analysis draws the value proposition the firm promises, the one it actually delivers, and a third one. Which?",
+  "options": {
+   "A": "The value proposition of the average competitor today.",
+   "B": "The value proposition customers would ideally want.",
+   "C": "The future value proposition of the firm's strongest competitor.",
+   "D": "The value proposition of the firm five years ago."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. The slides compare with the strongest competitor, looking forward.",
+   "B": "Incorrect. Customer importance shapes the attributes, but it is not one of the three curves.",
+   "C": "Correct. Promised, delivered and the strongest competitor's future curve diagnose execution gaps and future threats.",
+   "D": "Incorrect. The past curve is not part of the diagnosis."
+  },
+  "recap": "Correct. Promised, delivered and the strongest competitor's future curve diagnose execution gaps and future threats."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Triading",
+  "question": "In Kelly's repertory grid, what happens during triading?",
+  "options": {
+   "A": "The respondent rates every brand on a 1 to 5 agreement scale.",
+   "B": "The researcher merges correlated attributes into a component.",
+   "C": "The respondent climbs from attributes to consequences to values.",
+   "D": "The respondent sees three elements and says how two are alike and different from the third."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Rating comes after triading, on the constructs the respondent has stated.",
+   "B": "Incorrect. That is principal component analysis, in the reduction step.",
+   "C": "Incorrect. That is laddering, within the means-end chain.",
+   "D": "Correct. Triading forces respondents to articulate their own constructs, such as friendly versus not friendly for e-mail services."
+  },
+  "recap": "Correct. Triading forces respondents to articulate their own constructs, such as friendly versus not friendly for e-mail services."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "The Laddering Chain",
+  "question": "In the laddering example, “less alcohol, less filling” leads to “avoid getting drunk”, then “socialise”, then “sense of belonging”. What is “sense of belonging”?",
+  "options": {
+   "A": "A value.",
+   "B": "An attribute.",
+   "C": "A consequence.",
+   "D": "A construct from a repertory grid."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Values are the ultimate life goals at the top of the ladder.",
+   "B": "Incorrect. The attribute is the concrete feature at the bottom: less alcohol, less filling.",
+   "C": "Incorrect. Avoiding getting drunk and socialising are the consequences.",
+   "D": "Incorrect. Constructs come from triading in the repertory grid, a different technique."
+  },
+  "recap": "Correct. Values are the ultimate life goals at the top of the ladder."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "Reducing the Attributes",
+  "question": "Durability and material quality move together and are merged into one dimension called “premium value”. Which technique is this?",
+  "options": {
+   "A": "Gap analysis.",
+   "B": "Principal component analysis.",
+   "C": "Likert rating.",
+   "D": "k-means cluster analysis."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Gap analysis looks for white spaces on the finished map.",
+   "B": "Correct. Principal component analysis reduces correlated attributes to a few dimensions for the map's axes.",
+   "C": "Incorrect. Likert scales collect the ratings in the step before.",
+   "D": "Incorrect. Cluster analysis groups respondents or brands, it does not merge attributes; in the course it is a segmentation method."
+  },
+  "recap": "Correct. Principal component analysis reduces correlated attributes to a few dimensions for the map's axes."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "When a White Space Is an Opportunity",
+  "question": "Gap analysis finds an area of the perceptual map with no brands. When is it an opportunity?",
+  "options": {
+   "A": "Always: an empty space means no competition.",
+   "B": "Only when the firm already has a product near it.",
+   "C": "When the space corresponds to a consumer need.",
+   "D": "When the variance of the ratings around it is high."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A space can be empty because nobody wants that combination.",
+   "B": "Incorrect. Proximity can make the move easier, but it does not make the space valuable.",
+   "C": "Correct. White spaces are opportunities for differentiation or innovation only if they match a real need.",
+   "D": "Incorrect. Variance tells how sharply brands are perceived; it does not validate a gap."
+  },
+  "recap": "Correct. White spaces are opportunities for differentiation or innovation only if they match a real need."
+ },
+ {
+  "cat": "Positioning Tools & Methods",
+  "title": "A Functional Attribute",
+  "question": "Which of these is a functional positioning attribute?",
+  "options": {
+   "A": "The confidence a brand gives its users.",
+   "B": "A sense of status.",
+   "C": "The joy of using the product.",
+   "D": "Battery life."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Confidence is an emotional attribute: how the product makes me feel.",
+   "B": "Incorrect. Status is an emotional association.",
+   "C": "Incorrect. Joy is an emotional attribute.",
+   "D": "Correct. Battery life is tangible and measurable: it answers what the product does."
+  },
+  "recap": "Correct. Battery life is tangible and measurable: it answers what the product does."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "The Megapixel Problem",
+  "question": "Consumers compare cameras on megapixels, although picture quality depends mainly on sensor size. What should a firm with a better sensor do?",
+  "options": {
+   "A": "Raise its megapixel count to match the market.",
+   "B": "Educate consumers and communicate the benefits of the attributes that drive performance.",
+   "C": "Cut prices, because consumers cannot see its quality.",
+   "D": "Stop communicating technical features altogether."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Matching rivals on the irrelevant criterion only reinforces it.",
+   "B": "Correct. The firm must shift attention to the criterion it is good at and make customers value it.",
+   "C": "Incorrect. A price cut gives away the advantage instead of making it visible.",
+   "D": "Incorrect. The problem is the wrong feature, not technical communication as such."
+  },
+  "recap": "Correct. The firm must shift attention to the criterion it is good at and make customers value it."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "A-Class versus Volvo",
+  "question": "Mercedes A-Class stresses the joy of driving, Volvo stresses safety. What does the example show?",
+  "options": {
+   "A": "Each brand must prove its car is better overall.",
+   "B": "Safety always beats performance as a purchase criterion.",
+   "C": "Brands win minds by making their own criterion important and owning it.",
+   "D": "Cars in the same class must use the same positioning attributes."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Neither brand claims an overall better product.",
+   "B": "Incorrect. Each criterion appeals to different customers; neither always wins.",
+   "C": "Correct. Competition for the mind is won by raising the importance of your criterion and associating your brand strongly with it.",
+   "D": "Incorrect. The point is the opposite: they choose different criteria."
+  },
+  "recap": "Correct. Competition for the mind is won by raising the importance of your criterion and associating your brand strongly with it."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Choosing Your Competitors",
+  "question": "Which is NOT one of the slides' three reasons why positioning lets a firm choose its competitors?",
+  "options": {
+   "A": "The criteria you choose determine your competitive set.",
+   "B": "Comparative versus independent positioning changes whom you compete with.",
+   "C": "Pricing places you in a competitive set.",
+   "D": "Industry boundaries are fixed by the product's technology."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. This is the first reason on the slide.",
+   "B": "Incorrect. This is the second reason on the slide.",
+   "C": "Incorrect. This is the third reason on the slide.",
+   "D": "Correct. The slides argue the opposite: competitors follow from positioning choices, not from fixed boundaries."
+  },
+  "recap": "Correct. The slides argue the opposite: competitors follow from positioning choices, not from fixed boundaries."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Category Points of Parity",
+  "question": "What are category points of parity?",
+  "options": {
+   "A": "Associations viewed as essential to be a credible offer in a product category.",
+   "B": "Attributes consumers believe they cannot find to the same extent in competitors.",
+   "C": "Associations designed to negate competitors' points of difference.",
+   "D": "Attributes no brand in the category offers yet."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Without them the offer is not credible in the category, however strong its differences.",
+   "B": "Incorrect. That is a point of difference.",
+   "C": "Incorrect. That is a competitive point of parity.",
+   "D": "Incorrect. That is a white space found by gap analysis."
+  },
+  "recap": "Correct. Without them the offer is not credible in the category, however strong its differences."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Extension Positioning",
+  "question": "A brand launches a new product aimed at different segments, with different perceptions, next to its existing product. Which repositioning strategy is this?",
+  "options": {
+   "A": "Shift positioning.",
+   "B": "Reinforced positioning.",
+   "C": "Rebranding.",
+   "D": "Extension positioning."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Shift changes the perception of the existing offer's features through marketing levers.",
+   "B": "Incorrect. Reinforced positioning stays on the same product and extends its perceptions.",
+   "C": "Incorrect. Rebranding transforms the brand's identity, not just its offer.",
+   "D": "Correct. Extension adds a new position, on different segments, next to the existing one."
+  },
+  "recap": "Correct. Extension adds a new position, on different segments, next to the existing one."
+ },
+ {
+  "cat": "Positioning & Repositioning",
+  "title": "Repositioning or Rebranding",
+  "question": "Which change is a rebranding rather than a repositioning?",
+  "options": {
+   "A": "Zara adds premium sub-lines and experience stores.",
+   "B": "Gucci launches accessible luxury items and digital channels.",
+   "C": "Jaguar adopts a new visual identity and promise as an all-electric luxury brand.",
+   "D": "A brand adjusts its prices and advertising message for a younger target."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Zara changes perception through product, channels and communication while keeping its identity.",
+   "B": "Incorrect. Gucci repositioned through product, channels and tone, keeping its core identity.",
+   "C": "Correct. Rebranding transforms identity: name, promise, values, mission, visual identity and go-to-market, as Jaguar's “Copy Nothing” did in 2024.",
+   "D": "Incorrect. Adjusting prices and messages while keeping the essence is repositioning."
+  },
+  "recap": "Correct. Rebranding transforms identity: name, promise, values, mission, visual identity and go-to-market, as Jaguar's “Copy Nothing” did in 2024."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "The Customer's Mix",
+  "question": "Which framework restates the marketing mix from the customer's side as customer solution, cost, convenience and communication?",
+  "options": {
+   "A": "McCarthy's 4Ps.",
+   "B": "Lauterborn's 4Cs.",
+   "C": "The 7Ps of Zeithaml, Bitner and Gremler.",
+   "D": "The product hierarchy model."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The 4Ps (1960) are the firm's levers: product, price, place, promotion.",
+   "B": "Correct. Lauterborn (1990) reads each P from the customer's point of view.",
+   "C": "Incorrect. The 7Ps add people, process and physical evidence for services.",
+   "D": "Incorrect. The product hierarchy describes the levels of a product."
+  },
+  "recap": "Correct. Lauterborn (1990) reads each P from the customer's point of view."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Physical Evidence",
+  "question": "In the 7Ps, physical evidence refers to:",
+  "options": {
+   "A": "the employees who deliver the service.",
+   "B": "the procedures and policies that execute the service.",
+   "C": "the tangible goods sold together with the service.",
+   "D": "everything customers see: environment, layout, packaging, branding, staff appearance."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. That is the people P.",
+   "B": "Incorrect. That is the process P.",
+   "C": "Incorrect. Physical evidence is broader than the goods: it covers every visible cue of the service.",
+   "D": "Correct. Physical evidence is all that customers see when interacting with the business, including how staff dress and act."
+  },
+  "recap": "Correct. Physical evidence is all that customers see when interacting with the business, including how staff dress and act."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Breaking Internal Consistency",
+  "question": "A premium-priced, high-performance product is sold mainly through discount stores. Which consistency rule of the marketing mix does this break most directly?",
+  "options": {
+   "A": "Consistency with general corporate policies.",
+   "B": "An effort appropriate to the market-share objectives.",
+   "C": "Internal consistency among the mix's components.",
+   "D": "Consistency with customer needs."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Corporate policies are not the issue here.",
+   "B": "Incorrect. The marketing effort's size is not the problem; its coherence is.",
+   "C": "Correct. Price and place contradict each other: the components of the mix are not consistent.",
+   "D": "Incorrect. The product may well meet needs; the levers contradict each other."
+  },
+  "recap": "Correct. Price and place contradict each other: the components of the mix are not consistent."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Where the Differential Is Built",
+  "question": "On the product hierarchy, which level holds the complementary features and services beyond customers' expectations that create the competitive differential?",
+  "options": {
+   "A": "Expected product.",
+   "B": "Augmented product.",
+   "C": "Basic product.",
+   "D": "Core benefit."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. The expected product is the set of minimal attributes buyers look for.",
+   "B": "Correct. The augmented product goes beyond expectations: for the drill, a carrying case, extended warranty or app.",
+   "C": "Incorrect. The basic product is the thing itself, its technical specifications.",
+   "D": "Incorrect. The core benefit is what the customer is really seeking: the hole, not the drill."
+  },
+  "recap": "Correct. The augmented product goes beyond expectations: for the drill, a carrying case, extended warranty or app."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "An Umbrella in a Rainstorm",
+  "question": "An umbrella bought on the spot in a sudden rainstorm is which kind of consumer good?",
+  "options": {
+   "A": "An emergency convenience good.",
+   "B": "An unsought good.",
+   "C": "A shopping good.",
+   "D": "A specialty good."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. Convenience goods include emergency goods, bought when a need is urgent.",
+   "B": "Incorrect. Unsought goods are those consumers do not normally think of buying, such as smoke detectors.",
+   "C": "Incorrect. Shopping goods are compared on quality, price and style before purchase.",
+   "D": "Incorrect. Specialty goods are unique and worth a special purchasing effort."
+  },
+  "recap": "Correct. Convenience goods include emergency goods, bought when a need is urgent."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "Goods That Enter Partially",
+  "question": "Which industrial goods enter the finished product only partially?",
+  "options": {
+   "A": "Raw materials such as cotton or iron ore.",
+   "B": "Component parts such as tyres or motors.",
+   "C": "Capital items such as installations and equipment.",
+   "D": "Operating supplies such as lubricants and paper."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Raw materials are materials and parts: they enter the product completely.",
+   "B": "Incorrect. Component parts also enter the product completely.",
+   "C": "Correct. Capital items are long-lasting goods that help develop or manage the product and enter it only partially.",
+   "D": "Incorrect. Supplies do not enter the product at all."
+  },
+  "recap": "Correct. Capital items are long-lasting goods that help develop or manage the product and enter it only partially."
+ },
+ {
+  "cat": "Marketing Mix & Product",
+  "title": "McDonald's Kind of Quality",
+  "question": "McDonald's offers (almost) the same taste, speed and cleanliness in every restaurant. Which differentiation lever is this?",
+  "options": {
+   "A": "Performance quality.",
+   "B": "Customisation.",
+   "C": "Durability.",
+   "D": "Conformance quality."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Performance quality is about performing better, as Dyson does with suction.",
+   "B": "Incorrect. McDonald's standardises; customisation is Nike's design-your-own shoes.",
+   "C": "Incorrect. Durability is about how long a product lasts, as with Patagonia.",
+   "D": "Correct. Conformance quality is consistency with the promised standard: customers choose predictable satisfaction."
+  },
+  "recap": "Correct. Conformance quality is consistency with the promised standard: customers choose predictable satisfaction."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Who Buys in Growth",
+  "question": "In the growth stage of the product life cycle, which adopter group is the main target?",
+  "options": {
+   "A": "Innovators and early adopters.",
+   "B": "The early majority.",
+   "C": "The late majority.",
+   "D": "The laggards."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Innovators and early adopters, the visionaries, are the target of the introduction stage.",
+   "B": "Correct. Growth is when mass adoption begins with the pragmatists of the early majority.",
+   "C": "Incorrect. The late majority, the conservatives, buys in maturity.",
+   "D": "Incorrect. Laggards are the remaining customers in decline."
+  },
+  "recap": "Correct. Growth is when mass adoption begins with the pragmatists of the early majority."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Promotion in Maturity",
+  "question": "Which promotion style fits the maturity stage?",
+  "options": {
+   "A": "Informative communication that builds awareness.",
+   "B": "Persuasive communication highlighting brand differences.",
+   "C": "Reminder advertising and loyalty.",
+   "D": "No communication at all."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Informative communication is for the introduction stage.",
+   "B": "Incorrect. Persuasive communication is for growth.",
+   "C": "Correct. In maturity almost everyone knows the category: reminders and loyalty defend share.",
+   "D": "Incorrect. Minimal communication belongs to decline."
+  },
+  "recap": "Correct. In maturity almost everyone knows the category: reminders and loyalty defend share."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Pricing at Introduction",
+  "question": "Which pricing options does the slide give for the introduction stage?",
+  "options": {
+   "A": "Discounting or liquidation pricing.",
+   "B": "Stable prices or promotions to defend share.",
+   "C": "A gradual price increase towards profitability.",
+   "D": "Skimming (high) or penetration (low), depending on the goals."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Discounting and liquidation clear stock in decline.",
+   "B": "Incorrect. Defending share with promotions is a maturity choice.",
+   "C": "Incorrect. A gradual increase while gaining share is the growth-stage choice.",
+   "D": "Correct. At launch the firm either skims high-willingness-to-pay buyers or penetrates with a low price."
+  },
+  "recap": "Correct. At launch the firm either skims high-willingness-to-pay buyers or penetrates with a low price."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Netflix in Maturity",
+  "question": "During the maturity of its DVD business, what did Netflix do on price?",
+  "options": {
+   "A": "Cut the price to $16.99 a month to regain share against Blockbuster.",
+   "B": "Launched at a penetration price of $15.95 a month.",
+   "C": "Raised the price gradually to about $17.99.",
+   "D": "Moved to liquidation pricing to clear stock."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. In maturity, price reductions defend share against rivals: $16.99 against Blockbuster.",
+   "B": "Incorrect. $15.95 was the introduction price in 1997.",
+   "C": "Incorrect. The gradual increase to about $17.99 belongs to the growth stage.",
+   "D": "Incorrect. In decline Netflix kept a perceived fair price; it did not liquidate."
+  },
+  "recap": "Correct. In maturity, price reductions defend share against rivals: $16.99 against Blockbuster."
+ },
+ {
+  "cat": "Product Life Cycle",
+  "title": "Objective in Decline",
+  "question": "What is the marketing objective in the decline stage?",
+  "options": {
+   "A": "Create awareness and reduce perceived risk.",
+   "B": "Harvest the remaining value and manage the phase-out.",
+   "C": "Build preference before competitors enter.",
+   "D": "Expand distribution to new markets."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. Awareness and risk reduction are introduction-stage objectives.",
+   "B": "Correct. Decline calls for cutting costs, simplifying the offer and concentrating on loyal, profitable segments.",
+   "C": "Incorrect. Building preference before rivals arrive is the growth objective.",
+   "D": "Incorrect. Expansion belongs to growth; decline reduces coverage."
+  },
+  "recap": "Correct. Decline calls for cutting costs, simplifying the offer and concentrating on loyal, profitable segments."
+ },
+ {
+  "cat": "Services",
+  "title": "Power by the Hour",
+  "question": "Rolls-Royce sells airlines engine usage hours instead of engines. What is this an example of?",
+  "options": {
+   "A": "Product specialisation.",
+   "B": "Conformance quality.",
+   "C": "A pure service.",
+   "D": "Servitization."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Product specialisation is a targeting coverage approach.",
+   "B": "Incorrect. Conformance quality is consistency of output.",
+   "C": "Incorrect. The engine is still central: this is a product turned into an integrated service, not a pure service.",
+   "D": "Correct. Rolls-Royce moves from selling products to integrated services: airlines pay for performance and uptime."
+  },
+  "recap": "Correct. Rolls-Royce moves from selling products to integrated services: airlines pay for performance and uptime."
+ },
+ {
+  "cat": "Services",
+  "title": "A Challenge of Servitization",
+  "question": "Which of these is a challenge of servitization rather than a benefit?",
+  "options": {
+   "A": "Stable and recurring revenues.",
+   "B": "Access to product-usage data.",
+   "C": "Increased business and financial risk.",
+   "D": "Alignment with ESG objectives."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Recurring revenues are a benefit.",
+   "B": "Incorrect. Usage data is a benefit.",
+   "C": "Correct. The seller takes on performance risk and finances the assets; with operational complexity and cultural change, it is a challenge.",
+   "D": "Incorrect. ESG alignment is a benefit."
+  },
+  "recap": "Correct. The seller takes on performance risk and finances the assets; with operational complexity and cultural change, it is a challenge."
+ },
+ {
+  "cat": "Services",
+  "title": "Why Services Are Riskier to Buy",
+  "question": "Why is buying a service generally riskier than buying a good?",
+  "options": {
+   "A": "Services are high in experience and credence qualities.",
+   "B": "Services always cost more than goods.",
+   "C": "Services can be stored and inspected before purchase.",
+   "D": "Services are produced before they are consumed."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. They can be judged only after use, or not even then, so the buyer faces more risk (Kotler and Keller, 2012).",
+   "B": "Incorrect. Price is not the reason given on the slide.",
+   "C": "Incorrect. Services are non-storeable and cannot be inspected beforehand.",
+   "D": "Incorrect. Production and consumption are simultaneous."
+  },
+  "recap": "Correct. They can be judged only after use, or not even then, so the buyer faces more risk (Kotler and Keller, 2012)."
+ },
+ {
+  "cat": "Services",
+  "title": "Zalando's Lever",
+  "question": "Zalando offers free returns within 100 days. Which service differentiator is this, and what does it remove?",
+  "options": {
+   "A": "Delivery; it removes waiting time.",
+   "B": "Installation; it removes assembly effort.",
+   "C": "Returns; it removes the risk of buying clothes without trying them on.",
+   "D": "Warranties; it removes the risk of product failure."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. Delivery speed is Domino's lever, not Zalando's.",
+   "B": "Incorrect. Installation is IKEA's lever.",
+   "C": "Correct. In online fashion customers cannot try before buying: easy returns remove the perceived risk.",
+   "D": "Incorrect. A warranty covers failure; free returns cover fit and taste."
+  },
+  "recap": "Correct. In online fashion customers cannot try before buying: easy returns remove the perceived risk."
+ },
+ {
+  "cat": "Services",
+  "title": "The Hybrid Offer",
+  "question": "On the goods-services continuum, which example is a hybrid offer in which products and services are equally significant?",
+  "options": {
+   "A": "Salt.",
+   "B": "Legal consultancy.",
+   "C": "An airline flight.",
+   "D": "A restaurant."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Salt is a pure tangible good.",
+   "B": "Incorrect. Legal consultancy is a pure service.",
+   "C": "Incorrect. An airline is a service with some facilitating goods (drinks, snacks).",
+   "D": "Correct. In a restaurant the food and the service both matter."
+  },
+  "recap": "Correct. In a restaurant the food and the service both matter."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Lemon and Verhoef",
+  "question": "How do Lemon and Verhoef (2016) define customer experience?",
+  "options": {
+   "A": "As the internal and subjective response to any direct or indirect contact with a company.",
+   "B": "As a multidimensional construct of cognitive, emotional, behavioural, sensory and social responses throughout the customer journey.",
+   "C": "As average satisfaction measured on a /100 scale.",
+   "D": "As the progression from commodities to experiences."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. That is Meyer and Schwager (2007).",
+   "B": "Correct. Their definition stresses the many dimensions of the response, across the whole journey.",
+   "C": "Incorrect. That is the Customer Satisfaction Index, a measure.",
+   "D": "Incorrect. That is Pine and Gilmore's experience economy."
+  },
+  "recap": "Correct. Their definition stresses the many dimensions of the response, across the whole journey."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Persona Logic",
+  "question": "Which approach does building a persona require, according to the slides?",
+  "options": {
+   "A": "An inductive approach.",
+   "B": "A deductive approach.",
+   "C": "A purely statistical approach.",
+   "D": "A product-based approach."
+  },
+  "correct": "A",
+  "expl": {
+   "A": "Correct. A persona embodies the typical customer of a segment so the team can identify with them: an inductive approach.",
+   "B": "Incorrect. The deductive approach is the one of segments.",
+   "C": "Incorrect. Personas mix data, interviews, market knowledge and some assumptions.",
+   "D": "Incorrect. Personas describe customers, not products."
+  },
+  "recap": "Correct. A persona embodies the typical customer of a segment so the team can identify with them: an inductive approach."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Moment of Truth",
+  "question": "For Airbnb, the first impression when the guest arrives at the property is:",
+  "options": {
+   "A": "an experiential gap.",
+   "B": "a passive activity.",
+   "C": "a moment of truth.",
+   "D": "a post-fruition stage."
+  },
+  "correct": "C",
+  "expl": {
+   "A": "Incorrect. A gap is a mismatch between expectation and experience; the arrival may or may not create one.",
+   "B": "Incorrect. Activities are tasks the persona carries out; this is a key interaction that shapes perception.",
+   "C": "Correct. Moments of truth are interactions that disproportionately shape overall perception: delivery for Amazon, arrival for Airbnb.",
+   "D": "Incorrect. Arrival is part of fruition, not post-fruition."
+  },
+  "recap": "Correct. Moments of truth are interactions that disproportionately shape overall perception: delivery for Amazon, arrival for Airbnb."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Computing the NPS",
+  "question": "1,000 customers are surveyed: 38% are promoters (9–10), 42% passives (7–8) and 20% detractors (0–6). What is the Net Promoter Score?",
+  "options": {
+   "A": "58.",
+   "B": "80.",
+   "C": "38.",
+   "D": "18."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Adding promoters and detractors has no meaning.",
+   "B": "Incorrect. That is promoters plus passives.",
+   "C": "Incorrect. That is the share of promoters only.",
+   "D": "Correct. NPS = % promoters − % detractors = 38 − 20 = 18 (standard formula; the slide defines NPS as the propensity for advocacy)."
+  },
+  "recap": "Correct. NPS = % promoters − % detractors = 38 − 20 = 18 (standard formula; the slide defines NPS as the propensity for advocacy)."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "Measuring Effort",
+  "question": "Which indicator measures the effort the customer perceives along the journey?",
+  "options": {
+   "A": "Net Promoter Score.",
+   "B": "Customer Effort Score.",
+   "C": "Customer Satisfaction Index.",
+   "D": "Likert brand-trust score."
+  },
+  "correct": "B",
+  "expl": {
+   "A": "Incorrect. NPS measures the propensity for advocacy.",
+   "B": "Correct. CES measures perceived effort; less effort means a more frictionless journey.",
+   "C": "Incorrect. CSI measures average satisfaction on a /100 scale.",
+   "D": "Incorrect. A Likert item can measure an attitude, but it is not one of the three CX indicators."
+  },
+  "recap": "Correct. CES measures perceived effort; less effort means a more frictionless journey."
+ },
+ {
+  "cat": "Customer Experience & Journey",
+  "title": "First Step of the To-Be",
+  "question": "When redesigning the to-be customer journey, what is the first step?",
+  "options": {
+   "A": "Validate with customers.",
+   "B": "Introduce new enablers.",
+   "C": "Visualise the new flow.",
+   "D": "Define the desired customer experience."
+  },
+  "correct": "D",
+  "expl": {
+   "A": "Incorrect. Validation with customers is the last step.",
+   "B": "Incorrect. New enablers come after the desired experience and the touchpoint redesign.",
+   "C": "Incorrect. Visualising the flow is the fourth step.",
+   "D": "Correct. The to-be journey starts from the experience the firm wants customers to have, aligned with the brand promise."
+  },
+  "recap": "Correct. The to-be journey starts from the experience the firm wants customers to have, aligned with the brand promise."
  }
 ];

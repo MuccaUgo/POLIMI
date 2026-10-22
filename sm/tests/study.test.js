@@ -50,6 +50,15 @@ test("each written case asks Assess, Apply and Envision, with an outline to comp
   }
 });
 
+test("every deck comes from its lecture slides, not from notes", () => {
+  for (const d of C.DECKS) {
+    assert.ok(!d.notes, `${d.id}: still marked as built from notes`);
+    assert.ok(!/notes/i.test(C.SHEETS[d.id].slice(0, 400)), `${d.id}: the sheet still opens with a notes warning`);
+  }
+  assert.ok(C.DECK_BY_ID.mk4, "marketing lecture 4 is missing");
+  assert.ok(!C.COMING.marketing.some(x => /product/i.test(x)), "the product lecture is no longer to come");
+});
+
 test("every deck opens an existing area of the concept browser and quiz bank", () => {
   for (const d of C.DECKS) {
     assert.ok(ctx.window.TOPIC_NAMES.includes(S.TOPIC_OF[d.id]), `${d.id}: no matching topic`);
