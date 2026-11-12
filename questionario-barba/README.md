@@ -43,22 +43,30 @@ personali nel link. La selezione del campione rimane di convenienza, non rappres
 
 ## Esecuzione e controlli
 
-Dalla radice della cartella pubblicata:
+La pagina `index.html` contiene stile e script incorporati e funziona anche se aperta
+direttamente come file locale, oltre che tramite GitHub Pages. I sorgenti separati
+rimangono modificabili; dopo una modifica rigenerare la pagina:
+
+```sh
+node questionario-barba/build.mjs
+```
+
+Per servirla dalla radice del repository:
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Aprire la sottocartella `questionario-barba/` tramite HTTP: i moduli JavaScript non sono
-progettati per essere aperti direttamente con `file://`.
+Aprire la sottocartella `questionario-barba/` tramite HTTP oppure il file `index.html`.
 
 ```sh
 node --test questionario-barba/survey.test.mjs
 node --check questionario-barba/app.js
 ```
 
-File: `index.html`, `styles.css`, `survey.mjs` (domande e logica pura), `app.js`
-(interfaccia e salvataggio locale), `icon.svg`, `survey.test.mjs`.
+File: `index.html` (pagina autonoma generata), `index.template.html`, `build.mjs`,
+`styles.css`, `survey.mjs` (domande e logica pura), `app.js` (interfaccia e salvataggio
+locale), `icon.svg`, `survey.test.mjs`.
 
 ## Verifica del contenuto prima della ricerca
 
