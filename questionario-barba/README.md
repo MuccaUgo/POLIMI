@@ -25,7 +25,8 @@ Le risposte vengono conservate nel database del servizio di raccolta, non nel re
 - `?source=colleghi`, `?source=universita`, `?source=altro`: provenienza del campione senza
   un'altra domanda. Si può combinare con `prova=1` usando `&`.
 - L'area risultati è su `https://questionario-barba-raccolta.muccaugo.chatgpt.site/risultati`.
-  Richiede accesso ChatGPT e autorizzazione del ricercatore verificata sul server.
+  Consente accesso con codice per consultazione e download, oppure accesso ChatGPT del
+  ricercatore proprietario per gestire la raccolta. Tutti i permessi sono verificati sul server.
 
 Il servizio parte con raccolta effettiva in pausa per consentire la revisione delle domande;
 il ricercatore può aprirla dal pannello. I test funzionano anche durante la pausa.
