@@ -1,76 +1,53 @@
-# Questionario barba e regali — bozza 01
+# Questionario barba e regali — progetto Politecnico di Milano
 
-Prima versione esplorativa per il project work Strategy & Marketing 2026–27.
-Pagina indipendente dal resto del portale POLIMI, senza dipendenze, loghi commerciali,
-domande su testimonial o riferimenti a marchi nelle domande chiuse.
+Questionario realizzato da due studenti per un progetto didattico del corso Strategy & Marketing
+2026–27 del Politecnico di Milano. Percorsi: uso personale, acquisto di regali negli ultimi
+12 mesi, entrambi o nessuno. Una sola domanda aperta facoltativa sui marchi.
 
-## Stato della raccolta
+## Struttura
 
-**È un prototipo per provare contenuti e navigazione. Non è ancora una raccolta centralizzata.**
-Non esistono endpoint di invio, database, tracking analitico o risultati pubblici.
-Le risposte vengono conservate esclusivamente nel `localStorage` del browser e possono
-essere cancellate dalla pagina. La pagina dichiara chiaramente questo comportamento
-all'inizio, nel piè di pagina, nel riepilogo e dopo il completamento.
+- `index.html`: pagina autonoma generata, apribile anche come file locale per provarla.
+- `index.template.html`, `styles.css`, `app.js`: interfaccia e navigazione.
+- `survey.mjs`: domande, condizioni, validazione ed esportazione della propria risposta.
+- `submission.mjs`: invio al servizio di raccolta con timeout e verifica della ricevuta.
+- `build.mjs`: incorpora le risorse nella pagina autonoma.
+- `survey.test.mjs`, `submission.test.mjs`: controlli della logica e dell'invio.
 
-Il partecipante può scaricare CSV o JSON delle proprie risposte, senza invio automatico.
-I file esportati non vanno committati nel repository pubblico. Prima di distribuire il
-questionario per la raccolta effettiva occorre collegare un archivio con invio autenticato
-o protetto, accesso ai risultati riservato ai ricercatori e informativa coerente.
-Le normali richieste della pagina sono gestite dall'hosting GitHub Pages; il sito non
-promette anonimato assoluto rispetto ai log dell'hosting.
+La compilazione non richiede un account e non chiede nome, email o datore di lavoro.
+Il testo introduttivo spiega il progetto, la partecipazione volontaria e l'analisi aggregata.
+La bozza rimane nel browser; solo la conferma finale la invia ai ricercatori.
+Le risposte vengono conservate nel database del servizio di raccolta, non nel repository.
 
-## Percorsi
+## Ricerca e prove
 
-- Partecipazione volontaria riservata a maggiorenni; fascia d'età e selezione del percorso.
-- **Uso personale:** lavaggio, strumenti, bisogno prioritario, eventuale barriera al
-  detergente specifico, ultimo acquisto e, se pertinente, spesa e canale.
-- **Regalo negli ultimi 12 mesi:** età del destinatario, tipologia, spesa, canale,
-  criterio principale e conoscenza dell'utilizzo successivo. Percorso aperto a tutti i generi.
-- **Entrambi:** combina i due percorsi senza ripetere le informazioni comuni.
-- **Nessuno:** messaggio di chiusura senza altre domande.
-- Una sola domanda aperta e facoltativa finale sui marchi di rasoi/regolabarba.
+- Link normale: compilazione per la ricerca. L'apertura e la pausa sono gestite dall'area ricercatori.
+- `?prova=1`: invia dati di prova, sempre separati dalle risposte effettive.
+- `?source=colleghi`, `?source=universita`, `?source=altro`: provenienza del campione senza
+  un'altra domanda. Si può combinare con `prova=1` usando `&`.
+- L'area risultati è su `https://questionario-barba-raccolta.muccaugo.chatgpt.site/risultati`.
+  Richiede accesso ChatGPT e autorizzazione del ricercatore verificata sul server.
 
-Non vengono chiesti nomi, email, datore di lavoro, reddito o contatti. La scelta di un
-nuovo percorso rimuove le risposte che non sono più pertinenti; selezioni come
-"non uso nulla" sono esclusive. I testi liberi sono renderizzati come testo, mai come HTML.
+Il servizio parte con raccolta effettiva in pausa per consentire la revisione delle domande;
+il ricercatore può aprirla dal pannello. I test funzionano anche durante la pausa.
+Se la connessione si interrompe, l'interfaccia conserva la bozza e permette di riprovare.
+I tentativi con lo stesso identificativo e contenuto non generano righe duplicate.
+La conferma viene mostrata soltanto dopo una ricevuta valida del server.
+Cancellare la copia locale non cancella una risposta già ricevuta dai ricercatori.
 
-## Provenienza facoltativa del campione
+Da un file locale si possono provare le domande, ma per inviare bisogna aprire il link HTTPS.
+Il sito spiega questo passaggio; non usa le risposte locali come prova di invio.
 
-Per distinguere gruppi di reclutamento senza aggiungere una domanda, il link può avere
-`?source=colleghi`, `?source=universita` oppure `?source=altro`. Il valore viene incluso
-soltanto nell'esportazione locale e non viene trasmesso. Non inserire nomi o identificativi
-personali nel link. La selezione del campione rimane di convenienza, non rappresentativa.
-
-## Esecuzione e controlli
-
-La pagina `index.html` contiene stile e script incorporati e funziona anche se aperta
-direttamente come file locale, oltre che tramite GitHub Pages. I sorgenti separati
-rimangono modificabili; dopo una modifica rigenerare la pagina:
+## Modifiche e controlli
 
 ```sh
 node questionario-barba/build.mjs
+node --test questionario-barba/survey.test.mjs questionario-barba/submission.test.mjs
 ```
 
-Per servirla dalla radice del repository:
+Dopo modifiche alle domande, sincronizzare `survey.mjs` nel servizio di raccolta e aggiornare
+la versione se cambia la struttura, prima di ripubblicare entrambi. Le vecchie risposte
+mantengono la versione con cui sono state inviate. Non committare mai esportazioni o segreti.
 
-```sh
-python3 -m http.server 8000
-```
-
-Aprire la sottocartella `questionario-barba/` tramite HTTP oppure il file `index.html`.
-
-```sh
-node --test questionario-barba/survey.test.mjs
-node --check questionario-barba/app.js
-```
-
-File: `index.html` (pagina autonoma generata), `index.template.html`, `build.mjs`,
-`styles.css`, `survey.mjs` (domande e logica pura), `app.js` (interfaccia e salvataggio
-locale), `icon.svg`, `survey.test.mjs`.
-
-## Verifica del contenuto prima della ricerca
-
-Fare una prova con 3–5 persone, misurare il tempo e raccogliere dubbi sulla formulazione.
-La durata indicativa di 3–5 minuti va verificata, soprattutto per il percorso combinato.
-Le risposte sulle abitudini aiutano la diagnosi della categoria, ma non costituiscono
-una validazione di uno specifico marchio, bundle o prezzo futuro.
+Le risposte sui comportamenti sono esplorative; il reclutamento tramite chat non rende
+il campione rappresentativo. Prima di avviare la raccolta, verificare domande e durata con
+3–5 persone usando il link di prova.

@@ -1,4 +1,4 @@
-export const VERSION = 'grooming-pilot-1';
+export const VERSION = 'grooming-v1';
 const o = (value, label, description) => ({ value, label, description });
 const money = [o('under10','Meno di 10 €'),o('10-19','10–19 €'),o('20-34','20–34 €'),o('35-49','35–49 €'),o('50-74','50–74 €'),o('75plus','75 € o più'),o('unknown','Non ricordo')];
 const channels = [o('drugstore','Negozio di igiene e cura della persona','Per esempio, una catena specializzata'),o('supermarket','Supermercato o ipermercato'),o('electronics','Negozio di elettronica'),o('online','Online'),o('barber','Barbiere o parrucchiere'),o('other','Altro'),o('unknown','Non ricordo')];
@@ -47,9 +47,9 @@ export function answerLabel(q,value) {
   if(q.type==='text') return value || 'Domanda saltata';
   return (Array.isArray(value)?value:[value]).map(v=>q.options.find(x=>x.value===v)?.label||'').filter(Boolean).join('; ');
 }
-export function makeRecord(answers,source='non_indicata') {
+export function makeRecord(answers,source='non_indicata',mode='live') {
   const clean=pruneAnswers(answers);
-  return {version:VERSION,mode:'pilot_local_only',created_at:new Date().toISOString(),source:['colleghi','universita','altro'].includes(source)?source:'non_indicata',answers:clean};
+  return {version:VERSION,mode:mode==='test'?'test':'live',created_at:new Date().toISOString(),source:['colleghi','universita','altro'].includes(source)?source:'non_indicata',answers:clean};
 }
 export function toCSV(record) {
   const cell=x=>'"'+String(x??'').replaceAll('"','""')+'"';

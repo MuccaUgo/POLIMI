@@ -1,8 +1,8 @@
 import {readFile,writeFile} from 'node:fs/promises';
 const base=new URL('./',import.meta.url);
 const read=name=>readFile(new URL(name,base),'utf8');
-const [template,css,survey,app,icon]=await Promise.all(['index.template.html','styles.css','survey.mjs','app.js','icon.svg'].map(read));
-const script=survey.replace(/^export /gm,'')+'\n'+app.replace(/^import .*?;\r?\n/,'');
+const [template,css,survey,app,icon,submission]=await Promise.all(['index.template.html','styles.css','survey.mjs','app.js','icon.svg','submission.mjs'].map(read));
+const script=survey.replace(/^export /gm,'')+'\n'+submission.replace(/^export /gm,'')+'\n'+app.replace(/^import .*?;\r?\n/gm,'');
 const html=template
   .replace('<link rel="icon" href="./icon.svg" type="image/svg+xml">',`<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(icon)}" type="image/svg+xml">`)
   .replace('<link rel="stylesheet" href="./styles.css">',`<style>\n${css}\n</style>`)

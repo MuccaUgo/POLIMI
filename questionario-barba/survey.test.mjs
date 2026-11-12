@@ -43,7 +43,7 @@ test('optional recall and malformed saved answers are handled',()=>{
 });
 test('CSV exports conditional answers only, quotes user text and neutralizes formulas',()=>{
   const record=makeRecord({age:'25-29',route:'gift',brands:'=SUM(1,2)',p_spend:'75plus'},'colleghi');
-  assert.equal(record.mode,'pilot_local_only');
+  assert.equal(record.mode,'live');
   assert.equal(record.source,'colleghi');
   assert.ok(!Object.hasOwn(record.answers,'p_spend'));
   assert.ok(toCSV(record).includes('"\'=SUM(1,2)"'));
